@@ -121,7 +121,7 @@
     </resultMap>
     <!--获取家庭资产情况-->
     <select id="getFamilyAssets" parameterType="java.lang.Integer" resultMap="familyAssetsMap">
-         select fa.fmAllAssets,fa.mainAssets,h.nature,h.houseUse,h.site,h.structure,h.floorNum,h.usedSitu,h.houseArea,h.houseWorth,h.isInstallment,h.hasCredentials,h.note1
+         select fa.fmAllAssets,fa.mainAssets,h.site,h.structure,h.floorNum,h.usedSitu,h.houseArea,h.houseWorth,h.isInstallment,h.hasCredentials,h.note1
           from baseInfo b
            left outer join familyassets fa on b.recordId = fa.recordId
            left outer join housepropertyinfo h on fa.assetsId = h.assetsId

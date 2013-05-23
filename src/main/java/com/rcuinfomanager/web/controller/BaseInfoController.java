@@ -16,7 +16,7 @@ public class BaseInfoController {
     @Autowired
     BaseInfoService baseInfoService;
     //查看
-    @RequestMapping(value ="/show/{id}")
+    @RequestMapping(value ="/{id}")
     public String queryPersonBasicInfo(@PathVariable int id,Map map){
         map.put("personBasicList",baseInfoService.getCusBasicInfo(id));
         map.put("personBasicList",baseInfoService.getIncomeExpenses(id));
@@ -24,7 +24,7 @@ public class BaseInfoController {
         map.put("personBasicList",baseInfoService.getLandInfo(id));
         map.put("personBasicList",baseInfoService.getCarsInfo(id));
         map.put("personBasicList",baseInfoService.getFinancialAssets(id));
-        map.put("personBasicList",baseInfoService.getFamilyIncurDebts(id));
+        /*map.put("personBasicList",baseInfoService.getFamilyIncurDebts(id));*/
         map.put("personBasicList",baseInfoService.getFamilyMember(id));
         return "queryPersonBasicInfo";
     }

@@ -1,3 +1,10 @@
+.farmer_info {
+    width: 1064px;
+    height: 500;
+    overflow: auto;
+    margin-top: 10px;
+}
+
 /*表格表单*/
 .table_form{font-size:12px}
 .table_form td{padding-left:12px}

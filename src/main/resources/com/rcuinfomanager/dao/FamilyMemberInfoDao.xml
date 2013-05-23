@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rcuinfomanager.dao.FamilyMemberInfoDao">
+
+    <resultMap id="familyMemberInfoMap" type="com.rcuinfomanager.model.FamilyMemberInfo">
+        <result column="id"                 property="id"></result>
+        <result column="familyMemberCerNum" property="familyMemberCerNum"></result>
+        <result column="cerNum"             property="cerNum"></result>
+        <result column="familyMemberName"   property="familyMemberName"></result>
+        <result column="yearIncome"         property="yearIncome"></result>
+        <result column="leaderRelation"     property="leaderRelation"></result>
+        <result column="profession"         property="profession"></result>
+        <result column="address"            property="address"></result>
+        <result column="note1"              property="note1"></result>
+        <result column="note2"              property="note2"></result>
+        <result column="note3"              property="note3"></result>
+        <result column="note4"              property="note4"></result>
+    </resultMap>
+
+    <insert id="saveMember" parameterType="com.rcuinfomanager.model.FamilyMemberInfo">
+        INSERT INTO familymemberinfo(familyMemberCerNum,cerNum,familyMemberName,yearIncome,leaderRelation,profession,address,note1,note2,note3,note4)
+        VALUES(#{familyMemberCerNum},#{cerNum},#{familyMemberName},#{yearIncome},#{leaderRelation},#{profession},#{address},#{note1},#{note2},#{note3},#{note4})
+    </insert>
+</mapper>

@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rcuinfomanager.dao.BaseInfoDao">
+
+    <resultMap id="userListInfo" type="com.rcuinfomanager.model.CustomerListInfo">
+        <result column="recordId" property="recordId"></result>
+        <result column="customerName" property="customerName"></result>
+        <result column="telephone" property="telephone"></result>
+        <result column="submitTime" property="submitTime"></result>
+        <result column="organizationName" property="organizationName"></result>
+        <result column="displayUserName" property="displayUserName"></result>
+        <result column="state" property="state"></result>
+    </resultMap>
+
+    <!-- //管理员获取数据列表-->
+    <select id="queryAdminByBaseInfo"  resultMap="userListInfo">
+        select b.recordId,b.customerName,b.telephone,b.submitTime,org.organizationName,u.displayUserName,b.state
+          from baseinfo b
+          left outer join usersinfo u  on b.userName=u.userName
+          left outer join organizationInfo org on u.organizationId=org.organizationId
+    </select>
+    <!-- 普通用户获取数据列表-->
+    <select id="queryNormalByBaseInfo"  parameterType="java.lang.Integer" resultMap="userListInfo">
+        select b.recordId,b.customerName,b.telephone,b.submitTime,org.organizationName,u.displayUserName,b.state
+          from baseinfo b
+          left outer join usersinfo u  on b.userName=u.userName
+          left outer join organizationInfo org on u.organizationId=org.organizationId
+          where u.userId=#{userId}
+    </select>
+
+    <resultMap id="cusBasicMap" type="com.rcuinfomanager.model.CusBaseInfo">
+        <result column="customerName" property="customerName"></result>
+        <result column="gender" property="gender"></result>
+        <result column="isFarmer" property="isFarmer"></result>
+        <result column="customerType" property="customerType"></result>
+        <result column="cerType" property="cerType"></result>
+        <result column="cerNum" property="cerNum"></result>
+        <result column="cerValidityFrom" property="cerValidityFrom"></result>
+        <result column="birthday" property="birthday"></result>
+        <result column="nationality" property="nationality"></result>
+        <result column="isHavePassport" property="isHavePassport"></result>
+        <result column="nation" property="nation"></result>
+        <result column="poliLaspect" property="poliLaspect"></result>
+        <result column="health" property="health"></result>
+        <result column="maritalStatus" property="maritalStatus"></result>
+        <result column="address" property="address"></result>
+        <result column="postcode" property="postcode"></result>
+        <result column="areaName" property="areaName"></result>
+        <result column="village" property="village"></result>
+        <result column="telephone" property="telephone"></result>
+        <result column="mbPhoneNum" property="mbPhoneNum"></result>
+        <result column="liveCondition" property="liveCondition"></result>
+        <result column="socialSecurity" property="socialSecurity"></result>
+        <result column="highestDegree" property="highestDegree"></result>
+        <result column="highestEdu" property="highestEdu"></result>
+        <result column="bankRelation" property="bankRelation"></result>
+        <result column="bankPartnership" property="bankPartnership"></result>
+        <result column="profession" property="profession"></result>
+        <result column="businessProj" property="businessProj"></result>
+        <result column="businessYear" property="businessYear"></result>
+        <result column="businessSite" property="businessSite"></result>
+        <result column="industry" property="industry"></result>
+        <result column="businessProp" property="businessProp"></result>
+        <result column="moneySitu" property="moneySitu"></result>
+        <result column="inputMoney" property="inputMoney"></result>
+        <result column="ownMoney" property="ownMoney"></result>
+        <result column="yearIncome" property="yearIncome"></result>
+        <result column="workSitu" property="workSitu"></result>
+        <result column="unitProp" property="unitProp"></result>
+        <result column="unitIndustry" property="unitIndustry"></result>
+        <result column="department" property="department"></result>
+        <result column="unitType" property="unitType"></result>
+        <result column="duties" property="duties"></result>
+        <result column="annualWageIncome" property="annualWageIncome"></result>
+        <result column="workYears" property="workYears"></result>
+        <result column="workTitle" property="workTitle"></result>
+    </resultMap>
+    <!--获取客户的基本信息-->
+    <select id="getCusBasicInfo" parameterType="java.lang.Integer" resultMap="cusBasicMap">
+       select b.customerName,b.gender,b.isFarmer,b.customerType,b.cerType,b.cerNum,b.cerValidityFrom,b.birthday,b.nationality,b.isHavePassport,
+               b.nation,b.poliLaspect,b.health,b.maritalStatus,b.address,b.postcode,b.areaName,b.village,b.telephone,b.mbPhoneNum,b.liveCondition,
+               b.socialSecurity,b.highestDegree,b.highestEdu,b.bankRelation,b.bankPartnership,b.profession,b.businessProj,b.businessYear,
+               b.businessSite,b.industry,b.businessProp,b.moneySitu,b.inputMoney,b.ownMoney,b.yearIncome,b.workSitu,b.unitProp,b.unitIndustry,
+               b.department,b.unitType,b.duties,b.annualWageIncome,b.workYears,b.workTitle
+	   from baseinfo b
+       where b.recordId=#{recordId}
+    </select>
+
+    <resultMap id="incomeExpensesMap" type="com.rcuinfomanager.model.IncomeExpenses">
+        <result column="fmAllIncome" property="fmAllIncome"></result>
+        <result column="fmExpenses" property="fmExpenses"></result>
+        <result column="incomeSrc" property="incomeSrc"></result>
+        <result column="perIncome" property="perIncome"></result>
+        <result column="fmOtherMemberIn" property="fmOtherMemberIn"></result>
+        <result column="fmExpensesProj" property="fmExpensesProj"></result>
+        <result column="fmInOutRatio" property="fmInOutRatio"></result>
+    </resultMap>
+    <!--获取家庭收支情况-->
+    <select id="getIncomeExpenses" parameterType="java.lang.Integer" resultMap="incomeExpensesMap">
+        select i.fmAllIncome,i.fmExpenses,i.incomeSrc,i.perIncome,i.fmOtherMemberIn,i.fmExpensesProj,i.fmInOutRatio
+          from baseInfo b
+          left outer join incomeexpenses i on b.recordId = i.recordId
+          where i.recordId=#{recordId}
+    </select>
+
+    <resultMap id="familyAssetsMap" type="com.rcuinfomanager.model.FamilyAssets">
+        <result column="fmAllAssets" property="fmAllAssets"></result>
+        <result column="mainAssets" property="mainAssets"></result>
+        <result column="nature" property="nature"></result>
+        <result column="houseUse" property="houseUse"></result>
+        <result column="site" property="site"></result>
+        <result column="structure" property="structure"></result>
+        <result column="floorNum" property="floorNum"></result>
+        <result column="usedSitu" property="usedSitu"></result>
+        <result column="houseArea" property="structure"></result>
+        <result column="houseWorth" property="floorNum"></result>
+        <result column="isInstallment" property="usedSitu"></result>
+        <result column="hasCredentials" property="hasCredentials"></result>
+        <result column="note1" property="note1"></result>
+    </resultMap>
+    <!--获取家庭资产情况-->
+    <select id="getFamilyAssets" parameterType="java.lang.Integer" resultMap="familyAssetsMap">
+         select fa.fmAllAssets,fa.mainAssets,h.nature,h.houseUse,h.site,h.structure,h.floorNum,h.usedSitu,h.houseArea,h.houseWorth,h.isInstallment,h.hasCredentials,h.note1
+          from baseInfo b
+           left outer join familyassets fa on b.recordId = fa.recordId
+           left outer join housepropertyinfo h on fa.assetsId = h.assetsId
+           where fa.recordId=#{recordId}
+    </select>
+
+    <resultMap id="landInfoMap" type="com.rcuinfomanager.model.LandInfo">
+        <result column="area" property="area"></result>
+        <result column="worth" property="worth"></result>
+        <result column="property" property="property"></result>
+        <result column="type" property="type"></result>
+        <result column="usedSitu" property="usedSitu"></result>
+        <result column="isMoneyClear" property="isMoneyClear"></result>
+    </resultMap>
+    <!--获取土地信息-->
+    <select id="getLandInfo" parameterType="java.lang.Integer" resultMap="landInfoMap">
+         select land.area,land.worth,land.property,land.type,land.usedSitu,land.isMoneyClear
+         from baseInfo b
+           left outer join familyassets fa on b.recordId = fa.recordId
+           left outer join landInfo land on fa.assetsId = land.assetsId
+           where fa.recordId=#{recordId}
+    </select>
+
+    <resultMap id="carsInfoMap" type="com.rcuinfomanager.model.CarsInfo">
+        <result column="carsInfo" property="carsInfo"></result>
+        <result column="carsWorth" property="carsWorth"></result>
+        <result column="carsIsInstallment" property="carsIsInstallment"></result>
+        <result column="carsUsingInfo" property="carsUsingInfo"></result>
+    </resultMap>
+    <!--获取车辆信息-->
+    <select id="getCarsInfo" parameterType="java.lang.Integer" resultMap="carsInfoMap">
+         select car.carsInfo,car.carsWorth,car.carsIsInstallment,car.carsUsingInfo
+         from baseInfo b
+           left outer join familyassets fa on b.recordId = fa.recordId
+           left outer join carsInfo car on fa.assetsId = car.assetsId
+           where fa.recordId=#{recordId}
+    </select>
+
+    <resultMap id="financialAssetsMap" type="com.rcuinfomanager.model.FinancialAssets">
+        <result column="financialInfo" property="financialInfo"></result>
+        <result column="depositOurBank" property="depositOurBank"></result>
+        <result column="depositOtherBank" property="depositOtherBank"></result>
+    </resultMap>
+    <!--金融资产信息-->
+    <select id="getFinancialAssets" parameterType="java.lang.Integer" resultMap="financialAssetsMap">
+         select fin.financialInfo,fin.depositOurBank,fin.depositOtherBank
+         from baseInfo b
+           left outer join familyassets fa on b.recordId = fa.recordId
+           left outer join financialAssets fin on fa.assetsId = fin.assetsId
+           where fa.recordId=#{recordId}
+    </select>
+
+    <resultMap id="familyIncurDebtsMap" type="com.rcuinfomanager.model.FamilyIncurDebts">
+        <result column="fmIncurDebts" property="fmIncurDebts"></result>
+        <result column="ourBankDebts" property="ourBankDebts"></result>
+        <result column="otherBankDebts" property="otherBankDebts"></result>
+        <result column="loanPurpose" property="loanPurpose"></result>
+        <result column="loanShap" property="loanShap"></result>
+    </resultMap>
+    <!--负责情况信息-->
+    <select id="getFamilyIncurDebts" parameterType="java.lang.Integer" resultMap="familyIncurDebtsMap">
+         select fid.fmIncurDebts,fid.ourBankDebts,fid.otherBankDebts,fid.loanPurpose,fid.loanShap
+         from baseInfo b
+           left outer join familyIncurDebts fid on b.recordId = fid.recordId
+           where fa.recordId=#{recordId}
+    </select>
+
+    <resultMap id="familyMemberMap" type="com.rcuinfomanager.model.FamilyMember">
+        <result column="familyMemberName" property="familyMemberName"></result>
+        <result column="yearIncome" property="yearIncome"></result>
+        <result column="leaderRelation" property="leaderRelation"></result>
+        <result column="address" property="address"></result>
+        <result column="profession" property="profession"></result>
+        <result column="familyMemberCerNum" property="familyMemberCerNum"></result>
+    </resultMap>
+    <!--获取家庭成员信息 -->
+    <select id="getFamilyMember" parameterType="java.lang.Integer" resultMap="familyMemberMap">
+        select f.familyMemberName,f.yearIncome,f.leaderRelation,f.address,f.profession,f.familyMemberCerNum
+        from baseInfo b
+          left outer join familymemberinfo f on b.recordId = f.recordId
+          where b.recordId=#{recordId}
+    </select>
+</mapper>

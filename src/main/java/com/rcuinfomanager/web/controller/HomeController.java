@@ -6,6 +6,7 @@ import com.rcuinfomanager.session.UserSessionContext;
 import com.rcuinfomanager.session.UserSessionContextHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Map;
@@ -27,10 +28,11 @@ public class HomeController {
     }
 
      @RequestMapping(value ="/index")
-     public String index(Map map) {
+     public String index(ModelMap map) {
          UserSessionContext userSessionContext = UserSessionContextHolder.getUserSessionContext();
          SessionUser sessionUser = userSessionContext.getSessionUser();
          map.put("firstLogin",sessionUser.isFirstLogon());
+         map.put("displayUserName", sessionUser.getDisplayUserName());
          return "main";
     }
 

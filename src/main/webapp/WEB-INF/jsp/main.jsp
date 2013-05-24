@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:directive.include file="/WEB-INF/jsp/includes.jsp" />
 <html>
 <head>
     <title>农户建档现场电子信息采集系统</title>

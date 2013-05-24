@@ -24,7 +24,7 @@ public class SessionFilter implements Filter {
 
     private static final String FILTER_APPLIED = "__session_context_filter_applied";
 
-    private static final String[] INHERENT_ESCAPE_URIS = {"/login","/login.html"};
+    private static final String[] INHERENT_ESCAPE_URIS = {"/login","/login.html","/api"};
 
     private static final Set STATIC_RESOURCE_URIS = new HashSet();
 

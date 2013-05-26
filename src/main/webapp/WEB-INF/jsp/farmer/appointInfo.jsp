@@ -40,17 +40,17 @@
             <table width="100%" border="0">
                 <tbody>
                 <tr>
-                    <td >户主：</td>
+                    <td>户主：</td>
                     <td >性别的</td>
                     <td>电话：</td>
                     <td>12345678910</td>
                 </tr>
                 <tr>
-                    <td align="center">指派给：</td>
+                    <td>指派给：</td>
                 </tr>
                 <tr>
-                    <td align="center">&nbsp;</td>
-                    <td align="center">
+                    <td>&nbsp;</td>
+                    <td>
                         <select class="span2" name="">
                             <option value="">选择网点</option>
                             <option value="" >小作社</option>
@@ -58,9 +58,9 @@
                     </td>
                 </tr>
                 <tr>
-                    <td align="center">&nbsp;</td>
-                    <td align="center">
-                        <input type="text" placeholder="指定客户经理" style="height: 22px;">
+                    <td>&nbsp;</td>
+                    <td>
+                        <input type="text" placeholder="指定客户经理"><span class="help-inline">(可选)</span>
                     </td>
                 </tr>
                 </tbody>

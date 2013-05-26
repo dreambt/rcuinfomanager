@@ -334,6 +334,7 @@ DROP TABLE IF EXISTS `housepropertyinfo`;
 CREATE TABLE `housepropertyinfo` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `assetsId` bigint(20) DEFAULT NULL,
+  `nature` varchar(20) DEFAULT NULL,
   `site` varchar(20) DEFAULT NULL,
   `structure` varchar(20) DEFAULT NULL,
   `purpose` varchar(10) DEFAULT NULL,

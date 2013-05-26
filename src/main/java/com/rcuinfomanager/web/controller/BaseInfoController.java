@@ -17,44 +17,59 @@ public class BaseInfoController {
     BaseInfoService baseInfoService;
     //查看
     @RequestMapping(value ="/{id}")
-    public String queryPersonBasicInfo(@PathVariable int id,Map map){
+    public String show(@PathVariable long id,Map map){
+        //基础概况信息
         map.put("personBasicList",baseInfoService.getCusBasicInfo(id));
-        map.put("personBasicList",baseInfoService.getIncomeExpenses(id));
-        map.put("personBasicList",baseInfoService.getFamilyAssets(id));
-        map.put("personBasicList",baseInfoService.getLandInfo(id));
-        map.put("personBasicList",baseInfoService.getCarsInfo(id));
-        map.put("personBasicList",baseInfoService.getFinancialAssets(id));
-        /*map.put("personBasicList",baseInfoService.getFamilyIncurDebts(id));*/
-        map.put("personBasicList",baseInfoService.getFamilyMember(id));
-        return "queryPersonBasicInfo";
+        //家庭收支情况
+        map.put("personIncomeExpensesList",baseInfoService.getIncomeExpenses(id));
+        // 家庭资产情况
+        map.put("personFamilyAssetsList",baseInfoService.getFamilyAssets(id));
+        //房产
+        map.put("personHousePropertyInfoList",baseInfoService.getHousePropertyInfo(id));
+        //土地
+        map.put("personLandInfoList",baseInfoService.getLandInfo(id));
+        //车辆
+        map.put("personCarsInfoList",baseInfoService.getCarsInfo(id));
+        //金融资产
+        map.put("personFinancialAssets",baseInfoService.getFinancialAssets(id));
+        //家庭负债
+        map.put("personFamilyIncurDebtsList",baseInfoService.getFamilyIncurDebts(id));
+        //家庭成员
+        map.put("personFamilyMemberList",baseInfoService.getFamilyMember(id));
+
+        return "farmer/show";
     }
 
     //指派
     @RequestMapping("/appoint/{id}")
-    public String appointInfo(@PathVariable int id,Map map){
+    public String appointInfo(@PathVariable long id,Map map){
 
-        return "appointInfo";
-    }
-
-    //批量指派
-    @RequestMapping("/batchAppoint/{ids}")
-    public String batchAppointInfo(@PathVariable int ids,Map map){
-
-        return "appointInfo";
+        return "farmer/appointInfo";
     }
 
     //编辑
     @RequestMapping("/edit/{id}")
-    public String editInfo(@PathVariable int id,Map map){
+    public String editInfo(@PathVariable long id,Map map){
 
-        return "editePersonBasicInfo";
+        return "/farmer/edit";
     }
 
     //删除
     @RequestMapping("/delete/{id}")
-    public String deleteInfo(@PathVariable int id){
+    public String deleteInfo(@PathVariable long id){
 
-        return "queryPersonBasicInfo";
+        return "farmer/main";
     }
+
+   /* //批量指派
+    @RequestMapping("/{ids}")
+    public String batchAppointInfo(@PathVariable String ids,Map map){
+
+        return "appointInfo";
+    }
+
+
+
+   */
 }
 

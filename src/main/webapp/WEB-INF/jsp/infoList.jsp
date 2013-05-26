@@ -30,7 +30,7 @@
 		<div class="gWel-main-recommand-nav-aText">客户经理评价</div>
 	</div>
 </div>
-<iframe name="right" id="rightMain" src="queryPersonBasicInfo.jsp" frameborder="false" scrolling="auto" style="border: none; margin-bottom: 30px;" width="100%" height="100%" allowtransparency="true"></iframe>
+<iframe name="right" id="rightMain" src="farmer/show.jsp" frameborder="false" scrolling="auto" style="border: none; margin-bottom: 30px;" width="100%" height="100%" allowtransparency="true"></iframe>
 
 <style type="text/css">
 	html{_overflow-y:scroll}

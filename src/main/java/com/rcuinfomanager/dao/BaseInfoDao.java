@@ -10,19 +10,31 @@ public interface BaseInfoDao {
       //普通用户获取数据列表
       List<CustomerListInfo> queryNormalByBaseInfo(int userId);
       // 获取客户的基本信息
-      List<CusBaseInfo> getCusBasicInfo(int recordId);
+      List<CusBaseInfo> getCusBasicInfo(Long recordId);
       //获取家庭收支情况
-      List<IncomeExpenses> getIncomeExpenses(int recordId);
-      //获取家庭资产情况
-      List<FamilyAssets> getFamilyAssets(int recordId);
+      List<IncomeExpenses> getIncomeExpenses(Long recordId);
+      //房产
+      List<HousePropertyInfo> getHousePropertyInfo(Long recordId);
       //获取土地信息
-      List<LandInfo> getLandInfo(int recordId);
-      //获取车辆信息
-      List<CarsInfo> getCarsInfo(int recordId);
+      List<LandInfo> getLandInfo(Long recordId);
+     //获取车辆信息
+      List<CarsInfo> getCarsInfo(Long recordId);
+
       //金融资产信息
-      List<FinancialAssets> getFinancialAssets(int recordId);
+      List<FinancialAssets> getFinancialAssets(Long recordId);
+      //获取家庭资产情况
+      List<FamilyAssets> getFamilyAssets(Long recordId);
       //负责情况信息
-      List<FamilyIncurDebts> getFamilyIncurDebts(int recordId);
+      List<FamilyIncurDebts> getFamilyIncurDebts(Long recordId);
+
+
+
+
+
+
       //获取家庭成员信息
-      List<FamilyMember> getFamilyMember(int recordId);
+      List<FamilyMember> getFamilyMember(Long recordId);
+      //删除客户信息
+      int getDeleteCusBasicInfo(int recordId);
+      //指派用户信息
 }

@@ -16,12 +16,13 @@
 </head>
 
 <frameset rows="145,*" cols="*" frameborder="no" border="0" framespacing="0">
-  <frame src="top" name="topFrame" scrolling="No" noresize="noresize" id="topFrame" title="topFrame"/>
+ <frame src="top" name="topFrame" scrolling="No" noresize="noresize" id="topFrame" title="topFrame"/>
   <frameset cols="213,*" frameborder="no" border="0" framespacing="0">
-    <frame src="left" name="leftFrame" scrolling="No" noresize="noresize" id="leftFrame" title="leftFrame" />
+    <frame src="left" name="leftFrame" scrolling="No" noresize="noresize" id="leftFrame" title="leftFrame"/>
     <frame src="main" name="mainFrame" id="mainFrame" title="mainFrame" />
-  </frameset>
+ </frameset>
 </frameset>
+
 <noframes>
 <body>
 </body>

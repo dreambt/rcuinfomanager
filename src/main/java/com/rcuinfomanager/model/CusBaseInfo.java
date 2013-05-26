@@ -46,6 +46,15 @@ public class CusBaseInfo {
     private String annualWageIncome;
     private String workYears;
     private String workTitle;
+    private String cerValidityTo;
+
+    public String getCerValidityTo() {
+        return cerValidityTo;
+    }
+
+    public void setCerValidityTo(String cerValidityTo) {
+        this.cerValidityTo = cerValidityTo;
+    }
 
     public String getCustomerName() {
         return customerName;

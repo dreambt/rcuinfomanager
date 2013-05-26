@@ -32,7 +32,7 @@
               var me=$(this);
               var recordId=me.attr('recordId');
               var url='family/appoint/id='+recordId;
-              window.top.artDialog({
+              window.top.art.dialog({
                   id: 'assign',
                   title: '指派信息',
                   lock:true,
@@ -112,11 +112,6 @@
                  alert("未勾选任何客户信息！");
              }
          });
-
-
-
-
-
      });
 </script>
 </head>

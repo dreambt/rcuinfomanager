@@ -7,6 +7,7 @@ public class WebServiceResponseData {
     private List<AllColumnInfo> allColumnInfos;
 
     public List<AllColumnInfo> getAllColumnInfos() {
+
         return allColumnInfos;
     }
 

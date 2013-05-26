@@ -6,8 +6,13 @@ public class IncomeExpenses {
     private String incomeSrc;
     private String perIncome;
     private String fmOtherMemberIn;
+    private String businessProp;
+    private String moneySitu;
+    private String inputMoney;
+    private String ownMoney;
     private String fmExpensesProj;
     private String fmInOutRatio;
+
 
     public String getFmAllIncome() {
         return fmAllIncome;
@@ -47,6 +52,38 @@ public class IncomeExpenses {
 
     public void setFmOtherMemberIn(String fmOtherMemberIn) {
         this.fmOtherMemberIn = fmOtherMemberIn;
+    }
+
+    public String getBusinessProp() {
+        return businessProp;
+    }
+
+    public void setBusinessProp(String businessProp) {
+        this.businessProp = businessProp;
+    }
+
+    public String getOwnMoney() {
+        return ownMoney;
+    }
+
+    public void setOwnMoney(String ownMoney) {
+        this.ownMoney = ownMoney;
+    }
+
+    public String getInputMoney() {
+        return inputMoney;
+    }
+
+    public void setInputMoney(String inputMoney) {
+        this.inputMoney = inputMoney;
+    }
+
+    public String getMoneySitu() {
+        return moneySitu;
+    }
+
+    public void setMoneySitu(String moneySitu) {
+        this.moneySitu = moneySitu;
     }
 
     public String getFmExpensesProj() {

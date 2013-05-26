@@ -21,44 +21,62 @@ public class BaseInfoService {
     }
 
     // 获取客户的基本信息
-    public List<CusBaseInfo> getCusBasicInfo(int recordId){
+    public List<CusBaseInfo> getCusBasicInfo(Long recordId){
         return baseInfoDao.getCusBasicInfo(recordId);
     }
 
     //获取家庭收支情况
-    public List<IncomeExpenses> getIncomeExpenses(int recordId){
+    public List<IncomeExpenses> getIncomeExpenses(Long recordId){
         return baseInfoDao.getIncomeExpenses(recordId);
     }
 
     //获取家庭资产情况
-    public List<FamilyAssets> getFamilyAssets(int recordId){
+    public List<FamilyAssets> getFamilyAssets(Long recordId){
         return baseInfoDao.getFamilyAssets(recordId);
     }
 
-    //获取土地信息
-    public List<LandInfo> getLandInfo(int recordId){
+    //房产
+    public List<HousePropertyInfo> getHousePropertyInfo(Long recordId){
+        return baseInfoDao.getHousePropertyInfo(recordId);
+    }
+
+    //土地
+    public List<LandInfo> getLandInfo(Long recordId){
         return baseInfoDao.getLandInfo(recordId);
     }
 
-    //获取车辆信息
-    public List<CarsInfo> getCarsInfo(int recordId){
+    //车辆
+    public List<CarsInfo> getCarsInfo(Long recordId){
         return baseInfoDao.getCarsInfo(recordId);
     }
 
     //金融资产信息
-    public List<FinancialAssets> getFinancialAssets(int recordId){
+    public List<FinancialAssets> getFinancialAssets(Long recordId){
         return baseInfoDao.getFinancialAssets(recordId);
     }
 
     //负责情况信息
-    public List<FamilyIncurDebts> getFamilyIncurDebts(int recordId){
+    public List<FamilyIncurDebts> getFamilyIncurDebts(Long recordId){
         return baseInfoDao.getFamilyIncurDebts(recordId);
     }
 
     //获取家庭成员信息
-    public List<FamilyMember> getFamilyMember(int recordId){
+    public List<FamilyMember> getFamilyMember(Long recordId){
         return baseInfoDao.getFamilyMember(recordId);
     }
+
+
+    /////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
 
 
 

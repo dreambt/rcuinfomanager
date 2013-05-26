@@ -10,11 +10,7 @@
     <link href="/asserts/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
     <link href="/asserts/css/doc.css" rel="stylesheet" media="screen">
     <link href="/asserts/css/style.css" rel="stylesheet" media="screen">
-    <script type="text/javascript">
-        $(function(){
 
-        });
-    </script>
 </head>
 <body>
 

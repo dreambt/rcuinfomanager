@@ -48,6 +48,8 @@
             </ul>
         </div>
         <div class="span9" style="margin-left: -2.435897%;">
+            <br/>
+            <input class="input-block-level" type="text" placeholder="客户电子信息管理" disabled="disabled" style="color:#0000AA">
             <div class="navbar">
                 <div class="btn-group">
                     <select class="selectpicker" style="width: 95px; margin-top: 10px;">

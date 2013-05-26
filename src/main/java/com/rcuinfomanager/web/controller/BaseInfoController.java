@@ -31,7 +31,7 @@ public class BaseInfoController {
         //车辆
         map.put("personCarsInfoList",baseInfoService.getCarsInfo(id));
         //金融资产
-        map.put("personFinancialAssets",baseInfoService.getFinancialAssets(id));
+        map.put("personFinancialAssetsList",baseInfoService.getFinancialAssets(id));
         //家庭负债
         map.put("personFamilyIncurDebtsList",baseInfoService.getFamilyIncurDebts(id));
         //家庭成员
@@ -50,8 +50,9 @@ public class BaseInfoController {
     //编辑
     @RequestMapping("/edit/{id}")
     public String editInfo(@PathVariable long id,Map map){
-
-        return "/farmer/edit";
+        //基础概况信息
+        map.put("personBasicList",baseInfoService.getCusBasicInfo(id));
+        return "farmer/edit";
     }
 
     //删除

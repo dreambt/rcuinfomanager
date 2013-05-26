@@ -27,7 +27,8 @@
                                 </div>
                             </td>
                         </tr>
-                    </table></td>
+                    </table>
+                </td>
             </tr>
         </table>
     </div>
@@ -36,7 +37,7 @@
 <div class="row-fluid">
 <div class="span3">
     <ul class="nav nav-list bs-docs-sidenav affix">
-        <li class="active"><a href="#main"><i class="icon-chevron-right"></i>客户电子信息管理</a></li>
+        <li class="active"><a href="/index"><i class="icon-chevron-right"></i>客户电子信息管理</a></li>
         <li class=""><a href="#mobileDeviceManager"><i class="icon-chevron-right"></i>客户端管理</a></li>
         <li class=""><a href="#accountManager"><i class="icon-chevron-right"></i>系统账号管理</a></li>
         <li class=""><a href="#roleManager"><i class="icon-chevron-right"></i>系统角色管理</a></li>
@@ -44,457 +45,683 @@
     </ul>
 </div>
 <div class="span10" style="margin-left: -8.435897%;">
+<br/>
+<input class="input-block-level" type="text" placeholder="客户电子信息管理>查询" disabled="disabled" style="color:#0000AA">
+<table class="table table-condensed">
+    <tbody>
+    <tr>
+        <td><span class="label label-info">户主：</span></td>
+        <td>张晓明</td>
+        <td><span class="label label-info">电话：</span></td>
+        <td>11111111111</td>
+        <td><span class="label label-info">收集单位：</span></td>
+        <td>惠安分社区</td>
+        <td><span class="label label-info">收集人：</span></td>
+        <td>管理员</td>
+    </tr>
+    </tbody>
+</table>
+<p class="text-center">
+    <button class="btn" type="button">指派</button>
+    <button class="btn" type="button">删除</button>
+    <button class="btn" type="button">验收</button>
+    <button class="btn" type="button">编辑</button>
+</p>
+<div class="tabbable">
+<ul class="nav nav-tabs">
+    <li class="active"><a href="#tab1" data-toggle="tab">个人基本概况信息</a></li>
+    <li><a href="#tab2" data-toggle="tab">金融服务需求情况</a></li>
+    <li><a href="#tab3" data-toggle="tab">村委会（居委会）评价</a></li>
+    <li><a href="#tab4" data-toggle="tab">客户经理评价</a></li>
+</ul>
+<div class="tab-content">
+<div class="tab-pane active" id="tab1">
 
-    <div class="farmer_info">
-        <form name="myform" id="myform" action="" method="post">
-            <div class="table-list">
-                <table width="100%" border="0">
-                    <tbody>
-                      <core:forEach items="${personBasicList}" var="personBasic">
-                        <tr>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">姓名</td>
-                            <td align="center">${personBasic.customerName}</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">性别</td>
-                            <td align="center">${personBasic.gender}</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">是否农户</td>
-                            <td align="center">${personBasic.farmer}</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">客户类型</td>
-                            <td align="center">${personBasic.customerType}</td>
-                        </tr>
-                        <tr>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">证件类型</td>
-                            <td align="center" colspan="2">${personBasic.cerType}</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">证件号码</td>
-                            <td align="center" colspan="2">${personBasic.cerNum}</td>
-                            <td align="center" colspan="2" rowspan="4">照片</td>
-                        </tr>
-                        <tr>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">证件有效期</td>
-                            <td align="center" colspan="3">${personBasic.cerValidityFrom} - ${personBasic.cerValidityTo}</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">出生年月</td>
-                            <td align="center">${personBasic.birthday}</td>
-                        </tr>
-                        <tr>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">国籍</td>
-                            <td align="center">${personBasic.nationality}</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">是否拥有外国护照或居住权</td>
-                            <td align="center">${personBasic.havePassport}</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">民族</td>
-                            <td align="center">${personBasic.nation}</td>
-                        </tr>
-                        <tr>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">政治面貌</td>
-                            <td align="center">${personBasic.poliLaspect}</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">健康状况</td>
-                            <td align="center">${personBasic.health}</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">婚姻状况</td>
-                            <td align="center">${personBasic.maritalStatus}</td>
-                        </tr>
-                        <tr>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">
-                                居住地址
-                            </td>
-                            <td align="center" colspan="5">${personBasic.address}</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">居住编码</td>
-                            <td align="center">${personBasic.postcode}</td>
-                        </tr>
-                        <tr>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">
-                                区域名称
-                            </td>
-                            <td align="center"><p>${personBasic.areaName}</p></td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">村别</td>
-                            <td align="center"><p>${personBasic.village}</p></td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">联系电话</td>
-                            <td align="center">${personBasic.telephone}</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">手机号码</td>
-                            <td align="center">${personBasic.mbPhoneNum}</td>
-                        </tr>
-                        <tr>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">
-                                居住状况
-                            </td>
-                            <td align="center" colspan="2"><p>${personBasic.liveCondition}</p></td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">社会保障情况</td>
-                            <td align="center" colspan="4"><p>${personBasic.socialSecurity}</p></td>
-                        </tr>
-                        <tr>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">
-                                最高学位
-                            </td>
-                            <td align="center">${personBasic.highestDegree}</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">最高学历</td>
-                            <td align="center">${personBasic.highestEdu}</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">与我行（社）关系</td>
-                            <td align="center">${personBasic.bankRelation}</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">与我行（社）合作关系</td>
-                            <td align="center">${personBasic.bankPartnership}</td>
-                        </tr>
-                        <tr>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">
-                                职业
-                            </td>
-                            <td align="center" colspan="7">${personBasic.profession}</td>
-                        </tr>
-                        <tr>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">
-                                个人经营项目
-                            </td>
-                            <td align="center" colspan="4">${personBasic.businessProj}</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">经营年限</td>
-                            <td align="center" colspan="2">${personBasic.businessYear}</td>
-                        </tr>
-                        <tr>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">
-                                经营场所
-                            </td>
-                            <td align="center" colspan="3">${personBasic.businessSite}</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">从事行业</td>
-                            <td align="center" colspan="3">${personBasic.industry}</td>
-                        </tr>
-                        <tr>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">投资经营性质</td>
-                            <td align="center">${personBasic.businessProp}</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">投资资金情况</td>
-                            <td align="center">${personBasic.moneySitu}</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">投入金额</td>
-                            <td align="center">${personBasic.inputMoney}</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">自有资金情况</td>
-                            <td align="center">${personBasic.ownMoney}</td>
-                        </tr>
-                        <tr>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF"> 年收益情况</td>
-                            <td align="center" colspan="7">${personBasic.yearIncome}</td>
-                        </tr>
-                        <tr>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">工作情况</td>
-                            <td align="center" colspan="7">${personBasic.workSitu}</td>
-                        </tr>
-                        <tr>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">单位性质</td>
-                            <td align="center" colspan="3">${personBasic.unitProp}</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">单位所属行业</td>
-                            <td align="center" colspan="3">${personBasic.unitIndustry}</td>
-                        </tr>
-                        <tr>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">任职部门</td>
-                            <td align="center" colspan="3">${personBasic.department}</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">工作单位类别</td>
-                            <td align="center" colspan="3">${personBasic.unitType}</td>
-                        </tr>
-                        <tr>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">职务</td>
-                            <td align="center">${personBasic.duties}</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">年工资收入（万元）</td>
-                            <td align="center">${personBasic.annualWageIncome}</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">工作年限</td>
-                            <td align="center">${personBasic.workYears}</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">职称</td>
-                            <td align="center">${personBasic.workTitle}</td>
-                        </tr>
-                      </core:forEach>
-                        <tr>
-                            <td align="center" colspan="8" style="font-size:22px">
-                                家庭收支情况
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="center" colspan="2" bgcolor="#1e90ff" style="color:#FFFFFF">
-                                家庭年总收入（万元）
-                            </td>
-                            <td align="center" colspan="2">4</td>
-                            <td align="center" colspan="2" bgcolor="#1e90ff" style="color:#FFFFFF">家庭支出（万元）</td>
-                            <td align="center" colspan="2">2</td>
-                        </tr>
-                        <tr>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">
-                                收入来源
-                            </td>
-                            <td align="center" colspan="7">务农</td>
-                        </tr>
-                        <tr>
-                            <td align="center" colspan="2" bgcolor="#1e90ff" style="color:#FFFFFF">
-                                其中：个人年收入（万元）
-                            </td>
-                            <td align="center" colspan="2">2</td>
-                            <td align="center" colspan="2" bgcolor="#1e90ff" style="color:#FFFFFF">家庭其他成员年收入（万元）</td>
-                            <td align="center" colspan="2">2</td>
-                        </tr>
-                        <tr>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">
-                                投资经营性质
-                            </td>
-                            <td align="center">&nbsp;</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">投资资金情况</td>
-                            <td align="center">&nbsp;</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">投入金额</td>
-                            <td align="center">&nbsp;</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">自有资金情况</td>
-                            <td align="center">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td align="center"  bgcolor="#1e90ff" style="color:#FFFFFF">
-                                家庭主要支出项目
-                            </td>
-                            <td align="center" colspan="3">生活性支出</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">家庭收入能否应付支出</td>
-                            <td align="center" colspan="3">能、刚刚够</td>
-                        </tr>
-                        <tr>
-                            <td align="center" colspan="8" style="font-size:22px">
-                                家庭资产情况
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">
-                                总资产（万元）
-                            </td>
-                            <td align="center">5</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">主要资产</td>
-                            <td align="center" colspan="5">房屋</td>
-                        </tr>
-                        <tr>
-                            <td align="left" colspan="8" style="font-size:18px">
-                                房产：1
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">
-                                性质
-                            </td>
-                            <td align="center">自建房</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">用途</td>
-                            <td align="center">居住</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">所在位置</td>
-                            <td align="center">户口地乡村</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">房屋结构</td>
-                            <td align="center">混砖</td>
-                        </tr>
-                        <tr>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">
-                                层数
-                            </td>
-                            <td align="center">1</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">使用情况</td>
-                            <td align="center">自住</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">建筑面积</td>
-                            <td align="center">100-300㎡</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">房产价值</td>
-                            <td align="center">10-30万</td>
-                        </tr>
-                        <tr>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">
-                                是否按揭
-                            </td>
-                            <td align="center">自建房</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">用途</td>
-                            <td align="center">居住</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">所在位置</td>
-                            <td align="center">户口地乡村</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">房屋结构</td>
-                            <td align="center">混砖</td>
-                        </tr>
-                        <tr>
-                            <td align="left" colspan="8" style="font-size:18px">
-                                房产：2
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">
-                                性质
-                            </td>
-                            <td align="center">自建房</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">用途</td>
-                            <td align="center">居住</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">所在位置</td>
-                            <td align="center">户口地乡村</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">房屋结构</td>
-                            <td align="center">混砖</td>
-                        </tr>
-                        <tr>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">
-                                层数
-                            </td>
-                            <td align="center">1</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">使用情况</td>
-                            <td align="center">自住</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">建筑面积</td>
-                            <td align="center">100-300㎡</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">房产价值</td>
-                            <td align="center">10-30万</td>
-                        </tr>
-                        <tr>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">
-                                是否按揭
-                            </td>
-                            <td align="center">自建房</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">用途</td>
-                            <td align="center">居住</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">所在位置</td>
-                            <td align="center">户口地乡村</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">房屋结构</td>
-                            <td align="center">混砖</td>
-                        </tr>
+<div class="farmer_info">
+<div class="table-list" style="width:1086px; height:280px; overflow:scroll;">
+<table width="100%" border="1" cellspacing="0" width="732px">
+<tbody>
+<core:forEach items="${personBasicList}" var="personBasic">
+    <tr>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">姓名</td>
+        <td align="center">${personBasic.customerName}</td>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">性别</td>
+        <td align="center">${personBasic.gender}</td>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">是否农户</td>
+        <td align="center">${personBasic.farmer}</td>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">客户类型</td>
+        <td align="center">${personBasic.customerType}</td>
+    </tr>
+    <tr>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">证件类型</td>
+        <td align="center" colspan="2">${personBasic.cerType}</td>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">证件号码</td>
+        <td align="center" colspan="2">${personBasic.cerNum}</td>
+        <td align="center" colspan="2" rowspan="4">照片</td>
+    </tr>
+    <tr>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">证件有效期</td>
+        <td align="center" colspan="3">${personBasic.cerValidityFrom} - ${personBasic.cerValidityTo}</td>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">出生年月</td>
+        <td align="center">${personBasic.birthday}</td>
+    </tr>
+    <tr>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">国籍</td>
+        <td align="center">${personBasic.nationality}</td>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">是否拥有外国护照或居住权</td>
+        <td align="center">${personBasic.havePassport}</td>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">民族</td>
+        <td align="center">${personBasic.nation}</td>
+    </tr>
+    <tr>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">政治面貌</td>
+        <td align="center">${personBasic.poliLaspect}</td>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">健康状况</td>
+        <td align="center">${personBasic.health}</td>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">婚姻状况</td>
+        <td align="center">${personBasic.maritalStatus}</td>
+    </tr>
+    <tr>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">
+            居住地址
+        </td>
+        <td align="center" colspan="5">${personBasic.address}</td>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">居住编码</td>
+        <td align="center">${personBasic.postcode}</td>
+    </tr>
+    <tr>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">
+            区域名称
+        </td>
+        <td align="center"><p>${personBasic.areaName}</p></td>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">村别</td>
+        <td align="center"><p>${personBasic.village}</p></td>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">联系电话</td>
+        <td align="center">${personBasic.telephone}</td>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">手机号码</td>
+        <td align="center">${personBasic.mbPhoneNum}</td>
+    </tr>
+    <tr>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">
+            居住状况
+        </td>
+        <td align="center" colspan="2"><p>${personBasic.liveCondition}</p></td>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">社会保障情况</td>
+        <td align="center" colspan="4"><p>${personBasic.socialSecurity}</p></td>
+    </tr>
+    <tr>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">
+            最高学位
+        </td>
+        <td align="center">${personBasic.highestDegree}</td>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">最高学历</td>
+        <td align="center">${personBasic.highestEdu}</td>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">与我行（社）关系</td>
+        <td align="center">${personBasic.bankRelation}</td>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">与我行（社）合作关系</td>
+        <td align="center">${personBasic.bankPartnership}</td>
+    </tr>
+    <tr>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">
+            职业
+        </td>
+        <td align="center" colspan="7">${personBasic.profession}</td>
+    </tr>
+    <tr>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">
+            个人经营项目
+        </td>
+        <td align="center" colspan="4">${personBasic.businessProj}</td>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">经营年限</td>
+        <td align="center" colspan="2">${personBasic.businessYear}</td>
+    </tr>
+    <tr>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">
+            经营场所
+        </td>
+        <td align="center" colspan="3">${personBasic.businessSite}</td>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">从事行业</td>
+        <td align="center" colspan="3">${personBasic.industry}</td>
+    </tr>
+    <tr>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">投资经营性质</td>
+        <td align="center">${personBasic.businessProp}</td>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">投资资金情况</td>
+        <td align="center">${personBasic.moneySitu}</td>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">投入金额</td>
+        <td align="center">${personBasic.inputMoney}</td>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">自有资金情况</td>
+        <td align="center">${personBasic.ownMoney}</td>
+    </tr>
+    <tr>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF"> 年收益情况</td>
+        <td align="center" colspan="7">${personBasic.yearIncome}</td>
+    </tr>
+    <tr>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">工作情况</td>
+        <td align="center" colspan="7">${personBasic.workSitu}</td>
+    </tr>
+    <tr>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">单位性质</td>
+        <td align="center" colspan="3">${personBasic.unitProp}</td>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">单位所属行业</td>
+        <td align="center" colspan="3">${personBasic.unitIndustry}</td>
+    </tr>
+    <tr>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">任职部门</td>
+        <td align="center" colspan="3">${personBasic.department}</td>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">工作单位类别</td>
+        <td align="center" colspan="3">${personBasic.unitType}</td>
+    </tr>
+    <tr>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">职务</td>
+        <td align="center">${personBasic.duties}</td>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">年工资收入（万元）</td>
+        <td align="center">${personBasic.annualWageIncome}</td>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">工作年限</td>
+        <td align="center">${personBasic.workYears}</td>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">职称</td>
+        <td align="center">${personBasic.workTitle}</td>
+    </tr>
+</core:forEach>
+<tr>
+    <td align="center" colspan="8" style="font-size:22px">
+        家庭收支情况
+    </td>
+</tr>
+<core:forEach items="${personIncomeExpensesList}" var="personIncomeExpenses">
+    <tr>
+        <td align="center" colspan="2" bgcolor="#A9A9A9" style="color:#FFFFFF">
+            家庭年总收入（万元）
+        </td>
+        <td align="center" colspan="2">${personIncomeExpenses.fmAllIncome}</td>
+        <td align="center" colspan="2" bgcolor="#A9A9A9" style="color:#FFFFFF">家庭支出（万元）</td>
+        <td align="center" colspan="2">${personIncomeExpenses.fmExpenses}</td>
+    </tr>
+    <tr>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">
+            收入来源
+        </td>
+        <td align="center" colspan="7">${personIncomeExpenses.incomeSrc}</td>
+    </tr>
+    <tr>
+        <td align="center" colspan="2" bgcolor="#A9A9A9" style="color:#FFFFFF">
+            其中：个人年收入（万元）
+        </td>
+        <td align="center" colspan="2">${personIncomeExpenses.perIncome}</td>
+        <td align="center" colspan="2" bgcolor="#A9A9A9" style="color:#FFFFFF">家庭其他成员年收入（万元）</td>
+        <td align="center" colspan="2">${personIncomeExpenses.fmOtherMemberIn}</td>
+    </tr>
+    <tr>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">投资经营性质</td>
+        <td align="center">${personIncomeExpenses.businessProp}</td>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">投资资金情况</td>
+        <td align="center">${personIncomeExpenses.moneySitu}</td>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">投入金额</td>
+        <td align="center">${personIncomeExpenses.inputMoney}</td>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">自有资金情况</td>
+        <td align="center">${personIncomeExpenses.ownMoney}</td>
+    </tr>
+    <tr>
+        <td align="center"  bgcolor="#A9A9A9" style="color:#FFFFFF">家庭主要支出项目</td>
+        <td align="center" colspan="3">${personIncomeExpenses.fmExpensesProj}</td>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">家庭收入能否应付支出</td>
+        <td align="center" colspan="3">${personIncomeExpenses.fmInOutRatio}</td>
+    </tr>
+</core:forEach>
+<tr>
+    <td align="center" colspan="8" style="font-size:22px">
+        家庭资产情况
+    </td>
+</tr>
+<core:forEach items="${personFamilyAssetsList}" var="personFamilyAssets">
+    <tr>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">总资产（万元）</td>
+        <td align="center">${personFamilyAssets.fmAllAssets}</td>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">主要资产</td>
+        <td align="center" colspan="5">${personFamilyAssets.mainAssets}</td>
+    </tr>
+</core:forEach>
+<tr>
+    <td align="left" colspan="8" style="font-size:18px">
+        房产：1
+    </td>
+</tr>
+<core:forEach items="${personHousePropertyInfoList}" var="personHousePropertyInfo">
+    <tr>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">性质</td>
+        <td align="center">${personHousePropertyInfo.nature}</td>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">用途</td>
+        <td align="center">${personHousePropertyInfo.purpose}</td>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">所在位置</td>
+        <td align="center">${personHousePropertyInfo.site}</td>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">房屋结构</td>
+        <td align="center">${personHousePropertyInfo.structure}</td>
+    </tr>
+    <tr>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">层数</td>
+        <td align="center">${personHousePropertyInfo.floorNum}</td>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">使用情况</td>
+        <td align="center">${personHousePropertyInfo.usedSitu}</td>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">建筑面积</td>
+        <td align="center">${personHousePropertyInfo.houseArea}</td>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">房产价值</td>
+        <td align="center">${personHousePropertyInfo.houseWorth}</td>
+    </tr>
+    <tr>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">是否按揭</td>
+        <td align="center">${personHousePropertyInfo.installment}</td>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">是否办证</td>
+        <td align="center">${personHousePropertyInfo.hasCredentials}</td>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">备注</td>
+        <td align="center">${personHousePropertyInfo.note1}</td>
+    </tr>
+</core:forEach>
 
-                        <tr>
-                            <td align="left" colspan="8" style="font-size:18px">
-                                土地：1
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">
-                                土地面积
-                            </td>
-                            <td align="center">100-300㎡</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">土地价值</td>
-                            <td align="center">&nbsp;</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">土地性质</td>
-                            <td align="center">&nbsp;</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">土地类型</td>
-                            <td align="center">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">
-                                土地使用情况
-                            </td>
-                            <td align="center">&nbsp;</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">土地款是否结清</td>
-                            <td align="center" colspan="5">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td align="left" colspan="8" style="font-size:18px">
-                                车辆：1
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">
-                                情况
-                            </td>
-                            <td align="center">轿车</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">车辆价值</td>
-                            <td align="center">10-30万元</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">是否按揭</td>
-                            <td align="center">否</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">使用情况</td>
-                            <td align="center">自用</td>
-                        </tr>
-                        <tr>
-                            <td align="left" colspan="8" style="font-size:18px">
-                                车辆：2
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">
-                                情况
-                            </td>
-                            <td align="center">货车</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">车辆价值</td>
-                            <td align="center">10-30万元</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">是否按揭</td>
-                            <td align="center">否</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">使用情况</td>
-                            <td align="center">运营</td>
-                        </tr>
-                        <tr>
-                            <td align="left" colspan="8" style="font-size:18px">
-                                使用金融资产情况
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">
-                                情况
-                            </td>
-                            <td align="center" colspan="3">活期存款 定期存款 股票 基金 债券 投资性保险 其他</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">我社存款</td>
-                            <td align="center">10-30万内</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">他行存款</td>
-                            <td align="center">3万元内</td>
-                        </tr>
-                        <tr>
-                            <td align="center" colspan="8" style="font-size:22px">
-                                家庭负责情况
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">
-                                家庭负债总额（万元）
-                            </td>
-                            <td align="center">&nbsp;</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">本行负债（万元）</td>
-                            <td align="center" colspan="2">&nbsp;</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">他行负债（万元）</td>
-                            <td align="center" colspan="2">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">
-                                贷款用途
-                            </td>
-                            <td align="center" colspan="3">&nbsp;</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">贷款形态</td>
-                            <td align="center" colspan="3">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td align="center" colspan="8" style="font-size:22px">
-                                家庭成员基本情况
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="left" colspan="8" style="font-size:18px">
-                                成员：1
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">
-                                姓名
-                            </td>
-                            <td align="center">张惠孝</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">年收入（万元）</td>
-                            <td align="center">1</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">与户主关系</td>
-                            <td align="center">其他血亲</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">常住地址</td>
-                            <td align="center">本地区</td>
-                        </tr>
-                        <tr>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">
-                                职业
-                            </td>
-                            <td align="center" colspan="3">专业技术人员</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">证件号码</td>
-                            <td align="center" colspan="3">350583198011151353</td>
-                        </tr>
-                        <tr>
-                            <td align="left" colspan="8" style="font-size:18px">
-                                成员：2
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">
-                                姓名
-                            </td>
-                            <td align="center">张惠贤</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">年收入（万元）</td>
-                            <td align="center">1</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">与户主关系</td>
-                            <td align="center">其他血亲</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">常住地址</td>
-                            <td align="center">本地区</td>
-                        </tr>
-                        <tr>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">
-                                职业
-                            </td>
-                            <td align="center" colspan="3">专业技术人员</td>
-                            <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">证件号码</td>
-                            <td align="center" colspan="3">350583198011151354</td>
-                        </tr>
-                 </tbody>
-                </table>
-            </div>
-        </form>
+<tr>
+    <td align="left" colspan="8" style="font-size:18px">
+        土地：1
+    </td>
+</tr>
+<core:forEach items="${personLandInfoList}" var="personLandInfo">
+    <tr>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">土地面积</td>
+        <td align="center">${personLandInfo.area}</td>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">土地价值</td>
+        <td align="center">${personLandInfo.worth}</td>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">土地性质</td>
+        <td align="center">${personLandInfo.property}</td>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">土地类型</td>
+        <td align="center">${personLandInfo.type}</td>
+    </tr>
+    <tr>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">土地使用情况</td>
+        <td align="center">${personLandInfo.usedSitu}</td>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">土地款是否结清</td>
+        <td align="center" colspan="5">${personLandInfo.moneyClear}</td>
+    </tr>
+</core:forEach>
+
+<tr>
+    <td align="left" colspan="8" style="font-size:18px">
+        车辆：1
+    </td>
+</tr>
+<core:forEach items="${personCarsInfoList}" var="personCarsInfo">
+    <tr>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">情况</td>
+        <td align="center">${personCarsInfo.carsInfo}</td>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">车辆价值</td>
+        <td align="center">${personCarsInfo.carsWorth}</td>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">是否按揭</td>
+        <td align="center">${personCarsInfo.carsIsInstallment}</td>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">使用情况</td>
+        <td align="center">${personCarsInfo.carsUsingInfo}</td>
+    </tr>
+</core:forEach>
+
+<tr>
+    <td align="left" colspan="8" style="font-size:18px">
+        使用金融资产情况
+    </td>
+</tr>
+<core:forEach items="${personFinancialAssetsList}" var="personFinancialAssets">
+    <tr>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">情况</td>
+        <td align="center" colspan="3">${personFinancialAssets.financialInfo}</td>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">我社存款</td>
+        <td align="center">${personFinancialAssets.depositOurBank}</td>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">他行存款</td>
+        <td align="center">${personFinancialAssets.depositOtherBank}</td>
+    </tr>
+</core:forEach>
+<tr>
+    <td align="center" colspan="8" style="font-size:22px">
+        家庭负债情况
+    </td>
+</tr>
+<core:forEach items="${personFamilyIncurDebtsList}" var="personFamilyIncurDebts">
+    <tr>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">
+            家庭负债总额（万元）
+        </td>
+        <td align="center">${personFamilyIncurDebts.fmIncurDebts}</td>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">本行负债（万元）</td>
+        <td align="center" colspan="2">${personFamilyIncurDebts.ourBankDebts}</td>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">他行负债（万元）</td>
+        <td align="center" colspan="2">${personFamilyIncurDebts.otherBankDebts}</td>
+    </tr>
+    <tr>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">贷款用途</td>
+        <td align="center" colspan="3">${personFamilyIncurDebts.loanPurpose}</td>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">贷款形态</td>
+        <td align="center" colspan="3">${personFamilyIncurDebts.loanShap}</td>
+    </tr>
+</core:forEach>
+<tr>
+    <td align="center" colspan="8" style="font-size:22px">
+        家庭成员基本情况
+    </td>
+</tr>
+<tr>
+    <td align="left" colspan="8" style="font-size:18px">
+        成员：1
+    </td>
+</tr>
+<core:forEach items="${personFamilyMemberList}" var="personFamilyMember">
+    <tr>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">姓名</td>
+        <td align="center">${personFamilyMember.familyMemberName}</td>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">年收入（万元）</td>
+        <td align="center">${personFamilyMember.yearIncome}</td>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">与户主关系</td>
+        <td align="center">${personFamilyMember.leaderRelation}</td>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">常住地址</td>
+        <td align="center">${personFamilyMember.address}</td>
+    </tr>
+    <tr>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">职业</td>
+        <td align="center" colspan="3">${personFamilyMember.profession}</td>
+        <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">证件号码</td>
+        <td align="center" colspan="3">${personFamilyMember.familyMemberCerNum}</td>
+    </tr>
+</core:forEach>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="tab-pane" id="tab2">
+    <div class="pad-10">
+        <div class="table-list" style="width:1086px; height:280px; overflow:scroll;">
+            <table width="100%" border="1" cellspacing="0" width="732px">
+                <tbody>
+                <tr>
+                    <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">
+                        您目前使用我行（社）的哪些产品
+                    </td>
+                    <td align="center" colspan="3">存款</td>
+                </tr>
+                <tr>
+                    <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">
+                        您对我行（社）产品满意度
+                    </td>
+                    <td align="center" colspan="3">较为适用</td>
+                </tr>
+                <tr>
+                    <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">
+                        您在未来两年内是否有资金需求
+                    </td>
+                    <td align="center" colspan="3">不需要</td>
+                </tr>
+                <tr>
+                    <td align="center" rowspan="3" bgcolor="#A9A9A9" style="color:#FFFFFF">
+                        如果需要贷款的话，您计划用这笔贷款做什么？
+                    </td>
+                    <td align="center" rowspan="3">&nbsp;</td>
+                    <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">
+                        您希望得到的贷款金额是多少？
+                    </td>
+                    <td align="center">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">
+                        您可以提供的担保物有？
+                    </td>
+                    <td align="center">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">
+                        您希望得到的贷款期限是多久？
+                    </td>
+                    <td align="center">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td align="center"  colspan="2" bgcolor="#A9A9A9" style="color:#FFFFFF">
+                        未来1-2年家庭储蓄的主要目的和用途？
+                    </td>
+                    <td align="center" colspan="2">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td align="center"  colspan="2" bgcolor="#A9A9A9" style="color:#FFFFFF">
+                        您目前希望得到我行（社）的哪些服务？
+                    </td>
+                    <td align="center" colspan="2">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td align="center"  colspan="2" bgcolor="#A9A9A9" style="color:#FFFFFF">
+                        除了上述业务，您还需要哪些服务？
+                    </td>
+                    <td align="center" colspan="2">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td align="center"  colspan="2" bgcolor="#A9A9A9" style="color:#FFFFFF">
+                        您希望我行（社）增加哪些方面的服务？
+                    </td>
+                    <td align="center" colspan="2">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td align="center"  colspan="2" bgcolor="#A9A9A9" style="color:#FFFFFF">
+                        您对我行（社）服务有何建议？
+                    </td>
+                    <td align="center" colspan="2">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td align="center" rowspan="7" bgcolor="#A9A9A9" style="color:#FFFFFF">
+                        金融业务需求
+                    </td>
+                    <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">
+                        金融业务需求
+                    </td>
+                    <td align="center" colspan="2">信用卡 福万通卡 贵宾卡</td>
+                </tr>
+                <tr>
+                    <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">
+                        电子银行业务
+                    </td>
+                    <td align="center" colspan="2">短信银行 电话银行 网上银行 手机银行</td>
+                </tr>
+                <tr>
+                    <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">
+                        代缴代扣业务
+                    </td>
+                    <td align="center" colspan="2">代缴水费 代缴电费 代缴烟草费 代发工资 电子扣税 保险费代扣</td>
+                </tr>
+                <tr>
+                    <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">
+                        自助机具业务
+                    </td>
+                    <td align="center" colspan="2">银联POS机 福农通 小额支付便民点 生意通 居家银行</td>
+                </tr>
+                <tr>
+                    <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">
+                        对私贷款业务
+                    </td>
+                    <td align="center" colspan="2">农户小额信用贷款 农户联保贷款 农户保证贷款</td>
+                </tr>
+                <tr>
+                    <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">
+                        对公贷款业务
+                    </td>
+                    <td align="center" colspan="2">流动资金贷款 固定资产贷款 小企业联保贷款 中小企业保证贷款</td>
+                </tr>
+                <tr>
+                    <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">
+                        客户新需求登记
+                    </td>
+                    <td align="center" colspan="2">无</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!--村委会（居委会）评价-->
+<div class="tab-pane" id="tab3">
+    <div class="pad-10">
+        <div class="table-list" style="width:1086px; height:280px; overflow:scroll;">
+            <table width="100%" border="1" cellspacing="0" width="732px">
+                <tbody>
+                <tr>
+                    <td width="27%" align="left" bgcolor="#A9A9A9" style="color:#FFFFFF">
+                        一、客户基本资料真实性						</td>
+                    <td width="73%" align="center"></td>
+                </tr>
+                <tr>
+                    <td align="left" bgcolor="#A9A9A9" style="color:#FFFFFF">
+                        二、本地居住时间（农户）
+                    </td>
+                    <td align="center">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td width="27%" align="left" bgcolor="#A9A9A9" style="color:#FFFFFF">
+                        三、经营能力
+                    </td>
+                    <td width="73%" align="center">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td align="left" bgcolor="#A9A9A9" style="color:#FFFFFF">
+                        四、项目潜质
+                    </td>
+                    <td align="center">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td width="27%" align="left" bgcolor="#A9A9A9" style="color:#FFFFFF">
+                        五、市场经营风险
+                    </td>
+                    <td width="73%" align="center">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td align="left" bgcolor="#A9A9A9" style="color:#FFFFFF">
+                        六、市场竞争力和发展前景
+                    </td>
+                    <td align="center">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td width="27%" align="left" bgcolor="#A9A9A9" style="color:#FFFFFF">
+                        七、生产经营力或工作稳定情况
+                    </td>
+                    <td width="73%" align="center">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td align="left" bgcolor="#A9A9A9" style="color:#FFFFFF">
+                        八、家庭人均纯收入水平（农户）
+                    </td>
+                    <td align="center">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td width="27%" align="left" bgcolor="#A9A9A9" style="color:#FFFFFF">
+                        九、家庭人均可支配收入水平（非农户）
+                    </td>
+                    <td width="73%" align="center">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td align="left" bgcolor="#A9A9A9" style="color:#FFFFFF">
+                        十、家庭财产水平
+                    </td>
+                    <td align="center">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td width="27%" align="left" bgcolor="#A9A9A9" style="color:#FFFFFF">
+                        十一、税费缴纳情况（含土地、房产款项）
+                    </td>
+                    <td width="73%" align="center">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td align="left" bgcolor="#A9A9A9" style="color:#FFFFFF">
+                        十二、敬老情况
+                    </td>
+                    <td align="center">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td width="27%" align="left" bgcolor="#A9A9A9" style="color:#FFFFFF">
+                        十三、邻里关系
+                    </td>
+                    <td width="73%" align="center">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td align="left" bgcolor="#A9A9A9" style="color:#FFFFFF">
+                        十四、对公益事业关心程度
+                    </td>
+                    <td align="center">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td width="27%" align="left" bgcolor="#A9A9A9" style="color:#FFFFFF">
+                        十五、信誉情况
+                    </td>
+                    <td width="73%" align="center">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td align="left" bgcolor="#A9A9A9" style="color:#FFFFFF">
+                        十六、个人品行综合评价
+                    </td>
+                    <td align="center">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td width="27%" align="left" bgcolor="#A9A9A9" style="color:#FFFFFF">
+                        十七、受表彰情况
+                    </td>
+                    <td width="73%" align="center">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td align="left" bgcolor="#A9A9A9" style="color:#FFFFFF">
+                        十八、其他补充
+                    </td>
+                    <td align="center">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td width="27%" align="left" bgcolor="#A9A9A9" style="color:#FFFFFF">
+                        十九、是否为我行（社）重点服务对象
+                    </td>
+                    <td width="73%" align="center">&nbsp;</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!--客户经理评价-->
+<div class="tab-pane" id="tab4">
+    <div class="pad-10">
+        <div class="table-list">
+            <table width="100%" border="1">
+                <tbody>
+                <tr>
+                    <td width="27%" align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">
+                        客户在他行贷款情况
+                    </td>
+                    <td width="73%" align="center">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">
+                        个人银行信用记录
+                    </td>
+                    <td align="center">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td width="27%" align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">
+                        他行信用记录
+                    </td>
+                    <td width="73%" align="center">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">
+                        变现能力
+                    </td>
+                    <td align="center">&nbsp;</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 </div>
 </div>
+</div>
+</div>
+</div>
+<script src="/asserts/js/jquery-1.7.2.min.js"></script>
+<script src="/asserts/js/bootstrap.min.js"></script>
 </body>
 </html>

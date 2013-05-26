@@ -52,6 +52,23 @@ public class BaseInfoController {
     public String editInfo(@PathVariable long id,Map map){
         //基础概况信息
         map.put("personBasicList",baseInfoService.getCusBasicInfo(id));
+        //家庭收支情况
+        map.put("personIncomeExpensesList",baseInfoService.getIncomeExpenses(id));
+        // 家庭资产情况
+        map.put("personFamilyAssetsList",baseInfoService.getFamilyAssets(id));
+        //房产
+        map.put("personHousePropertyInfoList",baseInfoService.getHousePropertyInfo(id));
+        //土地
+        map.put("personLandInfoList",baseInfoService.getLandInfo(id));
+        //车辆
+        map.put("personCarsInfoList",baseInfoService.getCarsInfo(id));
+        //金融资产
+        map.put("personFinancialAssetsList",baseInfoService.getFinancialAssets(id));
+        //家庭负债
+        map.put("personFamilyIncurDebtsList",baseInfoService.getFamilyIncurDebts(id));
+        //家庭成员
+        map.put("personFamilyMemberList",baseInfoService.getFamilyMember(id));
+
         return "farmer/edit";
     }
 

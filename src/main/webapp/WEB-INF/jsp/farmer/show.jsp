@@ -4,7 +4,7 @@
 <html>
 <head>
     <title>农户建档现场电子信息采集系统</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <!-- Bootstrap -->
     <link href="/asserts/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="/asserts/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
@@ -13,6 +13,7 @@
 
 </head>
 <body>
+
 <div class="top">
     <div class="row" style="margin-left: 2px;margin-top: -40px;">
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -32,7 +33,6 @@
         </table>
     </div>
 </div>
-
 <div class="container-fluid">
 <div class="row-fluid">
 <div class="span3">
@@ -50,25 +50,23 @@
 <table class="table table-condensed">
     <tbody>
     <tr>
-        <td>户主：</td>
+        <td><span class="label label-info">户主：</span></td>
         <td>张晓明</td>
-        <td>电话:</td>
+        <td><span class="label label-info">电话：</span></td>
         <td>11111111111</td>
-        <td>收集单位:</td>
+        <td><span class="label label-info">收集单位：</span></td>
         <td>惠安分社区</td>
-        <td>收集人:</td>
+        <td><span class="label label-info">收集人：</span></td>
         <td>管理员</td>
     </tr>
     </tbody>
 </table>
-
 <p class="text-center">
     <button class="btn" type="button">指派</button>
     <button class="btn" type="button">删除</button>
     <button class="btn" type="button">验收</button>
     <button class="btn" type="button">编辑</button>
 </p>
-
 <div class="tabbable">
 <ul class="nav nav-tabs">
     <li class="active"><a href="#tab1" data-toggle="tab">个人基本概况信息</a></li>
@@ -78,9 +76,10 @@
 </ul>
 <div class="tab-content">
 <div class="tab-pane active" id="tab1">
+
 <div class="farmer_info">
-<div class="table-list">
-<table width="100%" border="0">
+<div class="table-list" style="width:1086px; height:280px; overflow:scroll;">
+<table width="100%" border="1" cellspacing="0" width="732px">
 <tbody>
 <core:forEach items="${personBasicList}" var="personBasic">
     <tr>
@@ -225,7 +224,6 @@
         <td align="center">${personBasic.workTitle}</td>
     </tr>
 </core:forEach>
-
 <tr>
     <td align="center" colspan="8" style="font-size:22px">
         家庭收支情况
@@ -271,9 +269,10 @@
         <td align="center" colspan="3">${personIncomeExpenses.fmInOutRatio}</td>
     </tr>
 </core:forEach>
-
 <tr>
-    <td align="center" colspan="8" style="font-size:22px">家庭资产情况</td>
+    <td align="center" colspan="8" style="font-size:22px">
+        家庭资产情况
+    </td>
 </tr>
 <core:forEach items="${personFamilyAssetsList}" var="personFamilyAssets">
     <tr>
@@ -288,7 +287,6 @@
         房产：1
     </td>
 </tr>
-
 <core:forEach items="${personHousePropertyInfoList}" var="personHousePropertyInfo">
     <tr>
         <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">性质</td>
@@ -338,7 +336,7 @@
     </tr>
     <tr>
         <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">土地使用情况</td>
-        <td align="center">${personLandInfo.landUsedSitu}</td>
+        <td align="center">${personLandInfo.usedSitu}</td>
         <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">土地款是否结清</td>
         <td align="center" colspan="5">${personLandInfo.moneyClear}</td>
     </tr>
@@ -349,7 +347,6 @@
         车辆：1
     </td>
 </tr>
-
 <core:forEach items="${personCarsInfoList}" var="personCarsInfo">
     <tr>
         <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">情况</td>
@@ -378,10 +375,9 @@
         <td align="center">${personFinancialAssets.depositOtherBank}</td>
     </tr>
 </core:forEach>
-
 <tr>
     <td align="center" colspan="8" style="font-size:22px">
-        家庭负责情况
+        家庭负债情况
     </td>
 </tr>
 <core:forEach items="${personFamilyIncurDebtsList}" var="personFamilyIncurDebts">
@@ -402,13 +398,11 @@
         <td align="center" colspan="3">${personFamilyIncurDebts.loanShap}</td>
     </tr>
 </core:forEach>
-
 <tr>
     <td align="center" colspan="8" style="font-size:22px">
         家庭成员基本情况
     </td>
 </tr>
-
 <tr>
     <td align="left" colspan="8" style="font-size:18px">
         成员：1
@@ -437,117 +431,122 @@
 </div>
 </div>
 </div>
-<!--金融服务需求-->
 <div class="tab-pane" id="tab2">
     <div class="pad-10">
-        <div class="table-list">
-            <table width="100%" border="1">
+        <div class="table-list" style="width:1086px; height:280px; overflow:scroll;">
+            <table width="100%" border="1" cellspacing="0" width="732px">
                 <tbody>
                 <tr>
-                    <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">
+                    <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">
                         您目前使用我行（社）的哪些产品
+                    </td>
+                    <td align="center" colspan="3">存款</td>
+                </tr>
+                <tr>
+                    <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">
+                        您对我行（社）产品满意度
                     </td>
                     <td align="center" colspan="3">较为适用</td>
                 </tr>
                 <tr>
-                    <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">
+                    <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">
                         您在未来两年内是否有资金需求
                     </td>
                     <td align="center" colspan="3">不需要</td>
                 </tr>
                 <tr>
-                    <td align="center" rowspan="3" bgcolor="#1e90ff" style="color:#FFFFFF">
+                    <td align="center" rowspan="3" bgcolor="#A9A9A9" style="color:#FFFFFF">
                         如果需要贷款的话，您计划用这笔贷款做什么？
                     </td>
                     <td align="center" rowspan="3">&nbsp;</td>
-                    <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">
+                    <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">
                         您希望得到的贷款金额是多少？
                     </td>
                     <td align="center">&nbsp;</td>
                 </tr>
                 <tr>
-                    <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">
+                    <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">
                         您可以提供的担保物有？
                     </td>
                     <td align="center">&nbsp;</td>
                 </tr>
                 <tr>
-                    <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">
+                    <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">
                         您希望得到的贷款期限是多久？
                     </td>
                     <td align="center">&nbsp;</td>
                 </tr>
                 <tr>
-                    <td align="center"  colspan="2" bgcolor="#1e90ff" style="color:#FFFFFF">
+                    <td align="center"  colspan="2" bgcolor="#A9A9A9" style="color:#FFFFFF">
                         未来1-2年家庭储蓄的主要目的和用途？
                     </td>
                     <td align="center" colspan="2">&nbsp;</td>
                 </tr>
                 <tr>
-                    <td align="center"  colspan="2" bgcolor="#1e90ff" style="color:#FFFFFF">
+                    <td align="center"  colspan="2" bgcolor="#A9A9A9" style="color:#FFFFFF">
                         您目前希望得到我行（社）的哪些服务？
                     </td>
                     <td align="center" colspan="2">&nbsp;</td>
                 </tr>
                 <tr>
-                    <td align="center"  colspan="2" bgcolor="#1e90ff" style="color:#FFFFFF">
+                    <td align="center"  colspan="2" bgcolor="#A9A9A9" style="color:#FFFFFF">
                         除了上述业务，您还需要哪些服务？
                     </td>
                     <td align="center" colspan="2">&nbsp;</td>
                 </tr>
                 <tr>
-                    <td align="center"  colspan="2" bgcolor="#1e90ff" style="color:#FFFFFF">
+                    <td align="center"  colspan="2" bgcolor="#A9A9A9" style="color:#FFFFFF">
                         您希望我行（社）增加哪些方面的服务？
                     </td>
                     <td align="center" colspan="2">&nbsp;</td>
                 </tr>
                 <tr>
-                    <td align="center"  colspan="2" bgcolor="#1e90ff" style="color:#FFFFFF">
+                    <td align="center"  colspan="2" bgcolor="#A9A9A9" style="color:#FFFFFF">
                         您对我行（社）服务有何建议？
                     </td>
                     <td align="center" colspan="2">&nbsp;</td>
                 </tr>
                 <tr>
-                    <td align="center" rowspan="7" bgcolor="#1e90ff" style="color:#FFFFFF">
+                    <td align="center" rowspan="7" bgcolor="#A9A9A9" style="color:#FFFFFF">
                         金融业务需求
                     </td>
-                    <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">
+                    <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">
                         金融业务需求
                     </td>
                     <td align="center" colspan="2">信用卡 福万通卡 贵宾卡</td>
                 </tr>
                 <tr>
-                    <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">
+                    <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">
                         电子银行业务
                     </td>
                     <td align="center" colspan="2">短信银行 电话银行 网上银行 手机银行</td>
                 </tr>
                 <tr>
-                    <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">
+                    <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">
                         代缴代扣业务
                     </td>
                     <td align="center" colspan="2">代缴水费 代缴电费 代缴烟草费 代发工资 电子扣税 保险费代扣</td>
                 </tr>
                 <tr>
-                    <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">
+                    <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">
                         自助机具业务
                     </td>
                     <td align="center" colspan="2">银联POS机 福农通 小额支付便民点 生意通 居家银行</td>
                 </tr>
                 <tr>
-                    <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">
+                    <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">
                         对私贷款业务
                     </td>
                     <td align="center" colspan="2">农户小额信用贷款 农户联保贷款 农户保证贷款</td>
                 </tr>
                 <tr>
-                    <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">
+                    <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">
                         对公贷款业务
                     </td>
                     <td align="center" colspan="2">流动资金贷款 固定资产贷款 小企业联保贷款 中小企业保证贷款</td>
                 </tr>
                 <tr>
-                    <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">
+                    <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">
                         客户新需求登记
                     </td>
                     <td align="center" colspan="2">无</td>
@@ -557,121 +556,122 @@
         </div>
     </div>
 </div>
+
 <!--村委会（居委会）评价-->
 <div class="tab-pane" id="tab3">
     <div class="pad-10">
-        <div class="table-list">
-            <table width="100%" border="1">
+        <div class="table-list" style="width:1086px; height:280px; overflow:scroll;">
+            <table width="100%" border="1" cellspacing="0" width="732px">
                 <tbody>
                 <tr>
-                    <td width="27%" align="left" bgcolor="#1e90ff" style="color:#FFFFFF">
+                    <td width="27%" align="left" bgcolor="#A9A9A9" style="color:#FFFFFF">
                         一、客户基本资料真实性						</td>
                     <td width="73%" align="center"></td>
                 </tr>
                 <tr>
-                    <td align="left" bgcolor="#1e90ff" style="color:#FFFFFF">
+                    <td align="left" bgcolor="#A9A9A9" style="color:#FFFFFF">
                         二、本地居住时间（农户）
                     </td>
                     <td align="center">&nbsp;</td>
                 </tr>
                 <tr>
-                    <td width="27%" align="left" bgcolor="#1e90ff" style="color:#FFFFFF">
+                    <td width="27%" align="left" bgcolor="#A9A9A9" style="color:#FFFFFF">
                         三、经营能力
                     </td>
                     <td width="73%" align="center">&nbsp;</td>
                 </tr>
                 <tr>
-                    <td align="left" bgcolor="#1e90ff" style="color:#FFFFFF">
+                    <td align="left" bgcolor="#A9A9A9" style="color:#FFFFFF">
                         四、项目潜质
                     </td>
                     <td align="center">&nbsp;</td>
                 </tr>
                 <tr>
-                    <td width="27%" align="left" bgcolor="#1e90ff" style="color:#FFFFFF">
+                    <td width="27%" align="left" bgcolor="#A9A9A9" style="color:#FFFFFF">
                         五、市场经营风险
                     </td>
                     <td width="73%" align="center">&nbsp;</td>
                 </tr>
                 <tr>
-                    <td align="left" bgcolor="#1e90ff" style="color:#FFFFFF">
+                    <td align="left" bgcolor="#A9A9A9" style="color:#FFFFFF">
                         六、市场竞争力和发展前景
                     </td>
                     <td align="center">&nbsp;</td>
                 </tr>
                 <tr>
-                    <td width="27%" align="left" bgcolor="#1e90ff" style="color:#FFFFFF">
+                    <td width="27%" align="left" bgcolor="#A9A9A9" style="color:#FFFFFF">
                         七、生产经营力或工作稳定情况
                     </td>
                     <td width="73%" align="center">&nbsp;</td>
                 </tr>
                 <tr>
-                    <td align="left" bgcolor="#1e90ff" style="color:#FFFFFF">
+                    <td align="left" bgcolor="#A9A9A9" style="color:#FFFFFF">
                         八、家庭人均纯收入水平（农户）
                     </td>
                     <td align="center">&nbsp;</td>
                 </tr>
                 <tr>
-                    <td width="27%" align="left" bgcolor="#1e90ff" style="color:#FFFFFF">
+                    <td width="27%" align="left" bgcolor="#A9A9A9" style="color:#FFFFFF">
                         九、家庭人均可支配收入水平（非农户）
                     </td>
                     <td width="73%" align="center">&nbsp;</td>
                 </tr>
                 <tr>
-                    <td align="left" bgcolor="#1e90ff" style="color:#FFFFFF">
+                    <td align="left" bgcolor="#A9A9A9" style="color:#FFFFFF">
                         十、家庭财产水平
                     </td>
                     <td align="center">&nbsp;</td>
                 </tr>
                 <tr>
-                    <td width="27%" align="left" bgcolor="#1e90ff" style="color:#FFFFFF">
+                    <td width="27%" align="left" bgcolor="#A9A9A9" style="color:#FFFFFF">
                         十一、税费缴纳情况（含土地、房产款项）
                     </td>
                     <td width="73%" align="center">&nbsp;</td>
                 </tr>
                 <tr>
-                    <td align="left" bgcolor="#1e90ff" style="color:#FFFFFF">
+                    <td align="left" bgcolor="#A9A9A9" style="color:#FFFFFF">
                         十二、敬老情况
                     </td>
                     <td align="center">&nbsp;</td>
                 </tr>
                 <tr>
-                    <td width="27%" align="left" bgcolor="#1e90ff" style="color:#FFFFFF">
+                    <td width="27%" align="left" bgcolor="#A9A9A9" style="color:#FFFFFF">
                         十三、邻里关系
                     </td>
                     <td width="73%" align="center">&nbsp;</td>
                 </tr>
                 <tr>
-                    <td align="left" bgcolor="#1e90ff" style="color:#FFFFFF">
+                    <td align="left" bgcolor="#A9A9A9" style="color:#FFFFFF">
                         十四、对公益事业关心程度
                     </td>
                     <td align="center">&nbsp;</td>
                 </tr>
                 <tr>
-                    <td width="27%" align="left" bgcolor="#1e90ff" style="color:#FFFFFF">
+                    <td width="27%" align="left" bgcolor="#A9A9A9" style="color:#FFFFFF">
                         十五、信誉情况
                     </td>
                     <td width="73%" align="center">&nbsp;</td>
                 </tr>
                 <tr>
-                    <td align="left" bgcolor="#1e90ff" style="color:#FFFFFF">
+                    <td align="left" bgcolor="#A9A9A9" style="color:#FFFFFF">
                         十六、个人品行综合评价
                     </td>
                     <td align="center">&nbsp;</td>
                 </tr>
                 <tr>
-                    <td width="27%" align="left" bgcolor="#1e90ff" style="color:#FFFFFF">
+                    <td width="27%" align="left" bgcolor="#A9A9A9" style="color:#FFFFFF">
                         十七、受表彰情况
                     </td>
                     <td width="73%" align="center">&nbsp;</td>
                 </tr>
                 <tr>
-                    <td align="left" bgcolor="#1e90ff" style="color:#FFFFFF">
+                    <td align="left" bgcolor="#A9A9A9" style="color:#FFFFFF">
                         十八、其他补充
                     </td>
                     <td align="center">&nbsp;</td>
                 </tr>
                 <tr>
-                    <td width="27%" align="left" bgcolor="#1e90ff" style="color:#FFFFFF">
+                    <td width="27%" align="left" bgcolor="#A9A9A9" style="color:#FFFFFF">
                         十九、是否为我行（社）重点服务对象
                     </td>
                     <td width="73%" align="center">&nbsp;</td>
@@ -688,25 +688,25 @@
             <table width="100%" border="1">
                 <tbody>
                 <tr>
-                    <td width="27%" align="center" bgcolor="#1e90ff" style="color:#FFFFFF">
+                    <td width="27%" align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">
                         客户在他行贷款情况
                     </td>
                     <td width="73%" align="center">&nbsp;</td>
                 </tr>
                 <tr>
-                    <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">
+                    <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">
                         个人银行信用记录
                     </td>
                     <td align="center">&nbsp;</td>
                 </tr>
                 <tr>
-                    <td width="27%" align="center" bgcolor="#1e90ff" style="color:#FFFFFF">
+                    <td width="27%" align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">
                         他行信用记录
                     </td>
                     <td width="73%" align="center">&nbsp;</td>
                 </tr>
                 <tr>
-                    <td align="center" bgcolor="#1e90ff" style="color:#FFFFFF">
+                    <td align="center" bgcolor="#A9A9A9" style="color:#FFFFFF">
                         变现能力
                     </td>
                     <td align="center">&nbsp;</td>

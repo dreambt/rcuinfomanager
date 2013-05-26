@@ -43,7 +43,7 @@
         <li class=""><a href="#systemlogManager"><i class="icon-chevron-right"></i>系统日志</a></li>
     </ul>
 </div>
-<div class="span9" style="margin-left: -3.435897%;">
+<div class="span10" style="margin-left: -8.435897%;">
 
     <div class="farmer_info">
         <form name="myform" id="myform" action="" method="post">

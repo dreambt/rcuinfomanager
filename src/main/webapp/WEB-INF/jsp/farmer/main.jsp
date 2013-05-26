@@ -47,7 +47,7 @@
                 <li class=""><a href="#systemlogManager"><i class="icon-chevron-right"></i>系统日志</a></li>
             </ul>
         </div>
-        <div class="span9" style="margin-left: -2.435897%;">
+        <div class="span10" style="margin-left: -8.435897%;">
             <br/>
             <input class="input-block-level" type="text" placeholder="客户电子信息管理" disabled="disabled" style="color:#0000AA">
             <div class="navbar">

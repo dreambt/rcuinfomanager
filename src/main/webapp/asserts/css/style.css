@@ -11,9 +11,12 @@
 .table_form tbody td,.table_form tbody th{border-bottom:1px solid #eee; }
 .colorpanel tbody td,.colorpanel tbody th{ padding:0;border-bottom: none;}
 
-
+ .table-list {
+     overflow: auto;
+     height: 550px;
+ }
 .table-list td,.table-list th{padding-left:18px}
-.table-list thead th{ height:30px; background:#e6f3f7; border-bottom:1px solid #d5dfe8; font-weight:normal}
+.table-list thead th{ height:20px; background:#e6f3f7; border-bottom:1px solid #d5dfe8; font-weight:normal}
 .table-list tbody td,.table-list .btn{border-bottom: #CCCCCC 1px solid; padding-top:5px; padding-bottom:5px}
 div.btn{background:#ffffff; padding:6px 2px 0px 12px; height:50px;line-height:30px; position:relative;}
 .table-list tr:hover,.table-list table tbody tr:hover{ background:#fbffe4}

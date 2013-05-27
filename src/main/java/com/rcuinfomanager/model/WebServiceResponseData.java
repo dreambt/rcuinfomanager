@@ -4,14 +4,13 @@ import java.util.List;
 
 public class WebServiceResponseData {
 
-    private List<AllColumnInfo> allColumnInfos;
+    private String data;
 
-    public List<AllColumnInfo> getAllColumnInfos() {
-
-        return allColumnInfos;
+    public String getData() {
+        return data;
     }
 
-    public void setAllColumnInfos(List<AllColumnInfo> allColumnInfos) {
-        this.allColumnInfos = allColumnInfos;
+    public void setData(String data) {
+        this.data = data;
     }
 }

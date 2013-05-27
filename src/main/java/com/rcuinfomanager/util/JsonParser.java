@@ -3,6 +3,15 @@ package com.rcuinfomanager.util;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 import net.sf.json.util.CycleDetectionStrategy;
+import org.apache.poi.ss.formula.functions.T;
+import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 /**
  * @author 王文庭(xorbytes@qq.com)
@@ -37,5 +46,35 @@ public class JsonParser {
         jsonConfig.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
 
         return JSONObject.fromObject(obj, jsonConfig);
+    }
+
+
+    static ObjectMapper mapper = new ObjectMapper();
+
+    public static String toJSON(Object o) {
+        String result = "";
+        if (o != null) {
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            try {
+                mapper.writeValue(out, o);
+            } catch (JsonGenerationException e) {
+                e.printStackTrace();
+            } catch (JsonMappingException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                result = out.toString("UTF-8");
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
+    }
+
+    public static <T> T parseJSON(String jsonString, Class<T> beanClass)
+            throws JsonParseException, JsonMappingException, IOException {
+        return mapper.readValue(jsonString, beanClass);
     }
 }

@@ -27,7 +27,7 @@ $(function(){
             id: 'assign',
             title: '指派信息',
             lock:true,
-            content:'<iframe scrolling="auto" width="550" height="220" frameborder="0" style="border: none;margin: -20px -25px;"marginheight="0" marginwidth="0" src="'+ url +'"/>'
+            content:'<iframe scrolling="auto" width="450" height="210" frameborder="0" style="border: none;margin: -20px -25px;"marginheight="0" marginwidth="0" src="'+ url +'"/>'
         });
     });
 

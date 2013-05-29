@@ -79,7 +79,7 @@
 <div class="tab-pane active" id="tab1">
 
 <div class="farmer_info">
-<div class="table-list" style="table-layout:fixed; height:345px; overflow:scroll;">
+<div class="table-list">
 <table width="100%" border="1" cellspacing="0" width="732px" color="#727f8a;">
 <tbody>
 <core:forEach items="${personBasicList}" var="personBasic">
@@ -434,7 +434,7 @@
 </div>
 <div class="tab-pane" id="tab2">
     <div class="pad-10">
-        <div class="table-list" style="table-layout:fixed; height:345px; overflow:scroll;">
+        <div class="table-list">
             <table width="100%" border="1">
                 <tbody>
                 <tr>
@@ -561,7 +561,7 @@
 <!--村委会（居委会）评价-->
 <div class="tab-pane" id="tab3">
     <div class="pad-10">
-        <div class="table-list" style="table-layout:fixed; height:345px; overflow:scroll;">
+        <div class="table-list">
             <table width="100%" border="1">
                 <tbody>
                 <tr>

@@ -1,6 +1,5 @@
 package com.rcuinfomanager.web.controller;
 
-import com.rcuinfomanager.model.CustomerListInfo;
 import com.rcuinfomanager.service.BaseInfoService;
 import com.rcuinfomanager.session.SessionUser;
 import com.rcuinfomanager.session.UserSessionContext;
@@ -9,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.List;
 
 /**
  * @author 王文庭(xorbytes@qq.com)
@@ -30,9 +27,9 @@ public class HomeController {
          map.put("firstLogin",sessionUser.isFirstLogon());
          map.put("displayUserName", sessionUser.getDisplayUserName());
          if(sessionUser.getId()==1){
-             map.put("familyInfoList",getAllFamilyInfoList());
+             map.put("familyInfoList",baseInfoServer.getAllFamilyInfoList());
          }else{
-             map.put("familyInfoList",getFamilyInfoList(sessionUser.getId()));
+             map.put("familyInfoList", baseInfoServer.getFamilyInfoList(sessionUser.getId()));
          }
          return "farmer/main";
     }
@@ -41,13 +38,13 @@ public class HomeController {
     public String logout(){
         return "login";
     }
-    //admin
+   /* //admin
     List<CustomerListInfo> getAllFamilyInfoList(){
            return baseInfoServer.getAllFamilyInfoList();
     }
     //Normal
     public List<CustomerListInfo> getFamilyInfoList(int userId){
         return baseInfoServer.getFamilyInfoList(userId);
-    }
+    }*/
 
 }

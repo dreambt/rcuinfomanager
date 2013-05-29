@@ -20,6 +20,11 @@ public class BaseInfoService {
         return baseInfoDao.queryNormalByBaseInfo(userId);
     }
 
+    //显示客户个人信息
+    public List<CustomerListInfo> getPersonBasicInfo(Long recordId){
+        return baseInfoDao.getPersonBasicInfo(recordId);
+    }
+
     // 获取客户的基本信息
     public List<CusBaseInfo> getCusBasicInfo(Long recordId){
         return baseInfoDao.getCusBasicInfo(recordId);

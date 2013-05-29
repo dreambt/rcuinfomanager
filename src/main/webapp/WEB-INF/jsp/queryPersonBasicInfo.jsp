@@ -517,5 +517,6 @@
 
 <script src="/asserts/js/jquery-1.7.2.min.js"></script>
 <script src="/asserts/js/bootstrap.min.js"></script>
+</div>
 </body>
 </html>

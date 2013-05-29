@@ -9,6 +9,8 @@ public interface BaseInfoDao {
       List<CustomerListInfo> queryAdminByBaseInfo();
       //普通用户获取数据列表
       List<CustomerListInfo> queryNormalByBaseInfo(int userId);
+      //显示客户个人信息
+      List<CustomerListInfo> getPersonBasicInfo(Long recordId);
       // 获取客户的基本信息
       List<CusBaseInfo> getCusBasicInfo(Long recordId);
       //获取家庭收支情况

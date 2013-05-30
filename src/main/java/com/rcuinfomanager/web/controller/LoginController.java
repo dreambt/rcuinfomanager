@@ -1,9 +1,6 @@
 package com.rcuinfomanager.web.controller;
 
-import com.rcuinfomanager.model.CustomerListInfo;
 import com.rcuinfomanager.model.LogonUser;
-import com.rcuinfomanager.model.User;
-import com.rcuinfomanager.service.BaseInfoService;
 import com.rcuinfomanager.service.UserService;
 import com.rcuinfomanager.util.CookieUtil;
 import com.rcuinfomanager.util.RequestUtils;
@@ -16,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -52,8 +48,8 @@ public class LoginController extends BaseController {
 
         //如果登录正确，将创建用户会话并绑定到UserSessionContextHolder中
         logonResult = userService.logon(logonUser);
-        //登录成功后，根据用户显示数据
-        User users = userService.getUserByUserManager(logonUser.getUserName());
+        /*//登录成功后，根据用户显示数据
+        User users = userService.getUserByUserManager(logonUser.getUserName());*/
         //对登录结果进行处理
         if (logonResult.isSuccessful()) {//登录成功
             CookieUtil.setUserInfoCookies(response);

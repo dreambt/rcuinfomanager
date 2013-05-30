@@ -1,36 +1,8 @@
 $(function(){
-
     //左侧菜单样式控制
-    $('.nav li').click(function(){
+    $('.span3').click(function(){
         $("li[class='active']").removeAttr("class");
         $(this).addClass("active");
-
-       /* var me=$(this);
-        var clientName=me.attr('clientId');
-        var url='';
-        if(clientName=='mobileDevice'){
-            $("li[class='active']").removeAttr("class");
-            $(this).addClass("active");
-            url='/version';
-            window.location.href = url;
-        }else if(clientName=='account'){
-            $("li[class='active']").removeAttr("class");
-            $(this).addClass("active");
-            url='/account';
-            window.location.href = url;
-        }else if(clientName=='role'){
-            $("li[class='active']").removeAttr("class");
-            $(this).addClass("active");
-            url='/role';
-            window.location.href = url;
-        }else if(clientName=='sysTemLog'){
-            $("li[class='active']").removeAttr("class");
-            $(this).addClass("active");
-            url='/sysTemLog';
-            window.location.href = url;
-        }*/
-
-
     });
 
     //查看
@@ -39,19 +11,6 @@ $(function(){
         var recordId = me.attr('recordId');
         var url='family/'+recordId;
         window.location.href = url;
-    });
-
-    //指派
-    $('.appointOperate').click(function(){
-        var me=$(this);
-        var recordId=me.attr('recordId');
-        var url='family/appoint/'+recordId;
-        window.art.dialog({
-            id: 'assign',
-            title: '指派信息',
-            lock:true,
-            content:'<iframe scrolling="auto" width="450" height="210" frameborder="0" style="border: none;margin: -20px -25px;"marginheight="0" marginwidth="0" src="'+ url +'"/>'
-        });
     });
 
     //编辑
@@ -91,6 +50,19 @@ $(function(){
         });
     }
 
+    //指派
+    $('.appointOperate').click(function(){
+        var me=$(this);
+        var recordId=me.attr('recordId');
+        var url='family/appoint/'+recordId;
+        window.art.dialog({
+            id: 'assign',
+            title: '指派信息',
+            lock:true,
+            content:'<iframe scrolling="auto" width="450" height="210" frameborder="0" style="border: none;margin: -20px -25px;"marginheight="0" marginwidth="0" src="'+ url +'"/>'
+        });
+    });
+
     // 批量指派
     var batchAssignNode=$('#assignOperate');
     batchAssignNode.click(function(){
@@ -112,16 +84,43 @@ $(function(){
             }
         });
         if(isExist){
-            var url = 'family/batchAppoint/ids='+recordIds;
-            window.top.artDialog({
+            var url = 'family/batchAppoints/'+recordIds;
+            window.art.dialog({
                 id: 'assign',
                 title: '指派信息',
                 lock:true,
-                content:'<iframe scrolling="auto" width="620" height="560" frameborder="0" style="border: none;margin: -20px -25px;"marginheight="0" marginwidth="0" src="'+ url +'"/>'
+                content:'<iframe scrolling="auto" width="450" height="210" frameborder="0" style="border: none;margin: -20px -25px;"marginheight="0" marginwidth="0" src="'+ url +'"/>'
             });
         }else{
-            alert("未勾选任何客户信息！");
+            var timer;
+            window.art.dialog({
+                content: '未勾选任何客户信息！',
+                init: function () {
+                    var that = this, i = 2;
+                    var fn = function () {
+                        that.title(i + '秒后关闭');
+                        !i && that.close();
+                        i --;
+                    };
+                    timer = setInterval(fn, 1000);
+                    fn();
+                },
+                close: function () {
+                    clearInterval(timer);
+                }
+            }).show();
         }
     });
 
+    //导入基础数据
+    $('#importBasicData').click(function(){
+        var url='';
+        window.top.artDialog({
+            id: 'import',
+            title: '导入基础数据信息',
+            lock:true,
+            content:'<iframe scrolling="auto" width="620" height="560" frameborder="0" style="border: none;margin: -20px -25px;"marginheight="0" marginwidth="0" src="'+ url +'"/>'
+        });
+
+    });
 });

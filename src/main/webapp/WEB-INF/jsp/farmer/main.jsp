@@ -33,9 +33,7 @@
                         <tr>
                             <td width="60%" height="145"><img src="/asserts/img/logo.png" width="500" height="145" /></td>
                             <td width="40%" align="right" valign="bottom" >
-                                <div style="margin-bottom:10px; margin-right:10px; color:#FFFFFF">
-                                    您好！<span id="uName">[<c:out value="${displayUserName}"/>]</span>
-                                    <a href="/logout" style="color:#FFFFFF">&nbsp;退出</a>
+                                <div style="margin-bottom:10px; margin-right:10px; color:#FFFFFF">您好！<span id="uName">[<c:out value="${displayUserName}"/>]</span><a href="/logout" style="color:#FFFFFF">&nbsp;退出</a>
                                 </div>
                             </td>
                         </tr>
@@ -50,10 +48,10 @@
         <div class="span3">
             <ul class="nav nav-list bs-docs-sidenav affix">
                 <li class="active"><a href="/index"><i class="icon-chevron-right"></i>客户电子信息管理</a></li>
-                <li clientId="mobileDevice"><a href="#mobileDeviceManager"><i class="icon-chevron-right"></i>客户端管理</a></li>
-                <li clientId="account"><a href="#accountManager"><i class="icon-chevron-right"></i>系统账号管理</a></li>
-                <li clientId="role"><a href="#roleManager"><i class="icon-chevron-right"></i>系统角色管理</a></li>
-                <li clientId="sysTemLog"><a href="#systemlogManager"><i class="icon-chevron-right"></i>系统日志</a></li>
+                <li class=""><a href="/clientManager"><i class="icon-chevron-right"></i>客户端管理</a></li>
+                <li class=""><a href="/accountManager"><i class="icon-chevron-right"></i>系统账号管理</a></li>
+                <li class=""><a href="/roleManager"><i class="icon-chevron-right"></i>系统角色管理</a></li>
+                <li class=""><a href="/systemLogManager"><i class="icon-chevron-right"></i>系统日志</a></li>
             </ul>
         </div>
         <div class="span10" style="margin-left: -8.435897%;">
@@ -74,14 +72,14 @@
                     <a class="btn" href="#">查询</a>
                 </div>
                 <div class="btn-group">
-                    <button class="btn" type="button">指派</button>
-                    <button class="btn" type="button">验收</button>
+                    <button class="btn" type="button" id="assignOperate">指派</button>
+                    <button class="btn" type="button" id="checkOperate">验收</button>
                 </div>
                 <div class="btn-group">
                     <button class="btn dropdown-toggle" data-toggle="dropdown">导入 <span class="caret"></span></button>
                     <ul class="dropdown-menu">
-                        <li><a href="#">导入基础数据</a></li>
-                        <li><a href="#">导入村委会评价表</a></li>
+                        <li><a href="#" id="importBasicOperate">导入基础数据</a></li>
+                        <li><a href="#" id="importVillageAssess">导入村委会评价表</a></li>
                     </ul>
                 </div>
                 <div class="btn-group">
@@ -112,39 +110,38 @@
                     </thead>
                     <tbody>
                     <core:forEach items="${familyInfoList}" var="familyInfo">
-                    <tr>
-                        <td align="center" class="first">
-                            <input type="checkbox" class="checkOpera" recordId="${familyInfo.recordId}"/>
-                        </td>
-                        <td align="center">${familyInfo.recordId}</td>
-                        <td align="center">${familyInfo.customerName}</td>
-                        <td align="center">${familyInfo.telephone}</td>
-                        <td align="center">${familyInfo.submitTime}</td>
-                        <td align="center">${familyInfo.organizationName}</td>
-                        <td align="center">${familyInfo.displayUserName}</td>
-                        <td align="center">${familyInfo.state}</td>
-                        <td align="center">
-                            <a href="#" style="color:#0099FF" class="showOperate" recordId="${familyInfo.recordId}">查看</a>&nbsp;|&nbsp;
-                            <a href="#" style="color:#0099FF" class="appointOperate" recordId="${familyInfo.recordId}">指派</a>&nbsp;|&nbsp;
-                            <a href="#" style="color:#0099FF" class="editOperate" recordId="${familyInfo.recordId}">编辑</a>&nbsp;|&nbsp;
-                            <a href="#" style="color:#FF0000" class="deleteOperate" recordId="${familyInfo.recordId}">删除</a>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td align="center" class="first">
+                                <input type="checkbox" class="checkOpera" recordId="${familyInfo.recordId}"/>
+                            </td>
+                            <td align="center">${familyInfo.recordId}</td>
+                            <td align="center">${familyInfo.customerName}</td>
+                            <td align="center">${familyInfo.telephone}</td>
+                            <td align="center">${familyInfo.submitTime}</td>
+                            <td align="center">${familyInfo.organizationName}</td>
+                            <td align="center">${familyInfo.displayUserName}</td>
+                            <td align="center">${familyInfo.state}</td>
+                            <td align="center">
+                                <a href="#" style="color:#0099FF" class="showOperate" recordId="${familyInfo.recordId}">查看</a>&nbsp;|&nbsp;
+                                <a href="#" style="color:#0099FF" class="appointOperate" recordId="${familyInfo.recordId}">指派</a>&nbsp;|&nbsp;
+                                <a href="#" style="color:#0099FF" class="editOperate" recordId="${familyInfo.recordId}">编辑</a>&nbsp;|&nbsp;
+                                <a href="#" style="color:#FF0000" class="deleteOperate" recordId="${familyInfo.recordId}">删除</a>
+                            </td>
+                        </tr>
                     </core:forEach>
                     </tbody>
                 </table>
-            </div>
-
-            <div class="pagination" style="text-align: center;">
-                <ul>
-                    <li><a href="#">«</a></li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#">»</a></li>
-                </ul>
+                <div class="pagination" style="text-align: center;">
+                    <ul>
+                        <li><a href="#">«</a></li>
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li><a href="#">»</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>

@@ -15,15 +15,9 @@
     <script type="text/javascript">
         $(function(){
             //左侧菜单样式控制
-            $('.span3 li').click(function(){
+            $('.span3').click(function(){
                 $("li[class='active']").removeAttr("class");
                 $(this).addClass("active");
-            });
-
-            //取消
-            $('#cencel').click(function(){
-                var url='/index';
-                window.location.href = url;
             });
         });
     </script>
@@ -50,14 +44,15 @@
     </div>
 </div>
 <div class="container-fluid">
+
 <div class="row-fluid">
 <div class="span3">
     <ul class="nav nav-list bs-docs-sidenav affix">
         <li class="active"><a href="/index"><i class="icon-chevron-right"></i>客户电子信息管理</a></li>
-        <li class=""><a href="#mobileDeviceManager"><i class="icon-chevron-right"></i>客户端管理</a></li>
-        <li class=""><a href="#accountManager"><i class="icon-chevron-right"></i>系统账号管理</a></li>
-        <li class=""><a href="#roleManager"><i class="icon-chevron-right"></i>系统角色管理</a></li>
-        <li class=""><a href="#systemlogManager"><i class="icon-chevron-right"></i>系统日志</a></li>
+        <li class=""><a href="/clientManager"><i class="icon-chevron-right"></i>客户端管理</a></li>
+        <li class=""><a href="/accountManager"><i class="icon-chevron-right"></i>系统账号管理</a></li>
+        <li class=""><a href="/roleManager"><i class="icon-chevron-right"></i>系统角色管理</a></li>
+        <li class=""><a href="/systemLogManager"><i class="icon-chevron-right"></i>系统日志</a></li>
     </ul>
 </div>
 <div class="span10" style="margin-left: -8.435897%;">
@@ -65,25 +60,25 @@
 <input class="input-block-level" type="text" placeholder="客户电子信息管理>查询" disabled="disabled" style="color:#0000AA">
 <table class="table table-condensed">
     <tbody>
-    <tr>
-        <td><span class="label label-info">户主：</span></td>
-        <td>张晓明</td>
-        <td><span class="label label-info">电话：</span></td>
-        <td>11111111111</td>
-        <td><span class="label label-info">收集单位：</span></td>
-        <td>惠安分社区</td>
-        <td><span class="label label-info">收集人：</span></td>
-        <td>管理员</td>
-    </tr>
+    <core:forEach items="${personInfoList}" var="personInfo">
+        <tr>
+            <td><span class="label label-info">户主：</span></td>
+            <td>${personInfo.customerName}</td>
+            <td><span class="label label-info">电话：</span></td>
+            <td>${personInfo.telephone}</td>
+            <td><span class="label label-info">收集单位：</span></td>
+            <td>${personInfo.organizationName}</td>
+            <td><span class="label label-info">收集人：</span></td>
+            <td>${personInfo.displayUserName}</td>
+        </tr>
+    </core:forEach>
     </tbody>
 </table>
-<%--<p class="text-left">
-    <button class="btn btn-info" type="button">保存</button>
-    <button class="btn btn-warning" type="button">取消</button>
-</p>--%>
+
 <div class="form-actions">
 <a class="btn btn-primary" href="#">保存</a>
-<a class="btn" href="#" id="cencel">返回</a>
+<a class="btn" href="/index">返回</a>
+
 <hr  size="1" width="100%" style="margin-bottom: -1px;"/>
 <div class="tabbable">
 <ul class="nav nav-tabs">
@@ -94,8 +89,8 @@
 </ul>
 <div class="tab-content">
 <div class="tab-pane active" id="tab1">
-
 <div class="farmer_info">
+<!--table-->
 <div class="table-list" style="table-layout:fixed; height:345px; overflow:scroll;">
 <table width="100%" border="1">
 <tbody>
@@ -521,9 +516,9 @@
 <tr>
     <td align="center" colspan="8" style="font-size:22px">
         家庭资产情况
-            <button class="btn btn-info" type="button">增加房产</button>
-            <button class="btn btn-success" type="button">增加车辆</button>
-            <button class="btn btn-warning" type="button">增加土地</button>
+        <button class="btn btn-info" type="button">增加房产</button>
+        <button class="btn btn-warning" type="button">增加车辆</button>
+        <button class="btn btn-warning" type="button">增加土地</button>
     </td>
 </tr>
 <core:forEach items="${personFamilyAssetsList}" var="personFamilyAssets">
@@ -832,8 +827,11 @@
 </tbody>
 </table>
 </div>
+<!--table-->
 </div>
+
 </div>
+<!--2-->
 <div class="tab-pane" id="tab2">
     <div class="pad-10">
         <div class="table-list" style="table-layout:fixed; height:345px; overflow:scroll;">
@@ -960,7 +958,7 @@
     </div>
 </div>
 
-<!--村委会（居委会）评价-->
+<!-- 3村委会（居委会）评价-->
 <div class="tab-pane" id="tab3">
     <div class="pad-10">
         <div class="table-list" style="table-layout:fixed; height:345px; overflow:scroll;">
@@ -1084,7 +1082,7 @@
         </div>
     </div>
 </div>
-<!--客户经理评价-->
+<!-- 4客户经理评价-->
 <div class="tab-pane" id="tab4">
     <div class="pad-10">
         <div class="table-list">
@@ -1122,6 +1120,7 @@
 </div>
 </div>
 </div>
+<!--submit  end-->
 </div>
 </div>
 </div>

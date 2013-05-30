@@ -13,19 +13,25 @@
     <script src="/asserts/js/bootstrap.min.js"></script>
     <script type="text/javascript">
         $(function(){
-
+            var ids='${ids}';
             //确定
-            $('#okOperate').click(function(){
-                var id=$('#recordId').val();
-                var organizationName=$('#organizationName').val();
-                var customerName=$('#customerName').val();
-                var url='family/saveAppointInfo/'+id+'/'+organizationName+'/'+customerName;
-                window.location.href=url;
+            $('#addOpera').click(function(){
+                if(ids){
+                    var organizationName=$('#organizationName').val();
+                    var customerName=$('#customerName').val();
+                    var url='family/saveAppointInfo/'+ids+'/'+organizationName+'/'+customerName;
+                    window.location.href=url;
+                }else{
+                    alert("操作失败！");
+                }
             });
 
             //关闭
             $('#cancelOperate').click(function() {
+
                 window.top.art.dialog({id : 'assign' }).close();
+                var url='/index';
+                window.location.href=url;
             });
             //返回main
             var success='${params.success}';
@@ -43,15 +49,6 @@
 <form method="post">
     <table width="100%" border="0">
         <tbody>
-        <core:forEach items="${appointPeopleList}" var="appointPeople">
-            <input type="hidden" id="recordId" name="recordId" value="${appointPeople.recordId}" >
-        <tr>
-            <td><span class="label label-info">户主：</span></td>
-            <td>${appointPeople.customerName}</td>
-            <td><span class="label label-info">电话：</span></td>
-            <td>${appointPeople.telephone}</td>
-        </tr>
-        </core:forEach>
         <tr>
             <td align="left" colspan="2">
                 <span class="label label-info">指派给：</span>
@@ -73,12 +70,11 @@
             </td>
             <td><span class="help-inline">(可选)</span></td>
         </tr>
-
         </tbody>
     </table>
 </form>
 <p align="center">
-    <a class="btn" href="#" id="okOperate">确定</a>&nbsp;<a class="btn" href="#" id="cancelOperate">取消</a>
+    <a class="btn" href="#" id="okOperate">确定</a>&nbsp;<a class="btn" href="/index" id="cancelOperate">取消</a>
 </p>
 </body>
 </html>

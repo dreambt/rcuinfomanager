@@ -47,13 +47,47 @@ public class BaseInfoController {
     //指派
     @RequestMapping("/appoint/{id}")
     public String appointInfo(@PathVariable long id,Map map){
+        map.put("appointPeopleList", baseInfoService.getPersonBasicInfo(id));
 
         return "farmer/appointInfo";
+    }
+
+    //保存指派
+    @RequestMapping("/saveAppointInfo/{id}/{organizationName}/{customerName}")
+    public String saveAppointInfo(@PathVariable long id,String organizationName,
+                                                 String customerName,Map map){
+        System.out.print(id);
+        System.out.print(organizationName);
+        System.out.print(customerName);
+
+
+           return "/index";
+    }
+
+
+    //批量指派
+    @RequestMapping("/batchAppoints/{ids}")
+    public String batchAppointInfo(@PathVariable String ids,Map map){
+        System.out.print(ids);
+        map.put("ids",ids);
+        return "farmer/batchAppoint";
+    }
+
+    //保存指派对象
+    @RequestMapping("/saveBatchAppointInfo/{ids}")
+    public String saveBatchAppointInfo(@PathVariable String ids,Map map){
+         String[] recordIds= ids.split(",");
+        for (String id : recordIds){
+         //Object k=baseInfoService.getPersonBasicInfo(Long.parseLong(id));
+        }
+        return "/index";
     }
 
     //编辑
     @RequestMapping("/edit/{id}")
     public String editInfo(@PathVariable long id,Map map){
+
+        map.put("personInfoList", baseInfoService.getPersonBasicInfo(id));
         //基础概况信息
         map.put("personBasicList",baseInfoService.getCusBasicInfo(id));
         //家庭收支情况
@@ -82,16 +116,4 @@ public class BaseInfoController {
 
         return "farmer/main";
     }
-
-   /* //批量指派
-    @RequestMapping("/{ids}")
-    public String batchAppointInfo(@PathVariable String ids,Map map){
-
-        return "appointInfo";
-    }
-
-
-
-   */
 }
-

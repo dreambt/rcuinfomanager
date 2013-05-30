@@ -14,36 +14,51 @@ import org.springframework.web.bind.annotation.RequestMapping;
  *         功能说明:
  */
 @Controller
+
 public class HomeController {
 
-     @Autowired
-     private BaseInfoService baseInfoServer;
+    @Autowired
+    private BaseInfoService baseInfoServer;
 
-     @RequestMapping(value ="/index")
-     public String index(ModelMap map) {
-         UserSessionContext userSessionContext = UserSessionContextHolder.getUserSessionContext();
-         SessionUser sessionUser = userSessionContext.getSessionUser();
-         map.put("firstLogin",sessionUser.isFirstLogon());
-         map.put("displayUserName", sessionUser.getDisplayUserName());
-         if(sessionUser.getId()==1){
-             map.put("familyInfoList",baseInfoServer.getAllFamilyInfoList());
-         }else{
-             map.put("familyInfoList", baseInfoServer.getFamilyInfoList(sessionUser.getId()));
-         }
-         return "farmer/main";
+    @RequestMapping(value ="/index")
+    public String index(ModelMap map) {
+        UserSessionContext userSessionContext = UserSessionContextHolder.getUserSessionContext();
+        SessionUser sessionUser = userSessionContext.getSessionUser();
+        map.put("firstLogin",sessionUser.isFirstLogon());
+        map.put("displayUserName", sessionUser.getDisplayUserName());
+        if(sessionUser.getId()==1){
+            map.put("familyInfoList",baseInfoServer.getAllFamilyInfoList());
+        }else{
+            map.put("familyInfoList", baseInfoServer.getFamilyInfoList(sessionUser.getId()));
+        }
+        return "farmer/main";
     }
 
-    @RequestMapping(value ="/version")
-    public String clientVersion(){
+    @RequestMapping(value ="/clientManager")
+    public String clientManager() {
 
         return "device/clientVersion";
     }
 
-    @RequestMapping(value ="/account")
-    public String account(){
+    @RequestMapping(value ="/accountManager")
+    public String accountManager() {
 
-        return "device/clientVersion";
+        return "ps/systemAccountManage";
     }
+
+    @RequestMapping(value ="/roleManager")
+    public String roleManager() {
+
+        return "ps/systemRoleManager";
+    }
+
+    @RequestMapping(value ="/systemLogManager")
+    public String systemLogManager() {
+
+        return "logsystem/systemLog";
+    }
+
+
 
     @RequestMapping(value ="/login")
     public String logout(){

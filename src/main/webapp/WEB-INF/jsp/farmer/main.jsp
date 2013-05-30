@@ -14,6 +14,13 @@
     <script src="/asserts/js/bootstrap.min.js"></script>
     <script src="/asserts/js/dialog/artDialog.js"></script>
     <script src="/asserts/js/main.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            if(${firstLogin}){
+                alert("第一次登录，是否需要修改密码？");
+            }
+        });
+    </script>
 </head>
 <body>
 
@@ -26,7 +33,9 @@
                         <tr>
                             <td width="60%" height="145"><img src="/asserts/img/logo.png" width="500" height="145" /></td>
                             <td width="40%" align="right" valign="bottom" >
-                                <div style="margin-bottom:10px; margin-right:10px; color:#FFFFFF">您好！<span id="uName">[<c:out value="${displayUserName}"/>]</span><a href="/logout" style="color:#FFFFFF">&nbsp;退出</a>
+                                <div style="margin-bottom:10px; margin-right:10px; color:#FFFFFF">
+                                    您好！<span id="uName">[<c:out value="${displayUserName}"/>]</span>
+                                    <a href="/logout" style="color:#FFFFFF">&nbsp;退出</a>
                                 </div>
                             </td>
                         </tr>
@@ -41,10 +50,10 @@
         <div class="span3">
             <ul class="nav nav-list bs-docs-sidenav affix">
                 <li class="active"><a href="/index"><i class="icon-chevron-right"></i>客户电子信息管理</a></li>
-                <li class=""><a href="#mobileDeviceManager"><i class="icon-chevron-right"></i>客户端管理</a></li>
-                <li class=""><a href="#accountManager"><i class="icon-chevron-right"></i>系统账号管理</a></li>
-                <li class=""><a href="#roleManager"><i class="icon-chevron-right"></i>系统角色管理</a></li>
-                <li class=""><a href="#systemlogManager"><i class="icon-chevron-right"></i>系统日志</a></li>
+                <li clientId="mobileDevice"><a href="#mobileDeviceManager"><i class="icon-chevron-right"></i>客户端管理</a></li>
+                <li clientId="account"><a href="#accountManager"><i class="icon-chevron-right"></i>系统账号管理</a></li>
+                <li clientId="role"><a href="#roleManager"><i class="icon-chevron-right"></i>系统角色管理</a></li>
+                <li clientId="sysTemLog"><a href="#systemlogManager"><i class="icon-chevron-right"></i>系统日志</a></li>
             </ul>
         </div>
         <div class="span10" style="margin-left: -8.435897%;">
@@ -61,10 +70,10 @@
                     <select class="selectpicker" style="width: 95px; margin-top: 10px;">
                         <option value="" selected="selected">按村</option>
                     </select>
+                    <input type="text"  name="" value="" placeholder="按客户经理" style="width: 95px; height:30px;margin-top: 10px;">
+                    <a class="btn" href="#">查询</a>
                 </div>
                 <div class="btn-group">
-                    <button class="btn" type="button">按客户经理</button>
-                    <button class="btn" type="button">查询</button>
                     <button class="btn" type="button">指派</button>
                     <button class="btn" type="button">验收</button>
                 </div>

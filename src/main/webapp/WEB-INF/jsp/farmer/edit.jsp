@@ -10,7 +10,23 @@
     <link href="/asserts/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
     <link href="/asserts/css/doc.css" rel="stylesheet" media="screen">
     <link href="/asserts/css/style.css" rel="stylesheet" media="screen">
+    <script src="/asserts/js/jquery-1.7.2.min.js"></script>
+    <script src="/asserts/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            //左侧菜单样式控制
+            $('.span3 li').click(function(){
+                $("li[class='active']").removeAttr("class");
+                $(this).addClass("active");
+            });
 
+            //取消
+            $('#cencel').click(function(){
+                var url='/index';
+                window.location.href = url;
+            });
+        });
+    </script>
 </head>
 <body>
 
@@ -61,10 +77,13 @@
     </tr>
     </tbody>
 </table>
-<p class="text-left">
+<%--<p class="text-left">
     <button class="btn btn-info" type="button">保存</button>
     <button class="btn btn-warning" type="button">取消</button>
-</p>
+</p>--%>
+<div class="form-actions">
+<a class="btn btn-primary" href="#">保存</a>
+<a class="btn" href="#" id="cencel">返回</a>
 <hr  size="1" width="100%" style="margin-bottom: -1px;"/>
 <div class="tabbable">
 <ul class="nav nav-tabs">
@@ -77,345 +96,345 @@
 <div class="tab-pane active" id="tab1">
 
 <div class="farmer_info">
-<div class="table-list">
+<div class="table-list" style="table-layout:fixed; height:345px; overflow:scroll;">
 <table width="100%" border="1">
 <tbody>
 <core:forEach items="${personBasicList}" var="personBasic">
-    <tr>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">姓名</td>
-        <td align="center">
-            <input class="input-small" type="text" name="customerName" value="${personBasic.customerName}"
-                   style="width: 95px;height: 30px; margin-top: 10px;">
-        </td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">性别</td>
-        <td align="center">
-            <select class="selectpicker" style="width: 95px; margin-top: 10px;">
-                <option value="${personBasic.gender}">是</option>
-                <option value="${personBasic.gender}">否</option>
-            </select>
-        </td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">是否农户</td>
-        <td align="center">
-            <select class="selectpicker" style="width: 95px; margin-top: 10px;">
-                <option value="${personBasic.farmer}">是</option>
-                <option value="${personBasic.farmer}">否</option>
-            </select>
-        </td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">客户类型</td>
-        <td align="center">
-            <select class="selectpicker" style="width: 95px; margin-top: 10px;">
-                <option value="${personBasic.customerType}">是</option>
-                <option value="${personBasic.customerType}">否</option>
-            </select>
-        </td>
-    </tr>
-    <tr>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">证件类型</td>
-        <td align="center" colspan="2">
-            <select class="selectpicker" style="width: 95px; margin-top: 10px;">
-                <option value="${personBasic.cerType}">是</option>
-                <option value="${personBasic.cerType}">否</option>
-            </select>
-        </td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">证件号码</td>
-        <td align="center" colspan="2">
-            <input class="input-small" type="text" name="customerName" value="${personBasic.cerNum}"
-                   style="width: 95px;height: 30px; margin-top: 10px;">
-        </td>
-        <td align="center" colspan="2" rowspan="4"><img src="..." class="img-rounded"></td>
-    </tr>
-    <tr>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">证件有效期</td>
-        <td align="center" colspan="3">
-            <input class="input-small" type="text" name="customerName" value="${personBasic.cerValidityFrom}"
-                   style="width: 95px;height: 30px; margin-top: 10px;"> -
-            <input class="input-small" type="text" name="customerName" value="${personBasic.cerValidityTo}"
-                   style="width: 95px;height: 30px; margin-top: 10px;">
-        </td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">出生年月</td>
-        <td align="center">
-            <input class="input-small" type="text" name="customerName" value="${personBasic.birthday}"
-                   style="width: 95px;height: 30px; margin-top: 10px;">
-        </td>
-    </tr>
-    <tr>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">国籍</td>
-        <td align="center">
-            <select class="selectpicker" style="width: 95px; margin-top: 10px;">
-                <option value="${personBasic.nationality}">是</option>
-                <option value="${personBasic.nationality}">否</option>
-            </select>
-        </td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">是否拥有外国护照或居住权</td>
-        <td align="center">
-            <select class="selectpicker" style="width: 95px; margin-top: 10px;">
-                <option value="${personBasic.havePassport}">是</option>
-                <option value="${personBasic.havePassport}">否</option>
-            </select>
-        </td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">民族</td>
-        <td align="center">
-            <input class="input-small" type="text" name="customerName" value="${personBasic.nation}"
-                   style="width: 95px;height: 30px; margin-top: 10px;">
-        </td>
-    </tr>
-    <tr>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">政治面貌</td>
-        <td align="center">
-            <select class="selectpicker" style="width: 95px; margin-top: 10px;">
-                <option value="${personBasic.poliLaspect}">是</option>
-                <option value="${personBasic.poliLaspect}">否</option>
-            </select>
-        </td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">健康状况</td>
-        <td align="center">
-            <select class="selectpicker" style="width: 95px; margin-top: 10px;">
-                <option value="${personBasic.health}">是</option>
-                <option value="${personBasic.health}">否</option>
-            </select>
-        </td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">婚姻状况</td>
-        <td align="center">
-            <select class="selectpicker" style="width: 95px; margin-top: 10px;">
-                <option value="${personBasic.maritalStatus}">是</option>
-                <option value="${personBasic.maritalStatus}">否</option>
-            </select>
-        </td>
-    </tr>
-    <tr>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">
-            居住地址
-        </td>
-        <td align="center" colspan="5">
-            <input class="input-small" type="text" name="customerName" value="${personBasic.address}"
-                   style="width: 95px;height: 30px; margin-top: 10px;">
-        </td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">居住编码</td>
-        <td align="center">
-            <input class="input-small" type="text" name="customerName" value="${personBasic.postcode}"
-                   style="width: 95px;height: 30px; margin-top: 10px;">
-        </td>
-    </tr>
-    <tr>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">
-            区域名称
-        </td>
-        <td align="center">
-            <select class="selectpicker" style="width: 95px; margin-top: 10px;">
-                <option value="${personBasic.areaName}">崇武镇</option>
-                <option value="${personBasic.areaName}">东园镇</option>
-            </select>
-        </td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">村别</td>
-        <td align="center">
-            <select class="selectpicker" style="width: 95px; margin-top: 10px;">
-                <option value="${personBasic.village}">后内</option>
-                <option value="${personBasic.village}">前海</option>
-            </select>
-        </td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">联系电话</td>
-        <td align="center">
-            <input class="input-small" type="text" name="customerName" value="${personBasic.telephone}"
-                   style="width: 95px;height: 30px; margin-top: 10px;">
-        </td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">手机号码</td>
-        <td align="center">
-            <input class="input-small" type="text" name="customerName" value="${personBasic.mbPhoneNum}"
-                   style="width: 95px;height: 30px; margin-top: 10px;">
-        </td>
-    </tr>
-    <tr>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">
-            居住状况
-        </td>
-        <td align="center" colspan="2">
-            <select class="selectpicker" style="width: 95px; margin-top: 10px;">
+<tr>
+    <td align="center" bgcolor="#b4d8ed" style="color:#161823">姓名</td>
+    <td align="center">
+        <input class="input-small" type="text" name="customerName" value="${personBasic.customerName}"
+               style="width: 95px;height: 30px; margin-top: 10px;">
+    </td>
+    <td align="center" bgcolor="#b4d8ed" style="color:#161823">性别</td>
+    <td align="center">
+        <select class="selectpicker" style="width: 95px; margin-top: 10px;">
+            <option value="${personBasic.gender}">是</option>
+            <option value="${personBasic.gender}">否</option>
+        </select>
+    </td>
+    <td align="center" bgcolor="#b4d8ed" style="color:#161823">是否农户</td>
+    <td align="center">
+        <select class="selectpicker" style="width: 95px; margin-top: 10px;">
+            <option value="${personBasic.farmer}">是</option>
+            <option value="${personBasic.farmer}">否</option>
+        </select>
+    </td>
+    <td align="center" bgcolor="#b4d8ed" style="color:#161823">客户类型</td>
+    <td align="center">
+        <select class="selectpicker" style="width: 95px; margin-top: 10px;">
+            <option value="${personBasic.customerType}">是</option>
+            <option value="${personBasic.customerType}">否</option>
+        </select>
+    </td>
+</tr>
+<tr>
+    <td align="center" bgcolor="#b4d8ed" style="color:#161823">证件类型</td>
+    <td align="center" colspan="2">
+        <select class="selectpicker" style="width: 95px; margin-top: 10px;">
+            <option value="${personBasic.cerType}">是</option>
+            <option value="${personBasic.cerType}">否</option>
+        </select>
+    </td>
+    <td align="center" bgcolor="#b4d8ed" style="color:#161823">证件号码</td>
+    <td align="center" colspan="2">
+        <input class="input-small" type="text" name="customerName" value="${personBasic.cerNum}"
+               style="width: 95px;height: 30px; margin-top: 10px;">
+    </td>
+    <td align="center" colspan="2" rowspan="4"><img src="..." class="img-rounded"></td>
+</tr>
+<tr>
+    <td align="center" bgcolor="#b4d8ed" style="color:#161823">证件有效期</td>
+    <td align="center" colspan="3">
+        <input class="input-small" type="text" name="customerName" value="${personBasic.cerValidityFrom}"
+               style="width: 95px;height: 30px; margin-top: 10px;"> -
+        <input class="input-small" type="text" name="customerName" value="${personBasic.cerValidityTo}"
+               style="width: 95px;height: 30px; margin-top: 10px;">
+    </td>
+    <td align="center" bgcolor="#b4d8ed" style="color:#161823">出生年月</td>
+    <td align="center">
+        <input class="input-small" type="text" name="customerName" value="${personBasic.birthday}"
+               style="width: 95px;height: 30px; margin-top: 10px;">
+    </td>
+</tr>
+<tr>
+    <td align="center" bgcolor="#b4d8ed" style="color:#161823">国籍</td>
+    <td align="center">
+        <select class="selectpicker" style="width: 95px; margin-top: 10px;">
+            <option value="${personBasic.nationality}">是</option>
+            <option value="${personBasic.nationality}">否</option>
+        </select>
+    </td>
+    <td align="center" bgcolor="#b4d8ed" style="color:#161823">是否拥有外国护照或居住权</td>
+    <td align="center">
+        <select class="selectpicker" style="width: 95px; margin-top: 10px;">
+            <option value="${personBasic.havePassport}">是</option>
+            <option value="${personBasic.havePassport}">否</option>
+        </select>
+    </td>
+    <td align="center" bgcolor="#b4d8ed" style="color:#161823">民族</td>
+    <td align="center">
+        <input class="input-small" type="text" name="customerName" value="${personBasic.nation}"
+               style="width: 95px;height: 30px; margin-top: 10px;">
+    </td>
+</tr>
+<tr>
+    <td align="center" bgcolor="#b4d8ed" style="color:#161823">政治面貌</td>
+    <td align="center">
+        <select class="selectpicker" style="width: 95px; margin-top: 10px;">
+            <option value="${personBasic.poliLaspect}">是</option>
+            <option value="${personBasic.poliLaspect}">否</option>
+        </select>
+    </td>
+    <td align="center" bgcolor="#b4d8ed" style="color:#161823">健康状况</td>
+    <td align="center">
+        <select class="selectpicker" style="width: 95px; margin-top: 10px;">
+            <option value="${personBasic.health}">是</option>
+            <option value="${personBasic.health}">否</option>
+        </select>
+    </td>
+    <td align="center" bgcolor="#b4d8ed" style="color:#161823">婚姻状况</td>
+    <td align="center">
+        <select class="selectpicker" style="width: 95px; margin-top: 10px;">
+            <option value="${personBasic.maritalStatus}">是</option>
+            <option value="${personBasic.maritalStatus}">否</option>
+        </select>
+    </td>
+</tr>
+<tr>
+    <td align="center" bgcolor="#b4d8ed" style="color:#161823">
+        居住地址
+    </td>
+    <td align="center" colspan="5">
+        <input class="input-small" type="text" name="customerName" value="${personBasic.address}"
+               style="width: 95px;height: 30px; margin-top: 10px;">
+    </td>
+    <td align="center" bgcolor="#b4d8ed" style="color:#161823">居住编码</td>
+    <td align="center">
+        <input class="input-small" type="text" name="customerName" value="${personBasic.postcode}"
+               style="width: 95px;height: 30px; margin-top: 10px;">
+    </td>
+</tr>
+<tr>
+    <td align="center" bgcolor="#b4d8ed" style="color:#161823">
+        区域名称
+    </td>
+    <td align="center">
+        <select class="selectpicker" style="width: 95px; margin-top: 10px;">
+            <option value="${personBasic.areaName}">崇武镇</option>
+            <option value="${personBasic.areaName}">东园镇</option>
+        </select>
+    </td>
+    <td align="center" bgcolor="#b4d8ed" style="color:#161823">村别</td>
+    <td align="center">
+        <select class="selectpicker" style="width: 95px; margin-top: 10px;">
+            <option value="${personBasic.village}">后内</option>
+            <option value="${personBasic.village}">前海</option>
+        </select>
+    </td>
+    <td align="center" bgcolor="#b4d8ed" style="color:#161823">联系电话</td>
+    <td align="center">
+        <input class="input-small" type="text" name="customerName" value="${personBasic.telephone}"
+               style="width: 95px;height: 30px; margin-top: 10px;">
+    </td>
+    <td align="center" bgcolor="#b4d8ed" style="color:#161823">手机号码</td>
+    <td align="center">
+        <input class="input-small" type="text" name="customerName" value="${personBasic.mbPhoneNum}"
+               style="width: 95px;height: 30px; margin-top: 10px;">
+    </td>
+</tr>
+<tr>
+    <td align="center" bgcolor="#b4d8ed" style="color:#161823">
+        居住状况
+    </td>
+    <td align="center" colspan="2">
+        <select class="selectpicker" style="width: 95px; margin-top: 10px;">
             <option value="${personBasic.liveCondition}">自置</option>
             <option value="${personBasic.liveCondition}">其他</option>
         </select>
-        </td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">社会保障情况</td>
-        <td align="center" colspan="4"><p>${personBasic.socialSecurity}</p></td>
-    </tr>
-    <tr>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">
-            最高学位
-        </td>
-        <td align="center">
-            <select class="selectpicker" style="width: 95px; margin-top: 10px;">
-                <option value="${personBasic.highestDegree}">学士</option>
-                <option value="${personBasic.highestDegree}">其他</option>
-            </select>
-        </td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">最高学历</td>
-        <td align="center">
-            <select class="selectpicker" style="width: 95px; margin-top: 10px;">
-                <option value="${personBasic.highestEdu}">本科</option>
-                <option value="${personBasic.highestEdu}">其他</option>
-            </select>
-        </td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">与我行（社）关系</td>
-        <td align="center">
-            <select class="selectpicker" style="width: 95px; margin-top: 10px;">
-                <option value="${personBasic.bankRelation}">普通客户</option>
-                <option value="${personBasic.bankRelation}">其他</option>
-            </select>
-        </td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">与我行（社）合作关系</td>
-        <td align="center">
-            <select class="selectpicker" style="width: 95px; margin-top: 10px;">
-                <option value="${personBasic.bankPartnership}">一般</option>
-                <option value="${personBasic.bankPartnership}">其他</option>
-            </select>
-        </td>
-    </tr>
-    <tr>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">
-            职业
-        </td>
-        <td align="center" colspan="7">
-            <select class="selectpicker" style="width: 95px; margin-top: 10px;">
-                <option value="${personBasic.profession}">专业技术人员</option>
-                <option value="${personBasic.profession}">其他</option>
-            </select>
-        </td>
-    </tr>
-    <tr>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">
-            个人经营项目
-        </td>
-        <td align="center" colspan="4">
-            <input class="input-small" type="text" name="customerName" value="${personBasic.businessProj}"
-                   style="width: 95px;height: 30px; margin-top: 10px;">
-        </td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">经营年限</td>
-        <td align="center" colspan="2">
-            <input class="input-small" type="text" name="customerName" value="${personBasic.businessYear}"
-                   style="width: 95px;height: 30px; margin-top: 10px;">
-        </td>
-    </tr>
-    <tr>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">
-            经营场所
-        </td>
-        <td align="center" colspan="3">
-            <input class="input-small" type="text" name="customerName" value="${personBasic.businessSite}"
-                   style="width: 95px;height: 30px; margin-top: 10px;">
-        </td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">从事行业</td>
-        <td align="center" colspan="3">
-            <select class="selectpicker" style="width: 95px; margin-top: 10px;">
-                <option value="${personBasic.industry}">专业技术人员</option>
-                <option value="${personBasic.industry}">其他</option>
-            </select>
-        </td>
-    </tr>
-    <tr>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">投资经营性质</td>
-        <td align="center">
-            <select class="selectpicker" style="width: 95px; margin-top: 10px;">
-                <option value="${personBasic.businessProp}">专业技术人员</option>
-                <option value="${personBasic.businessProp}">其他</option>
-            </select>
-        </td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">投资资金情况</td>
-        <td align="center">
-            <select class="selectpicker" style="width: 95px; margin-top: 10px;">
-                <option value="${personBasic.moneySitu}">专业技术人员</option>
-                <option value="${personBasic.moneySitu}">其他</option>
-            </select>
-        </td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">投入金额</td>
-        <td align="center">
-            <select class="selectpicker" style="width: 95px; margin-top: 10px;">
-                <option value="${personBasic.inputMoney}">专业技术人员</option>
-                <option value="${personBasic.inputMoney}">其他</option>
-            </select>
-        </td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">自有资金情况</td>
-        <td align="center">
-            <select class="selectpicker" style="width: 95px; margin-top: 10px;">
-                <option value="${personBasic.ownMoney}">专业技术人员</option>
-                <option value="${personBasic.ownMoney}">其他</option>
-            </select>
-        </td>
-    </tr>
-    <tr>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823"> 年收益情况</td>
-        <td align="center" colspan="7">
-            <select class="selectpicker" style="width: 95px; margin-top: 10px;">
-                <option value="${personBasic.yearIncome}">专业技术人员</option>
-                <option value="${personBasic.yearIncome}">其他</option>
-            </select>
-        </td>
-    </tr>
-    <tr>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">工作情况</td>
-        <td align="center" colspan="7">
-            <input class="input-small" type="text" name="customerName" value="${personBasic.workSitu}"
-                   style="width: 95px;height: 30px; margin-top: 10px;">
-        </td>
-    </tr>
-    <tr>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">单位性质</td>
-        <td align="center" colspan="3">
-            <select class="selectpicker" style="width: 95px; margin-top: 10px;">
-                <option value="${personBasic.unitProp}">专业技术人员</option>
-                <option value="${personBasic.unitProp}">其他</option>
-            </select>
-        </td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">单位所属行业</td>
-        <td align="center" colspan="3">
-            <select class="selectpicker" style="width: 95px; margin-top: 10px;">
-                <option value="${personBasic.unitIndustry}">专业技术人员</option>
-                <option value="${personBasic.unitIndustry}">其他</option>
-            </select>
-        </td>
-    </tr>
-    <tr>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">任职部门</td>
-        <td align="center" colspan="3">
-            <input class="input-small" type="text" name="customerName" value="${personBasic.department}"
-                   style="width: 95px;height: 30px; margin-top: 10px;">
-        </td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">工作单位类别</td>
-        <td align="center" colspan="3">
-            <select class="selectpicker" style="width: 95px; margin-top: 10px;">
-                <option value="${personBasic.unitType}">专业技术人员</option>
-                <option value="${personBasic.unitType}">其他</option>
-            </select>
-        </td>
-    </tr>
-    <tr>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">职务</td>
-        <td align="center">
-            <select class="selectpicker" style="width: 95px; margin-top: 10px;">
-                <option value="${personBasic.duties}">专业技术人员</option>
-                <option value="${personBasic.duties}">其他</option>
-            </select>
-        </td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">年工资收入（万元）</td>
-        <td align="center">
-            <select class="selectpicker" style="width: 95px; margin-top: 10px;">
-                <option value="${personBasic.annualWageIncome}">专业技术人员</option>
-                <option value="${personBasic.annualWageIncome}">其他</option>
-            </select>
-        </td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">工作年限</td>
-        <td align="center">
-            <select class="selectpicker" style="width: 95px; margin-top: 10px;">
-                <option value="${personBasic.workYears}">专业技术人员</option>
-                <option value="${personBasic.workYears}">其他</option>
-            </select>
-        </td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">职称</td>
-        <td align="center">
-            <select class="selectpicker" style="width: 95px; margin-top: 10px;">
-                <option value="${personBasic.workTitle}">专业技术人员</option>
-                <option value="${personBasic.workTitle}">其他</option>
-            </select>
-        </td>
-    </tr>
+    </td>
+    <td align="center" bgcolor="#b4d8ed" style="color:#161823">社会保障情况</td>
+    <td align="center" colspan="4"><p>${personBasic.socialSecurity}</p></td>
+</tr>
+<tr>
+    <td align="center" bgcolor="#b4d8ed" style="color:#161823">
+        最高学位
+    </td>
+    <td align="center">
+        <select class="selectpicker" style="width: 95px; margin-top: 10px;">
+            <option value="${personBasic.highestDegree}">学士</option>
+            <option value="${personBasic.highestDegree}">其他</option>
+        </select>
+    </td>
+    <td align="center" bgcolor="#b4d8ed" style="color:#161823">最高学历</td>
+    <td align="center">
+        <select class="selectpicker" style="width: 95px; margin-top: 10px;">
+            <option value="${personBasic.highestEdu}">本科</option>
+            <option value="${personBasic.highestEdu}">其他</option>
+        </select>
+    </td>
+    <td align="center" bgcolor="#b4d8ed" style="color:#161823">与我行（社）关系</td>
+    <td align="center">
+        <select class="selectpicker" style="width: 95px; margin-top: 10px;">
+            <option value="${personBasic.bankRelation}">普通客户</option>
+            <option value="${personBasic.bankRelation}">其他</option>
+        </select>
+    </td>
+    <td align="center" bgcolor="#b4d8ed" style="color:#161823">与我行（社）合作关系</td>
+    <td align="center">
+        <select class="selectpicker" style="width: 95px; margin-top: 10px;">
+            <option value="${personBasic.bankPartnership}">一般</option>
+            <option value="${personBasic.bankPartnership}">其他</option>
+        </select>
+    </td>
+</tr>
+<tr>
+    <td align="center" bgcolor="#b4d8ed" style="color:#161823">
+        职业
+    </td>
+    <td align="center" colspan="7">
+        <select class="selectpicker" style="width: 95px; margin-top: 10px;">
+            <option value="${personBasic.profession}">专业技术人员</option>
+            <option value="${personBasic.profession}">其他</option>
+        </select>
+    </td>
+</tr>
+<tr>
+    <td align="center" bgcolor="#b4d8ed" style="color:#161823">
+        个人经营项目
+    </td>
+    <td align="center" colspan="4">
+        <input class="input-small" type="text" name="customerName" value="${personBasic.businessProj}"
+               style="width: 95px;height: 30px; margin-top: 10px;">
+    </td>
+    <td align="center" bgcolor="#b4d8ed" style="color:#161823">经营年限</td>
+    <td align="center" colspan="2">
+        <input class="input-small" type="text" name="customerName" value="${personBasic.businessYear}"
+               style="width: 95px;height: 30px; margin-top: 10px;">
+    </td>
+</tr>
+<tr>
+    <td align="center" bgcolor="#b4d8ed" style="color:#161823">
+        经营场所
+    </td>
+    <td align="center" colspan="3">
+        <input class="input-small" type="text" name="customerName" value="${personBasic.businessSite}"
+               style="width: 95px;height: 30px; margin-top: 10px;">
+    </td>
+    <td align="center" bgcolor="#b4d8ed" style="color:#161823">从事行业</td>
+    <td align="center" colspan="3">
+        <select class="selectpicker" style="width: 95px; margin-top: 10px;">
+            <option value="${personBasic.industry}">专业技术人员</option>
+            <option value="${personBasic.industry}">其他</option>
+        </select>
+    </td>
+</tr>
+<tr>
+    <td align="center" bgcolor="#b4d8ed" style="color:#161823">投资经营性质</td>
+    <td align="center">
+        <select class="selectpicker" style="width: 95px; margin-top: 10px;">
+            <option value="${personBasic.businessProp}">专业技术人员</option>
+            <option value="${personBasic.businessProp}">其他</option>
+        </select>
+    </td>
+    <td align="center" bgcolor="#b4d8ed" style="color:#161823">投资资金情况</td>
+    <td align="center">
+        <select class="selectpicker" style="width: 95px; margin-top: 10px;">
+            <option value="${personBasic.moneySitu}">专业技术人员</option>
+            <option value="${personBasic.moneySitu}">其他</option>
+        </select>
+    </td>
+    <td align="center" bgcolor="#b4d8ed" style="color:#161823">投入金额</td>
+    <td align="center">
+        <select class="selectpicker" style="width: 95px; margin-top: 10px;">
+            <option value="${personBasic.inputMoney}">专业技术人员</option>
+            <option value="${personBasic.inputMoney}">其他</option>
+        </select>
+    </td>
+    <td align="center" bgcolor="#b4d8ed" style="color:#161823">自有资金情况</td>
+    <td align="center">
+        <select class="selectpicker" style="width: 95px; margin-top: 10px;">
+            <option value="${personBasic.ownMoney}">专业技术人员</option>
+            <option value="${personBasic.ownMoney}">其他</option>
+        </select>
+    </td>
+</tr>
+<tr>
+    <td align="center" bgcolor="#b4d8ed" style="color:#161823"> 年收益情况</td>
+    <td align="center" colspan="7">
+        <select class="selectpicker" style="width: 95px; margin-top: 10px;">
+            <option value="${personBasic.yearIncome}">专业技术人员</option>
+            <option value="${personBasic.yearIncome}">其他</option>
+        </select>
+    </td>
+</tr>
+<tr>
+    <td align="center" bgcolor="#b4d8ed" style="color:#161823">工作情况</td>
+    <td align="center" colspan="7">
+        <input class="input-small" type="text" name="customerName" value="${personBasic.workSitu}"
+               style="width: 95px;height: 30px; margin-top: 10px;">
+    </td>
+</tr>
+<tr>
+    <td align="center" bgcolor="#b4d8ed" style="color:#161823">单位性质</td>
+    <td align="center" colspan="3">
+        <select class="selectpicker" style="width: 95px; margin-top: 10px;">
+            <option value="${personBasic.unitProp}">专业技术人员</option>
+            <option value="${personBasic.unitProp}">其他</option>
+        </select>
+    </td>
+    <td align="center" bgcolor="#b4d8ed" style="color:#161823">单位所属行业</td>
+    <td align="center" colspan="3">
+        <select class="selectpicker" style="width: 95px; margin-top: 10px;">
+            <option value="${personBasic.unitIndustry}">专业技术人员</option>
+            <option value="${personBasic.unitIndustry}">其他</option>
+        </select>
+    </td>
+</tr>
+<tr>
+    <td align="center" bgcolor="#b4d8ed" style="color:#161823">任职部门</td>
+    <td align="center" colspan="3">
+        <input class="input-small" type="text" name="customerName" value="${personBasic.department}"
+               style="width: 95px;height: 30px; margin-top: 10px;">
+    </td>
+    <td align="center" bgcolor="#b4d8ed" style="color:#161823">工作单位类别</td>
+    <td align="center" colspan="3">
+        <select class="selectpicker" style="width: 95px; margin-top: 10px;">
+            <option value="${personBasic.unitType}">专业技术人员</option>
+            <option value="${personBasic.unitType}">其他</option>
+        </select>
+    </td>
+</tr>
+<tr>
+    <td align="center" bgcolor="#b4d8ed" style="color:#161823">职务</td>
+    <td align="center">
+        <select class="selectpicker" style="width: 95px; margin-top: 10px;">
+            <option value="${personBasic.duties}">专业技术人员</option>
+            <option value="${personBasic.duties}">其他</option>
+        </select>
+    </td>
+    <td align="center" bgcolor="#b4d8ed" style="color:#161823">年工资收入（万元）</td>
+    <td align="center">
+        <select class="selectpicker" style="width: 95px; margin-top: 10px;">
+            <option value="${personBasic.annualWageIncome}">专业技术人员</option>
+            <option value="${personBasic.annualWageIncome}">其他</option>
+        </select>
+    </td>
+    <td align="center" bgcolor="#b4d8ed" style="color:#161823">工作年限</td>
+    <td align="center">
+        <select class="selectpicker" style="width: 95px; margin-top: 10px;">
+            <option value="${personBasic.workYears}">专业技术人员</option>
+            <option value="${personBasic.workYears}">其他</option>
+        </select>
+    </td>
+    <td align="center" bgcolor="#b4d8ed" style="color:#161823">职称</td>
+    <td align="center">
+        <select class="selectpicker" style="width: 95px; margin-top: 10px;">
+            <option value="${personBasic.workTitle}">专业技术人员</option>
+            <option value="${personBasic.workTitle}">其他</option>
+        </select>
+    </td>
+</tr>
 </core:forEach>
 <tr>
     <td align="center" colspan="8" style="font-size:22px">
@@ -502,11 +521,9 @@
 <tr>
     <td align="center" colspan="8" style="font-size:22px">
         家庭资产情况
-        <p class="text-left">
             <button class="btn btn-info" type="button">增加房产</button>
-            <button class="btn btn-warning" type="button">增加车辆</button>
+            <button class="btn btn-success" type="button">增加车辆</button>
             <button class="btn btn-warning" type="button">增加土地</button>
-        </p>
     </td>
 </tr>
 <core:forEach items="${personFamilyAssetsList}" var="personFamilyAssets">
@@ -819,7 +836,7 @@
 </div>
 <div class="tab-pane" id="tab2">
     <div class="pad-10">
-        <div class="table-list">
+        <div class="table-list" style="table-layout:fixed; height:345px; overflow:scroll;">
             <table width="100%" border="1">
                 <tbody>
                 <tr>
@@ -946,7 +963,7 @@
 <!--村委会（居委会）评价-->
 <div class="tab-pane" id="tab3">
     <div class="pad-10">
-        <div class="table-list">
+        <div class="table-list" style="table-layout:fixed; height:345px; overflow:scroll;">
             <table width="100%">
                 <tbody>
                 <tr>
@@ -1107,7 +1124,6 @@
 </div>
 </div>
 </div>
-<script src="/asserts/js/jquery-1.7.2.min.js"></script>
-<script src="/asserts/js/bootstrap.min.js"></script>
+</div>
 </body>
 </html>

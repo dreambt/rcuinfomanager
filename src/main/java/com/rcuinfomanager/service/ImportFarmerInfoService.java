@@ -44,17 +44,17 @@ public class ImportFarmerInfoService {
                 familyMemberInfo.setFamilyMemberName(rowData[2]);
                 familyMemberInfo.setLeaderRelation(rowData[3]);
             }
-            familyMemberInfoDao.saveMember(familyMemberInfo);
+           familyMemberInfoDao.saveMember(familyMemberInfo);
             row = csvReader.readLine();
         }
 
         csvReader.close();
     }
 
-    public static void main(String[] argus) throws IOException {
+   /* public static void main(String[] argus) throws IOException {
 
         ImportFarmerInfoService importFarmerInfoService = new ImportFarmerInfoService();
-        importFarmerInfoService.importFromCSV("D:\\MyProjects\\RCUInfoManager\\server\\src\\test\\resources\\1.csv");
-    }
+        importFarmerInfoService.importFromCSV("G:\\rcuinfomanager\\src\\test\\resources\\1.csv");
+    }*/
 
 }

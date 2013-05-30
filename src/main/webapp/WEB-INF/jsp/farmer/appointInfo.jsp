@@ -34,40 +34,40 @@
 </head>
 <body>
 
-    <form name="myform" id="myform" action="" method="post">
-            <table width="100%" border="0">
-                <tbody>
-                <tr>
-                    <td><span class="label label-info">户主：</span></td>
-                    <td>性别的</td>
-                    <td><span class="label label-info">电话：</span></td>
-                    <td>12345678910</td>
-                </tr>
-                <tr>
-                    <td align="left" colspan="2">
-                        <span class="label label-info">指派给：</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>&nbsp;</td>
-                    <td align="right">
-                        <select class="span3" name="" style="width:175px;">
-                            <option value="">选择网点</option>
-                            <option value="" >小作社</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td align="right" colspan="2">
-                        <input type="text" name="customerName" value="${personFamilyMember.yearIncome}"
-                               style="width: 130px;height: 25px; margin-top: 10px;" placeholder="指定客户经理"><span class="help-inline">(可选)</span>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-    </form>
-     <p align="center">
-         <a class="btn" href="#" id="okOperate">确定</a>&nbsp;<a class="btn" href="#" id="cancelOperate">取消</a>
-     </p>
+<form name="myform" id="myform" action="" method="post">
+    <table width="100%" border="0">
+        <tbody>
+        <tr>
+            <td><span class="label label-info">户主：</span></td>
+            <td>性别的</td>
+            <td><span class="label label-info">电话：</span></td>
+            <td>12345678910</td>
+        </tr>
+        <tr>
+            <td align="left" colspan="2">
+                <span class="label label-info">指派给：</span>
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td align="right">
+                <select class="span3" name="" style="width:175px;">
+                    <option value="">选择网点</option>
+                    <option value="" >小作社</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td align="right" colspan="2">
+                <input type="text" name="customerName" value="${personFamilyMember.yearIncome}"
+                       style="width: 130px;height: 25px; margin-top: 10px;" placeholder="指定客户经理"><span class="help-inline">(可选)</span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</form>
+<p align="center">
+    <a class="btn" href="#" id="okOperate">确定</a>&nbsp;<a class="btn" href="#" id="cancelOperate">取消</a>
+</p>
 </body>
 </html>

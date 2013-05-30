@@ -10,6 +10,32 @@
     <link href="/asserts/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
     <link href="/asserts/css/doc.css" rel="stylesheet" media="screen">
     <link href="/asserts/css/style.css" rel="stylesheet" media="screen">
+    <link id="artDialog-skin" href="/asserts/js/dialog/skins/opera.css" rel="stylesheet" />
+    <script src="/asserts/js/jquery-1.7.2.min.js"></script>
+    <script src="/asserts/js/bootstrap.min.js"></script>
+    <script src="/asserts/js/dialog/artDialog.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            //左侧菜单样式控制
+            $('.span3 li').click(function(){
+                $("li[class='active']").removeAttr("class");
+                $(this).addClass("active");
+            });
+            //指派
+            $('.appointOperate').click(function(){
+                var me=$(this);
+                var recordId=me.attr('recordId');
+                var url='family/appoint/'+recordId;
+                window.art.dialog({
+                    id: 'assign',
+                    title: '指派信息',
+                    lock:true,
+                    content:'<iframe scrolling="auto" width="550" height="220" frameborder="0" style="border: none;margin: -20px -25px;"marginheight="0" marginwidth="0" src="'+ url +'"/>'
+                });
+            });
+
+        });
+    </script>
 
 </head>
 <body>
@@ -49,24 +75,26 @@
 <input class="input-block-level" type="text" placeholder="客户电子信息管理>查询" disabled="disabled" style="color:#0000AA">
 <table class="table table-condensed">
     <tbody>
+  <core:forEach items="${personInfoList}" var="personInfo">
     <tr>
         <td><span class="label label-info">户主：</span></td>
-        <td>张晓明</td>
+        <td>${personInfo.customerName}</td>
         <td><span class="label label-info">电话：</span></td>
-        <td>11111111111</td>
+        <td>${personInfo.telephone}</td>
         <td><span class="label label-info">收集单位：</span></td>
-        <td>惠安分社区</td>
+        <td>${personInfo.organizationName}</td>
         <td><span class="label label-info">收集人：</span></td>
-        <td>管理员</td>
+        <td>${personInfo.displayUserName}</td>
     </tr>
     </tbody>
 </table>
 <p class="text-center">
-    <button class="btn" type="button">指派</button>
-    <button class="btn" type="button">删除</button>
-    <button class="btn" type="button">验收</button>
-    <button class="btn" type="button">编辑</button>
+    <button class="btn" type="button" id="appointOperate" recordId="${personInfo.recordId}">指派</button>
+    <button class="btn" type="button" id="delOperate" recordId="${personInfo.recordId}">删除</button>
+    <button class="btn" type="button" id="checkOperate" recordId="${personInfo.recordId}">验收</button>
+    <button class="btn" type="button" id="editOperate" recordId="${personInfo.recordId}">编辑</button>
 </p>
+</core:forEach>
 <hr  size="1" width="100%" style="margin-bottom: -1px;"/>
 <div class="tabbable">
 <ul class="nav nav-tabs">
@@ -79,7 +107,7 @@
 <div class="tab-pane active" id="tab1">
 
 <div class="farmer_info">
-<div class="table-list">
+<div class="table-list" style="table-layout:fixed; height:345px; overflow:scroll;">
 <table width="100%" border="1" cellspacing="0" width="732px" color="#727f8a;">
 <tbody>
 <core:forEach items="${personBasicList}" var="personBasic">
@@ -434,7 +462,7 @@
 </div>
 <div class="tab-pane" id="tab2">
     <div class="pad-10">
-        <div class="table-list">
+        <div class="table-list" style="table-layout:fixed; height:345px; overflow:scroll;">
             <table width="100%" border="1">
                 <tbody>
                 <tr>
@@ -561,7 +589,7 @@
 <!--村委会（居委会）评价-->
 <div class="tab-pane" id="tab3">
     <div class="pad-10">
-        <div class="table-list">
+        <div class="table-list" style="table-layout:fixed; height:345px; overflow:scroll;">
             <table width="100%" border="1">
                 <tbody>
                 <tr>
@@ -722,7 +750,5 @@
 </div>
 </div>
 </div>
-<script src="/asserts/js/jquery-1.7.2.min.js"></script>
-<script src="/asserts/js/bootstrap.min.js"></script>
 </body>
 </html>

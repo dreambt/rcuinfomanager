@@ -1,24 +1,24 @@
-<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=7">
 <title>系统角色管理</title>
-<link href="../css/reset.css" rel="stylesheet" type="text/css">
-<link href="../css/zh-cn-system.css" rel="stylesheet" type="text/css">
-<link href="../css/table_form.css" rel="stylesheet" type="text/css">
-<link href="../css/dialog.css" rel="stylesheet" type="text/css">
+    <link href="/asserts/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="/asserts/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+    <link href="/asserts/css/doc.css" rel="stylesheet" media="screen">
+    <link href="/asserts/css/style.css" rel="stylesheet" media="screen">
+    <link id="artDialog-skin" href="/asserts/js/dialog/skins/opera.css" rel="stylesheet" />
+    <script src="/asserts/js/jquery-1.7.2.min.js"></script>
+    <script src="/asserts/js/bootstrap.min.js"></script>
+    <script src="/asserts/js/dialog/artDialog.js"></script>
 
-<script language="javascript" type="text/javascript" src="../js/jquery-1.7.2.min.js"></script>
-<script language="javascript" type="text/javascript" src="../js/admin_common.js"></script>
-<script language="javascript" type="text/javascript" src="../js/styleswitch.js"></script>
-<script type="text/javascript">
-	window.focus();
-	var pc_hash = 'AttuXV';
-	</script>
 </head>
 <body>
 <style type="text/css">
 	html{_overflow-y:scroll}
-</style><div id="closeParentTime" style="display:none">1</div>
+</style>
+<div id="closeParentTime" style="display:none">1</div>
 
 <div class="pad-10">
 <form name="myform" id="myform" action="" method="post">
@@ -28,23 +28,32 @@
 				<tr>
 					<td align="left" colspan="5" height="50">
 						当前客户端版本：
-						<label id="" name="" style="color:#FF0000">V1.0.0</label>				</td>
+						<label id="" name="" style="color:#FF0000">V1.0.0</label>
+                    </td>
 				</tr>
 				<tr>
 					<td width="21%" align="right" height="50">填写要导入的客户端版本：</td>
-				  <td width="19%" align="left"><input type="text" id="" name="" value="" style="width:200px"/></td>
+				    <td width="19%" align="left">
+                        <input type="text" id="" name="" value="" style="width:200px"/>
+                    </td>
 					<td width="18%" align="right">版本描述：</td>
-				  <td align="left" colspan="2"><input type="text" id="" name="" value="" style="width:400px"/></td>
+				    <td align="left" colspan="2">
+                        <input type="text" id="" name="" value="" style="width:400px"/>
+                    </td>
 				</tr>
 				<tr>
 					<td width="21%" align="right" height="50">填写要导入的客户端版本：</td>
-				  <td align="left" valign="middle" colspan="2">
-				  <input type="file" id="" name="" value="" valign="middle" style="width:280px;height:30px;align:center"/>&nbsp;&nbsp;&nbsp;&nbsp;
-				  <input type="button" id="" name="Input" value="上传" style="width:80px; height:30px"/></td>
+				    <td align="left" valign="middle" colspan="2">
+				        <input type="file" id="" name="" value="" valign="middle"
+                               style="width:280px;height:30px;align:center"/>&nbsp;&nbsp;&nbsp;&nbsp;
+				        <input type="button" id="" name="Input" value="上传" style="width:80px; height:30px"/>
+                    </td>
 					<td width="14%" align="left">
-				  <input type="checkbox" id="" name="" value=""/>是否强制更新</td>
+				        <input type="checkbox" id="" name="" value=""/>是否强制更新
+                    </td>
 					<td width="28%" align="left">
-				  <input type="button" id="" name="" value="完成" style="width:80px; height:30px"/>			  </td>
+				        <input type="button" id="" name="" value="完成" style="width:80px; height:30px"/>
+                    </td>
 				</tr>
 		 </tbody>
 		</table>
@@ -66,13 +75,15 @@
 							<label id="" style="color:#FF0000">强制更新</label>
 						</td>
 						<td width="50%" align="center" >
-							<a href="" style="color:#0099FF">下载</a>&nbsp;|&nbsp;<a href="" style="color:#FF0000">删除</a>
+							<a href="" style="color:#0099FF">下载</a>
+                               &nbsp;|&nbsp;
+                            <a href="" style="color:#FF0000">删除</a>
 						</td>
 					</tr>
 			 	</tbody>
-			</table>
+	    </table>
 	</div>
 </form>
 </div>
-<script language="javascript" type="text/javascript" src="../js/cookie.js"></script>
-</body></html>
+</body>
+</html>

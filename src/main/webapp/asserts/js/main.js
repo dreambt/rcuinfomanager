@@ -1,13 +1,36 @@
 $(function(){
 
-    var firstLoginResult='${firstLogin}';
-    if(firstLoginResult){
-        alert("第一次登录，是否需要修改密码？");
-    }
     //左侧菜单样式控制
     $('.nav li').click(function(){
         $("li[class='active']").removeAttr("class");
         $(this).addClass("active");
+
+       /* var me=$(this);
+        var clientName=me.attr('clientId');
+        var url='';
+        if(clientName=='mobileDevice'){
+            $("li[class='active']").removeAttr("class");
+            $(this).addClass("active");
+            url='/version';
+            window.location.href = url;
+        }else if(clientName=='account'){
+            $("li[class='active']").removeAttr("class");
+            $(this).addClass("active");
+            url='/account';
+            window.location.href = url;
+        }else if(clientName=='role'){
+            $("li[class='active']").removeAttr("class");
+            $(this).addClass("active");
+            url='/role';
+            window.location.href = url;
+        }else if(clientName=='sysTemLog'){
+            $("li[class='active']").removeAttr("class");
+            $(this).addClass("active");
+            url='/sysTemLog';
+            window.location.href = url;
+        }*/
+
+
     });
 
     //查看

@@ -28,6 +28,14 @@
           left outer join organizationInfo org on u.organizationId=org.organizationId
           where u.userId=#{userId}
     </select>
+    <!--显示客户个人信息-->
+    <select id="getPersonBasicInfo" parameterType="java.lang.Long" resultMap="userListInfo">
+          select b.recordId,b.customerName,b.telephone,org.organizationName,u.displayUserName
+          from baseinfo b
+          left outer join usersinfo u  on b.userName=u.userName
+          left outer join organizationInfo org on u.organizationId=org.organizationId
+          where b.recordId=#{recordId}
+    </select>
 
     <resultMap id="cusBasicMap" type="com.rcuinfomanager.model.CusBaseInfo">
         <result column="customerName" property="customerName"></result>

@@ -14,18 +14,10 @@ import java.util.Map;
 public class BaseInfoController {
 
     @Autowired
-    private BaseInfoService baseInfoServer;
-    @Autowired
     BaseInfoService baseInfoService;
     //查看
     @RequestMapping(value ="/{id}")
     public String show(@PathVariable long id,Map map){
-/*
-        UserSessionContext userSessionContext = UserSessionContextHolder.getUserSessionContext();
-        SessionUser sessionUser = userSessionContext.getSessionUser();
-        System.out.print("+++++++++++++");
-        System.out.print(sessionUser.getId());*/
-        map.put("personInfoList", baseInfoService.getPersonBasicInfo(id));
         //基础概况信息
         map.put("personBasicList",baseInfoService.getCusBasicInfo(id));
         //家庭收支情况

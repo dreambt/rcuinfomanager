@@ -487,100 +487,46 @@ CREATE TABLE `organizationinfo` (
 
 /*Data for the table `organizationinfo` */
 
-/*Table structure for table `permissionsinfo` */
-
-DROP TABLE IF EXISTS `permissionsinfo`;
-
-CREATE TABLE `permissionsinfo` (
-  `permissionId` bigint(20) NOT NULL AUTO_INCREMENT,
-  `name` varchar(20) DEFAULT NULL,
-  `action` varchar(50) DEFAULT NULL,
-  `isMenu` tinyint(1) DEFAULT NULL,
-  `fatherId` bigint(20) DEFAULT NULL,
-  `note1` varchar(200) DEFAULT NULL,
-  `note2` varchar(200) DEFAULT NULL,
-  `note3` varchar(200) DEFAULT NULL,
-  `note4` varchar(200) DEFAULT NULL,
-  PRIMARY KEY (`permissionId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='权限信息表';
-
-/*Data for the table `permissionsinfo` */
-
-/*Table structure for table `photosinfo` */
-
-DROP TABLE IF EXISTS `photosinfo`;
-
-CREATE TABLE `photosinfo` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `recordId` bigint(20) DEFAULT NULL COMMENT '记录唯一性标识',
-  `photoUri` varchar(100) DEFAULT NULL,
-  `note1` varchar(200) DEFAULT NULL,
-  `note2` varchar(200) DEFAULT NULL,
-  `note3` varchar(200) DEFAULT NULL,
-  `note4` varchar(200) DEFAULT NULL,
+/*Table structure for table `t_role` */
+DROP TABLE IF EXISTS t_role;
+CREATE TABLE `t_role` (
+  `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `role_code` VARCHAR(36) DEFAULT NULL COMMENT '角色编码',
+  `role_name` VARCHAR(60) DEFAULT NULL COMMENT '角色名称',
+  `app_code` VARCHAR(30) NOT NULL COMMENT '应用编码',
+  `role_type` CHAR(1) DEFAULT NULL COMMENT '1:管理员角色 2：普通角色',
+  `remark` VARCHAR(200) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`),
-  KEY `FK_Reference_17` (`recordId`),
-  CONSTRAINT `FK_Reference_17` FOREIGN KEY (`recordId`) REFERENCES `baseinfo` (`recordId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='照片记录表';
+  UNIQUE KEY `AK_ak_app_role` (`role_code`)
+) ENGINE=INNODB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='应用角色';
 
-/*Data for the table `photosinfo` */
+/*Table structure for table `t_acl` */
+DROP TABLE IF EXISTS t_acl;
+CREATE TABLE `t_acl` (
+  `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `principal_type` VARCHAR(30) DEFAULT NULL COMMENT '主休类型： 1--角色\n            2--用户',
+  `principal_code` VARCHAR(100) DEFAULT NULL COMMENT '主体标识',
+  `priv_code` VARCHAR(30) NOT NULL COMMENT '权限编码',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_key` (`principal_type`,`principal_code`,`priv_code`)
+) ENGINE=INNODB AUTO_INCREMENT=963 DEFAULT CHARSET=utf8 COMMENT='应用系统访问控制列表';
 
-/*Table structure for table `rolepermissioninfo` */
+/*Data for the table `t_acl` */
 
-DROP TABLE IF EXISTS `rolepermissioninfo`;
+/*Table structure for table `t_priv_tree` */
+DROP TABLE IF EXISTS t_priv_tree;
+CREATE TABLE `t_priv_tree` (
+  `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `node_code` VARCHAR(30) NOT NULL COMMENT '权限树节点编码,采用层级编码，每层编码字符为2位，如01 0101 0102等。',
+  `node_name` VARCHAR(60) NOT NULL COMMENT '权限树节点名称',
+  `node_type` CHAR(1) NOT NULL COMMENT '1:分支节点 2：叶子节点',
+  `priv_code` VARCHAR(30) DEFAULT NULL COMMENT '当node_type=2时，不能为空，表示一个真实的系统权限',
+  `order_no` INT(11) NOT NULL COMMENT '同级排序号',
+  `remark` VARCHAR(200) DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`id`)
+) ENGINE=INNODB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8 COMMENT='应用权限';
 
-CREATE TABLE `rolepermissioninfo` (
-  `roleId` bigint(20) DEFAULT NULL,
-  `permissionId` bigint(20) DEFAULT NULL,
-  `note1` varchar(200) DEFAULT NULL,
-  `note2` varchar(200) DEFAULT NULL,
-  `note3` varchar(200) DEFAULT NULL,
-  `note4` varchar(200) DEFAULT NULL,
-  KEY `FK_Reference_14` (`roleId`),
-  KEY `FK_Reference_15` (`permissionId`),
-  CONSTRAINT `FK_Reference_15` FOREIGN KEY (`permissionId`) REFERENCES `permissionsinfo` (`permissionId`),
-  CONSTRAINT `FK_Reference_14` FOREIGN KEY (`roleId`) REFERENCES `rolesinfo` (`roleId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='角色权限映射关系表';
-
-/*Data for the table `rolepermissioninfo` */
-
-/*Table structure for table `rolesinfo` */
-
-DROP TABLE IF EXISTS `rolesinfo`;
-
-CREATE TABLE `rolesinfo` (
-  `roleId` bigint(20) NOT NULL AUTO_INCREMENT,
-  `roleName` varchar(20) DEFAULT NULL,
-  `roleDescription` varchar(50) DEFAULT NULL,
-  `createTime` varchar(50) DEFAULT NULL,
-  `note1` varchar(200) DEFAULT NULL,
-  `note2` varchar(200) DEFAULT NULL,
-  `note3` varchar(200) DEFAULT NULL,
-  `note4` varchar(200) DEFAULT NULL,
-  PRIMARY KEY (`roleId`),
-  KEY `Index_2` (`createTime`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='角色信息 表';
-
-/*Data for the table `rolesinfo` */
-
-/*Table structure for table `userroleinfo` */
-
-DROP TABLE IF EXISTS `userroleinfo`;
-
-CREATE TABLE `userroleinfo` (
-  `userId` bigint(20) DEFAULT NULL,
-  `roleId` bigint(20) DEFAULT NULL,
-  `note1` varchar(200) DEFAULT NULL,
-  `note2` varchar(200) DEFAULT NULL,
-  `note3` varchar(200) DEFAULT NULL,
-  `note4` varchar(200) DEFAULT NULL,
-  KEY `FK_Reference_12` (`userId`),
-  KEY `FK_Reference_13` (`roleId`),
-  CONSTRAINT `FK_Reference_13` FOREIGN KEY (`roleId`) REFERENCES `rolesinfo` (`roleId`),
-  CONSTRAINT `FK_Reference_12` FOREIGN KEY (`userId`) REFERENCES `usersinfo` (`userId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户角色映射关系表';
-
-/*Data for the table `userroleinfo` */
+/*Data for the table `t_priv_tree` */
 
 /*Table structure for table `usersinfo` */
 

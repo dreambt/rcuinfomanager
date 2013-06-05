@@ -107,7 +107,7 @@ CREATE TABLE `baseinfo` (
   `workYears` int(11) DEFAULT NULL,
   `workSitu` varchar(100) DEFAULT NULL,
   `unitProp` varchar(50) DEFAULT NULL,
-  `unitIndustry` varchar(20) DEFAULT NULL,
+  `unitIndustryId` varchar(20) DEFAULT NULL,
   `unitIndustryName` varchar(50) DEFAULT NULL,
   `department` varchar(50) DEFAULT NULL,
   `unitType` varchar(50) DEFAULT NULL,
@@ -433,7 +433,7 @@ DROP TABLE IF EXISTS `locationinfo`;
 
 CREATE TABLE `locationinfo` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `userId` bigint(20) DEFAULT NULL,
+  `userName` bigint(20) DEFAULT NULL,
   `longitude` varchar(20) DEFAULT NULL,
   `latitude` varchar(20) DEFAULT NULL,
   `recordTime` varchar(50) DEFAULT NULL,
@@ -442,8 +442,8 @@ CREATE TABLE `locationinfo` (
   `note3` varchar(200) DEFAULT NULL,
   `note4` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK_Reference_19` (`userId`),
-  CONSTRAINT `FK_Reference_19` FOREIGN KEY (`userId`) REFERENCES `usersinfo` (`userId`)
+  KEY `FK_Reference_19` (`userName`),
+  CONSTRAINT `FK_Reference_19` FOREIGN KEY (`userName`) REFERENCES `usersinfo` (`userName`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='位置信息表';
 
 /*Data for the table `locationinfo` */

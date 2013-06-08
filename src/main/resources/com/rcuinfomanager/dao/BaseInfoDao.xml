@@ -262,8 +262,69 @@
 
 
 
+    <resultMap id="allColumnInfoList" type="com.rcuinfomanager.model.AllColumnInfo">
+        <result column="recordId" property="recordId"></result>
+        <result column="customerName" property="customerName"></result>
+        <result column="cerNum" property="cerNum"></result>
+        <result column="gender" property="gender"></result>
+        <result column="isFarmer" property="isFarmer"></result>
+        <result column="cerType" property="cerType"></result>
+        <result column="cerValidityFrom" property="cerValidityFrom"></result>
+        <result column="cerValidityTo" property="cerValidityTo"></result>
+        <result column="nationality" property="nationality"></result>
+        <result column="isHavePassport" property="isHavePassport"></result>
+        <result column="nation" property="nation"></result>
+        <result column="poliLaspect" property="poliLaspect"></result>
+        <result column="address" property="address"></result>
+        <result column="postcode" property="postcode"></result>
+        <result column="telephone" property="telephone"></result>
+        <result column="mbPhoneNum" property="mbPhoneNum"></result>
+        <result column="areaCode" property="areaCode"></result>
+        <result column="areaName" property="areaName"></result>
+        <result column="highestDegree" property="highestDegree"></result>
+        <result column="health" property="health"></result>
+        <result column="highestEdu" property="highestEdu"></result>
+        <result column="bankRelation" property="bankRelation"></result>
+        <result column="liveCondition" property="liveCondition"></result>
+        <result column="maritalStatus" property="maritalStatus"></result>
+        <result column="socialSecurity" property="socialSecurity"></result>
+        <result column="bankPartnership" property="bankPartnership"></result>
+        <result column="profession" property="profession"></result>
+        <result column="businessProj" property="businessProj"></result>
+        <result column="businessYear" property="businessYear"></result>
+        <result column="businessSite" property="businessSite"></result>
+        <result column="industry" property="industry"></result>
+        <result column="businessProp" property="businessProp"></result>
+        <result column="moneySitu" property="moneySitu"></result>
+        <result column="inputMoney" property="inputMoney"></result>
+        <result column="ownMoney" property="ownMoney"></result>
+        <result column="yearIncome" property="yearIncome"></result>
+        <result column="workSitu" property="workSitu"></result>
+        <result column="unitProp" property="unitProp"></result>
+        <result column="unitIndustry" property="unitIndustry"></result>
+        <result column="unitIndustryName" property="unitIndustryName"></result>
+        <result column="department" property="department"></result>
+        <result column="unitType" property="unitType"></result>
+        <result column="duties" property="duties"></result>
+        <result column="annualWageIncome" property="annualWageIncome"></result>
+        <result column="workYears" property="workYears"></result>
+        <result column="workTitle" property="workTitle"></result>
+    </resultMap>
 
-
+    <select id="queryAppointInfoByUserId" parameterType="java.lang.Long" resultMap="allColumnInfoList">
+        SELECT a.*, b.*, c.*, d.*, e.*, f.*, g.*, h.*, z.*, w.*, n.* FROM baseinfo a LEFT JOIN incomeexpenses b ON  b.`recordId` = a.`recordId`
+            LEFT JOIN familyassets c ON c.`recordId`=a.`recordId`
+            LEFT JOIN housepropertyinfo d ON d.`assetsId`=c.`assetsId`
+            LEFT JOIN landinfo e ON e.`assetsId`=c.`assetsId`
+            LEFT JOIN carsinfo f ON f.`assetsId`=c.`assetsId`
+            LEFT JOIN familymemberinfo g ON g.`recordId`=a.`recordId`
+            LEFT JOIN financialassets h ON h.`assetsId`=c.`assetsId`
+            LEFT JOIN familyincurdebts z ON z.`recordId`=a.`recordId`
+            LEFT JOIN financeservices w ON w.`recordId`=a.`recordId`
+            LEFT JOIN customermanagereva n ON n.`recordId`=a.`recordId`
+            LEFT JOIN t_appoint t ON t.`recordId`=a.`recordId`
+            WHERE t.`user_id` = #{userId}
+    </select>
 
 
 </mapper>

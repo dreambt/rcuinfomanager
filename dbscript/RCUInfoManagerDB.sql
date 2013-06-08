@@ -37,6 +37,25 @@ CREATE TABLE `appversionsinfo` (
 
 /*Data for the table `appversionsinfo` */
 
+/*Table structure for table `devicescontrol` */
+
+DROP TABLE IF EXISTS `devicescontrol`;
+
+CREATE TABLE `devicescontrol` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `deviceId` varchar(20) DEFAULT NULL,
+  `createTime` varchar(50) DEFAULT NULL,
+  `note1` varchar(200) DEFAULT NULL,
+  `note2` varchar(200) DEFAULT NULL,
+  `note3` varchar(200) DEFAULT NULL,
+  `note4` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `Index_1` (`createTime`),
+  KEY `Index_3` (`deviceId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='授权设备信息表';
+
+/*Data for the table `devicescontrol` */
+
 /*Table structure for table `areasinfo` */
 
 DROP TABLE IF EXISTS `areasinfo`;
@@ -107,7 +126,7 @@ CREATE TABLE `baseinfo` (
   `workYears` int(11) DEFAULT NULL,
   `workSitu` varchar(100) DEFAULT NULL,
   `unitProp` varchar(50) DEFAULT NULL,
-  `unitIndustry` varchar(20) DEFAULT NULL,
+  `unitIndustryId` varchar(20) DEFAULT NULL,
   `unitIndustryName` varchar(50) DEFAULT NULL,
   `department` varchar(50) DEFAULT NULL,
   `unitType` varchar(50) DEFAULT NULL,
@@ -180,25 +199,6 @@ CREATE TABLE `customermanagereva` (
 
 /*Data for the table `customermanagereva` */
 
-/*Table structure for table `devicescontrol` */
-
-DROP TABLE IF EXISTS `devicescontrol`;
-
-CREATE TABLE `devicescontrol` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `deviceId` varchar(20) DEFAULT NULL,
-  `createTime` varchar(50) DEFAULT NULL,
-  `note1` varchar(200) DEFAULT NULL,
-  `note2` varchar(200) DEFAULT NULL,
-  `note3` varchar(200) DEFAULT NULL,
-  `note4` varchar(200) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `Index_1` (`createTime`),
-  KEY `Index_3` (`deviceId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='授权设备信息表';
-
-/*Data for the table `devicescontrol` */
-
 /*Table structure for table `familyassets` */
 
 DROP TABLE IF EXISTS `familyassets`;
@@ -206,7 +206,7 @@ DROP TABLE IF EXISTS `familyassets`;
 CREATE TABLE `familyassets` (
   `assetsId` bigint(20) NOT NULL AUTO_INCREMENT,
   `recordId` bigint(20) DEFAULT NULL,
-  `fmAllAssets` float DEFAULT NULL,
+  `fmAllAssets` double(4,4) DEFAULT NULL,
   `mainAssets` varchar(50) DEFAULT NULL,
   `depositOurBank` varchar(20) DEFAULT NULL,
   `depositOtherBank` varchar(20) DEFAULT NULL,
@@ -254,7 +254,7 @@ CREATE TABLE `familymemberinfo` (
   `familyMemberCerNum` varchar(20) DEFAULT NULL,
   `cerNum` varchar(20) DEFAULT NULL,
   `familyMemberName` varchar(20) DEFAULT NULL,
-  `yearIncome` float DEFAULT NULL,
+  `yearIncome` double(4,4) DEFAULT NULL,
   `leaderRelation` varchar(10) DEFAULT NULL,
   `profession` varchar(50) DEFAULT NULL,
   `address` varchar(100) DEFAULT NULL,
@@ -362,11 +362,11 @@ DROP TABLE IF EXISTS `incomeexpenses`;
 CREATE TABLE `incomeexpenses` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `recordId` bigint(20) DEFAULT NULL,
-  `fmAllIncome` float DEFAULT NULL,
-  `fmExpenses` float DEFAULT NULL,
+  `fmAllIncome` double(4,4) DEFAULT NULL,
+  `fmExpenses` double(4,4) DEFAULT NULL,
   `incomeSrc` varchar(50) DEFAULT NULL,
-  `perIncome` float DEFAULT NULL,
-  `fmOtherMemberIn` float DEFAULT NULL,
+  `perIncome` double(4,4) DEFAULT NULL,
+  `fmOtherMemberIn` double(4,4) DEFAULT NULL,
   `fmExpensesProj` varchar(50) DEFAULT NULL,
   `fmInOutRatio` varchar(20) DEFAULT NULL,
   `note1` varchar(200) DEFAULT NULL,
@@ -433,7 +433,7 @@ DROP TABLE IF EXISTS `locationinfo`;
 
 CREATE TABLE `locationinfo` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `userId` bigint(20) DEFAULT NULL,
+  `userName` bigint(20) DEFAULT NULL,
   `longitude` varchar(20) DEFAULT NULL,
   `latitude` varchar(20) DEFAULT NULL,
   `recordTime` varchar(50) DEFAULT NULL,
@@ -442,11 +442,23 @@ CREATE TABLE `locationinfo` (
   `note3` varchar(200) DEFAULT NULL,
   `note4` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK_Reference_19` (`userId`),
-  CONSTRAINT `FK_Reference_19` FOREIGN KEY (`userId`) REFERENCES `usersinfo` (`userId`)
+  KEY `FK_Reference_19` (`userName`),
+  CONSTRAINT `FK_Reference_19` FOREIGN KEY (`userName`) REFERENCES `usersinfo` (`userName`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='位置信息表';
 
 /*Data for the table `locationinfo` */
+
+DROP TABLE IF EXISTS `t_appoint`;
+
+CREATE TABLE `t_appoint` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `recordId` bigint(20) NOT NULL,
+  `user_id` bigint(20) NOT NULL,
+  `downloaded` int(1) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+/*Data for the table `t_appoint` */
 
 /*Table structure for table `logsinfo` */
 

@@ -76,7 +76,9 @@ public class BaseInfoService {
 
 
 
-
+    public List<AllColumnInfo> queryAllColumnInfoList(long userId) {
+        return baseInfoDao.queryAppointInfoByUserId(userId);
+    }
 
 
 

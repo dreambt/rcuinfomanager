@@ -448,6 +448,18 @@ CREATE TABLE `locationinfo` (
 
 /*Data for the table `locationinfo` */
 
+DROP TABLE IF EXISTS `t_appoint`;
+
+CREATE TABLE `t_appoint` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `recordId` bigint(20) NOT NULL,
+  `user_id` bigint(20) NOT NULL,
+  `downloaded` int(1) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+/*Data for the table `t_appoint` */
+
 /*Table structure for table `logsinfo` */
 
 DROP TABLE IF EXISTS `logsinfo`;

@@ -29,10 +29,10 @@ public class FarmerInfoWebService {
         //todo 认证
 
         WebServiceResponseData webServiceResponseData = new WebServiceResponseData();
-        List<AllColumnInfo> data = baseInfoService.queryAllColumnInfoList(1);
+        /*List<AllColumnInfo> data = baseInfoService.queryAllColumnInfoList(1);
 
         String rawData = JsonParser.toJSON(data);
-        webServiceResponseData.setData(rawData);
+        webServiceResponseData.setData(rawData);*/
 
         return webServiceResponseData;
     }

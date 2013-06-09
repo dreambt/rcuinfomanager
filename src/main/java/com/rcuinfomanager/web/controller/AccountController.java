@@ -73,4 +73,5 @@ public class AccountController extends BaseController {
     public String successLogonPage(ModelMap modelMap, HttpServletRequest request) {
         return "index";
     }
+
 }

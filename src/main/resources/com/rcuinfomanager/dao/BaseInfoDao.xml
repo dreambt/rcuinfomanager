@@ -84,6 +84,7 @@
         <result column="annualWageIncome" property="annualWageIncome"></result>
         <result column="workYears" property="workYears"></result>
         <result column="workTitle" property="workTitle"></result>
+        <result column="photoUri" property="photoUri"></result>
     </resultMap>
     <!--获取客户的基本信息-->
     <select id="getCusBasicInfo" parameterType="java.lang.Long" resultMap="cusBasicMap">
@@ -91,8 +92,9 @@
                b.nation,b.poliLaspect,b.health,b.maritalStatus,b.address,b.postcode,b.areaName,b.village,b.telephone,b.mbPhoneNum,b.liveCondition,
                b.socialSecurity,b.highestDegree,b.highestEdu,b.bankRelation,b.bankPartnership,b.profession,b.businessProj,b.businessYear,
                b.businessSite,b.industry,b.businessProp,b.moneySitu,b.inputMoney,b.ownMoney,b.yearIncome,b.workSitu,b.unitProp,b.unitIndustry,
-               b.department,b.unitType,b.duties,b.annualWageIncome,b.workYears,b.workTitle
+               b.department,b.unitType,b.duties,b.annualWageIncome,b.workYears,b.workTitle,p.photoUri
 	   from baseinfo b
+	   left outer join photosInfo p on b.recordId = p.recordId
        where b.recordId=#{recordId}
     </select>
 
@@ -117,46 +119,6 @@
           left outer join incomeexpenses i on b.recordId = i.recordId
           where i.recordId=#{recordId}
     </select>
-
-   <!-- <resultMap id="familyAssetsMap" type="com.rcuinfomanager.model.FamilyAssets">
-        <result column="fmAllAssets" property="fmAllAssets"></result>
-        <result column="mainAssets" property="mainAssets"></result>
-        <result column="nature" property="nature"></result>
-        <result column="site" property="site"></result>
-        <result column="structure" property="structure"></result>
-        <result column="floorNum" property="floorNum"></result>
-        <result column="usedSitu" property="usedSitu"></result>
-        <result column="houseArea" property="houseArea"></result>
-        <result column="houseWorth" property="houseWorth"></result>
-        <result column="isInstallment" property="isInstallment"></result>
-        <result column="hasCredentials" property="hasCredentials"></result>
-        <result column="area" property="area"></result>
-        <result column="worth" property="worth"></result>
-        <result column="property" property="property"></result>
-        <result column="type" property="type"></result>
-        <result column="usedSitu" property="landUsedSitu"></result>
-        <result column="isMoneyClear" property="isMoneyClear"></result>
-        <result column="carsInfo" property="carsInfo"></result>
-        <result column="carsWorth" property="carsWorth"></result>
-        <result column="carsIsInstallment" property="carsIsInstallment"></result>
-        <result column="carsUsingInfo" property="carsUsingInfo"></result>
-        <result column="financialInfo" property="financialInfo"></result>
-        <result column="depositOurBank" property="depositOurBank"></result>
-        <result column="depositOtherBank" property="depositOtherBank"></result>
-    </resultMap>
-    &lt;!&ndash;获取家庭资产情况&ndash;&gt;
-    <select id="getFamilyAssets" parameterType="java.lang.Long" resultMap="familyAssetsMap">
-         select fa.fmAllAssets,fa.mainAssets,h.nature,h.site,h.structure,h.floorNum,h.usedSitu,h.houseArea,h.houseWorth,
-                 h.isInstallment,h.hasCredentials,h.note1,land.area,land.worth,land.property,land.type,land.usedSitu,
-                 land.isMoneyClear,car.carsInfo,car.carsWorth,car.carsIsInstallment,car.carsUsingInfo,fin.financialInfo,
-                 fin.depositOurBank,fin.depositOtherBank
-          from  familyassets fa
-           left outer join housepropertyinfo h on fa.assetsId = h.assetsId
-           left outer join landinfo land on  fa.assetsId =land.assetsId
-           left outer join carsinfo car on fa.assetsId=car.assetsId
-           left outer join financialassets fin on fa.assetsId =fin.assetsId
-           where fa.recordId=#{recordId}
-    </select>-->
 
     <!--获取家庭资产情况-->
     <resultMap id="familyAssetsMap" type="com.rcuinfomanager.model.FamilyAssets">
@@ -258,9 +220,30 @@
            left outer join financialAssets fin on fa.assetsId = fin.assetsId
            where fa.recordId=#{recordId}
     </select>
-
-
-
+    <!--指派网点-->
+    <select id="getAdminOrganizationName" resultMap="userListInfo">
+         select org.organizationName from organizationInfo org
+    </select>
+    <select id="getUserOrganizationName" parameterType="java.lang.Long" resultMap="userListInfo">
+         select org.organizationName
+          from usersinfo u
+          left outer join organizationInfo org on u.organizationId=org.organizationId
+          where u.userId=#{userId}
+    </select>
+    <!--删除-->
+    <delete id="deleteInfo" parameterType="java.lang.Long">
+           delete from baseinfo b
+           left outer join familymemberinfo fm on b.recordId=fm.recordId
+           left outer join photosinfo pho on b.recordId = pho.recordId
+           left outer join familyincurdebts fid on b.recordId = fid.recordId
+           left outer join incomeexpenses ies on b.recordId = ies.recordId
+           left outer join familyassets fas on b.recordId = fas.recordId
+           left outer join housepropertyinfo h on fas.assetsId= h.assetsId
+           left outer join landinfo land on fas.assetsId=land.assetsId
+           left outer join carsinfo car on fas.assetsId=car.assetsId
+           left outer join financialassets fin on fas.assetsId=fin.assetsId
+           where b.recordId=#{recordId}
+    </delete>
 
     <resultMap id="allColumnInfoList" type="com.rcuinfomanager.model.AllColumnInfo">
         <result column="recordId" property="recordId"></result>

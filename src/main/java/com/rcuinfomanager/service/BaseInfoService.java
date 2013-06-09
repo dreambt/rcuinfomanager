@@ -71,19 +71,25 @@ public class BaseInfoService {
     }
 
 
-    /////////////////////////////////////////////
 
 
+    /*//选择网点
+    public List<CustomerListInfo> getAdminOrganizationName(){
+        return baseInfoDao.getAdminOrganizationName();
+    }
+    public List<CustomerListInfo> getUserOrganizationName(Long id){
+        return baseInfoDao.getUserOrganizationName(id);
+    }
+
+    //删除
+    public int deleteInfo(Long id){
+        return baseInfoDao.deleteInfo(id);
+    }
 
 
     public List<AllColumnInfo> queryAllColumnInfoList(long userId) {
         return baseInfoDao.queryAppointInfoByUserId(userId);
-    }
-
-
-
-
-
+    }*/
 
 
 

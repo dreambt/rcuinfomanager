@@ -47,6 +47,15 @@ public class CusBaseInfo {
     private String workYears;
     private String workTitle;
     private String cerValidityTo;
+    private String photoUri;
+
+    public String getPhotoUri() {
+        return photoUri;
+    }
+
+    public void setPhotoUri(String photoUri) {
+        this.photoUri = photoUri;
+    }
 
     public String getCerValidityTo() {
         return cerValidityTo;

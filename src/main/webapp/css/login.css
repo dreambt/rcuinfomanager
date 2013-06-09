@@ -45,7 +45,7 @@ div{*display:block;}
     font-size:16px;
     font-weight:bold;}
 .login_tj_btn{
-    background:url(../images/login_dl_btn.jpg) no-repeat 0px 0px;
+    background:url(../images/login_dl_btn.jpg) no-repeat;
     width:52px;
     height:24px;
     margin-left:16px;

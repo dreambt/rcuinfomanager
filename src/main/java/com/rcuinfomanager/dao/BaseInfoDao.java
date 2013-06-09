@@ -33,4 +33,5 @@ public interface BaseInfoDao {
       //删除客户信息
       int getDeleteCusBasicInfo(int recordId);
       //指派用户信息
+      List<AllColumnInfo> queryAppointInfoByUserId(long userId);
 }

@@ -1,4 +1,6 @@
-package com.rcuinfomanager.model;
+package com.rcuinfomanager.webservice.model;
+
+import com.rcuinfomanager.model.FamilyMemberInfo;
 
 import java.util.List;
 

@@ -2,6 +2,7 @@ package com.rcuinfomanager.service;
 
 import com.rcuinfomanager.dao.BaseInfoDao;
 import com.rcuinfomanager.model.*;
+import com.rcuinfomanager.webservice.model.AllColumnInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -91,6 +92,10 @@ public class BaseInfoService {
         return baseInfoDao.queryAppointInfoByUserId(userId);
     }*/
 
+
+    public List<AllColumnInfo> queryAllColumnInfoList(long userId) {
+        return baseInfoDao.queryAppointInfoByUserId(userId);
+    }
 
 
 }

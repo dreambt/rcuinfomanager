@@ -1,6 +1,6 @@
 package com.rcuinfomanager.dao;
 
-import com.rcuinfomanager.model.AllColumnInfo;
+import com.rcuinfomanager.webservice.model.AllColumnInfo;
 import junit.framework.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

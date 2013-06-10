@@ -1,6 +1,7 @@
 package com.rcuinfomanager.dao;
 
 import com.rcuinfomanager.model.*;
+import com.rcuinfomanager.webservice.model.AllColumnInfo;
 
 import java.util.List;
 

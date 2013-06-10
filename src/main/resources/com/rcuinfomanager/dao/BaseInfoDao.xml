@@ -245,7 +245,7 @@
            where b.recordId=#{recordId}
     </delete>
 
-    <resultMap id="allColumnInfoList" type="com.rcuinfomanager.model.AllColumnInfo">
+    <resultMap id="allColumnInfoList" type="com.rcuinfomanager.webservice.model.AllColumnInfo">
         <result column="recordId" property="recordId"></result>
         <result column="customerName" property="customerName"></result>
         <result column="cerNum" property="cerNum"></result>

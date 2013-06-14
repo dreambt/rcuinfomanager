@@ -44,7 +44,7 @@ public class ImportFarmerInfoService {
                 familyMemberInfo.setFamilyMemberName(rowData[2]);
                 familyMemberInfo.setLeaderRelation(rowData[3]);
             }
-           familyMemberInfoDao.saveMember(familyMemberInfo);
+            familyMemberInfoDao.saveMember(familyMemberInfo);
             row = csvReader.readLine();
         }
 

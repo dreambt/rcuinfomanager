@@ -1,7 +1,7 @@
 package com.rcuinfomanager.model;
 
 public class FamilyMember {
-   private String familyMemberName;
+    private String familyMemberName;
     private String yearIncome;
     private String leaderRelation;
     private String address;

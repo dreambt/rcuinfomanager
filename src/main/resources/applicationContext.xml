@@ -36,11 +36,11 @@
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="configLocation" value="classpath:mybatis-config.xml"/>
-        <property name="dataSource" ref="dataSource" />
+        <property name="dataSource" ref="dataSource"/>
     </bean>
 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.rcuinfomanager.dao" />
+        <property name="basePackage" value="com.rcuinfomanager.dao"/>
     </bean>
 
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
@@ -60,7 +60,7 @@
                 -->
                 <prop key="find*">PROPAGATION_SUPPORTS,readOnly</prop>
                 <prop key="get*">PROPAGATION_SUPPORTS,readOnly</prop>
-                <prop key="delete*"> PROPAGATION_SUPPORTS</prop>
+                <prop key="delete*">PROPAGATION_SUPPORTS</prop>
                 <prop key="update*">PROPAGATION_REQUIRED</prop>
                 <prop key="save*">PROPAGATION_REQUIRED,-Exception</prop>
             </props>
@@ -81,7 +81,6 @@
     </bean>
 
     <bean id="bootstrap" class="com.rcuinfomanager.bootstrap.Bootstrap"/>
-
 
 
 </beans>

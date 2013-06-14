@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:directive.include file="/WEB-INF/jsp/includes.jsp" />
+<jsp:directive.include file="/WEB-INF/jsp/includes.jsp"/>
 <html>
 <head>
     <title>农户建档现场电子信息采集系统</title>
@@ -9,7 +9,7 @@
     <link href="/asserts/css/doc.css" rel="stylesheet" media="screen">
     <link href="/asserts/css/style.css" rel="stylesheet" media="screen">
     <script type="text/javascript">
-        $(function(){
+        $(function () {
         });
     </script>
 </head>
@@ -22,13 +22,17 @@
                 <td height="145" background="/asserts/img/head.png">
                     <table width="99%" border="0" cellspacing="0" cellpadding="0">
                         <tr>
-                            <td width="60%" height="145"><img src="/asserts/img/logo.png" width="500" height="145" /></td>
-                            <td width="40%" align="right" valign="bottom" >
-                                <div style="margin-bottom:10px; margin-right:10px; color:#FFFFFF">您好！<span id="uName">[<c:out value="${displayUserName}"/>]</span><a href="" style="color:#FFFFFF">[退出]</a>
+                            <td width="60%" height="145"><img src="/asserts/img/logo.png" width="500" height="145"/>
+                            </td>
+                            <td width="40%" align="right" valign="bottom">
+                                <div style="margin-bottom:10px; margin-right:10px; color:#FFFFFF">您好！<span
+                                        id="uName">[<c:out value="${displayUserName}"/>]</span><a href=""
+                                                                                                  style="color:#FFFFFF">[退出]</a>
                                 </div>
                             </td>
                         </tr>
-                    </table></td>
+                    </table>
+                </td>
             </tr>
         </table>
     </div>

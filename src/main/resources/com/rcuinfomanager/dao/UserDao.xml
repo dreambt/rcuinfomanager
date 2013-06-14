@@ -5,7 +5,7 @@
 
     <resultMap id="userMap" type="com.rcuinfomanager.model.User">
         <id column="userId" property="userId"/>
-        <result column="organizationId" property="organizationId" />
+        <result column="organizationId" property="organizationId"/>
         <result column="userName" property="userName"></result>
         <result column="password" property="password"></result>
         <result column="displayUserName" property="displayUserName"></result>
@@ -28,25 +28,25 @@
 
     <!-- 获取管理员和普通用户-->
     <select id="getUserManager" parameterType="java.lang.String" resultType="com.rcuinfomanager.model.User">
-          select u.userId, u.lastLoginTime from usersinfo u where u.userName=#{userName}
+        select u.userId, u.lastLoginTime from usersinfo u where u.userName=#{userName}
     </select>
 
     <insert id="saveUser" parameterType="com.rcuinfomanager.model.User">
-        INSERT INTO usersinfo(organization_id,user_name,password,named,cur_designate_flag,create_time,last_login_time,note1,note2,note3,note4)
+        INSERT INTO
+        usersinfo(organization_id,user_name,password,named,cur_designate_flag,create_time,last_login_time,note1,note2,note3,note4)
         VALUES(#{organizationId},#{userName},#{password},#{name},#{curDesignateFlag},#{createTime},,#{lastLoginTime},#{note1},#{note2},#{note3},#{note4})
     </insert>
 
     <update id="updateUser" parameterType="com.rcuinfomanager.model.User">
         UPDATE usersinfo SET
-                              password = #{password},
-                              update_time = #{updateTime}
-                          WHERE user_id=#{id}
+        password = #{password},
+        update_time = #{updateTime}
+        WHERE user_id=#{id}
     </update>
 
     <delete id="deleteUser" parameterType="java.lang.Integer">
         DELETE FROM user_info WHERE user_id=#{id}
     </delete>
-
 
 
 </mapper>

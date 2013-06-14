@@ -2,8 +2,8 @@ package com.rcuinfomanager.model;
 
 public class FamilyAssets {
 
-    private  String fmAllAssets;
-    private  String mainAssets;
+    private String fmAllAssets;
+    private String mainAssets;
 
     public String getFmAllAssets() {
         return fmAllAssets;

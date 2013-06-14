@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 /**
  * @author 王文庭(xorbytes@qq.com)
- *          功能说明：
+ *         功能说明：
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 public class BaseModel implements Serializable {

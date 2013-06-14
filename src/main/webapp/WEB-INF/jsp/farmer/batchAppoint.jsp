@@ -12,33 +12,33 @@
     <script src="/asserts/js/jquery-1.7.2.min.js"></script>
     <script src="/asserts/js/bootstrap.min.js"></script>
     <script type="text/javascript">
-        $(function(){
-            var ids='${ids}';
+        $(function () {
+            var ids = '${ids}';
             //确定
-            $('#addOpera').click(function(){
-                if(ids){
-                    var organizationName=$('#organizationName').val();
-                    var customerName=$('#customerName').val();
-                    var url='family/saveAppointInfo/'+ids+'/'+organizationName+'/'+customerName;
-                    window.location.href=url;
-                }else{
+            $('#addOpera').click(function () {
+                if (ids) {
+                    var organizationName = $('#organizationName').val();
+                    var customerName = $('#customerName').val();
+                    var url = 'family/saveAppointInfo/' + ids + '/' + organizationName + '/' + customerName;
+                    window.location.href = url;
+                } else {
                     alert("操作失败！");
                 }
             });
 
             //关闭
-            $('#cancelOperate').click(function() {
+            $('#cancelOperate').click(function () {
 
-                window.top.art.dialog({id : 'assign' }).close();
-                var url='/index';
-                window.location.href=url;
+                window.top.art.dialog({id: 'assign' }).close();
+                var url = '/index';
+                window.location.href = url;
             });
             //返回main
-            var success='${params.success}';
-            if(success&&success!=''){
-                var url='farmer/main';
-                $(window.top.window.document).find('#main').attr('src',url);
-                window.top.art.dialog({id:'assign'}).close();
+            var success = '${params.success}';
+            if (success && success != '') {
+                var url = 'farmer/main';
+                $(window.top.window.document).find('#main').attr('src', url);
+                window.top.art.dialog({id: 'assign'}).close();
             }
 
         });
@@ -59,7 +59,7 @@
             <td align="right">
                 <select class="span3" name="organizationName" id="organizationName" style="width:202px;">
                     <option value="">选择网点</option>
-                    <option value="" >小作社</option>
+                    <option value="">小作社</option>
                 </select>
             </td>
         </tr>

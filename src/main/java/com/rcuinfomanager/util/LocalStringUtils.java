@@ -752,7 +752,7 @@ public class LocalStringUtils extends org.apache.commons.lang.StringUtils {
     /**
      * 将字符分隔的字符串转换为List
      *
-     * @param srcStr    字符分隔的字符串
+     * @param srcStr   字符分隔的字符串
      * @param splitStr 分隔字符
      */
     public static List<String> stringToList(String srcStr, String splitStr) {
@@ -762,9 +762,9 @@ public class LocalStringUtils extends org.apache.commons.lang.StringUtils {
     /**
      * 将字符分隔的字符串转换为List
      *
-     * @param srcStr    字符分隔的字符串
+     * @param srcStr   字符分隔的字符串
      * @param splitStr 分隔字符
-     * @param trim      是否去除首尾多余字符
+     * @param trim     是否去除首尾多余字符
      */
     public static List<String> stringToList(String srcStr, String splitStr, boolean trim) {
         if (srcStr == null) {

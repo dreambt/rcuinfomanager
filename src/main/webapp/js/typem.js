@@ -1,81 +1,80 @@
-
 var _D			//div
-var div_Top;		//²ã¶¥×ø±ê
-var div_Id;		//²ãµÄÃû×Ö
-var div_Left;		//²ã×ó±ß×ø±ê
-var div_Width;		//²ãµÄ¿í¶È
-var div_Height;		//²ãµÄ¸ß¶È
-var doc_Height;		//´°¿Úµ±Ç°×Ü¸ß¶È
-var doc_Width;		//´°¿Úµ±Ç°¿í¶È
+var div_Top;		//ï¿½ã¶¥ï¿½ï¿½ï¿½
+var div_Id;		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+var div_Left;		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+var div_Width;		//ï¿½ï¿½Ä¿ï¿½ï¿½
+var div_Height;		//ï¿½ï¿½Ä¸ß¶ï¿½
+var doc_Height;		//ï¿½ï¿½ï¿½Úµï¿½Ç°ï¿½Ü¸ß¶ï¿½
+var doc_Width;		//ï¿½ï¿½ï¿½Úµï¿½Ç°ï¿½ï¿½ï¿½
 
-//style¶ÔÏóÖÐµÄÊôÐÔ
+//styleï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½
 var _style;
 var style_Top;
 var style_Left;
 
-var T = function (divId){
-	alert(divId);
-	//alert("T");
-	init(divId);
-	style_Top=(arrayPageSize[1] - div_Height)/2+arrayScroll[1];
-	style_Left=(arrayPageSize[0] - div_Width)/2+arrayScroll[0];
-	_style.display="";
+var T = function (divId) {
+    alert(divId);
+    //alert("T");
+    init(divId);
+    style_Top = (arrayPageSize[1] - div_Height) / 2 + arrayScroll[1];
+    style_Left = (arrayPageSize[0] - div_Width) / 2 + arrayScroll[0];
+    _style.display = "";
 }
 
-//»ñÈ¡ÊôÐÔ
-var init = function (divId){
-	_D =		document.getElementById(divId);
-	div_Top =    parseInt(document.getElementById(divId).style.top,10)			//»ñÈ¡¸ß
-	div_Left =   parseInt(document.getElementById(divId).style.left,10)			//divµÄy×ø±ê
-    div_Height = parseInt(document.getElementById(divId).offsetHeight,10)		//divµÄ¸ß¶È
-    div_Width =	 parseInt(document.getElementById(divId).offsetWidth,10)		//divµÄ¿í¶È	
-	arrayScroll		=	 getPageScroll();
-	arrayPageSize	=    getPageSize();
-	_style = divId.style;
-	style_Top= divId.style.top;
-	style_Left= divId.style.left;
+//ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½
+var init = function (divId) {
+    _D = document.getElementById(divId);
+    div_Top = parseInt(document.getElementById(divId).style.top, 10)			//ï¿½ï¿½È¡ï¿½ï¿½
+    div_Left = parseInt(document.getElementById(divId).style.left, 10)			//divï¿½ï¿½yï¿½ï¿½ï¿½
+    div_Height = parseInt(document.getElementById(divId).offsetHeight, 10)		//divï¿½Ä¸ß¶ï¿½
+    div_Width = parseInt(document.getElementById(divId).offsetWidth, 10)		//divï¿½Ä¿ï¿½ï¿½
+    arrayScroll = getPageScroll();
+    arrayPageSize = getPageSize();
+    _style = divId.style;
+    style_Top = divId.style.top;
+    style_Left = divId.style.left;
 }
 
-//Ôö¼ÓµÄ·½·¨
-var addTM = function (x,y){
-	//»ñÈ¡Öµ
-	var td1 = document.getElementById("gztype").value;
-	var td2 = document.getElementById("jinge").value;
+//ï¿½ï¿½ï¿½ÓµÄ·ï¿½ï¿½ï¿½
+var addTM = function (x, y) {
+    //ï¿½ï¿½È¡Öµ
+    var td1 = document.getElementById("gztype").value;
+    var td2 = document.getElementById("jinge").value;
 
-	//±í¸ñ²åÈë
-	var _T = document.getElementById("t2");
-	var R_ind = _T.rows.Length;
-	var objTR = objTable.insertRow(R_ind);  
-  	var objTD_1=  objTR.insertCell(0);
-	var objTD_2=  objTR.insertCell(1);
-	objTD_1.innerHTML="<td>"+td1+"</td>";
-	objTD_2.innerHTML="<td>"+td2+"</td>";
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    var _T = document.getElementById("t2");
+    var R_ind = _T.rows.Length;
+    var objTR = objTable.insertRow(R_ind);
+    var objTD_1 = objTR.insertCell(0);
+    var objTD_2 = objTR.insertCell(1);
+    objTD_1.innerHTML = "<td>" + td1 + "</td>";
+    objTD_2.innerHTML = "<td>" + td2 + "</td>";
 }
 
-//»ñÈ¡getPageSize
+//ï¿½ï¿½È¡getPageSize
 var getPageSize = function () {
-	var de = document.documentElement;
-	var w = window.innerWidth || self.innerWidth || (de&&de.clientWidth) || document.body.clientWidth;
-	var h = window.innerHeight || self.innerHeight || (de&&de.clientHeight) || document.body.clientHeight
-	arrayPageSize = new Array(w,h) 
-	return arrayPageSize;
+    var de = document.documentElement;
+    var w = window.innerWidth || self.innerWidth || (de && de.clientWidth) || document.body.clientWidth;
+    var h = window.innerHeight || self.innerHeight || (de && de.clientHeight) || document.body.clientHeight
+    arrayPageSize = new Array(w, h)
+    return arrayPageSize;
 }
 
-//»ñÈ¡pageScrollTop
-var getPageScroll = function (){
-	var yScrolltop;
-	var xScrollleft;
-	if (self.pageYOffset || self.pageXOffset) {
-		yScrolltop = self.pageYOffset;
-		xScrollleft = self.pageXOffset;
-	} else if (document.documentElement && document.documentElement.scrollTop || document.documentElement.scrollLeft ){	 // Explorer 6 Strict
-		yScrolltop = document.documentElement.scrollTop;
-		xScrollleft = document.documentElement.scrollLeft;
-	} else if (document.body) {// all other Explorers
-		yScrolltop = document.body.scrollTop;
-		xScrollleft = document.body.scrollLeft;
-	}
-	arrayPageScroll = new Array(xScrollleft,yScrolltop) 
-	return arrayPageScroll;
+//ï¿½ï¿½È¡pageScrollTop
+var getPageScroll = function () {
+    var yScrolltop;
+    var xScrollleft;
+    if (self.pageYOffset || self.pageXOffset) {
+        yScrolltop = self.pageYOffset;
+        xScrollleft = self.pageXOffset;
+    } else if (document.documentElement && document.documentElement.scrollTop || document.documentElement.scrollLeft) {	 // Explorer 6 Strict
+        yScrolltop = document.documentElement.scrollTop;
+        xScrollleft = document.documentElement.scrollLeft;
+    } else if (document.body) {// all other Explorers
+        yScrolltop = document.body.scrollTop;
+        xScrollleft = document.body.scrollLeft;
+    }
+    arrayPageScroll = new Array(xScrollleft, yScrolltop)
+    return arrayPageScroll;
 }
 

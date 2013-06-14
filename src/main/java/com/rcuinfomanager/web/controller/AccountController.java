@@ -5,10 +5,7 @@ import com.rcuinfomanager.service.UserService;
 import com.rcuinfomanager.session.SessionUser;
 import com.rcuinfomanager.session.UserSessionContext;
 import com.rcuinfomanager.session.UserSessionCookieName;
-import com.rcuinfomanager.util.CodeGenerator;
-import com.rcuinfomanager.util.CookieUtil;
-import com.rcuinfomanager.util.JsonParser;
-import com.rcuinfomanager.util.RequestUtils;
+import com.rcuinfomanager.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -53,7 +50,7 @@ public class AccountController extends BaseController {
         //对登录结果进行处理
         if (logonResult.isSuccessful()) {//登录成功
             CookieUtil.setUserInfoCookies(response);
-        }  else {//用户密码有错误
+        } else {//用户密码有错误
             String newLogonId = CodeGenerator.getUUID();
             logonResultJsonMap.put("logonId", newLogonId);
         }
@@ -76,5 +73,4 @@ public class AccountController extends BaseController {
     public String successLogonPage(ModelMap modelMap, HttpServletRequest request) {
         return "index";
     }
-
 }

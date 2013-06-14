@@ -17,7 +17,6 @@ import java.util.Map;
 
 /**
  * @author 王文庭(xorbytes@qq.com)
- *
  */
 
 @Controller
@@ -35,7 +34,7 @@ public class LoginController extends BaseController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String processForm(HttpServletRequest request, HttpServletResponse response,LoginForm loginForm, BindingResult result, Map model) {
+    public String processForm(HttpServletRequest request, HttpServletResponse response, LoginForm loginForm, BindingResult result, Map model) {
         if (result.hasErrors()) {
             return "login";
         }
@@ -54,7 +53,7 @@ public class LoginController extends BaseController {
         if (logonResult.isSuccessful()) {//登录成功
             CookieUtil.setUserInfoCookies(response);
             return "redirect:/index";
-        }  else {//用户密码有错误
+        } else {//用户密码有错误
             model.put("msg", "用户或密码错误");
             return "login";
         }

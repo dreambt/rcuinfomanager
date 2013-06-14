@@ -10,6 +10,7 @@ public class UserSessionContextHolder {
 
     /**
      * 将用户会话绑定到当前的请求线程中
+     *
      * @param userSessionContext
      */
     public static void mountUserSessionContext(UserSessionContext userSessionContext) {
@@ -19,12 +20,13 @@ public class UserSessionContextHolder {
     /**
      * 将用户会话从当前请求线程中解除绑定
      */
-    public static void unmountUserSessionContext(){
+    public static void unmountUserSessionContext() {
         userContextThreadLocal.set(null);
     }
 
     /**
      * 获取当前线程的绑定的SessionContext
+     *
      * @return
      */
     public static UserSessionContext getUserSessionContext() {

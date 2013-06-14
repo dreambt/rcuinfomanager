@@ -5,10 +5,10 @@ public class OrganizationInfo {
     private String organizationName;
     private String organizationDescription;
     private int fatherId;
-    private String  note1;
-    private String  note2;
-    private String  note3;
-    private String  note4;
+    private String note1;
+    private String note2;
+    private String note3;
+    private String note4;
 
     public int getOrganizationId() {
         return organizationId;

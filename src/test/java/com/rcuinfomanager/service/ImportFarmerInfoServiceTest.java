@@ -22,6 +22,6 @@ public class ImportFarmerInfoServiceTest {
 
     @Test
     public void TestImport() throws IOException {
-       importFarmerInfoService.importFromCSV("D:\\MyProjects\\RCUInfoManager\\server\\src\\test\\resources\\1.csv");
+        importFarmerInfoService.importFromCSV("D:\\MyProjects\\RCUInfoManager\\server\\src\\test\\resources\\1.csv");
     }
 }

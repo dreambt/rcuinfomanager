@@ -9,18 +9,19 @@
     <link href="/asserts/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
     <link href="/asserts/css/doc.css" rel="stylesheet" media="screen">
     <link href="/asserts/css/style.css" rel="stylesheet" media="screen">
-    <link id="artDialog-skin" href="/asserts/js/dialog/skins/opera.css" rel="stylesheet" />
+    <link id="artDialog-skin" href="/asserts/js/dialog/skins/opera.css" rel="stylesheet"/>
     <script src="/asserts/js/jquery-1.7.2.min.js"></script>
     <script src="/asserts/js/bootstrap.min.js"></script>
     <script src="/asserts/js/dialog/artDialog.js"></script>
     <script src="/asserts/js/main.js"></script>
     <script type="text/javascript">
-        $(function(){
-            /*if(${firstLogin}){
+        $(function () {
+            /*if(
+            ${firstLogin}){
              alert("第一次登录，是否需要修改密码？");
              }*/
 
-            $('.span3').click(function(){
+            $('.span3').click(function () {
                 $("li[class='active']").removeAttr("class");
                 $(this).addClass("active");
             });
@@ -36,9 +37,13 @@
                 <td height="145" background="/asserts/img/head.png">
                     <table width="99%" border="0" cellspacing="0" cellpadding="0">
                         <tr>
-                            <td width="60%" height="145"><img src="/asserts/img/logo.png" width="500" height="145" /></td>
-                            <td width="40%" align="right" valign="bottom" >
-                                <div style="margin-bottom:10px; margin-right:10px; color:#FFFFFF">您好！<span id="uName">[<c:out value="${displayUserName}"/>]</span><a href="/logout" style="color:#FFFFFF">&nbsp;退出</a>
+                            <td width="60%" height="145"><img src="/asserts/img/logo.png" width="500" height="145"/>
+                            </td>
+                            <td width="40%" align="right" valign="bottom">
+                                <div style="margin-bottom:10px; margin-right:10px; color:#FFFFFF">您好！<span
+                                        id="uName">[<c:out value="${displayUserName}"/>]</span><a href="/logout"
+                                                                                                  style="color:#FFFFFF">
+                                    &nbsp;退出</a>
                                 </div>
                             </td>
                         </tr>
@@ -62,6 +67,7 @@
         <div class="span10" style="margin-left: -8.435897%;">
             <br/>
             <input class="input-block-level" type="text" placeholder="系统日志" disabled="disabled" style="color:#0000AA">
+
             <div class="pad-10">
                 <div class="btn-default">
                   <form class="form-search">

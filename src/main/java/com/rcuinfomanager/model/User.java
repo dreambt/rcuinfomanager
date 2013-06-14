@@ -28,7 +28,7 @@ public class User extends BaseModel {
 
     private String note4;
 
-    public User(){
+    public User() {
 
     }
 

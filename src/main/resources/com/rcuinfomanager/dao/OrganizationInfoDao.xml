@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.rcuinfomanager.dao.OrganizationInfoDao">
     <resultMap id="organizationInfoMap" type="com.rcuinfomanager.model.OrganizationInfo">
-         <id property="organizationId" column="organizationId" />
+        <id property="organizationId" column="organizationId"/>
         <result property="userId" column="userId"></result>
         <result property="organizationName" column="organizationName"/>
         <result property="organizationDescription" column="organizationDescription"/>
@@ -14,8 +14,8 @@
         <result property="note4" column="note4"/>
     </resultMap>
 
-    <resultMap  id="organizationInfoMap" type="com.rcuinfomanager.model.OrganizationInfo">
-        <association property="userInfo" column="userInfo" select="selectOrganizationInfo"  javaType="OrganizationInfo"/>
+    <resultMap id="organizationInfoMap" type="com.rcuinfomanager.model.OrganizationInfo">
+        <association property="userInfo" column="userInfo" select="selectOrganizationInfo" javaType="OrganizationInfo"/>
     </resultMap>
 
     <select id="selectOrganizationInfo" parameterType="int" resultType="OrganizationInfo">
@@ -23,9 +23,8 @@
     </select>
 
     <select id="getOrganizationById" parameterType="int" resultMap="organizationInfoMap">
-       select * from organizationInfo org where org.organizationId = #{organizationId}
+        select * from organizationInfo org where org.organizationId = #{organizationId}
     </select>
-
 
 
 </mapper>

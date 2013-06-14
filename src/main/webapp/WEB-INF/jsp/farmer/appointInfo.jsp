@@ -12,27 +12,27 @@
     <script src="/asserts/js/jquery-1.7.2.min.js"></script>
     <script src="/asserts/js/bootstrap.min.js"></script>
     <script type="text/javascript">
-        $(function(){
+        $(function () {
 
             //确定
-            $('#okOperate').click(function(){
-                var id=$('#recordId').val();
-                var organizationName=$('#organizationName').val();
-                var customerName=$('#customerName').val();
-                var url='family/saveAppointInfo/'+id+'/'+organizationName+'/'+customerName;
-                window.location.href=url;
+            $('#okOperate').click(function () {
+                var id = $('#recordId').val();
+                var organizationName = $('#organizationName').val();
+                var customerName = $('#customerName').val();
+                var url = 'family/saveAppointInfo/' + id + '/' + organizationName + '/' + customerName;
+                window.location.href = url;
             });
 
             //关闭
-            $('#cancelOperate').click(function() {
-                window.top.art.dialog({id : 'assign' }).close();
+            $('#cancelOperate').click(function () {
+                window.top.art.dialog({id: 'assign' }).close();
             });
             //返回main
-            var success='${params.success}';
-            if(success&&success!=''){
-                var url='farmer/main';
-                $(window.top.window.document).find('#main').attr('src',url);
-                window.top.art.dialog({id:'assign'}).close();
+            var success = '${params.success}';
+            if (success && success != '') {
+                var url = 'farmer/main';
+                $(window.top.window.document).find('#main').attr('src', url);
+                window.top.art.dialog({id: 'assign'}).close();
             }
 
         });
@@ -44,13 +44,13 @@
     <table width="100%" border="0">
         <tbody>
         <core:forEach items="${appointPeopleList}" var="appointPeople">
-            <input type="hidden" id="recordId" name="recordId" value="${appointPeople.recordId}" >
-        <tr>
-            <td><span class="label label-info">户主：</span></td>
-            <td>${appointPeople.customerName}</td>
-            <td><span class="label label-info">电话：</span></td>
-            <td>${appointPeople.telephone}</td>
-        </tr>
+            <input type="hidden" id="recordId" name="recordId" value="${appointPeople.recordId}">
+            <tr>
+                <td><span class="label label-info">户主：</span></td>
+                <td>${appointPeople.customerName}</td>
+                <td><span class="label label-info">电话：</span></td>
+                <td>${appointPeople.telephone}</td>
+            </tr>
         </core:forEach>
         <tr>
             <td align="left" colspan="2">
@@ -62,9 +62,7 @@
             <td align="right">
                 <select class="span3" name="organizationName" id="organizationName" style="width:202px;">
                     <option value="">选择网点</option>
-                    <core:forEach items="${orgNameInfo}" var="orgName">
-                        <option value="${orgName.organizationName}" >${orgName.organizationName}</option>
-                    </core:forEach>
+                    <option value="">小作社</option>
                 </select>
             </td>
         </tr>

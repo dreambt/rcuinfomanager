@@ -17,67 +17,50 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 public class HomeController {
 
-     @Autowired
-     private BaseInfoService baseInfoServer;
+    @Autowired
+    private BaseInfoService baseInfoServer;
 
-     @RequestMapping(value ="/index")
-     public String index(ModelMap map) {
-         UserSessionContext userSessionContext = UserSessionContextHolder.getUserSessionContext();
-         SessionUser sessionUser = userSessionContext.getSessionUser();
-         map.put("firstLogin",sessionUser.isFirstLogon());
-         map.put("displayUserName", sessionUser.getDisplayUserName());
-         if(sessionUser.getId()==1){
-             map.put("familyInfoList",baseInfoServer.getAllFamilyInfoList());
-         }else{
-             map.put("familyInfoList", baseInfoServer.getFamilyInfoList(sessionUser.getId()));
-         }
-         return "farmer/main";
+    @RequestMapping(value = "/index")
+    public String index(ModelMap map) {
+        UserSessionContext userSessionContext = UserSessionContextHolder.getUserSessionContext();
+        SessionUser sessionUser = userSessionContext.getSessionUser();
+        map.put("firstLogin", sessionUser.isFirstLogon());
+        map.put("displayUserName", sessionUser.getDisplayUserName());
+        if (sessionUser.getId() == 1) {
+            map.put("familyInfoList", baseInfoServer.getAllFamilyInfoList());
+        } else {
+            map.put("familyInfoList", baseInfoServer.getFamilyInfoList(sessionUser.getId()));
+        }
+        return "farmer/main";
     }
 
-    @RequestMapping(value ="/clientManager")
+    @RequestMapping(value = "/clientManager")
     public String clientManager() {
 
         return "device/clientVersion";
     }
 
-    @RequestMapping(value ="/accountManager")
+    @RequestMapping(value = "/accountManager")
     public String accountManager() {
 
         return "ps/systemAccountManage";
     }
 
-    @RequestMapping(value ="/roleManager")
+    @RequestMapping(value = "/roleManager")
     public String roleManager() {
 
         return "ps/systemRoleManager";
     }
 
-    @RequestMapping(value ="/systemLogManager")
+    @RequestMapping(value = "/systemLogManager")
     public String systemLogManager() {
 
         return "logsystem/systemLog";
     }
 
-    @RequestMapping(value ="/addSystemRole")
-    public String addSystemRole(){
 
-        return "ps/addSystemRole";
-    }
-
-    @RequestMapping(value ="/addAccount")
-    public String addAccount(){
-
-        return "ps/addAccount";
-    }
-
-    @RequestMapping(value ="/addStipple")
-    public String addStipple(){
-
-        return "ps/addStipple";
-    }
-
-    @RequestMapping(value ="/login")
-    public String logout(){
+    @RequestMapping(value = "/login")
+    public String logout() {
         return "login";
     }
 

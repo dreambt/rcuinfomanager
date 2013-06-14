@@ -1,17 +1,17 @@
 package com.rcuinfomanager.model;
 
 public class HousePropertyInfo {
-    private  String nature;
-    private  String purpose;
-    private  String site;
-    private  String structure;
-    private  int floorNum;
-    private  String usedSitu;
-    private  String houseArea;
-    private  String houseWorth;
-    private  int isInstallment;
-    private  String hasCredentials;
-    private  String note1;
+    private String nature;
+    private String purpose;
+    private String site;
+    private String structure;
+    private int floorNum;
+    private String usedSitu;
+    private String houseArea;
+    private String houseWorth;
+    private int isInstallment;
+    private String hasCredentials;
+    private String note1;
 
     public String getNature() {
         return nature;

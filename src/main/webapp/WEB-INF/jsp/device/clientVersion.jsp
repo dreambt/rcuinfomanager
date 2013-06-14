@@ -34,9 +34,9 @@
                             <td width="60%" height="145"><img src="/asserts/img/logo.png" width="500" height="145"/>
                             </td>
                             <td width="40%" align="right" valign="bottom">
-                                <div style="margin-bottom:10px; margin-right:10px; color:#161823">您好！<span
-                                        id="uName">[<c:out value="${displayUserName}"/>]</span><a href=""
-                                                                                                  style="color:#161823">[退出]</a>
+                                <div style="margin-bottom:10px; margin-right:10px; color:#FFFFFF">您好！
+                                    <span id="uName">[<c:out value="${displayUserName}"/>]</span>
+                                    <a href="/logout" style="color:#FFFFFF">&nbsp;[退出]</a>
                                 </div>
                             </td>
                         </tr>

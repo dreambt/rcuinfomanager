@@ -91,8 +91,11 @@ public class HomeController {
         UserSessionContext userSessionContext = UserSessionContextHolder.getUserSessionContext();
         SessionUser sessionUser = userSessionContext.getSessionUser();
         map.put("displayUserName", sessionUser.getDisplayUserName());
-        map.put("logsInfoList",logsInfoService.getLogsInfoList(sessionUser.getId()));
-
+        if(sessionUser.getId()==1){
+            map.put("logsInfoList",logsInfoService.getLogsInfoByAdminList());
+        }else{
+            map.put("logsInfoList",logsInfoService.getLogsInfoByNormalList(sessionUser.getId()));
+        }
         return "logsystem/systemLog";
     }
 

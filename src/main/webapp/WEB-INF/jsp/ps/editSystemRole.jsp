@@ -41,11 +41,6 @@
                     </td>
                 </tr>
                 <tr>
-                    <td align="center" colspan="2" class="transparent_class">&nbsp;
-
-                    </td>
-                </tr>
-                <tr>
                     <td align="center" colspan="2" bgcolor="#1e90ff" style="color:#FFFFFF">功能权限设置</td>
                 </tr>
                 <tr>

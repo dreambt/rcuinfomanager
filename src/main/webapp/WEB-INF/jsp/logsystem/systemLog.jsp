@@ -30,6 +30,12 @@
             $('#searchLogs').click(function(){
                 $('#searchForm').submit();
             });
+            //重置
+            $('#cleanLogs').click(function(){
+                $('#beginTime').val('');
+                $('#endTime').val('');
+                $('#userName').val('');
+            });
 
 
         });
@@ -74,13 +80,14 @@
                 <div class="btn-default">
                     <form class="form-search" id="searchForm" action="/logs/queryLogs" method="post">
                         按时间：
-                        <input type="text"  name="beginTime" value="${param.beginTime}" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"
+                        <input type="text" id="beginTime"  name="beginTime" value="${param.beginTime}" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"
                                style="width: 115px;height: 25px; margin-top: 10px;">&nbsp;-&nbsp;
-                        <input type="text" name="endTime" value="${param.endTime}" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"
+                        <input type="text" id="endTime" name="endTime" value="${param.endTime}" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"
                                style="width: 115px;height: 25px; margin-top: 10px;">
-                        <input type="text" name="userName" value="${param.userName}" placeholder="按系统帐号"
+                        <input type="text" id="userName" name="userName" value="${param.userName}" placeholder="按系统帐号"
                                style="width: 140px;height: 25px; margin-top: 10px;">
                         <a href="#" class="btn btn-small" id="searchLogs">查询</a>
+                        <a href="#" class="btn btn-small" id="cleanLogs">重置</a>
                     </form>
                 </div>
 

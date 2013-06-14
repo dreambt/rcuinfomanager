@@ -17,11 +17,31 @@ public class LogsInfoService {
         logsInfoDao.saveLogsInfo(logs);
     }
     //获取日志 List
-    public List<LogsInfo> getLogsInfoList(long userId){
-        return logsInfoDao.getLogsInfoList(userId);
+    public List<LogsInfo> getLogsInfoByAdminList(){
+        return logsInfoDao.getLogsInfoByAdminList();
+    }
+    public List<LogsInfo> getLogsInfoByNormalList(long userId){
+        return logsInfoDao.getLogsInfoByNormalList(userId);
     }
 
     //查询
+    //admin
+    public List<LogsInfo> getLogsAllByAdminList(String beginTime,String endTime,String userName){
+        return logsInfoDao.getLogsAllByAdminList(beginTime,endTime,userName);
+    }
+    public List<LogsInfo> getLogsBeginAndEndTimeByAdminList(String beginTime,String endTime){
+        return logsInfoDao.getLogsBeginAndEndTimeByAdminList(beginTime,endTime);
+    }
+    public List<LogsInfo> getLogsBeginTimeByAdminList(String beginTime){
+        return logsInfoDao.getLogsBeginTimeByAdminList(beginTime);
+    }
+    public List<LogsInfo> getLogsEndTimeByAdminList(String endTime){
+        return logsInfoDao.getLogsEndTimeByAdminList(endTime);
+    }
+    public List<LogsInfo> getLogsUNameByAdminList(String userName){
+        return logsInfoDao.getLogsUNameByAdminList(userName);
+    }
+    //Normal
     public List<LogsInfo> getLogsAllList(String beginTime,String endTime,String userName,long userId){
         return logsInfoDao.getLogsAllList(beginTime,endTime,userName,userId);
     }

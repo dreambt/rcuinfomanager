@@ -9,12 +9,20 @@ public interface LogsInfoDao {
     //保存日志
     void saveLogsInfo(LogsInfo logs);
     //获取日志
-    List<LogsInfo> getLogsInfoList(long userId);
+    List<LogsInfo> getLogsInfoByAdminList();
+    List<LogsInfo> getLogsInfoByNormalList(long userId);
     //查询
-    List<LogsInfo> getLogsAllList(@Param("beginTime") String beginTime,@Param("endTime") String endTime,@Param("userName") String userName,@Param("userId")long userId);
-    List<LogsInfo> getLogsBeginAndEndTimeList(@Param("beginTime") String beginTime,@Param("endTime") String endTime,@Param("userId")long userId);
-    List<LogsInfo> getLogsBeginTimeList(String beginTime, long userId);
-    List<LogsInfo> getLogsEndTimeList(String endTime, long userId);
-    List<LogsInfo> getLogsUNameList(String userName, long userId);
+    //Admin
+    List<LogsInfo> getLogsAllByAdminList(@Param("beginTime") String beginTime,@Param("endTime")String endTime,@Param("userName")String userName);
+    List<LogsInfo> getLogsBeginAndEndTimeByAdminList(@Param("beginTime")String beginTime,@Param("endTime")String endTime);
+    List<LogsInfo> getLogsBeginTimeByAdminList(@Param("beginTime")String beginTime);
+    List<LogsInfo> getLogsEndTimeByAdminList(@Param("endTime")String endTime);
+    List<LogsInfo> getLogsUNameByAdminList(@Param("userName")String userName);
+    //Normal
+    List<LogsInfo> getLogsAllList(@Param("beginTime") String beginTime,@Param("endTime")String endTime,@Param("userName")String userName,@Param("userId")long userId);
+    List<LogsInfo> getLogsBeginAndEndTimeList(@Param("beginTime")String beginTime,@Param("endTime")String endTime,@Param("userId")long userId);
+    List<LogsInfo> getLogsBeginTimeList(@Param("beginTime")String beginTime,@Param("userId")long userId);
+    List<LogsInfo> getLogsEndTimeList(@Param("endTime")String endTime,@Param("userId")long userId);
+    List<LogsInfo> getLogsUNameList(@Param("userName")String userName,@Param("userId")long userId);
 
 }

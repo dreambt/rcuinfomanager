@@ -130,7 +130,7 @@
     </select>
 
     <!--房产-->
-    <resultMap id="housePropertyInfoMap" type="com.rcuinfomanager.model.HousePropertyInfo">
+    <resultMap id="housePropertyInfoMap" type="com.rcuinfomanager.model.HouseInfo">
         <result column="nature" property="nature"></result>
         <result column="use" property="use"></result>
         <result column="site" property="site"></result>
@@ -357,7 +357,7 @@
             WHERE t.`user_id` = #{userId}
     </select>
     <!--指派网点-->
-    <select id="getAdminOrganizationName" resultMap="userListInfo">
+    <!--<select id="getAdminOrganizationName" resultMap="userListInfo">
          select org.organizationName from organizationInfo org
     </select>
     <select id="getUserOrganizationName" parameterType="java.lang.Long" resultMap="userListInfo">
@@ -366,7 +366,8 @@
           left outer join organizationInfo org on u.organizationId=org.organizationId
           where u.userId=#{userId}
     </select>
-    <!--删除-->
+
+
     <delete id="deleteInfo" parameterType="java.lang.Long">
            delete from baseinfo b
            left outer join familymemberinfo fm on b.recordId=fm.recordId
@@ -380,6 +381,6 @@
            left outer join financialassets fin on fas.assetsId=fin.assetsId
            where b.recordId=#{recordId}
     </delete>
-
+    -->
 
 </mapper>

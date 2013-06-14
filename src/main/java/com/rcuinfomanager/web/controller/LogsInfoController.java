@@ -24,20 +24,35 @@ public class LogsInfoController {
         SessionUser sessionUser = userSessionContext.getSessionUser();
         map.put("firstLogin",sessionUser.isFirstLogon());
         map.put("displayUserName", sessionUser.getDisplayUserName());
-        if(!Strings.isNullOrEmpty(beginTime) && !Strings.isNullOrEmpty(endTime) && !Strings.isNullOrEmpty(userName)){
-            map.put("logsInfoList",logsInfoService.getLogsAllList(beginTime, endTime, userName, sessionUser.getId()));
-        }else if(!Strings.isNullOrEmpty(beginTime) && !Strings.isNullOrEmpty(endTime)){
-            map.put("logsInfoList",logsInfoService.getLogsBeginAndEndTimeList(beginTime, endTime, sessionUser.getId()));
-        }else if(!Strings.isNullOrEmpty(beginTime)){
-            map.put("logsInfoList",logsInfoService.getLogsBeginTimeList(beginTime, sessionUser.getId()));
-        }else if(!Strings.isNullOrEmpty(endTime)){
-            map.put("logsInfoList",logsInfoService.getLogsEndTimeList(endTime, sessionUser.getId()));
-        }else if(!Strings.isNullOrEmpty(userName)){
-            map.put("logsInfoList",logsInfoService.getLogsUNameList(userName, sessionUser.getId()));
-        }else{
-            map.put("logsInfoList",logsInfoService.getLogsInfoList(sessionUser.getId()));
+        if(sessionUser.getId()==1){
+            if(!Strings.isNullOrEmpty(beginTime) && !Strings.isNullOrEmpty(endTime) && !Strings.isNullOrEmpty(userName)){
+                map.put("logsInfoList",logsInfoService.getLogsAllByAdminList(beginTime, endTime, userName));
+            }else if(!Strings.isNullOrEmpty(beginTime) && !Strings.isNullOrEmpty(endTime)){
+                map.put("logsInfoList",logsInfoService.getLogsBeginAndEndTimeByAdminList(beginTime, endTime));
+            }else if(!Strings.isNullOrEmpty(beginTime)){
+                map.put("logsInfoList",logsInfoService.getLogsBeginTimeByAdminList(beginTime));
+            }else if(!Strings.isNullOrEmpty(endTime)){
+                map.put("logsInfoList",logsInfoService.getLogsEndTimeByAdminList(endTime));
+            }else if(!Strings.isNullOrEmpty(userName)){
+                map.put("logsInfoList",logsInfoService.getLogsUNameByAdminList(userName));
+            }else{
+                map.put("logsInfoList",logsInfoService.getLogsInfoByAdminList());
+            }
+        }else {
+            if(!Strings.isNullOrEmpty(beginTime) && !Strings.isNullOrEmpty(endTime) && !Strings.isNullOrEmpty(userName)){
+                map.put("logsInfoList",logsInfoService.getLogsAllList(beginTime, endTime, userName, sessionUser.getId()));
+            }else if(!Strings.isNullOrEmpty(beginTime) && !Strings.isNullOrEmpty(endTime)){
+                map.put("logsInfoList",logsInfoService.getLogsBeginAndEndTimeList(beginTime, endTime, sessionUser.getId()));
+            }else if(!Strings.isNullOrEmpty(beginTime)){
+                map.put("logsInfoList",logsInfoService.getLogsBeginTimeList(beginTime, sessionUser.getId()));
+            }else if(!Strings.isNullOrEmpty(endTime)){
+                map.put("logsInfoList",logsInfoService.getLogsEndTimeList(endTime, sessionUser.getId()));
+            }else if(!Strings.isNullOrEmpty(userName)){
+                map.put("logsInfoList",logsInfoService.getLogsUNameList(userName, sessionUser.getId()));
+            }else{
+                map.put("logsInfoList",logsInfoService.getLogsInfoByNormalList(sessionUser.getId()));
+            }
         }
-
         return "logsystem/systemLog";
     }
 

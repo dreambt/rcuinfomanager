@@ -1,7 +1,5 @@
 package com.rcuinfomanager.webservice.model;
 
-import java.util.List;
-
 public class WebServiceResponseData {
 
     private int status;

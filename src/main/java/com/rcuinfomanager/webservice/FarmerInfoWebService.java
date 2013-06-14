@@ -5,16 +5,20 @@ import com.rcuinfomanager.model.User;
 import com.rcuinfomanager.service.BaseInfoService;
 import com.rcuinfomanager.util.JsonParser;
 import com.rcuinfomanager.webservice.model.AllColumnInfo;
+import com.rcuinfomanager.webservice.model.WebResponseData;
 import com.rcuinfomanager.webservice.model.WebServiceResponseData;
 import com.security.mdfive.MDFive;
+import net.sf.json.JSONArray;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.type.TypeReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/api/1")
@@ -47,5 +51,22 @@ public class FarmerInfoWebService {
         }
 
         return webServiceResponseData;
+    }
+
+    @RequestMapping(value="/baseinfo/uploadData", method = RequestMethod.POST)
+    public @ResponseBody WebResponseData uploadBaseInfo(@RequestParam("data") String rawData) {
+
+        WebResponseData webResponseData = new WebResponseData(1);
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            List<AllColumnInfo> allColumnInfoList = mapper.readValue(rawData, new TypeReference<List<AllColumnInfo>>() {});
+            if (allColumnInfoList != null && !allColumnInfoList.isEmpty()) {
+                //save it to db
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return webResponseData;
     }
 }

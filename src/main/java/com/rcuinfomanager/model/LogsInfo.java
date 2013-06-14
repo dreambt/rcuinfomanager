@@ -6,14 +6,14 @@ public class LogsInfo {
     private String operation;
     private String userName;
 
-    public LogsInfo(){
+    public LogsInfo() {
 
     }
 
-    public LogsInfo(String operatedTime,long userId,String operation){
-        this.operatedTime=operatedTime;
-        this.userId=userId;
-        this.operation=operation;
+    public LogsInfo(String operatedTime, long userId, String operation) {
+        this.operatedTime = operatedTime;
+        this.userId = userId;
+        this.operation = operation;
     }
 
     public String getOperation() {

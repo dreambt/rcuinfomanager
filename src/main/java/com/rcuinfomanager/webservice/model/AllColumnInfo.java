@@ -6,7 +6,6 @@ import com.rcuinfomanager.model.HouseInfo;
 import com.rcuinfomanager.model.LandInfo;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 public class AllColumnInfo implements Serializable {

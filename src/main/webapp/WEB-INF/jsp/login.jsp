@@ -5,8 +5,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>农户建档现场电子信息采集系统</title>
-    <link href="../css/login.css" rel="stylesheet" type="text/css"/>
-    <script language="javascript" type="text/javascript" src="../jquery/jquery-1.7.2.min.js"></script>
+    <link href="/asserts/css/login.css" rel="stylesheet" type="text/css"/>
+    <script language="javascript" type="text/javascript" src="/asserts/js/jquery-1.7.2.min.js"></script>
     <script type="text/javascript">
         $(function () {
             $('.login_tj_btn').click(function () {
@@ -29,11 +29,10 @@
         <form:form action="/login.html" commandName="loginForm">
             <label>用户名：</label><form:input path="userName" class="ipt"/>
             <label>密码：</label><form:password path="password" class="ipt"/>
-            <input type="submit" class="login_tj_btn"/>
+            <input type="submit" value="登陆" />
         </form:form>
     </div>
-    <div class="cr">CopyRight 2013-2014 <a href="http://www.fjhaxh.com/" target="_blank">惠安县农村信用合作联社</a> & 上海广盈 <a
-            href="" target="_blank">BODING TEAM</a></div>
+    <div class="cr">CopyRight 2013-2014 <a href="http://www.fjhaxh.com/" target="_blank">惠安县农村信用合作联社</a> & 上海广盈 </div>
 </div>
 </body>
 </html>

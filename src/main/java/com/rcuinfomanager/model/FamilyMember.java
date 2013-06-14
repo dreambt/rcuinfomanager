@@ -7,6 +7,7 @@ public class FamilyMember {
     private String address;
     private String profession;
     private String familyMemberCerNum;
+    private String cerNum;
 
     public String getFamilyMemberName() {
         return familyMemberName;
@@ -54,5 +55,13 @@ public class FamilyMember {
 
     public void setFamilyMemberCerNum(String familyMemberCerNum) {
         this.familyMemberCerNum = familyMemberCerNum;
+    }
+
+    public String getCerNum() {
+        return cerNum;
+    }
+
+    public void setCerNum(String cerNum) {
+        this.cerNum = cerNum;
     }
 }

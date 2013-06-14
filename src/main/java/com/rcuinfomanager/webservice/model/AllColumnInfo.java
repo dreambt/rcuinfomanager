@@ -1,17 +1,27 @@
 package com.rcuinfomanager.webservice.model;
 
-import com.rcuinfomanager.model.FamilyMemberInfo;
+import com.rcuinfomanager.model.CarsInfo;
+import com.rcuinfomanager.model.FamilyMember;
+import com.rcuinfomanager.model.HouseInfo;
+import com.rcuinfomanager.model.LandInfo;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-public class AllColumnInfo {
+public class AllColumnInfo implements Serializable {
 
-    private int recordId;
+    private static final long serialVersionUID = 1L;
+
+    private long recordId;
+    private String userName;
+    private String village;
     private String customerName;
     private String cerNum;
     private int gender;
     private int isFarmer;
     private String cerType;
+    private String custType;
     private String image;
     private String cerValidityFrom;
     private String cerValidityTo;
@@ -46,7 +56,7 @@ public class AllColumnInfo {
     private String yearIncome;
     private String workSitu;
     private String unitProp;
-    private String unitIndustry;
+    private String unitIndustryId;
     private String unitIndustryName;
     private String department;
     private String unitType;
@@ -55,50 +65,35 @@ public class AllColumnInfo {
     private String workYears;
     private String workTitle;
 
-    private float fmAllIncome;
-    private float fmExpenses;
+    private double fmAllIncome;
+    private double fmExpenses;
     private String fmIncomeSrc;
-    private float fmPerIncome;
-    private float fmOtherMemberIn;
+    private double fmPerIncome;
+    private double fmOtherMemberIn;
     private String fmExpensesProj;
     private String fmInOutRatio;
 
-    private float fmAllAssets;
+    private double fmAllAssets;
     private String mainAssets;
 
-    private String houseProp;
-    private String housePurpose;
-    private String houseSite;
-    private String houseStructure;
-    private int houseFloorNum;
-    private String houseUsedSitu;
-    private String houseArea;
-    private int houseIsInstallment;
-    private String houseHasCredentials;
 
-    private String landArea;
-    private String landWorth;
-    private String landProperty;
-    private String landType;
-    private String landUsedSitu;
-    private String landIsMoneyClear;
+    private List<HouseInfo> houseInfos;
 
-    private String carsInfo;
-    private String carsWorth;
-    private int carsIsInstallment;
-    private String carsUsingInfo;
+    private List<LandInfo> landInfos;
+
+    private List<CarsInfo> carInfos;
 
     private String financialInfo;
     private String financialDepositOurBank;
     private String financialDepositOtherBank;
 
-    private String fmIncurDebts;
-    private String fmIncurOurBankDebts;
-    private String fmIncurOtherBankDebts;
+    private int fmIncurDebts;
+    private int fmIncurOurBankDebts;
+    private int fmIncurOtherBankDebts;
     private String fmIncurLoanPurpose;
     private String fmIncurLoanShap;
 
-    private List<FamilyMemberInfo> familyMemberInfos;
+    private List<FamilyMember> familyMembers;
 
     private String finaServiceUsedProduct;
     private int finaServiceIsMoneyNeed;
@@ -119,12 +114,28 @@ public class AllColumnInfo {
     private String custManagerOtherBankRecord;
     private String custManagerHouseToMoney;
 
-    public int getRecordId() {
+    public long getRecordId() {
         return recordId;
     }
 
-    public void setRecordId(int recordId) {
+    public void setRecordId(long recordId) {
         this.recordId = recordId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getVillage() {
+        return village;
+    }
+
+    public void setVillage(String village) {
+        this.village = village;
     }
 
     public String getCustomerName() {
@@ -165,6 +176,14 @@ public class AllColumnInfo {
 
     public void setCerType(String cerType) {
         this.cerType = cerType;
+    }
+
+    public String getCustType() {
+        return custType;
+    }
+
+    public void setCustType(String custType) {
+        this.custType = custType;
     }
 
     public String getImage() {
@@ -439,12 +458,12 @@ public class AllColumnInfo {
         this.unitProp = unitProp;
     }
 
-    public String getUnitIndustry() {
-        return unitIndustry;
+    public String getUnitIndustryId() {
+        return unitIndustryId;
     }
 
-    public void setUnitIndustry(String unitIndustry) {
-        this.unitIndustry = unitIndustry;
+    public void setUnitIndustryId(String unitIndustryId) {
+        this.unitIndustryId = unitIndustryId;
     }
 
     public String getUnitIndustryName() {
@@ -503,19 +522,19 @@ public class AllColumnInfo {
         this.workTitle = workTitle;
     }
 
-    public float getFmAllIncome() {
+    public double getFmAllIncome() {
         return fmAllIncome;
     }
 
-    public void setFmAllIncome(float fmAllIncome) {
+    public void setFmAllIncome(double fmAllIncome) {
         this.fmAllIncome = fmAllIncome;
     }
 
-    public float getFmExpenses() {
+    public double getFmExpenses() {
         return fmExpenses;
     }
 
-    public void setFmExpenses(float fmExpenses) {
+    public void setFmExpenses(double fmExpenses) {
         this.fmExpenses = fmExpenses;
     }
 
@@ -527,19 +546,19 @@ public class AllColumnInfo {
         this.fmIncomeSrc = fmIncomeSrc;
     }
 
-    public float getFmPerIncome() {
+    public double getFmPerIncome() {
         return fmPerIncome;
     }
 
-    public void setFmPerIncome(float fmPerIncome) {
+    public void setFmPerIncome(double fmPerIncome) {
         this.fmPerIncome = fmPerIncome;
     }
 
-    public float getFmOtherMemberIn() {
+    public double getFmOtherMemberIn() {
         return fmOtherMemberIn;
     }
 
-    public void setFmOtherMemberIn(float fmOtherMemberIn) {
+    public void setFmOtherMemberIn(double fmOtherMemberIn) {
         this.fmOtherMemberIn = fmOtherMemberIn;
     }
 
@@ -559,11 +578,11 @@ public class AllColumnInfo {
         this.fmInOutRatio = fmInOutRatio;
     }
 
-    public float getFmAllAssets() {
+    public double getFmAllAssets() {
         return fmAllAssets;
     }
 
-    public void setFmAllAssets(float fmAllAssets) {
+    public void setFmAllAssets(double fmAllAssets) {
         this.fmAllAssets = fmAllAssets;
     }
 
@@ -575,156 +594,28 @@ public class AllColumnInfo {
         this.mainAssets = mainAssets;
     }
 
-    public String getHouseProp() {
-        return houseProp;
+    public List<HouseInfo> getHouseInfos() {
+        return houseInfos;
     }
 
-    public void setHouseProp(String houseProp) {
-        this.houseProp = houseProp;
+    public void setHouseInfos(List<HouseInfo> houseInfos) {
+        this.houseInfos = houseInfos;
     }
 
-    public String getHousePurpose() {
-        return housePurpose;
+    public List<LandInfo> getLandInfos() {
+        return landInfos;
     }
 
-    public void setHousePurpose(String housePurpose) {
-        this.housePurpose = housePurpose;
+    public void setLandInfos(List<LandInfo> landInfos) {
+        this.landInfos = landInfos;
     }
 
-    public String getHouseSite() {
-        return houseSite;
+    public List<CarsInfo> getCarInfos() {
+        return carInfos;
     }
 
-    public void setHouseSite(String houseSite) {
-        this.houseSite = houseSite;
-    }
-
-    public String getHouseStructure() {
-        return houseStructure;
-    }
-
-    public void setHouseStructure(String houseStructure) {
-        this.houseStructure = houseStructure;
-    }
-
-    public int getHouseFloorNum() {
-        return houseFloorNum;
-    }
-
-    public void setHouseFloorNum(int houseFloorNum) {
-        this.houseFloorNum = houseFloorNum;
-    }
-
-    public String getHouseUsedSitu() {
-        return houseUsedSitu;
-    }
-
-    public void setHouseUsedSitu(String houseUsedSitu) {
-        this.houseUsedSitu = houseUsedSitu;
-    }
-
-    public String getHouseArea() {
-        return houseArea;
-    }
-
-    public void setHouseArea(String houseArea) {
-        this.houseArea = houseArea;
-    }
-
-    public int getHouseIsInstallment() {
-        return houseIsInstallment;
-    }
-
-    public void setHouseIsInstallment(int houseIsInstallment) {
-        this.houseIsInstallment = houseIsInstallment;
-    }
-
-    public String getHouseHasCredentials() {
-        return houseHasCredentials;
-    }
-
-    public void setHouseHasCredentials(String houseHasCredentials) {
-        this.houseHasCredentials = houseHasCredentials;
-    }
-
-    public String getLandArea() {
-        return landArea;
-    }
-
-    public void setLandArea(String landArea) {
-        this.landArea = landArea;
-    }
-
-    public String getLandWorth() {
-        return landWorth;
-    }
-
-    public void setLandWorth(String landWorth) {
-        this.landWorth = landWorth;
-    }
-
-    public String getLandProperty() {
-        return landProperty;
-    }
-
-    public void setLandProperty(String landProperty) {
-        this.landProperty = landProperty;
-    }
-
-    public String getLandType() {
-        return landType;
-    }
-
-    public void setLandType(String landType) {
-        this.landType = landType;
-    }
-
-    public String getLandUsedSitu() {
-        return landUsedSitu;
-    }
-
-    public void setLandUsedSitu(String landUsedSitu) {
-        this.landUsedSitu = landUsedSitu;
-    }
-
-    public String getLandIsMoneyClear() {
-        return landIsMoneyClear;
-    }
-
-    public void setLandIsMoneyClear(String landIsMoneyClear) {
-        this.landIsMoneyClear = landIsMoneyClear;
-    }
-
-    public String getCarsInfo() {
-        return carsInfo;
-    }
-
-    public void setCarsInfo(String carsInfo) {
-        this.carsInfo = carsInfo;
-    }
-
-    public String getCarsWorth() {
-        return carsWorth;
-    }
-
-    public void setCarsWorth(String carsWorth) {
-        this.carsWorth = carsWorth;
-    }
-
-    public int getCarsIsInstallment() {
-        return carsIsInstallment;
-    }
-
-    public void setCarsIsInstallment(int carsIsInstallment) {
-        this.carsIsInstallment = carsIsInstallment;
-    }
-
-    public String getCarsUsingInfo() {
-        return carsUsingInfo;
-    }
-
-    public void setCarsUsingInfo(String carsUsingInfo) {
-        this.carsUsingInfo = carsUsingInfo;
+    public void setCarInfos(List<CarsInfo> carInfos) {
+        this.carInfos = carInfos;
     }
 
     public String getFinancialInfo() {
@@ -751,27 +642,27 @@ public class AllColumnInfo {
         this.financialDepositOtherBank = financialDepositOtherBank;
     }
 
-    public String getFmIncurDebts() {
+    public int getFmIncurDebts() {
         return fmIncurDebts;
     }
 
-    public void setFmIncurDebts(String fmIncurDebts) {
+    public void setFmIncurDebts(int fmIncurDebts) {
         this.fmIncurDebts = fmIncurDebts;
     }
 
-    public String getFmIncurOurBankDebts() {
+    public int getFmIncurOurBankDebts() {
         return fmIncurOurBankDebts;
     }
 
-    public void setFmIncurOurBankDebts(String fmIncurOurBankDebts) {
+    public void setFmIncurOurBankDebts(int fmIncurOurBankDebts) {
         this.fmIncurOurBankDebts = fmIncurOurBankDebts;
     }
 
-    public String getFmIncurOtherBankDebts() {
+    public int getFmIncurOtherBankDebts() {
         return fmIncurOtherBankDebts;
     }
 
-    public void setFmIncurOtherBankDebts(String fmIncurOtherBankDebts) {
+    public void setFmIncurOtherBankDebts(int fmIncurOtherBankDebts) {
         this.fmIncurOtherBankDebts = fmIncurOtherBankDebts;
     }
 
@@ -791,12 +682,12 @@ public class AllColumnInfo {
         this.fmIncurLoanShap = fmIncurLoanShap;
     }
 
-    public List<FamilyMemberInfo> getFamilyMemberInfos() {
-        return familyMemberInfos;
+    public List<FamilyMember> getFamilyMembers() {
+        return familyMembers;
     }
 
-    public void setFamilyMemberInfos(List<FamilyMemberInfo> familyMemberInfos) {
-        this.familyMemberInfos = familyMemberInfos;
+    public void setFamilyMembers(List<FamilyMember> familyMembers) {
+        this.familyMembers = familyMembers;
     }
 
     public String getFinaServiceUsedProduct() {
@@ -934,4 +825,5 @@ public class AllColumnInfo {
     public void setCustManagerHouseToMoney(String custManagerHouseToMoney) {
         this.custManagerHouseToMoney = custManagerHouseToMoney;
     }
+
 }

@@ -1,6 +1,6 @@
 package com.rcuinfomanager.model;
 
-public class HousePropertyInfo {
+public class HouseInfo {
     private String nature;
     private String purpose;
     private String site;

@@ -51,10 +51,4 @@ public class ImportFarmerInfoService {
         csvReader.close();
     }
 
-   /* public static void main(String[] argus) throws IOException {
-
-        ImportFarmerInfoService importFarmerInfoService = new ImportFarmerInfoService();
-        importFarmerInfoService.importFromCSV("G:\\rcuinfomanager\\src\\test\\resources\\1.csv");
-    }*/
-
 }

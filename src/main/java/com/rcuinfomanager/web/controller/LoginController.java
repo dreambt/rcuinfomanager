@@ -5,6 +5,7 @@ import com.rcuinfomanager.service.UserService;
 import com.rcuinfomanager.util.CookieUtil;
 import com.rcuinfomanager.util.RequestUtils;
 import com.rcuinfomanager.web.form.LoginForm;
+import com.security.mdfive.MDFive;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -17,6 +18,7 @@ import java.util.Map;
 
 /**
  * @author 王文庭(xorbytes@qq.com)
+ *
  */
 
 @Controller
@@ -34,7 +36,7 @@ public class LoginController extends BaseController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String processForm(HttpServletRequest request, HttpServletResponse response, LoginForm loginForm, BindingResult result, Map model) {
+    public String processForm(HttpServletRequest request, HttpServletResponse response,LoginForm loginForm, BindingResult result, Map model) {
         if (result.hasErrors()) {
             return "login";
         }
@@ -43,7 +45,7 @@ public class LoginController extends BaseController {
         String logonIP = RequestUtils.getIpAddress(request);
         loginForm = (LoginForm) model.get("loginForm");
 
-        LogonUser logonUser = new LogonUser(loginForm.getUserName().trim(), loginForm.getPassword().trim(), logonIP);
+        LogonUser logonUser = new LogonUser(loginForm.getUserName().trim(), MDFive.getEncryptPwd(loginForm.getPassword().trim()), logonIP);
 
         //如果登录正确，将创建用户会话并绑定到UserSessionContextHolder中
         logonResult = userService.logon(logonUser);
@@ -53,7 +55,7 @@ public class LoginController extends BaseController {
         if (logonResult.isSuccessful()) {//登录成功
             CookieUtil.setUserInfoCookies(response);
             return "redirect:/index";
-        } else {//用户密码有错误
+        }  else {//用户密码有错误
             model.put("msg", "用户或密码错误");
             return "login";
         }

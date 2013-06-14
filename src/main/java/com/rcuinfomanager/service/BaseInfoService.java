@@ -12,64 +12,69 @@ import java.util.List;
 public class BaseInfoService {
     @Autowired
     private BaseInfoDao baseInfoDao;
+
     //admin
-    public List<CustomerListInfo> getAllFamilyInfoList(){
+    public List<CustomerListInfo> getAllFamilyInfoList() {
         return baseInfoDao.queryAdminByBaseInfo();
     }
+
     //Normal
-    public List<CustomerListInfo> getFamilyInfoList(int userId){
+    public List<CustomerListInfo> getFamilyInfoList(int userId) {
         return baseInfoDao.queryNormalByBaseInfo(userId);
     }
 
     //显示客户个人信息
-    public List<CustomerListInfo> getPersonBasicInfo(Long recordId){
+    public List<CustomerListInfo> getPersonBasicInfo(Long recordId) {
         return baseInfoDao.getPersonBasicInfo(recordId);
     }
 
     // 获取客户的基本信息
-    public List<CusBaseInfo> getCusBasicInfo(Long recordId){
+    public List<CusBaseInfo> getCusBasicInfo(Long recordId) {
         return baseInfoDao.getCusBasicInfo(recordId);
     }
 
     //获取家庭收支情况
-    public List<IncomeExpenses> getIncomeExpenses(Long recordId){
+    public List<IncomeExpenses> getIncomeExpenses(Long recordId) {
         return baseInfoDao.getIncomeExpenses(recordId);
     }
 
     //获取家庭资产情况
-    public List<FamilyAssets> getFamilyAssets(Long recordId){
+    public List<FamilyAssets> getFamilyAssets(Long recordId) {
         return baseInfoDao.getFamilyAssets(recordId);
     }
 
     //房产
-    public List<HousePropertyInfo> getHousePropertyInfo(Long recordId){
+    public List<HouseInfo> getHousePropertyInfo(Long recordId){
         return baseInfoDao.getHousePropertyInfo(recordId);
     }
 
     //土地
-    public List<LandInfo> getLandInfo(Long recordId){
+    public List<LandInfo> getLandInfo(Long recordId) {
         return baseInfoDao.getLandInfo(recordId);
     }
 
     //车辆
-    public List<CarsInfo> getCarsInfo(Long recordId){
+    public List<CarsInfo> getCarsInfo(Long recordId) {
         return baseInfoDao.getCarsInfo(recordId);
     }
 
     //金融资产信息
-    public List<FinancialAssets> getFinancialAssets(Long recordId){
+    public List<FinancialAssets> getFinancialAssets(Long recordId) {
         return baseInfoDao.getFinancialAssets(recordId);
     }
 
     //负责情况信息
-    public List<FamilyIncurDebts> getFamilyIncurDebts(Long recordId){
+    public List<FamilyIncurDebts> getFamilyIncurDebts(Long recordId) {
         return baseInfoDao.getFamilyIncurDebts(recordId);
     }
 
     //获取家庭成员信息
-    public List<FamilyMember> getFamilyMember(Long recordId){
+    public List<FamilyMember> getFamilyMember(Long recordId) {
         return baseInfoDao.getFamilyMember(recordId);
     }
+
+
+
 
     /*//选择网点
     public List<CustomerListInfo> getAdminOrganizationName(){
@@ -91,6 +96,21 @@ public class BaseInfoService {
 
 
     public List<AllColumnInfo> queryAllColumnInfoList(long userId) {
+        List<AllColumnInfo> allColumnInfos = baseInfoDao.queryAppointInfoByUserId(userId);
+
+        if (allColumnInfos != null && !allColumnInfos.isEmpty()) {
+            for (AllColumnInfo allColumnInfo : allColumnInfos) {
+                List<HouseInfo> houseInfoList = baseInfoDao.getHousePropertyInfo(allColumnInfo.getRecordId());
+                allColumnInfo.setHouseInfos(houseInfoList);
+                List<CarsInfo> carsInfoList = baseInfoDao.getCarsInfo(allColumnInfo.getRecordId());
+                allColumnInfo.setCarInfos(carsInfoList);
+                List<LandInfo> landInfoList = baseInfoDao.getLandInfo(allColumnInfo.getRecordId());
+                allColumnInfo.setLandInfos(landInfoList);
+                List<FamilyMember> familyMemberList = baseInfoDao.getFamilyMember(allColumnInfo.getRecordId());
+                allColumnInfo.setFamilyMembers(familyMemberList);
+            }
+        }
+
         return baseInfoDao.queryAppointInfoByUserId(userId);
     }
 

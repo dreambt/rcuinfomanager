@@ -8,6 +8,7 @@ import com.rcuinfomanager.session.UserSessionContext;
 import com.rcuinfomanager.session.UserSessionContextHolder;
 import com.rcuinfomanager.session.UserSessionContextManager;
 import com.rcuinfomanager.util.CodeGenerator;
+import com.security.mdfive.MDFive;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -50,7 +51,8 @@ public class UserService {
         }
 
         //密码错误
-        if (!checkUserValid(logonUser.getUserName().toUpperCase(), logonUser.getPassword())) {
+        String pwdMd5 = MDFive.getEncryptPwd(user.getPassword());
+        if (!pwdMd5.equals(logonUser.getPassword())) {
             return LogonResult.ERROR_PASSWORD;
         }
 

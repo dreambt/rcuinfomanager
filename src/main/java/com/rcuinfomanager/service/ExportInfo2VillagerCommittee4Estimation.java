@@ -1,41 +1,60 @@
 package com.rcuinfomanager.service;
 
+import com.rcuinfomanager.model.BaseInfo;
+import com.sun.deploy.net.HttpResponse;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+import org.springframework.core.io.ClassPathResource;
 
-import java.io.File;
-import java.io.FileInputStream;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.util.List;
 
 public class ExportInfo2VillagerCommittee4Estimation {
 
-    public void readTemplateAndExport(File templateFile) {
-        try {
+    private final static String templateFileName = "template.xls";
 
-            POIFSFileSystem fs = new POIFSFileSystem(new FileInputStream(templateFile));
+    public void readTemplateAndExport(List<BaseInfo> baseInfoList,HttpServletResponse response) {
+        ServletOutputStream outputStream = null;
+        try {
+            ClassPathResource cpr = new ClassPathResource(templateFileName);
+            POIFSFileSystem fs = new POIFSFileSystem(cpr.getInputStream());
             HSSFWorkbook wb = new HSSFWorkbook(fs);
             HSSFSheet sheet = wb.getSheetAt(0);
 
-            //获取单元格内容
-            HSSFRow row = sheet.getRow(1);
-            HSSFCell cell = row.getCell(1);
-            String str = cell.getStringCellValue();
+            for (int i = 1; i <= baseInfoList.size(); i++) {
+                BaseInfo baseInfo = baseInfoList.get(i-1);
+                HSSFRow row = sheet.getRow(i);
+                HSSFCell cell1 = row.createCell(0);
+                cell1.setCellType(HSSFCell.CELL_TYPE_STRING);
+                cell1.setCellValue(baseInfo.getCustomerName());
+                HSSFCell cell2 = row.createCell(1);
+                cell2.setCellType(HSSFCell.CELL_TYPE_STRING);
+                cell2.setCellValue(baseInfo.getCerNum());
+                HSSFCell cell3 = row.createCell(2);
+                cell3.setCellType(HSSFCell.CELL_TYPE_STRING);
+                cell3.setCellValue(baseInfo.getAddress());
+            }
 
-            //替换单元格内容
-            str = str.replace("value", "replace");
-
-            //写入单元格内容
-            cell.setCellType(HSSFCell.CELL_TYPE_STRING);
-            cell.setCellValue(str);
-            // 输出文件
-            //FileOutputStream fileOut = new FileOutputStream();
-            //wb.write(fileOut);
-            //fileOut.close();
-
+            outputStream = response.getOutputStream();
+            response.setContentType("application/vnd.ms-excel");
+            response.addHeader("content-disposition",
+                    "attachment; filename=" + "村委会评价表.xls");
+            wb.write(outputStream);
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            if (outputStream != null) {
+                try {
+                    outputStream.close();
+                } catch (IOException e) {
+                    //just ignored.
+                }
+            }
         }
     }
 }

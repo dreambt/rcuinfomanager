@@ -4,6 +4,7 @@ import com.google.common.base.Strings;
 import com.rcuinfomanager.dao.UserDao;
 import com.rcuinfomanager.model.User;
 import com.rcuinfomanager.webservice.model.AuthResponseData;
+import com.security.mdfive.MDFive;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,7 +32,9 @@ public class AuthWebService {
             return new AuthResponseData(1);
         }
 
-        if (!password.equals(user.getPassword())) {
+        String pwdMD5 = MDFive.getEncryptPwd(user.getPassword());
+
+        if (!password.equals(pwdMD5)) {
             return new AuthResponseData(1);
         }
 
@@ -53,7 +56,8 @@ public class AuthWebService {
 
         User user = userDao.getUserByUserName(username);
         //用户名不存在
-        if (user == null || !oldPassword.equals(user.getPassword())) {
+        String pwdMD5 = MDFive.getEncryptPwd(user.getPassword());
+        if (user == null || !oldPassword.equals(pwdMD5)) {
             return new AuthResponseData(1);
         }
 

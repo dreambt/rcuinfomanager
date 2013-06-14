@@ -14,27 +14,27 @@
     </resultMap>
 
     <!-- //管理员获取数据列表-->
-    <select id="queryAdminByBaseInfo"  resultMap="userListInfo">
+    <select id="queryAdminByBaseInfo" resultMap="userListInfo">
         select b.recordId,b.customerName,b.telephone,b.submitTime,org.organizationName,u.displayUserName,b.state
-          from baseinfo b
-          left outer join usersinfo u  on b.userName=u.userName
-          left outer join organizationInfo org on u.organizationId=org.organizationId
+        from baseinfo b
+        left outer join usersinfo u on b.userName=u.userName
+        left outer join organizationInfo org on u.organizationId=org.organizationId
     </select>
     <!-- 普通用户获取数据列表-->
-    <select id="queryNormalByBaseInfo"  parameterType="java.lang.Integer" resultMap="userListInfo">
+    <select id="queryNormalByBaseInfo" parameterType="java.lang.Integer" resultMap="userListInfo">
         select b.recordId,b.customerName,b.telephone,b.submitTime,org.organizationName,u.displayUserName,b.state
-          from baseinfo b
-          left outer join usersinfo u  on b.userName=u.userName
-          left outer join organizationInfo org on u.organizationId=org.organizationId
-          where u.userId=#{userId}
+        from baseinfo b
+        left outer join usersinfo u on b.userName=u.userName
+        left outer join organizationInfo org on u.organizationId=org.organizationId
+        where u.userId=#{userId}
     </select>
     <!--显示客户个人信息-->
     <select id="getPersonBasicInfo" parameterType="java.lang.Long" resultMap="userListInfo">
-          select b.recordId,b.customerName,b.telephone,org.organizationName,u.displayUserName
-          from baseinfo b
-          left outer join usersinfo u  on b.userName=u.userName
-          left outer join organizationInfo org on u.organizationId=org.organizationId
-          where b.recordId=#{recordId}
+        select b.recordId,b.customerName,b.telephone,org.organizationName,u.displayUserName
+        from baseinfo b
+        left outer join usersinfo u on b.userName=u.userName
+        left outer join organizationInfo org on u.organizationId=org.organizationId
+        where b.recordId=#{recordId}
     </select>
 
     <resultMap id="cusBasicMap" type="com.rcuinfomanager.model.CusBaseInfo">
@@ -202,9 +202,10 @@
         <result column="address" property="address"></result>
         <result column="profession" property="profession"></result>
         <result column="familyMemberCerNum" property="familyMemberCerNum"></result>
+        <result column="cerNum" property="cerNum"></result>
     </resultMap>
     <select id="getFamilyMember" parameterType="java.lang.Long" resultMap="familyMemberMap">
-        select f.familyMemberName,f.yearIncome,f.leaderRelation,f.address,f.profession,f.familyMemberCerNum
+        select f.familyMemberName,f.yearIncome,f.leaderRelation,f.address,f.profession,f.familyMemberCerNum, f.cerNum
         from familymemberinfo f where f.recordId=#{recordId}
     </select>
 
@@ -215,6 +216,10 @@
         <result column="depositOtherBank" property="depositOtherBank"></result>
     </resultMap>
     <select id="getFinancialAssets" parameterType="java.lang.Long" resultMap="financialAssetsMap">
+         select fin.financialInfo,fin.depositOurBank,fin.depositOtherBank
+         from familyassets fa
+           left outer join financialAssets fin on fa.assetsId = fin.assetsId
+           where fa.recordId=#{recordId}
          select fin.financialInfo,fin.depositOurBank,fin.depositOtherBank
          from familyassets fa
            left outer join financialAssets fin on fa.assetsId = fin.assetsId
@@ -252,8 +257,10 @@
         <result column="gender" property="gender"></result>
         <result column="isFarmer" property="isFarmer"></result>
         <result column="cerType" property="cerType"></result>
+        <result column="custType" property="customerType"></result>
         <result column="cerValidityFrom" property="cerValidityFrom"></result>
         <result column="cerValidityTo" property="cerValidityTo"></result>
+        <result column="birthday" property="birthday"></result>
         <result column="nationality" property="nationality"></result>
         <result column="isHavePassport" property="isHavePassport"></result>
         <result column="nation" property="nation"></result>
@@ -284,7 +291,7 @@
         <result column="yearIncome" property="yearIncome"></result>
         <result column="workSitu" property="workSitu"></result>
         <result column="unitProp" property="unitProp"></result>
-        <result column="unitIndustry" property="unitIndustry"></result>
+        <result column="unitIndustryId" property="unitIndustryId"></result>
         <result column="unitIndustryName" property="unitIndustryName"></result>
         <result column="department" property="department"></result>
         <result column="unitType" property="unitType"></result>
@@ -292,12 +299,51 @@
         <result column="annualWageIncome" property="annualWageIncome"></result>
         <result column="workYears" property="workYears"></result>
         <result column="workTitle" property="workTitle"></result>
+
+        <result column="fmAllIncome" property="fmAllIncome"></result>
+        <result column="fmExpenses" property="fmExpenses"></result>
+        <result column="fmincomeSrc" property="incomeSrc"></result>
+        <result column="fmPerIncome" property="perIncome"></result>
+        <result column="fmOtherMemberIn" property="fmOtherMemberIn"></result>
+        <result column="fmExpensesProj" property="fmExpensesProj"></result>
+        <result column="fmInOutRatio" property="fmInOutRatio"></result>
+
+        <result column="fmAllAssets" property="fmAllAssets"></result>
+        <result column="mainAssets" property="mainAssets"></result>
+
+        <result column="financialInfo" property="financialInfo"></result>
+        <result column="financialDepositOurBank" property="financialDepositOurBank"></result>
+        <result column="financialDepositOtherBank" property="financialDepositOtherBank"></result>
+
+        <result column="fmIncurDebts" property="fmIncurDebts"></result>
+        <result column="fmIncurOurBankDebts" property="fmIncurOurBankDebts"></result>
+        <result column="fmIncurOtherBankDebts" property="fmIncurOtherBankDebts"></result>
+        <result column="fmIncurLoanPurpose" property="fmIncurLoanPurpose"></result>
+        <result column="fmIncurLoanShap" property="fmIncurLoanShap"></result>
+
+        <result column="finaServiceUsedProduct" property="UsedProduct"></result>
+        <result column="finaServiceIsMoneyNeed" property="isMoneyNeed"></result>
+        <result column="finaServiceMoneyTodo" property="moneyTodo"></result>
+        <result column="finaServiceMoneyCount" property="moneyCount"></result>
+        <result column="finaServiceTimeLimit" property="timeLimit"></result>
+        <result column="finaServiceGuarantee" property="Guarantee"></result>
+        <result column="finaServiceBankCard" property="bankCard"></result>
+        <result column="finaServiceEleBankBusiness" property="bankBusiness"></result>
+        <result column="finaServiceAgentPayBusiness" property="agentPayBusiness"></result>
+        <result column="finaServiceAutoBusiness" property="autoBusiness"></result>
+        <result column="finaServicePrivateLoan" property="privateLoan"></result>
+        <result column="finaServicePublicLoan" property="publicLoan"></result>
+        <result column="finaServiceNewRequirement" property="newRequirement"></result>
+
+        <result column="custManagerLoanSitu" property="loanSitu"></result>
+        <result column="custManagerCreditRecord" property="creditRecord"></result>
+        <result column="custManagerOtherBankRecord" property="otherBankRecord"></result>
+        <result column="custManagerHouseToMoney" property="houseToMoney"></result>
+
     </resultMap>
 
     <select id="queryAppointInfoByUserId" parameterType="java.lang.Long" resultMap="allColumnInfoList">
-        SELECT a.*, b.*, c.*, d.*, e.*, f.*, g.*, h.*, z.*, w.*, n.*
-        FROM baseinfo a
-            LEFT JOIN incomeexpenses b ON  b.`recordId` = a.`recordId`
+        SELECT a.*, b.*, c.*, d.*, e.*, f.*, g.*, h.*, z.*, w.*, n.* FROM baseinfo a LEFT JOIN incomeexpenses b ON  b.`recordId` = a.`recordId`
             LEFT JOIN familyassets c ON c.`recordId`=a.`recordId`
             LEFT JOIN housepropertyinfo d ON d.`assetsId`=c.`assetsId`
             LEFT JOIN landinfo e ON e.`assetsId`=c.`assetsId`
@@ -310,4 +356,30 @@
             LEFT JOIN t_appoint t ON t.`recordId`=a.`recordId`
             WHERE t.`user_id` = #{userId}
     </select>
+    <!--指派网点-->
+    <select id="getAdminOrganizationName" resultMap="userListInfo">
+         select org.organizationName from organizationInfo org
+    </select>
+    <select id="getUserOrganizationName" parameterType="java.lang.Long" resultMap="userListInfo">
+         select org.organizationName
+          from usersinfo u
+          left outer join organizationInfo org on u.organizationId=org.organizationId
+          where u.userId=#{userId}
+    </select>
+    <!--删除-->
+    <delete id="deleteInfo" parameterType="java.lang.Long">
+           delete from baseinfo b
+           left outer join familymemberinfo fm on b.recordId=fm.recordId
+           left outer join photosinfo pho on b.recordId = pho.recordId
+           left outer join familyincurdebts fid on b.recordId = fid.recordId
+           left outer join incomeexpenses ies on b.recordId = ies.recordId
+           left outer join familyassets fas on b.recordId = fas.recordId
+           left outer join housepropertyinfo h on fas.assetsId= h.assetsId
+           left outer join landinfo land on fas.assetsId=land.assetsId
+           left outer join carsinfo car on fas.assetsId=car.assetsId
+           left outer join financialassets fin on fas.assetsId=fin.assetsId
+           where b.recordId=#{recordId}
+    </delete>
+
+
 </mapper>

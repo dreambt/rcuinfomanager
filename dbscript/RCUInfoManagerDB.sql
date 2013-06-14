@@ -123,7 +123,7 @@ CREATE TABLE `baseinfo` (
   `ownMoney` varchar(20) DEFAULT NULL,
   `yearIncome` varchar(20) DEFAULT NULL,
   `annualWageIncome` varchar(20) DEFAULT NULL,
-  `workYears` int(11) DEFAULT NULL,
+  `workYears` varchar(20) DEFAULT NULL,
   `workSitu` varchar(100) DEFAULT NULL,
   `unitProp` varchar(50) DEFAULT NULL,
   `unitIndustryId` varchar(20) DEFAULT NULL,

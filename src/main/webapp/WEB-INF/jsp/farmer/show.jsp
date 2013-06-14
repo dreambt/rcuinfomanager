@@ -13,9 +13,9 @@
     <script src="/asserts/js/jquery-1.7.2.min.js"></script>
     <script src="/asserts/js/bootstrap.min.js"></script>
     <script type="text/javascript">
-        $(function () {
+        $(function(){
             //左侧菜单样式控制
-            $('.span3').click(function () {
+            $('.span3').click(function(){
                 $("li[class='active']").removeAttr("class");
                 $(this).addClass("active");
             });
@@ -32,12 +32,9 @@
                 <td height="145" background="/asserts/img/head.png">
                     <table width="99%" border="0" cellspacing="0" cellpadding="0">
                         <tr>
-                            <td width="60%" height="145"><img src="/asserts/img/logo.png" width="500" height="145"/>
-                            </td>
-                            <td width="40%" align="right" valign="bottom">
-                                <div style="margin-bottom:10px; margin-right:10px; color:#161823">您好！<span
-                                        id="uName">[<c:out value="${displayUserName}"/>]</span><a href=""
-                                                                                                  style="color:#161823">[退出]</a>
+                            <td width="60%" height="145"><img src="/asserts/img/logo.png" width="500" height="145" /></td>
+                            <td width="40%" align="right" valign="bottom" >
+                                <div style="margin-bottom:10px; margin-right:10px; color:#161823">您好！<span id="uName">[<c:out value="${displayUserName}"/>]</span><a href="" style="color:#161823">[退出]</a>
                                 </div>
                             </td>
                         </tr>
@@ -83,7 +80,7 @@
     <button class="btn" type="button">验收</button>
     <button class="btn" type="button">编辑</button>
 </p>
-<hr size="1" width="100%" style="margin-bottom: -1px;"/>
+<hr  size="1" width="100%" style="margin-bottom: -1px;"/>
 <div class="tabbable">
 <ul class="nav nav-tabs">
     <li class="active"><a href="#tab1" data-toggle="tab">个人基本概况信息</a></li>
@@ -307,8 +304,16 @@
             <td align="center" colspan="2">${personBasic.cerNum}</td>
         </core:otherwise>
     </core:choose>
-
-    <td align="center" colspan="2" rowspan="4">照片</td>
+    <core:choose>
+        <core:when test="${empty personBasic.photoUri}">
+            <td align="center" colspan="2" rowspan="4">&nbsp;</td>
+        </core:when>
+        <core:otherwise>
+            <td align="center" colspan="2" rowspan="4">
+                <img src="${personBasic.photoUri}" class="img-rounded">
+            </td>
+        </core:otherwise>
+    </core:choose>
 </tr>
 <tr>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">证件有效期</td>
@@ -795,7 +800,7 @@
             <td align="center">&nbsp;</td>
         </tr>
         <tr>
-            <td align="center" bgcolor="#b4d8ed" style="color:#161823">家庭主要支出项目</td>
+            <td align="center"  bgcolor="#b4d8ed" style="color:#161823">家庭主要支出项目</td>
             <td align="center" colspan="3">&nbsp;</td>
             <td align="center" bgcolor="#b4d8ed" style="color:#161823">家庭收入能否应付支出</td>
             <td align="center" colspan="3">&nbsp;</td>
@@ -908,7 +913,7 @@
 
             </tr>
             <tr>
-                <td align="center" bgcolor="#b4d8ed" style="color:#161823">家庭主要支出项目</td>
+                <td align="center"  bgcolor="#b4d8ed" style="color:#161823">家庭主要支出项目</td>
                 <core:choose>
                     <core:when test="${empty personIncomeExpenses.fmExpensesProj}">
                         <td align="center">&nbsp;</td>
@@ -1597,31 +1602,31 @@
                     <td align="center">&nbsp;</td>
                 </tr>
                 <tr>
-                    <td align="center" colspan="2" bgcolor="#b4d8ed" style="color:#161823">
+                    <td align="center"  colspan="2" bgcolor="#b4d8ed" style="color:#161823">
                         未来1-2年家庭储蓄的主要目的和用途？
                     </td>
                     <td align="center" colspan="2">&nbsp;</td>
                 </tr>
                 <tr>
-                    <td align="center" colspan="2" bgcolor="#b4d8ed" style="color:#161823">
+                    <td align="center"  colspan="2" bgcolor="#b4d8ed" style="color:#161823">
                         您目前希望得到我行（社）的哪些服务？
                     </td>
                     <td align="center" colspan="2">&nbsp;</td>
                 </tr>
                 <tr>
-                    <td align="center" colspan="2" bgcolor="#b4d8ed" style="color:#161823">
+                    <td align="center"  colspan="2" bgcolor="#b4d8ed" style="color:#161823">
                         除了上述业务，您还需要哪些服务？
                     </td>
                     <td align="center" colspan="2">&nbsp;</td>
                 </tr>
                 <tr>
-                    <td align="center" colspan="2" bgcolor="#b4d8ed" style="color:#161823">
+                    <td align="center"  colspan="2" bgcolor="#b4d8ed" style="color:#161823">
                         您希望我行（社）增加哪些方面的服务？
                     </td>
                     <td align="center" colspan="2">&nbsp;</td>
                 </tr>
                 <tr>
-                    <td align="center" colspan="2" bgcolor="#b4d8ed" style="color:#161823">
+                    <td align="center"  colspan="2" bgcolor="#b4d8ed" style="color:#161823">
                         您对我行（社）服务有何建议？
                     </td>
                     <td align="center" colspan="2">&nbsp;</td>
@@ -1685,8 +1690,7 @@
                 <tbody>
                 <tr>
                     <td width="27%" align="left" bgcolor="#b4d8ed" style="color:#161823">
-                        一、客户基本资料真实性
-                    </td>
+                        一、客户基本资料真实性						</td>
                     <td width="73%" align="center"></td>
                 </tr>
                 <tr>

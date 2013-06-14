@@ -220,10 +220,6 @@
          from familyassets fa
            left outer join financialAssets fin on fa.assetsId = fin.assetsId
            where fa.recordId=#{recordId}
-         select fin.financialInfo,fin.depositOurBank,fin.depositOtherBank
-         from familyassets fa
-           left outer join financialAssets fin on fa.assetsId = fin.assetsId
-           where fa.recordId=#{recordId}
     </select>
     <!--指派网点-->
     <select id="getAdminOrganizationName" resultMap="userListInfo">

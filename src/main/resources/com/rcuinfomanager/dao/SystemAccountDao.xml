@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rcuinfomanager.dao.SystemAccountDao">
+    <resultMap id="accountInfoMap" type="com.rcuinfomanager.model.SystemAccount">
+        <result property="userId" column="userId" ></result>
+        <result property="userName" column="userName" ></result>
+        <result property="displayUserName" column="displayUserName" ></result>
+        <result property="roleName" column="roleName" ></result>
+
+    </resultMap>
+    <!--admin-->
+    <select id="getSystemAccountByAdminList" resultMap="accountInfoMap">
+            select u.userId,u.userName,u.displayUserName,ri.roleName
+            from usersinfo u
+            left outer join userroleinfo ur on u.userId=ur.userId
+            left outer join rolesinfo ri on ur.roleId=ri.roleId
+       </select>
+    <!--Normal-->
+    <select id="getSystemAccountByCommonList" parameterType="java.lang.Long" resultMap="accountInfoMap">
+            select u.userId,u.userName,u.displayUserName,ri.roleName
+            from usersinfo u
+            left outer join userroleinfo ur on u.userId=ur.userId
+            left outer join rolesinfo ri on ur.roleId=ri.roleId
+            where u.userId=#{userId}
+       </select>
+</mapper>

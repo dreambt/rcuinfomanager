@@ -100,26 +100,24 @@ public class UserService {
     }
 
     /**
-     * 判断首次登录最后时间是否为空
-     *
+     *  判断首次登录最后时间是否为空
      * @return
      */
-    public boolean isLastLoginTime(String userName) {
+    public boolean isLastLoginTime(String userName){
         User lastLoginTime = userDao.getUserByUserName(userName);
-        if (lastLoginTime.getLastLoginTime() != null) {
+        if(lastLoginTime.getLastLoginTime() != null){
             return false;
-        } else {
+        }else {
             return true;
         }
     }
 
     /**
      * 获取管理员和普通用户
-     *
      * @param uname
      * @return
      */
-    public User getUserByUserManager(String uname) {
+    public User getUserByUserManager(String uname){
         return userDao.getUserManager(uname);
     }
 

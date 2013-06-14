@@ -1,8 +1,8 @@
 package com.rcuinfomanager.webservice;
 
-import com.rcuinfomanager.model.AllColumnInfo;
-import com.rcuinfomanager.model.WebServiceResponseData;
 import com.rcuinfomanager.util.JsonParser;
+import com.rcuinfomanager.webservice.model.AllColumnInfo;
+import com.rcuinfomanager.webservice.model.WebServiceResponseData;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,8 +18,7 @@ public class FarmerInfoWebService {
 
     @RequestMapping(value = "/baseinfo/download/{username}/{password}", method = RequestMethod.GET)
     public
-    @ResponseBody
-    WebServiceResponseData downloadBaseInfo(@PathVariable String username, @PathVariable String password) {
+    @ResponseBody WebServiceResponseData downloadBaseInfo(@PathVariable String username, @PathVariable String password) {
         WebServiceResponseData webServiceResponseData = new WebServiceResponseData();
         ArrayList<AllColumnInfo> data = new ArrayList<AllColumnInfo>();
         AllColumnInfo allColumnInfo = new AllColumnInfo();

@@ -9,15 +9,27 @@
     <link href="/asserts/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
     <link href="/asserts/css/doc.css" rel="stylesheet" media="screen">
     <link href="/asserts/css/style.css" rel="stylesheet" media="screen">
-    <link id="artDialog-skin" href="/asserts/js/dialog/skins/opera.css" rel="stylesheet"/>
+    <link id="artDialog-skin" href="/asserts/js/dialog/skins/opera.css" rel="stylesheet" />
     <script src="/asserts/js/jquery-1.7.2.min.js"></script>
     <script src="/asserts/js/bootstrap.min.js"></script>
     <script src="/asserts/js/dialog/artDialog.js"></script>
     <script src="/asserts/js/main.js"></script>
     <script type="text/javascript">
-        $(function () {
-            if (${firstLogin}) {
-                alert("第一次登录，是否需要修改密码？");
+        $(function(){
+            if(${firstLogin}){
+                if(confirm('第一次登录，是否需要修改密码？')){
+                    var url='systemAccount/editAccount';
+                    window.top.artDialog({
+                        id: 'editAccount',
+                        title: '修改帐号',
+                        lock:true,
+                        content:'<iframe scrolling="auto" width="500" height="380" frameborder="0" style="border: none;margin: -20px -25px;"marginheight="0" marginwidth="0" src="'+ url +'"/>'
+                    });
+                }
+            }
+            var delMsg="${delSuccess}";
+            if(delMsg){
+                alert(delMsg);
             }
         });
     </script>
@@ -31,13 +43,9 @@
                 <td height="145" background="/asserts/img/head.png">
                     <table width="99%" border="0" cellspacing="0" cellpadding="0">
                         <tr>
-                            <td width="60%" height="145"><img src="/asserts/img/logo.png" width="500" height="145"/>
-                            </td>
-                            <td width="40%" align="right" valign="bottom">
-                                <div style="margin-bottom:10px; margin-right:10px; color:#FFFFFF">您好！<span
-                                        id="uName">[<c:out value="${displayUserName}"/>]</span><a href="/logout"
-                                                                                                  style="color:#FFFFFF">
-                                    &nbsp;退出</a>
+                            <td width="60%" height="145"><img src="/asserts/img/logo.png" width="500" height="145" /></td>
+                            <td width="40%" align="right" valign="bottom" >
+                                <div style="margin-bottom:10px; margin-right:10px; color:#FFFFFF">您好！<span id="uName">[<c:out value="${displayUserName}"/>]</span><a href="/logout" style="color:#FFFFFF">&nbsp;退出</a>
                                 </div>
                             </td>
                         </tr>
@@ -60,9 +68,7 @@
         </div>
         <div class="span10" style="margin-left: -8.435897%;">
             <br/>
-            <input class="input-block-level" type="text" placeholder="客户电子信息管理" disabled="disabled"
-                   style="color:#0000AA">
-
+            <input class="input-block-level" type="text" placeholder="客户电子信息管理" disabled="disabled" style="color:#0000AA">
             <div class="navbar">
                 <div class="btn-group">
                     <select class="selectpicker" style="width: 95px; margin-top: 10px;">
@@ -74,13 +80,12 @@
                     <select class="selectpicker" style="width: 95px; margin-top: 10px;">
                         <option value="" selected="selected">按村</option>
                     </select>
-                    <input type="text" name="" value="" placeholder="按客户经理"
-                           style="width: 95px; height:30px;margin-top: 10px;">
+                    <input type="text"  name="" value="" placeholder="按客户经理" style="width: 95px; height:30px;margin-top: 10px;">
                     <a class="btn" href="#">查询</a>
                 </div>
                 <div class="btn-group">
                     <button class="btn" type="button" id="assignOperate">指派</button>
-                    <button class="btn" type="button" id="checkOperate">验收</button>
+                    <button class="btn" type="button">验收</button>
                 </div>
                 <div class="btn-group">
                     <button class="btn dropdown-toggle" data-toggle="dropdown">导入 <span class="caret"></span></button>
@@ -119,7 +124,7 @@
                     <core:forEach items="${familyInfoList}" var="familyInfo">
                         <tr>
                             <td align="center" class="first">
-                                <input type="checkbox" class="checkOpera" recordId="${familyInfo.recordId}"/>
+                                <input type="checkbox" name="checkOpera" class="checkOpera" recordId="${familyInfo.recordId}"/>
                             </td>
                             <td align="center">${familyInfo.recordId}</td>
                             <td align="center">${familyInfo.customerName}</td>
@@ -130,11 +135,9 @@
                             <td align="center">${familyInfo.state}</td>
                             <td align="center">
                                 <a href="#" style="color:#0099FF" class="showOperate" recordId="${familyInfo.recordId}">查看</a>&nbsp;|&nbsp;
-                                <a href="#" style="color:#0099FF" class="appointOperate"
-                                   recordId="${familyInfo.recordId}">指派</a>&nbsp;|&nbsp;
+                                <a href="#" style="color:#0099FF" class="appointOperate" recordId="${familyInfo.recordId}">指派</a>&nbsp;|&nbsp;
                                 <a href="#" style="color:#0099FF" class="editOperate" recordId="${familyInfo.recordId}">编辑</a>&nbsp;|&nbsp;
-                                <a href="#" style="color:#FF0000" class="deleteOperate"
-                                   recordId="${familyInfo.recordId}">删除</a>
+                                <a href="#" style="color:#FF0000" class="deleteOperate" recordId="${familyInfo.recordId}">删除</a>
                             </td>
                         </tr>
                     </core:forEach>

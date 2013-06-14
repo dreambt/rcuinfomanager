@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rcuinfomanager.dao.SystemRoleDao">
+
+    <resultMap id="roleInfoMap" type="com.rcuinfomanager.model.SystemRole">
+        <result column="roleName" property="roleName"></result>
+        <result column="roleDescription" property="roleDescription"></result>
+    </resultMap>
+    <!--admin-->
+    <select id="getSystemRoleByAdminList" resultMap="roleInfoMap">
+            select ri.roleName,ri.roleDescription
+            from usersinfo u
+            left outer join userroleinfo ur on u.userId=ur.userId
+            left outer join rolesinfo ri on ur.roleId=ri.roleId
+       </select>
+    <!--Normal-->
+    <select id="getSystemRoleByCommonList" parameterType="java.lang.Long" resultMap="roleInfoMap">
+            select ri.roleName,ri.roleDescription
+            from usersinfo u
+            left outer join userroleinfo ur on u.userId=ur.userId
+            left outer join rolesinfo ri on ur.roleId=ri.roleId
+            where u.userId=#{userId}
+       </select>
+
+
+</mapper>

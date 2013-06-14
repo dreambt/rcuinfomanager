@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rcuinfomanager.dao.LogsInfoDao">
+
+    <!--保存日志-->
+    <insert id="saveLogsInfo" parameterType="com.rcuinfomanager.model.LogsInfo" >
+            INSERT INTO logsinfo(operatedTime,userId,operation)
+            VALUES(#{operatedTime},#{userId},#{operation})
+    </insert>
+
+    <resultMap id="logsInfoMap" type="com.rcuinfomanager.model.LogsInfo">
+        <result column="operatedTime" property="operatedTime"></result>
+        <result column="userName" property="userName"></result>
+        <result column="operation" property="operation"></result>
+    </resultMap>
+    <!--获取日志信息-->
+    <select id="getLogsInfoList" parameterType="java.lang.Long" resultMap="logsInfoMap">
+           select lo.operatedTime,u.userName,lo.operation
+           from logsinfo lo
+           left join usersinfo u on lo.userId=u.userId
+           where lo.userId=#{userId}
+    </select>
+    <!--查询-->
+    <select id="getLogsAllList" parameterType="java.lang.String" resultMap="logsInfoMap">
+        select lo.operatedTime,u.userName,lo.operation
+           from logsinfo lo
+           left join usersinfo u on lo.userId=u.userId
+           where lo.operatedTime between #{beginTime} and #{endTime}
+           and u.userName like '%'+#{userName}+'%'
+           and lo.userId=#{userId}
+    </select>
+    <select id="getLogsBeginAndEndTimeList" parameterType="java.lang.String" resultMap="logsInfoMap">
+        select lo.operatedTime,u.userName,lo.operation
+           from logsinfo lo
+           left join usersinfo u on lo.userId=u.userId
+           where lo.operatedTime between '%'+#{beginTime}+'%' and '%'+#{endTime}+'%'
+           and lo.userId=#{userId}
+    </select>
+    <select id="getLogsBeginTimeList" parameterType="java.lang.String" resultMap="logsInfoMap">
+        select lo.operatedTime,u.userName,lo.operation
+           from logsinfo lo
+           left join usersinfo u on lo.userId=u.userId
+           where lo.operatedTime like '%'+#{beginTime}+'%'
+           and lo.userId=#{userId}
+    </select>
+    <select id="getLogsEndTimeList" parameterType="java.lang.String" resultMap="logsInfoMap">
+        select lo.operatedTime,u.userName,lo.operation
+           from logsinfo lo
+           left join usersinfo u on lo.userId=u.userId
+           where lo.operatedTime like '%'+#{endTime}+'%'
+           and lo.userId=#{userId}
+    </select>
+    <select id="getLogsUNameList" parameterType="java.lang.String" resultMap="logsInfoMap">
+        select lo.operatedTime,u.userName,lo.operation
+           from logsinfo lo
+           left join usersinfo u on lo.userId=u.userId
+           where u.userName like '%'+#{userName}+'%'
+           and lo.userId=#{userId}
+    </select>
+
+</mapper>

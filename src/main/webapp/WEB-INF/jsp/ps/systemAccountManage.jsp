@@ -9,21 +9,58 @@
     <link href="/asserts/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
     <link href="/asserts/css/doc.css" rel="stylesheet" media="screen">
     <link href="/asserts/css/style.css" rel="stylesheet" media="screen">
-    <link id="artDialog-skin" href="/asserts/js/dialog/skins/opera.css" rel="stylesheet"/>
+    <link id="artDialog-skin" href="/asserts/js/dialog/skins/opera.css" rel="stylesheet" />
     <script src="/asserts/js/jquery-1.7.2.min.js"></script>
     <script src="/asserts/js/bootstrap.min.js"></script>
     <script src="/asserts/js/dialog/artDialog.js"></script>
     <script type="text/javascript">
-        $(function () {
-            /*if(
-            ${firstLogin}){
-             alert("第一次登录，是否需要修改密码？");
-             }*/
+        $(function(){
 
-            $('.span3').click(function () {
+            $('.span3').click(function(){
                 $("li[class='active']").removeAttr("class");
                 $(this).addClass("active");
             });
+
+            //添加帐号
+            $('#addAccount').click(function(){
+                var url='systemAccount/addAccount';
+                window.top.artDialog({
+                    id: 'addAccount',
+                    title: '添加帐号',
+                    lock:true,
+                    content:'<iframe scrolling="auto" width="500" height="380" frameborder="0" style="border: none;margin: -20px -25px;"marginheight="0" marginwidth="0" src="'+ url +'"/>'
+                });
+            });
+            //添加网点
+            $('#addStipple').click(function(){
+                var url='systemAccount/addStipple';
+                window.top.artDialog({
+                    id: 'addStipple',
+                    title: '系统帐号管理  〉管理网点 ',
+                    lock:true,
+                    content:'<iframe scrolling="auto" width="400" height="280" frameborder="0" style="border: none;margin: -20px -25px;"marginheight="0" marginwidth="0" src="'+ url +'"/>'
+                });
+            });
+
+            $('#editAccount').click(function(){
+                var url='systemAccount/editAccount';
+                window.top.artDialog({
+                    id: 'editAccount',
+                    title: '修改帐号',
+                    lock:true,
+                    content:'<iframe scrolling="auto" width="500" height="380" frameborder="0" style="border: none;margin: -20px -25px;"marginheight="0" marginwidth="0" src="'+ url +'"/>'
+                });
+            });
+
+            $('#deleteAccount').click(function(){
+                if(confirm('确定要删除吗？')){
+                    var me=$(this);
+                    var id=me.attr('recordId');
+                    var url = 'systemAccount/deleteAccount'+id;
+                    window.location.href=url;
+                }
+            });
+
         });
     </script>
 </head>
@@ -36,13 +73,9 @@
                 <td height="145" background="/asserts/img/head.png">
                     <table width="99%" border="0" cellspacing="0" cellpadding="0">
                         <tr>
-                            <td width="60%" height="145"><img src="/asserts/img/logo.png" width="500" height="145"/>
-                            </td>
-                            <td width="40%" align="right" valign="bottom">
-                                <div style="margin-bottom:10px; margin-right:10px; color:#FFFFFF">您好！<span
-                                        id="uName">[<c:out value="${displayUserName}"/>]</span><a href="/logout"
-                                                                                                  style="color:#FFFFFF">
-                                    &nbsp;退出</a>
+                            <td width="60%" height="145"><img src="/asserts/img/logo.png" width="500" height="145" /></td>
+                            <td width="40%" align="right" valign="bottom" >
+                                <div style="margin-bottom:10px; margin-right:10px; color:#FFFFFF">您好！<span id="uName">[<c:out value="${displayUserName}"/>]</span><a href="/logout" style="color:#FFFFFF">&nbsp;退出</a>
                                 </div>
                             </td>
                         </tr>
@@ -77,8 +110,8 @@
                 <input id="keyword" name="keyword" type="text" style="color:#999999;width:120px; height:30px"
                        class="input-text" value="请输入关键字"/>
                 <input type="submit" name="" value="查询" style="width:80px; height:30px"/>
-                <input type="button" name="" value="添加账号" style="width:80px; height:30px"/>
-                <input type="button" name="" value="添加网点" style="width:80px; height:30px"/>
+                <input type="button" id="addAccount" value="添加账号" style="width:80px; height:30px"/>
+                <input type="button" id="addStipple" value="添加网点" style="width:80px; height:30px"/>
             </div>
 
             <div class="table-list">
@@ -94,17 +127,19 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td align="center">1</td>
-                        <td align="center">admin</td>
-                        <td align="center"><p>系统管理员</p></td>
-                        <td align="center">否</td>
-                        <td align="center">系统管理员</td>
-                        <td align="center">
-                            <a href="" style="color:#0099FF">编辑</a>&nbsp;|&nbsp;
-                            <a href="" style="color:#FF0000">删除</a>
-                        </td>
-                    </tr>
+                    <core:forEach items="${accountList}" var="accountInfo" varStatus="idx">
+                        <tr>
+                            <td align="center"><core:out value="${idx.index+1}"></core:out></td>
+                            <td align="center">${accountInfo.userName}</td>
+                            <td align="center"><p>${accountInfo.roleName}</p></td>
+                            <td align="center">否</td>
+                            <td align="center">${accountInfo.displayUserName}</td>
+                            <td align="center">
+                                <a href="#" style="color:#0099FF" id="editAccount">编辑</a>&nbsp;|&nbsp;
+                                <a href="#" style="color:#FF0000" id="deletedAccount">删除</a>
+                            </td>
+                        </tr>
+                    </core:forEach>
                     </tbody>
                 </table>
                 <div class="pagination" style="text-align: center;">

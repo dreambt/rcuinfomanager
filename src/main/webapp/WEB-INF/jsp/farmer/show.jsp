@@ -97,656 +97,664 @@
 <tbody>
 
 <core:choose>
-<core:when test="${empty personBasicList}">
+    <core:when test="${empty personBasicList}">
 
-    <tr>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">姓名</td>
-        <td align="center">&nbsp;</td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">性别</td>
-        <td align="center">&nbsp;</td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">是否农户</td>
-        <td align="center">&nbsp;</td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">客户类型</td>
-        <td align="center">&nbsp;</td>
-    </tr>
-    <tr>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">证件类型</td>
-        <td align="center" colspan="2">&nbsp;</td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">证件号码</td>
-        <td align="center" colspan="2">&nbsp;</td>
-        <td align="center" colspan="2" rowspan="4">照片</td>
-    </tr>
-    <tr>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">证件有效期</td>
-        <td align="center" colspan="3">&nbsp;</td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">出生年月</td>
-        <td align="center">&nbsp;</td>
-    </tr>
-    <tr>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">国籍</td>
-        <td align="center">&nbsp;</td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">是否拥有外国护照或居住权</td>
-        <td align="center">&nbsp;</td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">民族</td>
-        <td align="center">&nbsp;</td>
-    </tr>
-    <tr>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">政治面貌</td>
-        <td align="center">&nbsp;</td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">健康状况</td>
-        <td align="center">&nbsp;</td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">婚姻状况</td>
-        <td align="center">&nbsp;</td>
-    </tr>
-    <tr>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">
-            居住地址
-        </td>
-        <td align="center" colspan="5">&nbsp;</td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">居住编码</td>
-        <td align="center">&nbsp;</td>
-    </tr>
-    <tr>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">
-            区域名称
-        </td>
-        <td align="center">&nbsp;</td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">村别</td>
-        <td align="center">&nbsp;</td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">联系电话</td>
-        <td align="center">&nbsp;</td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">手机号码</td>
-        <td align="center">&nbsp;</td>
-    </tr>
-    <tr>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">
-            居住状况
-        </td>
-        <td align="center" colspan="2">&nbsp;</td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">社会保障情况</td>
-        <td align="center" colspan="4">&nbsp;</td>
-    </tr>
-    <tr>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">
-            最高学位
-        </td>
-        <td align="center">&nbsp;</td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">最高学历</td>
-        <td align="center">&nbsp;</td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">与我行（社）关系</td>
-        <td align="center">&nbsp;</td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">与我行（社）合作关系</td>
-        <td align="center">&nbsp;</td>
-    </tr>
-    <tr>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">
-            职业
-        </td>
-        <td align="center" colspan="7">&nbsp;</td>
-    </tr>
-    <tr>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">
-            个人经营项目
-        </td>
-        <td align="center" colspan="4">&nbsp;</td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">经营年限</td>
-        <td align="center" colspan="2">&nbsp;</td>
-    </tr>
-    <tr>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">
-            经营场所
-        </td>
-        <td align="center" colspan="3">&nbsp;</td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">从事行业</td>
-        <td align="center" colspan="3">&nbsp;</td>
-    </tr>
-    <tr>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">投资经营性质</td>
-        <td align="center">&nbsp;</td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">投资资金情况</td>
-        <td align="center">&nbsp;</td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">投入金额</td>
-        <td align="center">&nbsp;</td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">自有资金情况</td>
-        <td align="center">&nbsp;</td>
-    </tr>
-    <tr>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823"> 年收益情况</td>
-        <td align="center" colspan="7">&nbsp;</td>
-    </tr>
-    <tr>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">工作情况</td>
-        <td align="center" colspan="7">&nbsp;</td>
-    </tr>
-    <tr>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">单位性质</td>
-        <td align="center" colspan="3">&nbsp;</td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">单位所属行业</td>
-        <td align="center" colspan="3">&nbsp;</td>
-    </tr>
-    <tr>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">任职部门</td>
-        <td align="center" colspan="3">&nbsp;</td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">工作单位类别</td>
-        <td align="center" colspan="3">&nbsp;</td>
-    </tr>
-    <tr>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">职务</td>
-        <td align="center">&nbsp;</td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">年工资收入（万元）</td>
-        <td align="center">&nbsp;</td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">工作年限</td>
-        <td align="center">&nbsp;</td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">职称</td>
-        <td align="center">&nbsp;</td>
-    </tr>
-</core:when>
-<core:otherwise>
-<core:forEach items="${personBasicList}" var="personBasic">
-<tr>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">姓名</td>
-    <core:choose>
-        <core:when test="${empty personBasic.customerName}">
-            <td align="center">&nbsp;</td>
-        </core:when>
-        <core:otherwise>
-            <td align="center">${personBasic.customerName}</td>
-        </core:otherwise>
-    </core:choose>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">性别</td>
-    <core:choose>
-        <core:when test="${empty personBasic.gender}">
-            <td align="center">&nbsp;</td>
-        </core:when>
-        <core:otherwise>
-            <td align="center">${personBasic.gender}</td>
-        </core:otherwise>
-    </core:choose>
+            <tr>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">姓名</td>
+                <td align="center">&nbsp;</td>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">性别</td>
+                <td align="center">&nbsp;</td>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">是否农户</td>
+                <td align="center">&nbsp;</td>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">客户类型</td>
+                <td align="center">&nbsp;</td>
+            </tr>
+            <tr>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">证件类型</td>
+                <td align="center" colspan="2">&nbsp;</td>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">证件号码</td>
+                <td align="center" colspan="2">&nbsp;</td>
+                <td align="center" colspan="2" rowspan="4">照片</td>
+            </tr>
+            <tr>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">证件有效期</td>
+                <td align="center" colspan="3">&nbsp;</td>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">出生年月</td>
+                <td align="center">&nbsp;</td>
+            </tr>
+            <tr>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">国籍</td>
+                <td align="center">&nbsp;</td>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">是否拥有外国护照或居住权</td>
+                <td align="center">&nbsp;</td>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">民族</td>
+                <td align="center">&nbsp;</td>
+            </tr>
+            <tr>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">政治面貌</td>
+                <td align="center">&nbsp;</td>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">健康状况</td>
+                <td align="center">&nbsp;</td>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">婚姻状况</td>
+                <td align="center">&nbsp;</td>
+            </tr>
+            <tr>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">
+                    居住地址
+                </td>
+                <td align="center" colspan="5">&nbsp;</td>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">居住编码</td>
+                <td align="center">&nbsp;</td>
+            </tr>
+            <tr>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">
+                    区域名称
+                </td>
+                <td align="center">&nbsp;</td>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">村别</td>
+                <td align="center">&nbsp;</td>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">联系电话</td>
+                <td align="center">&nbsp;</td>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">手机号码</td>
+                <td align="center">&nbsp;</td>
+            </tr>
+            <tr>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">
+                    居住状况
+                </td>
+                <td align="center" colspan="2">&nbsp;</td>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">社会保障情况</td>
+                <td align="center" colspan="4">&nbsp;</td>
+            </tr>
+            <tr>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">
+                    最高学位
+                </td>
+                <td align="center">&nbsp;</td>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">最高学历</td>
+                <td align="center">&nbsp;</td>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">与我行（社）关系</td>
+                <td align="center">&nbsp;</td>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">与我行（社）合作关系</td>
+                <td align="center">&nbsp;</td>
+            </tr>
+            <tr>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">
+                    职业
+                </td>
+                <td align="center" colspan="7">&nbsp;</td>
+            </tr>
+            <tr>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">
+                    个人经营项目
+                </td>
+                <td align="center" colspan="4">&nbsp;</td>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">经营年限</td>
+                <td align="center" colspan="2">&nbsp;</td>
+            </tr>
+            <tr>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">
+                    经营场所
+                </td>
+                <td align="center" colspan="3">&nbsp;</td>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">从事行业</td>
+                <td align="center" colspan="3">&nbsp;</td>
+            </tr>
+            <tr>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">投资经营性质</td>
+                <td align="center">&nbsp;</td>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">投资资金情况</td>
+                <td align="center">&nbsp;</td>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">投入金额</td>
+                <td align="center">&nbsp;</td>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">自有资金情况</td>
+                <td align="center">&nbsp;</td>
+            </tr>
+            <tr>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823"> 年收益情况</td>
+                <td align="center" colspan="7">&nbsp;</td>
+            </tr>
+            <tr>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">工作情况</td>
+                <td align="center" colspan="7">&nbsp;</td>
+            </tr>
+            <tr>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">单位性质</td>
+                <td align="center" colspan="3">&nbsp;</td>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">单位所属行业</td>
+                <td align="center" colspan="3">&nbsp;</td>
+            </tr>
+            <tr>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">任职部门</td>
+                <td align="center" colspan="3">&nbsp;</td>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">工作单位类别</td>
+                <td align="center" colspan="3">&nbsp;</td>
+            </tr>
+            <tr>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">职务</td>
+                <td align="center">&nbsp;</td>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">年工资收入（万元）</td>
+                <td align="center">&nbsp;</td>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">工作年限</td>
+                <td align="center">&nbsp;</td>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">职称</td>
+                <td align="center">&nbsp;</td>
+            </tr>
+    </core:when>
+    <core:otherwise>
+        <core:forEach items="${personBasicList}" var="personBasic">
+            <tr>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">姓名</td>
+                <core:choose>
+                    <core:when test="${empty personBasic.customerName}">
+                        <td align="center">&nbsp;</td>
+                    </core:when>
+                    <core:otherwise>
+                        <td align="center">${personBasic.customerName}</td>
+                    </core:otherwise>
+                </core:choose>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">性别</td>
+                <core:choose>
+                    <core:when test="${empty personBasic.gender}">
+                        <td align="center">&nbsp;</td>
+                    </core:when>
+                    <core:otherwise>
+                        <td align="center">${personBasic.gender}</td>
+                    </core:otherwise>
+                </core:choose>
 
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">是否农户</td>
-    <core:choose>
-        <core:when test="${empty personBasic.farmer}">
-            <td align="center">&nbsp;</td>
-        </core:when>
-        <core:otherwise>
-            <td align="center">${personBasic.farmer}</td>
-        </core:otherwise>
-    </core:choose>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">是否农户</td>
+                <core:choose>
+                    <core:when test="${empty personBasic.farmer}">
+                        <td align="center">&nbsp;</td>
+                    </core:when>
+                    <core:otherwise>
+                        <td align="center">${personBasic.farmer}</td>
+                    </core:otherwise>
+                </core:choose>
 
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">客户类型</td>
-    <core:choose>
-        <core:when test="${empty personBasic.customerType}">
-            <td align="center">&nbsp;</td>
-        </core:when>
-        <core:otherwise>
-            <td align="center">${personBasic.customerType}</td>
-        </core:otherwise>
-    </core:choose>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">客户类型</td>
+                <core:choose>
+                    <core:when test="${empty personBasic.customerType}">
+                        <td align="center">&nbsp;</td>
+                    </core:when>
+                    <core:otherwise>
+                        <td align="center">${personBasic.customerType}</td>
+                    </core:otherwise>
+                </core:choose>
 
-</tr>
-<tr>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">证件类型</td>
-    <core:choose>
-        <core:when test="${empty personBasic.cerType}">
-            <td align="center">&nbsp;</td>
-        </core:when>
-        <core:otherwise>
-            <td align="center" colspan="2">${personBasic.cerType}</td>
-        </core:otherwise>
-    </core:choose>
+            </tr>
+            <tr>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">证件类型</td>
+                <core:choose>
+                    <core:when test="${empty personBasic.cerType}">
+                        <td align="center">&nbsp;</td>
+                    </core:when>
+                    <core:otherwise>
+                        <td align="center" colspan="2">${personBasic.cerType}</td>
+                    </core:otherwise>
+                </core:choose>
 
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">证件号码</td>
-    <core:choose>
-        <core:when test="${empty personBasic.cerNum}">
-            <td align="center">&nbsp;</td>
-        </core:when>
-        <core:otherwise>
-            <td align="center" colspan="2">${personBasic.cerNum}</td>
-        </core:otherwise>
-    </core:choose>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">证件号码</td>
+                <core:choose>
+                    <core:when test="${empty personBasic.cerNum}">
+                        <td align="center">&nbsp;</td>
+                    </core:when>
+                    <core:otherwise>
+                        <td align="center" colspan="2">${personBasic.cerNum}</td>
+                    </core:otherwise>
+                </core:choose>
+                <core:choose>
+                    <core:when test="${empty personBasic.photoUri}">
+                        <td align="center" colspan="2" rowspan="4">&nbsp;</td>
+                    </core:when>
+                    <core:otherwise>
+                        <td align="center" colspan="2" rowspan="4">
+                          <img src="${personBasic.photoUri}" class="img-rounded">
+                        </td>
+                    </core:otherwise>
+                </core:choose>
+            </tr>
+            <tr>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">证件有效期</td>
+                <core:choose>
+                    <core:when test="${empty personBasic.cerValidityFrom && personBasic.cerValidityTo}">
+                        <td align="center">&nbsp;</td>
+                    </core:when>
+                    <core:otherwise>
+                        <td align="center" colspan="3">
+                        ${personBasic.cerValidityFrom} - ${personBasic.cerValidityTo}
+                        </td>
+                    </core:otherwise>
+                </core:choose>
 
-    <td align="center" colspan="2" rowspan="4">照片</td>
-</tr>
-<tr>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">证件有效期</td>
-    <core:choose>
-        <core:when test="${empty personBasic.cerValidityFrom && personBasic.cerValidityTo}">
-            <td align="center">&nbsp;</td>
-        </core:when>
-        <core:otherwise>
-            <td align="center" colspan="3">
-                    ${personBasic.cerValidityFrom} - ${personBasic.cerValidityTo}
-            </td>
-        </core:otherwise>
-    </core:choose>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">出生年月</td>
+                <core:choose>
+                    <core:when test="${empty personBasic.birthday}">
+                        <td align="center">&nbsp;</td>
+                    </core:when>
+                    <core:otherwise>
+                        <td align="center">${personBasic.birthday}</td>
+                    </core:otherwise>
+                </core:choose>
 
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">出生年月</td>
-    <core:choose>
-        <core:when test="${empty personBasic.birthday}">
-            <td align="center">&nbsp;</td>
-        </core:when>
-        <core:otherwise>
-            <td align="center">${personBasic.birthday}</td>
-        </core:otherwise>
-    </core:choose>
+            </tr>
+            <tr>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">国籍</td>
+                <core:choose>
+                    <core:when test="${empty personBasic.nationality}">
+                        <td align="center">&nbsp;</td>
+                    </core:when>
+                    <core:otherwise>
+                        <td align="center">${personBasic.nationality}</td>
+                    </core:otherwise>
+                </core:choose>
 
-</tr>
-<tr>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">国籍</td>
-    <core:choose>
-        <core:when test="${empty personBasic.nationality}">
-            <td align="center">&nbsp;</td>
-        </core:when>
-        <core:otherwise>
-            <td align="center">${personBasic.nationality}</td>
-        </core:otherwise>
-    </core:choose>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">是否拥有外国护照或居住权</td>
+                <core:choose>
+                    <core:when test="${empty personBasic.havePassport}">
+                        <td align="center">&nbsp;</td>
+                    </core:when>
+                    <core:otherwise>
+                        <td align="center">${personBasic.havePassport}</td>
+                    </core:otherwise>
+                </core:choose>
 
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">是否拥有外国护照或居住权</td>
-    <core:choose>
-        <core:when test="${empty personBasic.havePassport}">
-            <td align="center">&nbsp;</td>
-        </core:when>
-        <core:otherwise>
-            <td align="center">${personBasic.havePassport}</td>
-        </core:otherwise>
-    </core:choose>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">民族</td>
+                <core:choose>
+                    <core:when test="${empty personBasic.nation}">
+                        <td align="center">&nbsp;</td>
+                    </core:when>
+                    <core:otherwise>
+                        <td align="center">${personBasic.nation}</td>
+                    </core:otherwise>
+                </core:choose>
 
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">民族</td>
-    <core:choose>
-        <core:when test="${empty personBasic.nation}">
-            <td align="center">&nbsp;</td>
-        </core:when>
-        <core:otherwise>
-            <td align="center">${personBasic.nation}</td>
-        </core:otherwise>
-    </core:choose>
+            </tr>
+            <tr>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">政治面貌</td>
+                <core:choose>
+                    <core:when test="${empty personBasic.poliLaspect}">
+                        <td align="center">&nbsp;</td>
+                    </core:when>
+                    <core:otherwise>
+                        <td align="center">${personBasic.poliLaspect}</td>
+                    </core:otherwise>
+                </core:choose>
 
-</tr>
-<tr>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">政治面貌</td>
-    <core:choose>
-        <core:when test="${empty personBasic.poliLaspect}">
-            <td align="center">&nbsp;</td>
-        </core:when>
-        <core:otherwise>
-            <td align="center">${personBasic.poliLaspect}</td>
-        </core:otherwise>
-    </core:choose>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">健康状况</td>
+                <core:choose>
+                    <core:when test="${empty personBasic.health}">
+                        <td align="center">&nbsp;</td>
+                    </core:when>
+                    <core:otherwise>
+                        <td align="center">${personBasic.health}</td>
+                    </core:otherwise>
+                </core:choose>
 
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">健康状况</td>
-    <core:choose>
-        <core:when test="${empty personBasic.health}">
-            <td align="center">&nbsp;</td>
-        </core:when>
-        <core:otherwise>
-            <td align="center">${personBasic.health}</td>
-        </core:otherwise>
-    </core:choose>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">婚姻状况</td>
+                <core:choose>
+                    <core:when test="${empty personBasic.maritalStatus}">
+                        <td align="center">&nbsp;</td>
+                    </core:when>
+                    <core:otherwise>
+                        <td align="center">${personBasic.maritalStatus}</td>
+                    </core:otherwise>
+                </core:choose>
 
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">婚姻状况</td>
-    <core:choose>
-        <core:when test="${empty personBasic.maritalStatus}">
-            <td align="center">&nbsp;</td>
-        </core:when>
-        <core:otherwise>
-            <td align="center">${personBasic.maritalStatus}</td>
-        </core:otherwise>
-    </core:choose>
+            </tr>
+            <tr>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">
+                    居住地址
+                </td>
+                <core:choose>
+                    <core:when test="${empty personBasic.address}">
+                        <td align="center">&nbsp;</td>
+                    </core:when>
+                    <core:otherwise>
+                        <td align="center" colspan="5">${personBasic.address}</td>
+                    </core:otherwise>
+                </core:choose>
 
-</tr>
-<tr>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">
-        居住地址
-    </td>
-    <core:choose>
-        <core:when test="${empty personBasic.address}">
-            <td align="center">&nbsp;</td>
-        </core:when>
-        <core:otherwise>
-            <td align="center" colspan="5">${personBasic.address}</td>
-        </core:otherwise>
-    </core:choose>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">居住编码</td>
+                <core:choose>
+                    <core:when test="${empty personBasic.postcode}">
+                        <td align="center">&nbsp;</td>
+                    </core:when>
+                    <core:otherwise>
+                        <td align="center">${personBasic.postcode}</td>
+                    </core:otherwise>
+                </core:choose>
 
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">居住编码</td>
-    <core:choose>
-        <core:when test="${empty personBasic.postcode}">
-            <td align="center">&nbsp;</td>
-        </core:when>
-        <core:otherwise>
-            <td align="center">${personBasic.postcode}</td>
-        </core:otherwise>
-    </core:choose>
+            </tr>
+            <tr>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">
+                    区域名称
+                </td>
+                <core:choose>
+                    <core:when test="${empty personBasic.areaName}">
+                        <td align="center">&nbsp;</td>
+                    </core:when>
+                    <core:otherwise>
+                        <td align="center"><p>${personBasic.areaName}</p></td>
+                    </core:otherwise>
+                </core:choose>
 
-</tr>
-<tr>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">
-        区域名称
-    </td>
-    <core:choose>
-        <core:when test="${empty personBasic.areaName}">
-            <td align="center">&nbsp;</td>
-        </core:when>
-        <core:otherwise>
-            <td align="center"><p>${personBasic.areaName}</p></td>
-        </core:otherwise>
-    </core:choose>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">村别</td>
+                <core:choose>
+                    <core:when test="${empty personBasic.village}">
+                        <td align="center">&nbsp;</td>
+                    </core:when>
+                    <core:otherwise>
+                        <td align="center"><p>${personBasic.village}</p></td>
+                    </core:otherwise>
+                </core:choose>
 
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">村别</td>
-    <core:choose>
-        <core:when test="${empty personBasic.village}">
-            <td align="center">&nbsp;</td>
-        </core:when>
-        <core:otherwise>
-            <td align="center"><p>${personBasic.village}</p></td>
-        </core:otherwise>
-    </core:choose>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">联系电话</td>
+                <core:choose>
+                    <core:when test="${empty personBasic.telephone}">
+                        <td align="center">&nbsp;</td>
+                    </core:when>
+                    <core:otherwise>
+                        <td align="center">${personBasic.telephone}</td>
+                    </core:otherwise>
+                </core:choose>
 
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">联系电话</td>
-    <core:choose>
-        <core:when test="${empty personBasic.telephone}">
-            <td align="center">&nbsp;</td>
-        </core:when>
-        <core:otherwise>
-            <td align="center">${personBasic.telephone}</td>
-        </core:otherwise>
-    </core:choose>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">手机号码</td>
+                <core:choose>
+                    <core:when test="${empty personBasic.mbPhoneNum}">
+                        <td align="center">&nbsp;</td>
+                    </core:when>
+                    <core:otherwise>
+                        <td align="center">${personBasic.mbPhoneNum}</td>
+                    </core:otherwise>
+                </core:choose>
 
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">手机号码</td>
-    <core:choose>
-        <core:when test="${empty personBasic.mbPhoneNum}">
-            <td align="center">&nbsp;</td>
-        </core:when>
-        <core:otherwise>
-            <td align="center">${personBasic.mbPhoneNum}</td>
-        </core:otherwise>
-    </core:choose>
+            </tr>
+            <tr>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">
+                    居住状况
+                </td>
+                <core:choose>
+                    <core:when test="${empty personBasic.liveCondition}">
+                        <td align="center">&nbsp;</td>
+                    </core:when>
+                    <core:otherwise>
+                        <td align="center" colspan="2"><p>${personBasic.liveCondition}</p></td>
+                    </core:otherwise>
+                </core:choose>
 
-</tr>
-<tr>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">
-        居住状况
-    </td>
-    <core:choose>
-        <core:when test="${empty personBasic.liveCondition}">
-            <td align="center">&nbsp;</td>
-        </core:when>
-        <core:otherwise>
-            <td align="center" colspan="2"><p>${personBasic.liveCondition}</p></td>
-        </core:otherwise>
-    </core:choose>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">社会保障情况</td>
+                <core:choose>
+                    <core:when test="${empty personBasic.socialSecurity}">
+                        <td align="center">&nbsp;</td>
+                    </core:when>
+                    <core:otherwise>
+                        <td align="center" colspan="4"><p>${personBasic.socialSecurity}</p></td>
+                    </core:otherwise>
+                </core:choose>
 
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">社会保障情况</td>
-    <core:choose>
-        <core:when test="${empty personBasic.socialSecurity}">
-            <td align="center">&nbsp;</td>
-        </core:when>
-        <core:otherwise>
-            <td align="center" colspan="4"><p>${personBasic.socialSecurity}</p></td>
-        </core:otherwise>
-    </core:choose>
+            </tr>
+            <tr>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">
+                    最高学位
+                </td>
+                <core:choose>
+                    <core:when test="${empty personBasic.highestDegree}">
+                        <td align="center">&nbsp;</td>
+                    </core:when>
+                    <core:otherwise>
+                        <td align="center">${personBasic.highestDegree}</td>
+                    </core:otherwise>
+                </core:choose>
 
-</tr>
-<tr>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">
-        最高学位
-    </td>
-    <core:choose>
-        <core:when test="${empty personBasic.highestDegree}">
-            <td align="center">&nbsp;</td>
-        </core:when>
-        <core:otherwise>
-            <td align="center">${personBasic.highestDegree}</td>
-        </core:otherwise>
-    </core:choose>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">最高学历</td>
+                <core:choose>
+                    <core:when test="${empty personBasic.highestEdu}">
+                        <td align="center">&nbsp;</td>
+                    </core:when>
+                    <core:otherwise>
+                        <td align="center">${personBasic.highestEdu}</td>
+                    </core:otherwise>
+                </core:choose>
 
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">最高学历</td>
-    <core:choose>
-        <core:when test="${empty personBasic.highestEdu}">
-            <td align="center">&nbsp;</td>
-        </core:when>
-        <core:otherwise>
-            <td align="center">${personBasic.highestEdu}</td>
-        </core:otherwise>
-    </core:choose>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">与我行（社）关系</td>
+                <core:choose>
+                    <core:when test="${empty personBasic.bankRelation}">
+                        <td align="center">&nbsp;</td>
+                    </core:when>
+                    <core:otherwise>
+                        <td align="center">${personBasic.bankRelation}</td>
+                    </core:otherwise>
+                </core:choose>
 
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">与我行（社）关系</td>
-    <core:choose>
-        <core:when test="${empty personBasic.bankRelation}">
-            <td align="center">&nbsp;</td>
-        </core:when>
-        <core:otherwise>
-            <td align="center">${personBasic.bankRelation}</td>
-        </core:otherwise>
-    </core:choose>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">与我行（社）合作关系</td>
+                <core:choose>
+                    <core:when test="${empty personBasic.bankPartnership}">
+                        <td align="center">&nbsp;</td>
+                    </core:when>
+                    <core:otherwise>
+                        <td align="center">${personBasic.bankPartnership}</td>
+                    </core:otherwise>
+                </core:choose>
 
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">与我行（社）合作关系</td>
-    <core:choose>
-        <core:when test="${empty personBasic.bankPartnership}">
-            <td align="center">&nbsp;</td>
-        </core:when>
-        <core:otherwise>
-            <td align="center">${personBasic.bankPartnership}</td>
-        </core:otherwise>
-    </core:choose>
+            </tr>
+            <tr>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">
+                    职业
+                </td>
+                <core:choose>
+                    <core:when test="${empty personBasic.profession}">
+                        <td align="center">&nbsp;</td>
+                    </core:when>
+                    <core:otherwise>
+                        <td align="center" colspan="7">${personBasic.profession}</td>
+                    </core:otherwise>
+                </core:choose>
 
-</tr>
-<tr>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">
-        职业
-    </td>
-    <core:choose>
-        <core:when test="${empty personBasic.profession}">
-            <td align="center">&nbsp;</td>
-        </core:when>
-        <core:otherwise>
-            <td align="center" colspan="7">${personBasic.profession}</td>
-        </core:otherwise>
-    </core:choose>
+            </tr>
+            <tr>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">
+                    个人经营项目
+                </td>
+                <core:choose>
+                    <core:when test="${empty personBasic.businessProj}">
+                        <td align="center">&nbsp;</td>
+                    </core:when>
+                    <core:otherwise>
+                        <td align="center" colspan="4">${personBasic.businessProj}</td>
+                    </core:otherwise>
+                </core:choose>
 
-</tr>
-<tr>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">
-        个人经营项目
-    </td>
-    <core:choose>
-        <core:when test="${empty personBasic.businessProj}">
-            <td align="center">&nbsp;</td>
-        </core:when>
-        <core:otherwise>
-            <td align="center" colspan="4">${personBasic.businessProj}</td>
-        </core:otherwise>
-    </core:choose>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">经营年限</td>
+                <core:choose>
+                    <core:when test="${empty personBasic.businessYear}">
+                        <td align="center">&nbsp;</td>
+                    </core:when>
+                    <core:otherwise>
+                        <td align="center" colspan="2">${personBasic.businessYear}</td>
+                    </core:otherwise>
+                </core:choose>
 
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">经营年限</td>
-    <core:choose>
-        <core:when test="${empty personBasic.businessYear}">
-            <td align="center">&nbsp;</td>
-        </core:when>
-        <core:otherwise>
-            <td align="center" colspan="2">${personBasic.businessYear}</td>
-        </core:otherwise>
-    </core:choose>
+            </tr>
+            <tr>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">
+                    经营场所
+                </td>
+                <core:choose>
+                    <core:when test="${empty personBasic.businessSite}">
+                        <td align="center">&nbsp;</td>
+                    </core:when>
+                    <core:otherwise>
+                        <td align="center" colspan="3">${personBasic.businessSite}</td>
+                    </core:otherwise>
+                </core:choose>
 
-</tr>
-<tr>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">
-        经营场所
-    </td>
-    <core:choose>
-        <core:when test="${empty personBasic.businessSite}">
-            <td align="center">&nbsp;</td>
-        </core:when>
-        <core:otherwise>
-            <td align="center" colspan="3">${personBasic.businessSite}</td>
-        </core:otherwise>
-    </core:choose>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">从事行业</td>
+                <core:choose>
+                    <core:when test="${empty personBasic.industry}">
+                        <td align="center">&nbsp;</td>
+                    </core:when>
+                    <core:otherwise>
+                        <td align="center" colspan="3">${personBasic.industry}</td>
+                    </core:otherwise>
+                </core:choose>
 
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">从事行业</td>
-    <core:choose>
-        <core:when test="${empty personBasic.industry}">
-            <td align="center">&nbsp;</td>
-        </core:when>
-        <core:otherwise>
-            <td align="center" colspan="3">${personBasic.industry}</td>
-        </core:otherwise>
-    </core:choose>
+            </tr>
+            <tr>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">投资经营性质</td>
+                <core:choose>
+                    <core:when test="${empty personBasic.businessProp}">
+                        <td align="center">&nbsp;</td>
+                    </core:when>
+                    <core:otherwise>
+                        <td align="center">${personBasic.businessProp}</td>
+                    </core:otherwise>
+                </core:choose>
 
-</tr>
-<tr>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">投资经营性质</td>
-    <core:choose>
-        <core:when test="${empty personBasic.businessProp}">
-            <td align="center">&nbsp;</td>
-        </core:when>
-        <core:otherwise>
-            <td align="center">${personBasic.businessProp}</td>
-        </core:otherwise>
-    </core:choose>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">投资资金情况</td>
+                <core:choose>
+                    <core:when test="${empty personBasic.moneySitu}">
+                        <td align="center">&nbsp;</td>
+                    </core:when>
+                    <core:otherwise>
+                        <td align="center">${personBasic.moneySitu}</td>
+                    </core:otherwise>
+                </core:choose>
 
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">投资资金情况</td>
-    <core:choose>
-        <core:when test="${empty personBasic.moneySitu}">
-            <td align="center">&nbsp;</td>
-        </core:when>
-        <core:otherwise>
-            <td align="center">${personBasic.moneySitu}</td>
-        </core:otherwise>
-    </core:choose>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">投入金额</td>
+                <core:choose>
+                    <core:when test="${empty personBasic.inputMoney}">
+                        <td align="center">&nbsp;</td>
+                    </core:when>
+                    <core:otherwise>
+                        <td align="center">${personBasic.inputMoney}</td>
+                    </core:otherwise>
+                </core:choose>
 
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">投入金额</td>
-    <core:choose>
-        <core:when test="${empty personBasic.inputMoney}">
-            <td align="center">&nbsp;</td>
-        </core:when>
-        <core:otherwise>
-            <td align="center">${personBasic.inputMoney}</td>
-        </core:otherwise>
-    </core:choose>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">自有资金情况</td>
+                <core:choose>
+                    <core:when test="${empty personBasic.ownMoney}">
+                        <td align="center">&nbsp;</td>
+                    </core:when>
+                    <core:otherwise>
+                        <td align="center">${personBasic.ownMoney}</td>
+                    </core:otherwise>
+                </core:choose>
 
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">自有资金情况</td>
-    <core:choose>
-        <core:when test="${empty personBasic.ownMoney}">
-            <td align="center">&nbsp;</td>
-        </core:when>
-        <core:otherwise>
-            <td align="center">${personBasic.ownMoney}</td>
-        </core:otherwise>
-    </core:choose>
+            </tr>
+            <tr>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823"> 年收益情况</td>
+                <core:choose>
+                    <core:when test="${empty personBasic.yearIncome}">
+                        <td align="center">&nbsp;</td>
+                    </core:when>
+                    <core:otherwise>
+                        <td align="center" colspan="7">${personBasic.yearIncome}</td>
+                    </core:otherwise>
+                </core:choose>
 
-</tr>
-<tr>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823"> 年收益情况</td>
-    <core:choose>
-        <core:when test="${empty personBasic.yearIncome}">
-            <td align="center">&nbsp;</td>
-        </core:when>
-        <core:otherwise>
-            <td align="center" colspan="7">${personBasic.yearIncome}</td>
-        </core:otherwise>
-    </core:choose>
+            </tr>
+            <tr>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">工作情况</td>
+                <core:choose>
+                    <core:when test="${empty personBasic.workSitu}">
+                        <td align="center">&nbsp;</td>
+                    </core:when>
+                    <core:otherwise>
+                        <td align="center" colspan="7">${personBasic.workSitu}</td>
+                    </core:otherwise>
+                </core:choose>
 
-</tr>
-<tr>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">工作情况</td>
-    <core:choose>
-        <core:when test="${empty personBasic.workSitu}">
-            <td align="center">&nbsp;</td>
-        </core:when>
-        <core:otherwise>
-            <td align="center" colspan="7">${personBasic.workSitu}</td>
-        </core:otherwise>
-    </core:choose>
+            </tr>
+            <tr>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">单位性质</td>
+                <core:choose>
+                    <core:when test="${empty personBasic.unitProp}">
+                        <td align="center">&nbsp;</td>
+                    </core:when>
+                    <core:otherwise>
+                        <td align="center" colspan="3">${personBasic.unitProp}</td>
+                    </core:otherwise>
+                </core:choose>
 
-</tr>
-<tr>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">单位性质</td>
-    <core:choose>
-        <core:when test="${empty personBasic.unitProp}">
-            <td align="center">&nbsp;</td>
-        </core:when>
-        <core:otherwise>
-            <td align="center" colspan="3">${personBasic.unitProp}</td>
-        </core:otherwise>
-    </core:choose>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">单位所属行业</td>
+                <core:choose>
+                    <core:when test="${empty personBasic.unitIndustry}">
+                        <td align="center">&nbsp;</td>
+                    </core:when>
+                    <core:otherwise>
+                        <td align="center" colspan="3">${personBasic.unitIndustry}</td>
+                    </core:otherwise>
+                </core:choose>
 
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">单位所属行业</td>
-    <core:choose>
-        <core:when test="${empty personBasic.unitIndustry}">
-            <td align="center">&nbsp;</td>
-        </core:when>
-        <core:otherwise>
-            <td align="center" colspan="3">${personBasic.unitIndustry}</td>
-        </core:otherwise>
-    </core:choose>
+            </tr>
+            <tr>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">任职部门</td>
+                <core:choose>
+                    <core:when test="${empty personBasic.department}">
+                        <td align="center">&nbsp;</td>
+                    </core:when>
+                    <core:otherwise>
+                        <td align="center" colspan="3">${personBasic.department}</td>
+                    </core:otherwise>
+                </core:choose>
 
-</tr>
-<tr>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">任职部门</td>
-    <core:choose>
-        <core:when test="${empty personBasic.department}">
-            <td align="center">&nbsp;</td>
-        </core:when>
-        <core:otherwise>
-            <td align="center" colspan="3">${personBasic.department}</td>
-        </core:otherwise>
-    </core:choose>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">工作单位类别</td>
+                <core:choose>
+                    <core:when test="${empty personBasic.unitType}">
+                        <td align="center">&nbsp;</td>
+                    </core:when>
+                    <core:otherwise>
+                        <td align="center" colspan="3">${personBasic.unitType}</td>
+                    </core:otherwise>
+                </core:choose>
 
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">工作单位类别</td>
-    <core:choose>
-        <core:when test="${empty personBasic.unitType}">
-            <td align="center">&nbsp;</td>
-        </core:when>
-        <core:otherwise>
-            <td align="center" colspan="3">${personBasic.unitType}</td>
-        </core:otherwise>
-    </core:choose>
+            </tr>
+            <tr>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">职务</td>
+                <core:choose>
+                    <core:when test="${empty personBasic.duties}">
+                        <td align="center">&nbsp;</td>
+                    </core:when>
+                    <core:otherwise>
+                        <td align="center">${personBasic.duties}</td>
+                    </core:otherwise>
+                </core:choose>
 
-</tr>
-<tr>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">职务</td>
-    <core:choose>
-        <core:when test="${empty personBasic.duties}">
-            <td align="center">&nbsp;</td>
-        </core:when>
-        <core:otherwise>
-            <td align="center">${personBasic.duties}</td>
-        </core:otherwise>
-    </core:choose>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">年工资收入（万元）</td>
+                <core:choose>
+                    <core:when test="${empty personBasic.annualWageIncome}">
+                        <td align="center">&nbsp;</td>
+                    </core:when>
+                    <core:otherwise>
+                        <td align="center">${personBasic.annualWageIncome}</td>
+                    </core:otherwise>
+                </core:choose>
 
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">年工资收入（万元）</td>
-    <core:choose>
-        <core:when test="${empty personBasic.annualWageIncome}">
-            <td align="center">&nbsp;</td>
-        </core:when>
-        <core:otherwise>
-            <td align="center">${personBasic.annualWageIncome}</td>
-        </core:otherwise>
-    </core:choose>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">工作年限</td>
+                <core:choose>
+                    <core:when test="${empty personBasic.workYears}">
+                        <td align="center">&nbsp;</td>
+                    </core:when>
+                    <core:otherwise>
+                        <td align="center">${personBasic.workYears}</td>
+                    </core:otherwise>
+                </core:choose>
 
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">工作年限</td>
-    <core:choose>
-        <core:when test="${empty personBasic.workYears}">
-            <td align="center">&nbsp;</td>
-        </core:when>
-        <core:otherwise>
-            <td align="center">${personBasic.workYears}</td>
-        </core:otherwise>
-    </core:choose>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">职称</td>
+                <core:choose>
+                    <core:when test="${empty personBasic.workTitle}">
+                        <td align="center">&nbsp;</td>
+                    </core:when>
+                    <core:otherwise>
+                        <td align="center">${personBasic.workTitle}</td>
+                    </core:otherwise>
+                </core:choose>
 
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">职称</td>
-    <core:choose>
-        <core:when test="${empty personBasic.workTitle}">
-            <td align="center">&nbsp;</td>
-        </core:when>
-        <core:otherwise>
-            <td align="center">${personBasic.workTitle}</td>
-        </core:otherwise>
-    </core:choose>
-
-</tr>
-</core:forEach>
-</core:otherwise>
+            </tr>
+        </core:forEach>
+    </core:otherwise>
 </core:choose>
 
 
@@ -759,44 +767,44 @@
 <core:choose>
     <core:when test="${empty personIncomeExpensesList}">
 
-        <tr>
-            <td align="center" colspan="2" bgcolor="#b4d8ed" style="color:#161823">
-                家庭年总收入（万元）
-            </td>
-            <td align="center" colspan="2">&nbsp;</td>
-            <td align="center" colspan="2" bgcolor="#b4d8ed" style="color:#161823">家庭支出（万元）</td>
-            <td align="center" colspan="2">&nbsp;</td>
-        </tr>
-        <tr>
-            <td align="center" bgcolor="#b4d8ed" style="color:#161823">
-                收入来源
-            </td>
-            <td align="center" colspan="7">&nbsp;</td>
-        </tr>
-        <tr>
-            <td align="center" colspan="2" bgcolor="#b4d8ed" style="color:#161823">
-                其中：个人年收入（万元）
-            </td>
-            <td align="center" colspan="2">&nbsp;</td>
-            <td align="center" colspan="2" bgcolor="#b4d8ed" style="color:#161823">家庭其他成员年收入（万元）</td>
-            <td align="center" colspan="2">&nbsp;</td>
-        </tr>
-        <tr>
-            <td align="center" bgcolor="#b4d8ed" style="color:#161823">投资经营性质</td>
-            <td align="center">&nbsp;</td>
-            <td align="center" bgcolor="#b4d8ed" style="color:#161823">投资资金情况</td>
-            <td align="center">&nbsp;</td>
-            <td align="center" bgcolor="#b4d8ed" style="color:#161823">投入金额</td>
-            <td align="center">&nbsp;</td>
-            <td align="center" bgcolor="#b4d8ed" style="color:#161823">自有资金情况</td>
-            <td align="center">&nbsp;</td>
-        </tr>
-        <tr>
-            <td align="center"  bgcolor="#b4d8ed" style="color:#161823">家庭主要支出项目</td>
-            <td align="center" colspan="3">&nbsp;</td>
-            <td align="center" bgcolor="#b4d8ed" style="color:#161823">家庭收入能否应付支出</td>
-            <td align="center" colspan="3">&nbsp;</td>
-        </tr>
+            <tr>
+                <td align="center" colspan="2" bgcolor="#b4d8ed" style="color:#161823">
+                    家庭年总收入（万元）
+                </td>
+                <td align="center" colspan="2">&nbsp;</td>
+                <td align="center" colspan="2" bgcolor="#b4d8ed" style="color:#161823">家庭支出（万元）</td>
+                <td align="center" colspan="2">&nbsp;</td>
+            </tr>
+            <tr>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">
+                    收入来源
+                </td>
+                <td align="center" colspan="7">&nbsp;</td>
+            </tr>
+            <tr>
+                <td align="center" colspan="2" bgcolor="#b4d8ed" style="color:#161823">
+                    其中：个人年收入（万元）
+                </td>
+                <td align="center" colspan="2">&nbsp;</td>
+                <td align="center" colspan="2" bgcolor="#b4d8ed" style="color:#161823">家庭其他成员年收入（万元）</td>
+                <td align="center" colspan="2">&nbsp;</td>
+            </tr>
+            <tr>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">投资经营性质</td>
+                <td align="center">&nbsp;</td>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">投资资金情况</td>
+                <td align="center">&nbsp;</td>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">投入金额</td>
+                <td align="center">&nbsp;</td>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">自有资金情况</td>
+                <td align="center">&nbsp;</td>
+            </tr>
+            <tr>
+                <td align="center"  bgcolor="#b4d8ed" style="color:#161823">家庭主要支出项目</td>
+                <td align="center" colspan="3">&nbsp;</td>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">家庭收入能否应付支出</td>
+                <td align="center" colspan="3">&nbsp;</td>
+            </tr>
     </core:when>
     <core:otherwise>
         <core:forEach items="${personIncomeExpensesList}" var="personIncomeExpenses">
@@ -939,12 +947,12 @@
 <core:choose>
     <core:when test="${empty personFamilyAssetsList}">
 
-        <tr>
-            <td align="center" bgcolor="#b4d8ed" style="color:#161823">总资产（万元）</td>
-            <td align="center">&nbsp;</td>
-            <td align="center" bgcolor="#b4d8ed" style="color:#161823">主要资产</td>
-            <td align="center" colspan="5">&nbsp;</td>
-        </tr>
+            <tr>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">总资产（万元）</td>
+                <td align="center">&nbsp;</td>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">主要资产</td>
+                <td align="center" colspan="5">&nbsp;</td>
+            </tr>
     </core:when>
     <core:otherwise>
         <core:forEach items="${personFamilyAssetsList}" var="personFamilyAssets">
@@ -982,34 +990,34 @@
 <core:choose>
     <core:when test="${empty personHousePropertyInfoList}">
 
-        <tr>
-            <td align="center" bgcolor="#b4d8ed" style="color:#161823">性质</td>
-            <td align="center">&nbsp;</td>
-            <td align="center" bgcolor="#b4d8ed" style="color:#161823">用途</td>
-            <td align="center">&nbsp;</td>
-            <td align="center" bgcolor="#b4d8ed" style="color:#161823">所在位置</td>
-            <td align="center">&nbsp;</td>
-            <td align="center" bgcolor="#b4d8ed" style="color:#161823">房屋结构</td>
-            <td align="center">&nbsp;</td>
-        </tr>
-        <tr>
-            <td align="center" bgcolor="#b4d8ed" style="color:#161823">层数</td>
-            <td align="center">&nbsp;</td>
-            <td align="center" bgcolor="#b4d8ed" style="color:#161823">使用情况</td>
-            <td align="center">&nbsp;</td>
-            <td align="center" bgcolor="#b4d8ed" style="color:#161823">建筑面积</td>
-            <td align="center">&nbsp;</td>
-            <td align="center" bgcolor="#b4d8ed" style="color:#161823">房产价值</td>
-            <td align="center">&nbsp;</td>
-        </tr>
-        <tr>
-            <td align="center" bgcolor="#b4d8ed" style="color:#161823">是否按揭</td>
-            <td align="center">&nbsp;</td>
-            <td align="center" bgcolor="#b4d8ed" style="color:#161823">是否办证</td>
-            <td align="center">&nbsp;</td>
-            <td align="center" bgcolor="#b4d8ed" style="color:#161823">备注</td>
-            <td align="center">&nbsp;</td>
-        </tr>
+            <tr>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">性质</td>
+                <td align="center">&nbsp;</td>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">用途</td>
+                <td align="center">&nbsp;</td>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">所在位置</td>
+                <td align="center">&nbsp;</td>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">房屋结构</td>
+                <td align="center">&nbsp;</td>
+            </tr>
+            <tr>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">层数</td>
+                <td align="center">&nbsp;</td>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">使用情况</td>
+                <td align="center">&nbsp;</td>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">建筑面积</td>
+                <td align="center">&nbsp;</td>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">房产价值</td>
+                <td align="center">&nbsp;</td>
+            </tr>
+            <tr>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">是否按揭</td>
+                <td align="center">&nbsp;</td>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">是否办证</td>
+                <td align="center">&nbsp;</td>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">备注</td>
+                <td align="center">&nbsp;</td>
+            </tr>
 
     </core:when>
     <core:otherwise>
@@ -1142,26 +1150,26 @@
 <core:choose>
     <core:when test="${empty personLandInfoList}">
 
-        <tr>
-            <td align="center" bgcolor="#b4d8ed" style="color:#161823">土地面积</td>
-            <td align="center">&nbsp;</td>
+            <tr>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">土地面积</td>
+                <td align="center">&nbsp;</td>
 
-            <td align="center" bgcolor="#b4d8ed" style="color:#161823">土地价值</td>
-            <td align="center">&nbsp;</td>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">土地价值</td>
+                <td align="center">&nbsp;</td>
 
-            <td align="center" bgcolor="#b4d8ed" style="color:#161823">土地性质</td>
-            <td align="center">&nbsp;</td>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">土地性质</td>
+                <td align="center">&nbsp;</td>
 
-            <td align="center" bgcolor="#b4d8ed" style="color:#161823">土地类型</td>
-            <td align="center">&nbsp;</td>
-        </tr>
-        <tr>
-            <td align="center" bgcolor="#b4d8ed" style="color:#161823">土地使用情况</td>
-            <td align="center">&nbsp;</td>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">土地类型</td>
+                <td align="center">&nbsp;</td>
+            </tr>
+            <tr>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">土地使用情况</td>
+                <td align="center">&nbsp;</td>
 
-            <td align="center" bgcolor="#b4d8ed" style="color:#161823">土地款是否结清</td>
-            <td align="center">&nbsp;</td>
-        </tr>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">土地款是否结清</td>
+                <td align="center">&nbsp;</td>
+            </tr>
     </core:when>
     <core:otherwise>
         <core:forEach items="${personLandInfoList}" var="personLandInfo">
@@ -1360,22 +1368,22 @@
 
 <core:choose>
     <core:when test="${empty personFamilyIncurDebtsList}">
-        <tr>
-            <td align="center" bgcolor="#b4d8ed" style="color:#161823">
-                家庭负债总额（万元）
-            </td>
-            <td align="center">&nbsp;</td>
-            <td align="center" bgcolor="#b4d8ed" style="color:#161823">本行负债（万元）</td>
-            <td align="center">&nbsp;</td>
-            <td align="center" bgcolor="#b4d8ed" style="color:#161823">他行负债（万元）</td>
-            <td align="center" colspan="2">&nbsp;</td>
-        </tr>
-        <tr>
-            <td align="center" bgcolor="#b4d8ed" style="color:#161823">贷款用途</td>
-            <td align="center" colspan="3">&nbsp;</td>
-            <td align="center" bgcolor="#b4d8ed" style="color:#161823">贷款形态</td>
-            <td align="center" colspan="3">&nbsp;</td>
-        </tr>
+            <tr>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">
+                    家庭负债总额（万元）
+                </td>
+                <td align="center">&nbsp;</td>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">本行负债（万元）</td>
+                <td align="center">&nbsp;</td>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">他行负债（万元）</td>
+                <td align="center" colspan="2">&nbsp;</td>
+            </tr>
+            <tr>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">贷款用途</td>
+                <td align="center" colspan="3">&nbsp;</td>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">贷款形态</td>
+                <td align="center" colspan="3">&nbsp;</td>
+            </tr>
     </core:when>
     <core:otherwise>
         <core:forEach items="${personFamilyIncurDebtsList}" var="personFamilyIncurDebts">
@@ -1452,27 +1460,27 @@
 <core:choose>
     <core:when test="${empty personFamilyMemberList}">
         <tr>
-            <td align="center" bgcolor="#b4d8ed" style="color:#161823">姓名</td>
-            <td align="center">&nbsp;</td>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">姓名</td>
+                <td align="center">&nbsp;</td>
 
-            <td align="center" bgcolor="#b4d8ed" style="color:#161823">年收入（万元）</td>
-            <td align="center">&nbsp;</td>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">年收入（万元）</td>
+                <td align="center">&nbsp;</td>
 
-            <td align="center" bgcolor="#b4d8ed" style="color:#161823">与户主关系</td>
-            <td align="center">&nbsp;</td>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">与户主关系</td>
+                <td align="center">&nbsp;</td>
 
-            <td align="center" bgcolor="#b4d8ed" style="color:#161823">职业</td>
-            <td align="center">&nbsp;</td>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">职业</td>
+                <td align="center">&nbsp;</td>
 
-        </tr>
-        <tr>
+            </tr>
+            <tr>
 
-            <td align="center" bgcolor="#b4d8ed" style="color:#161823">证件号码</td>
-            <td align="center" colspan="3">&nbsp;</td>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">证件号码</td>
+                <td align="center" colspan="3">&nbsp;</td>
 
-            <td align="center" bgcolor="#b4d8ed" style="color:#161823">常住地址</td>
-            <td align="center" colspan="3">&nbsp;</td>
-        </tr>
+                <td align="center" bgcolor="#b4d8ed" style="color:#161823">常住地址</td>
+                <td align="center" colspan="3">&nbsp;</td>
+            </tr>
     </core:when>
     <core:otherwise>
         <core:forEach items="${personFamilyMemberList}" var="personFamilyMember">

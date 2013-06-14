@@ -37,6 +37,25 @@ CREATE TABLE `appversionsinfo` (
 
 /*Data for the table `appversionsinfo` */
 
+/*Table structure for table `devicescontrol` */
+
+DROP TABLE IF EXISTS `devicescontrol`;
+
+CREATE TABLE `devicescontrol` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `deviceId` varchar(20) DEFAULT NULL,
+  `createTime` varchar(50) DEFAULT NULL,
+  `note1` varchar(200) DEFAULT NULL,
+  `note2` varchar(200) DEFAULT NULL,
+  `note3` varchar(200) DEFAULT NULL,
+  `note4` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `Index_1` (`createTime`),
+  KEY `Index_3` (`deviceId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='授权设备信息表';
+
+/*Data for the table `devicescontrol` */
+
 /*Table structure for table `areasinfo` */
 
 DROP TABLE IF EXISTS `areasinfo`;
@@ -179,25 +198,6 @@ CREATE TABLE `customermanagereva` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='客户经理评价表';
 
 /*Data for the table `customermanagereva` */
-
-/*Table structure for table `devicescontrol` */
-
-DROP TABLE IF EXISTS `devicescontrol`;
-
-CREATE TABLE `devicescontrol` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `deviceId` varchar(20) DEFAULT NULL,
-  `createTime` varchar(50) DEFAULT NULL,
-  `note1` varchar(200) DEFAULT NULL,
-  `note2` varchar(200) DEFAULT NULL,
-  `note3` varchar(200) DEFAULT NULL,
-  `note4` varchar(200) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `Index_1` (`createTime`),
-  KEY `Index_3` (`deviceId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='授权设备信息表';
-
-/*Data for the table `devicescontrol` */
 
 /*Table structure for table `familyassets` */
 
@@ -447,6 +447,18 @@ CREATE TABLE `locationinfo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='位置信息表';
 
 /*Data for the table `locationinfo` */
+
+DROP TABLE IF EXISTS `t_appoint`;
+
+CREATE TABLE `t_appoint` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `recordId` bigint(20) NOT NULL,
+  `user_id` bigint(20) NOT NULL,
+  `downloaded` int(1) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+/*Data for the table `t_appoint` */
 
 /*Table structure for table `logsinfo` */
 

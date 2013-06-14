@@ -1,6 +1,7 @@
 package com.rcuinfomanager.dao;
 
 import com.rcuinfomanager.model.*;
+import com.rcuinfomanager.webservice.model.AllColumnInfo;
 
 import java.util.List;
 
@@ -28,15 +29,10 @@ public interface BaseInfoDao {
       List<FamilyAssets> getFamilyAssets(Long recordId);
       //负责情况信息
       List<FamilyIncurDebts> getFamilyIncurDebts(Long recordId);
-
-
-
-
-
-
       //获取家庭成员信息
       List<FamilyMember> getFamilyMember(Long recordId);
       //删除客户信息
       int getDeleteCusBasicInfo(int recordId);
       //指派用户信息
+      List<AllColumnInfo> queryAppointInfoByUserId(long userId);
 }

@@ -5,7 +5,10 @@ import com.rcuinfomanager.service.UserService;
 import com.rcuinfomanager.session.SessionUser;
 import com.rcuinfomanager.session.UserSessionContext;
 import com.rcuinfomanager.session.UserSessionCookieName;
-import com.rcuinfomanager.util.*;
+import com.rcuinfomanager.util.CodeGenerator;
+import com.rcuinfomanager.util.CookieUtil;
+import com.rcuinfomanager.util.JsonParser;
+import com.rcuinfomanager.util.RequestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -73,4 +76,5 @@ public class AccountController extends BaseController {
     public String successLogonPage(ModelMap modelMap, HttpServletRequest request) {
         return "index";
     }
+
 }

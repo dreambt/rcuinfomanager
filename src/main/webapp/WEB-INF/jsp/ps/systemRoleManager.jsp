@@ -17,13 +17,24 @@
     <script type="text/javascript">
         $(function(){
             /*if(${firstLogin}){
-             alert("第一次登录，是否需要修改密码？");
-             }*/
+                alert("第一次登录，是否需要修改密码？");
+            }*/
 
             $('.span3').click(function(){
                 $("li[class='active']").removeAttr("class");
                 $(this).addClass("active");
             });
+
+            $('#addRoleOperate').click(function(){
+                var url='/addSystemRole';
+                window.top.artDialog({
+                    id: 'addRole',
+                    title: '系统角色管理 〉添加',
+                    lock:true,
+                    content:'<iframe scrolling="auto" width="750" height="550" frameborder="0" style="border: none;margin: -20px -25px;"marginheight="0" marginwidth="0" src="'+ url +'"/>'
+                });
+            });
+
         });
     </script>
 </head>
@@ -64,9 +75,7 @@
             <input class="input-block-level" type="text" placeholder="系统角色管理" disabled="disabled" style="color:#0000AA">
             <div class="pad-10">
                 <div class="content-menu ib-a blue line-x">
-                    <a href="addSystemRole.jsp" target="mainFrame" class="left-font03">
-                        <input id="" type="button" name="" value="添加" style="width:80px; height:30px"/>
-                    </a>
+                    <input id="addRoleOperate" type="button" value="添加" style="width:80px; height:30px"/>
                 </div>
                 <form name="myform" id="myform" action="" method="post">
                     <%--<div class="btn">
@@ -143,15 +152,15 @@
                             </tbody>
                         </table>
                         <div class="pagination" style="text-align: center;">
-                            <ul>
-                                <li><a href="#">«</a></li>
-                                <li><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">5</a></li>
-                                <li><a href="#">»</a></li>
-                            </ul>
+                          <ul>
+                            <li><a href="#">«</a></li>
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                            <li><a href="#">»</a></li>
+                          </ul>
                         </div>
                     </div>
                 </form>

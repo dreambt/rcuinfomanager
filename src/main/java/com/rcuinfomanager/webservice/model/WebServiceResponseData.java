@@ -1,4 +1,4 @@
-package com.rcuinfomanager.model;
+package com.rcuinfomanager.webservice.model;
 
 import java.util.List;
 

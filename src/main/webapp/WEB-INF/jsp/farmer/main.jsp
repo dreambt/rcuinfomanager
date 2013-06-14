@@ -19,6 +19,10 @@
             if(${firstLogin}){
                 alert("第一次登录，是否需要修改密码？");
             }
+            var delMsg="${delSuccess}";
+            if(delMsg){
+                alert(delMsg);
+            }
         });
     </script>
 </head>
@@ -73,7 +77,7 @@
                 </div>
                 <div class="btn-group">
                     <button class="btn" type="button" id="assignOperate">指派</button>
-                    <button class="btn" type="button" id="checkOperate">验收</button>
+                    <button class="btn" type="button">验收</button>
                 </div>
                 <div class="btn-group">
                     <button class="btn dropdown-toggle" data-toggle="dropdown">导入 <span class="caret"></span></button>
@@ -110,37 +114,37 @@
                     </thead>
                     <tbody>
                     <core:forEach items="${familyInfoList}" var="familyInfo">
-                        <tr>
-                            <td align="center" class="first">
-                                <input type="checkbox" class="checkOpera" recordId="${familyInfo.recordId}"/>
-                            </td>
-                            <td align="center">${familyInfo.recordId}</td>
-                            <td align="center">${familyInfo.customerName}</td>
-                            <td align="center">${familyInfo.telephone}</td>
-                            <td align="center">${familyInfo.submitTime}</td>
-                            <td align="center">${familyInfo.organizationName}</td>
-                            <td align="center">${familyInfo.displayUserName}</td>
-                            <td align="center">${familyInfo.state}</td>
-                            <td align="center">
-                                <a href="#" style="color:#0099FF" class="showOperate" recordId="${familyInfo.recordId}">查看</a>&nbsp;|&nbsp;
-                                <a href="#" style="color:#0099FF" class="appointOperate" recordId="${familyInfo.recordId}">指派</a>&nbsp;|&nbsp;
-                                <a href="#" style="color:#0099FF" class="editOperate" recordId="${familyInfo.recordId}">编辑</a>&nbsp;|&nbsp;
-                                <a href="#" style="color:#FF0000" class="deleteOperate" recordId="${familyInfo.recordId}">删除</a>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td align="center" class="first">
+                            <input type="checkbox" name="checkOpera" class="checkOpera" recordId="${familyInfo.recordId}"/>
+                        </td>
+                        <td align="center">${familyInfo.recordId}</td>
+                        <td align="center">${familyInfo.customerName}</td>
+                        <td align="center">${familyInfo.telephone}</td>
+                        <td align="center">${familyInfo.submitTime}</td>
+                        <td align="center">${familyInfo.organizationName}</td>
+                        <td align="center">${familyInfo.displayUserName}</td>
+                        <td align="center">${familyInfo.state}</td>
+                        <td align="center">
+                            <a href="#" style="color:#0099FF" class="showOperate" recordId="${familyInfo.recordId}">查看</a>&nbsp;|&nbsp;
+                            <a href="#" style="color:#0099FF" class="appointOperate" recordId="${familyInfo.recordId}">指派</a>&nbsp;|&nbsp;
+                            <a href="#" style="color:#0099FF" class="editOperate" recordId="${familyInfo.recordId}">编辑</a>&nbsp;|&nbsp;
+                            <a href="#" style="color:#FF0000" class="deleteOperate" recordId="${familyInfo.recordId}">删除</a>
+                        </td>
+                    </tr>
                     </core:forEach>
                     </tbody>
                 </table>
                 <div class="pagination" style="text-align: center;">
-                    <ul>
-                        <li><a href="#">«</a></li>
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#">»</a></li>
-                    </ul>
+                  <ul>
+                    <li><a href="#">«</a></li>
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li><a href="#">»</a></li>
+                  </ul>
                 </div>
             </div>
         </div>

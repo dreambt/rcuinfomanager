@@ -64,32 +64,34 @@
             <input class="input-block-level" type="text" placeholder="系统日志" disabled="disabled" style="color:#0000AA">
             <div class="pad-10">
                 <div class="btn-default">
-                    <form class="form-search">
-                        <input type="text" style="width: 115px;height: 30px; margin-top: 10px;">&nbsp;-&nbsp;
-                        <input type="text" style="width: 115px;height: 30px; margin-top: 10px;">
-                        <a href="#" class="btn btn-small">查询</a>
-                    </form>
+                  <form class="form-search">
+                      按时间：
+                    <input type="text" style="width: 115px;height: 25px; margin-top: 10px;">&nbsp;-&nbsp;
+                    <input type="text" style="width: 115px;height: 25px; margin-top: 10px;">&nbsp;
+                    <input type="text" placeholder="按系统帐号" style="width: 140px;height: 25px; margin-top: 10px;">
+                    <a href="#" class="btn btn-small">查询</a>
+                  </form>
                 </div>
                 <form name="myform" id="myform" action="" method="post">
                     <div class="table-list">
-                        <table width="100%">
-                            <thead>
-                            <tr>
-                                <th width="271" align="center">时间</th>
-                                <th width="260" align="center">系统账号</th>
-                                <th width="564" align="center">操作</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td align="center">2013-05-07 10:26:47</td>
-                                <td align="center">admin</td>
-                                <td align="center"><p>用户退出</p></td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <div class="pagination" style="text-align: center;">
-                            <ul>
+                            <table width="100%">
+                                <thead>
+                                <tr>
+                                    <th width="271" align="center">时间</th>
+                                    <th width="260" align="center">系统账号</th>
+                                    <th width="564" align="center">操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td align="center">2013-05-07 10:26:47</td>
+                                    <td align="center">admin</td>
+                                    <td align="center"><p>用户退出</p></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div class="pagination" style="text-align: center;">
+                              <ul>
                                 <li><a href="#">«</a></li>
                                 <li><a href="#">1</a></li>
                                 <li><a href="#">2</a></li>
@@ -97,8 +99,8 @@
                                 <li><a href="#">4</a></li>
                                 <li><a href="#">5</a></li>
                                 <li><a href="#">»</a></li>
-                            </ul>
-                        </div>
+                              </ul>
+                            </div>
                     </div>
                 </form>
             </div>
@@ -107,3 +109,6 @@
 </div>
 </body>
 </html>
+
+
+

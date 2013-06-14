@@ -16,8 +16,8 @@ $(function(){
     //编辑
     $('.editOperate').click(function(){
         var me=$(this);
-        var recordId=me.attr('recordId');
-        var url='family/edit/'+recordId;
+        var id=me.attr('recordId');
+        var url='family/edit/'+id;
         window.location.href = url;
     });
 
@@ -26,8 +26,8 @@ $(function(){
     $('.deleteOperate').click(function(){
         if(confirm('确定要删除吗？')){
             var me=$(this);
-            var recordId=me.attr('recordId');
-            var url = 'family/delete/'+recordId;
+            var id=me.attr('recordId');
+            var url = 'family/delete/'+id;
             window.location.href=url;
         }
     });
@@ -54,6 +54,7 @@ $(function(){
     $('.appointOperate').click(function(){
         var me=$(this);
         var recordId=me.attr('recordId');
+        //var uName=me.attr('userName');
         var url='family/appoint/'+recordId;
         window.art.dialog({
             id: 'assign',
@@ -84,42 +85,30 @@ $(function(){
             }
         });
         if(isExist){
-            var url = 'family/batchAppoints/'+recordIds;
-            window.art.dialog({
+            if(!recordIds.split(',')){
+              var url='family/appoint/'+recordId;
+              window.art.dialog({
                 id: 'assign',
                 title: '指派信息',
                 lock:true,
                 content:'<iframe scrolling="auto" width="450" height="210" frameborder="0" style="border: none;margin: -20px -25px;"marginheight="0" marginwidth="0" src="'+ url +'"/>'
-            });
+              });
+            }else{
+                alert("只能勾选任一项信息！");
+            }
         }else{
-            var timer;
-            window.art.dialog({
-                content: '未勾选任何客户信息！',
-                init: function () {
-                    var that = this, i = 2;
-                    var fn = function () {
-                        that.title(i + '秒后关闭');
-                        !i && that.close();
-                        i --;
-                    };
-                    timer = setInterval(fn, 1000);
-                    fn();
-                },
-                close: function () {
-                    clearInterval(timer);
-                }
-            }).show();
+            alert("未选勾选任何信息！");
         }
     });
 
     //导入基础数据
-    $('#importBasicData').click(function(){
-        var url='';
+    $('#importBasicOperate').click(function(){
+        var url='family/importBasicData';
         window.top.artDialog({
             id: 'import',
             title: '导入基础数据信息',
             lock:true,
-            content:'<iframe scrolling="auto" width="620" height="560" frameborder="0" style="border: none;margin: -20px -25px;"marginheight="0" marginwidth="0" src="'+ url +'"/>'
+            content:'<iframe scrolling="auto" width="500" height="350" frameborder="0" style="border: none;margin: -20px -25px;"marginheight="0" marginwidth="0" src="'+ url +'"/>'
         });
 
     });

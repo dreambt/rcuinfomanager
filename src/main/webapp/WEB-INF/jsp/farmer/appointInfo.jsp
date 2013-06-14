@@ -62,7 +62,9 @@
             <td align="right">
                 <select class="span3" name="organizationName" id="organizationName" style="width:202px;">
                     <option value="">选择网点</option>
-                    <option value="" >小作社</option>
+                    <core:forEach items="${orgNameInfo}" var="orgName">
+                        <option value="${orgName.organizationName}" >${orgName.organizationName}</option>
+                    </core:forEach>
                 </select>
             </td>
         </tr>

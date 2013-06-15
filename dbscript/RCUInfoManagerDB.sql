@@ -1,4 +1,4 @@
-/*
+﻿/*
 SQLyog Trial v11.11 (64 bit)
 MySQL - 5.6.11 : Database - rcuinfomanager
 *********************************************************************
@@ -579,6 +579,7 @@ CREATE TABLE `usersinfo` (
   `displayUserName` varchar(20) DEFAULT NULL,
   `curDesignateFlag` int(11) DEFAULT NULL,
   `createTime` varchar(50) DEFAULT NULL,
+  `needModifyPassword` int(1),
   `lastLoginTime` varchar(50) DEFAULT NULL,
   `note1` varchar(200) DEFAULT NULL,
   `note2` varchar(200) DEFAULT NULL,
@@ -630,3 +631,20 @@ CREATE TABLE `villagemanagereva` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='村委会评价表';
 
 /*Data for the table `villagemanagereva` */
+
+DROP TABLE IF EXISTS `photosinfo`;
+
+create table `photosinfo`(
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `recordId` bigint(20) DEFAULT NULL,
+  `photoUri` varchar(100) DEFAULT NULL,
+  `note1` varchar(200) DEFAULT NULL,
+  `note2` varchar(200) DEFAULT NULL,
+  `note3` varchar(200) DEFAULT NULL,
+  `note4` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `Index_1` (`id`),
+  KEY `Index_2` (`photoUri`),
+  KEY `FK_Reference_17` (`recordId`),
+  CONSTRAINT `FK_Reference_17` FOREIGN KEY (`recordId`) REFERENCES `baseinfo` (`recordId`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='照片信息表';

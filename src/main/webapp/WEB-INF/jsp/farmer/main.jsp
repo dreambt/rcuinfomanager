@@ -145,13 +145,11 @@
                 </table>
                 <div class="pagination" style="text-align: center;">
                     <ul>
-                        <li><a href="#">«</a></li>
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#">»</a></li>
+                        <li> <a href="/index/?page=1">首页</a> </li>
+                        <c:forEach begin="1" end="${pageCount}" var="p">
+                            <li> <a href="/index/?page=${p}">${p}</a> </li>
+                        </c:forEach>
+                        <li> <a href="/index/?page=${pageCount}">尾页</a> </li>
                     </ul>
                 </div>
             </div>

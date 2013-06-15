@@ -10,7 +10,9 @@ import com.rcuinfomanager.session.UserSessionContextHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * @author 王文庭(xorbytes@qq.com)
@@ -31,15 +33,23 @@ public class HomeController {
 
     //客户电子信息管理
     @RequestMapping(value ="/index")
-    public String index(ModelMap map) {
+    public String index(@RequestParam(value = "page", required = false) Integer pageNum, ModelMap map) {
+
+        if (pageNum == null) {
+            pageNum = 1;
+        }
+
         UserSessionContext userSessionContext = UserSessionContextHolder.getUserSessionContext();
         SessionUser sessionUser = userSessionContext.getSessionUser();
         map.put("firstLogin",sessionUser.isFirstLogon());
         map.put("displayUserName", sessionUser.getDisplayUserName());
-        if(sessionUser.getId()==1){
-            map.put("familyInfoList",baseInfoService.getAllFamilyInfoList());
+        int offset = 1;
+        if("admin".equalsIgnoreCase(sessionUser.getUserName())){
+            map.put("pageCount", baseInfoService.getAllFamilyInfoListByCount() / offset);
+            map.put("familyInfoList",baseInfoService.getAllFamilyInfoListByPage(pageNum,offset));
         }else{
-            map.put("familyInfoList", baseInfoService.getFamilyInfoList(sessionUser.getId()));
+            map.put("pageCount", baseInfoService.getFamilyInfoListByCount(sessionUser.getId()) / offset);
+            map.put("familyInfoList", baseInfoService.getFamilyInfoListByPage(sessionUser.getId(), pageNum, offset));
         }
         return "farmer/main";
     }

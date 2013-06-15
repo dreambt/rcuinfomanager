@@ -8,7 +8,6 @@ import com.rcuinfomanager.webservice.model.AllColumnInfo;
 import com.rcuinfomanager.webservice.model.WebResponseData;
 import com.rcuinfomanager.webservice.model.WebServiceResponseData;
 import com.security.mdfive.MDFive;
-import net.sf.json.JSONArray;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/api/1")
@@ -62,6 +59,9 @@ public class FarmerInfoWebService {
             List<AllColumnInfo> allColumnInfoList = mapper.readValue(rawData, new TypeReference<List<AllColumnInfo>>() {});
             if (allColumnInfoList != null && !allColumnInfoList.isEmpty()) {
                 //save it to db
+                for (AllColumnInfo allColumnInfo : allColumnInfoList) {
+
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();

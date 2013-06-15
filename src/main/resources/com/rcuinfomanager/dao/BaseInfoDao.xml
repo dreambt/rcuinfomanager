@@ -14,20 +14,37 @@
     </resultMap>
 
     <!-- //管理员获取数据列表-->
-    <select id="queryAdminByBaseInfo" resultMap="userListInfo">
+    <select id="queryAdminByBaseInfoByPage" resultMap="userListInfo">
         select b.recordId,b.customerName,b.telephone,b.submitTime,org.organizationName,u.displayUserName,b.state
+        from baseinfo b
+        left outer join usersinfo u on b.userName=u.userName
+        left outer join organizationInfo org on u.organizationId=org.organizationId limit #{beginPageNum}, #{endPageNum}
+    </select>
+
+    <select id="queryAdminByBaseInfoByCount" resultType="java.lang.Integer">
+        select count(*)
         from baseinfo b
         left outer join usersinfo u on b.userName=u.userName
         left outer join organizationInfo org on u.organizationId=org.organizationId
     </select>
     <!-- 普通用户获取数据列表-->
-    <select id="queryNormalByBaseInfo" parameterType="java.lang.Integer" resultMap="userListInfo">
+    <select id="queryNormalByBaseInfoByPage" parameterType="java.lang.Integer" resultMap="userListInfo">
         select b.recordId,b.customerName,b.telephone,b.submitTime,org.organizationName,u.displayUserName,b.state
+        from baseinfo b
+        left outer join usersinfo u on b.userName=u.userName
+        left outer join organizationInfo org on u.organizationId=org.organizationId
+        where u.userId=#{userId} limit #{beginPageNum}, #{endPageNum}
+    </select>
+
+    <select id="queryNormalByBaseInfoByCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select count(*)
         from baseinfo b
         left outer join usersinfo u on b.userName=u.userName
         left outer join organizationInfo org on u.organizationId=org.organizationId
         where u.userId=#{userId}
     </select>
+
+
     <!--显示客户个人信息-->
     <select id="getPersonBasicInfo" parameterType="java.lang.Long" resultMap="userListInfo">
         select b.recordId,b.customerName,b.telephone,org.organizationName,u.displayUserName
@@ -378,5 +395,23 @@
            where b.recordId=#{recordId}
     </delete>
     -->
+
+    <select id="getBaseInfoByCustomerAndCerNum" parameterType="java.lang.String" resultType="com.rcuinfomanager.model.BaseInfo">
+        select * from baseinfo where customerName = #{customerName} and cerNum = #{cerNum}
+    </select>
+
+    <update id="updateBaseInfoById" parameterType="com.rcuinfomanager.model.BaseInfo">
+        update baseinfo set village = #{village}, gender = #{gender}, isFarmer = #{isFarmer}, cerType = #{cerType},cerValidityFrom = #{cerValidityFrom} ,
+           getCerValidityTo = #{getCerValidityTo}, customerType = #{customerType}, birthday = #{birthday}, nationality = #{nationality}, isHavePassport = #{isHavePassport},
+           nation = #{nation}, poliLaspect = #{poliLaspect}, address = #{address}, postcode = #{postcode}, telephone = #{telephone}, mbPhoneNum = #{mbPhoneNum},
+           areaCode = #{areaCode}, areaName = #{areaName}, highestDegree = #{highestDegree}, highestEdu = #{highestEdu}, health = #{health},
+           bankRelation = #{bankRelation}, liveCondition = #{liveCondition}, maritalStatus = #{maritalStatus}, socialSecurity = #{socialSecurity},
+           bankPartnership = #{bankPartnership}, profession = #{profession}, businessProj = #{businessProj}, businessYear = #{businessYear},
+           businessSite = #{businessSite}, industry = #{industry}, businessProp = #{businessProp}, moneySitu = #{moneySitu},  inputMoney = #{inputMoney}
+           ownMoney = #{ownMoney}, yearIncome = #{yearIncome}, annualWageIncome = #{annualWageIncome}, workYears = #[workYears], workSitu = #{workSitu},
+           unitProp = #{unitProp}, unitIndustry = #{unitIndustry}, unitIndustryName = #{unitIndustryName}, department = #{department}, unitType = #{unitType},
+           duties = #{duties}, workTitle = #{workTitle}, state = #{state}
+        where recordId = #{recordId}
+    </update>
 
 </mapper>

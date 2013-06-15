@@ -14,13 +14,27 @@ public class BaseInfoService {
     private BaseInfoDao baseInfoDao;
 
     //admin
-    public List<CustomerListInfo> getAllFamilyInfoList() {
-        return baseInfoDao.queryAdminByBaseInfo();
+    public List<CustomerListInfo> getAllFamilyInfoListByPage(int pageNum, int offset) {
+        int beginPageNum = (pageNum -1) * offset;
+        int engPageNum = pageNum * offset;
+
+        return baseInfoDao.queryAdminByBaseInfoByPage(beginPageNum, engPageNum);
+    }
+
+    public int getAllFamilyInfoListByCount() {
+        return baseInfoDao.queryAdminByBaseInfoByCount();
     }
 
     //Normal
-    public List<CustomerListInfo> getFamilyInfoList(int userId) {
-        return baseInfoDao.queryNormalByBaseInfo(userId);
+    public List<CustomerListInfo> getFamilyInfoListByPage(int userId, int pageNum, int offset) {
+        int beginPageNum = (pageNum -1) * offset;
+        int engPageNum = pageNum * offset;
+
+        return baseInfoDao.queryNormalByBaseInfoByPage(userId, beginPageNum, engPageNum);
+    }
+
+    public int getFamilyInfoListByCount(int userId) {
+        return baseInfoDao.queryNormalByBaseInfoByCount(userId);
     }
 
     //显示客户个人信息
@@ -113,6 +127,4 @@ public class BaseInfoService {
 
         return baseInfoDao.queryAppointInfoByUserId(userId);
     }
-
-
 }

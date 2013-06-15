@@ -2,15 +2,20 @@ package com.rcuinfomanager.dao;
 
 import com.rcuinfomanager.model.*;
 import com.rcuinfomanager.webservice.model.AllColumnInfo;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 public interface BaseInfoDao {
     //管理员获取数据列表
-    List<CustomerListInfo> queryAdminByBaseInfo();
+    List<CustomerListInfo> queryAdminByBaseInfoByPage(@Param("beginPageNum") int beginPageNum, @Param("endPageNum") int endPageNum);
+
+    int queryAdminByBaseInfoByCount();
 
     //普通用户获取数据列表
-    List<CustomerListInfo> queryNormalByBaseInfo(int userId);
+    List<CustomerListInfo> queryNormalByBaseInfoByPage(@Param("userId") int userId, @Param("beginPageNum") int beginPageNum, @Param("endPageNum") int endPageNum);
+
+    int queryNormalByBaseInfoByCount(@Param("userId")int userId);
 
     //显示客户个人信息
     List<CustomerListInfo> getPersonBasicInfo(Long recordId);
@@ -46,4 +51,6 @@ public interface BaseInfoDao {
     int getDeleteCusBasicInfo(int recordId);
     //指派用户信息
     List<AllColumnInfo> queryAppointInfoByUserId(long userId);
+
+    BaseInfo getBaseInfoByCustomerAndCerNum(@Param("customerName") String customerName, @Param("cerNum") String cerNum);
 }

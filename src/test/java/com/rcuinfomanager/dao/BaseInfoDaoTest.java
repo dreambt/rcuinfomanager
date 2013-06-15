@@ -1,5 +1,6 @@
 package com.rcuinfomanager.dao;
 
+import com.rcuinfomanager.model.BaseInfo;
 import com.rcuinfomanager.webservice.model.AllColumnInfo;
 import junit.framework.Assert;
 import org.junit.Test;
@@ -22,5 +23,11 @@ public class BaseInfoDaoTest {
     public void testQueryAllColumnInfo() {
         List<AllColumnInfo> allColumnInfos = baseInfoDao.queryAppointInfoByUserId(1);
         Assert.assertNotNull(allColumnInfos);
+    }
+
+    @Test
+    public void testQueryBaseInfoByCustomerAndCerNum() {
+        BaseInfo baseInfo = baseInfoDao.getBaseInfoByCustomerAndCerNum("张晓明", "4");
+        Assert.assertNotNull(baseInfo);
     }
 }

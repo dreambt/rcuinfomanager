@@ -94,7 +94,7 @@
         <result column="yearIncome" property="yearIncome"></result>
         <result column="workSitu" property="workSitu"></result>
         <result column="unitProp" property="unitProp"></result>
-        <result column="unitIndustry" property="unitIndustry"></result>
+        <result column="unitIndustryId" property="unitIndustryId"></result>
         <result column="department" property="department"></result>
         <result column="unitType" property="unitType"></result>
         <result column="duties" property="duties"></result>
@@ -108,7 +108,7 @@
        select b.customerName,b.gender,b.isFarmer,b.customerType,b.cerType,b.cerNum,b.cerValidityFrom,b.cerValidityTo,b.birthday,b.nationality,b.isHavePassport,
                b.nation,b.poliLaspect,b.health,b.maritalStatus,b.address,b.postcode,b.areaName,b.village,b.telephone,b.mbPhoneNum,b.liveCondition,
                b.socialSecurity,b.highestDegree,b.highestEdu,b.bankRelation,b.bankPartnership,b.profession,b.businessProj,b.businessYear,
-               b.businessSite,b.industry,b.businessProp,b.moneySitu,b.inputMoney,b.ownMoney,b.yearIncome,b.workSitu,b.unitProp,b.unitIndustry,
+               b.businessSite,b.industry,b.businessProp,b.moneySitu,b.inputMoney,b.ownMoney,b.yearIncome,b.workSitu,b.unitProp,b.unitIndustryId,
                b.department,b.unitType,b.duties,b.annualWageIncome,b.workYears,b.workTitle,p.photoUri
 	   from baseinfo b
 	   left outer join photosInfo p on b.recordId = p.recordId
@@ -409,7 +409,7 @@
            bankPartnership = #{bankPartnership}, profession = #{profession}, businessProj = #{businessProj}, businessYear = #{businessYear},
            businessSite = #{businessSite}, industry = #{industry}, businessProp = #{businessProp}, moneySitu = #{moneySitu},  inputMoney = #{inputMoney}
            ownMoney = #{ownMoney}, yearIncome = #{yearIncome}, annualWageIncome = #{annualWageIncome}, workYears = #[workYears], workSitu = #{workSitu},
-           unitProp = #{unitProp}, unitIndustry = #{unitIndustry}, unitIndustryName = #{unitIndustryName}, department = #{department}, unitType = #{unitType},
+           unitProp = #{unitProp}, unitIndustryId = #{unitIndustryId}, unitIndustryName = #{unitIndustryName}, department = #{department}, unitType = #{unitType},
            duties = #{duties}, workTitle = #{workTitle}, state = #{state}
         where recordId = #{recordId}
     </update>

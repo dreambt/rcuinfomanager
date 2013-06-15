@@ -680,11 +680,11 @@
 
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">单位所属行业</td>
     <core:choose>
-        <core:when test="${empty personBasic.unitIndustry}">
+        <core:when test="${empty personBasic.unitIndustryId}">
             <td align="center">&nbsp;</td>
         </core:when>
         <core:otherwise>
-            <td align="center" colspan="3">${personBasic.unitIndustry}</td>
+            <td align="center" colspan="3">${personBasic.unitIndustryId}</td>
         </core:otherwise>
     </core:choose>
 

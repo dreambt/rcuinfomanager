@@ -1,4 +1,4 @@
-﻿/*
+/*
 SQLyog Trial v11.11 (64 bit)
 MySQL - 5.6.11 : Database - rcuinfomanager
 *********************************************************************
@@ -460,7 +460,7 @@ DROP TABLE IF EXISTS `locationinfo`;
 
 CREATE TABLE `locationinfo` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `userName` bigint(20) DEFAULT NULL,
+  `userName` varchar(20) DEFAULT NULL,
   `longitude` varchar(20) DEFAULT NULL,
   `latitude` varchar(20) DEFAULT NULL,
   `recordTime` varchar(50) DEFAULT NULL,

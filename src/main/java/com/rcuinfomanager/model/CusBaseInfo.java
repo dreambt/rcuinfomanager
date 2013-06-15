@@ -39,7 +39,7 @@ public class CusBaseInfo {
     private String yearIncome;
     private String workSitu;
     private String unitProp;
-    private String unitIndustry;
+    private String unitIndustryId;
     private String department;
     private String unitType;
     private String duties;
@@ -369,12 +369,12 @@ public class CusBaseInfo {
         this.unitProp = unitProp;
     }
 
-    public String getUnitIndustry() {
-        return unitIndustry;
+    public String getUnitIndustryId() {
+        return unitIndustryId;
     }
 
-    public void setUnitIndustry(String unitIndustry) {
-        this.unitIndustry = unitIndustry;
+    public void setUnitIndustryId(String unitIndustryId) {
+        this.unitIndustryId = unitIndustryId;
     }
 
     public String getDepartment() {

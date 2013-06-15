@@ -46,7 +46,7 @@ public class BaseInfo {
     private int workYears;
     private String workSitu;
     private String unitProp;
-    private String unitIndustry;
+    private String unitIndustryId;
     private String unitIndustryName;
     private String department;
     private String unitType;
@@ -407,12 +407,12 @@ public class BaseInfo {
         this.unitProp = unitProp;
     }
 
-    public String getUnitIndustry() {
-        return unitIndustry;
+    public String getUnitIndustryId() {
+        return unitIndustryId;
     }
 
-    public void setUnitIndustry(String unitIndustry) {
-        this.unitIndustry = unitIndustry;
+    public void setUnitIndustryId(String unitIndustryId) {
+        this.unitIndustryId = unitIndustryId;
     }
 
     public String getUnitIndustryName() {

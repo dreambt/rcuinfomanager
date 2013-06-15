@@ -409,8 +409,8 @@
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">单位所属行业</td>
     <td align="left" colspan="3">
         <select class="selectpicker" style="width: 255px; margin-top: 5px;">
-            <option value="${personBasic.unitIndustry}">专业技术人员</option>
-            <option value="${personBasic.unitIndustry}">其他</option>
+            <option value="${personBasic.unitIndustryId}">专业技术人员</option>
+            <option value="${personBasic.unitIndustryId}">其他</option>
         </select>
     </td>
 </tr>

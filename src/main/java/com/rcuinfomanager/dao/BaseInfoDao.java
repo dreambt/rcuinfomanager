@@ -38,19 +38,29 @@ public interface BaseInfoDao {
     List<FinancialAssets> getFinancialAssets(Long recordId);
 
     //获取家庭资产情况
-    List<FamilyAssets> getFamilyAssets(Long recordId);
+    FamilyAssets getFamilyAssets(Long recordId);
 
     //负责情况信息
     List<FamilyIncurDebts> getFamilyIncurDebts(Long recordId);
 
-
     //获取家庭成员信息
     List<FamilyMember> getFamilyMember(Long recordId);
 
+    //获取网点
+    //admin
+    List<CustomerListInfo> getNetWorkByAdmin();
+    //normal
+    List<CustomerListInfo> getNetWorkByNormal(long userId);
+
     //删除客户信息
     int getDeleteCusBasicInfo(int recordId);
+
     //指派用户信息
     List<AllColumnInfo> queryAppointInfoByUserId(long userId);
+    //指派
+    List<AppointInfo> getAppointInfoList(long id);
+    //保存指派
+    void saveAppointInfo(@Param("id")long id,@Param("userId")long userId);
 
     BaseInfo getBaseInfoByCustomerAndCerNum(@Param("customerName") String customerName, @Param("cerNum") String cerNum);
 

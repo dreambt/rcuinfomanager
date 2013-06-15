@@ -53,8 +53,8 @@ $(function () {
     //指派
     $('.appointOperate').click(function () {
         var me = $(this);
-        var recordId = me.attr('recordId');
-        var url = 'family/appoint/' + recordId;
+        var id = me.attr('recordId');
+        var url = 'family/appoint/' + id;
         window.art.dialog({
             id: 'assign',
             title: '指派信息',
@@ -84,7 +84,7 @@ $(function () {
             }
         });
         if (isExist) {
-            var url = 'family/batchAppoints/' + recordIds;
+            var url = '/family/batchAppoints/' + recordIds;
             window.art.dialog({
                 id: 'assign',
                 title: '指派信息',
@@ -92,23 +92,7 @@ $(function () {
                 content: '<iframe scrolling="auto" width="450" height="210" frameborder="0" style="border: none;margin: -20px -25px;"marginheight="0" marginwidth="0" src="' + url + '"/>'
             });
         } else {
-            var timer;
-            window.art.dialog({
-                content: '未勾选任何客户信息！',
-                init: function () {
-                    var that = this, i = 2;
-                    var fn = function () {
-                        that.title(i + '秒后关闭');
-                        !i && that.close();
-                        i--;
-                    };
-                    timer = setInterval(fn, 1000);
-                    fn();
-                },
-                close: function () {
-                    clearInterval(timer);
-                }
-            }).show();
+            alert("未勾选任何客户信息！");
         }
     });
 

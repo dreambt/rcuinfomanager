@@ -43,7 +43,7 @@
                         <tr>
                             <td width="60%" height="145"><img src="/asserts/img/logo.png" width="500" height="145" /></td>
                             <td width="40%" align="right" valign="bottom" >
-                                <div style="margin-bottom:10px; margin-right:10px; color:#161823">您好！<span id="uName">[<c:out value="${displayUserName}"/>]</span><a href="" style="color:#161823">[退出]</a>
+                                <div style="margin-bottom:10px; margin-right:10px; color:#FFFFFF">您好！<span id="uName">[<c:out value="${displayUserName}"/>]</span><a href="" style="color:#FFFFFF">&nbsp;[退出]</a>
                                 </div>
                             </td>
                         </tr>
@@ -549,36 +549,34 @@
         <button class="btn btn-info" type="button">增加土地</button>
     </td>
 </tr>
-<core:forEach items="${personFamilyAssetsList}" var="personFamilyAssets">
-    <tr>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">总资产（万元）</td>
-        <td align="left">
-            <input class="input-small" type="text" name="customerName" value="${personFamilyAssets.fmAllAssets}"
-                   style="width: 95px;height: 30px; margin-top: 5px;">
-        </td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">主要资产</td>
-        <td align="left" colspan="5"><%--${personFamilyAssets.mainAssets}--%>
-            <label class="checkbox inline">
-                <input type="checkbox" id="inlineCheckbox6" value="option1"> 房屋
-            </label>
-            <label class="checkbox inline">
-                <input type="checkbox" id="inlineCheckbox7" value="option2"> 土地
-            </label>
-            <label class="checkbox inline">
-                <input type="checkbox" id="inlineCheckbox8" value="option3"> 车辆
-            </label>
-            <label class="checkbox inline">
-                <input type="checkbox" id="inlineCheckbox9" value="option1"> 金融资产
-            </label>
-            <label class="checkbox inline">
-                <input type="checkbox" id="inlineCheckbox10" value="option2"> 经营资金
-            </label>
-            <label class="checkbox inline">
-                <input type="checkbox" id="inlineCheckbox11" value="option3"> 其他
-            </label>
-        </td>
-    </tr>
-</core:forEach>
+<tr>
+    <td align="center" bgcolor="#b4d8ed" style="color:#161823">总资产（万元）</td>
+    <td align="left">
+        <input class="input-small" type="text" name="customerName" value="${personFamilyAssets.fmAllAssets}"
+               style="width: 95px;height: 30px; margin-top: 5px;">
+    </td>
+    <td align="center" bgcolor="#b4d8ed" style="color:#161823">主要资产</td>
+    <td align="left" colspan="5"><%--${personFamilyAssets.mainAssets}--%>
+        <label class="checkbox inline">
+            <input type="checkbox" id="inlineCheckbox6" value="option1"> 房屋
+        </label>
+        <label class="checkbox inline">
+            <input type="checkbox" id="inlineCheckbox7" value="option2"> 土地
+        </label>
+        <label class="checkbox inline">
+            <input type="checkbox" id="inlineCheckbox8" value="option3"> 车辆
+        </label>
+        <label class="checkbox inline">
+            <input type="checkbox" id="inlineCheckbox9" value="option1"> 金融资产
+        </label>
+        <label class="checkbox inline">
+            <input type="checkbox" id="inlineCheckbox10" value="option2"> 经营资金
+        </label>
+        <label class="checkbox inline">
+            <input type="checkbox" id="inlineCheckbox11" value="option3"> 其他
+        </label>
+    </td>
+</tr>
 <tr>
     <td align="left" colspan="8" style="font-size:18px">
         房产：1

@@ -13,22 +13,15 @@
     <script src="/asserts/js/bootstrap.min.js"></script>
     <script type="text/javascript">
         $(function () {
-            var ids = '${ids}';
+            var recordIds = '${recordIds}';
             //确定
             $('#addOpera').click(function () {
-                if (ids) {
-                    var organizationName = $('#organizationName').val();
-                    var customerName = $('#customerName').val();
-                    var url = 'family/saveAppointInfo/' + ids + '/' + organizationName + '/' + customerName;
-                    window.location.href = url;
-                } else {
-                    alert("操作失败！");
-                }
+                var url = '/family/saveBatchAppoint/' + recordIds ;
+                window.location.href = url;
             });
 
             //关闭
             $('#cancelOperate').click(function () {
-
                 window.top.art.dialog({id: 'assign' }).close();
                 var url = '/index';
                 window.location.href = url;
@@ -36,7 +29,7 @@
             //返回main
             var success = '${params.success}';
             if (success && success != '') {
-                var url = 'farmer/main';
+                var url = '/farmer/main';
                 $(window.top.window.document).find('#main').attr('src', url);
                 window.top.art.dialog({id: 'assign'}).close();
             }
@@ -59,6 +52,7 @@
             <td align="right">
                 <select class="span3" name="organizationName" id="organizationName" style="width:202px;">
                     <option value="">选择网点</option>
+
                     <option value="">小作社</option>
                 </select>
             </td>
@@ -74,7 +68,8 @@
     </table>
 </form>
 <p align="center">
-    <a class="btn" href="#" id="okOperate">确定</a>&nbsp;<a class="btn" href="/index" id="cancelOperate">取消</a>
+    <a class="btn" href="#" id="okOperate">确定</a>&nbsp;
+    <a class="btn" href="/index" id="cancelOperate">取消</a>
 </p>
 </body>
 </html>

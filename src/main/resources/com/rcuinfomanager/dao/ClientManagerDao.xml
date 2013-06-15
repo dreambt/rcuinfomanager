@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rcuinfomanager.dao.ClientManagerDao">
+       <resultMap id="clientMap" type="com.rcuinfomanager.model.ClientManager">
+           <result column="appVerName" property="appVerName"></result>
+           <result column="descb" property="descb"></result>
+           <result column="url" property="url"></result>
+           <result column="isCoerce" property="isCoerce"></result>
+           <result column="createTime" property="createTime"></result>
+       </resultMap>
+       <!--<select id="" parameterType="java.lang.String" resultMap="clientMap">
+
+       </select>-->
+    <!--保存客户端-->
+    <insert id="saveClientInfo" parameterType="com.rcuinfomanager.model.ClientManager" >
+            INSERT INTO appversionsinfo(appVerName,descb,url,isCoerce,createTime)
+            VALUES(#{appVerName},#{descb},#{url},#{isCoerce},#{createTime})
+    </insert>
+
+</mapper>

@@ -13,10 +13,13 @@
     <script src="/asserts/js/jquery-1.7.2.min.js"></script>
     <script src="/asserts/js/bootstrap.min.js"></script>
     <script type="text/javascript">
-        $(function () {
-            $('.span3').click(function () {
+        $(function(){
+            $('.span3').click(function(){
                 $("li[class='active']").removeAttr("class");
                 $(this).addClass("active");
+            });
+            $('#finishOperate').click(function(){
+                $('#submitForm').submit();
             });
         });
     </script>
@@ -31,12 +34,11 @@
                 <td height="145" background="/asserts/img/head.png">
                     <table width="99%" border="0" cellspacing="0" cellpadding="0">
                         <tr>
-                            <td width="60%" height="145"><img src="/asserts/img/logo.png" width="500" height="145"/>
-                            </td>
-                            <td width="40%" align="right" valign="bottom">
+                            <td width="60%" height="145"><img src="/asserts/img/logo.png" width="500" height="145" /></td>
+                            <td width="40%" align="right" valign="bottom" >
                                 <div style="margin-bottom:10px; margin-right:10px; color:#FFFFFF">您好！
                                     <span id="uName">[<c:out value="${displayUserName}"/>]</span>
-                                    <a href="/logout" style="color:#FFFFFF">&nbsp;[退出]</a>
+                                    <a href="" style="color:#FFFFFF">&nbsp;[退出]</a>
                                 </div>
                             </td>
                         </tr>
@@ -61,7 +63,7 @@
             <br/>
             <input class="input-block-level" type="text" placeholder="客户端管理" disabled="disabled" style="color:#0000AA">
 
-            <hr size="1" width="100%" style="margin-bottom: -1px;"/>
+            <hr  size="1" width="100%" style="margin-bottom: -1px;"/>
             <div class="tabbable">
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#tab1" data-toggle="tab">客户端版本</a></li>
@@ -72,10 +74,11 @@
                     <div class="tab-pane active" id="tab1">
 
                         <div class="farmer_info">
-                            <div class="table-list">
-                                <table width="100%" border="1">
-                                    <tbody>
+                            <div class="table-list" >
 
+                                <form id="submitForm" action="/client/saveClient" method="post">
+                                <table width="100%" border="0">
+                                    <tbody>
                                     <tr>
                                         <td align="left" colspan="4">
                                             当前客户端版本：V1.0.0
@@ -86,21 +89,35 @@
                                         <td align="center" bgcolor="#b4d8ed" style="color:#161823">
                                             填写要导入的客户端版本：
                                         </td>
-                                        <td align="center">1</td>
+                                        <td align="left">
+                                            <input type="text" name="appVerName"  value="" style="width: 140px;height: 25px; margin-top: 5px;"/>
+                                        </td>
                                         <td align="center" bgcolor="#b4d8ed" style="color:#161823">版本描述：</td>
-                                        <td align="center">1</td>
+                                        <td align="left">
+                                            <input type="text" name="descb"  value="" style="width: 140px;height: 25px; margin-top: 5px;"/>
+                                        </td>
                                     </tr>
-
                                     <tr>
                                         <td align="center" bgcolor="#b4d8ed" style="color:#161823">
                                             选择要导入的客户端文件：
                                         </td>
-                                        <td align="center">2</td>
-                                        <td align="center" bgcolor="#b4d8ed" style="color:#161823">
-                                            是否强制更新
+                                        <td align="left">
+                                            <input type="file" name="url"  value="" style="color:#999999"
+                                                   readonly="readonly"/>
                                         </td>
-                                        <td align="center">2</td>
+                                        <td align="center" bgcolor="#b4d8ed" style="color:#161823">
+                                            <input type="checkbox" name="isCoerce"/>是否强制更新
+                                        </td>
+                                        <td align="center">
+                                            <a class="btn" href="#" id="finishOperate">完成</a>
+                                        </td>
                                     </tr>
+                                    </tbody>
+                                    </table>
+                                </form>
+
+                                <table width="100%" border="0">
+                                    <tbody>
                                     <tr>
                                         <td align="center" colspan="4">
                                             历史版本
@@ -109,11 +126,17 @@
                                     <tr>
                                         <td align="center">3</td>
                                         <td align="center">3</td>
-                                        <td align="center">3</td>
-                                        <td align="center">3</td>
+                                        <td align="center">
+                                            <a href="#">强制更新</a>
+                                        </td>
+                                        <td align="center">
+                                            <a href="#">下载</a>&nbsp;
+                                            <a href="#">删除</a>
+                                        </td>
                                     </tr>
                                     </tbody>
                                 </table>
+
                             </div>
                         </div>
                     </div>
@@ -123,8 +146,7 @@
                                 <table width="100%" border="1">
                                     <tbody>
                                     <tr>
-                                        <td align="center" colspan="5" bgcolor="#1e90ff"
-                                            style="color:#FFFFFF; font-size:20px">
+                                        <td align="center" colspan="5" bgcolor="#1e90ff" style="color:#FFFFFF; font-size:20px">
                                             限制使用客户端的移动终端<br>
                                             <label style="font-style:oblique; font-size:16px;color: #FFFF66">
                                                 （若开启，则终端标识列表中对应的终端才可使用客户端）</label>
@@ -133,10 +155,9 @@
                                     <tr>
                                         <td width="18%" align="center">当前状态：</td>
                                         <td width="17%" align="center">
-                                            <label>关闭</label>
+                                            <label >关闭</label>
                                         </td>
-                                        <td width="21%" align="center"><input type="button" name="" value="开启"
-                                                                              style="width:80px; height:30px"/></td>
+                                        <td width="21%" align="center"><input  type="button" name="" value="开启" style="width:80px; height:30px"/></td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -144,9 +165,7 @@
                                 <table width="100%" border="1">
                                     <tbody>
                                     <tr>
-                                        <td align="center" colspan="2" bgcolor="#1e90ff"
-                                            style="color:#FFFFFF; font-size:20px">终端标识列表
-                                        </td>
+                                        <td align="center" colspan="2" bgcolor="#1e90ff" style="color:#FFFFFF; font-size:20px">终端标识列表</td>
                                     </tr>
                                     <tr>
                                         <td align="left">
@@ -154,16 +173,13 @@
                                                 <tbody>
                                                 <tr>
                                                     <td align="center" style="border-bottom-color:#FFFFFF">
-                                                        <input type="text" name="" value="请输入关键字"
-                                                               style="width:150px; height:30px;"/>
+                                                        <input  type="text" name="" value="" placeholder="请输入关键字" style="width:150px; height:30px;"/>
                                                     </td>
                                                     <td align="center" style="border-bottom-color:#FFFFFF">
-                                                        <input type="button" name="" value="查找"
-                                                               style="width:80px; height:30px"/>
+                                                        <input type="button" name="" value="查找" style="width:80px; height:30px"/>
                                                     </td>
                                                     <td align="center" style="border-bottom-color:#FFFFFF">
-                                                        <input type="button" name="" value="添加"
-                                                               style="width:80px; height:30px"/>
+                                                        <input  type="button" name="" value="添加" style="width:80px; height:30px"/>
                                                     </td>
                                                 </tr>
                                                 </tbody>
@@ -182,8 +198,7 @@
                                                     <td align="center" style="border-bottom-color:#FFFFFF">
                                                         共&nbsp;4&nbsp;条&nbsp;
                                                     </td>
-                                                    <td align="center" style="border-bottom-color:#FFFFFF">每页&nbsp;20条
-                                                    </td>
+                                                    <td align="center" style="border-bottom-color:#FFFFFF">每页&nbsp;5条</td>
                                                 </tr>
                                                 </tbody>
                                             </table>
@@ -193,9 +208,8 @@
                                         <td width="17%" align="center">
                                             <label id="">001D7DAADE72</label>
                                         </td>
-                                        <td width="50%" align="center">
-                                            <a href="" style="color:#0099FF">编辑</a>&nbsp;|&nbsp;<a href=""
-                                                                                                   style="color:#FF0000">删除</a>
+                                        <td width="50%" align="center" >
+                                            <a href="" style="color:#0099FF">编辑</a>&nbsp;|&nbsp;<a href="" style="color:#FF0000">删除</a>
                                         </td>
                                     </tr>
                                     </tbody>

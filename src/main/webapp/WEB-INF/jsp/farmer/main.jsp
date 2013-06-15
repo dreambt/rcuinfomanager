@@ -72,7 +72,10 @@
             <div class="navbar">
                 <div class="btn-group">
                     <select class="selectpicker" style="width: 95px; margin-top: 10px;">
-                        <option value="" selected="selected">按网点</option>
+                        <option value="">按网点</option>
+                        <core:forEach items="${netWorkList}" var="netWork">
+                            <option value="${netWork.organizationName}">${netWork.organizationName}</option>
+                        </core:forEach>
                     </select>
                     <select class="selectpicker" style="width: 95px; margin-top: 10px;">
                         <option value="" selected="selected">按乡镇</option>
@@ -84,7 +87,7 @@
                     <a class="btn" href="#">查询</a>
                 </div>
                 <div class="btn-group">
-                    <button class="btn" type="button" id="assignOperate">指派</button>
+                    <button class="btn" type="button" id="assignOperate">批量指派</button>
                     <button class="btn" type="button">验收</button>
                 </div>
                 <div class="btn-group">
@@ -121,12 +124,12 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <core:forEach items="${familyInfoList}" var="familyInfo">
+                    <core:forEach items="${familyInfoList}" var="familyInfo" varStatus="idx">
                         <tr>
                             <td align="center" class="first">
                                 <input type="checkbox" name="checkOpera" class="checkOpera" recordId="${familyInfo.recordId}"/>
                             </td>
-                            <td align="center">${familyInfo.recordId}</td>
+                            <td align="center"><core:out value="${idx.index+1}"></core:out></td>
                             <td align="center">${familyInfo.customerName}</td>
                             <td align="center">${familyInfo.telephone}</td>
                             <td align="center">${familyInfo.submitTime}</td>

@@ -138,11 +138,11 @@
     </select>
 
     <!--获取家庭资产情况-->
-    <resultMap id="familyAssetsMap" type="com.rcuinfomanager.model.FamilyAssets">
+    <!--<resultMap id="familyAssetsMap" type="com.rcuinfomanager.model.FamilyAssets">
         <result column="fmAllAssets" property="fmAllAssets"></result>
         <result column="mainAssets" property="mainAssets"></result>
-    </resultMap>
-    <select id="getFamilyAssets" parameterType="java.lang.Long" resultMap="familyAssetsMap">
+    </resultMap>-->
+    <select id="getFamilyAssets" parameterType="java.lang.Long" resultType="com.rcuinfomanager.model.FamilyAssets">
              select f.fmAllAssets,f.mainAssets from familyAssets f where f.recordId=#{recordId}
     </select>
 
@@ -373,6 +373,35 @@
             LEFT JOIN t_appoint t ON t.`recordId`=a.`recordId`
             WHERE t.`user_id` = #{userId}
     </select>
+
+    <!--网点-->
+    <select id="getNetWorkByAdmin" resultMap="userListInfo">
+        select org.organizationName from organizationInfo org
+    </select>
+    <select id="getNetWorkByNormal" parameterType="java.lang.Long" resultMap="userListInfo">
+            select org.organizationName from usersinfo u
+            left outer join organizationInfo org on u.organizationId=org.organizationId
+            where u.userId=#{userId}
+    </select>
+
+    <resultMap id="appointMap" type="com.rcuinfomanager.model.AppointInfo">
+        <result property="recordId" column="recordId"></result>
+        <result property="customerName" column="customerName"></result>
+        <result property="telephone" column="telephone"></result>
+        <result property="organizationName" column="organizationName"></result>
+        <result property="displayUserName" column="displayUserName"></result>
+    </resultMap>
+    <!--指派-->
+    <select id="getAppointInfoList" parameterType="java.lang.Long" resultMap="appointMap">
+          select b.recordId,b.customerName,b.telephone
+          from baseinfo b
+    </select>
+    <!--保存指派-->
+    <insert id="saveAppointInfo" parameterType="com.rcuinfomanager.model.AppointInfo">
+          insert into t_appoint(recordId,user_id)
+          values (#{id},#{userId})
+    </insert>
+
     <!--指派网点-->
     <!--<select id="getAdminOrganizationName" resultMap="userListInfo">
          select org.organizationName from organizationInfo org

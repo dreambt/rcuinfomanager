@@ -35,16 +35,15 @@ public class BaseInfoController {
         SessionUser sessionUser = userSessionContext.getSessionUser();
         SimpleDateFormat dateFm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); //格式化当前系统日期
         String logsDate = dateFm.format(new java.util.Date());
-        //tring logsDate=DateUtils.getTimeStr(new java.util.Date(),HYPHEN_DISPLAY_DATE);
         logsInfoService.saveLogsInfo(new LogsInfo(logsDate,sessionUser.getId(),"查看"));
-
+        map.put("displayUserName", sessionUser.getDisplayUserName());
         map.put("personInfoList", baseInfoService.getPersonBasicInfo(id));
         //基础概况信息
         map.put("personBasicList",baseInfoService.getCusBasicInfo(id));
         //家庭收支情况
         map.put("personIncomeExpensesList",baseInfoService.getIncomeExpenses(id));
         // 家庭资产情况
-        map.put("personFamilyAssetsList",baseInfoService.getFamilyAssets(id));
+        map.put("personFamilyAssets",baseInfoService.getFamilyAssets(id));
         //房产
         map.put("personHousePropertyInfoList",baseInfoService.getHousePropertyInfo(id));
         //土地
@@ -63,23 +62,40 @@ public class BaseInfoController {
 
     //指派
     @RequestMapping("/appoint/{id}")
-    public String appointInfo(@PathVariable long id,Map map){
+    public String appointInfoList(@PathVariable long id,Map map){
         //记录日志
         UserSessionContext userSessionContext = UserSessionContextHolder.getUserSessionContext();
         SessionUser sessionUser = userSessionContext.getSessionUser();
         SimpleDateFormat dateFm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); //格式化当前系统日期
         String logsDate = dateFm.format(new java.util.Date());
-        //tring logsDate=DateUtils.getTimeStr(new java.util.Date(),HYPHEN_DISPLAY_DATE);
         logsInfoService.saveLogsInfo(new LogsInfo(logsDate,sessionUser.getId(),"指派"));
-
-
-        /*if(sessionUser.getId()==1){
-            map.put("orgNameInfo",baseInfoService.getAdminOrganizationName());
-        }else{
-            map.put("orgNameInfo",baseInfoService.getUserOrganizationName(Long.valueOf(sessionUser.getId())));
-        }*/
+        map.put("appointList",baseInfoService.getAppointInfoList(id));
 
         return "farmer/appointInfo";
+    }
+
+    //保存指派
+    @RequestMapping("/saveAppoint/{id}")
+    public String saveAppoint(@PathVariable long id){
+        UserSessionContext userSessionContext = UserSessionContextHolder.getUserSessionContext();
+        SessionUser sessionUser = userSessionContext.getSessionUser();
+        System.out.println(id);
+        System.out.println(sessionUser.getId());
+        baseInfoService.saveAppointInfo(id,sessionUser.getId());
+       return "farmer/main";
+    }
+
+    //批量指派
+    @RequestMapping("/batchAppoints/{recordIds}")
+    public String batchAppoints(@PathVariable long recordIds,Map map){
+        //记录日志
+        UserSessionContext userSessionContext = UserSessionContextHolder.getUserSessionContext();
+        SessionUser sessionUser = userSessionContext.getSessionUser();
+        SimpleDateFormat dateFm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); //格式化当前系统日期
+        String logsDate = dateFm.format(new java.util.Date());
+        logsInfoService.saveLogsInfo(new LogsInfo(logsDate,sessionUser.getId(),"指派"));
+        map.put("recordIds",recordIds);
+        return "farmer/batchAppoint";
     }
 
     //编辑
@@ -90,16 +106,15 @@ public class BaseInfoController {
         SessionUser sessionUser = userSessionContext.getSessionUser();
         SimpleDateFormat dateFm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); //格式化当前系统日期
         String logsDate = dateFm.format(new java.util.Date());
-        //tring logsDate=DateUtils.getTimeStr(new java.util.Date(),HYPHEN_DISPLAY_DATE);
         logsInfoService.saveLogsInfo(new LogsInfo(logsDate,sessionUser.getId(),"编辑"));
-
+        map.put("displayUserName", sessionUser.getDisplayUserName());
         map.put("personInfoList", baseInfoService.getPersonBasicInfo(id));
         //基础概况信息
         map.put("personBasicList",baseInfoService.getCusBasicInfo(id));
         //家庭收支情况
         map.put("personIncomeExpensesList",baseInfoService.getIncomeExpenses(id));
         // 家庭资产情况
-        map.put("personFamilyAssetsList",baseInfoService.getFamilyAssets(id));
+        map.put("personFamilyAssets",baseInfoService.getFamilyAssets(id));
         //房产
         map.put("personHousePropertyInfoList",baseInfoService.getHousePropertyInfo(id));
         //土地
@@ -128,12 +143,7 @@ public class BaseInfoController {
         return "farmer/main";
     }*/
 
-   /*//批量指派
-    @RequestMapping("/{id}")
-    public String batchAppointInfo(@PathVariable long id,Map map){
 
-        return "appointInfo";
-    }*/
 
 
     //导入基础数据页面

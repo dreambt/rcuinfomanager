@@ -17,9 +17,8 @@
             //确定
             $('#okOperate').click(function () {
                 var id = $('#recordId').val();
-                var organizationName = $('#organizationName').val();
-                var customerName = $('#customerName').val();
-                var url = 'family/saveAppointInfo/' + id + '/' + organizationName + '/' + customerName;
+                alert(id);
+                var url = '/family/saveAppoint/'+id;
                 window.location.href = url;
             });
 
@@ -43,7 +42,7 @@
 <form method="post">
     <table width="100%" border="0">
         <tbody>
-        <core:forEach items="${appointPeopleList}" var="appointPeople">
+        <core:forEach items="${appointList}" var="appointPeople">
             <input type="hidden" id="recordId" name="recordId" value="${appointPeople.recordId}">
             <tr>
                 <td><span class="label label-info">户主：</span></td>
@@ -62,6 +61,7 @@
             <td align="right">
                 <select class="span3" name="organizationName" id="organizationName" style="width:202px;">
                     <option value="">选择网点</option>
+
                     <option value="">小作社</option>
                 </select>
             </td>
@@ -78,7 +78,8 @@
     </table>
 </form>
 <p align="center">
-    <a class="btn" href="#" id="okOperate">确定</a>&nbsp;<a class="btn" href="#" id="cancelOperate">取消</a>
+    <a class="btn" href="#" id="okOperate">确定</a>&nbsp;
+    <a class="btn" href="#" id="cancelOperate">取消</a>
 </p>
 </body>
 </html>

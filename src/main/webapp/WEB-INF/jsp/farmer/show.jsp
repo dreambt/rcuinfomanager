@@ -34,7 +34,7 @@
                         <tr>
                             <td width="60%" height="145"><img src="/asserts/img/logo.png" width="500" height="145" /></td>
                             <td width="40%" align="right" valign="bottom" >
-                                <div style="margin-bottom:10px; margin-right:10px; color:#161823">您好！<span id="uName">[<c:out value="${displayUserName}"/>]</span><a href="" style="color:#161823">[退出]</a>
+                                <div style="margin-bottom:10px; margin-right:10px; color:#FFFFFF">您好！<span id="uName">[<c:out value="${displayUserName}"/>]</span><a href="" style="color:#FFFFFF">&nbsp;[退出]</a>
                                 </div>
                             </td>
                         </tr>
@@ -945,7 +945,7 @@
     </td>
 </tr>
 <core:choose>
-    <core:when test="${empty personFamilyAssetsList}">
+    <core:when test="${empty personFamilyAssets}">
 
         <tr>
             <td align="center" bgcolor="#b4d8ed" style="color:#161823">总资产（万元）</td>
@@ -955,30 +955,27 @@
         </tr>
     </core:when>
     <core:otherwise>
-        <core:forEach items="${personFamilyAssetsList}" var="personFamilyAssets">
-            <tr>
-                <td align="center" bgcolor="#b4d8ed" style="color:#161823">总资产（万元）</td>
-                <core:choose>
-                    <core:when test="${empty personFamilyAssets.fmAllAssets}">
-                        <td align="center">&nbsp;</td>
-                    </core:when>
-                    <core:otherwise>
-                        <td align="center">${personFamilyAssets.fmAllAssets}</td>
-                    </core:otherwise>
-                </core:choose>
+        <tr>
+            <td align="center" bgcolor="#b4d8ed" style="color:#161823">总资产（万元）</td>
+            <core:choose>
+                <core:when test="${empty personFamilyAssets.fmAllAssets}">
+                    <td align="center">&nbsp;</td>
+                </core:when>
+                <core:otherwise>
+                    <td align="center">${personFamilyAssets.fmAllAssets}</td>
+                </core:otherwise>
+            </core:choose>
 
-                <td align="center" bgcolor="#b4d8ed" style="color:#161823">主要资产</td>
-                <core:choose>
-                    <core:when test="${empty personFamilyAssets.mainAssets}">
-                        <td align="center">&nbsp;</td>
-                    </core:when>
-                    <core:otherwise>
-                        <td align="center" colspan="5">${personFamilyAssets.mainAssets}</td>
-                    </core:otherwise>
-                </core:choose>
-
-            </tr>
-        </core:forEach>
+            <td align="center" bgcolor="#b4d8ed" style="color:#161823">主要资产</td>
+            <core:choose>
+                <core:when test="${empty personFamilyAssets.mainAssets}">
+                    <td align="center">&nbsp;</td>
+                </core:when>
+                <core:otherwise>
+                    <td align="center" colspan="5">${personFamilyAssets.mainAssets}</td>
+                </core:otherwise>
+            </core:choose>
+        </tr>
     </core:otherwise>
 </core:choose>
 

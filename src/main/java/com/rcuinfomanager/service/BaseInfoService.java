@@ -1,10 +1,8 @@
 package com.rcuinfomanager.service;
 
-import com.google.common.base.Strings;
 import com.rcuinfomanager.dao.BaseInfoDao;
 import com.rcuinfomanager.model.*;
 import com.rcuinfomanager.webservice.model.AllColumnInfo;
-import net.sf.cglib.beans.BeanCopier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -55,7 +53,7 @@ public class BaseInfoService {
     }
 
     //获取家庭资产情况
-    public List<FamilyAssets> getFamilyAssets(Long recordId) {
+    public FamilyAssets getFamilyAssets(Long recordId) {
         return baseInfoDao.getFamilyAssets(recordId);
     }
 
@@ -89,8 +87,22 @@ public class BaseInfoService {
         return baseInfoDao.getFamilyMember(recordId);
     }
 
+    //网点（查询）
+    public List<CustomerListInfo> getNetWorkByAdmin(){
+        return baseInfoDao.getNetWorkByAdmin();
+    }
+    public List<CustomerListInfo> getNetWorkByNormal(long uid){
+        return baseInfoDao.getNetWorkByNormal(uid);
+    }
 
-
+    //指派
+    public List<AppointInfo> getAppointInfoList(long id){
+        return baseInfoDao.getAppointInfoList(id);
+    }
+    //保存指派
+    public void saveAppointInfo(long id,long userId){
+        baseInfoDao.saveAppointInfo(id,userId);
+    }
 
     /*//选择网点
     public List<CustomerListInfo> getAdminOrganizationName(){

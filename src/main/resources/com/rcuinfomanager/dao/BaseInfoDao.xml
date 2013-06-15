@@ -148,6 +148,7 @@
 
     <!--房产-->
     <resultMap id="housePropertyInfoMap" type="com.rcuinfomanager.model.HouseInfo">
+        <result column="id" property="id"></result>
         <result column="nature" property="nature"></result>
         <result column="use" property="use"></result>
         <result column="site" property="site"></result>
@@ -161,7 +162,7 @@
         <result column="note1" property="note1"></result>
     </resultMap>
     <select id="getHousePropertyInfo" parameterType="java.lang.Long" resultMap="housePropertyInfoMap">
-            select h.nature,h.purpose,h.site,h.structure,h.floorNum,h.usedSitu,h.houseArea,h.houseWorth,
+            select h.id, h.nature,h.purpose,h.site,h.structure,h.floorNum,h.usedSitu,h.houseArea,h.houseWorth,
                     h.isInstallment,h.hasCredentials,h.note1
             from housepropertyinfo h
             left outer join  familyassets f on f.assetsId=h.assetsId
@@ -170,6 +171,7 @@
 
     <!--获取土地信息-->
     <resultMap id="landInfoMap" type="com.rcuinfomanager.model.LandInfo">
+        <result column="id" property="id"></result>
         <result column="area" property="area"></result>
         <result column="worth" property="worth"></result>
         <result column="property" property="property"></result>
@@ -186,13 +188,14 @@
 
     <!--获取车辆信息-->
     <resultMap id="carsInfoMap" type="com.rcuinfomanager.model.CarsInfo">
+        <result column="id" property="id"></result>
         <result column="carsInfo" property="carsInfo"></result>
         <result column="carsWorth" property="carsWorth"></result>
         <result column="carsIsInstallment" property="carsIsInstallment"></result>
         <result column="carsUsingInfo" property="carsUsingInfo"></result>
     </resultMap>
     <select id="getCarsInfo" parameterType="java.lang.Long" resultMap="carsInfoMap">
-         select car.carsInfo,car.carsWorth,car.carsIsInstallment,car.carsUsingInfo
+         select car.id, car.carsInfo,car.carsWorth,car.carsIsInstallment,car.carsUsingInfo
          from carsInfo car
          left outer join familyassets fa on fa.assetsId = car.assetsId
          where fa.recordId=#{recordId}
@@ -213,6 +216,7 @@
 
     <!--获取家庭成员信息 -->
     <resultMap id="familyMemberMap" type="com.rcuinfomanager.model.FamilyMember">
+        <result column="id" property="id"></result>
         <result column="familyMemberName" property="familyMemberName"></result>
         <result column="yearIncome" property="yearIncome"></result>
         <result column="leaderRelation" property="leaderRelation"></result>
@@ -222,7 +226,7 @@
         <result column="cerNum" property="cerNum"></result>
     </resultMap>
     <select id="getFamilyMember" parameterType="java.lang.Long" resultMap="familyMemberMap">
-        select f.familyMemberName,f.yearIncome,f.leaderRelation,f.address,f.profession,f.familyMemberCerNum, f.cerNum
+        select f.id, f.familyMemberName,f.yearIncome,f.leaderRelation,f.address,f.profession,f.familyMemberCerNum, f.cerNum
         from familymemberinfo f where f.recordId=#{recordId}
     </select>
 
@@ -400,7 +404,7 @@
         select * from baseinfo where customerName = #{customerName} and cerNum = #{cerNum}
     </select>
 
-    <update id="updateBaseInfoById" parameterType="com.rcuinfomanager.model.BaseInfo">
+    <update id="updateBaseInfoById" parameterType="com.rcuinfomanager.webservice.model.AllColumnInfo">
         update baseinfo set village = #{village}, gender = #{gender}, isFarmer = #{isFarmer}, cerType = #{cerType},cerValidityFrom = #{cerValidityFrom} ,
            getCerValidityTo = #{getCerValidityTo}, customerType = #{customerType}, birthday = #{birthday}, nationality = #{nationality}, isHavePassport = #{isHavePassport},
            nation = #{nation}, poliLaspect = #{poliLaspect}, address = #{address}, postcode = #{postcode}, telephone = #{telephone}, mbPhoneNum = #{mbPhoneNum},
@@ -411,6 +415,17 @@
            ownMoney = #{ownMoney}, yearIncome = #{yearIncome}, annualWageIncome = #{annualWageIncome}, workYears = #[workYears], workSitu = #{workSitu},
            unitProp = #{unitProp}, unitIndustryId = #{unitIndustryId}, unitIndustryName = #{unitIndustryName}, department = #{department}, unitType = #{unitType},
            duties = #{duties}, workTitle = #{workTitle}, state = #{state}
+        where recordId = #{recordId}
+    </update>
+    
+    <update id="updateIncomeexpenses" parameterType="com.rcuinfomanager.webservice.model.AllColumnInfo">
+        update incomeexpenses set fmAllIncome = #{fmAllIncome}, fmExpenses = #{fmExpenses}, incomeSrc = #{fmIncomeSrc}, perIncome = #{fmPerIncome},
+          fmOtherMemberIn = #{fmOtherMemberIn}, fmExpensesProj = #{fmExpensesProj}, fmInOutRatio = #{fmInOutRatio}
+        where recordId = #{recordId}
+    </update>
+
+    <update id="updateFamilyassets" parameterType="com.rcuinfomanager.webservice.model.AllColumnInfo">
+        update familyassets set fmAllAssets = #{fmAllAssets}, mainAssets = #{mainAssets}
         where recordId = #{recordId}
     </update>
 

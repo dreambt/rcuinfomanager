@@ -60,7 +60,6 @@ public class FarmerInfoWebService {
             if (allColumnInfoList != null && !allColumnInfoList.isEmpty()) {
                 //save it to db
                 for (AllColumnInfo allColumnInfo : allColumnInfoList) {
-
                 }
             }
         } catch (IOException e) {

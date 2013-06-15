@@ -1,8 +1,10 @@
 package com.rcuinfomanager.service;
 
+import com.google.common.base.Strings;
 import com.rcuinfomanager.dao.BaseInfoDao;
 import com.rcuinfomanager.model.*;
 import com.rcuinfomanager.webservice.model.AllColumnInfo;
+import net.sf.cglib.beans.BeanCopier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -126,5 +128,15 @@ public class BaseInfoService {
         }
 
         return baseInfoDao.queryAppointInfoByUserId(userId);
+    }
+
+    public void saveFarmerInfoFromDownload(AllColumnInfo allColumnInfo) {
+        BaseInfo baseInfo = baseInfoDao.getBaseInfoByCustomerAndCerNum(allColumnInfo.getCustomerName(), allColumnInfo.getCerNum());
+        if (baseInfo != null) {
+            allColumnInfo.setRecordId(baseInfo.getRecordId());
+            baseInfoDao.updateBaseInfoById(allColumnInfo);
+            baseInfoDao.updateIncomeexpenses(allColumnInfo);
+        }
+
     }
 }

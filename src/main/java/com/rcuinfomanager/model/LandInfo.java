@@ -1,6 +1,7 @@
 package com.rcuinfomanager.model;
 
 public class LandInfo {
+    private int id;
     private String area;
     private String worth;
     private String property;

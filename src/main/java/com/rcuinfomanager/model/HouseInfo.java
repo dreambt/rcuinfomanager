@@ -1,6 +1,7 @@
 package com.rcuinfomanager.model;
 
 public class HouseInfo {
+    private int id;
     private String nature;
     private String purpose;
     private String site;
@@ -99,5 +100,13 @@ public class HouseInfo {
 
     public void setNote1(String note1) {
         this.note1 = note1;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

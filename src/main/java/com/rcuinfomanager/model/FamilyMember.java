@@ -1,6 +1,7 @@
 package com.rcuinfomanager.model;
 
 public class FamilyMember {
+    private int id;
     private String familyMemberName;
     private String yearIncome;
     private String leaderRelation;
@@ -63,5 +64,13 @@ public class FamilyMember {
 
     public void setCerNum(String cerNum) {
         this.cerNum = cerNum;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

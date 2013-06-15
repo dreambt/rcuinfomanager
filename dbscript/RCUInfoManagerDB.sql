@@ -153,7 +153,7 @@ CREATE TABLE `baseinfo` (
   KEY `Index_9` (`cerNum`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='基础概况信息表';
 
-insert into `baseinfo` values(1, 'admin', '小岞镇新桥村', '张惠忠', '350583198011151352', 0, 0, '身份证', '20010302', '20210302', '一般农户', '19801115', '中国', 0, '汉族', '群众', '小岞镇新桥村09组410号', '362100', '87830100', '13100000000', '350521113204', '新桥', '其他', '初中', '良好', '普通客户', '自置', '已婚', '养老保险,医疗保险', '一般', '专业技术人员', '务农', 6, '户口所在地', '农、林、牧、渔业', '', null, null, null, null, '3-6万元', '5年（含）以上', '一般', '其他', '1010101', '稻谷种植', null, '无职业', '一般员工', '无', 1, '2013-06-14 00:00:00.000', '2013-06-14 00:00:00.000', null, '2013-06-14 00:00:00.000', null, null, null, null);
+insert into `baseinfo` values(1, '小岞镇新桥村', '张惠忠', '350583198011151352', 0, 0, '身份证', '20010302', '20210302', '一般农户', '19801115', '中国', 0, '汉族', '群众', '小岞镇新桥村09组410号', '362100', '87830100', '13100000000', '350521113204', '新桥', '其他', '初中', '良好', '普通客户', '自置', '已婚', '养老保险,医疗保险', '一般', '专业技术人员', '务农', 6, '户口所在地', '农、林、牧、渔业', '', null, null, null, null, '3-6万元', '5年（含）以上', '一般', '其他', '1010101', '稻谷种植', null, '无职业', '一般员工', '无', 1, 'admin', '2013-06-14 00:00:00.000', '2013-06-14 00:00:00.000', null, '2013-06-14 00:00:00.000', null, null, null, null);
 
 /*Data for the table `baseinfo` */
 
@@ -213,7 +213,7 @@ DROP TABLE IF EXISTS `familyassets`;
 CREATE TABLE `familyassets` (
   `assetsId` bigint(20) NOT NULL AUTO_INCREMENT,
   `recordId` bigint(20) DEFAULT NULL,
-  `fmAllAssets` double(4,4) DEFAULT NULL,
+  `fmAllAssets` double(8,4) DEFAULT NULL,
   `mainAssets` varchar(50) DEFAULT NULL,
   `depositOurBank` varchar(20) DEFAULT NULL,
   `depositOtherBank` varchar(20) DEFAULT NULL,
@@ -265,7 +265,7 @@ CREATE TABLE `familymemberinfo` (
   `familyMemberCerNum` varchar(20) DEFAULT NULL,
   `cerNum` varchar(20) DEFAULT NULL,
   `familyMemberName` varchar(20) DEFAULT NULL,
-  `yearIncome` double(4,4) DEFAULT NULL,
+  `yearIncome` double(8,4) DEFAULT NULL,
   `leaderRelation` varchar(10) DEFAULT NULL,
   `profession` varchar(50) DEFAULT NULL,
   `address` varchar(100) DEFAULT NULL,
@@ -384,11 +384,11 @@ DROP TABLE IF EXISTS `incomeexpenses`;
 CREATE TABLE `incomeexpenses` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `recordId` bigint(20) DEFAULT NULL,
-  `fmAllIncome` double(4,4) DEFAULT NULL,
-  `fmExpenses` double(4,4) DEFAULT NULL,
+  `fmAllIncome` double(8,4) DEFAULT NULL,
+  `fmExpenses` double(8,4) DEFAULT NULL,
   `incomeSrc` varchar(50) DEFAULT NULL,
-  `perIncome` double(4,4) DEFAULT NULL,
-  `fmOtherMemberIn` double(4,4) DEFAULT NULL,
+  `perIncome` double(8,4) DEFAULT NULL,
+  `fmOtherMemberIn` double(8,4) DEFAULT NULL,
   `fmExpensesProj` varchar(50) DEFAULT NULL,
   `fmInOutRatio` varchar(20) DEFAULT NULL,
   `note1` varchar(200) DEFAULT NULL,

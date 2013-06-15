@@ -53,4 +53,8 @@ public interface BaseInfoDao {
     List<AllColumnInfo> queryAppointInfoByUserId(long userId);
 
     BaseInfo getBaseInfoByCustomerAndCerNum(@Param("customerName") String customerName, @Param("cerNum") String cerNum);
+
+    void updateBaseInfoById(AllColumnInfo allColumnInfo);
+
+    void updateIncomeexpenses(AllColumnInfo allColumnInfo);
 }

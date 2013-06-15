@@ -1,6 +1,7 @@
 package com.rcuinfomanager.model;
 
 public class CarsInfo {
+    private int id;
     private String carsInfo;
     private String carsWorth;
     private String carsIsInstallment;
@@ -36,5 +37,13 @@ public class CarsInfo {
 
     public void setCarsUsingInfo(String carsUsingInfo) {
         this.carsUsingInfo = carsUsingInfo;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

@@ -13,6 +13,7 @@ public class AllColumnInfo implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private long recordId;
+    private long assetsId;
     private String userName;
     private String village;
     private String customerName;
@@ -825,4 +826,11 @@ public class AllColumnInfo implements Serializable {
         this.custManagerHouseToMoney = custManagerHouseToMoney;
     }
 
+    public long getAssetsId() {
+        return assetsId;
+    }
+
+    public void setAssetsId(long assetsId) {
+        this.assetsId = assetsId;
+    }
 }

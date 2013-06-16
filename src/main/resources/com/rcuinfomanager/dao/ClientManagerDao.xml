@@ -18,4 +18,8 @@
             VALUES(#{appVerName},#{descb},#{url},#{isCoerce},#{createTime})
     </insert>
 
+    <select id="queryAll" resultMap="clientMap">
+        select * from appversionsinfo
+    </select>
+
 </mapper>

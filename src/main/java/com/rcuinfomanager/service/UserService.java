@@ -90,6 +90,7 @@ public class UserService {
         sessionUser.setDisplayUserName(user.getDisplayUserName());
         sessionUser.setSessionId(sessionId);
         sessionUser.setLastLoginTime(user.getLastLoginTime());
+        sessionUser.setNeedModifyPassword(user.getNeedModifyPassword());
 
         userSessionContext.setSessionUser(sessionUser);
         //将用户会话上下放到缓存中

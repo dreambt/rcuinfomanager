@@ -18,6 +18,8 @@ public class SessionUser {
 
     private String lastLoginTime;
 
+    private int needModifyPassword;
+
     public boolean isFirstLogon() {
         return lastLoginTime == null;
     }
@@ -68,5 +70,13 @@ public class SessionUser {
 
     public void setLastLoginTime(String lastLoginTime) {
         this.lastLoginTime = lastLoginTime;
+    }
+
+    public int getNeedModifyPassword() {
+        return needModifyPassword;
+    }
+
+    public void setNeedModifyPassword(int needModifyPassword) {
+        this.needModifyPassword = needModifyPassword;
     }
 }

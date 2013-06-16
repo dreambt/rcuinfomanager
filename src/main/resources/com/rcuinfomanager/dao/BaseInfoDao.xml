@@ -143,7 +143,7 @@
         <result column="mainAssets" property="mainAssets"></result>
     </resultMap>-->
     <select id="getFamilyAssets" parameterType="java.lang.Long" resultType="com.rcuinfomanager.model.FamilyAssets">
-             select f.fmAllAssets,f.mainAssets from familyAssets f where f.recordId=#{recordId}
+             select f.assetsId, f.fmAllAssets, f.mainAssets from familyAssets f where f.recordId=#{recordId}
     </select>
 
     <!--房产-->
@@ -355,7 +355,7 @@
         <result column="finaServiceBankCard" property="bankCard"></result>
         <result column="finaServiceEleBankBusiness" property="bankBusiness"></result>
         <result column="finaServiceAgentPayBusiness" property="agentPayBusiness"></result>
-        <result column="finaServiceAutoBusiness" property="autoBusiness"></result>
+        <result column="finaServiceAutoBusiness" property="auto"></result>
         <result column="finaServicePrivateLoan" property="privateLoan"></result>
         <result column="finaServicePublicLoan" property="publicLoan"></result>
         <result column="finaServiceNewRequirement" property="newRequirement"></result>
@@ -368,12 +368,8 @@
     </resultMap>
 
     <select id="queryAppointInfoByUserId" parameterType="java.lang.Long" resultMap="allColumnInfoList">
-        SELECT a.*, b.*, c.*, d.*, e.*, f.*, g.*, h.*, z.*, w.*, n.* FROM baseinfo a LEFT JOIN incomeexpenses b ON  b.`recordId` = a.`recordId`
+        SELECT a.*, b.*, c.*, h.*, z.*, w.*, n.* FROM baseinfo a LEFT JOIN incomeexpenses b ON  b.`recordId` = a.`recordId`
             LEFT JOIN familyassets c ON c.`recordId`=a.`recordId`
-            LEFT JOIN housepropertyinfo d ON d.`assetsId`=c.`assetsId`
-            LEFT JOIN landinfo e ON e.`assetsId`=c.`assetsId`
-            LEFT JOIN carsinfo f ON f.`assetsId`=c.`assetsId`
-            LEFT JOIN familymemberinfo g ON g.`recordId`=a.`recordId`
             LEFT JOIN financialassets h ON h.`assetsId`=c.`assetsId`
             LEFT JOIN familyincurdebts z ON z.`recordId`=a.`recordId`
             LEFT JOIN financeservices w ON w.`recordId`=a.`recordId`
@@ -430,18 +426,41 @@
 
     <update id="updateBaseInfoById" parameterType="com.rcuinfomanager.webservice.model.AllColumnInfo">
         update baseinfo set village = #{village}, gender = #{gender}, isFarmer = #{isFarmer}, cerType = #{cerType},cerValidityFrom = #{cerValidityFrom} ,
-           getCerValidityTo = #{getCerValidityTo}, customerType = #{customerType}, birthday = #{birthday}, nationality = #{nationality}, isHavePassport = #{isHavePassport},
+           cerValidityTo = #{cerValidityTo}, customerType = #{custType}, birthday = #{birthday}, nationality = #{nationality}, isHavePassport = #{isHavePassport},
            nation = #{nation}, poliLaspect = #{poliLaspect}, address = #{address}, postcode = #{postcode}, telephone = #{telephone}, mbPhoneNum = #{mbPhoneNum},
            areaCode = #{areaCode}, areaName = #{areaName}, highestDegree = #{highestDegree}, highestEdu = #{highestEdu}, health = #{health},
            bankRelation = #{bankRelation}, liveCondition = #{liveCondition}, maritalStatus = #{maritalStatus}, socialSecurity = #{socialSecurity},
            bankPartnership = #{bankPartnership}, profession = #{profession}, businessProj = #{businessProj}, businessYear = #{businessYear},
-           businessSite = #{businessSite}, industry = #{industry}, businessProp = #{businessProp}, moneySitu = #{moneySitu},  inputMoney = #{inputMoney}
-           ownMoney = #{ownMoney}, yearIncome = #{yearIncome}, annualWageIncome = #{annualWageIncome}, workYears = #[workYears], workSitu = #{workSitu},
+           businessSite = #{businessSite}, businessProp = #{businessProp}, moneySitu = #{moneySitu},  inputMoney = #{inputMoney},
+           ownMoney = #{ownMoney}, yearIncome = #{yearIncome}, annualWageIncome = #{annualWageIncome}, workYears = #{workYears}, workSitu = #{workSitu},
            unitProp = #{unitProp}, unitIndustryId = #{unitIndustryId}, unitIndustryName = #{unitIndustryName}, department = #{department}, unitType = #{unitType},
-           duties = #{duties}, workTitle = #{workTitle}, state = #{state}
+           duties = #{duties}, workTitle = #{workTitle}
         where recordId = #{recordId}
     </update>
-    
+
+    <insert id="saveBaseInfoFromClient" parameterType="com.rcuinfomanager.webservice.model.AllColumnInfo" >
+
+        <selectKey resultType="java.lang.Integer" keyProperty="recordId">
+            SELECT @@IDENTITY
+        </selectKey>
+
+        insert into baseinfo(village, gender, isFarmer, cerType, cerValidityFrom, cerValidityTo, customerType, birthday, nationality, isHavePassport,nation, poliLaspect,
+           address, postcode, telephone, mbPhoneNum, areaCode, areaName, highestDegree,highestEdu,health,
+           bankRelation, liveCondition,maritalStatus, socialSecurity,
+           bankPartnership, profession, businessProj, businessYear,
+           businessSite, businessProp, moneySitu,inputMoney,
+           ownMoney, yearIncome, annualWageIncome, workYears, workSitu,
+           unitProp, unitIndustryId, unitIndustryName, department,unitType, duties, workTitle, customerName,cerNum)
+        values(#{village}, #{gender}, #{isFarmer}, #{cerType}, #{cerValidityFrom},#{cerValidityTo}, #{custType}, #{birthday}, #{nationality}, #{isHavePassport}, #{nation}, #{poliLaspect},
+           #{address}, #{postcode},#{telephone}, #{mbPhoneNum}, #{areaCode},  #{areaName}, #{highestDegree}, #{highestEdu}, #{health},
+           #{bankRelation}, #{liveCondition}, #{maritalStatus}, #{socialSecurity},
+           #{bankPartnership}, #{profession}, #{businessProj}, #{businessYear},
+           #{businessSite}, #{businessProp}, #{moneySitu}, #{inputMoney},
+           #{ownMoney}, #{yearIncome}, #{annualWageIncome}, #{workYears}, #{workSitu},
+           #{unitProp}, #{unitIndustryId}, #{unitIndustryName}, #{department}, #{unitType},
+           #{duties}, #{workTitle}, #{customerName}, #{cerNum})
+    </insert>
+
     <update id="updateIncomeexpenses" parameterType="com.rcuinfomanager.webservice.model.AllColumnInfo">
         update incomeexpenses set fmAllIncome = #{fmAllIncome}, fmExpenses = #{fmExpenses}, incomeSrc = #{fmIncomeSrc}, perIncome = #{fmPerIncome},
           fmOtherMemberIn = #{fmOtherMemberIn}, fmExpensesProj = #{fmExpensesProj}, fmInOutRatio = #{fmInOutRatio}
@@ -452,5 +471,67 @@
         update familyassets set fmAllAssets = #{fmAllAssets}, mainAssets = #{mainAssets}
         where recordId = #{recordId}
     </update>
+
+    <update id="updateFamilyincurdebts" parameterType="com.rcuinfomanager.webservice.model.AllColumnInfo">
+        update familyincurdebts set fmIncurDebts = #{fmIncurDebts}, ourBankDebts = #{fmIncurOurBankDebts},
+         otherBankDebts = #{fmIncurOtherBankDebts}, loanPurpose = #{fmIncurLoanPurpose}, loanShap = #{fmIncurLoanPurpose}
+        where recordId = #{recordId}
+    </update>
+
+    <update id="updateFinancialassets" parameterType="com.rcuinfomanager.webservice.model.AllColumnInfo">
+        update financialassets set financialInfo = #{financialInfo}, depositOurBank = #{financialDepositOurBank}, depositOtherBank = #{financialDepositOtherBank}
+         where  assetsId = #{assetsId}
+    </update>
+
+    <update id="updateFinanceservices" parameterType="com.rcuinfomanager.webservice.model.AllColumnInfo">
+        update financeservices set usedProduct = #{finaServiceUsedProduct}, isMoneyNeed = #{finaServiceIsMoneyNeed},
+          moneyTodo = #{finaServiceMoneyTodo}, moneyCount = #{finaServiceMoneyCount},
+          timeLimit = #{finaServiceTimeLimit}, guarantee = #{finaServiceGuarantee},
+          bankCard = #{finaServiceBankCard}, electronBank = #{finaServiceEleBankBusiness},
+          agentPay = #{finaServiceAgentPayBusiness}, auto = #{finaServiceAutoBusiness},
+          privateLoan = #{finaServicePrivateLoan}, publicLoan = #{finaServicePublicLoan}, newRequirement = #{finaServiceNewRequirement}
+        where recordId = #{recordId}
+    </update>
+
+    <update id="updateCustomermanagereva" parameterType="com.rcuinfomanager.webservice.model.AllColumnInfo">
+        update customermanagereva set loanSitu = #{custManagerLoanSitu},creditRecord = #{custManagerCreditRecord},
+          otherBankRecord = #{custManagerOtherBankRecord}, houseToMoney = #{custManagerHouseToMoney}
+        where recordId = #{recordId}
+    </update>
+
+    <delete id="deleteCarsinfoByAssetsId" parameterType="java.lang.Long">
+        DELETE FROM carsinfo WHERE assetsId = #{assetsId};
+    </delete>
+
+    <insert id="saveCarsinfo" parameterType="com.rcuinfomanager.model.CarsInfo">
+        insert into carsinfo(assetsId,carsInfo,carsWorth,carsIsInstallment,carsUsingInfo) values(#{assetsId},#{carsInfo},#{carsWorth},#{carsIsInstallment},#{carsUsingInfo})
+    </insert>
+
+    <delete id="deleteHouseInfoByAssetsId" parameterType="java.lang.Long">
+         DELETE FROM housepropertyinfo WHERE assetsId = #{assetsId};
+    </delete>
+
+    <insert id="saveHouseInfo" parameterType="com.rcuinfomanager.model.HouseInfo">
+        insert into housepropertyinfo(assetsId,nature,site,structure,purpose,floorNum,usedSitu,houseArea,houseWorth,isInstallment,hasCredentials)
+         values(#{assetsId},#{nature},#{site},#{structure},#{purpose},#{floorNum},#{usedSitu},#{houseArea}, #{houseWorth},#{isInstallment},#{hasCredentials})
+    </insert>
+
+    <delete id="deleteLandInfoByAssetsId" parameterType="java.lang.Long">
+         DELETE FROM landInfo WHERE assetsId = #{assetsId};
+    </delete>
+
+    <insert id="saveLandInfo" parameterType="com.rcuinfomanager.model.LandInfo">
+        insert into landInfo(assetsId,area,worth,property,type,usedSitu,isMoneyClear)
+          values(#{assetsId},#{area},#{worth},#{property},#{type},#{usedSitu}, #{isMoneyClear})
+    </insert>
+
+    <delete id="deleteFamilyMemberInfoByRecordId" parameterType="java.lang.Long">
+         DELETE FROM familymemberinfo WHERE recordId = #{recordId};
+    </delete>
+
+    <insert id="saveFamilyMember" parameterType="com.rcuinfomanager.model.FamilyMember">
+        insert into familymemberinfo(recordId,familyMemberCerNum,cerNum,familyMemberName,yearIncome,leaderRelation,profession,address)
+          values(#{recordId},#{familyMemberCerNum},#{cerNum},#{familyMemberName},#{yearIncome},#{leaderRelation},#{profession}, #{address})
+    </insert>
 
 </mapper>

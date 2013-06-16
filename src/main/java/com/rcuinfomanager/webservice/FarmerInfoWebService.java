@@ -5,6 +5,7 @@ import com.rcuinfomanager.model.User;
 import com.rcuinfomanager.service.BaseInfoService;
 import com.rcuinfomanager.util.JsonParser;
 import com.rcuinfomanager.webservice.model.AllColumnInfo;
+import com.rcuinfomanager.webservice.model.UploadData;
 import com.rcuinfomanager.webservice.model.WebResponseData;
 import com.rcuinfomanager.webservice.model.WebServiceResponseData;
 import com.security.mdfive.MDFive;
@@ -28,8 +29,10 @@ public class FarmerInfoWebService {
     private UserDao userDao;
 
 
-    @RequestMapping(value="/baseinfo/download/{username}/{password}", method = RequestMethod.GET)
-    public @ResponseBody WebServiceResponseData downloadBaseInfo(@PathVariable String username, @PathVariable String password) {
+    @RequestMapping(value = "/baseinfo/download/{username}/{password}", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    WebServiceResponseData downloadBaseInfo(@PathVariable String username, @PathVariable String password) {
 
         WebServiceResponseData webServiceResponseData = new WebServiceResponseData();
         webServiceResponseData.setStatus(1);
@@ -50,20 +53,30 @@ public class FarmerInfoWebService {
         return webServiceResponseData;
     }
 
-    @RequestMapping(value="/baseinfo/uploadData", method = RequestMethod.POST)
-    public @ResponseBody WebResponseData uploadBaseInfo(@RequestParam("data") String rawData) {
+    @RequestMapping(value = "/baseinfo/uploadData/{username}/{password}", method = RequestMethod.POST)
+    public
+    @ResponseBody
+    WebResponseData uploadBaseInfo(@RequestParam("data") String rawData, @PathVariable String username, @PathVariable String password) {
 
         WebResponseData webResponseData = new WebResponseData(1);
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            List<AllColumnInfo> allColumnInfoList = mapper.readValue(rawData, new TypeReference<List<AllColumnInfo>>() {});
-            if (allColumnInfoList != null && !allColumnInfoList.isEmpty()) {
-                //save it to db
-                for (AllColumnInfo allColumnInfo : allColumnInfoList) {
+
+        User user = userDao.getUserByUserName(username);
+        if (user != null) {
+            String pwdMD5 = MDFive.getEncryptPwd(user.getPassword());
+            if (pwdMD5.equals(password)) {
+                try {
+                    ObjectMapper mapper = new ObjectMapper();
+                    UploadData uploadData = mapper.readValue(rawData, UploadData.class);
+                    if (uploadData != null) {
+                        AllColumnInfo allColumnInfo = uploadData.getAllColumnInfo();
+                        //TODO: 检查这条记录是否已验收, 如果已验收，不处理，返回status=2
+                        baseInfoService.saveFarmerInfoFromDownload(allColumnInfo);
+                        webResponseData.setStatus(0);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
 
         return webResponseData;

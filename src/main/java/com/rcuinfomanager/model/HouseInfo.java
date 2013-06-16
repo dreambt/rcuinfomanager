@@ -2,6 +2,7 @@ package com.rcuinfomanager.model;
 
 public class HouseInfo {
     private int id;
+    private long assetsId;
     private String nature;
     private String purpose;
     private String site;
@@ -109,4 +110,14 @@ public class HouseInfo {
     public void setId(int id) {
         this.id = id;
     }
+
+    public long getAssetsId() {
+        return assetsId;
+    }
+
+    public void setAssetsId(long assetsId) {
+        this.assetsId = assetsId;
+    }
+
+
 }

@@ -38,7 +38,7 @@ public class AuthWebService {
             return new WebResponseData(1);
         }
 
-        if (Strings.isNullOrEmpty(user.getLastLoginTime())) {
+        if (user.getNeedModifyPassword() == 0) {
             return new WebResponseData(3);
         }
 
@@ -67,6 +67,5 @@ public class AuthWebService {
 
         return new WebResponseData(0);
     }
-
 
 }

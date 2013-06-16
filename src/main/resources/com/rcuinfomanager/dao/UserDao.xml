@@ -11,6 +11,7 @@
         <result column="displayUserName" property="displayUserName"></result>
         <result column="createTime" property="createTime"></result>
         <result column="lastLoginTime" property="lastLoginTime"></result>
+        <result column="needModifyPassword" property="needModifyPassword"></result>
         <result column="curDesignateFlag" property="curDesignateFlag"></result>
         <result column="note1" property="note1"></result>
         <result column="note2" property="note2"></result>
@@ -37,7 +38,7 @@
     </insert>
 
     <update id="updateUser" parameterType="com.rcuinfomanager.model.User">
-        UPDATE usersinfo SET password = #{password} WHERE userId=#{userId}
+        UPDATE usersinfo SET password = #{password}, needModifyPassword = 1 WHERE userId=#{userId}
     </update>
 
     <delete id="deleteUser" parameterType="java.lang.Integer">

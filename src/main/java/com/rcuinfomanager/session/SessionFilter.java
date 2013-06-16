@@ -43,6 +43,8 @@ public class SessionFilter implements Filter {
         STATIC_RESOURCE_URIS.add(".CSS");
 
         STATIC_RESOURCE_URIS.add(".HTM");
+
+        STATIC_RESOURCE_URIS.add(".APK");
     }
 
     @Override

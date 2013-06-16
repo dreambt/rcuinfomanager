@@ -20,6 +20,8 @@ public class User extends BaseModel {
 
     private String lastLoginTime;
 
+    private int needModifyPassword;
+
     private String note1;
 
     private String note2;
@@ -118,5 +120,13 @@ public class User extends BaseModel {
 
     public void setNote4(String note4) {
         this.note4 = note4;
+    }
+
+    public int getNeedModifyPassword() {
+        return needModifyPassword;
+    }
+
+    public void setNeedModifyPassword(int needModifyPassword) {
+        this.needModifyPassword = needModifyPassword;
     }
 }

@@ -38,7 +38,7 @@ public interface BaseInfoDao {
     List<FinancialAssets> getFinancialAssets(Long recordId);
 
     //获取家庭资产情况
-    FamilyAssets getFamilyAssets(Long recordId);
+    FamilyAssets getFamilyAssets(long recordId);
 
     //负责情况信息
     List<FamilyIncurDebts> getFamilyIncurDebts(Long recordId);
@@ -77,4 +77,34 @@ public interface BaseInfoDao {
     BaseInfo getBaseInfoByCerNum(String cerNum);
 
     void saveFamilyMember(BaseInfo baseInfo);
+
+    void updateFamilyincurdebts(AllColumnInfo allColumnInfo);
+
+    void updateFinancialassets(AllColumnInfo allColumnInfo);
+
+    void updateFamilyassets(AllColumnInfo allColumnInfo);
+
+    void updateFinanceservices(AllColumnInfo allColumnInfo);
+
+    void updateCustomermanagereva(AllColumnInfo allColumnInfo);
+
+    void deleteCarsinfoByAssetsId(long assetsId);
+
+    void deleteHouseInfoByAssetsId(long assetsId);
+
+    void deleteLandInfoByAssetsId(long assetsId);
+
+    void deleteFamilyMemberInfoByRecordId(long recordId);
+
+    void saveCarsinfo(CarsInfo carsInfo);
+
+    void saveLandInfo(LandInfo landInfo);
+
+    void saveHouseInfo(HouseInfo houseInfo);
+
+    void saveFamilyMember(FamilyMember familyMember);
+
+    int saveBaseInfoFromClient(AllColumnInfo allColumnInfo);
+
+
 }

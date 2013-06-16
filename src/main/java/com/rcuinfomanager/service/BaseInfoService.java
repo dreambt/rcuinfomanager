@@ -147,7 +147,7 @@ public class BaseInfoService {
             }
         }
 
-        return baseInfoDao.queryAppointInfoByUserId(userId);
+        return allColumnInfos;
     }
 
     public void saveFarmerInfoFromDownload(AllColumnInfo allColumnInfo) {
@@ -156,6 +156,55 @@ public class BaseInfoService {
             allColumnInfo.setRecordId(baseInfo.getRecordId());
             baseInfoDao.updateBaseInfoById(allColumnInfo);
             baseInfoDao.updateIncomeexpenses(allColumnInfo);
+            baseInfoDao.updateFamilyincurdebts(allColumnInfo);
+            baseInfoDao.updateFinancialassets(allColumnInfo);
+            baseInfoDao.updateFinanceservices(allColumnInfo);
+            baseInfoDao.updateCustomermanagereva(allColumnInfo);
+            FamilyAssets familyAssets = baseInfoDao.getFamilyAssets(baseInfo.getRecordId());
+            if (familyAssets != null) {
+                allColumnInfo.setAssetsId(familyAssets.getAssetsId());
+                baseInfoDao.updateFamilyassets(allColumnInfo);
+                baseInfoDao.deleteCarsinfoByAssetsId(familyAssets.getAssetsId());
+                baseInfoDao.deleteHouseInfoByAssetsId(familyAssets.getAssetsId());
+                baseInfoDao.deleteLandInfoByAssetsId(familyAssets.getAssetsId());
+                baseInfoDao.deleteFamilyMemberInfoByRecordId(baseInfo.getRecordId());
+            }
+
+            List<CarsInfo> carInfos = allColumnInfo.getCarInfos();
+            if (carInfos != null) {
+                for (CarsInfo carsInfo : carInfos) {
+                    carsInfo.setAssetsId(familyAssets.getAssetsId());
+                    baseInfoDao.saveCarsinfo(carsInfo);
+                }
+            }
+
+            List<LandInfo> landInfos = allColumnInfo.getLandInfos();
+            if (landInfos != null) {
+                for (LandInfo landInfo : landInfos) {
+                    landInfo.setAssetsId(familyAssets.getAssetsId());
+                    baseInfoDao.saveLandInfo(landInfo);
+                }
+            }
+
+            List<HouseInfo> houseInfos = allColumnInfo.getHouseInfos();
+            if (houseInfos != null) {
+                for (HouseInfo houseInfo : houseInfos) {
+                    houseInfo.setAssetsId(familyAssets.getAssetsId());
+                    baseInfoDao.saveHouseInfo(houseInfo);
+                }
+            }
+
+            List<FamilyMember> familyMembers = allColumnInfo.getFamilyMembers();
+            if (familyMembers != null) {
+                for (FamilyMember familyMember : familyMembers) {
+                    familyMember.setRecordId(baseInfo.getRecordId());
+                    baseInfoDao.saveFamilyMember(familyMember);
+                }
+            }
+        } else {
+            //TODO save new base info.
+            int recordId = baseInfoDao.saveBaseInfoFromClient(allColumnInfo);
+            allColumnInfo.setRecordId(recordId);
         }
 
     }

@@ -2,6 +2,7 @@ package com.rcuinfomanager.model;
 
 public class FamilyAssets {
 
+    private long assetsId;
     private String fmAllAssets;
     private String mainAssets;
 
@@ -19,5 +20,13 @@ public class FamilyAssets {
 
     public void setMainAssets(String mainAssets) {
         this.mainAssets = mainAssets;
+    }
+
+    public long getAssetsId() {
+        return assetsId;
+    }
+
+    public void setAssetsId(long assetsId) {
+        this.assetsId = assetsId;
     }
 }

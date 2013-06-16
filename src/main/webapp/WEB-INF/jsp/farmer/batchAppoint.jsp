@@ -14,9 +14,14 @@
     <script type="text/javascript">
         $(function () {
             var recordIds = '${recordIds}';
+            var isUserName='${isUserName}';
+            if(isUserName){
+               alert(isUserName);
+            }
             //确定
             $('#addOpera').click(function () {
-                var url = '/family/saveBatchAppoint/' + recordIds ;
+                var uid =$('#userId').val();
+                var url = '/family/saveBatchAppoint/'+recordIds+'/'+uid ;
                 window.location.href = url;
             });
 
@@ -27,10 +32,9 @@
                 window.location.href = url;
             });
             //返回main
-            var success = '${params.success}';
+            var success = '${success}';
             if (success && success != '') {
                 var url = '/farmer/main';
-                $(window.top.window.document).find('#main').attr('src', url);
                 window.top.art.dialog({id: 'assign'}).close();
             }
 
@@ -50,25 +54,26 @@
         <tr>
             <td>&nbsp;</td>
             <td align="right">
-                <select class="span3" name="organizationName" id="organizationName" style="width:202px;">
-                    <option value="">选择网点</option>
-
-                    <option value="">小作社</option>
+                <select class="span3" name="userId" id="userId" style="width:202px;">
+                    <option value="">指定客户经理</option>
+                    <core:forEach items="${userNameList}" var="uList">
+                        <option value="${uList.userId}">${uList.userName}</option>
+                    </core:forEach>
                 </select>
             </td>
         </tr>
-        <tr>
+       <%-- <tr>
             <td align="right" colspan="2">
                 <input type="text" id="customerName" name="customerName" value=""
                        style="width: 200px;height: 30px; margin-top: 10px;" placeholder="指定客户经理">
             </td>
             <td><span class="help-inline">(可选)</span></td>
-        </tr>
+        </tr>--%>
         </tbody>
     </table>
 </form>
 <p align="center">
-    <a class="btn" href="#" id="okOperate">确定</a>&nbsp;
+    <a class="btn" href="#" id="addOpera">确定</a>&nbsp;
     <a class="btn" href="/index" id="cancelOperate">取消</a>
 </p>
 </body>

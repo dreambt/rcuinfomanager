@@ -12,29 +12,32 @@
     <script src="/asserts/js/jquery-1.7.2.min.js"></script>
     <script src="/asserts/js/bootstrap.min.js"></script>
     <script type="text/javascript">
-
         $(function () {
-            var scuccessInfo='${isUserName}';
-            if(scuccessInfo){
-                 alert(scuccessInfo);
+            var isCheck='${isCheck}';
+            if(isCheck){
+               alert(isCheck);
             }
+           var recordIds='${recordIds}';
             //确定
             $('#okOperate').click(function () {
-                var id = $('#recordId').val();
-                var uid =$('#userId').val();
-                var url = '/family/saveAppoint/'+id+'/'+uid;
-                window.location.href = url;
+                var state = $('#state').val();
+                if(state && state!=''){
+                    var url = '/family/saveBatchChecks/'+recordIds+'/'+state;
+                    window.location.href = url;
+                }else{
+                    alert("未选择验收结果！");
+                }
             });
 
             //关闭
             $('#cancelOperate').click(function () {
-                window.top.art.dialog({id: 'assign' }).close();
+                window.top.art.dialog({id: 'check' }).close();
             });
             //返回main
             var success = '${success}';
             if (success && success != '') {
                 var url = 'farmer/main';
-                window.top.art.dialog({id: 'assign'}).close();
+                window.top.art.dialog({id: 'check'}).close();
             }
 
         });
@@ -45,7 +48,7 @@
 <form method="post">
     <table width="100%" border="0">
         <tbody>
-        <core:forEach items="${appointList}" var="appointPeople">
+        <%--<core:forEach items="${appointList}" var="appointPeople">
             <input type="hidden" id="recordId" name="recordId" value="${appointPeople.recordId}">
             <tr>
                 <td><span class="label label-info">户主：</span></td>
@@ -53,31 +56,21 @@
                 <td><span class="label label-info">电话：</span></td>
                 <td>${appointPeople.telephone}</td>
             </tr>
-        </core:forEach>
+        </core:forEach>--%>
         <tr>
             <td align="left" colspan="2">
-                <span class="label label-info">指派给：</span>
-            </td>
+                <span class="label label-info">验收</span>
         </tr>
         <tr>
             <td>&nbsp;</td>
             <td align="right">
-                <select class="span3" name="userId" id="userId" style="width:202px;">
-                    <option value="">指定客户经理</option>
-                     <core:forEach items="${userNameList}" var="uList">
-                         <option value="${uList.userId}">${uList.userName}</option>
-                     </core:forEach>
+                <select class="span3" name="state" id="state" style="width:202px;">
+                    <option value="">选择验收结果</option>
+                    <option value="1">验收通过</option>
+                    <option value="2">验收拒绝</option>
                 </select>
             </td>
         </tr>
-        <%--<tr>
-            <td align="right" colspan="2">
-                <input type="text" id="customerName" name="customerName" value=""
-                       style="width: 200px;height: 30px; margin-top: 10px;" placeholder="指定客户经理">
-            </td>
-            <td><span class="help-inline">(可选)</span></td>
-        </tr>--%>
-
         </tbody>
     </table>
 </form>

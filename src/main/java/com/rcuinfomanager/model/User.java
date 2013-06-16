@@ -6,7 +6,7 @@ package com.rcuinfomanager.model;
  */
 public class User extends BaseModel {
 
-    private int userId;
+    private Long userId;
 
     private int organizationId;
 
@@ -32,11 +32,11 @@ public class User extends BaseModel {
 
     }
 
-    public int getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 

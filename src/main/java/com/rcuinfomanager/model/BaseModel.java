@@ -11,18 +11,18 @@ import java.io.Serializable;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class BaseModel implements Serializable {
 
-    protected int userId;
+    protected Long userId;
 
     protected String createTime;
 
     protected String updateTime;
 
 
-    public int getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 

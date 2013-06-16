@@ -96,15 +96,122 @@ $(function () {
         }
     });
 
+    //验收
+    var batchCheckNode = $('#checkOperate');
+    batchCheckNode.click(function () {
+        var me = $(this);
+        var checkOperaNodes = $('.checkOpera');
+        var isExist = false;
+        var recordIds = '';
+        var j = 0;
+        $.each(checkOperaNodes, function (i, checkOperaNode) {
+            checkOperaNode = $(checkOperaNode);
+            if (checkOperaNode.attr('checked')) {
+                isExist = true;
+                if (j == 0) {
+                    recordIds = checkOperaNode.attr('recordId');
+                } else {
+                    recordIds = recordIds + ',' + checkOperaNode.attr('recordId');
+                }
+                j++;
+            }
+        });
+        if (isExist) {
+            var url = '/family/batchChecks/' + recordIds;
+            window.art.dialog({
+                id: 'check',
+                title: '验收信息',
+                lock: true,
+                content: '<iframe scrolling="auto" width="450" height="210" frameborder="0" style="border: none;margin: -20px -25px;"marginheight="0" marginwidth="0" src="' + url + '"/>'
+            });
+        } else {
+            alert("未勾选任何客户信息！");
+        }
+    });
+
     //导入基础数据
-    $('#importBasicData').click(function () {
-        var url = '';
+    $('#importBasicOperate').click(function () {
+        var url = '/family/importBasicData';
         window.top.artDialog({
             id: 'import',
-            title: '导入基础数据信息',
+            title: '导入数据信息',
             lock: true,
-            content: '<iframe scrolling="auto" width="620" height="560" frameborder="0" style="border: none;margin: -20px -25px;"marginheight="0" marginwidth="0" src="' + url + '"/>'
+            content: '<iframe scrolling="auto" width="400" height="250" frameborder="0" style="border: none;margin: -20px -25px;"marginheight="0" marginwidth="0" src="' + url + '"/>'
         });
-
     });
+    //导入村委会评价表
+    $('#importVillageAssess').click(function () {
+        var url = '/family/importBasicData';
+        window.top.artDialog({
+            id: 'import',
+            title: '导入数据信息',
+            lock: true,
+            content: '<iframe scrolling="auto" width="400" height="250" frameborder="0" style="border: none;margin: -20px -25px;"marginheight="0" marginwidth="0" src="' + url + '"/>'
+        });
+    });
+
+    //导出数据
+    $('#exportBasicOperate').click(function () {
+        var me = $(this);
+        var checkOperaNodes = $('.checkOpera');
+        var isExist = false;
+        var recordIds = '';
+        var j = 0;
+        $.each(checkOperaNodes, function (i, checkOperaNode) {
+            checkOperaNode = $(checkOperaNode);
+            if (checkOperaNode.attr('checked')) {
+                isExist = true;
+                if (j == 0) {
+                    recordIds = checkOperaNode.attr('recordId');
+                } else {
+                    recordIds = recordIds + ',' + checkOperaNode.attr('recordId');
+                }
+                j++;
+            }
+        });
+        if (isExist) {
+            var url = '/family/exportBasicData/' + recordIds;
+            window.top.artDialog({
+                id: 'export',
+                title: '导出数据信息',
+                lock: true,
+                content: '<iframe scrolling="auto" width="400" height="250" frameborder="0" style="border: none;margin: -20px -25px;"marginheight="0" marginwidth="0" src="' + url + '"/>'
+            });
+        } else {
+            alert("未勾选任何客户信息！");
+        }
+    });
+    //导出村委会评价表
+    $('#exportVillageAssess').click(function () {
+        var me = $(this);
+        var checkOperaNodes = $('.checkOpera');
+        var isExist = false;
+        var recordIds = '';
+        var j = 0;
+        $.each(checkOperaNodes, function (i, checkOperaNode) {
+            checkOperaNode = $(checkOperaNode);
+            if (checkOperaNode.attr('checked')) {
+                isExist = true;
+                if (j == 0) {
+                    recordIds = checkOperaNode.attr('recordId');
+                } else {
+                    recordIds = recordIds + ',' + checkOperaNode.attr('recordId');
+                }
+                j++;
+            }
+        });
+        if (isExist) {
+            var url = '/family/exportBasicData/' + recordIds;
+            window.top.artDialog({
+                id: 'export',
+                title: '导出数据信息',
+                lock: true,
+                content: '<iframe scrolling="auto" width="400" height="250" frameborder="0" style="border: none;margin: -20px -25px;"marginheight="0" marginwidth="0" src="' + url + '"/>'
+            });
+        } else {
+            alert("未勾选任何客户信息！");
+        }
+    });
+
+
 });

@@ -12,19 +12,19 @@
     <script type="text/javascript">
         $(function () {
             //确定
-            $('#okOperate').click(function () {
+            $('#addOpera').click(function () {
                 $('#myForm').submit();
             });
 
             //关闭
             $('#cancelOperate').click(function () {
-                window.top.art.dialog({id: 'import' }).close();
+                window.top.art.dialog({id: 'export' }).close();
             });
             //返回main
-            var success = '${success}';
+            var success = '${params.success}';
             if (success && success != '') {
                 var url = 'farmer/main';
-                window.top.art.dialog({id: 'import'}).close();
+                window.top.art.dialog({id: 'export'}).close();
             }
 
         });
@@ -32,7 +32,8 @@
 </head>
 <body>
 
-<form id="myForm" action="/family/saveImportBasicData" method="post">
+<form id="myForm" action="/family/saveExportBasicData" method="post">
+    <input type="hidden" name="recordIds" value="${recordIds}"/>
        <table>
            <tr>
                <td>
@@ -55,7 +56,7 @@
        </table>
 </form>
 <p align="center">
-    <a class="btn" href="#" id="okOperate">导入</a>&nbsp;
+    <a class="btn" href="#" id="okOperate">导出</a>&nbsp;
     <a class="btn" href="#" id="cancelOperate">取消</a>
 </p>
 </body>

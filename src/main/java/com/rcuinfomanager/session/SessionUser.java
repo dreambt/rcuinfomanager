@@ -6,7 +6,7 @@ package com.rcuinfomanager.session;
  */
 public class SessionUser {
 
-    private int id;
+    private Long id;
 
     private String userName;
 
@@ -22,11 +22,11 @@ public class SessionUser {
         return lastLoginTime == null;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -21,14 +21,14 @@
         left outer join organizationInfo org on u.organizationId=org.organizationId limit #{beginPageNum}, #{endPageNum}
     </select>
 
-    <select id="queryAdminByBaseInfoByCount" resultType="java.lang.Integer">
+    <select id="queryAdminByBaseInfoByCount" resultType="java.lang.Long">
         select count(*)
         from baseinfo b
         left outer join usersinfo u on b.userName=u.userName
         left outer join organizationInfo org on u.organizationId=org.organizationId
     </select>
     <!-- 普通用户获取数据列表-->
-    <select id="queryNormalByBaseInfoByPage" parameterType="java.lang.Integer" resultMap="userListInfo">
+    <select id="queryNormalByBaseInfoByPage" parameterType="java.lang.Long" resultMap="userListInfo">
         select b.recordId,b.customerName,b.telephone,b.submitTime,org.organizationName,u.displayUserName,b.state
         from baseinfo b
         left outer join usersinfo u on b.userName=u.userName
@@ -36,7 +36,7 @@
         where u.userId=#{userId} limit #{beginPageNum}, #{endPageNum}
     </select>
 
-    <select id="queryNormalByBaseInfoByCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    <select id="queryNormalByBaseInfoByCount" parameterType="java.lang.Long" resultType="java.lang.Long">
         select count(*)
         from baseinfo b
         left outer join usersinfo u on b.userName=u.userName
@@ -266,6 +266,14 @@
            left outer join financialassets fin on fas.assetsId=fin.assetsId
            where b.recordId=#{recordId}
     </delete>
+    <!--111111111111111111111111111111111111111111111-->
+    <insert id="saveSimpleBaseInfo" parameterType="com.rcuinfomanager.model.BaseInfo" >
+        insert into baseinfo(customerName,cerNum,nation) values (#{customerName},#{cerNum},#{nation})
+    </insert>
+    <insert id="saveFamilyMember" parameterType="com.rcuinfomanager.model.BaseInfo" >
+        insert into baseinfo(familyMemberCerNum,cerNum,familyMemberName,leaderRelation,recordId)
+        values (#{familyMemberCerNum},#{cerNum},#{familyMemberName},#{leaderRelation},#{recordId})
+    </insert>
 
     <resultMap id="allColumnInfoList" type="com.rcuinfomanager.webservice.model.AllColumnInfo">
         <result column="recordId" property="recordId"></result>
@@ -401,36 +409,23 @@
           insert into t_appoint(recordId,user_id)
           values (#{id},#{userId})
     </insert>
-
-    <!--指派网点-->
-    <!--<select id="getAdminOrganizationName" resultMap="userListInfo">
-         select org.organizationName from organizationInfo org
+    <resultMap id="userNameMap" type="com.rcuinfomanager.model.User">
+        <result column="userId" property="userId"></result>
+        <result column="userName" property="userName"></result>
+    </resultMap>
+    <select id="getUserNameList" resultMap="userNameMap">
+          select u.userId,u.userName from usersinfo u
     </select>
-    <select id="getUserOrganizationName" parameterType="java.lang.Long" resultMap="userListInfo">
-         select org.organizationName
-          from usersinfo u
-          left outer join organizationInfo org on u.organizationId=org.organizationId
-          where u.userId=#{userId}
-    </select>
-
-
-    <delete id="deleteInfo" parameterType="java.lang.Long">
-           delete from baseinfo b
-           left outer join familymemberinfo fm on b.recordId=fm.recordId
-           left outer join photosinfo pho on b.recordId = pho.recordId
-           left outer join familyincurdebts fid on b.recordId = fid.recordId
-           left outer join incomeexpenses ies on b.recordId = ies.recordId
-           left outer join familyassets fas on b.recordId = fas.recordId
-           left outer join housepropertyinfo h on fas.assetsId= h.assetsId
-           left outer join landinfo land on fas.assetsId=land.assetsId
-           left outer join carsinfo car on fas.assetsId=car.assetsId
-           left outer join financialassets fin on fas.assetsId=fin.assetsId
-           where b.recordId=#{recordId}
-    </delete>
-    -->
+    <!--保存验收-->
+    <update id="saveChecksInfo" parameterType="com.rcuinfomanager.model.CustomerListInfo">
+        update baseinfo b set b.state=#{state} where b.recordId=#{id}
+    </update>
 
     <select id="getBaseInfoByCustomerAndCerNum" parameterType="java.lang.String" resultType="com.rcuinfomanager.model.BaseInfo">
         select * from baseinfo where customerName = #{customerName} and cerNum = #{cerNum}
+    </select>
+    <select id="getBaseInfoByCerNum" parameterType="java.lang.String" resultType="com.rcuinfomanager.model.BaseInfo">
+        select * from baseinfo where cerNum = #{cerNum}
     </select>
 
     <update id="updateBaseInfoById" parameterType="com.rcuinfomanager.webservice.model.AllColumnInfo">

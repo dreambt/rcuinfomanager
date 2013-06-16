@@ -88,7 +88,7 @@
                 </div>
                 <div class="btn-group">
                     <button class="btn" type="button" id="assignOperate">批量指派</button>
-                    <button class="btn" type="button">验收</button>
+                    <button class="btn" type="button" id="checkOperate">验收</button>
                 </div>
                 <div class="btn-group">
                     <button class="btn dropdown-toggle" data-toggle="dropdown">导入 <span class="caret"></span></button>
@@ -100,8 +100,8 @@
                 <div class="btn-group">
                     <button class="btn dropdown-toggle" data-toggle="dropdown">导出 <span class="caret"></span></button>
                     <ul class="dropdown-menu">
-                        <li><a href="#">导出基础数据</a></li>
-                        <li><a href="#">导出村委会评价表</a></li>
+                        <li><a href="#" id="exportBasicOperate">导出基础数据</a></li>
+                        <li><a href="#" id="exportVillageAssess">导出村委会评价表</a></li>
                     </ul>
                 </div>
             </div>

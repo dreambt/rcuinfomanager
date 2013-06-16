@@ -21,19 +21,19 @@ public class BaseInfoService {
         return baseInfoDao.queryAdminByBaseInfoByPage(beginPageNum, engPageNum);
     }
 
-    public int getAllFamilyInfoListByCount() {
+    public Long getAllFamilyInfoListByCount() {
         return baseInfoDao.queryAdminByBaseInfoByCount();
     }
 
     //Normal
-    public List<CustomerListInfo> getFamilyInfoListByPage(int userId, int pageNum, int offset) {
+    public List<CustomerListInfo> getFamilyInfoListByPage(Long userId, int pageNum, int offset) {
         int beginPageNum = (pageNum -1) * offset;
         int engPageNum = pageNum * offset;
 
         return baseInfoDao.queryNormalByBaseInfoByPage(userId, beginPageNum, engPageNum);
     }
 
-    public int getFamilyInfoListByCount(int userId) {
+    public Long getFamilyInfoListByCount(Long userId) {
         return baseInfoDao.queryNormalByBaseInfoByCount(userId);
     }
 
@@ -102,6 +102,14 @@ public class BaseInfoService {
     //保存指派
     public void saveAppointInfo(long id,long userId){
         baseInfoDao.saveAppointInfo(id,userId);
+    }
+    //获取UserName
+    public List<User> getUserNameList(){
+        return baseInfoDao.getUserNameList();
+    }
+    //保存验收
+    public void saveChecksInfo(long id,int state){
+        baseInfoDao.saveChecksInfo(id,state);
     }
 
     /*//选择网点

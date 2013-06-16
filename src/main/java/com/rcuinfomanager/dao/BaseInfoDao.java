@@ -10,12 +10,12 @@ public interface BaseInfoDao {
     //管理员获取数据列表
     List<CustomerListInfo> queryAdminByBaseInfoByPage(@Param("beginPageNum") int beginPageNum, @Param("endPageNum") int endPageNum);
 
-    int queryAdminByBaseInfoByCount();
+    Long queryAdminByBaseInfoByCount();
 
     //普通用户获取数据列表
-    List<CustomerListInfo> queryNormalByBaseInfoByPage(@Param("userId") int userId, @Param("beginPageNum") int beginPageNum, @Param("endPageNum") int endPageNum);
+    List<CustomerListInfo> queryNormalByBaseInfoByPage(@Param("userId") Long userId, @Param("beginPageNum") int beginPageNum, @Param("endPageNum") int endPageNum);
 
-    int queryNormalByBaseInfoByCount(@Param("userId")int userId);
+    Long queryNormalByBaseInfoByCount(@Param("userId")Long userId);
 
     //显示客户个人信息
     List<CustomerListInfo> getPersonBasicInfo(Long recordId);
@@ -61,10 +61,20 @@ public interface BaseInfoDao {
     List<AppointInfo> getAppointInfoList(long id);
     //保存指派
     void saveAppointInfo(@Param("id")long id,@Param("userId")long userId);
+    //获取userName
+    List<User> getUserNameList();
+    //保存验收
+    void saveChecksInfo(@Param("id")long id,@Param("state")int state);
 
     BaseInfo getBaseInfoByCustomerAndCerNum(@Param("customerName") String customerName, @Param("cerNum") String cerNum);
 
     void updateBaseInfoById(AllColumnInfo allColumnInfo);
 
     void updateIncomeexpenses(AllColumnInfo allColumnInfo);
+
+    void saveSimpleBaseInfo(BaseInfo baseInfo);
+
+    BaseInfo getBaseInfoByCerNum(String cerNum);
+
+    void saveFamilyMember(BaseInfo baseInfo);
 }

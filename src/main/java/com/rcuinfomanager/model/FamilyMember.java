@@ -2,6 +2,7 @@ package com.rcuinfomanager.model;
 
 public class FamilyMember {
     private int id;
+    private long recordId;
     private String familyMemberName;
     private String yearIncome;
     private String leaderRelation;
@@ -72,5 +73,13 @@ public class FamilyMember {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public long getRecordId() {
+        return recordId;
+    }
+
+    public void setRecordId(long recordId) {
+        this.recordId = recordId;
     }
 }

@@ -5,7 +5,7 @@ public class VillageManagerEva {
     private String truth;
     private String localLivingTime;
     private String operatingCapacity;
-    private String   projectPotential;
+    private String projectPotential;
     private String operationalRisks;
     private String developmentProspects;
     private String operatingStability;

@@ -10,7 +10,6 @@ import com.rcuinfomanager.session.UserSessionContextHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -44,7 +43,7 @@ public class HomeController {
         map.put("firstLogin",sessionUser.isFirstLogon());
         map.put("displayUserName", sessionUser.getDisplayUserName());
         map.put("userNameByAdmin", sessionUser.getUserName());
-        int offset = 1;
+        int offset = 20;
         if("admin".equalsIgnoreCase(sessionUser.getUserName())){
             map.put("pageCount", baseInfoService.getAllFamilyInfoListByCount() / offset);
             map.put("familyInfoList",baseInfoService.getAllFamilyInfoListByPage(pageNum,offset));
@@ -105,7 +104,7 @@ public class HomeController {
         UserSessionContext userSessionContext = UserSessionContextHolder.getUserSessionContext();
         SessionUser sessionUser = userSessionContext.getSessionUser();
         map.put("displayUserName", sessionUser.getDisplayUserName());
-        int offset = 1;
+        int offset = 20;
         if("admin".equalsIgnoreCase(sessionUser.getUserName())){
             map.put("pageCount", logsInfoService.getAllLogsInfoListByCount() / offset);
             map.put("logsInfoList",logsInfoService.getLogsInfoByAdminListPage(pageNum,offset));
@@ -113,9 +112,6 @@ public class HomeController {
         }else{
             map.put("pageCount", logsInfoService.getLogsInfoListByCount(sessionUser.getId()) / offset);
             map.put("logsInfoList",logsInfoService.getLogsInfoByNormalListPage(sessionUser.getId(), pageNum, offset));
-
-
-            //map.put("familyInfoList", baseInfoService.getFamilyInfoListByPage(sessionUser.getId(), pageNum, offset));
         }
         return "logsystem/systemLog";
     }

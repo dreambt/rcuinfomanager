@@ -209,7 +209,7 @@ public class BaseInfoService {
     }
 
     //二
-    public FinanceServices getFinanceServicesList(){
+    public FinanceServices getFinanceService(){
         return baseInfoDao.getFinanceServicesList();
     }
     //三

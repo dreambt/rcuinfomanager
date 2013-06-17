@@ -37,7 +37,7 @@ public class BaseInfoController {
         map.put("userNameByAdmin", sessionUser.getUserName());
         SimpleDateFormat dateFm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); //格式化当前系统日期
         String logsDate = dateFm.format(new java.util.Date());
-        logsInfoService.saveLogsInfo(new LogsInfo(logsDate,sessionUser.getId(),"查看"));
+        logsInfoService.saveLogsInfo(new LogsInfo(logsDate, sessionUser.getId(), "查看"));
         map.put("displayUserName", sessionUser.getDisplayUserName());
         map.put("personInfoList", baseInfoService.getPersonBasicInfo(id));
         //基础概况信息
@@ -59,7 +59,7 @@ public class BaseInfoController {
         //家庭成员
         map.put("personFamilyMemberList",baseInfoService.getFamilyMember(id));
         //二
-        map.put("financeServicesLists",baseInfoService.getFinanceServicesList());
+        map.put("financeService",baseInfoService.getFinanceService());
         //三
         map.put("villageManagerEvaList",baseInfoService.getVillageManagerEvaList());
         //四
@@ -179,7 +179,7 @@ public class BaseInfoController {
         //家庭成员
         map.put("personFamilyMemberList",baseInfoService.getFamilyMember(id));
         //二
-        map.put("financeServicesLists",baseInfoService.getFinanceServicesList());
+        map.put("financeServicesLists",baseInfoService.getFinanceService());
         //三
         map.put("villageManagerEvaList",baseInfoService.getVillageManagerEvaList());
         //四

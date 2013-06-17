@@ -1620,11 +1620,11 @@
                             您目前使用我行（社）的哪些产品
                         </td>
                         <core:choose>
-                          <core:when test="${empty financeServicesLists.usedProduct}">
+                          <core:when test="${empty financeService.usedProduct}">
                              <td align="center" colspan="3">&nbsp;</td>
                           </core:when>
                           <core:otherwise>
-                              <td align="center" colspan="3">${financeServicesLists.usedProduct}</td>
+                              <td align="center" colspan="3">${financeService.usedProduct}</td>
                           </core:otherwise>
                         </core:choose>
                     </tr>
@@ -1634,11 +1634,11 @@
                             您对我行（社）产品满意度
                         </td>
                         <core:choose>
-                          <core:when test="${empty financeServicesLists.satisfaction}">
+                          <core:when test="${empty financeService.satisfaction}">
                             <td align="center" colspan="3">&nbsp;</td>
                           </core:when>
                           <core:otherwise>
-                             <td align="center" colspan="3">${financeServicesLists.satisfaction}</td>
+                             <td align="center" colspan="3">${financeService.satisfaction}</td>
                           </core:otherwise>
                         </core:choose>
                     </tr>
@@ -1647,11 +1647,11 @@
                             您在未来两年内是否有资金需求
                         </td>
                         <core:choose>
-                            <core:when test="${empty financeServicesLists.isMoneyNeed}">
+                            <core:when test="${empty financeService.moneyNeedReadable}">
                                 <td align="center" colspan="3">&nbsp;</td>
                             </core:when>
                             <core:otherwise>
-                                <td align="center" colspan="3">${financeServicesLists.isMoneyNeed}</td>
+                                <td align="center" colspan="3">${financeService.moneyNeedReadable}</td>
                             </core:otherwise>
                         </core:choose>
                     </tr>
@@ -1660,11 +1660,11 @@
                             如果需要贷款的话，您计划用这笔贷款做什么？
                         </td>
                         <core:choose>
-                            <core:when test="${empty financeServicesLists.moneyTodo}">
+                            <core:when test="${empty financeService.moneyTodo}">
                                 <td align="center" rowspan="3">&nbsp;</td>
                             </core:when>
                             <core:otherwise>
-                                <td align="center" rowspan="3">${financeServicesLists.moneyTodo}</td>
+                                <td align="center" rowspan="3">${financeService.moneyTodo}</td>
                             </core:otherwise>
                         </core:choose>
 
@@ -1672,11 +1672,11 @@
                             您希望得到的贷款金额是多少？
                         </td>
                         <core:choose>
-                            <core:when test="${empty financeServicesLists.moneyCount}">
+                            <core:when test="${empty financeService.moneyCount}">
                                 <td align="center">&nbsp;</td>
                             </core:when>
                             <core:otherwise>
-                                <td align="center">${financeServicesLists.moneyCount}</td>
+                                <td align="center">${financeService.moneyCount}</td>
                             </core:otherwise>
                         </core:choose>
                     </tr>
@@ -1685,11 +1685,11 @@
                             您可以提供的担保物有？
                         </td>
                         <core:choose>
-                            <core:when test="${empty financeServicesLists.guarantee}">
+                            <core:when test="${empty financeService.guarantee}">
                                 <td align="center">&nbsp;</td>
                             </core:when>
                             <core:otherwise>
-                                <td align="center">${financeServicesLists.guarantee}</td>
+                                <td align="center">${financeService.guarantee}</td>
                             </core:otherwise>
                         </core:choose>
                     </tr>
@@ -1698,11 +1698,11 @@
                             您希望得到的贷款期限是多久？
                         </td>
                         <core:choose>
-                            <core:when test="${empty financeServicesLists.timeLimit}">
+                            <core:when test="${empty financeService.timeLimit}">
                                 <td align="center">&nbsp;</td>
                             </core:when>
                             <core:otherwise>
-                                <td align="center">${financeServicesLists.timeLimit}</td>
+                                <td align="center">${financeService.timeLimit}</td>
                             </core:otherwise>
                         </core:choose>
                     </tr>
@@ -1711,11 +1711,11 @@
                             未来1-2年家庭储蓄的主要目的和用途？
                         </td>
                         <core:choose>
-                            <core:when test="${empty financeServicesLists.fmDepositTodo}">
+                            <core:when test="${empty financeService.fmDepositTodo}">
                                 <td align="center" colspan="2">&nbsp;</td>
                             </core:when>
                             <core:otherwise>
-                                <td align="center" colspan="2">${financeServicesLists.fmDepositTodo}</td>
+                                <td align="center" colspan="2">${financeService.fmDepositTodo}</td>
                             </core:otherwise>
                         </core:choose>
                     </tr>
@@ -1724,11 +1724,11 @@
                             您目前希望得到我行（社）的哪些服务？
                         </td>
                         <core:choose>
-                            <core:when test="${empty financeServicesLists.needServices}">
+                            <core:when test="${empty financeService.needServices}">
                                 <td align="center" colspan="2">&nbsp;</td>
                             </core:when>
                             <core:otherwise>
-                                <td align="center" colspan="2">${financeServicesLists.needServices}</td>
+                                <td align="center" colspan="2">${financeService.needServices}</td>
                             </core:otherwise>
                         </core:choose>
                     </tr>
@@ -1737,11 +1737,11 @@
                             除了上述业务，您还需要哪些服务？
                         </td>
                         <core:choose>
-                            <core:when test="${empty financeServicesLists.needServicesElse}">
+                            <core:when test="${empty financeService.needServicesElse}">
                                 <td align="center" colspan="2">&nbsp;</td>
                             </core:when>
                             <core:otherwise>
-                                <td align="center" colspan="2">${financeServicesLists.needServicesElse}</td>
+                                <td align="center" colspan="2">${financeService.needServicesElse}</td>
                             </core:otherwise>
                         </core:choose>
                     </tr>
@@ -1750,11 +1750,11 @@
                             您希望我行（社）增加哪些方面的服务？
                         </td>
                         <core:choose>
-                            <core:when test="${empty financeServicesLists.holpForServices}">
+                            <core:when test="${empty financeService.holpForServices}">
                                 <td align="center" colspan="2">&nbsp;</td>
                             </core:when>
                             <core:otherwise>
-                                <td align="center" colspan="2">${financeServicesLists.holpForServices}</td>
+                                <td align="center" colspan="2">${financeService.holpForServices}</td>
                             </core:otherwise>
                         </core:choose>
                     </tr>
@@ -1763,11 +1763,11 @@
                             您对我行（社）服务有何建议？
                         </td>
                         <core:choose>
-                            <core:when test="${empty financeServicesLists.suggestion}">
+                            <core:when test="${empty financeService.suggestion}">
                                 <td align="center" colspan="2">&nbsp;</td>
                             </core:when>
                             <core:otherwise>
-                                <td align="center" colspan="2">${financeServicesLists.suggestion}</td>
+                                <td align="center" colspan="2">${financeService.suggestion}</td>
                             </core:otherwise>
                         </core:choose>
                     </tr>
@@ -1779,11 +1779,11 @@
                             金融业务需求
                         </td>
                         <core:choose>
-                            <core:when test="${empty financeServicesLists.bankCard}">
+                            <core:when test="${empty financeService.bankCard}">
                                 <td align="center" colspan="2">&nbsp;</td>
                             </core:when>
                             <core:otherwise>
-                                <td align="center" colspan="2">${financeServicesLists.bankCard}</td>
+                                <td align="center" colspan="2">${financeService.bankCard}</td>
                             </core:otherwise>
                         </core:choose>
                     </tr>
@@ -1792,11 +1792,11 @@
                             电子银行业务
                         </td>
                         <core:choose>
-                            <core:when test="${empty financeServicesLists.electronBank}">
+                            <core:when test="${empty financeService.electronBank}">
                                 <td align="center" colspan="2">&nbsp;</td>
                             </core:when>
                             <core:otherwise>
-                                <td align="center" colspan="2">${financeServicesLists.electronBank}</td>
+                                <td align="center" colspan="2">${financeService.electronBank}</td>
                             </core:otherwise>
                         </core:choose>
                     </tr>
@@ -1805,11 +1805,11 @@
                             代缴代扣业务
                         </td>
                         <core:choose>
-                            <core:when test="${empty financeServicesLists.agentPay}">
+                            <core:when test="${empty financeService.agentPay}">
                                 <td align="center" colspan="2">&nbsp;</td>
                             </core:when>
                             <core:otherwise>
-                                <td align="center" colspan="2">${financeServicesLists.agentPay}</td>
+                                <td align="center" colspan="2">${financeService.agentPay}</td>
                             </core:otherwise>
                         </core:choose>
                     </tr>
@@ -1818,11 +1818,11 @@
                             自助机具业务
                         </td>
                         <core:choose>
-                            <core:when test="${empty financeServicesLists.auto}">
+                            <core:when test="${empty financeService.auto}">
                                 <td align="center" colspan="2">&nbsp;</td>
                             </core:when>
                             <core:otherwise>
-                                <td align="center" colspan="2">${financeServicesLists.auto}</td>
+                                <td align="center" colspan="2">${financeService.auto}</td>
                             </core:otherwise>
                         </core:choose>
                     </tr>
@@ -1831,11 +1831,11 @@
                             对私贷款业务
                         </td>
                         <core:choose>
-                            <core:when test="${empty financeServicesLists.privateLoan}">
+                            <core:when test="${empty financeService.privateLoan}">
                                 <td align="center" colspan="2">&nbsp;</td>
                             </core:when>
                             <core:otherwise>
-                                <td align="center" colspan="2">${financeServicesLists.privateLoan}</td>
+                                <td align="center" colspan="2">${financeService.privateLoan}</td>
                             </core:otherwise>
                         </core:choose>
                     </tr>
@@ -1844,11 +1844,11 @@
                             对公贷款业务
                         </td>
                         <core:choose>
-                            <core:when test="${empty financeServicesLists.publicLoan}">
+                            <core:when test="${empty financeService.publicLoan}">
                                 <td align="center" colspan="2">&nbsp;</td>
                             </core:when>
                             <core:otherwise>
-                                <td align="center" colspan="2">${financeServicesLists.publicLoan}</td>
+                                <td align="center" colspan="2">${financeService.publicLoan}</td>
                             </core:otherwise>
                         </core:choose>
                     </tr>
@@ -1857,11 +1857,11 @@
                             客户新需求登记
                         </td>
                         <core:choose>
-                            <core:when test="${empty financeServicesLists.newRequirement}">
+                            <core:when test="${empty financeService.newRequirement}">
                                 <td align="center" colspan="2">&nbsp;</td>
                             </core:when>
                             <core:otherwise>
-                                <td align="center" colspan="2">${financeServicesLists.newRequirement}</td>
+                                <td align="center" colspan="2">${financeService.newRequirement}</td>
                             </core:otherwise>
                         </core:choose>
                     </tr>
@@ -2116,11 +2116,11 @@
                         十九、是否为我行（社）重点服务对象
                     </td>
                     <core:choose>
-                        <core:when test="${empty villageManagerEvaList.isImportantObject}">
+                        <core:when test="${empty villageManagerEvaList.importantObject}">
                             <td align="center">&nbsp;</td>
                         </core:when>
                         <core:otherwise>
-                            <td align="center">${villageManagerEvaList.isImportantObject}</td>
+                            <td align="center">${villageManagerEvaList.importantObject}</td>
                         </core:otherwise>
                     </core:choose>
                 </tr>

@@ -51,6 +51,14 @@ public class FinanceServices {
         return isMoneyNeed;
     }
 
+    public String getMoneyNeedReadable() {
+        if (isMoneyNeed == 0) {
+            return "否";
+        } else {
+            return "是";
+        }
+    }
+
     public void setMoneyNeed(int moneyNeed) {
         isMoneyNeed = moneyNeed;
     }

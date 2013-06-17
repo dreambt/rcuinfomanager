@@ -46,31 +46,31 @@
            from logsinfo lo
            left join usersinfo u on lo.userId=u.userId
            where lo.operatedTime between #{beginTime} and #{endTime}
-           and u.userName like #{userName}
+           and u.userName like #{userName} limit #{beginPageNum}, #{endPageNum}
     </select>
     <select id="getLogsBeginAndEndTimeByAdminList" parameterType="java.lang.String" resultMap="logsInfoMap">
         select lo.operatedTime,u.userName,lo.operation
            from logsinfo lo
            left join usersinfo u on lo.userId=u.userId
-           where substring(lo.operatedTime, 1, 10) between #{beginTime} and #{endTime}
+           where substring(lo.operatedTime, 1, 10) between #{beginTime} and #{endTime} limit #{beginPageNum}, #{endPageNum}
     </select>
     <select id="getLogsBeginTimeByAdminList" parameterType="java.lang.String" resultMap="logsInfoMap">
         select lo.operatedTime,u.userName,lo.operation
            from logsinfo lo
            left join usersinfo u on lo.userId=u.userId
-           where substring(lo.operatedTime, 1, 10) like #{beginTime}
+           where substring(lo.operatedTime, 1, 10) like #{beginTime} limit #{beginPageNum}, #{endPageNum}
     </select>
     <select id="getLogsEndTimeByAdminList" parameterType="java.lang.String" resultMap="logsInfoMap">
         select lo.operatedTime,u.userName,lo.operation
            from logsinfo lo
            left join usersinfo u on lo.userId=u.userId
-           where substring(lo.operatedTime, 1, 10) like #{endTime}
+           where substring(lo.operatedTime, 1, 10) like #{endTime} limit #{beginPageNum}, #{endPageNum}
     </select>
     <select id="getLogsUNameByAdminList" parameterType="java.lang.String" resultMap="logsInfoMap">
         select lo.operatedTime,u.userName,lo.operation
            from logsinfo lo
            left join usersinfo u on lo.userId=u.userId
-           where u.userName like #{userName}
+           where u.userName like #{userName} limit #{beginPageNum}, #{endPageNum}
     </select>
     <!--Normal-->
     <select id="getLogsAllList" parameterType="java.lang.String" resultMap="logsInfoMap">
@@ -79,35 +79,35 @@
            left join usersinfo u on lo.userId=u.userId
            where lo.operatedTime between #{beginTime} and #{endTime}
            and u.userName like #{userName}
-           and lo.userId=#{userId}
+           and lo.userId=#{userId} limit #{beginPageNum}, #{endPageNum}
     </select>
     <select id="getLogsBeginAndEndTimeList" parameterType="java.lang.String" resultMap="logsInfoMap">
         select lo.operatedTime,u.userName,lo.operation
            from logsinfo lo
            left join usersinfo u on lo.userId=u.userId
            where substring(lo.operatedTime, 1, 10) between #{beginTime} and #{endTime}
-           and lo.userId=#{userId}
+           and lo.userId=#{userId} limit #{beginPageNum}, #{endPageNum}
     </select>
     <select id="getLogsBeginTimeList" parameterType="java.lang.String" resultMap="logsInfoMap">
         select lo.operatedTime,u.userName,lo.operation
            from logsinfo lo
            left join usersinfo u on lo.userId=u.userId
            where substring(lo.operatedTime, 1, 10) like #{beginTime}
-           and lo.userId=#{userId}
+           and lo.userId=#{userId} limit #{beginPageNum}, #{endPageNum}
     </select>
     <select id="getLogsEndTimeList" parameterType="java.lang.String" resultMap="logsInfoMap">
         select lo.operatedTime,u.userName,lo.operation
            from logsinfo lo
            left join usersinfo u on lo.userId=u.userId
            where substring(lo.operatedTime, 1, 10) like #{endTime}
-           and lo.userId=#{userId}
+           and lo.userId=#{userId} limit #{beginPageNum}, #{endPageNum}
     </select>
     <select id="getLogsUNameList" parameterType="java.lang.String" resultMap="logsInfoMap">
         select lo.operatedTime,u.userName,lo.operation
            from logsinfo lo
            left join usersinfo u on lo.userId=u.userId
            where u.userName like #{userName}
-           and lo.userId=#{userId}
+           and lo.userId=#{userId} limit #{beginPageNum}, #{endPageNum}
     </select>
 
 </mapper>

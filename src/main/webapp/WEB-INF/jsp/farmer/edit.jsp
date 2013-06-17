@@ -121,7 +121,16 @@
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">是否农户</td>
     <td align="left">
         <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="farmer">
-            <option value="${personBasicList.farmer}">${personBasicList.farmer}</option>
+            <core:choose>
+                <core:when test="${personBasicList.farmer==0}">
+                    <option value="${personBasicList.farmer}" selected="selected">否</option>
+                    <option value="1">是</option>
+                </core:when>
+                <core:otherwise>
+                    <option value="0">否</option>
+                    <option value="${personBasicList.farmer}" selected="selected">是</option>
+                </core:otherwise>
+            </core:choose>
         </select>
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">客户类型</td>
@@ -171,7 +180,16 @@
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">是否拥有外国护照或居住权</td>
     <td align="left">
         <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="havePassport">
-            <option value="${personBasicList.havePassport}">${personBasicList.havePassport}</option>
+            <core:choose>
+                <core:when test="${personBasicList.havePassport==0}">
+                    <option value="${personBasicList.havePassport}" selected="selected">否</option>
+                    <option value="1">是</option>
+                </core:when>
+                <core:otherwise>
+                    <option value="0">否</option>
+                    <option value="${personBasicList.havePassport}" selected="selected">是</option>
+                </core:otherwise>
+            </core:choose>
         </select>
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">民族</td>
@@ -184,19 +202,53 @@
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">政治面貌</td>
     <td align="left">
         <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="poliLaspect">
-            <option value="${personBasicList.poliLaspect}">${personBasicList.poliLaspect}</option>
+            <core:choose>
+            <core:when test="${personBasicList.poliLaspect=='群众'}">
+                <option value="${personBasicList.poliLaspect}" selected="selected">群众</option>
+                <option value="党员">党员</option>
+            </core:when>
+            <core:otherwise>
+                <option value="群众">群众</option>
+                <option value="${personBasicList.poliLaspect}" selected="selected">党员</option>
+            </core:otherwise>
+            </core:choose>
         </select>
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">健康状况</td>
     <td align="left">
         <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="health">
-            <option value="${personBasicList.health}">${personBasicList.health}</option>
+            <core:choose>
+            <core:when test="${personBasicList.health=='良好'}">
+                <option value="${personBasicList.health}" selected="selected">良好</option>
+                <option value="一般">一般</option>
+                <option value="差">差</option>
+            </core:when>
+            <core:when test="${personBasicList.health=='一般'}">
+                <option value="良好" >良好</option>
+                <option value="${personBasicList.health}" selected="selected">一般</option>
+                <option value="差">差</option>
+            </core:when>
+            <core:otherwise>
+                <option value="良好" >良好</option>
+                <option value="一般">一般</option>
+                <option value="${personBasicList.health}" selected="selected">差</option>
+            </core:otherwise>
+            </core:choose>
         </select>
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">婚姻状况</td>
     <td align="left">
         <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="maritalStatus">
-            <option value="${personBasicList.maritalStatus}">${personBasicList.maritalStatus}</option>
+            <core:choose>
+            <core:when test="${personBasicList.maritalStatus=='已婚'}">
+                <option value="${personBasicList.maritalStatus}" selected="selected">已婚</option>
+                <option value="未说明">未说明</option>
+            </core:when>
+            <core:otherwise>
+                <option value="已婚">已婚</option>
+                <option value="${personBasicList.maritalStatus}" selected="selected">未说明</option>
+            </core:otherwise>
+            </core:choose>
         </select>
     </td>
 </tr>
@@ -220,6 +272,9 @@
     </td>
     <td align="left">
         <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="areaName">
+
+
+
             <option value="${personBasicList.areaName}">${personBasicList.areaName}</option>
         </select>
     </td>
@@ -246,7 +301,88 @@
     </td>
     <td align="left" colspan="2">
         <select class="selectpicker" style="width: 155px; margin-top: 5px;" name="liveCondition">
-            <option value="${personBasicList.liveCondition}">${personBasicList.liveCondition}</option>
+            <core:choose>
+                <core:when test="${personBasicList.liveCondition=='自置'}">
+                    <option value="${personBasicList.liveCondition}" selected="selected">自置</option>
+                    <option value="按揭">按揭</option>
+                    <option value="亲属楼宇">亲属楼宇</option>
+                    <option value="集体宿舍">集体宿舍</option>
+                    <option value="租房">租房</option>
+                    <option value="共有住宅">共有住宅</option>
+                    <option value="其他">其他</option>
+                    <option value="未知">未知</option>
+                </core:when>
+                <core:when test="${personBasicList.liveCondition=='按揭'}">
+                    <option value="自置">自置</option>
+                    <option value="${personBasicList.liveCondition}" selected="selected">按揭</option>
+                    <option value="亲属楼宇">亲属楼宇</option>
+                    <option value="集体宿舍">集体宿舍</option>
+                    <option value="租房">租房</option>
+                    <option value="共有住宅">共有住宅</option>
+                    <option value="其他">其他</option>
+                    <option value="未知">未知</option>
+                </core:when>
+                <core:when test="${personBasicList.liveCondition=='亲属楼宇'}">
+                    <option value="自置">自置</option>
+                    <option value="按揭">按揭</option>
+                    <option value="${personBasicList.liveCondition}" selected="selected">亲属楼宇</option>
+                    <option value="集体宿舍">集体宿舍</option>
+                    <option value="租房">租房</option>
+                    <option value="共有住宅">共有住宅</option>
+                    <option value="其他">其他</option>
+                    <option value="未知">未知</option>
+                </core:when>
+                <core:when test="${personBasicList.liveCondition=='集体宿舍'}">
+                    <option value="自置">自置</option>
+                    <option value="按揭">按揭</option>
+                    <option value="亲属楼宇">亲属楼宇</option>
+                    <option value="${personBasicList.liveCondition}" selected="selected">集体宿舍</option>
+                    <option value="租房">租房</option>
+                    <option value="共有住宅">共有住宅</option>
+                    <option value="其他">其他</option>
+                    <option value="未知">未知</option>
+                </core:when>
+                <core:when test="${personBasicList.liveCondition=='租房'}">
+                    <option value="自置">自置</option>
+                    <option value="按揭">按揭</option>
+                    <option value="亲属楼宇">亲属楼宇</option>
+                    <option value="集体宿舍">集体宿舍</option>
+                    <option value="${personBasicList.liveCondition}" selected="selected">租房</option>
+                    <option value="共有住宅">共有住宅</option>
+                    <option value="其他">其他</option>
+                    <option value="未知">未知</option>
+                </core:when>
+                <core:when test="${personBasicList.liveCondition=='共有住宅'}">
+                    <option value="自置">自置</option>
+                    <option value="按揭">按揭</option>
+                    <option value="亲属楼宇">亲属楼宇</option>
+                    <option value="集体宿舍">集体宿舍</option>
+                    <option value="租房">租房</option>
+                    <option value="${personBasicList.liveCondition}" selected="selected">共有住宅</option>
+                    <option value="其他">其他</option>
+                    <option value="未知">未知</option>
+                </core:when>
+                <core:when test="${personBasicList.liveCondition=='其他'}">
+                    <option value="自置">自置</option>
+                    <option value="按揭">按揭</option>
+                    <option value="亲属楼宇">亲属楼宇</option>
+                    <option value="集体宿舍">集体宿舍</option>
+                    <option value="租房">租房</option>
+                    <option value="共有住宅">共有住宅</option>
+                    <option value="${personBasicList.liveCondition}" selected="selected">其他</option>
+                    <option value="未知">未知</option>
+                </core:when>
+                <core:otherwise>
+                    <option value="自置">自置</option>
+                    <option value="按揭">按揭</option>
+                    <option value="亲属楼宇">亲属楼宇</option>
+                    <option value="集体宿舍">集体宿舍</option>
+                    <option value="租房">租房</option>
+                    <option value="共有住宅">共有住宅</option>
+                    <option value="其他">其他</option>
+                    <option value="${personBasicList.liveCondition}" selected="selected">未知</option>
+                </core:otherwise>
+            </core:choose>
         </select>
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">社会保障情况</td>
@@ -274,7 +410,56 @@
     </td>
     <td align="left">
         <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="highestDegree">
-            <option value="${personBasicList.highestDegree}">${personBasicList.highestDegree}</option>
+            <core:choose>
+                <core:when test="${personBasicList.highestDegree=='名誉博士'}">
+                    <option value="${personBasicList.highestDegree}" selected="selected">名誉博士</option>
+                    <option value="博士">博士</option>
+                    <option value="硕士">硕士</option>
+                    <option value="学士">学士</option>
+                    <option value="其他">其他</option>
+                    <option value="未知">未知</option>
+                </core:when>
+                <core:when test="${personBasicList.highestDegree=='博士'}">
+                    <option value="名誉博士">名誉博士</option>
+                    <option value="${personBasicList.highestDegree}" selected="selected">博士</option>
+                    <option value="硕士">硕士</option>
+                    <option value="学士">学士</option>
+                    <option value="其他">其他</option>
+                    <option value="未知">未知</option>
+                </core:when>
+                <core:when test="${personBasicList.highestDegree=='硕士'}">
+                    <option value="名誉博士">名誉博士</option>
+                    <option value="博士">博士</option>
+                    <option value="${personBasicList.highestDegree}" selected="selected">硕士</option>
+                    <option value="学士">学士</option>
+                    <option value="其他">其他</option>
+                    <option value="未知">未知</option>
+                </core:when>
+                <core:when test="${personBasicList.highestDegree=='学士'}">
+                    <option value="名誉博士">名誉博士</option>
+                    <option value="博士">博士</option>
+                    <option value="硕士">硕士</option>
+                    <option value="${personBasicList.highestDegree}" selected="selected">学士</option>
+                    <option value="其他">其他</option>
+                    <option value="未知">未知</option>
+                </core:when>
+                <core:when test="${personBasicList.highestDegree=='其他'}">
+                    <option value="名誉博士">名誉博士</option>
+                    <option value="博士">博士</option>
+                    <option value="硕士">硕士</option>
+                    <option value="学士">学士</option>
+                    <option value="${personBasicList.highestDegree}" selected="selected">其他</option>
+                    <option value="未知">未知</option>
+                </core:when>
+                <core:otherwise>
+                    <option value="名誉博士">名誉博士</option>
+                    <option value="博士">博士</option>
+                    <option value="硕士">硕士</option>
+                    <option value="学士">学士</option>
+                    <option value="其他">其他</option>
+                    <option value="${personBasicList.highestDegree}" selected="selected">未知</option>
+                </core:otherwise>
+            </core:choose>
         </select>
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">最高学历</td>
@@ -1567,8 +1752,8 @@
         十九、是否为我行（社）重点服务对象
     </td>
     <td width="73%" align="left">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="isImportantObject">
-            <option value="${villageManagerEvaList.isImportantObject}">是</option>
+        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="importantObject">
+            <option value="${villageManagerEvaList.importantObject}">是</option>
             <option value="">否</option>
             <option value="">一般</option>
         </select>

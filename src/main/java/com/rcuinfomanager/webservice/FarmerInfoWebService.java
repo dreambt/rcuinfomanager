@@ -10,12 +10,10 @@ import com.rcuinfomanager.webservice.model.WebResponseData;
 import com.rcuinfomanager.webservice.model.WebServiceResponseData;
 import com.security.mdfive.MDFive;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.type.TypeReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -69,9 +67,13 @@ public class FarmerInfoWebService {
                     UploadData uploadData = mapper.readValue(rawData, UploadData.class);
                     if (uploadData != null) {
                         AllColumnInfo allColumnInfo = uploadData.getAllColumnInfo();
-                        //TODO: 检查这条记录是否已验收, 如果已验收，不处理，返回status=2
-                        baseInfoService.saveFarmerInfoFromDownload(allColumnInfo);
-                        webResponseData.setStatus(0);
+                        //检查这条记录是否已验收, 如果已验收，不处理，返回status=2
+                        if (baseInfoService.isAccepted(allColumnInfo.getCerNum())) {
+                            webResponseData.setStatus(2);
+                        } else {
+                            baseInfoService.saveFarmerInfoFromDownload(allColumnInfo);
+                            webResponseData.setStatus(0);
+                        }
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

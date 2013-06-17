@@ -76,8 +76,6 @@ public interface BaseInfoDao {
 
     BaseInfo getBaseInfoByCerNum(String cerNum);
 
-    void saveFamilyMember(BaseInfo baseInfo);
-
     void updateFamilyincurdebts(AllColumnInfo allColumnInfo);
 
     void updateFinancialassets(AllColumnInfo allColumnInfo);
@@ -104,7 +102,10 @@ public interface BaseInfoDao {
 
     void saveFamilyMember(FamilyMember familyMember);
 
-    int saveBaseInfoFromClient(AllColumnInfo allColumnInfo);
+    void saveBaseInfoFromClient(AllColumnInfo allColumnInfo);
+
+    void saveFamilyassets(FamilyAssets familyAssets);
 
 
+    int getStatusByCerNum(String cerNum);
 }

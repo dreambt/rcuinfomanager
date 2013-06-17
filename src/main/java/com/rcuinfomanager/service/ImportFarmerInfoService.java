@@ -55,7 +55,7 @@ public class ImportFarmerInfoService {
                     familyMember.setLeaderRelation(rowData[3]);
                     familyMember.setRecordId(baseInfo.getRecordId());
                     //todo save familyMember
-                    baseInfoDao.saveFamilyMember(baseInfo);
+                    baseInfoDao.saveFamilyMember(familyMember);
                 }
             }
             row = csvReader.readLine();

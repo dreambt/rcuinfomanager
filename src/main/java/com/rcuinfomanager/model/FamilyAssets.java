@@ -3,14 +3,14 @@ package com.rcuinfomanager.model;
 public class FamilyAssets {
 
     private long assetsId;
-    private String fmAllAssets;
+    private Double fmAllAssets;
     private String mainAssets;
 
-    public String getFmAllAssets() {
+    public Double getFmAllAssets() {
         return fmAllAssets;
     }
 
-    public void setFmAllAssets(String fmAllAssets) {
+    public void setFmAllAssets(Double fmAllAssets) {
         this.fmAllAssets = fmAllAssets;
     }
 

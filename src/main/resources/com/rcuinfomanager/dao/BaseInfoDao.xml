@@ -270,10 +270,6 @@
     <insert id="saveSimpleBaseInfo" parameterType="com.rcuinfomanager.model.BaseInfo" >
         insert into baseinfo(customerName,cerNum,nation) values (#{customerName},#{cerNum},#{nation})
     </insert>
-    <insert id="saveFamilyMember" parameterType="com.rcuinfomanager.model.BaseInfo" >
-        insert into baseinfo(familyMemberCerNum,cerNum,familyMemberName,leaderRelation,recordId)
-        values (#{familyMemberCerNum},#{cerNum},#{familyMemberName},#{leaderRelation},#{recordId})
-    </insert>
 
     <resultMap id="allColumnInfoList" type="com.rcuinfomanager.webservice.model.AllColumnInfo">
         <result column="recordId" property="recordId"></result>
@@ -440,7 +436,7 @@
 
     <insert id="saveBaseInfoFromClient" parameterType="com.rcuinfomanager.webservice.model.AllColumnInfo" >
 
-        <selectKey resultType="java.lang.Integer" keyProperty="recordId">
+        <selectKey resultType="java.lang.Long" keyProperty="recordId" order="AFTER">
             SELECT @@IDENTITY
         </selectKey>
 
@@ -471,6 +467,14 @@
         update familyassets set fmAllAssets = #{fmAllAssets}, mainAssets = #{mainAssets}
         where recordId = #{recordId}
     </update>
+
+    <insert id="saveFamilyassets" parameterType="com.rcuinfomanager.model.FamilyAssets">
+        <selectKey resultType="java.lang.Long" keyProperty="assetsId" order="AFTER">
+            SELECT @@IDENTITY
+        </selectKey>
+
+        insert into familyassets(recordId,fmAllAssets, mainAssets) values (recordId,fmAllAssets, mainAssets)
+    </insert>
 
     <update id="updateFamilyincurdebts" parameterType="com.rcuinfomanager.webservice.model.AllColumnInfo">
         update familyincurdebts set fmIncurDebts = #{fmIncurDebts}, ourBankDebts = #{fmIncurOurBankDebts},
@@ -533,5 +537,9 @@
         insert into familymemberinfo(recordId,familyMemberCerNum,cerNum,familyMemberName,yearIncome,leaderRelation,profession,address)
           values(#{recordId},#{familyMemberCerNum},#{cerNum},#{familyMemberName},#{yearIncome},#{leaderRelation},#{profession}, #{address})
     </insert>
+
+    <select id="" resultType="java.lang.Integer" parameterType="java.lang.String">
+        select state from baseinfo where cerNum = #{cerNum}
+    </select>
 
 </mapper>

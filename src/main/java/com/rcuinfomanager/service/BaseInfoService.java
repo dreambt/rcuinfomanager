@@ -109,7 +109,7 @@ public class BaseInfoService {
     }
     //保存验收
     public void saveChecksInfo(long id,int state){
-        baseInfoDao.saveChecksInfo(id,state);
+        baseInfoDao.saveChecksInfo(id, state);
     }
 
     /*//选择网点
@@ -152,6 +152,7 @@ public class BaseInfoService {
 
     public void saveFarmerInfoFromDownload(AllColumnInfo allColumnInfo) {
         BaseInfo baseInfo = baseInfoDao.getBaseInfoByCustomerAndCerNum(allColumnInfo.getCustomerName(), allColumnInfo.getCerNum());
+        FamilyAssets familyAssets = null;
         if (baseInfo != null) {
             allColumnInfo.setRecordId(baseInfo.getRecordId());
             baseInfoDao.updateBaseInfoById(allColumnInfo);
@@ -160,7 +161,7 @@ public class BaseInfoService {
             baseInfoDao.updateFinancialassets(allColumnInfo);
             baseInfoDao.updateFinanceservices(allColumnInfo);
             baseInfoDao.updateCustomermanagereva(allColumnInfo);
-            FamilyAssets familyAssets = baseInfoDao.getFamilyAssets(baseInfo.getRecordId());
+            familyAssets = baseInfoDao.getFamilyAssets(baseInfo.getRecordId());
             if (familyAssets != null) {
                 allColumnInfo.setAssetsId(familyAssets.getAssetsId());
                 baseInfoDao.updateFamilyassets(allColumnInfo);
@@ -170,42 +171,58 @@ public class BaseInfoService {
                 baseInfoDao.deleteFamilyMemberInfoByRecordId(baseInfo.getRecordId());
             }
 
-            List<CarsInfo> carInfos = allColumnInfo.getCarInfos();
-            if (carInfos != null) {
-                for (CarsInfo carsInfo : carInfos) {
-                    carsInfo.setAssetsId(familyAssets.getAssetsId());
-                    baseInfoDao.saveCarsinfo(carsInfo);
-                }
-            }
-
-            List<LandInfo> landInfos = allColumnInfo.getLandInfos();
-            if (landInfos != null) {
-                for (LandInfo landInfo : landInfos) {
-                    landInfo.setAssetsId(familyAssets.getAssetsId());
-                    baseInfoDao.saveLandInfo(landInfo);
-                }
-            }
-
-            List<HouseInfo> houseInfos = allColumnInfo.getHouseInfos();
-            if (houseInfos != null) {
-                for (HouseInfo houseInfo : houseInfos) {
-                    houseInfo.setAssetsId(familyAssets.getAssetsId());
-                    baseInfoDao.saveHouseInfo(houseInfo);
-                }
-            }
-
-            List<FamilyMember> familyMembers = allColumnInfo.getFamilyMembers();
-            if (familyMembers != null) {
-                for (FamilyMember familyMember : familyMembers) {
-                    familyMember.setRecordId(baseInfo.getRecordId());
-                    baseInfoDao.saveFamilyMember(familyMember);
-                }
-            }
         } else {
-            //TODO save new base info.
-            int recordId = baseInfoDao.saveBaseInfoFromClient(allColumnInfo);
-            allColumnInfo.setRecordId(recordId);
+            //save new base info.
+            baseInfoDao.saveBaseInfoFromClient(allColumnInfo);
         }
 
+        List<FamilyMember> familyMembers = allColumnInfo.getFamilyMembers();
+        if (familyMembers != null && !familyMembers.isEmpty()) {
+            for (FamilyMember familyMember : familyMembers) {
+                familyMember.setRecordId(allColumnInfo.getRecordId());
+                baseInfoDao.saveFamilyMember(familyMember);
+            }
+        }
+
+        if (familyAssets == null) {
+            familyAssets = new FamilyAssets();
+            familyAssets.setFmAllAssets(allColumnInfo.getFmAllAssets());
+            familyAssets.setMainAssets(allColumnInfo.getMainAssets());
+            baseInfoDao.saveFamilyassets(familyAssets);
+        }
+
+        List<CarsInfo> carInfos = allColumnInfo.getCarInfos();
+        if (carInfos != null && !carInfos.isEmpty()) {
+            for (CarsInfo carsInfo : carInfos) {
+                carsInfo.setAssetsId(familyAssets.getAssetsId());
+                baseInfoDao.saveCarsinfo(carsInfo);
+            }
+        }
+
+        List<LandInfo> landInfos = allColumnInfo.getLandInfos();
+        if (landInfos != null && !landInfos.isEmpty()) {
+            for (LandInfo landInfo : landInfos) {
+                landInfo.setAssetsId(familyAssets.getAssetsId());
+                baseInfoDao.saveLandInfo(landInfo);
+            }
+        }
+
+        List<HouseInfo> houseInfos = allColumnInfo.getHouseInfos();
+        if (houseInfos != null && !houseInfos.isEmpty()) {
+            for (HouseInfo houseInfo : houseInfos) {
+                houseInfo.setAssetsId(familyAssets.getAssetsId());
+                baseInfoDao.saveHouseInfo(houseInfo);
+            }
+        }
+
+    }
+
+    public boolean isAccepted(String cerNum) {
+        int status = baseInfoDao.getStatusByCerNum(cerNum);
+        if (status == 2) {
+            return true;
+        }
+
+        return false;
     }
 }

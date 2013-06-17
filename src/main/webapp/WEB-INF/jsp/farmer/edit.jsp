@@ -115,6 +115,7 @@
     <td align="left">
 
         <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="gender">
+
             <option value="${personBasicList.gender}">${personBasicList.gender}</option>
         </select>
     </td>
@@ -465,7 +466,128 @@
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">最高学历</td>
     <td align="left">
         <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="highestEdu">
-            <option value="${personBasicList.highestEdu}">${personBasicList.highestEdu}</option>
+            <core:choose>
+                <core:when test="${personBasicList.highestEdu=='研究生'}">
+                    <option value="${personBasicList.highestEdu}" selected="selected">研究生</option>
+                    <option value="本科">本科</option>
+                    <option value="大专">大专</option>
+                    <option value="中等专业学校或中等技术学校">中等专业学校或中等技术学校</option>
+                    <option value="技术学校">技术学校</option>
+                    <option value="高中">高中</option>
+                    <option value="初中">初中</option>
+                    <option value="小学">小学</option>
+                    <option value="文盲或半文盲">文盲或半文盲</option>
+                    <option value="未知">未知</option>
+                </core:when>
+                <core:when test="${personBasicList.highestEdu=='本科'}">
+                    <option value="研究生">研究生</option>
+                    <option value="${personBasicList.highestEdu}" selected="selected">本科</option>
+                    <option value="大专">大专</option>
+                    <option value="中等专业学校或中等技术学校">中等专业学校或中等技术学校</option>
+                    <option value="技术学校">技术学校</option>
+                    <option value="高中">高中</option>
+                    <option value="初中">初中</option>
+                    <option value="小学">小学</option>
+                    <option value="文盲或半文盲">文盲或半文盲</option>
+                    <option value="未知">未知</option>
+                </core:when>
+                <core:when test="${personBasicList.highestEdu=='大专'}">
+                    <option value="研究生">研究生</option>
+                    <option value="本科">本科</option>
+                    <option value="${personBasicList.highestEdu}" selected="selected">大专</option>
+                    <option value="中等专业学校或中等技术学校">中等专业学校或中等技术学校</option>
+                    <option value="技术学校">技术学校</option>
+                    <option value="高中">高中</option>
+                    <option value="初中">初中</option>
+                    <option value="小学">小学</option>
+                    <option value="文盲或半文盲">文盲或半文盲</option>
+                    <option value="未知">未知</option>
+                </core:when>
+                <core:when test="${personBasicList.highestEdu=='中等专业学校或中等技术学校'}">
+                    <option value="研究生">研究生</option>
+                    <option value="本科">本科</option>
+                    <option value="大专">大专</option>
+                    <option value="${personBasicList.highestEdu}" selected="selected">中等专业学校或中等技术学校</option>
+                    <option value="技术学校">技术学校</option>
+                    <option value="高中">高中</option>
+                    <option value="初中">初中</option>
+                    <option value="小学">小学</option>
+                    <option value="文盲或半文盲">文盲或半文盲</option>
+                    <option value="未知">未知</option>
+                </core:when>
+                <core:when test="${personBasicList.highestEdu=='技术学校'}">
+                    <option value="研究生">研究生</option>
+                    <option value="本科">本科</option>
+                    <option value="大专">大专</option>
+                    <option value="中等专业学校或中等技术学校">中等专业学校或中等技术学校</option>
+                    <option value="${personBasicList.highestEdu}" selected="selected">技术学校</option>
+                    <option value="高中">高中</option>
+                    <option value="初中">初中</option>
+                    <option value="小学">小学</option>
+                    <option value="文盲或半文盲">文盲或半文盲</option>
+                    <option value="未知">未知</option>
+                </core:when>
+                <core:when test="${personBasicList.highestEdu=='高中'}">
+                    <option value="研究生">研究生</option>
+                    <option value="本科">本科</option>
+                    <option value="大专">大专</option>
+                    <option value="中等专业学校或中等技术学校">中等专业学校或中等技术学校</option>
+                    <option value="技术学校">技术学校</option>
+                    <option value="${personBasicList.highestEdu}" selected="selected">高中</option>
+                    <option value="初中">初中</option>
+                    <option value="小学">小学</option>
+                    <option value="文盲或半文盲">文盲或半文盲</option>
+                    <option value="未知">未知</option>
+                </core:when>
+                <core:when test="${personBasicList.highestEdu=='初中'}">
+                    <option value="研究生">研究生</option>
+                    <option value="本科">本科</option>
+                    <option value="大专">大专</option>
+                    <option value="中等专业学校或中等技术学校">中等专业学校或中等技术学校</option>
+                    <option value="技术学校">技术学校</option>
+                    <option value="高中">高中</option>
+                    <option value="${personBasicList.highestEdu}" selected="selected">初中</option>
+                    <option value="小学">小学</option>
+                    <option value="文盲或半文盲">文盲或半文盲</option>
+                    <option value="未知">未知</option>
+                </core:when>
+                <core:when test="${personBasicList.highestEdu=='小学'}">
+                    <option value="研究生">研究生</option>
+                    <option value="本科">本科</option>
+                    <option value="大专">大专</option>
+                    <option value="中等专业学校或中等技术学校">中等专业学校或中等技术学校</option>
+                    <option value="技术学校">技术学校</option>
+                    <option value="高中">高中</option>
+                    <option value="初中">初中</option>
+                    <option value="${personBasicList.highestEdu}" selected="selected">小学</option>
+                    <option value="文盲或半文盲">文盲或半文盲</option>
+                    <option value="未知">未知</option>
+                </core:when>
+                <core:when test="${personBasicList.highestEdu=='文盲或半文盲'}">
+                    <option value="研究生">研究生</option>
+                    <option value="本科">本科</option>
+                    <option value="大专">大专</option>
+                    <option value="中等专业学校或中等技术学校">中等专业学校或中等技术学校</option>
+                    <option value="技术学校">技术学校</option>
+                    <option value="高中">高中</option>
+                    <option value="初中">初中</option>
+                    <option value="小学">小学</option>
+                    <option value="${personBasicList.highestEdu}" selected="selected">文盲或半文盲</option>
+                    <option value="未知">未知</option>
+                </core:when>
+                <core:otherwise>
+                    <option value="${personBasicList.highestEdu}" selected="selected">研究生</option>
+                    <option value="本科">本科</option>
+                    <option value="大专">大专</option>
+                    <option value="中等专业学校或中等技术学校">中等专业学校或中等技术学校</option>
+                    <option value="技术学校">技术学校</option>
+                    <option value="高中">高中</option>
+                    <option value="初中">初中</option>
+                    <option value="小学">小学</option>
+                    <option value="文盲或半文盲">文盲或半文盲</option>
+                    <option value="${personBasicList.highestEdu}" selected="selected">未知</option>
+                </core:otherwise>
+            </core:choose>
         </select>
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">与我行（社）关系</td>
@@ -487,7 +609,108 @@
     </td>
     <td align="left" colspan="7">
         <select class="selectpicker" style="width: 495px; margin-top: 5px;" name="profession">
-            <option value="${personBasicList.profession}">${personBasicList.profession}</option>
+            <core:choose>
+                <core:when test="${personBasicList.profession=='国家机关、党群组织、企业、事业单位负责人'}">
+                    <option value="${personBasicList.profession}" selected="selected">国家机关、党群组织、企业、事业单位负责人</option>
+                    <option value="专业技术人员">专业技术人员</option>
+                    <option value="办事人员和有关人员">办事人员和有关人员</option>
+                    <option value="商业、服务业人员">商业、服务业人员</option>
+                    <option value="农、林、木、渔、水利业生产人员">农、林、木、渔、水利业生产人员</option>
+                    <option value="生产、运输设备操作人员及有关人员">生产、运输设备操作人员及有关人员</option>
+                    <option value="军人">军人</option>
+                    <option value="不便分类的其他从业人员">不便分类的其他从业人员</option>
+                    <option value="未知">未知</option>
+                </core:when>
+                <core:when test="${personBasicList.profession=='专业技术人员'}">
+                    <option value="国家机关、党群组织、企业、事业单位负责人">国家机关、党群组织、企业、事业单位负责人</option>
+                    <option value="${personBasicList.profession}" selected="selected">专业技术人员</option>
+                    <option value="办事人员和有关人员">办事人员和有关人员</option>
+                    <option value="商业、服务业人员">商业、服务业人员</option>
+                    <option value="农、林、木、渔、水利业生产人员">农、林、木、渔、水利业生产人员</option>
+                    <option value="生产、运输设备操作人员及有关人员">生产、运输设备操作人员及有关人员</option>
+                    <option value="军人">军人</option>
+                    <option value="不便分类的其他从业人员">不便分类的其他从业人员</option>
+                    <option value="未知">未知</option>
+                </core:when>
+                <core:when test="${personBasicList.profession=='办事人员和有关人员'}">
+                    <option value="国家机关、党群组织、企业、事业单位负责人">国家机关、党群组织、企业、事业单位负责人</option>
+                    <option value="专业技术人员">专业技术人员</option>
+                    <option value="${personBasicList.profession}" selected="selected">办事人员和有关人员</option>
+                    <option value="商业、服务业人员">商业、服务业人员</option>
+                    <option value="农、林、木、渔、水利业生产人员">农、林、木、渔、水利业生产人员</option>
+                    <option value="生产、运输设备操作人员及有关人员">生产、运输设备操作人员及有关人员</option>
+                    <option value="军人">军人</option>
+                    <option value="不便分类的其他从业人员">不便分类的其他从业人员</option>
+                    <option value="未知">未知</option>
+                </core:when>
+                <core:when test="${personBasicList.profession=='商业、服务业人员'}">
+                    <option value="国家机关、党群组织、企业、事业单位负责人">国家机关、党群组织、企业、事业单位负责人</option>
+                    <option value="专业技术人员">专业技术人员</option>
+                    <option value="办事人员和有关人员">办事人员和有关人员</option>
+                    <option value="${personBasicList.profession}" selected="selected">商业、服务业人员</option>
+                    <option value="农、林、木、渔、水利业生产人员">农、林、木、渔、水利业生产人员</option>
+                    <option value="生产、运输设备操作人员及有关人员">生产、运输设备操作人员及有关人员</option>
+                    <option value="军人">军人</option>
+                    <option value="不便分类的其他从业人员">不便分类的其他从业人员</option>
+                    <option value="未知">未知</option>
+                </core:when>
+                <core:when test="${personBasicList.profession=='农、林、木、渔、水利业生产人员'}">
+                    <option value="国家机关、党群组织、企业、事业单位负责人">国家机关、党群组织、企业、事业单位负责人</option>
+                    <option value="专业技术人员">专业技术人员</option>
+                    <option value="办事人员和有关人员">办事人员和有关人员</option>
+                    <option value="商业、服务业人员">商业、服务业人员</option>
+                    <option value="${personBasicList.profession}" selected="selected">农、林、木、渔、水利业生产人员</option>
+                    <option value="生产、运输设备操作人员及有关人员">生产、运输设备操作人员及有关人员</option>
+                    <option value="军人">军人</option>
+                    <option value="不便分类的其他从业人员">不便分类的其他从业人员</option>
+                    <option value="未知">未知</option>
+                </core:when>
+                <core:when test="${personBasicList.profession=='生产、运输设备操作人员及有关人员'}">
+                    <option value="国家机关、党群组织、企业、事业单位负责人">国家机关、党群组织、企业、事业单位负责人</option>
+                    <option value="专业技术人员">专业技术人员</option>
+                    <option value="办事人员和有关人员">办事人员和有关人员</option>
+                    <option value="商业、服务业人员">商业、服务业人员</option>
+                    <option value="农、林、木、渔、水利业生产人员">农、林、木、渔、水利业生产人员</option>
+                    <option value="${personBasicList.profession}" selected="selected">生产、运输设备操作人员及有关人员</option>
+                    <option value="军人">军人</option>
+                    <option value="不便分类的其他从业人员">不便分类的其他从业人员</option>
+                    <option value="未知">未知</option>
+                </core:when>
+                <core:when test="${personBasicList.profession=='军人'}">
+                    <option value="国家机关、党群组织、企业、事业单位负责人">国家机关、党群组织、企业、事业单位负责人</option>
+                    <option value="专业技术人员">专业技术人员</option>
+                    <option value="办事人员和有关人员">办事人员和有关人员</option>
+                    <option value="商业、服务业人员">商业、服务业人员</option>
+                    <option value="农、林、木、渔、水利业生产人员">农、林、木、渔、水利业生产人员</option>
+                    <option value="生产、运输设备操作人员及有关人员">生产、运输设备操作人员及有关人员</option>
+                    <option value="${personBasicList.profession}" selected="selected">军人</option>
+                    <option value="不便分类的其他从业人员">不便分类的其他从业人员</option>
+                    <option value="未知">未知</option>
+                </core:when>
+                <core:when test="${personBasicList.profession=='不便分类的其他从业人员'}">
+                    <option value="国家机关、党群组织、企业、事业单位负责人">国家机关、党群组织、企业、事业单位负责人</option>
+                    <option value="专业技术人员">专业技术人员</option>
+                    <option value="办事人员和有关人员">办事人员和有关人员</option>
+                    <option value="商业、服务业人员">商业、服务业人员</option>
+                    <option value="农、林、木、渔、水利业生产人员">农、林、木、渔、水利业生产人员</option>
+                    <option value="生产、运输设备操作人员及有关人员">生产、运输设备操作人员及有关人员</option>
+                    <option value="军人">军人</option>
+                    <option value="${personBasicList.profession}" selected="selected">不便分类的其他从业人员</option>
+                    <option value="未知">未知</option>
+                </core:when>
+                <core:otherwise>
+                    <option value="国家机关、党群组织、企业、事业单位负责人">国家机关、党群组织、企业、事业单位负责人</option>
+                    <option value="专业技术人员">专业技术人员</option>
+                    <option value="办事人员和有关人员">办事人员和有关人员</option>
+                    <option value="商业、服务业人员">商业、服务业人员</option>
+                    <option value="农、林、木、渔、水利业生产人员">农、林、木、渔、水利业生产人员</option>
+                    <option value="生产、运输设备操作人员及有关人员">生产、运输设备操作人员及有关人员</option>
+                    <option value="军人">军人</option>
+                    <option value="不便分类的其他从业人员">不便分类的其他从业人员</option>
+                    <option value="未知">未知</option>
+                    <option value="${personBasicList.profession}" selected="selected">未说明</option>
+                </core:otherwise>
+            </core:choose>
         </select>
     </td>
 </tr>
@@ -510,10 +733,11 @@
         经营场所
     </td>
     <td align="left" colspan="3">
+
         <input class="input-small" type="text" name="businessSite" value="${personBasicList.businessSite}"
                style="width: 300px;height: 30px; margin-top: 5px;">
     </td>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">从事行业</td>
+    <td align="center" bgcolor="#b4d8ed" style="color:#161823">从事行业</td> <%--从数据库取--%>
     <td align="left" colspan="3">
         <select class="selectpicker" style="width: 275px; margin-top: 5px;" name="industry">
             <option value="${personBasicList.industry}">${personBasicList.industry}</option>
@@ -524,25 +748,173 @@
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">投资经营性质</td>
     <td align="left">
         <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="businessProp">
-            <option value="${personBasicList.businessProp}">${personBasicList.businessProp}</option>
+            <core:choose>
+                <core:when test="${personBasicList.businessProp}=='个体工商户'}">
+                    <option value="${personBasicList.businessProp}" selected="selected">个体工商户</option>
+                    <option value="合伙企业">合伙企业</option>
+                    <option value="有限责任公司">有限责任公司</option>
+                    <option value="其他">其他</option>
+                </core:when>
+                <core:when test="${personBasicList.businessProp}=='合伙企业'}">
+                    <option value="个体工商户">个体工商户</option>
+                    <option value="${personBasicList.businessProp}" selected="selected">合伙企业</option>
+                    <option value="有限责任公司">有限责任公司</option>
+                    <option value="其他">其他</option>
+                </core:when>
+                <core:when test="${personBasicList.businessProp}=='有限责任公司'}">
+                    <option value="个体工商户">个体工商户</option>
+                    <option value="合伙企业">合伙企业</option>
+                    <option value="${personBasicList.businessProp}" selected="selected">有限责任公司</option>
+                    <option value="其他">其他</option>
+                </core:when>
+                <core:otherwise>
+                    <option value="个体工商户">个体工商户</option>
+                    <option value="合伙企业">合伙企业</option>
+                    <option value="有限责任公司">有限责任公司</option>
+                    <option value="${personBasicList.businessProp}" selected="selected">其他</option>
+                </core:otherwise>
+            </core:choose>
         </select>
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">投资资金情况</td>
     <td align="left">
         <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="moneySitu">
-            <option value="${personBasicList.moneySitu}">${personBasicList.moneySitu}</option>
+            <core:choose>
+                <core:when test="${personBasicList.moneySitu}=='独自投入'}">
+                    <option value="${personBasicList.moneySitu}" selected="selected">独自投入</option>
+                    <option value="与他人合伙">与他人合伙</option>
+                    <option value="自身经营">自身经营</option>
+                    <option value="挂靠他人合伙">挂靠他人合伙</option>
+                </core:when>
+                <core:when test="${personBasicList.moneySitu}=='与他人合伙'}">
+                    <option value="独自投入">独自投入</option>
+                    <option value="${personBasicList.moneySitu}" selected="selected">与他人合伙</option>
+                    <option value="自身经营">自身经营</option>
+                    <option value="挂靠他人合伙">挂靠他人合伙</option>
+                </core:when>
+                <core:when test="${personBasicList.moneySitu}=='自身经营'}">
+                    <option value="独自投入">独自投入</option>
+                    <option value="与他人合伙">与他人合伙</option>
+                    <option value="${personBasicList.moneySitu}" selected="selected">自身经营</option>
+                    <option value="挂靠他人合伙">挂靠他人合伙</option>
+                </core:when>
+                <core:otherwise>
+                    <option value="独自投入">独自投入</option>
+                    <option value="与他人合伙">与他人合伙</option>
+                    <option value="自身经营">自身经营</option>
+                    <option value="${personBasicList.moneySitu}" selected="selected">挂靠他人合伙</option>
+                </core:otherwise>
+            </core:choose>
         </select>
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">投入金额</td>
     <td align="left">
         <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="inputMoney">
-            <option value="${personBasicList.inputMoney}">${personBasicList.inputMoney}</option>
+            <core:choose>
+                <core:when test="${personBasicList.inputMoney}=='10万元以内'}">
+                    <option value="${personBasicList.inputMoney}" selected="selected">10万元以内</option>
+                    <option value="10-50万元">10-50万元</option>
+                    <option value="50-100万元">50-100万元</option>
+                    <option value="100-300万元">100-300万元</option>
+                    <option value="300-1000万元">300-1000万元</option>
+                    <option value="1000万元以上">1000万元以上</option>
+                </core:when>
+                <core:when test="${personBasicList.inputMoney}=='10-50万元'}">
+                    <option value="10万元以内">10万元以内</option>
+                    <option value="${personBasicList.inputMoney}" selected="selected">10-50万元</option>
+                    <option value="50-100万元">50-100万元</option>
+                    <option value="100-300万元">100-300万元</option>
+                    <option value="300-1000万元">300-1000万元</option>
+                    <option value="1000万元以上">1000万元以上</option>
+                </core:when>
+                <core:when test="${personBasicList.inputMoney}=='50-100万元'}">
+                    <option value="10万元以内">10万元以内</option>
+                    <option value="10-50万元">10-50万元</option>
+                    <option value="${personBasicList.inputMoney}" selected="selected">50-100万元</option>
+                    <option value="100-300万元">100-300万元</option>
+                    <option value="300-1000万元">300-1000万元</option>
+                    <option value="1000万元以上">1000万元以上</option>
+                </core:when>
+                <core:when test="${personBasicList.inputMoney}=='100-300万元'}">
+                    <option value="10万元以内">10万元以内</option>
+                    <option value="10-50万元">10-50万元</option>
+                    <option value="50-100万元">50-100万元</option>
+                    <option value="${personBasicList.inputMoney}" selected="selected">100-300万元</option>
+                    <option value="300-1000万元">300-1000万元</option>
+                    <option value="1000万元以上">1000万元以上</option>
+                </core:when>
+                <core:when test="${personBasicList.inputMoney}=='300-1000万元'}">
+                    <option value="10万元以内">10万元以内</option>
+                    <option value="10-50万元">10-50万元</option>
+                    <option value="50-100万元">50-100万元</option>
+                    <option value="100-300万元">100-300万元</option>
+                    <option value="${personBasicList.inputMoney}" selected="selected">300-1000万元</option>
+                    <option value="1000万元以上">1000万元以上</option>
+                </core:when>
+                <core:otherwise>
+                    <option value="10万元以内">10万元以内</option>
+                    <option value="10-50万元">10-50万元</option>
+                    <option value="50-100万元">50-100万元</option>
+                    <option value="100-300万元">100-300万元</option>
+                    <option value="300-1000万元">300-1000万元</option>
+                    <option value="${personBasicList.inputMoney}" selected="selected">1000万元以上</option>
+                </core:otherwise>
+            </core:choose>
         </select>
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">自有资金情况</td>
     <td align="left">
         <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="ownMoney">
-            <option value="${personBasicList.ownMoney}">${personBasicList.ownMoney}</option>
+            <core:choose>
+                <core:when test="${personBasicList.ownMoney}=='10万元以内'}">
+                    <option value="${personBasicList.ownMoney}" selected="selected">10万元以内</option>
+                    <option value="10-50万元">10-50万元</option>
+                    <option value="50-100万元">50-100万元</option>
+                    <option value="100-300万元">100-300万元</option>
+                    <option value="300-1000万元">300-1000万元</option>
+                    <option value="1000万元以上">1000万元以上</option>
+                </core:when>
+                <core:when test="${personBasicList.ownMoney}=='10-50万元'}">
+                    <option value="10万元以内">10万元以内</option>
+                    <option value="${personBasicList.ownMoney}" selected="selected">10-50万元</option>
+                    <option value="50-100万元">50-100万元</option>
+                    <option value="100-300万元">100-300万元</option>
+                    <option value="300-1000万元">300-1000万元</option>
+                    <option value="1000万元以上">1000万元以上</option>
+                </core:when>
+                <core:when test="${personBasicList.ownMoney}=='50-100万元'}">
+                    <option value="10万元以内">10万元以内</option>
+                    <option value="10-50万元">10-50万元</option>
+                    <option value="${personBasicList.ownMoney}" selected="selected">50-100万元</option>
+                    <option value="100-300万元">100-300万元</option>
+                    <option value="300-1000万元">300-1000万元</option>
+                    <option value="1000万元以上">1000万元以上</option>
+                </core:when>
+                <core:when test="${personBasicList.ownMoney}=='100-300万元'}">
+                    <option value="10万元以内">10万元以内</option>
+                    <option value="10-50万元">10-50万元</option>
+                    <option value="50-100万元">50-100万元</option>
+                    <option value="${personBasicList.ownMoney}" selected="selected">100-300万元</option>
+                    <option value="300-1000万元">300-1000万元</option>
+                    <option value="1000万元以上">1000万元以上</option>
+                </core:when>
+                <core:when test="${personBasicList.ownMoney}=='300-1000万元'}">
+                    <option value="10万元以内">10万元以内</option>
+                    <option value="10-50万元">10-50万元</option>
+                    <option value="50-100万元">50-100万元</option>
+                    <option value="100-300万元">100-300万元</option>
+                    <option value="${personBasicList.ownMoney}" selected="selected">300-1000万元</option>
+                    <option value="1000万元以上">1000万元以上</option>
+                </core:when>
+                <core:otherwise>
+                    <option value="10万元以内">10万元以内</option>
+                    <option value="10-50万元">10-50万元</option>
+                    <option value="50-100万元">50-100万元</option>
+                    <option value="100-300万元">100-300万元</option>
+                    <option value="300-1000万元">300-1000万元</option>
+                    <option value="${personBasicList.ownMoney}" selected="selected">1000万元以上</option>
+                </core:otherwise>
+            </core:choose>
         </select>
     </td>
 </tr>
@@ -550,7 +922,56 @@
     <td align="center" bgcolor="#b4d8ed" style="color:#161823"> 年收益情况</td>
     <td align="left" colspan="7">
         <select class="selectpicker" style="width: 595px; margin-top: 5px;" name="yearIncome">
-            <option value="${personBasicList.yearIncome}">${personBasicList.yearIncome}</option>
+            <core:choose>
+                <core:when test="${personBasicList.yearIncome}=='10万元以内'}">
+                    <option value="${personBasicList.yearIncome}" selected="selected">10万元以内</option>
+                    <option value="10-50万元">10-50万元</option>
+                    <option value="50-100万元">50-100万元</option>
+                    <option value="100-300万元">100-300万元</option>
+                    <option value="300-1000万元">300-1000万元</option>
+                    <option value="1000万元以上">1000万元以上</option>
+                </core:when>
+                <core:when test="${personBasicList.yearIncome}=='10-50万元'}">
+                    <option value="10万元以内">10万元以内</option>
+                    <option value="${personBasicList.yearIncome}" selected="selected">10-50万元</option>
+                    <option value="50-100万元">50-100万元</option>
+                    <option value="100-300万元">100-300万元</option>
+                    <option value="300-1000万元">300-1000万元</option>
+                    <option value="1000万元以上">1000万元以上</option>
+                </core:when>
+                <core:when test="${personBasicList.yearIncome}=='50-100万元'}">
+                    <option value="10万元以内">10万元以内</option>
+                    <option value="10-50万元">10-50万元</option>
+                    <option value="${personBasicList.yearIncome}" selected="selected">50-100万元</option>
+                    <option value="100-300万元">100-300万元</option>
+                    <option value="300-1000万元">300-1000万元</option>
+                    <option value="1000万元以上">1000万元以上</option>
+                </core:when>
+                <core:when test="${personBasicList.yearIncome}=='100-300万元'}">
+                    <option value="10万元以内">10万元以内</option>
+                    <option value="10-50万元">10-50万元</option>
+                    <option value="50-100万元">50-100万元</option>
+                    <option value="${personBasicList.yearIncome}" selected="selected">100-300万元</option>
+                    <option value="300-1000万元">300-1000万元</option>
+                    <option value="1000万元以上">1000万元以上</option>
+                </core:when>
+                <core:when test="${personBasicList.yearIncome}=='300-1000万元'}">
+                    <option value="10万元以内">10万元以内</option>
+                    <option value="10-50万元">10-50万元</option>
+                    <option value="50-100万元">50-100万元</option>
+                    <option value="100-300万元">100-300万元</option>
+                    <option value="${personBasicList.yearIncome}" selected="selected">300-1000万元</option>
+                    <option value="1000万元以上">1000万元以上</option>
+                </core:when>
+                <core:otherwise>
+                    <option value="10万元以内">10万元以内</option>
+                    <option value="10-50万元">10-50万元</option>
+                    <option value="50-100万元">50-100万元</option>
+                    <option value="100-300万元">100-300万元</option>
+                    <option value="300-1000万元">300-1000万元</option>
+                    <option value="${personBasicList.yearIncome}" selected="selected">1000万元以上</option>
+                </core:otherwise>
+            </core:choose>
         </select>
     </td>
 </tr>
@@ -661,7 +1082,7 @@
     <tr>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">投资经营性质</td>
         <td align="left">
-            <input class="input-small" type="text" name="businessProp" value="${personIncomeExpenses.businessProp}"
+           <input class="input-small" type="text" name="businessProp" value="${personIncomeExpenses.businessProp}"
                    style="width: 95px;height: 30px; margin-top: 5px;">
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">投资资金情况</td>
@@ -676,8 +1097,9 @@
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">自有资金情况</td>
         <td align="left">
-            <input class="input-small" type="text" name="ownMoney" value="${personIncomeExpenses.ownMoney}"
-                   style="width: 95px;height: 30px; margin-top: 5px;">
+
+           <%-- <input class="input-small" type="text" name="ownMoney" value="${personIncomeExpenses.ownMoney}"
+                   style="width: 95px;height: 30px; margin-top: 5px;">--%>
         </td>
     </tr>
     <tr>

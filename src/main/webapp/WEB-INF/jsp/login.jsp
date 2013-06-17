@@ -9,6 +9,10 @@
     <script language="javascript" type="text/javascript" src="/asserts/js/jquery-1.7.2.min.js"></script>
     <script type="text/javascript">
         $(function () {
+            var msg='${msg}';
+            if(msg){
+                alert(msg);
+            }
             $('.login_tj_btn').click(function () {
                 if ($('#userName').val() == '') {
                     alert('用户名不能为空!');

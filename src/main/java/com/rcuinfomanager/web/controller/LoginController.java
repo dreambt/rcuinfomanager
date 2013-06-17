@@ -56,7 +56,7 @@ public class LoginController extends BaseController {
             CookieUtil.setUserInfoCookies(response);
             return "redirect:/index";
         }  else {//用户密码有错误
-            model.put("msg", "用户或密码错误");
+            model.put("msg", "用户或密码错误,请重试！");
             return "login";
         }
     }

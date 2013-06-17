@@ -13,6 +13,7 @@
         $(function () {
             //确定
             $('#addOpera').click(function () {
+
                 $('#myForm').submit();
             });
 
@@ -32,7 +33,7 @@
 </head>
 <body>
 
-<form id="myForm" action="/family/saveExportBasicData" method="post">
+<form id="myForm" action="/family/saveExportBasicData" method="post" encType="multipart/form-data">
     <input type="hidden" name="recordIds" value="${recordIds}"/>
        <table>
            <tr>
@@ -49,8 +50,11 @@
                <td>&nbsp;</td>
            </tr>
            <tr>
+               <td>请选择要导入的文件</td>
                <td>
-                   <p align="center"><input id="fileField" type="file" name="file"></p>
+                   <p align="center">
+                       <input id="fileField" type="file" name="file">
+                   </p>
                </td>
            </tr>
        </table>

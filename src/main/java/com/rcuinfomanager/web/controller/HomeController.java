@@ -43,6 +43,7 @@ public class HomeController {
         SessionUser sessionUser = userSessionContext.getSessionUser();
         map.put("firstLogin",sessionUser.isFirstLogon());
         map.put("displayUserName", sessionUser.getDisplayUserName());
+        map.put("userNameByAdmin", sessionUser.getUserName());
         int offset = 1;
         if("admin".equalsIgnoreCase(sessionUser.getUserName())){
             map.put("pageCount", baseInfoService.getAllFamilyInfoListByCount() / offset);
@@ -97,14 +98,24 @@ public class HomeController {
 
     //系统日志
     @RequestMapping(value ="/systemLogManager")
-    public String systemLogManager(ModelMap map) {
+    public String systemLogManager(@RequestParam(value = "page", required = false) Integer pageNum,ModelMap map) {
+        if (pageNum == null) {
+            pageNum = 1;
+        }
         UserSessionContext userSessionContext = UserSessionContextHolder.getUserSessionContext();
         SessionUser sessionUser = userSessionContext.getSessionUser();
         map.put("displayUserName", sessionUser.getDisplayUserName());
-        if(sessionUser.getId()==1){
-            map.put("logsInfoList",logsInfoService.getLogsInfoByAdminList());
+        int offset = 1;
+        if("admin".equalsIgnoreCase(sessionUser.getUserName())){
+            map.put("pageCount", logsInfoService.getAllLogsInfoListByCount() / offset);
+            map.put("logsInfoList",logsInfoService.getLogsInfoByAdminListPage(pageNum,offset));
+
         }else{
-            map.put("logsInfoList",logsInfoService.getLogsInfoByNormalList(sessionUser.getId()));
+            map.put("pageCount", logsInfoService.getLogsInfoListByCount(sessionUser.getId()) / offset);
+            map.put("logsInfoList",logsInfoService.getLogsInfoByNormalListPage(sessionUser.getId(), pageNum, offset));
+
+
+            //map.put("familyInfoList", baseInfoService.getFamilyInfoListByPage(sessionUser.getId(), pageNum, offset));
         }
         return "logsystem/systemLog";
     }

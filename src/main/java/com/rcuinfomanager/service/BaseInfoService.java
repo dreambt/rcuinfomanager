@@ -43,7 +43,7 @@ public class BaseInfoService {
     }
 
     // 获取客户的基本信息
-    public List<CusBaseInfo> getCusBasicInfo(Long recordId) {
+    public CusBaseInfo getCusBasicInfo(Long recordId) {
         return baseInfoDao.getCusBasicInfo(recordId);
     }
 
@@ -111,24 +111,6 @@ public class BaseInfoService {
     public void saveChecksInfo(long id,int state){
         baseInfoDao.saveChecksInfo(id, state);
     }
-
-    /*//选择网点
-    public List<CustomerListInfo> getAdminOrganizationName(){
-        return baseInfoDao.getAdminOrganizationName();
-    }
-    public List<CustomerListInfo> getUserOrganizationName(Long id){
-        return baseInfoDao.getUserOrganizationName(id);
-    }
-
-    //删除
-    public int deleteInfo(Long id){
-        return baseInfoDao.deleteInfo(id);
-    }
-
-
-    public List<AllColumnInfo> queryAllColumnInfoList(long userId) {
-        return baseInfoDao.queryAppointInfoByUserId(userId);
-    }*/
 
 
     public List<AllColumnInfo> queryAllColumnInfoList(long userId) {
@@ -224,5 +206,18 @@ public class BaseInfoService {
         }
 
         return false;
+    }
+
+    //二
+    public FinanceServices getFinanceServicesList(){
+        return baseInfoDao.getFinanceServicesList();
+    }
+    //三
+    public VillageManagerEva getVillageManagerEvaList(){
+        return baseInfoDao.getVillageManagerEvaList();
+    }
+    //四
+    public CustomerManagerEva getCustomerManagerEvaList(){
+        return baseInfoDao.getCustomerManagerEvaList();
     }
 }

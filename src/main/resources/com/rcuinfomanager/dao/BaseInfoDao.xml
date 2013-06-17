@@ -54,7 +54,7 @@
         where b.recordId=#{recordId}
     </select>
 
-    <resultMap id="cusBasicMap" type="com.rcuinfomanager.model.CusBaseInfo">
+    <!--<resultMap id="cusBasicMap" type="com.rcuinfomanager.model.CusBaseInfo">
         <result column="customerName" property="customerName"></result>
         <result column="gender" property="gender"></result>
         <result column="isFarmer" property="isFarmer"></result>
@@ -102,9 +102,9 @@
         <result column="workYears" property="workYears"></result>
         <result column="workTitle" property="workTitle"></result>
         <result column="photoUri" property="photoUri"></result>
-    </resultMap>
+    </resultMap>-->
     <!--获取客户的基本信息-->
-    <select id="getCusBasicInfo" parameterType="java.lang.Long" resultMap="cusBasicMap">
+    <select id="getCusBasicInfo" parameterType="java.lang.Long" resultType="com.rcuinfomanager.model.CusBaseInfo">
        select b.customerName,b.gender,b.isFarmer,b.customerType,b.cerType,b.cerNum,b.cerValidityFrom,b.cerValidityTo,b.birthday,b.nationality,b.isHavePassport,
                b.nation,b.poliLaspect,b.health,b.maritalStatus,b.address,b.postcode,b.areaName,b.village,b.telephone,b.mbPhoneNum,b.liveCondition,
                b.socialSecurity,b.highestDegree,b.highestEdu,b.bankRelation,b.bankPartnership,b.profession,b.businessProj,b.businessYear,
@@ -541,5 +541,45 @@
     <select id="" resultType="java.lang.Integer" parameterType="java.lang.String">
         select state from baseinfo where cerNum = #{cerNum}
     </select>
+
+    <!--二-->
+    <!--<resultMap id="financeServicesMap" type="com.rcuinfomanager.model.FinanceServices">
+    <result column="recordId" property="recordId"></result>
+    <result column="usedProduct" property="usedProduct"></result>
+    <result column="satisfaction" property="satisfaction"></result>
+    <result column="isMoneyNeed" property="isMoneyNeed"></result>
+    <result column="moneyTodo" property="moneyTodo"></result>
+    <result column="moneyCount" property="moneyCount"></result>
+    <result column="timeLimit" property="timeLimit"></result>
+    <result column="guarantee" property="guarantee"></result>
+    <result column="fmDepositTodo" property="fmDepositTodo"></result>
+    <result column="needServices" property="needServices"></result>
+    <result column="needServicesElse" property="needServicesElse"></result>
+    <result column="holpForServices" property="holpForServices"></result>
+    <result column="suggestion" property="suggestion"></result>
+    <result column="bankCard" property="bankCard"></result>
+    <result column="electronBank" property="electronBank"></result>
+    <result column="agentPay" property="agentPay"></result>
+    <result column="auto" property="auto"></result>
+    <result column="newRequirement" property="newRequirement"></result>
+    <result column="publicLoan" property="publicLoan"></result>
+    <result column="privateLoan" property="privateLoan"></result>
+    <result column="note1" property="note1"></result>
+</resultMap>-->
+    <select id="getFinanceServicesList" resultType="com.rcuinfomanager.model.FinanceServices" >
+        select  f.recordId,f.usedProduct,f.satisfaction,f.isMoneyNeed,f.moneyTodo,f.moneyCount,f.timeLimit,
+        f.guarantee,f.fmDepositTodo,f.needServices,f.needServicesElse,f.holpForServices,f.suggestion,f.bankCard,
+        f.electronBank,f.agentPay,f.auto,f.newRequirement,f.publicLoan,f.privateLoan
+        from financeservices f
+    </select>
+    <!--三-->
+    <select id="getVillageManagerEvaList" resultType="com.rcuinfomanager.model.VillageManagerEva">
+          select * from villagemanagereva
+    </select>
+    <!--四-->
+    <select id="getCustomerManagerEvaList" resultType="com.rcuinfomanager.model.CustomerManagerEva">
+          select * from customermanagereva
+    </select>
+
 
 </mapper>

@@ -30,10 +30,11 @@ public class BaseInfoController {
     //查看
     @RequestMapping(value ="/{id}")
     public String show(@PathVariable long id,Map map){
-
+        map.put("recordId",id);
         //记录日志
         UserSessionContext userSessionContext = UserSessionContextHolder.getUserSessionContext();
         SessionUser sessionUser = userSessionContext.getSessionUser();
+        map.put("userNameByAdmin", sessionUser.getUserName());
         SimpleDateFormat dateFm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); //格式化当前系统日期
         String logsDate = dateFm.format(new java.util.Date());
         logsInfoService.saveLogsInfo(new LogsInfo(logsDate,sessionUser.getId(),"查看"));
@@ -57,6 +58,13 @@ public class BaseInfoController {
         map.put("personFamilyIncurDebtsList",baseInfoService.getFamilyIncurDebts(id));
         //家庭成员
         map.put("personFamilyMemberList",baseInfoService.getFamilyMember(id));
+        //二
+        map.put("financeServicesLists",baseInfoService.getFinanceServicesList());
+        //三
+        map.put("villageManagerEvaList",baseInfoService.getVillageManagerEvaList());
+        //四
+        map.put("customerManagerEvaList",baseInfoService.getCustomerManagerEvaList());
+
 
         return "farmer/show";
     }
@@ -170,6 +178,12 @@ public class BaseInfoController {
         map.put("personFamilyIncurDebtsList",baseInfoService.getFamilyIncurDebts(id));
         //家庭成员
         map.put("personFamilyMemberList",baseInfoService.getFamilyMember(id));
+        //二
+        map.put("financeServicesLists",baseInfoService.getFinanceServicesList());
+        //三
+        map.put("villageManagerEvaList",baseInfoService.getVillageManagerEvaList());
+        //四
+        map.put("customerManagerEvaList",baseInfoService.getCustomerManagerEvaList());
 
         return "farmer/edit";
     }
@@ -243,8 +257,6 @@ public class BaseInfoController {
         }
         return "farmer/exportBasicData";
     }
-
-
 
 }
 

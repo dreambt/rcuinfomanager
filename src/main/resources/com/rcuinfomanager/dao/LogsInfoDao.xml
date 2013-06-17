@@ -15,12 +15,25 @@
         <result column="operation" property="operation"></result>
     </resultMap>
     <!--获取日志信息-->
-    <select id="getLogsInfoByAdminList" parameterType="java.lang.Long" resultMap="logsInfoMap">
+    <select id="getLogsInfoByAdminListPage" resultMap="logsInfoMap">
+           select lo.operatedTime,u.userName,lo.operation
+           from logsinfo lo
+           left join usersinfo u on lo.userId=u.userId limit #{beginPageNum}, #{endPageNum}
+    </select>
+
+    <select id="queryAdminByLogsInfoByCount" resultType="java.lang.Long">
+          select count(*)
+          from logsinfo lo
+          left join usersinfo u on lo.userId=u.userId
+    </select>
+
+    <select id="queryNormalByLogsInfoByPage" resultMap="logsInfoMap">
            select lo.operatedTime,u.userName,lo.operation
            from logsinfo lo
            left join usersinfo u on lo.userId=u.userId
+           where lo.userId=#{userId} limit #{beginPageNum}, #{endPageNum}
     </select>
-    <select id="getLogsInfoByNormalList" parameterType="java.lang.Long" resultMap="logsInfoMap">
+    <select id="queryNormalByLogsInfoByCount" parameterType="java.lang.Long" resultType="java.lang.Long">
            select lo.operatedTime,u.userName,lo.operation
            from logsinfo lo
            left join usersinfo u on lo.userId=u.userId

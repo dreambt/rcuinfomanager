@@ -43,7 +43,7 @@
                         <tr>
                             <td width="60%" height="145"><img src="/asserts/img/logo.png" width="500" height="145" /></td>
                             <td width="40%" align="right" valign="bottom" >
-                                <div style="margin-bottom:10px; margin-right:10px; color:#FFFFFF">您好！<span id="uName">[<c:out value="${displayUserName}"/>]</span><a href="" style="color:#FFFFFF">&nbsp;[退出]</a>
+                                <div style="margin-bottom:10px; margin-right:10px; color:#FFFFFF">您好！<span>[<c:out value="${displayUserName}"/>]</span><a href="" style="color:#FFFFFF">&nbsp;[退出]</a>
                                 </div>
                             </td>
                         </tr>
@@ -67,7 +67,7 @@
 </div>
 <div class="span10" style="margin-left: -8.435897%;">
 <br/>
-<input class="input-block-level" type="text" placeholder="客户电子信息管理>查询" disabled="disabled" style="color:#0000AA">
+<input class="input-block-level" type="text" placeholder="客户电子信息管理>编辑" disabled="disabled" style="color:#0000AA">
 <table class="table table-condensed">
     <tbody>
     <core:forEach items="${personInfoList}" var="personInfo">
@@ -104,107 +104,99 @@
 <div class="table-list" style="table-layout:fixed; height:345px; overflow:scroll;">
 <table width="100%" border="1">
 <tbody>
-<core:forEach items="${personBasicList}" var="personBasic">
+
 <tr>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">姓名</td>
     <td align="center">
-        <input class="input-small" type="text" name="customerName" value="${personBasic.customerName}"
+        <input class="input-small" type="text" name="customerName" value="${personBasicList.customerName}"
                style="width: 95px;height: 30px; margin-top: 5px;">
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">性别</td>
     <td align="left">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;">
-            <option value="${personBasic.gender}">是</option>
-            <option value="${personBasic.gender}">否</option>
+
+        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="gender">
+            <option value="${personBasicList.gender}">${personBasicList.gender}</option>
         </select>
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">是否农户</td>
     <td align="left">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;">
-            <option value="${personBasic.farmer}">是</option>
-            <option value="${personBasic.farmer}">否</option>
+        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="farmer">
+            <option value="${personBasicList.farmer}">${personBasicList.farmer}</option>
         </select>
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">客户类型</td>
     <td align="center">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;">
-            <option value="${personBasic.customerType}">是</option>
-            <option value="${personBasic.customerType}">否</option>
+        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="customerType">
+            <option value="${personBasicList.customerType}">${personBasicList.customerType}</option>
         </select>
     </td>
 </tr>
 <tr>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">证件类型</td>
     <td align="left" colspan="2">
-        <select class="selectpicker" style="width: 155px; margin-top: 5px;">
-            <option value="${personBasic.cerType}">是</option>
-            <option value="${personBasic.cerType}">否</option>
+        <select class="selectpicker" style="width: 155px; margin-top: 5px;" name="cerType">
+            <option value="${personBasicList.cerType}">${personBasicList.cerType}</option>
         </select>
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">证件号码</td>
     <td align="left" colspan="2">
-        <input class="input-small" type="text" name="customerName" value="${personBasic.cerNum}"
+        <input class="input-small" type="text" name="cerNum" value="${personBasicList.cerNum}"
                style="width: 175px;height: 30px; margin-top: 5px;">
     </td>
     <td align="center" colspan="2" rowspan="4">
-        <img src="${personBasic.photoUri}" class="img-rounded">
+        <img src="${personBasicList.photoUri}" class="img-rounded">
     </td>
 </tr>
 <tr>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">证件有效期</td>
     <td align="left" colspan="3">
-        <input class="input-small" type="text" name="customerName" value="${personBasic.cerValidityFrom}"
+        <input class="input-small" type="text" name="cerValidityFrom" value="${personBasicList.cerValidityFrom}"
                style="width: 125px;height: 30px; margin-top: 5px;"> -
-        <input class="input-small" type="text" name="customerName" value="${personBasic.cerValidityTo}"
+        <input class="input-small" type="text" name="cerValidityTo" value="${personBasicList.cerValidityTo}"
                style="width: 125px;height: 30px; margin-top: 5px;">
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">出生年月</td>
     <td align="left">
-        <input class="input-small" type="text" name="customerName" value="${personBasic.birthday}"
+        <input class="input-small" type="text" name="birthday" value="${personBasicList.birthday}"
                style="width: 95px;height: 30px; margin-top: 5px;">
     </td>
 </tr>
 <tr>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">国籍</td>
     <td align="left">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;">
-            <option value="${personBasic.nationality}">是</option>
-            <option value="${personBasic.nationality}">否</option>
+        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="nationality">
+            <option value="${personBasicList.nationality}">${personBasicList.nationality}</option>
         </select>
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">是否拥有外国护照或居住权</td>
     <td align="left">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;">
-            <option value="${personBasic.havePassport}">是</option>
-            <option value="${personBasic.havePassport}">否</option>
+        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="havePassport">
+            <option value="${personBasicList.havePassport}">${personBasicList.havePassport}</option>
         </select>
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">民族</td>
     <td align="left">
-        <input class="input-small" type="text" name="customerName" value="${personBasic.nation}"
+        <input class="input-small" type="text" name="nation" value="${personBasicList.nation}"
                style="width: 95px;height: 30px; margin-top: 5px;">
     </td>
 </tr>
 <tr>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">政治面貌</td>
     <td align="left">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;">
-            <option value="${personBasic.poliLaspect}">是</option>
-            <option value="${personBasic.poliLaspect}">否</option>
+        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="poliLaspect">
+            <option value="${personBasicList.poliLaspect}">${personBasicList.poliLaspect}</option>
         </select>
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">健康状况</td>
     <td align="left">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;">
-            <option value="${personBasic.health}">是</option>
-            <option value="${personBasic.health}">否</option>
+        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="health">
+            <option value="${personBasicList.health}">${personBasicList.health}</option>
         </select>
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">婚姻状况</td>
     <td align="left">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;">
-            <option value="${personBasic.maritalStatus}">是</option>
-            <option value="${personBasic.maritalStatus}">否</option>
+        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="maritalStatus">
+            <option value="${personBasicList.maritalStatus}">${personBasicList.maritalStatus}</option>
         </select>
     </td>
 </tr>
@@ -213,12 +205,12 @@
         居住地址
     </td>
     <td align="left" colspan="5">
-        <input class="input-small" type="text" name="customerName" value="${personBasic.address}"
+        <input class="input-small" type="text" name="address" value="${personBasicList.address}"
                style="width: 465px;height: 30px; margin-top: 5px;">
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">居住编码</td>
     <td align="left">
-        <input class="input-small" type="text" name="customerName" value="${personBasic.postcode}"
+        <input class="input-small" type="text" name="postcode" value="${personBasicList.postcode}"
                style="width: 95px;height: 30px; margin-top: 5px;">
     </td>
 </tr>
@@ -227,26 +219,24 @@
         区域名称
     </td>
     <td align="left">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;">
-            <option value="${personBasic.areaName}">崇武镇</option>
-            <option value="${personBasic.areaName}">东园镇</option>
+        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="areaName">
+            <option value="${personBasicList.areaName}">${personBasicList.areaName}</option>
         </select>
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">村别</td>
     <td align="left">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;">
-            <option value="${personBasic.village}">后内</option>
-            <option value="${personBasic.village}">前海</option>
+        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="village">
+            <option value="${personBasicList.village}">${personBasicList.village}</option>
         </select>
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">联系电话</td>
     <td align="left">
-        <input class="input-small" type="text" name="customerName" value="${personBasic.telephone}"
+        <input class="input-small" type="text" name="telephone" value="${personBasicList.telephone}"
                style="width: 95px;height: 30px; margin-top: 5px;">
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">手机号码</td>
     <td align="left">
-        <input class="input-small" type="text" name="customerName" value="${personBasic.mbPhoneNum}"
+        <input class="input-small" type="text" name="mbPhoneNum" value="${personBasicList.mbPhoneNum}"
                style="width: 95px;height: 30px; margin-top: 5px;">
     </td>
 </tr>
@@ -255,13 +245,12 @@
         居住状况
     </td>
     <td align="left" colspan="2">
-        <select class="selectpicker" style="width: 155px; margin-top: 5px;">
-            <option value="${personBasic.liveCondition}">自置</option>
-            <option value="${personBasic.liveCondition}">其他</option>
+        <select class="selectpicker" style="width: 155px; margin-top: 5px;" name="liveCondition">
+            <option value="${personBasicList.liveCondition}">${personBasicList.liveCondition}</option>
         </select>
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">社会保障情况</td>
-    <td align="left" colspan="4"><%--${personBasic.socialSecurity}--%>
+    <td align="left" colspan="4"><%--${personBasicList.socialSecurity}--%>
         <label class="checkbox inline">
             <input type="checkbox" id="inlineCheckbox1" value="option1">养老保险
         </label>
@@ -284,30 +273,26 @@
         最高学位
     </td>
     <td align="left">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;">
-            <option value="${personBasic.highestDegree}">学士</option>
-            <option value="${personBasic.highestDegree}">其他</option>
+        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="highestDegree">
+            <option value="${personBasicList.highestDegree}">${personBasicList.highestDegree}</option>
         </select>
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">最高学历</td>
     <td align="left">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;">
-            <option value="${personBasic.highestEdu}">本科</option>
-            <option value="${personBasic.highestEdu}">其他</option>
+        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="highestEdu">
+            <option value="${personBasicList.highestEdu}">${personBasicList.highestEdu}</option>
         </select>
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">与我行（社）关系</td>
     <td align="left">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;">
-            <option value="${personBasic.bankRelation}">普通客户</option>
-            <option value="${personBasic.bankRelation}">其他</option>
+        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="bankRelation">
+            <option value="${personBasicList.bankRelation}">${personBasicList.bankRelation}</option>
         </select>
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">与我行（社）合作关系</td>
     <td align="left">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;">
-            <option value="${personBasic.bankPartnership}">一般</option>
-            <option value="${personBasic.bankPartnership}">其他</option>
+        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="bankPartnership">
+            <option value="${personBasicList.bankPartnership}">${personBasicList.bankPartnership}</option>
         </select>
     </td>
 </tr>
@@ -316,9 +301,8 @@
         职业
     </td>
     <td align="left" colspan="7">
-        <select class="selectpicker" style="width: 495px; margin-top: 5px;">
-            <option value="${personBasic.profession}">专业技术人员</option>
-            <option value="${personBasic.profession}">其他</option>
+        <select class="selectpicker" style="width: 495px; margin-top: 5px;" name="profession">
+            <option value="${personBasicList.profession}">${personBasicList.profession}</option>
         </select>
     </td>
 </tr>
@@ -327,12 +311,12 @@
         个人经营项目
     </td>
     <td align="left" colspan="3">
-        <input class="input-small" type="text" name="customerName" value="${personBasic.businessProj}"
+        <input class="input-small" type="text" name="businessProj" value="${personBasicList.businessProj}"
                style="width: 300px;height: 30px; margin-top: 5px;">
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">经营年限</td>
     <td align="left" colspan="3">
-        <input class="input-small" type="text" name="customerName" value="${personBasic.businessYear}"
+        <input class="input-small" type="text" name="businessYear" value="${personBasicList.businessYear}"
                style="width: 275px;height: 30px; margin-top: 5px;">
     </td>
 </tr>
@@ -341,124 +325,111 @@
         经营场所
     </td>
     <td align="left" colspan="3">
-        <input class="input-small" type="text" name="customerName" value="${personBasic.businessSite}"
+        <input class="input-small" type="text" name="businessSite" value="${personBasicList.businessSite}"
                style="width: 300px;height: 30px; margin-top: 5px;">
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">从事行业</td>
     <td align="left" colspan="3">
-        <select class="selectpicker" style="width: 275px; margin-top: 5px;">
-            <option value="${personBasic.industry}">专业技术人员</option>
-            <option value="${personBasic.industry}">其他</option>
+        <select class="selectpicker" style="width: 275px; margin-top: 5px;" name="industry">
+            <option value="${personBasicList.industry}">${personBasicList.industry}</option>
         </select>
     </td>
 </tr>
 <tr>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">投资经营性质</td>
     <td align="left">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;">
-            <option value="${personBasic.businessProp}">专业技术人员</option>
-            <option value="${personBasic.businessProp}">其他</option>
+        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="businessProp">
+            <option value="${personBasicList.businessProp}">${personBasicList.businessProp}</option>
         </select>
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">投资资金情况</td>
     <td align="left">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;">
-            <option value="${personBasic.moneySitu}">专业技术人员</option>
-            <option value="${personBasic.moneySitu}">其他</option>
+        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="moneySitu">
+            <option value="${personBasicList.moneySitu}">${personBasicList.moneySitu}</option>
         </select>
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">投入金额</td>
     <td align="left">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;">
-            <option value="${personBasic.inputMoney}">专业技术人员</option>
-            <option value="${personBasic.inputMoney}">其他</option>
+        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="inputMoney">
+            <option value="${personBasicList.inputMoney}">${personBasicList.inputMoney}</option>
         </select>
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">自有资金情况</td>
     <td align="left">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;">
-            <option value="${personBasic.ownMoney}">专业技术人员</option>
-            <option value="${personBasic.ownMoney}">其他</option>
+        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="ownMoney">
+            <option value="${personBasicList.ownMoney}">${personBasicList.ownMoney}</option>
         </select>
     </td>
 </tr>
 <tr>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823"> 年收益情况</td>
     <td align="left" colspan="7">
-        <select class="selectpicker" style="width: 595px; margin-top: 5px;">
-            <option value="${personBasic.yearIncome}">专业技术人员</option>
-            <option value="${personBasic.yearIncome}">其他</option>
+        <select class="selectpicker" style="width: 595px; margin-top: 5px;" name="yearIncome">
+            <option value="${personBasicList.yearIncome}">${personBasicList.yearIncome}</option>
         </select>
     </td>
 </tr>
 <tr>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">工作情况</td>
     <td align="left" colspan="7">
-        <input class="input-small" type="text" name="customerName" value="${personBasic.workSitu}"
+        <input class="input-small" type="text" name="workSitu" value="${personBasicList.workSitu}"
                style="width: 595px;height: 30px; margin-top: 5px;">
     </td>
 </tr>
 <tr>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">单位性质</td>
     <td align="left" colspan="3">
-        <select class="selectpicker" style="width: 255px; margin-top: 5px;">
-            <option value="${personBasic.unitProp}">专业技术人员</option>
-            <option value="${personBasic.unitProp}">其他</option>
+        <select class="selectpicker" style="width: 255px; margin-top: 5px;" name="unitProp">
+            <option value="${personBasicList.unitProp}">${personBasicList.unitProp}</option>
         </select>
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">单位所属行业</td>
     <td align="left" colspan="3">
-        <select class="selectpicker" style="width: 255px; margin-top: 5px;">
-            <option value="${personBasic.unitIndustryId}">专业技术人员</option>
-            <option value="${personBasic.unitIndustryId}">其他</option>
+        <select class="selectpicker" style="width: 255px; margin-top: 5px;" name="unitIndustryId">
+            <option value="${personBasicList.unitIndustryId}">${personBasicList.unitIndustryId}</option>
         </select>
     </td>
 </tr>
 <tr>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">任职部门</td>
     <td align="left" colspan="3">
-        <input class="input-small" type="text" name="customerName" value="${personBasic.department}"
+        <input class="input-small" type="text" name="department" value="${personBasicList.department}"
                style="width: 255px;height: 30px; margin-top: 5px;">
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">工作单位类别</td>
     <td align="left" colspan="3">
-        <select class="selectpicker" style="width: 255px; margin-top: 5px;">
-            <option value="${personBasic.unitType}">专业技术人员</option>
-            <option value="${personBasic.unitType}">其他</option>
+        <select class="selectpicker" style="width: 255px; margin-top: 5px;" name="unitType">
+            <option value="${personBasicList.unitType}">${personBasicList.unitType}</option>
         </select>
     </td>
 </tr>
 <tr>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">职务</td>
     <td align="left">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;">
-            <option value="${personBasic.duties}">专业技术人员</option>
-            <option value="${personBasic.duties}">其他</option>
+        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="duties">
+            <option value="${personBasicList.duties}">${personBasicList.duties}</option>
         </select>
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">年工资收入（万元）</td>
     <td align="left">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;">
-            <option value="${personBasic.annualWageIncome}">专业技术人员</option>
-            <option value="${personBasic.annualWageIncome}">其他</option>
+        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="annualWageIncome">
+            <option value="${personBasicList.annualWageIncome}">${personBasicList.annualWageIncome}</option>
         </select>
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">工作年限</td>
     <td align="left">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;">
-            <option value="${personBasic.workYears}">专业技术人员</option>
-            <option value="${personBasic.workYears}">其他</option>
+        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="workYears">
+            <option value="${personBasicList.workYears}">${personBasicList.workYears}</option>
         </select>
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">职称</td>
     <td align="left">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;">
-            <option value="${personBasic.workTitle}">专业技术人员</option>
-            <option value="${personBasic.workTitle}">其他</option>
+        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="workTitle">
+            <option value="${personBasicList.workTitle}">${personBasicList.workTitle}</option>
         </select>
     </td>
 </tr>
-</core:forEach>
+
 <tr>
     <td align="center" colspan="8" style="font-size:22px">
         家庭收支情况
@@ -470,12 +441,12 @@
             家庭年总收入（万元）
         </td>
         <td align="left" colspan="2">
-            <input class="input-small" type="text" name="customerName" value="${personIncomeExpenses.fmAllIncome}"
+            <input class="input-small" type="text" name="fmAllIncome" value="${personIncomeExpenses.fmAllIncome}"
                    style="width: 155px;height: 30px; margin-top: 5px;">
         </td>
         <td align="center" colspan="2" bgcolor="#b4d8ed" style="color:#161823">家庭支出（万元）</td>
         <td align="left" colspan="2">
-            <input class="input-small" type="text" name="customerName" value="${personIncomeExpenses.fmExpenses}"
+            <input class="input-small" type="text" name="fmExpenses" value="${personIncomeExpenses.fmExpenses}"
                    style="width: 155px;height: 30px; margin-top: 5px;">
         </td>
     </tr>
@@ -484,7 +455,7 @@
             收入来源
         </td>
         <td align="left" colspan="7">
-            <input class="input-small" type="text" name="customerName" value="${personIncomeExpenses.incomeSrc}"
+            <input class="input-small" type="text" name="incomeSrc" value="${personIncomeExpenses.incomeSrc}"
                    style="width: 595px;height: 30px; margin-top: 5px;">
         </td>
     </tr>
@@ -493,50 +464,48 @@
             其中：个人年收入（万元）
         </td>
         <td align="left" colspan="2">
-            <input class="input-small" type="text" name="customerName" value="${personIncomeExpenses.perIncome}"
+            <input class="input-small" type="text" name="perIncome" value="${personIncomeExpenses.perIncome}"
                    style="width: 155px;height: 30px; margin-top: 5px;">
         </td>
         <td align="center" colspan="2" bgcolor="#b4d8ed" style="color:#161823">家庭其他成员年收入（万元）</td>
         <td align="left" colspan="2">
-            <input class="input-small" type="text" name="customerName" value="${personIncomeExpenses.fmOtherMemberIn}"
+            <input class="input-small" type="text" name="fmOtherMemberIn" value="${personIncomeExpenses.fmOtherMemberIn}"
                    style="width: 155px;height: 30px; margin-top: 5px;">
         </td>
     </tr>
     <tr>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">投资经营性质</td>
         <td align="left">
-            <input class="input-small" type="text" name="customerName" value="${personIncomeExpenses.businessProp}"
+            <input class="input-small" type="text" name="businessProp" value="${personIncomeExpenses.businessProp}"
                    style="width: 95px;height: 30px; margin-top: 5px;">
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">投资资金情况</td>
         <td align="left">
-            <input class="input-small" type="text" name="customerName" value="${personIncomeExpenses.moneySitu}"
+            <input class="input-small" type="text" name="moneySitu" value="${personIncomeExpenses.moneySitu}"
                    style="width: 95px;height: 30px; margin-top: 5px;">
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">投入金额</td>
         <td align="left">
-            <input class="input-small" type="text" name="customerName" value="${personIncomeExpenses.inputMoney}"
+            <input class="input-small" type="text" name="inputMoney" value="${personIncomeExpenses.inputMoney}"
                    style="width: 95px;height: 30px; margin-top: 5px;">
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">自有资金情况</td>
         <td align="left">
-            <input class="input-small" type="text" name="customerName" value="${personIncomeExpenses.ownMoney}"
+            <input class="input-small" type="text" name="ownMoney" value="${personIncomeExpenses.ownMoney}"
                    style="width: 95px;height: 30px; margin-top: 5px;">
         </td>
     </tr>
     <tr>
         <td align="center"  bgcolor="#b4d8ed" style="color:#161823">家庭主要支出项目</td>
         <td align="left" colspan="3">
-            <select class="selectpicker" style="width: 255px; margin-top: 5px;">
-                <option value="${personIncomeExpenses.fmExpensesProj}">专业技术人员</option>
-                <option value="${personIncomeExpenses.fmExpensesProj}">其他</option>
+            <select class="selectpicker" style="width: 255px; margin-top: 5px;" name="fmExpensesProj">
+                <option value="${personIncomeExpenses.fmExpensesProj}">${personIncomeExpenses.fmExpensesProj}</option>
             </select>
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">家庭收入能否应付支出</td>
         <td align="left" colspan="3">
-            <select class="selectpicker" style="width: 255px; margin-top: 5px;">
-                <option value="${personIncomeExpenses.fmInOutRatio}">专业技术人员</option>
-                <option value="${personIncomeExpenses.fmInOutRatio}">其他</option>
+            <select class="selectpicker" style="width: 255px; margin-top: 5px;" name="fmInOutRatio">
+                <option value="${personIncomeExpenses.fmInOutRatio}">${personIncomeExpenses.fmInOutRatio}</option>
             </select>
         </td>
     </tr>
@@ -552,7 +521,7 @@
 <tr>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">总资产（万元）</td>
     <td align="left">
-        <input class="input-small" type="text" name="customerName" value="${personFamilyAssets.fmAllAssets}"
+        <input class="input-small" type="text" name="fmAllAssets" value="${personFamilyAssets.fmAllAssets}"
                style="width: 95px;height: 30px; margin-top: 5px;">
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">主要资产</td>
@@ -577,178 +546,164 @@
         </label>
     </td>
 </tr>
-<tr>
-    <td align="left" colspan="8" style="font-size:18px">
-        房产：1
-    </td>
-</tr>
-<core:forEach items="${personHousePropertyInfoList}" var="personHousePropertyInfo">
+
+<core:forEach items="${personHousePropertyInfoList}" var="personHousePropertyInfo" varStatus="idx">
+    <tr>
+        <td align="left" colspan="8" style="font-size:18px">
+            房产：<core:out value="${idx.index+1}"></core:out>
+        </td>
+    </tr>
     <tr id="defaultItem">
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">性质</td>
         <td align="left">
-            <select class="selectpicker" style="width: 95px; margin-top: 5px;">
-                <option value="${personHousePropertyInfo.nature}">专业技术人员</option>
-                <option value="${personHousePropertyInfo.nature}">其他</option>
+            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="nature">
+                <option value="${personHousePropertyInfo.nature}">${personHousePropertyInfo.nature}</option>
             </select>
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">用途</td>
         <td align="left">
-            <select class="selectpicker" style="width: 95px; margin-top: 5px;">
-                <option value="${personHousePropertyInfo.purpose}">专业技术人员</option>
-                <option value="${personHousePropertyInfo.purpose}">其他</option>
+            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="purpose">
+                <option value="${personHousePropertyInfo.purpose}">${personHousePropertyInfo.purpose}</option>
             </select>
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">所在位置</td>
         <td align="left">
-            <select class="selectpicker" style="width: 95px; margin-top: 5px;">
-                <option value="${personHousePropertyInfo.site}">专业技术人员</option>
-                <option value="${personHousePropertyInfo.site}">其他</option>
+            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="site">
+                <option value="${personHousePropertyInfo.site}">${personHousePropertyInfo.site}</option>
             </select>
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">房屋结构</td>
         <td align="left">
-            <select class="selectpicker" style="width: 95px; margin-top: 5px;">
-                <option value="${personHousePropertyInfo.structure}">专业技术人员</option>
-                <option value="${personHousePropertyInfo.structure}">其他</option>
+            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="structure">
+                <option value="${personHousePropertyInfo.structure}">${personHousePropertyInfo.structure}</option>
             </select>
         </td>
     </tr>
     <tr>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">层数</td>
         <td align="left">
-            <input class="input-small" type="text" name="customerName" value="${personHousePropertyInfo.floorNum}"
+            <input class="input-small" type="text" name="floorNum" value="${personHousePropertyInfo.floorNum}"
                    style="width: 95px;height: 30px; margin-top: 5px;">
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">使用情况</td>
         <td align="left">
-            <select class="selectpicker" style="width: 95px; margin-top: 5px;">
-                <option value="${personHousePropertyInfo.usedSitu}">专业技术人员</option>
-                <option value="${personHousePropertyInfo.usedSitu}">其他</option>
+            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="usedSitu">
+                <option value="${personHousePropertyInfo.usedSitu}">${personHousePropertyInfo.usedSitu}</option>
             </select>
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">建筑面积</td>
         <td align="left">
-            <select class="selectpicker" style="width: 95px; margin-top: 5px;">
-                <option value="${personHousePropertyInfo.houseArea}">专业技术人员</option>
-                <option value="${personHousePropertyInfo.houseArea}">其他</option>
+            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="houseArea">
+                <option value="${personHousePropertyInfo.houseArea}">${personHousePropertyInfo.houseArea}</option>
             </select>
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">房产价值</td>
         <td align="left">
-            <select class="selectpicker" style="width: 95px; margin-top: 5px;">
-                <option value="${personHousePropertyInfo.houseWorth}">专业技术人员</option>
-                <option value="${personHousePropertyInfo.houseWorth}">其他</option>
+            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="houseWorth">
+                <option value="${personHousePropertyInfo.houseWorth}">${personHousePropertyInfo.houseWorth}</option>
             </select>
         </td>
     </tr>
     <tr>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">是否按揭</td>
         <td align="left">
-            <select class="selectpicker" style="width: 95px; margin-top: 5px;">
-                <option value="${personHousePropertyInfo.installment}">专业技术人员</option>
-                <option value="${personHousePropertyInfo.installment}">其他</option>
+            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="installment">
+                <option value="${personHousePropertyInfo.installment}">${personHousePropertyInfo.installment}</option>
             </select>
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">是否办证</td>
         <td align="left">
-            <select class="selectpicker" style="width: 95px; margin-top: 5px;">
-                <option value="${personHousePropertyInfo.hasCredentials}">专业技术人员</option>
-                <option value="${personHousePropertyInfo.hasCredentials}">其他</option>
+            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="hasCredentials">
+                <option value="${personHousePropertyInfo.hasCredentials}">${personHousePropertyInfo.hasCredentials}</option>
             </select>
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">备注</td>
         <td align="left" colspan="3">
-            <input class="input-small" type="text" name="customerName" value="${personHousePropertyInfo.note1}"
+            <input class="input-small" type="text" name="note1" value="${personHousePropertyInfo.note1}"
                    style="width: 280px;height: 30px; margin-top: 5px;">
         </td>
     </tr>
 </core:forEach>
 
-<tr>
-    <td align="left" colspan="8" style="font-size:18px">
-        土地：1
-    </td>
-</tr>
-<core:forEach items="${personLandInfoList}" var="personLandInfo">
+
+<core:forEach items="${personLandInfoList}" var="personLandInfo" varStatus="idx">
+    <tr>
+        <td align="left" colspan="8" style="font-size:18px">
+            土地：<core:out value="${idx.index+1}"></core:out>
+        </td>
+    </tr>
     <tr>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">土地面积</td>
         <td align="left">
-            <select class="selectpicker" style="width: 95px; margin-top: 5px;">
-                <option value="${personLandInfo.area}">专业技术人员</option>
-                <option value="${personLandInfo.area}">其他</option>
+            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="area">
+                <option value="${personLandInfo.area}">${personLandInfo.area}</option>
             </select>
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">土地价值</td>
         <td align="left">
-            <input class="input-small" type="text" name="customerName" value="${personLandInfo.worth}"
+            <input class="input-small" type="text" name="worth" value="${personLandInfo.worth}"
                    style="width: 95px;height: 30px; margin-top: 5px;">
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">土地性质</td>
         <td align="left">
-            <select class="selectpicker" style="width: 95px; margin-top: 5px;">
-                <option value="${personLandInfo.property}">专业技术人员</option>
-                <option value="${personLandInfo.property}">其他</option>
+            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="property">
+                <option value="${personLandInfo.property}">${personLandInfo.property}</option>
             </select>
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">土地类型</td>
         <td align="left">
-            <select class="selectpicker" style="width: 95px; margin-top: 5px;">
-                <option value="${personLandInfo.type}">专业技术人员</option>
-                <option value="${personLandInfo.type}">其他</option>
+            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="type">
+                <option value="${personLandInfo.type}">${personLandInfo.type}</option>
             </select>
         </td>
     </tr>
     <tr>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">土地使用情况</td>
         <td align="left">
-            <select class="selectpicker" style="width: 95px; margin-top: 5px;">
+            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="usedSitu">
                 <option value="${personLandInfo.usedSitu}">专业技术人员</option>
                 <option value="${personLandInfo.usedSitu}">其他</option>
             </select>
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">土地款是否结清</td>
         <td align="left" colspan="5">
-            <select class="selectpicker" style="width: 465px; margin-top: 5px;">
-                <option value="${personLandInfo.moneyClear}">专业技术人员</option>
-                <option value="${personLandInfo.moneyClear}">其他</option>
+            <select class="selectpicker" style="width: 465px; margin-top: 5px;" name="moneyClear">
+                <option value="${personLandInfo.moneyClear}">${personLandInfo.moneyClear}</option>
             </select>
         </td>
     </tr>
 </core:forEach>
 
-<tr>
-    <td align="left" colspan="8" style="font-size:18px">
-        车辆：1
-    </td>
-</tr>
-<core:forEach items="${personCarsInfoList}" var="personCarsInfo">
+
+<core:forEach items="${personCarsInfoList}" var="personCarsInfo" varStatus="idx">
+    <tr>
+        <td align="left" colspan="8" style="font-size:18px">
+            车辆：<core:out value="${idx.index+1}"></core:out>
+        </td>
+    </tr>
     <tr>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">情况</td>
         <td align="left">
-            <select class="selectpicker" style="width: 95px; margin-top: 5px;">
-                <option value="${personCarsInfo.carsInfo}">专业技术人员</option>
-                <option value="${personCarsInfo.carsInfo}">其他</option>
+            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="carsInfo">
+                <option value="${personCarsInfo.carsInfo}">${personCarsInfo.carsInfo}</option>
             </select>
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">车辆价值</td>
         <td align="left">
-            <select class="selectpicker" style="width: 95px; margin-top: 5px;">
-                <option value="${personCarsInfo.carsWorth}">专业技术人员</option>
-                <option value="${personCarsInfo.carsWorth}">其他</option>
+            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="carsWorth">
+                <option value="${personCarsInfo.carsWorth}">${personCarsInfo.carsWorth}</option>
             </select>
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">是否按揭</td>
         <td align="left">
-            <select class="selectpicker" style="width: 95px; margin-top: 5px;">
-                <option value="${personCarsInfo.carsIsInstallment}">专业技术人员</option>
-                <option value="${personCarsInfo.carsIsInstallment}">其他</option>
+            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="carsIsInstallment">
+                <option value="${personCarsInfo.carsIsInstallment}">${personCarsInfo.carsIsInstallment}</option>
             </select>
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">使用情况</td>
         <td align="left">
-            <select class="selectpicker" style="width: 95px; margin-top: 5px;">
-                <option value="${personCarsInfo.carsUsingInfo}">专业技术人员</option>
-                <option value="${personCarsInfo.carsUsingInfo}">其他</option>
+            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="carsUsingInfo">
+                <option value="${personCarsInfo.carsUsingInfo}">${personCarsInfo.carsUsingInfo}</option>
             </select>
         </td>
     </tr>
@@ -787,16 +742,14 @@
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">我社存款</td>
         <td align="left">
-            <select class="selectpicker" style="width: 95px; margin-top: 5px;">
-                <option value="${personFinancialAssets.depositOurBank}">专业技术人员</option>
-                <option value="${personFinancialAssets.depositOurBank}">其他</option>
+            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="depositOurBank">
+                <option value="${personFinancialAssets.depositOurBank}">${personFinancialAssets.depositOurBank}</option>
             </select>
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">他行存款</td>
         <td align="left">
-            <select class="selectpicker" style="width: 95px; margin-top: 5px;">
-                <option value="${personFinancialAssets.depositOtherBank}">专业技术人员</option>
-                <option value="${personFinancialAssets.depositOtherBank}">其他</option>
+            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="depositOtherBank">
+                <option value="${personFinancialAssets.depositOtherBank}">${personFinancialAssets.depositOtherBank}</option>
             </select>
         </td>
     </tr>
@@ -812,29 +765,29 @@
             家庭负债总额（万元）
         </td>
         <td align="left">
-            <input class="input-small" type="text" name="customerName" value="${personFamilyIncurDebts.fmIncurDebts}"
+            <input class="input-small" type="text" name="fmIncurDebts" value="${personFamilyIncurDebts.fmIncurDebts}"
                    style="width: 95px;height: 30px; margin-top: 5px;">
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">本行负债（万元）</td>
         <td align="left" colspan="2">
-            <input class="input-small" type="text" name="customerName" value="${personFamilyIncurDebts.ourBankDebts}"
+            <input class="input-small" type="text" name="ourBankDebts" value="${personFamilyIncurDebts.ourBankDebts}"
                    style="width: 155px;height: 30px; margin-top: 5px;">
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">他行负债（万元）</td>
         <td align="left" colspan="2">
-            <input class="input-small" type="text" name="customerName" value="${personFamilyIncurDebts.otherBankDebts}"
+            <input class="input-small" type="text" name="otherBankDebts" value="${personFamilyIncurDebts.otherBankDebts}"
                    style="width: 155px;height: 30px; margin-top: 5px;">
         </td>
     </tr>
     <tr>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">贷款用途</td>
         <td align="left" colspan="3">
-            <input class="input-small" type="text" name="customerName" value="${personFamilyIncurDebts.loanPurpose}"
+            <input class="input-small" type="text" name="loanPurpose" value="${personFamilyIncurDebts.loanPurpose}"
                    style="width: 270px;height: 30px; margin-top: 5px;">
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">贷款形态</td>
         <td align="left" colspan="3">
-            <input class="input-small" type="text" name="customerName" value="${personFamilyIncurDebts.loanShap}"
+            <input class="input-small" type="text" name="loanShap" value="${personFamilyIncurDebts.loanShap}"
                    style="width: 270px;height: 30px; margin-top: 5px;">
         </td>
     </tr>
@@ -844,49 +797,47 @@
         家庭成员基本情况
     </td>
 </tr>
-<tr>
-    <td align="left" colspan="8" style="font-size:18px">
-        成员：1
-    </td>
-</tr>
-<core:forEach items="${personFamilyMemberList}" var="personFamilyMember">
+
+<core:forEach items="${personFamilyMemberList}" var="personFamilyMember" varStatus="idx">
+    <tr>
+        <td align="left" colspan="8" style="font-size:18px">
+            成员：<core:out value="${idx.index+1}"></core:out>
+        </td>
+    </tr>
     <tr>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">姓名</td>
         <td align="left">
-            <input class="input-small" type="text" name="customerName" value="${personFamilyMember.familyMemberName}"
+            <input class="input-small" type="text" name="familyMemberName" value="${personFamilyMember.familyMemberName}"
                    style="width: 95px;height: 30px; margin-top: 5px;">
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">年收入（万元）</td>
         <td align="left">
-            <input class="input-small" type="text" name="customerName" value="${personFamilyMember.yearIncome}"
+            <input class="input-small" type="text" name="yearIncome" value="${personFamilyMember.yearIncome}"
                    style="width: 95px;height: 30px; margin-top: 5px;">
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">与户主关系</td>
         <td align="left">
-            <select class="selectpicker" style="width: 95px; margin-top: 5px;">
-                <option value="${personFamilyMember.leaderRelation}">专业技术人员</option>
-                <option value="${personFamilyMember.leaderRelation}">其他</option>
+            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="leaderRelation">
+                <option value="${personFamilyMember.leaderRelation}">${personFamilyMember.leaderRelation}</option>
             </select>
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">常住地址</td>
         <td align="left">
-            <select class="selectpicker" style="width: 95px; margin-top: 5px;">
-                <option value="${personFamilyMember.address}">专业技术人员</option>
-                <option value="${personFamilyMember.address}">其他</option>
+            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="address">
+                <option value="${personFamilyMember.address}">${personFamilyMember.address}</option>
             </select>
         </td>
     </tr>
     <tr>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">职业</td>
         <td align="left" colspan="3">
-            <select class="selectpicker" style="width: 270px; margin-top: 5px;">
-                <option value="${personFamilyMember.profession}">专业技术人员</option>
-                <option value="${personFamilyMember.profession}">其他</option>
+            <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="profession">
+                <option value="${personFamilyMember.profession}">${personFamilyMember.profession}</option>
             </select>
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">证件号码</td>
         <td align="left" colspan="3">
-            <input class="input-small" type="text" name="customerName" value="${personFamilyMember.familyMemberCerNum}"
+            <input class="input-small" type="text" name="familyMemberCerNum" value="${personFamilyMember.familyMemberCerNum}"
                    style="width: 270px;height: 30px; margin-top: 5px;">
         </td>
     </tr>
@@ -894,9 +845,7 @@
 </tbody>
 </table>
 </div>
-<!--table-->
 </div>
-
 </div>
 <!--2-->
 <div class="tab-pane" id="tab2">
@@ -1132,7 +1081,7 @@
         您希望我行（社）增加哪些方面的服务？
     </td>
     <td align="left" colspan="2">
-        <textarea rows="3" style="width: 355px;height: 85px; margin-top: 5px;"></textarea>
+        <textarea rows="3" style="width: 355px;height: 85px; margin-top: 5px;" name=""></textarea>
     </td>
 </tr>
 <tr>
@@ -1140,7 +1089,7 @@
         您对我行（社）服务有何建议？
     </td>
     <td align="left" colspan="2">
-        <textarea rows="3" style="width: 355px;height: 85px; margin-top: 5px;"></textarea>
+        <textarea rows="3" style="width: 355px;height: 85px; margin-top: 5px;" name=""></textarea>
     </td>
 </tr>
 <tr>
@@ -1354,7 +1303,7 @@
         客户新需求登记
     </td>
     <td align="left" colspan="2">
-        <textarea rows="3" style="width: 355px;height: 85px; margin-top: 5px;"></textarea>
+        <textarea rows="3" style="width: 355px;height: 85px; margin-top: 5px;" name=""></textarea>
     </td>
 </tr>
 </tbody>
@@ -1369,13 +1318,14 @@
 <div class="table-list" style="table-layout:fixed; height:345px; overflow:scroll;">
 <table width="100%">
 <tbody>
+
 <tr>
     <td width="27%" align="left" bgcolor="#b4d8ed" style="color:#161823">
         一、客户基本资料真实性
     </td>
     <td width="73%" align="left">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;">
-            <option value="">基本准确</option>
+        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="truth">
+            <option value="${villageManagerEvaList.truth}">基本准确</option>
             <option value="">有所保留</option>
             <option value="">有一定差距</option>
             <option value="">有较大差距</option>
@@ -1387,8 +1337,8 @@
         二、本地居住时间（农户）
     </td>
     <td align="left">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;">
-            <option value="">5年（含）以下</option>
+        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="localLivingTime">
+            <option value="${villageManagerEvaList.localLivingTime}">5年（含）以下</option>
             <option value="">6年（含）以上</option>
         </select>
     </td>
@@ -1398,8 +1348,8 @@
         三、经营能力
     </td>
     <td width="73%" align="left">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;">
-            <option value="">经验丰富，技术水平高，能力强</option>
+        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="operatingCapacity">
+            <option value="${villageManagerEvaList.operatingCapacity}">经验丰富，技术水平高，能力强</option>
             <option value="">经验丰富，技术水平高，能力较强</option>
             <option value="">经验、技术水和能力均一般</option>
             <option value="">经验较欠缺，技术水平和能力较低</option>
@@ -1411,8 +1361,8 @@
         四、项目潜质
     </td>
     <td align="left">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;">
-            <option value="">优秀</option>
+        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="projectPotential">
+            <option value="${villageManagerEvaList.projectPotential}">优秀</option>
             <option value="">良好</option>
             <option value="">一般</option>
             <option value="">差</option>
@@ -1424,8 +1374,8 @@
         五、市场经营风险
     </td>
     <td width="73%" align="left">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;">
-            <option value="">很低</option>
+        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="operationalRisks">
+            <option value="${villageManagerEvaList.operationalRisks}">很低</option>
             <option value="">较低</option>
             <option value="">一般</option>
             <option value="">较高</option>
@@ -1437,8 +1387,8 @@
         六、市场竞争力和发展前景
     </td>
     <td align="left">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;">
-            <option value="">很好</option>
+        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="developmentProspects">
+            <option value="${villageManagerEvaList.developmentProspects}">很好</option>
             <option value="">较好</option>
             <option value="">一般</option>
             <option value="">较差</option>
@@ -1450,8 +1400,8 @@
         七、生产经营力或工作稳定情况
     </td>
     <td width="73%" align="left">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;">
-            <option value="">强</option>
+        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="operatingStability">
+            <option value="${villageManagerEvaList.operatingStability}">强</option>
             <option value="">中等</option>
             <option value="">一般</option>
             <option value="">差</option>
@@ -1464,8 +1414,8 @@
         八、家庭人均纯收入水平（农户）
     </td>
     <td align="left">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;">
-            <option value="">高收入</option>
+        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="capitaNetIncomeLevel">
+            <option value="${villageManagerEvaList.capitaNetIncomeLevel}">高收入</option>
             <option value="">中高收入</option>
             <option value="">中等收入</option>
             <option value="">中低收入</option>
@@ -1478,8 +1428,8 @@
         九、家庭人均可支配收入水平（非农户）
     </td>
     <td width="73%" align="left">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;">
-            <option value="">最高收入</option>
+        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="disposableIncomeLevel">
+            <option value="${villageManagerEvaList.disposableIncomeLevel}">最高收入</option>
             <option value="">高收入</option>
             <option value="">中等偏上收入</option>
             <option value="">中等收入</option>
@@ -1494,8 +1444,8 @@
         十、家庭财产水平
     </td>
     <td align="left">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;">
-            <option value="">富足家庭</option>
+        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="familyPropertyLevel">
+            <option value="${villageManagerEvaList.familyPropertyLevel}">富足家庭</option>
             <option value="">富裕家庭</option>
             <option value="">殷实家庭</option>
             <option value="">一般家庭</option>
@@ -1509,8 +1459,8 @@
         十一、税费缴纳情况（含土地、房产款项）
     </td>
     <td width="73%" align="left">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;">
-            <option value="">正常缴纳</option>
+        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="payTaxes">
+            <option value="${villageManagerEvaList.payTaxes}">正常缴纳</option>
             <option value="">拖欠罚款2次（含）以内</option>
             <option value="">拖欠罚款2次以上</option>
             <option value="">拖欠超过1年</option>
@@ -1524,8 +1474,8 @@
         十二、敬老情况
     </td>
     <td align="left">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;">
-            <option value="">好</option>
+        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="respectSitu">
+            <option value="${villageManagerEvaList.respectSitu}">好</option>
             <option value="">较好</option>
             <option value="">一般</option>
             <option value="">差</option>
@@ -1539,8 +1489,8 @@
         十三、邻里关系
     </td>
     <td width="73%" align="left">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;">
-            <option value="">好</option>
+        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="neighborhood">
+            <option value="${villageManagerEvaList.neighborhood}">好</option>
             <option value="">较好</option>
             <option value="">一般</option>
             <option value="">差</option>
@@ -1554,8 +1504,8 @@
         十四、对公益事业关心程度
     </td>
     <td align="left">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;">
-            <option value="">高</option>
+        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="publicWelfareLevel">
+            <option value="${villageManagerEvaList.publicWelfareLevel}">高</option>
             <option value="">较高</option>
             <option value="">一般</option>
             <option value="">从不关心</option>
@@ -1568,8 +1518,8 @@
         十五、信誉情况
     </td>
     <td width="73%" align="left">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;">
-            <option value="">好</option>
+        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="creditworthiness">
+            <option value="${villageManagerEvaList.creditworthiness}">好</option>
             <option value="">较好</option>
             <option value="">一般</option>
             <option value="">较差</option>
@@ -1581,8 +1531,8 @@
         十六、个人品行综合评价
     </td>
     <td align="left">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;">
-            <option value="">优秀</option>
+        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="conduct">
+            <option value="${villageManagerEvaList.conduct}">优秀</option>
             <option value="">良好</option>
             <option value="">中等</option>
             <option value="">一般</option>
@@ -1596,8 +1546,8 @@
         十七、受表彰情况
     </td>
     <td width="73%" align="left">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;">
-            <option value="">有</option>
+        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="praised">
+            <option value="${villageManagerEvaList.praised}">有</option>
             <option value="">无</option>
             <option value="">不清楚</option>
         </select>
@@ -1608,7 +1558,7 @@
         十八、其他补充
     </td>
     <td align="left">
-        <input type="text" name="" value=""
+        <input type="text" name="supplement" value="${villageManagerEvaList.supplement}"
                style="width: 270px; height: 30px;margin-top: 5px;">
     </td>
 </tr>
@@ -1617,8 +1567,8 @@
         十九、是否为我行（社）重点服务对象
     </td>
     <td width="73%" align="left">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;">
-            <option value="">是</option>
+        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="isImportantObject">
+            <option value="${villageManagerEvaList.isImportantObject}">是</option>
             <option value="">否</option>
             <option value="">一般</option>
         </select>
@@ -1640,7 +1590,7 @@
                         客户在他行贷款情况
                     </td>
                     <td width="73%" align="left">
-                        <input type="text" name="" value=""
+                        <input type="text" name="loanSitu" value="${customerManagerEvaList.loanSitu}"
                                style="width: 270px;height: 30px; margin-top: 5px;">
                     </td>
                 </tr>
@@ -1648,7 +1598,7 @@
                     <td align="center" bgcolor="#b4d8ed" style="color:#161823">
                         个人银行信用记录
                     </td>
-                    <td align="left">
+                    <td align="left">            <%--${customerManagerEvaList.creditRecord}  --%>
                         <label class="checkbox inline">
                             <input type="checkbox" id="inlineCheckbox111" value="option3">
                             报告期内能积极主动按期偿本付息，无违约记录
@@ -1710,8 +1660,8 @@
                         他行信用记录
                     </td>
                     <td width="73%" align="left">
-                        <select class="selectpicker" style="width: 270px; margin-top: 5px;">
-                            <option value="">良好</option>
+                        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="otherBankRecord">
+                            <option value="${customerManagerEvaList.otherBankRecord}">良好</option>
                             <option value="">一般</option>
                             <option value="">较差</option>
                         </select>
@@ -1722,8 +1672,8 @@
                         变现能力
                     </td>
                     <td align="left">
-                        <select class="selectpicker" style="width: 270px; margin-top: 5px;">
-                            <option value="">优秀</option>
+                        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="houseToMoney">
+                            <option value="${customerManagerEvaList.houseToMoney}">优秀</option>
                             <option value="">较好</option>
                             <option value="">一般</option>
                             <option value="">难以处置</option>

@@ -21,7 +21,7 @@ public interface BaseInfoDao {
     List<CustomerListInfo> getPersonBasicInfo(Long recordId);
 
     // 获取客户的基本信息
-    List<CusBaseInfo> getCusBasicInfo(Long recordId);
+    CusBaseInfo getCusBasicInfo(Long recordId);
 
     //获取家庭收支情况
     List<IncomeExpenses> getIncomeExpenses(Long recordId);
@@ -106,6 +106,12 @@ public interface BaseInfoDao {
 
     void saveFamilyassets(FamilyAssets familyAssets);
 
-
     int getStatusByCerNum(String cerNum);
+
+    //二
+    FinanceServices getFinanceServicesList();
+    //三
+    VillageManagerEva getVillageManagerEvaList();
+    //四
+    CustomerManagerEva getCustomerManagerEvaList();
 }

@@ -45,7 +45,7 @@
                         <tr>
                             <td width="60%" height="145"><img src="/asserts/img/logo.png" width="500" height="145" /></td>
                             <td width="40%" align="right" valign="bottom" >
-                                <div style="margin-bottom:10px; margin-right:10px; color:#FFFFFF">您好！<span id="uName">[<c:out value="${displayUserName}"/>]</span><a href="/logout" style="color:#FFFFFF">&nbsp;退出</a>
+                                <div style="margin-bottom:10px; margin-right:10px; color:#FFFFFF">您好！<span>[<c:out value="${displayUserName}"/>]</span><a href="/logout" style="color:#FFFFFF">&nbsp;退出</a>
                                 </div>
                             </td>
                         </tr>
@@ -87,8 +87,12 @@
                     <a class="btn" href="#">查询</a>
                 </div>
                 <div class="btn-group">
-                    <button class="btn" type="button" id="assignOperate">批量指派</button>
-                    <button class="btn" type="button" id="checkOperate">验收</button>
+                    <core:choose>
+                        <core:when test="${userNameByAdmin=='admin'}">
+                            <button class="btn" type="button" id="assignOperate">批量指派</button>
+                            <button class="btn" type="button" id="checkOperate">验收</button>
+                        </core:when>
+                    </core:choose>
                 </div>
                 <div class="btn-group">
                     <button class="btn dropdown-toggle" data-toggle="dropdown">导入 <span class="caret"></span></button>
@@ -138,7 +142,11 @@
                             <td align="center">${familyInfo.state}</td>
                             <td align="center">
                                 <a href="#" style="color:#0099FF" class="showOperate" recordId="${familyInfo.recordId}">查看</a>&nbsp;|&nbsp;
-                                <a href="#" style="color:#0099FF" class="appointOperate" recordId="${familyInfo.recordId}">指派</a>&nbsp;|&nbsp;
+                                <core:choose>
+                                 <core:when test="${userNameByAdmin=='admin'}">
+                                    <a href="#" style="color:#0099FF" class="appointOperate" recordId="${familyInfo.recordId}">指派</a>&nbsp;|&nbsp;
+                                 </core:when>
+                                </core:choose>
                                 <a href="#" style="color:#0099FF" class="editOperate" recordId="${familyInfo.recordId}">编辑</a>&nbsp;|&nbsp;
                                 <a href="#" style="color:#FF0000" class="deleteOperate" recordId="${familyInfo.recordId}">删除</a>
                             </td>

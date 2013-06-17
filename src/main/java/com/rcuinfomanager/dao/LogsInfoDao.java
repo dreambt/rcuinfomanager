@@ -9,8 +9,12 @@ public interface LogsInfoDao {
     //保存日志
     void saveLogsInfo(LogsInfo logs);
     //获取日志
-    List<LogsInfo> getLogsInfoByAdminList();
-    List<LogsInfo> getLogsInfoByNormalList(long userId);
+    //admin
+    List<LogsInfo> getLogsInfoByAdminListPage(@Param("beginPageNum") int beginPageNum, @Param("endPageNum") int endPageNum);
+    Long queryAdminByLogsInfoByCount();
+    //Normal
+    List<LogsInfo> queryNormalByLogsInfoByPage(@Param("userId") Long userId,@Param("beginPageNum") int beginPageNum, @Param("endPageNum") int endPageNum);//getLogsInfoByNormalList(long userId);
+    Long queryNormalByLogsInfoByCount(@Param("userId")Long userId);
     //查询
     //Admin
     List<LogsInfo> getLogsAllByAdminList(@Param("beginTime") String beginTime,@Param("endTime")String endTime,@Param("userName")String userName);

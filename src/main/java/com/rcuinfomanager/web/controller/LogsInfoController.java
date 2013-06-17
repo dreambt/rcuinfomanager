@@ -19,11 +19,16 @@ public class LogsInfoController {
 
     //查询日志
     @RequestMapping(value ="/queryLogs")
-    public String queryLogs(@RequestParam(value="beginTime", required=false) String beginTime,@RequestParam(value="endTime", required=false) String endTime,@RequestParam(value="userName", required=false) String userName,ModelMap map) {
+    public String queryLogs(@RequestParam(value = "page", required = false) Integer pageNum,@RequestParam(value="beginTime", required=false) String beginTime,@RequestParam(value="endTime", required=false) String endTime,@RequestParam(value="userName", required=false) String userName,ModelMap map) {
+
+        if (pageNum == null) {
+            pageNum = 1;
+        }
         UserSessionContext userSessionContext = UserSessionContextHolder.getUserSessionContext();
         SessionUser sessionUser = userSessionContext.getSessionUser();
         map.put("firstLogin",sessionUser.isFirstLogon());
         map.put("displayUserName", sessionUser.getDisplayUserName());
+        int offset = 1;
         if(sessionUser.getId()==1){
             if(!Strings.isNullOrEmpty(beginTime) && !Strings.isNullOrEmpty(endTime) && !Strings.isNullOrEmpty(userName)){
                 map.put("logsInfoList",logsInfoService.getLogsAllByAdminList(beginTime, endTime, userName));
@@ -36,7 +41,7 @@ public class LogsInfoController {
             }else if(!Strings.isNullOrEmpty(userName)){
                 map.put("logsInfoList",logsInfoService.getLogsUNameByAdminList(userName));
             }else{
-                map.put("logsInfoList",logsInfoService.getLogsInfoByAdminList());
+                map.put("logsInfoList",logsInfoService.getLogsInfoByAdminListPage(pageNum,offset));
             }
         }else {
             if(!Strings.isNullOrEmpty(beginTime) && !Strings.isNullOrEmpty(endTime) && !Strings.isNullOrEmpty(userName)){
@@ -50,7 +55,7 @@ public class LogsInfoController {
             }else if(!Strings.isNullOrEmpty(userName)){
                 map.put("logsInfoList",logsInfoService.getLogsUNameList(userName, sessionUser.getId()));
             }else{
-                map.put("logsInfoList",logsInfoService.getLogsInfoByNormalList(sessionUser.getId()));
+                map.put("logsInfoList",logsInfoService.getLogsInfoByNormalListPage(sessionUser.getId(), pageNum, offset));
             }
         }
         return "logsystem/systemLog";

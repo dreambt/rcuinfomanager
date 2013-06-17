@@ -17,11 +17,22 @@ public class LogsInfoService {
         logsInfoDao.saveLogsInfo(logs);
     }
     //获取日志 List
-    public List<LogsInfo> getLogsInfoByAdminList(){
-        return logsInfoDao.getLogsInfoByAdminList();
+    public List<LogsInfo> getLogsInfoByAdminListPage(int pageNum,int offset){
+        int beginPageNum = (pageNum -1) * offset;
+        int engPageNum = pageNum * offset;
+        return logsInfoDao.getLogsInfoByAdminListPage(beginPageNum,engPageNum);//getLogsInfoByAdminList();
     }
-    public List<LogsInfo> getLogsInfoByNormalList(long userId){
-        return logsInfoDao.getLogsInfoByNormalList(userId);
+    public Long getAllLogsInfoListByCount() {
+        return logsInfoDao.queryAdminByLogsInfoByCount();
+    }
+
+    public List<LogsInfo> getLogsInfoByNormalListPage(long userId,int pageNum, int offset){
+        int beginPageNum = (pageNum -1) * offset;
+        int engPageNum = pageNum * offset;
+        return logsInfoDao.queryNormalByLogsInfoByPage(userId,beginPageNum,engPageNum);//getLogsInfoByNormalList(userId,beginPageNum,engPageNum);
+    }
+    public Long getLogsInfoListByCount(Long userId) {
+        return logsInfoDao.queryNormalByLogsInfoByCount(userId);
     }
 
     //查询

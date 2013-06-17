@@ -7,9 +7,8 @@ import com.rcuinfomanager.model.FamilyMember;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.util.List;
 
 /**
  * @author 王文庭(xorbytes@qq.com)
@@ -23,8 +22,9 @@ public class ImportFarmerInfoService {
     @Autowired
     private BaseInfoDao baseInfoDao;
 
-    public void importFromCSV(String file) throws IOException {
-        BufferedReader csvReader = new BufferedReader(new FileReader(file));
+    public void importFromCSV(InputStream is) throws IOException {
+        BufferedReader csvReader = new BufferedReader(new InputStreamReader(is,"UTF-8"));
+
         String row = csvReader.readLine();
 
         if (row == null) {
@@ -38,7 +38,6 @@ public class ImportFarmerInfoService {
 
         while (row != null) {
             String[] rowData = row.split(",");
-           // FamilyMemberInfo familyMemberInfo = new FamilyMemberInfo();
             if (isImportHouseholdFile) {
                 BaseInfo baseInfo = new BaseInfo();
                 baseInfo.setCustomerName(rowData[0]);
@@ -64,4 +63,29 @@ public class ImportFarmerInfoService {
         csvReader.close();
     }
 
+    public void importFromCSV(String file) throws IOException {
+        importFromCSV(new FileInputStream(new File(file)));
+    }
+
+    public void exportBaseInfo4Household(String recordIds, BufferedWriter writer) throws IOException {
+        String[] recordIdList = recordIds.split(",");
+
+        for (String recordId : recordIdList) {
+            BaseInfo baseInfo = baseInfoDao.getBaseInfoByRecordId(Long.parseLong(recordId));
+            String rawData = baseInfo.getCustomerName()+ "," + baseInfo.getCerNum() + "," + baseInfo.getNation() + "\r\n";
+            writer.write(rawData);
+        }
+    }
+
+    public void exportBaseInfo4Member(String recordIds, BufferedWriter writer) throws IOException {
+        String[] recordIdList = recordIds.split(",");
+
+        for (String recordId : recordIdList) {
+            List<FamilyMember> familyMemberList = baseInfoDao.getFamilyMember(Long.parseLong(recordId));
+            for (FamilyMember familyMember : familyMemberList) {
+                String rawData = familyMember.getFamilyMemberCerNum() + "," + familyMember.getCerNum() + "," + familyMember.getFamilyMemberName() + familyMember.getLeaderRelation() + "\r\n";
+                writer.write(rawData);
+            }
+        }
+    }
 }

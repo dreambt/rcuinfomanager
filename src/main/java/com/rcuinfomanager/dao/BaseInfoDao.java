@@ -114,4 +114,8 @@ public interface BaseInfoDao {
     VillageManagerEva getVillageManagerEvaList();
     //四
     CustomerManagerEva getCustomerManagerEvaList();
+
+    BaseInfo getBaseInfoByRecordId(long recordId);
+
+    List<Long> getAllHouseholdInfos();
 }

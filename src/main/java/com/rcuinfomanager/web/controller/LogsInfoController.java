@@ -26,7 +26,7 @@ public class LogsInfoController {
         }
         UserSessionContext userSessionContext = UserSessionContextHolder.getUserSessionContext();
         SessionUser sessionUser = userSessionContext.getSessionUser();
-        map.put("firstLogin",sessionUser.isFirstLogon());
+        map.put("firstLogin",sessionUser.isNeedModifyPassword());
         map.put("displayUserName", sessionUser.getDisplayUserName());
         int offset = 20;
         if(sessionUser.getId()==1){

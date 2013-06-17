@@ -20,8 +20,8 @@ public class SessionUser {
 
     private int needModifyPassword;
 
-    public boolean isFirstLogon() {
-        return lastLoginTime == null;
+    public boolean isNeedModifyPassword() {
+        return needModifyPassword == 0;
     }
 
     public Long getId() {

@@ -16,7 +16,7 @@
     <script src="/asserts/js/main.js"></script>
     <script type="text/javascript">
         $(function(){
-            if(${firstLogin}){
+            if(${needModifyPassword}){
                 if(confirm('第一次登录，是否需要修改密码？')){
                     var url='systemAccount/editAccount';
                     window.top.artDialog({
@@ -104,7 +104,8 @@
                 <div class="btn-group">
                     <button class="btn dropdown-toggle" data-toggle="dropdown">导出 <span class="caret"></span></button>
                     <ul class="dropdown-menu">
-                        <li><a href="#" id="exportBasicOperate">导出基础数据</a></li>
+                        <li><a href="#" id="exportBasicData4Household">导出户主数据</a></li>
+                        <li><a href="#" id="exportBasicData4Members">导出家庭成员数据</a></li>
                         <li><a href="#" id="exportVillageAssess">导出村委会评价表</a></li>
                     </ul>
                 </div>
@@ -115,7 +116,7 @@
                     <thead>
                     <tr>
                         <th width="77" align="center" class="first">
-                            <input type="checkbox"/>全选
+                            <input type="checkbox" id="selectAll" />全选
                         </th>
                         <th width="74" align="center">序号</th>
                         <th width="115" align="center">户主姓名</th>

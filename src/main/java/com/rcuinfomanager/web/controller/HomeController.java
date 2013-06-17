@@ -40,7 +40,7 @@ public class HomeController {
 
         UserSessionContext userSessionContext = UserSessionContextHolder.getUserSessionContext();
         SessionUser sessionUser = userSessionContext.getSessionUser();
-        map.put("firstLogin",sessionUser.isFirstLogon());
+        map.put("needModifyPassword",sessionUser.isNeedModifyPassword());
         map.put("displayUserName", sessionUser.getDisplayUserName());
         map.put("userNameByAdmin", sessionUser.getUserName());
         int offset = 20;

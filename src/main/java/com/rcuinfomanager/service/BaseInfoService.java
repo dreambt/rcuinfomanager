@@ -220,4 +220,8 @@ public class BaseInfoService {
     public CustomerManagerEva getCustomerManagerEvaList(){
         return baseInfoDao.getCustomerManagerEvaList();
     }
+
+    public List<Long> getAllHouseholdInfos() {
+        return baseInfoDao.getAllHouseholdInfos();
+    }
 }

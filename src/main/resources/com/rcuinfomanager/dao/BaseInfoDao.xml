@@ -581,5 +581,11 @@
           select * from customermanagereva
     </select>
 
+   <select id="getBaseInfoByRecordId" resultType="com.rcuinfomanager.model.BaseInfo" parameterType="java.lang.Long">
+       select * from baseinfo where recordId = #{recordId}
+   </select>
 
+    <select id="getAllHouseholdInfos" resultType="java.lang.Long">
+       select recordId from baseinfo
+    </select>
 </mapper>

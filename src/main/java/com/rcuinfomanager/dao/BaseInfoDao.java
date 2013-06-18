@@ -118,4 +118,6 @@ public interface BaseInfoDao {
     BaseInfo getBaseInfoByRecordId(long recordId);
 
     List<Long> getAllHouseholdInfos();
+
+    void updateAppointStatus(long recordId);
 }

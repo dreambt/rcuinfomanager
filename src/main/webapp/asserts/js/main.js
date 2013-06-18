@@ -241,13 +241,17 @@ $(function () {
             }
         });
         if (isExist) {
-            var url = '/family/exportBasicData/' + recordIds;
-            window.top.artDialog({
+            if ($('#selectAll').is(':checked')) {
+                recordIds = 'All';
+            }
+            var url = '/family/exportVillagerEstimation/' + recordIds;
+            document.location.href = url;
+           /* window.top.artDialog({
                 id: 'export',
                 title: '导出数据信息',
                 lock: true,
                 content: '<iframe scrolling="auto" width="400" height="250" frameborder="0" style="border: none;margin: -20px -25px;"marginheight="0" marginwidth="0" src="' + url + '"/>'
-            });
+            });*/
         } else {
             alert("未勾选任何客户信息！");
         }

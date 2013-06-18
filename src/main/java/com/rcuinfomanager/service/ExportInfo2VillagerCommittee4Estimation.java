@@ -1,24 +1,48 @@
 package com.rcuinfomanager.service;
 
+import com.rcuinfomanager.dao.BaseInfoDao;
 import com.rcuinfomanager.model.BaseInfo;
-import com.sun.deploy.net.HttpResponse;
+import com.rcuinfomanager.util.Files;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.stereotype.Service;
 
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.*;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class ExportInfo2VillagerCommittee4Estimation {
 
     private final static String templateFileName = "template.xls";
 
-    public void readTemplateAndExport(List<BaseInfo> baseInfoList,HttpServletResponse response) {
+    @Autowired
+    private BaseInfoDao baseInfoDao;
+
+    public void readTemplateAndExport(String recordIds, HttpServletResponse response,HttpServletRequest request) {
+        List<BaseInfo> baseInfoList = new ArrayList<BaseInfo>();
+        String[] recordIdList = recordIds.split(",");
+
+        for (String recordId : recordIdList) {
+            BaseInfo baseInfo = baseInfoDao.getBaseInfoByRecordId(Long.parseLong(recordId));
+            if (baseInfo != null) {
+                baseInfoList.add(baseInfo);
+            }
+        }
+        if (!baseInfoList.isEmpty()) {
+            readTemplateAndExport(baseInfoList, response,request);
+        }
+    }
+
+    public void readTemplateAndExport(List<BaseInfo> baseInfoList,HttpServletResponse response,HttpServletRequest request) {
         ServletOutputStream outputStream = null;
         try {
             ClassPathResource cpr = new ClassPathResource(templateFileName);
@@ -41,9 +65,10 @@ public class ExportInfo2VillagerCommittee4Estimation {
             }
 
             outputStream = response.getOutputStream();
+            String fileName = Files.encodeFilename("村委会评价表.xls",request);
             response.setContentType("application/vnd.ms-excel");
             response.addHeader("content-disposition",
-                    "attachment; filename=" + "村委会评价表.xls");
+                    "attachment;filename=" + fileName);
             wb.write(outputStream);
         } catch (Exception e) {
             e.printStackTrace();

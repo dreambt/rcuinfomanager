@@ -371,8 +371,12 @@
             LEFT JOIN financeservices w ON w.`recordId`=a.`recordId`
             LEFT JOIN customermanagereva n ON n.`recordId`=a.`recordId`
             LEFT JOIN t_appoint t ON t.`recordId`=a.`recordId`
-            WHERE t.`user_id` = #{userId}
+            WHERE t.`user_id` = #{userId} and t.`downloaded` = 0
     </select>
+
+    <update id="updateAppointStatus" parameterType="java.lang.Long">
+        update t_appoint set downloaded = 1 where recordId = #{recordId}
+    </update>
 
     <!--网点-->
     <select id="getNetWorkByAdmin" resultMap="userListInfo">
@@ -430,7 +434,7 @@
            businessSite = #{businessSite}, businessProp = #{businessProp}, moneySitu = #{moneySitu},  inputMoney = #{inputMoney},
            ownMoney = #{ownMoney}, yearIncome = #{yearIncome}, annualWageIncome = #{annualWageIncome}, workYears = #{workYears}, workSitu = #{workSitu},
            unitProp = #{unitProp}, unitIndustryId = #{unitIndustryId}, unitIndustryName = #{unitIndustryName}, department = #{department}, unitType = #{unitType},
-           duties = #{duties}, workTitle = #{workTitle}
+           duties = #{duties}, workTitle = #{workTitle}, status = #{status}, userName = #{userName}
         where recordId = #{recordId}
     </update>
 
@@ -446,7 +450,7 @@
            bankPartnership, profession, businessProj, businessYear,
            businessSite, businessProp, moneySitu,inputMoney,
            ownMoney, yearIncome, annualWageIncome, workYears, workSitu,
-           unitProp, unitIndustryId, unitIndustryName, department,unitType, duties, workTitle, customerName,cerNum)
+           unitProp, unitIndustryId, unitIndustryName, department,unitType, duties, workTitle, customerName,cerNum, status, userName)
         values(#{village}, #{gender}, #{isFarmer}, #{cerType}, #{cerValidityFrom},#{cerValidityTo}, #{custType}, #{birthday}, #{nationality}, #{isHavePassport}, #{nation}, #{poliLaspect},
            #{address}, #{postcode},#{telephone}, #{mbPhoneNum}, #{areaCode},  #{areaName}, #{highestDegree}, #{highestEdu}, #{health},
            #{bankRelation}, #{liveCondition}, #{maritalStatus}, #{socialSecurity},
@@ -454,7 +458,7 @@
            #{businessSite}, #{businessProp}, #{moneySitu}, #{inputMoney},
            #{ownMoney}, #{yearIncome}, #{annualWageIncome}, #{workYears}, #{workSitu},
            #{unitProp}, #{unitIndustryId}, #{unitIndustryName}, #{department}, #{unitType},
-           #{duties}, #{workTitle}, #{customerName}, #{cerNum})
+           #{duties}, #{workTitle}, #{customerName}, #{cerNum}, #{status}, #{userName})
     </insert>
 
     <update id="updateIncomeexpenses" parameterType="com.rcuinfomanager.webservice.model.AllColumnInfo">

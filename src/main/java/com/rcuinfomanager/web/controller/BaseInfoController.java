@@ -3,11 +3,13 @@ package com.rcuinfomanager.web.controller;
 
 import com.rcuinfomanager.model.LogsInfo;
 import com.rcuinfomanager.service.BaseInfoService;
+import com.rcuinfomanager.service.ExportInfo2VillagerCommittee4Estimation;
 import com.rcuinfomanager.service.ImportFarmerInfoService;
 import com.rcuinfomanager.service.LogsInfoService;
 import com.rcuinfomanager.session.SessionUser;
 import com.rcuinfomanager.session.UserSessionContext;
 import com.rcuinfomanager.session.UserSessionContextHolder;
+import com.rcuinfomanager.util.Files;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -16,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,6 +38,9 @@ public class BaseInfoController {
     LogsInfoService logsInfoService;
     @Autowired
     ImportFarmerInfoService importFarmerInfoService;
+
+    @Autowired
+    ExportInfo2VillagerCommittee4Estimation exportInfo2VillagerCommittee4Estimation;
 
     //查看
     @RequestMapping(value = "/{id}")
@@ -278,8 +282,9 @@ public class BaseInfoController {
 
         BufferedWriter writer = null;
         try {
+            String fileName = Files.encodeFilename("户主.csv", request);
             response.setCharacterEncoding("UTF-8");
-            response.setHeader("Content-Disposition", "attachment; filename=\"户主.csv\"");
+            response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
             writer = new BufferedWriter(response.getWriter());
             importFarmerInfoService.exportBaseInfo4Household(recordIds, writer);
         } catch (IOException e) {
@@ -320,8 +325,9 @@ public class BaseInfoController {
 
         BufferedWriter writer = null;
         try {
+            String fileName = Files.encodeFilename("家庭成员.csv", request);
             response.setCharacterEncoding("UTF-8");
-            response.setHeader("Content-Disposition", "attachment; filename=\"家庭成员.csv\"");
+            response.setHeader("Content-Disposition", "attachment; filename="+fileName);
             writer = new BufferedWriter(response.getWriter());
             importFarmerInfoService.exportBaseInfo4Member(recordIds, writer);
         } catch (IOException e) {
@@ -337,22 +343,23 @@ public class BaseInfoController {
         }
     }
 
-    //保存导出基础数据
-    @RequestMapping("/saveExportBasicData")
-    public String saveExportBasicData(@RequestParam(value = "file", required = true) String file,
-                                      @RequestParam(value = "recordIds", required = true) String recordIds, Map map) {
-        try {
-            ImportFarmerInfoService importFarmerInfoService = new ImportFarmerInfoService();
-            String[] ids = recordIds.split(",");
-            for (String id : ids) {
-
-                importFarmerInfoService.importFromCSV(file);
+    //导出基础数据
+    @RequestMapping("/exportVillagerEstimation/{recordIds}")
+    public String saveExportBasicData(HttpServletRequest request, HttpServletResponse response,@PathVariable String recordIds) {
+        if ("All".equalsIgnoreCase(recordIds)) {
+            List<Long> allHouseholdInfos = baseInfoService.getAllHouseholdInfos();
+            if (allHouseholdInfos != null && !allHouseholdInfos.isEmpty()) {
+                StringBuffer buffer = new StringBuffer();
+                for (int i = 0; i < allHouseholdInfos.size(); i++) {
+                    if (i != 0) {
+                        buffer.append(",");
+                    }
+                    buffer.append(allHouseholdInfos.get(i));
+                }
+                recordIds = buffer.toString();
             }
-            boolean success = true;
-            map.put("success", success);
-        } catch (IOException e) {
-            e.printStackTrace();
         }
+        exportInfo2VillagerCommittee4Estimation.readTemplateAndExport(recordIds, response,request);
         return "farmer/exportBasicData";
     }
 

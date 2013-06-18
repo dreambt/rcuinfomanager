@@ -114,6 +114,8 @@ public class AllColumnInfo implements Serializable {
     private String custManagerOtherBankRecord;
     private String custManagerHouseToMoney;
 
+    private int status;
+
     public long getRecordId() {
         return recordId;
     }
@@ -832,5 +834,13 @@ public class AllColumnInfo implements Serializable {
 
     public void setAssetsId(long assetsId) {
         this.assetsId = assetsId;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

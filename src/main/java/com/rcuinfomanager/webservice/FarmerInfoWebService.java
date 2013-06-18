@@ -39,7 +39,7 @@ public class FarmerInfoWebService {
         if (user != null) {
             String pwdMD5 = MDFive.getEncryptPwd(user.getPassword());
             if (pwdMD5.equals(password)) {
-                List<AllColumnInfo> data = baseInfoService.queryAllColumnInfoList(user.getUserId());
+                List<AllColumnInfo> data = baseInfoService.queryAllColumnInfoListAndUpdateAppointStatus(user.getUserId());
                 if (data != null && !data.isEmpty()) {
                     webServiceResponseData.setStatus(0);
                     String rawData = JsonParser.toJSON(data);
@@ -67,10 +67,12 @@ public class FarmerInfoWebService {
                     UploadData uploadData = mapper.readValue(rawData, UploadData.class);
                     if (uploadData != null) {
                         AllColumnInfo allColumnInfo = uploadData.getAllColumnInfo();
+                        allColumnInfo.setUserName(username);
                         //检查这条记录是否已验收, 如果已验收，不处理，返回status=2
                         if (baseInfoService.isAccepted(allColumnInfo.getCerNum())) {
                             webResponseData.setStatus(2);
                         } else {
+                            allColumnInfo.setStatus(1);
                             baseInfoService.saveFarmerInfoFromDownload(allColumnInfo);
                             webResponseData.setStatus(0);
                         }

@@ -113,7 +113,7 @@ public class BaseInfoService {
     }
 
 
-    public List<AllColumnInfo> queryAllColumnInfoList(long userId) {
+    public List<AllColumnInfo> queryAllColumnInfoListAndUpdateAppointStatus(long userId) {
         List<AllColumnInfo> allColumnInfos = baseInfoDao.queryAppointInfoByUserId(userId);
 
         if (allColumnInfos != null && !allColumnInfos.isEmpty()) {
@@ -126,6 +126,7 @@ public class BaseInfoService {
                 allColumnInfo.setLandInfos(landInfoList);
                 List<FamilyMember> familyMemberList = baseInfoDao.getFamilyMember(allColumnInfo.getRecordId());
                 allColumnInfo.setFamilyMembers(familyMemberList);
+                baseInfoDao.updateAppointStatus(allColumnInfo.getRecordId());
             }
         }
 

@@ -986,7 +986,232 @@
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">单位性质</td>
     <td align="left" colspan="3">
         <select class="selectpicker" style="width: 255px; margin-top: 5px;" name="unitProp">
-            <option value="${personBasicList.unitProp}">${personBasicList.unitProp}</option>
+            <core:choose>
+                <core:when test="${personBasicList.unitProp}=='党政机关'}">
+                    <option value="${personBasicList.unitProp}" selected="selected">党政机关</option>
+                    <option value="事业单位">事业单位</option>
+                    <option value="军队社会团体">军队社会团体</option>
+                    <option value="内资企业">内资企业</option>
+                    <option value="国有企业">国有企业</option>
+                    <option value="集体企业">集体企业</option>
+                    <option value="股份合作企业">股份合作企业</option>
+                    <option value="联营企业">联营企业</option>
+                    <option value="有限责任公司">有限责任公司</option>
+                    <option value="股份有限公司">股份有限公司</option>
+                    <option value="私营企业">私营企业</option>
+                    <option value="个体经营">个体经营</option>
+                    <option value="其他">其他</option>
+                    <option value="未知">未知</option>
+                </core:when>
+                <core:when test="${personBasicList.unitProp}=='事业单位'}">
+                    <option value="党政机关">党政机关</option>
+                    <option value="${personBasicList.unitProp}" selected="selected">事业单位</option>
+                    <option value="军队社会团体">军队社会团体</option>
+                    <option value="内资企业">内资企业</option>
+                    <option value="国有企业">国有企业</option>
+                    <option value="集体企业">集体企业</option>
+                    <option value="股份合作企业">股份合作企业</option>
+                    <option value="联营企业">联营企业</option>
+                    <option value="有限责任公司">有限责任公司</option>
+                    <option value="股份有限公司">股份有限公司</option>
+                    <option value="私营企业">私营企业</option>
+                    <option value="个体经营">个体经营</option>
+                    <option value="其他">其他</option>
+                    <option value="未知">未知</option>
+                </core:when>
+                <core:when test="${personBasicList.unitProp}=='军队社会团体'}">
+                    <option value="党政机关">党政机关</option>
+                    <option value="事业单位">事业单位</option>
+                    <option value="${personBasicList.unitProp}" selected="selected">军队社会团体</option>
+                    <option value="内资企业">内资企业</option>
+                    <option value="国有企业">国有企业</option>
+                    <option value="集体企业">集体企业</option>
+                    <option value="股份合作企业">股份合作企业</option>
+                    <option value="联营企业">联营企业</option>
+                    <option value="有限责任公司">有限责任公司</option>
+                    <option value="股份有限公司">股份有限公司</option>
+                    <option value="私营企业">私营企业</option>
+                    <option value="个体经营">个体经营</option>
+                    <option value="其他">其他</option>
+                    <option value="未知">未知</option>
+                </core:when>
+                <core:when test="${personBasicList.unitProp}=='内资企业'}">
+                    <option value="党政机关">党政机关</option>
+                    <option value="事业单位">事业单位</option>
+                    <option value="军队社会团体">军队社会团体</option>
+                    <option value="${personBasicList.unitProp}" selected="selected">内资企业</option>
+                    <option value="国有企业">国有企业</option>
+                    <option value="集体企业">集体企业</option>
+                    <option value="股份合作企业">股份合作企业</option>
+                    <option value="联营企业">联营企业</option>
+                    <option value="有限责任公司">有限责任公司</option>
+                    <option value="股份有限公司">股份有限公司</option>
+                    <option value="私营企业">私营企业</option>
+                    <option value="个体经营">个体经营</option>
+                    <option value="其他">其他</option>
+                    <option value="未知">未知</option>
+                </core:when>
+                <core:when test="${personBasicList.unitProp}=='国有企业'}">
+                    <option value="党政机关">党政机关</option>
+                    <option value="事业单位">事业单位</option>
+                    <option value="军队社会团体">军队社会团体</option>
+                    <option value="内资企业">内资企业</option>
+                    <option value="${personBasicList.unitProp}" selected="selected">国有企业</option>
+                    <option value="集体企业">集体企业</option>
+                    <option value="股份合作企业">股份合作企业</option>
+                    <option value="联营企业">联营企业</option>
+                    <option value="有限责任公司">有限责任公司</option>
+                    <option value="股份有限公司">股份有限公司</option>
+                    <option value="私营企业">私营企业</option>
+                    <option value="个体经营">个体经营</option>
+                    <option value="其他">其他</option>
+                    <option value="未知">未知</option>
+                </core:when>
+                <core:when test="${personBasicList.unitProp}=='集体企业'}">
+                    <option value="党政机关">党政机关</option>
+                    <option value="事业单位">事业单位</option>
+                    <option value="军队社会团体">军队社会团体</option>
+                    <option value="内资企业">内资企业</option>
+                    <option value="国有企业">国有企业</option>
+                    <option value="${personBasicList.unitProp}" selected="selected">集体企业</option>
+                    <option value="股份合作企业">股份合作企业</option>
+                    <option value="联营企业">联营企业</option>
+                    <option value="有限责任公司">有限责任公司</option>
+                    <option value="股份有限公司">股份有限公司</option>
+                    <option value="私营企业">私营企业</option>
+                    <option value="个体经营">个体经营</option>
+                    <option value="其他">其他</option>
+                    <option value="未知">未知</option>
+                </core:when>
+                <core:when test="${personBasicList.unitProp}=='股份合作企业'}">
+                    <option value="党政机关">党政机关</option>
+                    <option value="事业单位">事业单位</option>
+                    <option value="军队社会团体">军队社会团体</option>
+                    <option value="内资企业">内资企业</option>
+                    <option value="国有企业">国有企业</option>
+                    <option value="集体企业">集体企业</option>
+                    <option value="${personBasicList.unitProp}" selected="selected">股份合作企业</option>
+                    <option value="联营企业">联营企业</option>
+                    <option value="有限责任公司">有限责任公司</option>
+                    <option value="股份有限公司">股份有限公司</option>
+                    <option value="私营企业">私营企业</option>
+                    <option value="个体经营">个体经营</option>
+                    <option value="其他">其他</option>
+                    <option value="未知">未知</option>
+                </core:when>
+                <core:when test="${personBasicList.unitProp}=='联营企业'}">
+                    <option value="党政机关">党政机关</option>
+                    <option value="事业单位">事业单位</option>
+                    <option value="军队社会团体">军队社会团体</option>
+                    <option value="内资企业">内资企业</option>
+                    <option value="国有企业">国有企业</option>
+                    <option value="集体企业">集体企业</option>
+                    <option value="股份合作企业">股份合作企业</option>
+                    <option value="${personBasicList.unitProp}" selected="selected">联营企业</option>
+                    <option value="有限责任公司">有限责任公司</option>
+                    <option value="股份有限公司">股份有限公司</option>
+                    <option value="私营企业">私营企业</option>
+                    <option value="个体经营">个体经营</option>
+                    <option value="其他">其他</option>
+                    <option value="未知">未知</option>
+                </core:when>
+                <core:when test="${personBasicList.unitProp}=='有限责任公司'}">
+                    <option value="党政机关">党政机关</option>
+                    <option value="事业单位">事业单位</option>
+                    <option value="军队社会团体">军队社会团体</option>
+                    <option value="内资企业">内资企业</option>
+                    <option value="国有企业">国有企业</option>
+                    <option value="集体企业">集体企业</option>
+                    <option value="股份合作企业">股份合作企业</option>
+                    <option value="联营企业">联营企业</option>
+                    <option value="${personBasicList.unitProp}" selected="selected">有限责任公司</option>
+                    <option value="股份有限公司">股份有限公司</option>
+                    <option value="私营企业">私营企业</option>
+                    <option value="个体经营">个体经营</option>
+                    <option value="其他">其他</option>
+                    <option value="未知">未知</option>
+                </core:when>
+                <core:when test="${personBasicList.unitProp}=='股份有限公司'}">
+                    <option value="党政机关">党政机关</option>
+                    <option value="事业单位">事业单位</option>
+                    <option value="军队社会团体">军队社会团体</option>
+                    <option value="内资企业">内资企业</option>
+                    <option value="国有企业">国有企业</option>
+                    <option value="集体企业">集体企业</option>
+                    <option value="股份合作企业">股份合作企业</option>
+                    <option value="联营企业">联营企业</option>
+                    <option value="有限责任公司">有限责任公司</option>
+                    <option value="${personBasicList.unitProp}" selected="selected">股份有限公司</option>
+                    <option value="私营企业">私营企业</option>
+                    <option value="个体经营">个体经营</option>
+                    <option value="其他">其他</option>
+                    <option value="未知">未知</option>
+                </core:when>
+                <core:when test="${personBasicList.unitProp}=='私营企业'}">
+                    <option value="党政机关">党政机关</option>
+                    <option value="事业单位">事业单位</option>
+                    <option value="军队社会团体">军队社会团体</option>
+                    <option value="内资企业">内资企业</option>
+                    <option value="国有企业">国有企业</option>
+                    <option value="集体企业">集体企业</option>
+                    <option value="股份合作企业">股份合作企业</option>
+                    <option value="联营企业">联营企业</option>
+                    <option value="有限责任公司">有限责任公司</option>
+                    <option value="股份有限公司">股份有限公司</option>
+                    <option value="${personBasicList.unitProp}" selected="selected">私营企业</option>
+                    <option value="个体经营">个体经营</option>
+                    <option value="其他">其他</option>
+                    <option value="未知">未知</option>
+                </core:when>
+                <core:when test="${personBasicList.unitProp}=='个体经营'}">
+                    <option value="党政机关">党政机关</option>
+                    <option value="事业单位">事业单位</option>
+                    <option value="军队社会团体">军队社会团体</option>
+                    <option value="内资企业">内资企业</option>
+                    <option value="国有企业">国有企业</option>
+                    <option value="集体企业">集体企业</option>
+                    <option value="股份合作企业">股份合作企业</option>
+                    <option value="联营企业">联营企业</option>
+                    <option value="有限责任公司">有限责任公司</option>
+                    <option value="股份有限公司">股份有限公司</option>
+                    <option value="私营企业">私营企业</option>
+                    <option value="${personBasicList.unitProp}" selected="selected">个体经营</option>
+                    <option value="其他">其他</option>
+                    <option value="未知">未知</option>
+                </core:when>
+                <core:when test="${personBasicList.unitProp}=='其他'}">
+                    <option value="党政机关">党政机关</option>
+                    <option value="事业单位">事业单位</option>
+                    <option value="军队社会团体">军队社会团体</option>
+                    <option value="内资企业">内资企业</option>
+                    <option value="国有企业">国有企业</option>
+                    <option value="集体企业">集体企业</option>
+                    <option value="股份合作企业">股份合作企业</option>
+                    <option value="联营企业">联营企业</option>
+                    <option value="有限责任公司">有限责任公司</option>
+                    <option value="股份有限公司">股份有限公司</option>
+                    <option value="私营企业">私营企业</option>
+                    <option value="个体经营">个体经营</option>
+                    <option value="${personBasicList.unitProp}" selected="selected">其他</option>
+                    <option value="未知">未知</option>
+                </core:when>
+                <core:otherwise>
+                    <option value="党政机关">党政机关</option>
+                    <option value="事业单位">事业单位</option>
+                    <option value="军队社会团体">军队社会团体</option>
+                    <option value="内资企业">内资企业</option>
+                    <option value="国有企业">国有企业</option>
+                    <option value="集体企业">集体企业</option>
+                    <option value="股份合作企业">股份合作企业</option>
+                    <option value="联营企业">联营企业</option>
+                    <option value="有限责任公司">有限责任公司</option>
+                    <option value="股份有限公司">股份有限公司</option>
+                    <option value="私营企业">私营企业</option>
+                    <option value="个体经营">个体经营</option>
+                    <option value="其他">其他</option>
+                    <option value="${personBasicList.unitProp}" selected="selected">未知</option>
+                </core:otherwise>
+            </core:choose>
         </select>
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">单位所属行业</td>
@@ -1005,7 +1230,56 @@
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">工作单位类别</td>
     <td align="left" colspan="3">
         <select class="selectpicker" style="width: 255px; margin-top: 5px;" name="unitType">
-            <option value="${personBasicList.unitType}">${personBasicList.unitType}</option>
+            <core:choose>
+                <core:when test="${personBasicList.unitType=='国家机关、团体、事业单位等'}">
+                    <option value="${personBasicList.unitType}" selected="selected">国家机关、团体、事业单位等</option>
+                    <option value="金融、烟草、邮电通讯、电力、民航、水电气供应">金融、烟草、邮电通讯、电力、民航、水电气供应</option>
+                    <option value="上市企业、大型优质企业等">上市企业、大型优质企业等</option>
+                    <option value="三资、民营企业及其他企业等">三资、民营企业及其他企业等</option>
+                    <option value="其他">其他</option>
+                    <option value="无职业">无职业</option>
+                </core:when>
+                <core:when test="${personBasicList.unitType=='金融、烟草、邮电通讯、电力、民航、水电气供应'}">
+                    <option value="国家机关、团体、事业单位等">国家机关、团体、事业单位等</option>
+                    <option value="${personBasicList.unitType}" selected="selected">金融、烟草、邮电通讯、电力、民航、水电气供应</option>
+                    <option value="上市企业、大型优质企业等">上市企业、大型优质企业等</option>
+                    <option value="三资、民营企业及其他企业等">三资、民营企业及其他企业等</option>
+                    <option value="其他">其他</option>
+                    <option value="无职业">无职业</option>
+                </core:when>
+                <core:when test="${personBasicList.unitType=='上市企业、大型优质企业等'}">
+                    <option value="国家机关、团体、事业单位等">国家机关、团体、事业单位等</option>
+                    <option value="金融、烟草、邮电通讯、电力、民航、水电气供应">金融、烟草、邮电通讯、电力、民航、水电气供应</option>
+                    <option value="${personBasicList.unitType}" selected="selected">上市企业、大型优质企业等</option>
+                    <option value="三资、民营企业及其他企业等">三资、民营企业及其他企业等</option>
+                    <option value="其他">其他</option>
+                    <option value="无职业">无职业</option>
+                </core:when>
+                <core:when test="${personBasicList.unitType=='三资、民营企业及其他企业等'}">
+                    <option value="国家机关、团体、事业单位等">国家机关、团体、事业单位等</option>
+                    <option value="金融、烟草、邮电通讯、电力、民航、水电气供应">金融、烟草、邮电通讯、电力、民航、水电气供应</option>
+                    <option value="上市企业、大型优质企业等">上市企业、大型优质企业等</option>
+                    <option value="${personBasicList.unitType}" selected="selected">三资、民营企业及其他企业等</option>
+                    <option value="其他">其他</option>
+                    <option value="无职业">无职业</option>
+                </core:when>
+                <core:when test="${personBasicList.unitType=='其他'}">
+                    <option value="国家机关、团体、事业单位等">国家机关、团体、事业单位等</option>
+                    <option value="金融、烟草、邮电通讯、电力、民航、水电气供应">金融、烟草、邮电通讯、电力、民航、水电气供应</option>
+                    <option value="上市企业、大型优质企业等">上市企业、大型优质企业等</option>
+                    <option value="三资、民营企业及其他企业等">三资、民营企业及其他企业等</option>
+                    <option value="${personBasicList.unitType}" selected="selected">其他</option>
+                    <option value="无职业">无职业</option>
+                </core:when>
+                <core:otherwise>
+                    <option value="国家机关、团体、事业单位等">国家机关、团体、事业单位等</option>
+                    <option value="金融、烟草、邮电通讯、电力、民航、水电气供应">金融、烟草、邮电通讯、电力、民航、水电气供应</option>
+                    <option value="上市企业、大型优质企业等">上市企业、大型优质企业等</option>
+                    <option value="三资、民营企业及其他企业等">三资、民营企业及其他企业等</option>
+                    <option value="其他">其他</option>
+                    <option value="${personBasicList.unitType}" selected="selected">无职业</option>
+                </core:otherwise>
+            </core:choose>
         </select>
     </td>
 </tr>
@@ -1013,25 +1287,138 @@
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">职务</td>
     <td align="left">
         <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="duties">
-            <option value="${personBasicList.duties}">${personBasicList.duties}</option>
+            <core:choose>
+                <core:when test="${personBasicList.duties=='高级领导'}">
+                    <option value="${personBasicList.duties}" selected="selected">高级领导</option>
+                    <option value="中级领导">中级领导</option>
+                    <option value="一般员工">一般员工</option>
+                    <option value="其他">其他</option>
+                    <option value="未知">未知</option>
+                </core:when>
+                <core:when test="${personBasicList.duties=='中级领导'}">
+                    <option value="高级领导">高级领导</option>
+                    <option value="${personBasicList.duties}" selected="selected">中级领导</option>
+                    <option value="一般员工">一般员工</option>
+                    <option value="其他">其他</option>
+                    <option value="未知">未知</option>
+                </core:when>
+                <core:when test="${personBasicList.duties=='一般员工'}">
+                    <option value="高级领导">高级领导</option>
+                    <option value="中级领导">中级领导</option>
+                    <option value="${personBasicList.duties}" selected="selected">一般员工</option>
+                    <option value="其他">其他</option>
+                    <option value="未知">未知</option>
+                </core:when>
+                <core:when test="${personBasicList.duties=='一般员工'}">
+                    <option value="高级领导">高级领导</option>
+                    <option value="中级领导">中级领导</option>
+                    <option value="一般员工">一般员工</option>
+                    <option value="${personBasicList.duties}" selected="selected">其他</option>
+                    <option value="未知">未知</option>
+                </core:when>
+                <core:otherwise>
+                    <option value="高级领导">高级领导</option>
+                    <option value="中级领导">中级领导</option>
+                    <option value="一般员工">一般员工</option>
+                    <option value="其他">其他</option>
+                    <option value="${personBasicList.duties}" selected="selected">未知</option>
+                </core:otherwise>
+            </core:choose>
         </select>
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">年工资收入（万元）</td>
     <td align="left">
         <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="annualWageIncome">
-            <option value="${personBasicList.annualWageIncome}">${personBasicList.annualWageIncome}</option>
+            <core:choose>
+                <core:when test="${personBasicList.annualWageIncome=='3万元以内'}">
+                    <option value="${personBasicList.annualWageIncome}" selected="selected">3万元以内</option>
+                    <option value="3-6万元">3-6万元</option>
+                    <option value="6-12万元">6-12万元</option>
+                    <option value="12万元以上">12万元以上</option>
+                </core:when>
+                <core:when test="${personBasicList.annualWageIncome=='3-6万元'}">
+                    <option value="3万元以内">3万元以内</option>
+                    <option value="${personBasicList.annualWageIncome}" selected="selected">3-6万元</option>
+                    <option value="6-12万元">6-12万元</option>
+                    <option value="12万元以上">12万元以上</option>
+                </core:when>
+                <core:when test="${personBasicList.annualWageIncome=='6-12万元'}">
+                    <option value="3万元以内">3万元以内</option>
+                    <option value="3-6万元">3-6万元</option>
+                    <option value="${personBasicList.annualWageIncome}" selected="selected">6-12万元</option>
+                    <option value="12万元以上">12万元以上</option>
+                </core:when>
+                <core:otherwise>
+                    <option value="3万元以内">3万元以内</option>
+                    <option value="3-6万元">3-6万元</option>
+                    <option value="6-12万元">6-12万元</option>
+                    <option value="${personBasicList.annualWageIncome}" selected="selected">12万元以上</option>
+                </core:otherwise>
+            </core:choose>
         </select>
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">工作年限</td>
     <td align="left">
         <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="workYears">
-            <option value="${personBasicList.workYears}">${personBasicList.workYears}</option>
+            <core:choose>
+                <core:when test="${personBasicList.workYears=='5年(含)以上'}">
+                    <option value="${personBasicList.workYears}" selected="selected">5年(含)以上</option>
+                    <option value="3(含)-5年">3(含)-5年</option>
+                    <option value="3年以内">3年以内</option>
+                </core:when>
+                <core:when test="${personBasicList.workYears=='3(含)-5年'}">
+                    <option value="5年(含)以上">5年(含)以上</option>
+                    <option value="${personBasicList.workYears}" selected="selected">3(含)-5年</option>
+                    <option value="3年以内">3年以内</option>
+                </core:when>
+                <core:otherwise>
+                    <option value="5年(含)以上">5年(含)以上</option>
+                    <option value="3(含)-5年">3(含)-5年</option>
+                    <option value="${personBasicList.workYears}" selected="selected">3年以内</option>
+                </core:otherwise>
+            </core:choose>
         </select>
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">职称</td>
     <td align="left">
         <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="workTitle">
-            <option value="${personBasicList.workTitle}">${personBasicList.workTitle}</option>
+            <core:choose>
+                <core:when test="${personBasicList.workTitle=='高级'}">
+                    <option value="无">无</option>
+                    <option value="${personBasicList.workTitle}" selected="selected">高级</option>
+                    <option value="中级">中级</option>
+                    <option value="初级">初级</option>
+                    <option value="未知">未知</option>
+                </core:when>
+                <core:when test="${personBasicList.workTitle=='中级'}">
+                    <option value="无">无</option>
+                    <option value="高级">高级</option>
+                    <option value="${personBasicList.workTitle}" selected="selected">中级</option>
+                    <option value="初级">初级</option>
+                    <option value="未知">未知</option>
+                </core:when>
+                <core:when test="${personBasicList.workTitle=='初级'}">
+                    <option value="无">无</option>
+                    <option value="高级">高级</option>
+                    <option value="中级">中级</option>
+                    <option value="${personBasicList.workTitle}" selected="selected">初级</option>
+                    <option value="未知">未知</option>
+                </core:when>
+                <core:when test="${personBasicList.workTitle=='未知'}">
+                    <option value="无">无</option>
+                    <option value="高级">高级</option>
+                    <option value="中级">中级</option>
+                    <option value="初级">初级</option>
+                    <option value="${personBasicList.workTitle}" selected="selected">未知</option>
+                </core:when>
+                <core:otherwise>
+                    <option value="${personBasicList.workTitle}" selected="selected">无</option>
+                    <option value="高级">高级</option>
+                    <option value="中级">中级</option>
+                    <option value="初级">初级</option>
+                    <option value="未知">未知</option>
+                </core:otherwise>
+            </core:choose>
         </select>
     </td>
 </tr>
@@ -1079,7 +1466,7 @@
                    style="width: 155px;height: 30px; margin-top: 5px;">
         </td>
     </tr>
-    <tr>
+    <%--<tr>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">投资经营性质</td>
         <td align="left">
            <input class="input-small" type="text" name="businessProp" value="${personIncomeExpenses.businessProp}"
@@ -1098,21 +1485,71 @@
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">自有资金情况</td>
         <td align="left">
 
-           <%-- <input class="input-small" type="text" name="ownMoney" value="${personIncomeExpenses.ownMoney}"
-                   style="width: 95px;height: 30px; margin-top: 5px;">--%>
+           &lt;%&ndash; <input class="input-small" type="text" name="ownMoney" value="${personIncomeExpenses.ownMoney}"
+                   style="width: 95px;height: 30px; margin-top: 5px;">&ndash;%&gt;
         </td>
-    </tr>
+    </tr>--%>
     <tr>
         <td align="center"  bgcolor="#b4d8ed" style="color:#161823">家庭主要支出项目</td>
         <td align="left" colspan="3">
             <select class="selectpicker" style="width: 255px; margin-top: 5px;" name="fmExpensesProj">
-                <option value="${personIncomeExpenses.fmExpensesProj}">${personIncomeExpenses.fmExpensesProj}</option>
+                <core:choose>
+                    <core:when test="${personIncomeExpenses.fmExpensesProj=='生活性支出'}">
+                        <option value="${personIncomeExpenses.fmExpensesProj}" selected="selected">生活性支出</option>
+                        <option value="交际应酬等消费支出">交际应酬等消费支出</option>
+                        <option value="投资性支出">投资性支出</option>
+                        <option value="其他支出">其他支出</option>
+                    </core:when>
+                    <core:when test="${personIncomeExpenses.fmExpensesProj=='生活性支出'}">
+                        <option value="生活性支出">生活性支出</option>
+                        <option value="${personIncomeExpenses.fmExpensesProj}" selected="selected">交际应酬等消费支出</option>
+                        <option value="投资性支出">投资性支出</option>
+                        <option value="其他支出">其他支出</option>
+                    </core:when>
+                    <core:when test="${personIncomeExpenses.fmExpensesProj=='投资性支出'}">
+                        <option value="生活性支出">生活性支出</option>
+                        <option value="交际应酬等消费支出">交际应酬等消费支出</option>
+                        <option value="${personIncomeExpenses.fmExpensesProj}" selected="selected">投资性支出</option>
+                        <option value="其他支出">其他支出</option>
+                    </core:when>
+                    <core:otherwise>
+                        <option value="生活性支出">生活性支出</option>
+                        <option value="交际应酬等消费支出">交际应酬等消费支出</option>
+                        <option value="投资性支出">投资性支出</option>
+                        <option value="${personIncomeExpenses.fmExpensesProj}" selected="selected">其他支出</option>
+                    </core:otherwise>
+                </core:choose>
             </select>
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">家庭收入能否应付支出</td>
         <td align="left" colspan="3">
             <select class="selectpicker" style="width: 255px; margin-top: 5px;" name="fmInOutRatio">
-                <option value="${personIncomeExpenses.fmInOutRatio}">${personIncomeExpenses.fmInOutRatio}</option>
+                <core:choose>
+                    <core:when test="${personIncomeExpenses.fmInOutRatio=='能、绰绰有余'}">
+                        <option value="${personIncomeExpenses.fmInOutRatio}" selected="selected">能、绰绰有余</option>
+                        <option value="能、还有余盈">能、还有余盈</option>
+                        <option value="能、刚刚够">能、刚刚够</option>
+                        <option value="不能">不能</option>
+                    </core:when>
+                    <core:when test="${personIncomeExpenses.fmInOutRatio=='能、还有余盈'}">
+                        <option value="能、绰绰有余">能、绰绰有余</option>
+                        <option value="${personIncomeExpenses.fmInOutRatio}" selected="selected">能、还有余盈</option>
+                        <option value="能、刚刚够">能、刚刚够</option>
+                        <option value="不能">不能</option>
+                    </core:when>
+                    <core:when test="${personIncomeExpenses.fmInOutRatio=='能、刚刚够'}">
+                        <option value="能、绰绰有余">能、绰绰有余</option>
+                        <option value="能、还有余盈">能、还有余盈</option>
+                        <option value="${personIncomeExpenses.fmInOutRatio}" selected="selected">能、刚刚够</option>
+                        <option value="不能">不能</option>
+                    </core:when>
+                    <core:otherwise>
+                        <option value="能、绰绰有余">能、绰绰有余</option>
+                        <option value="能、还有余盈">能、还有余盈</option>
+                        <option value="能、刚刚够">能、刚刚够</option>
+                        <option value="${personIncomeExpenses.fmInOutRatio}" selected="selected">不能</option>
+                    </core:otherwise>
+                </core:choose>
             </select>
         </td>
     </tr>
@@ -1164,25 +1601,131 @@
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">性质</td>
         <td align="left">
             <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="nature">
-                <option value="${personHousePropertyInfo.nature}">${personHousePropertyInfo.nature}</option>
+                <core:choose>
+                    <core:when test="${personHousePropertyInfo.nature=='商品房'}">
+                        <option value="${personHousePropertyInfo.nature}" selected="selected">商品房</option>
+                        <option value="自建房"></option>
+                    </core:when>
+                    <core:otherwise>
+                        <option value="商品房">商品房</option>
+                        <option value="${personHousePropertyInfo.nature}" selected="selected">自建房</option>
+                    </core:otherwise>
+                </core:choose>
             </select>
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">用途</td>
         <td align="left">
             <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="purpose">
-                <option value="${personHousePropertyInfo.purpose}">${personHousePropertyInfo.purpose}</option>
+                <core:choose>
+                    <core:when test="${personHousePropertyInfo.purpose=='商用楼'}">
+                        <option value="${personHousePropertyInfo.purpose}" selected="selected">商用楼</option>
+                        <option value="店铺">店铺</option>
+                        <option value="居住">居住</option>
+                        <option value="其他">其他</option>
+                    </core:when>
+                    <core:when test="${personHousePropertyInfo.purpose=='店铺'}">
+                        <option value="商用楼">商用楼</option>
+                        <option value="${personHousePropertyInfo.purpose}" selected="selected">店铺</option>
+                        <option value="居住">居住</option>
+                        <option value="其他">其他</option>
+                    </core:when>
+                    <core:when test="${personHousePropertyInfo.purpose=='居住'}">
+                        <option value="商用楼">商用楼</option>
+                        <option value="店铺">店铺</option>
+                        <option value="${personHousePropertyInfo.purpose}" selected="selected">居住</option>
+                        <option value="其他">其他</option>
+                    </core:when>
+                    <core:otherwise>
+                        <option value="商用楼">商用楼</option>
+                        <option value="店铺"></option>
+                        <option value="居住"></option>
+                        <option value="${personHousePropertyInfo.purpose}" selected="selected">其他</option>
+                    </core:otherwise>
+                </core:choose>
             </select>
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">所在位置</td>
         <td align="left">
             <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="site">
-                <option value="${personHousePropertyInfo.site}">${personHousePropertyInfo.site}</option>
+                <core:choose>
+                    <core:when test="${personHousePropertyInfo.site=='本市市区'}">
+                        <option value="${personHousePropertyInfo.site}" selected="selected">本市市区</option>
+                        <option value="户口地镇区">户口地镇区</option>
+                        <option value="户口地乡村">户口地乡村</option>
+                        <option value="本省其他县市">本省其他县市</option>
+                        <option value="外省">外省</option>
+                    </core:when>
+                    <core:when test="${personHousePropertyInfo.site=='户口地镇区'}">
+                        <option value="本市市区">本市市区</option>
+                        <option value="${personHousePropertyInfo.site}" selected="selected">户口地镇区</option>
+                        <option value="户口地乡村">户口地乡村</option>
+                        <option value="本省其他县市">本省其他县市</option>
+                        <option value="外省">外省</option>
+                    </core:when>
+                    <core:when test="${personHousePropertyInfo.site=='户口地乡村'}">
+                        <option value="本市市区">本市市区</option>
+                        <option value="户口地镇区">户口地镇区</option>
+                        <option value="${personHousePropertyInfo.site}" selected="selected">户口地乡村</option>
+                        <option value="本省其他县市">本省其他县市</option>
+                        <option value="外省">外省</option>
+                    </core:when>
+                    <core:when test="${personHousePropertyInfo.site=='本省其他县市'}">
+                        <option value="本市市区">本市市区</option>
+                        <option value="户口地镇区">户口地镇区</option>
+                        <option value="户口地乡村">户口地乡村</option>
+                        <option value="${personHousePropertyInfo.site}" selected="selected">本省其他县市</option>
+                        <option value="外省">外省</option>
+                    </core:when>
+                    <core:otherwise>
+                        <option value="本市市区">本市市区</option>
+                        <option value="户口地镇区">户口地镇区</option>
+                        <option value="户口地乡村">户口地乡村</option>
+                        <option value="本省其他县市">本省其他县市</option>
+                        <option value="${personHousePropertyInfo.site}" selected="selected">外省</option>
+                    </core:otherwise>
+                </core:choose>
             </select>
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">房屋结构</td>
         <td align="left">
             <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="structure">
-                <option value="${personHousePropertyInfo.structure}">${personHousePropertyInfo.structure}</option>
+                <core:choose>
+                    <core:when test="${personHousePropertyInfo.structure=='钢混'}">
+                        <option value="${personHousePropertyInfo.structure}" selected="selected">钢混</option>
+                        <option value="砖混">砖混</option>
+                        <option value="砖木">砖木</option>
+                        <option value="框架">框架</option>
+                        <option value="其他">其他</option>
+                    </core:when>
+                    <core:when test="${personHousePropertyInfo.structure=='砖混'}">
+                        <option value="钢混">钢混</option>
+                        <option value="${personHousePropertyInfo.structure}" selected="selected">砖混</option>
+                        <option value="砖木">砖木</option>
+                        <option value="框架">框架</option>
+                        <option value="其他">其他</option>
+                    </core:when>
+                    <core:when test="${personHousePropertyInfo.structure=='砖木'}">
+                        <option value="钢混">钢混</option>
+                        <option value="砖混">砖混</option>
+                        <option value="${personHousePropertyInfo.structure}" selected="selected">砖木</option>
+                        <option value="框架">框架</option>
+                        <option value="其他">其他</option>
+                    </core:when>
+                    <core:when test="${personHousePropertyInfo.structure=='框架'}">
+                        <option value="钢混">钢混</option>
+                        <option value="砖混">砖混</option>
+                        <option value="砖木">砖木</option>
+                        <option value="${personHousePropertyInfo.structure}" selected="selected">框架</option>
+                        <option value="其他">其他</option>
+                    </core:when>
+                    <core:otherwise>
+                        <option value="钢混">钢混</option>
+                        <option value="砖混">砖混</option>
+                        <option value="砖木">砖木</option>
+                        <option value="框架">框架</option>
+                        <option value="${personHousePropertyInfo.structure}" selected="selected">其他</option>
+                    </core:otherwise>
+                </core:choose>
             </select>
         </td>
     </tr>
@@ -1195,19 +1738,96 @@
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">使用情况</td>
         <td align="left">
             <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="usedSitu">
-                <option value="${personHousePropertyInfo.usedSitu}">${personHousePropertyInfo.usedSitu}</option>
+                <core:choose>
+                    <core:when test="${personHousePropertyInfo.usedSitu=='自住'}">
+                        <option value="${personHousePropertyInfo.usedSitu}" selected="selected">自住</option>
+                        <option value="自身经营使用">自身经营使用</option>
+                        <option value="出租">出租</option>
+                    </core:when>
+                    <core:when test="${personHousePropertyInfo.usedSitu=='自身经营使用'}">
+                        <option value="自住">自住</option>
+                        <option value="${personHousePropertyInfo.usedSitu}" selected="selected">自身经营使用</option>
+                        <option value="出租">出租</option>
+                    </core:when>
+                    <core:otherwise>
+                        <option value="自住">自住</option>
+                        <option value="自身经营使用">自身经营使用</option>
+                        <option value="${personHousePropertyInfo.usedSitu}" selected="selected">出租</option>
+                    </core:otherwise>
+                </core:choose>
             </select>
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">建筑面积</td>
         <td align="left">
             <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="houseArea">
-                <option value="${personHousePropertyInfo.houseArea}">${personHousePropertyInfo.houseArea}</option>
+                <core:choose>
+                    <core:when test="${personHousePropertyInfo.houseArea=='100㎡内'}">
+                        <option value="${personHousePropertyInfo.houseArea}" selected="selected">100㎡内</option>
+                        <option value="100-300㎡">100-300㎡</option>
+                        <option value="300-500㎡">300-500㎡</option>
+                        <option value="500㎡以上">500㎡以上</option>
+                    </core:when>
+                    <core:when test="${personHousePropertyInfo.houseArea=='100-300㎡'}">
+                        <option >100㎡内</option>
+                        <option value="${personHousePropertyInfo.houseArea}" selected="selected">100-300㎡</option>
+                        <option value="300-500㎡">300-500㎡</option>
+                        <option value="500㎡以上">500㎡以上</option>
+                    </core:when>
+                    <core:when test="${personHousePropertyInfo.houseArea=='300-500㎡'}">
+                        <option value="100㎡内">100㎡内</option>
+                        <option value="100-300㎡">100-300㎡</option>
+                        <option value="${personHousePropertyInfo.houseArea}" selected="selected">300-500㎡</option>
+                        <option value="500㎡以上">500㎡以上</option>
+                    </core:when>
+                    <core:otherwise>
+                        <option value="100㎡内">100㎡内</option>
+                        <option value="100-300㎡">100-300㎡</option>
+                        <option value="300-500㎡">300-500㎡</option>
+                        <option value="${personHousePropertyInfo.houseArea}" selected="selected">500㎡以上</option>
+                    </core:otherwise>
+                </core:choose>
             </select>
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">房产价值</td>
         <td align="left">
             <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="houseWorth">
-                <option value="${personHousePropertyInfo.houseWorth}">${personHousePropertyInfo.houseWorth}</option>
+                <core:choose>
+                    <core:when test="${personHousePropertyInfo.houseWorth=='10万以内'}">
+                        <option value="${personHousePropertyInfo.houseWorth}" selected="selected">10万以内</option>
+                        <option value="10-30万">10-30万</option>
+                        <option value="30-60万">30-60万</option>
+                        <option value="60-100万">60-100万</option>
+                        <option value="100万以上">100万以上</option>
+                    </core:when>
+                    <core:when test="${personHousePropertyInfo.houseWorth=='10-30万'}">
+                        <option value="10万以内">10万以内</option>
+                        <option value="${personHousePropertyInfo.houseWorth}" selected="selected">10-30万</option>
+                        <option value="30-60万">30-60万</option>
+                        <option value="60-100万">60-100万</option>
+                        <option value="100万以上">100万以上</option>
+                    </core:when>
+                    <core:when test="${personHousePropertyInfo.houseWorth=='30-60万'}">
+                        <option value="10万以内">10万以内</option>
+                        <option value="10-30万">10-30万</option>
+                        <option value="${personHousePropertyInfo.houseWorth}" selected="selected">30-60万</option>
+                        <option value="60-100万">60-100万</option>
+                        <option value="100万以上">100万以上</option>
+                    </core:when>
+                    <core:when test="${personHousePropertyInfo.houseWorth=='60-100万'}">
+                        <option value="10万以内">10万以内</option>
+                        <option value="10-30万">10-30万</option>
+                        <option value="30-60万">30-60万</option>
+                        <option value="${personHousePropertyInfo.houseWorth}" selected="selected">60-100万</option>
+                        <option value="100万以上">100万以上</option>
+                    </core:when>
+                    <core:otherwise>
+                        <option value="10万以内">10万以内</option>
+                        <option value="10-30万">10-30万</option>
+                        <option value="30-60万">30-60万</option>
+                        <option value="60-100万">60-100万</option>
+                        <option value="${personHousePropertyInfo.houseWorth}" selected="selected">100万以上</option>
+                    </core:otherwise>
+                </core:choose>
             </select>
         </td>
     </tr>
@@ -1215,13 +1835,38 @@
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">是否按揭</td>
         <td align="left">
             <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="installment">
-                <option value="${personHousePropertyInfo.installment}">${personHousePropertyInfo.installment}</option>
+                <core:choose>
+                    <core:when test="${personHousePropertyInfo.installment=='1'}">
+                        <option value="${personHousePropertyInfo.installment}" selected="selected">是</option>
+                        <option value="0">否</option>
+                    </core:when>
+                    <core:otherwise>
+                        <option value="1">是</option>
+                        <option value="${personHousePropertyInfo.installment}" selected="selected">否</option>
+                    </core:otherwise>
+                </core:choose>
             </select>
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">是否办证</td>
         <td align="left">
             <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="hasCredentials">
-                <option value="${personHousePropertyInfo.hasCredentials}">${personHousePropertyInfo.hasCredentials}</option>
+                <core:choose>
+                    <core:when test="${personHousePropertyInfo.hasCredentials=='双证齐全'}">
+                        <option value="${personHousePropertyInfo.hasCredentials}" selected="selected">双证齐全</option>
+                        <option value="单土地证">单土地证</option>
+                        <option value="无办证">无办证</option>
+                    </core:when>
+                    <core:when test="${personHousePropertyInfo.hasCredentials=='双证齐全'}">
+                        <option value="双证齐全">双证齐全</option>
+                        <option value="${personHousePropertyInfo.hasCredentials}" selected="selected">单土地证</option>
+                        <option value="无办证">无办证</option>
+                    </core:when>
+                    <core:otherwise>
+                        <option value="双证齐全">双证齐全</option>
+                        <option value="单土地证">单土地证</option>
+                        <option value="${personHousePropertyInfo.hasCredentials}" selected="selected">无办证</option>
+                    </core:otherwise>
+                </core:choose>
             </select>
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">备注</td>
@@ -1243,7 +1888,32 @@
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">土地面积</td>
         <td align="left">
             <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="area">
-                <option value="${personLandInfo.area}">${personLandInfo.area}</option>
+                <core:choose>
+                    <core:when test="${personLandInfo.area=='100㎡内'}">
+                        <option value="${personLandInfo.area}" selected="selected">100㎡内</option>
+                        <option value="100-300㎡">100-300㎡</option>
+                        <option value="300-500㎡">300-500㎡</option>
+                        <option value="500㎡以上">500㎡以上</option>
+                    </core:when>
+                    <core:when test="${personLandInfo.area=='100-300㎡'}">
+                        <option >100㎡内</option>
+                        <option value="${personLandInfo.area}" selected="selected">100-300㎡</option>
+                        <option value="300-500㎡">300-500㎡</option>
+                        <option value="500㎡以上">500㎡以上</option>
+                    </core:when>
+                    <core:when test="${personLandInfo.area=='300-500㎡'}">
+                        <option value="100㎡内">100㎡内</option>
+                        <option value="100-300㎡">100-300㎡</option>
+                        <option value="${personLandInfo.area}" selected="selected">300-500㎡</option>
+                        <option value="500㎡以上">500㎡以上</option>
+                    </core:when>
+                    <core:otherwise>
+                        <option value="100㎡内">100㎡内</option>
+                        <option value="100-300㎡">100-300㎡</option>
+                        <option value="300-500㎡">300-500㎡</option>
+                        <option value="${personLandInfo.area}" selected="selected">500㎡以上</option>
+                    </core:otherwise>
+                </core:choose>
             </select>
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">土地价值</td>
@@ -1254,13 +1924,74 @@
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">土地性质</td>
         <td align="left">
             <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="property">
-                <option value="${personLandInfo.property}">${personLandInfo.property}</option>
+                <core:choose>
+                    <core:when test="${personLandInfo.property=='国有出让'}">
+                        <option value="${personLandInfo.property}" selected="selected">国有出让</option>
+                        <option value="国有划拨">国有划拨</option>
+                        <option value="集体证">集体证</option>
+                        <option value="无办证">无办证</option>
+                    </core:when>
+                    <core:when test="${personLandInfo.property=='国有划拨'}">
+                        <option value="国有出让">国有出让</option>
+                        <option value="${personLandInfo.property}" selected="selected">国有划拨</option>
+                        <option value="集体证">集体证</option>
+                        <option value="无办证">无办证</option>
+                    </core:when>
+                    <core:when test="${personLandInfo.property=='集体证'}">
+                        <option value="国有出让">国有出让</option>
+                        <option value="国有划拨">国有划拨</option>
+                        <option value="${personLandInfo.property}" selected="selected">集体证</option>
+                        <option value="无办证">无办证</option>
+                    </core:when>
+                    <core:otherwise>
+                        <option value="国有出让">国有出让</option>
+                        <option value="国有划拨">国有划拨</option>
+                        <option value="集体证">集体证</option>
+                        <option value="${personLandInfo.property}" selected="selected">无办证</option>
+                    </core:otherwise>
+                </core:choose>
             </select>
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">土地类型</td>
         <td align="left">
             <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="type">
-                <option value="${personLandInfo.type}">${personLandInfo.type}</option>
+                <core:choose>
+                    <core:when test="${personLandInfo.type=='商业地'}">
+                        <option value="${personLandInfo.type}" selected="selected">商业地</option>
+                        <option value="住宅用地">住宅用地</option>
+                        <option value="工业地">工业地</option>
+                        <option value="耕地">耕地</option>
+                        <option value="山地或滩涂">山地或滩涂</option>
+                    </core:when>
+                    <core:when test="${personLandInfo.type=='住宅用地'}">
+                        <option value="商业地">商业地</option>
+                        <option value="${personLandInfo.type}" selected="selected">住宅用地</option>
+                        <option value="工业地">工业地</option>
+                        <option value="耕地">耕地</option>
+                        <option value="山地或滩涂">山地或滩涂</option>
+                    </core:when>
+                    <core:when test="${personLandInfo.type=='工业地'}">
+                        <option value="商业地">商业地</option>
+                        <option value="住宅用地">住宅用地</option>
+                        <option value="${personLandInfo.type}" selected="selected">工业地</option>
+                        <option value="耕地">耕地</option>
+                        <option value="山地或滩涂">山地或滩涂</option>
+                    </core:when>
+                    <core:when test="${personLandInfo.type=='耕地'}">
+                        <option value="商业地">商业地</option>
+                        <option value="住宅用地">住宅用地</option>
+                        <option value="工业地">工业地</option>
+                        <option value="${personLandInfo.type}" selected="selected">耕地</option>
+                        <option value="山地或滩涂">山地或滩涂</option>
+                    </core:when>
+                    <core:otherwise>
+                        <option value="商业地">商业地</option>
+                        <option value="住宅用地">住宅用地</option>
+                        <option value="工业地">工业地</option>
+                        <option value="耕地">耕地</option>
+                        <option value="${personLandInfo.type}" selected="selected">山地或滩涂</option>
+                    </core:otherwise>
+                </core:choose>
             </select>
         </td>
     </tr>
@@ -1268,14 +1999,47 @@
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">土地使用情况</td>
         <td align="left">
             <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="usedSitu">
-                <option value="${personLandInfo.usedSitu}">专业技术人员</option>
-                <option value="${personLandInfo.usedSitu}">其他</option>
+                <core:choose>
+                    <core:when test="${personLandInfo.usedSitu=='自用'}">
+                        <option value="${personLandInfo.usedSitu}" selected="selected">自用</option>
+                        <option value="出借">出借</option>
+                        <option value="出租">出租</option>
+                        <option value="未使用">未使用</option>
+                    </core:when>
+                    <core:when test="${personLandInfo.usedSitu=='出借'}">
+                        <option value="自用">自用</option>
+                        <option value="${personLandInfo.usedSitu}" selected="selected">出借</option>
+                        <option value="出租">出租</option>
+                        <option value="未使用">未使用</option>
+                    </core:when>
+                    <core:when test="${personLandInfo.usedSitu=='出租'}">
+                        <option value="自用">自用</option>
+                        <option value="出借">出借</option>
+                        <option value="${personLandInfo.usedSitu}" selected="selected">出租</option>
+                        <option value="未使用">未使用</option>
+                    </core:when>
+                    <core:otherwise>
+                        <option value="自用">自用</option>
+                        <option value="出借">出借</option>
+                        <option value="出租">出租</option>
+                        <option value="${personLandInfo.usedSitu}" selected="selected">未使用</option>
+                    </core:otherwise>
+                </core:choose>
             </select>
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">土地款是否结清</td>
         <td align="left" colspan="5">
             <select class="selectpicker" style="width: 465px; margin-top: 5px;" name="moneyClear">
-                <option value="${personLandInfo.moneyClear}">${personLandInfo.moneyClear}</option>
+                <core:choose>
+                    <core:when test="${personLandInfo.moneyClear=='1'}">
+                        <option value="${personLandInfo.moneyClear}" selected="selected">是</option>
+                        <option value="0">否</option>
+                    </core:when>
+                    <core:otherwise>
+                        <option value="1">是</option>
+                        <option value="${personLandInfo.moneyClear}" selected="selected">否</option>
+                    </core:otherwise>
+                </core:choose>
             </select>
         </td>
     </tr>
@@ -1292,25 +2056,104 @@
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">情况</td>
         <td align="left">
             <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="carsInfo">
-                <option value="${personCarsInfo.carsInfo}">${personCarsInfo.carsInfo}</option>
+                <core:choose>
+                    <core:when test="${personCarsInfo.carsInfo=='轿车'}">
+                        <option value="${personCarsInfo.carsInfo}" selected="selected">轿车</option>
+                        <option value="货车">货车</option>
+                    </core:when>
+                    <core:otherwise>
+                        <option value="轿车">轿车</option>
+                        <option value="${personCarsInfo.carsInfo}" selected="selected">货车</option>
+                    </core:otherwise>
+                </core:choose>
             </select>
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">车辆价值</td>
         <td align="left">
             <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="carsWorth">
-                <option value="${personCarsInfo.carsWorth}">${personCarsInfo.carsWorth}</option>
+                <core:choose>
+                    <core:when test="${personCarsInfo.carsWorth=='10万以内'}">
+                        <option value="${personCarsInfo.carsWorth}" selected="selected">10万以内</option>
+                        <option value="10-30万">10-30万</option>
+                        <option value="30-50万">30-50万</option>
+                        <option value="50万以上">50万以上</option>
+                    </core:when>
+                    <core:when test="${personCarsInfo.carsWorth=='10-30万'}">
+                        <option value="10万以内">10万以内</option>
+                        <option value="${personCarsInfo.carsWorth}" selected="selected">10-30万</option>
+                        <option value="30-50万">30-50万</option>
+                        <option value="50万以上">50万以上</option>
+                    </core:when>
+                    <core:when test="${personCarsInfo.carsWorth=='30-50万'}">
+                        <option value="10万以内">10万以内</option>
+                        <option value="10-30万">10-30万</option>
+                        <option value="${personCarsInfo.carsWorth}" selected="selected">30-50万</option>
+                        <option value="50万以上">50万以上</option>
+                    </core:when>
+                    <core:otherwise>
+                        <option value="10万以内">10万以内</option>
+                        <option value="10-30万">10-30万</option>
+                        <option value="30-50万">30-50万</option>
+                        <option value="${personCarsInfo.carsWorth}" selected="selected">50万以上</option>
+                    </core:otherwise>
+                </core:choose>
             </select>
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">是否按揭</td>
         <td align="left">
             <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="carsIsInstallment">
-                <option value="${personCarsInfo.carsIsInstallment}">${personCarsInfo.carsIsInstallment}</option>
+                <core:choose>
+                    <core:when test="${personCarsInfo.carsIsInstallment=='1'}">
+                        <option value="${personCarsInfo.carsIsInstallment}" selected="selected">是</option>
+                        <option value="0">否</option>
+                    </core:when>
+                    <core:otherwise>
+                        <option value="1">是</option>
+                        <option value="${personCarsInfo.carsIsInstallment}" selected="selected">否</option>
+                    </core:otherwise>
+                </core:choose>
             </select>
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">使用情况</td>
         <td align="left">
             <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="carsUsingInfo">
-                <option value="${personCarsInfo.carsUsingInfo}">${personCarsInfo.carsUsingInfo}</option>
+                <core:choose>
+                    <core:when test="${personCarsInfo.carsUsingInfo=='营运'}">
+                        <option value="${personCarsInfo.carsUsingInfo}" selected="selected">营运</option>
+                        <option value="出租">出租</option>
+                        <option value="闲置">闲置</option>
+                        <option value="自用">自用</option>
+                        <option value="其他">其他</option>
+                    </core:when>
+                    <core:when test="${personCarsInfo.carsUsingInfo=='出租'}">
+                        <option value="营运<">营运</option>
+                        <option value="${personCarsInfo.carsUsingInfo}" selected="selected">出租</option>
+                        <option value="闲置">闲置</option>
+                        <option value="自用">自用</option>
+                        <option value="其他">其他</option>
+                    </core:when>
+                    <core:when test="${personCarsInfo.carsUsingInfo=='闲置'}">
+                        <option value="营运<">营运</option>
+                        <option value="出租">出租</option>
+                        <option value="${personCarsInfo.carsUsingInfo}" selected="selected">闲置</option>
+                        <option value="自用">自用</option>
+                        <option value="其他">其他</option>
+                    </core:when>
+                    <core:when test="${personCarsInfo.carsUsingInfo=='自用'}">
+                        <option value="营运<">营运</option>
+                        <option value="出租">出租</option>
+                        <option value="闲置">闲置</option>
+                        <option value="${personCarsInfo.carsUsingInfo}" selected="selected">自用</option>
+                        <option value="其他">其他</option>
+                    </core:when>
+                    <core:otherwise>
+                        <option value="营运">营运</option>
+                        <option value="出租">出租</option>
+                        <option value="闲置">闲置</option>
+                        <option value="自用">自用</option>
+                        <option value="${personCarsInfo.carsUsingInfo}" selected="selected">其他</option>
+                    </core:otherwise>
+                </core:choose>
             </select>
         </td>
     </tr>
@@ -1350,13 +2193,85 @@
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">我社存款</td>
         <td align="left">
             <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="depositOurBank">
-                <option value="${personFinancialAssets.depositOurBank}">${personFinancialAssets.depositOurBank}</option>
+                <core:choose>
+                    <core:when test="${personFinancialAssets.depositOurBank=='3万元内'}">
+                        <option value="${personFinancialAssets.depositOurBank}" selected="selected">3万元内</option>
+                        <option value="3-10万元内">3-10万元内</option>
+                        <option value="10-30万元内">10-30万元内</option>
+                        <option value="30-100万元内">30-100万元内</option>
+                        <option value="100万元以上">100万元以上</option>
+                    </core:when>
+                    <core:when test="${personFinancialAssets.depositOurBank=='3-10万元内'}">
+                        <option value="3万元内">3万元内</option>
+                        <option value="${personFinancialAssets.depositOurBank}" selected="selected">3-10万元内</option>
+                        <option value="10-30万元内">10-30万元内</option>
+                        <option value="30-100万元内">30-100万元内</option>
+                        <option value="100万元以上">100万元以上</option>
+                    </core:when>
+                    <core:when test="${personFinancialAssets.depositOurBank=='10-30万元内'}">
+                        <option value="3万元内">3万元内</option>
+                        <option value="3-10万元内">3-10万元内</option>
+                        <option value="${personFinancialAssets.depositOurBank}" selected="selected">10-30万元内</option>
+                        <option value="30-100万元内">30-100万元内</option>
+                        <option value="100万元以上">100万元以上</option>
+                    </core:when>
+                    <core:when test="${personFinancialAssets.depositOurBank=='30-100万元内'}">
+                        <option value="3万元内">3万元内</option>
+                        <option value="3-10万元内">3-10万元内</option>
+                        <option value="10-30万元内">10-30万元内</option>
+                        <option value="${personFinancialAssets.depositOurBank}" selected="selected">30-100万元内</option>
+                        <option value="100万元以上">100万元以上</option>
+                    </core:when>
+                    <core:otherwise>
+                        <option value="10万以内">10万以内</option>
+                        <option value="10-30万">10-30万</option>
+                        <option value="30-60万">30-60万</option>
+                        <option value="60-100万">60-100万</option>
+                        <option value="${personFinancialAssets.depositOurBank}" selected="selected">100万以上</option>
+                    </core:otherwise>
+                </core:choose>
             </select>
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">他行存款</td>
         <td align="left">
             <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="depositOtherBank">
-                <option value="${personFinancialAssets.depositOtherBank}">${personFinancialAssets.depositOtherBank}</option>
+                <core:choose>
+                    <core:when test="${personFinancialAssets.depositOtherBank=='3万元内'}">
+                        <option value="${personFinancialAssets.depositOtherBank}" selected="selected">3万元内</option>
+                        <option value="3-10万元内">3-10万元内</option>
+                        <option value="10-30万元内">10-30万元内</option>
+                        <option value="30-100万元内">30-100万元内</option>
+                        <option value="100万元以上">100万元以上</option>
+                    </core:when>
+                    <core:when test="${personFinancialAssets.depositOtherBank=='3-10万元内'}">
+                        <option value="3万元内">3万元内</option>
+                        <option value="${personFinancialAssets.depositOtherBank}" selected="selected">3-10万元内</option>
+                        <option value="10-30万元内">10-30万元内</option>
+                        <option value="30-100万元内">30-100万元内</option>
+                        <option value="100万元以上">100万元以上</option>
+                    </core:when>
+                    <core:when test="${personFinancialAssets.depositOtherBank=='10-30万元内'}">
+                        <option value="3万元内">3万元内</option>
+                        <option value="3-10万元内">3-10万元内</option>
+                        <option value="${personFinancialAssets.depositOtherBank}" selected="selected">10-30万元内</option>
+                        <option value="30-100万元内">30-100万元内</option>
+                        <option value="100万元以上">100万元以上</option>
+                    </core:when>
+                    <core:when test="${personFinancialAssets.depositOtherBank=='30-100万元内'}">
+                        <option value="3万元内">3万元内</option>
+                        <option value="3-10万元内">3-10万元内</option>
+                        <option value="10-30万元内">10-30万元内</option>
+                        <option value="${personFinancialAssets.depositOtherBank}" selected="selected">30-100万元内</option>
+                        <option value="100万元以上">100万元以上</option>
+                    </core:when>
+                    <core:otherwise>
+                        <option value="10万以内">10万以内</option>
+                        <option value="10-30万">10-30万</option>
+                        <option value="30-60万">30-60万</option>
+                        <option value="60-100万">60-100万</option>
+                        <option value="${personFinancialAssets.depositOtherBank}" selected="selected">100万以上</option>
+                    </core:otherwise>
+                </core:choose>
             </select>
         </td>
     </tr>
@@ -1425,13 +2340,74 @@
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">与户主关系</td>
         <td align="left">
             <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="leaderRelation">
-                <option value="${personFamilyMember.leaderRelation}">${personFamilyMember.leaderRelation}</option>
+                <core:choose>
+                    <core:when test="${personFamilyMember.leaderRelation=='配偶'}">
+                        <option value="${personFamilyMember.leaderRelation}" selected="selected">配偶</option>
+                        <option value="父母">父母</option>
+                        <option value="子女">子女</option>
+                        <option value="其他血亲">其他血亲</option>
+                        <option value="其他姻亲">其他姻亲</option>
+                    </core:when>
+                    <core:when test="${personFamilyMember.leaderRelation=='父母'}">
+                        <option value="配偶">配偶</option>
+                        <option value="${personFamilyMember.leaderRelation}" selected="selected">父母</option>
+                        <option value="子女">子女</option>
+                        <option value="其他血亲">其他血亲</option>
+                        <option value="其他姻亲">其他姻亲</option>
+                    </core:when>
+                    <core:when test="${personFamilyMember.leaderRelation=='子女'}">
+                        <option value="配偶">配偶</option>
+                        <option value="父母">父母</option>
+                        <option value="${personFamilyMember.leaderRelation}" selected="selected">子女</option>
+                        <option value="其他血亲">其他血亲</option>
+                        <option value="其他姻亲">其他姻亲</option>
+                    </core:when>
+                    <core:when test="${personFamilyMember.leaderRelation=='其他血亲'}">
+                        <option value="配偶">配偶</option>
+                        <option value="父母">父母</option>
+                        <option value="子女">子女</option>
+                        <option value="${personFamilyMember.leaderRelation}" selected="selected">其他血亲</option>
+                        <option value="其他姻亲">其他姻亲</option>
+                    </core:when>
+                    <core:otherwise>
+                        <option value="配偶">配偶</option>
+                        <option value="父母">父母</option>
+                        <option value="子女">子女</option>
+                        <option value="其他血亲">其他血亲</option>
+                        <option value="${personFamilyMember.leaderRelation}" selected="selected">其他姻亲</option>
+                    </core:otherwise>
+                </core:choose>
             </select>
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">常住地址</td>
         <td align="left">
             <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="address">
-                <option value="${personFamilyMember.address}">${personFamilyMember.address}</option>
+                <core:choose>
+                    <core:when test="${personFamilyMember.address=='本市'}">
+                        <option value="${personFamilyMember.address}" selected="selected">本市</option>
+                        <option value="本地区">本地区</option>
+                        <option value="省内地区">省内地区</option>
+                        <option value="省外">省外</option>
+                    </core:when>
+                    <core:when test="${personFamilyMember.address=='本地区'}">
+                        <option value="本市">本市</option>
+                        <option value="${personFamilyMember.address}" selected="selected">本地区</option>
+                        <option value="省内地区">省内地区</option>
+                        <option value="省外">省外</option>
+                    </core:when>
+                    <core:when test="${personFamilyMember.address=='省内地区'}">
+                        <option value="本市">本市</option>
+                        <option value="本地区">本地区</option>
+                        <option value="${personFamilyMember.address}" selected="selected">省内地区</option>
+                        <option value="省外">省外</option>
+                    </core:when>
+                    <core:otherwise>
+                        <option value="本市">本市</option>
+                        <option value="本地区">本地区</option>
+                        <option value="省内地区">省内地区</option>
+                        <option value="${personFamilyMember.address}" selected="selected">省外</option>
+                    </core:otherwise>
+                </core:choose>
             </select>
         </td>
     </tr>
@@ -1439,6 +2415,10 @@
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">职业</td>
         <td align="left" colspan="3">
             <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="profession">
+
+
+
+
                 <option value="${personFamilyMember.profession}">${personFamilyMember.profession}</option>
             </select>
         </td>
@@ -1932,10 +2912,32 @@
     </td>
     <td width="73%" align="left">
         <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="truth">
-            <option value="${villageManagerEvaList.truth}">基本准确</option>
-            <option value="">有所保留</option>
-            <option value="">有一定差距</option>
-            <option value="">有较大差距</option>
+            <core:choose>
+                <core:when test="${villageManagerEvaList.truth=='基本准确'}">
+                    <option value="${villageManagerEvaList.truth}" selected="selected">基本准确</option>
+                    <option value="有所保留">有所保留</option>
+                    <option value="有一定差距">有一定差距</option>
+                    <option value="有较大差距">有较大差距</option>
+                </core:when>
+                <core:when test="${villageManagerEvaList.truth=='有所保留'}">
+                    <option value="基本准确">基本准确</option>
+                    <option value="${villageManagerEvaList.truth}" selected="selected">有所保留</option>
+                    <option value="有一定差距">有一定差距</option>
+                    <option value="有较大差距">有较大差距</option>
+                </core:when>
+                <core:when test="${villageManagerEvaList.truth=='有一定差距'}">
+                    <option value="基本准确">基本准确</option>
+                    <option value="有所保留">有所保留</option>
+                    <option value="${villageManagerEvaList.truth}" selected="selected">有一定差距</option>
+                    <option value="有较大差距">有较大差距</option>
+                </core:when>
+                <core:otherwise>
+                    <option value="基本准确">基本准确</option>
+                    <option value="有所保留">有所保留</option>
+                    <option value="有一定差距">有一定差距</option>
+                    <option value="${villageManagerEvaList.truth}" selected="selected">有较大差距</option>
+                </core:otherwise>
+            </core:choose>
         </select>
     </td>
 </tr>
@@ -1945,8 +2947,16 @@
     </td>
     <td align="left">
         <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="localLivingTime">
-            <option value="${villageManagerEvaList.localLivingTime}">5年（含）以下</option>
-            <option value="">6年（含）以上</option>
+            <core:choose>
+                <core:when test="${villageManagerEvaList.localLivingTime=='5年(含)以下'}">
+                    <option value="${villageManagerEvaList.localLivingTime}" selected="selected">5年（含）以下</option>
+                    <option value="6年(含)以上">6年（含）以上</option>
+                </core:when>
+                <core:otherwise>
+                    <option value="5年(含)以下">5年（含）以下</option>
+                    <option value="${villageManagerEvaList.localLivingTime}" selected="selected">6年（含）以上</option>
+                </core:otherwise>
+            </core:choose>
         </select>
     </td>
 </tr>

@@ -124,3 +124,8 @@ a.close-own {
 a.close-own:hover {
     background-position: left -46px
 }
+
+.photo {
+    max-height: 200px;
+    max-width: 300px;
+}

@@ -1,13 +1,12 @@
 package com.rcuinfomanager.webservice;
 
-import com.rcuinfomanager.util.ImageStore;
+import com.rcuinfomanager.util.ImageUtils;
 import com.rcuinfomanager.webservice.model.WebResponseData;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,7 +36,7 @@ public class UploadImageWebService {
                         parseRequest(request);
                 for (FileItem item : fileItems) {
                     if (!item.isFormField()) {
-                        ImageStore.storeImage(cerNum,imgStoreDir, item.getName(), item.getInputStream());
+                        ImageUtils.storeImage(cerNum, imgStoreDir, item.getName(), item.getInputStream());
                     }
                 }
             } catch (FileUploadException e) {

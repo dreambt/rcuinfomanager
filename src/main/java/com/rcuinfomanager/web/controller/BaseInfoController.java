@@ -1,6 +1,7 @@
 package com.rcuinfomanager.web.controller;
 
 
+import com.rcuinfomanager.model.CusBaseInfo;
 import com.rcuinfomanager.model.LogsInfo;
 import com.rcuinfomanager.service.BaseInfoService;
 import com.rcuinfomanager.service.ExportInfo2VillagerCommittee4Estimation;
@@ -10,6 +11,7 @@ import com.rcuinfomanager.session.SessionUser;
 import com.rcuinfomanager.session.UserSessionContext;
 import com.rcuinfomanager.session.UserSessionContextHolder;
 import com.rcuinfomanager.util.Files;
+import com.rcuinfomanager.util.ImageUtils;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -42,6 +44,8 @@ public class BaseInfoController {
     @Autowired
     ExportInfo2VillagerCommittee4Estimation exportInfo2VillagerCommittee4Estimation;
 
+    private  /*@Value("${images.store.dir}")*/ String imgStoreDir = "d:/tmp";
+
     //查看
     @RequestMapping(value = "/{id}")
     public String show(@PathVariable long id, Map map) {
@@ -57,7 +61,9 @@ public class BaseInfoController {
         map.put("displayUserName", sessionUser.getDisplayUserName());
         map.put("personInfoList", baseInfoService.getPersonBasicInfo(id));
         //基础概况信息
-        map.put("personBasicList", baseInfoService.getCusBasicInfo(id));
+
+        CusBaseInfo cusBasicInfo = baseInfoService.getCusBasicInfo(id);
+        map.put("personBasicList", cusBasicInfo);
         //家庭收支情况
         map.put("personIncomeExpensesList", baseInfoService.getIncomeExpenses(id));
         // 家庭资产情况
@@ -80,7 +86,11 @@ public class BaseInfoController {
         map.put("villageManagerEvaList", baseInfoService.getVillageManagerEvaList());
         //四
         map.put("customerManagerEvaList", baseInfoService.getCustomerManagerEvaList());
-
+        if (cusBasicInfo != null) {
+            map.put("imgList", ImageUtils.getFileNames(cusBasicInfo.getCerNum(),imgStoreDir));
+        } else {
+            map.put("imgList", null);
+        }
 
         return "farmer/show";
     }
@@ -327,7 +337,7 @@ public class BaseInfoController {
         try {
             String fileName = Files.encodeFilename("家庭成员.csv", request);
             response.setCharacterEncoding("UTF-8");
-            response.setHeader("Content-Disposition", "attachment; filename="+fileName);
+            response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
             writer = new BufferedWriter(response.getWriter());
             importFarmerInfoService.exportBaseInfo4Member(recordIds, writer);
         } catch (IOException e) {

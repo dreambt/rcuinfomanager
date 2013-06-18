@@ -11,9 +11,11 @@
     <link href="/asserts/css/doc.css" rel="stylesheet" media="screen">
     <link href="/asserts/css/style.css" rel="stylesheet" media="screen">
     <link id="artDialog-skin" href="/asserts/js/dialog/skins/opera.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/asserts/css/jquery.fancybox.css"/>
     <script src="/asserts/js/jquery-1.7.2.min.js"></script>
     <script src="/asserts/js/bootstrap.min.js"></script>
     <script src="/asserts/js/dialog/artDialog.js"></script>
+    <script src="/asserts/js/jquery.fancybox.js"></script>
     <script type="text/javascript">
         $(function(){
 
@@ -50,6 +52,20 @@
             $('#editor').click(function(){
                 var url = '/family/edit/'+id;
                 window.location.href=url;
+            });
+
+            $('#photo').click(function(){
+                var imgs = new Array()
+                $(".img").each(function( index,element ) {
+                    imgs[index] = $(element).attr('img')
+                });
+                $.fancybox(imgs, {
+                    'padding'			: 0,
+                    'transitionIn'		: 'none',
+                    'transitionOut'		: 'none',
+                    'type'              : 'image',
+                    'changeFade'        : 0
+                });
             });
 
         });
@@ -342,12 +358,20 @@
         </core:otherwise>
     </core:choose>
     <core:choose>
-        <core:when test="${empty personBasicList.photoUri}">
+        <core:when test="${empty imgList}">
             <td align="center" colspan="2" rowspan="4">&nbsp;</td>
         </core:when>
         <core:otherwise>
             <td align="center" colspan="2" rowspan="4">
-                <img src="${personBasicList.photoUri}" class="img-rounded">
+                <%--<ul id="pikame">
+                    <core:forEach items="${imgList}" var="img" varStatus="idx">
+                        <li><img src="/img/${img}" class="img-rounded photo"></li>
+                    </core:forEach>
+                </ul>--%>
+                    <core:forEach items="${imgList}" var="img" varStatus="idx">
+                        <div style="hidden" img="/img/${img}" class="img"></div>
+                    </core:forEach>
+                    <img id="photo" src="/img/${imgList[0]}" class="img-rounded photo">
             </td>
         </core:otherwise>
     </core:choose>

@@ -18,7 +18,7 @@
         $(function(){
             if(${needModifyPassword}){
                 if(confirm('第一次登录，是否需要修改密码？')){
-                    var url='systemAccount/editAccount';
+                    var url='/systemAccount/editAccount';
                     window.top.artDialog({
                         id: 'editAccount',
                         title: '修改帐号',

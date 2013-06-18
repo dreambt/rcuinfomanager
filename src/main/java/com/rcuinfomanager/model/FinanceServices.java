@@ -23,6 +23,10 @@ public class FinanceServices {
     private String privateLoan;
     private String note1;
 
+    public FinanceServices(){
+
+    }
+
     public Long getRecordId() {
         return recordId;
     }

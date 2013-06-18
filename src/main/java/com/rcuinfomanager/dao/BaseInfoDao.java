@@ -58,7 +58,7 @@ public interface BaseInfoDao {
     //指派用户信息
     List<AllColumnInfo> queryAppointInfoByUserId(long userId);
     //指派
-    List<AppointInfo> getAppointInfoList(long id);
+    AppointInfo getAppointInfoList(long id);
     //保存指派
     void saveAppointInfo(@Param("id")long id,@Param("userId")long userId);
     //获取userName
@@ -109,11 +109,12 @@ public interface BaseInfoDao {
     int getStatusByCerNum(String cerNum);
 
     //二
-    FinanceServices getFinanceServicesList();
+    FinanceServices getFinanceServicesList(long id);
+    List getUsedProduct(long id);
     //三
-    VillageManagerEva getVillageManagerEvaList();
+    VillageManagerEva getVillageManagerEvaList(long id);
     //四
-    CustomerManagerEva getCustomerManagerEvaList();
+    CustomerManagerEva getCustomerManagerEvaList(long id);
 
     BaseInfo getBaseInfoByRecordId(long recordId);
 

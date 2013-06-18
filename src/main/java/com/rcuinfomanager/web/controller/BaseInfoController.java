@@ -81,11 +81,11 @@ public class BaseInfoController {
         //家庭成员
         map.put("personFamilyMemberList", baseInfoService.getFamilyMember(id));
         //二
-        map.put("financeService", baseInfoService.getFinanceService());
+        map.put("financeService", baseInfoService.getFinanceService(id));
         //三
-        map.put("villageManagerEvaList", baseInfoService.getVillageManagerEvaList());
+        map.put("villageManagerEvaList", baseInfoService.getVillageManagerEvaList(id));
         //四
-        map.put("customerManagerEvaList", baseInfoService.getCustomerManagerEvaList());
+        map.put("customerManagerEvaList", baseInfoService.getCustomerManagerEvaList(id));
         if (cusBasicInfo != null) {
             map.put("imgList", ImageUtils.getFileNames(cusBasicInfo.getCerNum(),imgStoreDir));
         } else {
@@ -207,11 +207,11 @@ public class BaseInfoController {
         //家庭成员
         map.put("personFamilyMemberList", baseInfoService.getFamilyMember(id));
         //二
-        map.put("financeServicesLists", baseInfoService.getFinanceService());
+        map.put("financeServicesLists", baseInfoService.getFinanceService(id));
         //三
-        map.put("villageManagerEvaList", baseInfoService.getVillageManagerEvaList());
+        map.put("villageManagerEvaList", baseInfoService.getVillageManagerEvaList(id));
         //四
-        map.put("customerManagerEvaList", baseInfoService.getCustomerManagerEvaList());
+        map.put("customerManagerEvaList", baseInfoService.getCustomerManagerEvaList(id));
 
         return "farmer/edit";
     }

@@ -22,8 +22,12 @@
             $('#okOperate').click(function () {
                 var id = $('#recordId').val();
                 var uid =$('#userId').val();
-                var url = '/family/saveAppoint/'+id+'/'+uid;
-                window.location.href = url;
+                if(uid && uid!=''){
+                    var url = '/family/saveAppoint/'+id+'/'+uid;
+                    window.location.href = url;
+                }else{
+                    alert("指定客户经理不能为空！");
+                }
             });
 
             //关闭
@@ -45,15 +49,13 @@
 <form method="post">
     <table width="100%" border="0">
         <tbody>
-        <core:forEach items="${appointList}" var="appointPeople">
-            <input type="hidden" id="recordId" name="recordId" value="${appointPeople.recordId}">
+            <input type="hidden" id="recordId" name="recordId" value="${appoint.recordId}">
             <tr>
                 <td><span class="label label-info">户主：</span></td>
-                <td>${appointPeople.customerName}</td>
+                <td>${appoint.customerName}</td>
                 <td><span class="label label-info">电话：</span></td>
-                <td>${appointPeople.telephone}</td>
+                <td>${appoint.telephone}</td>
             </tr>
-        </core:forEach>
         <tr>
             <td align="left" colspan="2">
                 <span class="label label-info">指派给：</span>

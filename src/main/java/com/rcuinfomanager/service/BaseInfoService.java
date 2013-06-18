@@ -96,7 +96,7 @@ public class BaseInfoService {
     }
 
     //指派
-    public List<AppointInfo> getAppointInfoList(long id){
+    public AppointInfo getAppointInfoList(long id){
         return baseInfoDao.getAppointInfoList(id);
     }
     //保存指派
@@ -210,16 +210,19 @@ public class BaseInfoService {
     }
 
     //二
-    public FinanceServices getFinanceService(){
-        return baseInfoDao.getFinanceServicesList();
+    public FinanceServices getFinanceService(long id){
+        return baseInfoDao.getFinanceServicesList(id);
+    }
+    public List getUsedProduct(long id){
+        return baseInfoDao.getUsedProduct(id);
     }
     //三
-    public VillageManagerEva getVillageManagerEvaList(){
-        return baseInfoDao.getVillageManagerEvaList();
+    public VillageManagerEva getVillageManagerEvaList(long id){
+        return baseInfoDao.getVillageManagerEvaList(id);
     }
     //四
-    public CustomerManagerEva getCustomerManagerEvaList(){
-        return baseInfoDao.getCustomerManagerEvaList();
+    public CustomerManagerEva getCustomerManagerEvaList(long id){
+        return baseInfoDao.getCustomerManagerEvaList(id);
     }
 
     public List<Long> getAllHouseholdInfos() {

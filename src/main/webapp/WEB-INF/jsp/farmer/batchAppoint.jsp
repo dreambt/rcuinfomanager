@@ -21,8 +21,13 @@
             //确定
             $('#addOpera').click(function () {
                 var uid =$('#userId').val();
-                var url = '/family/saveBatchAppoint/'+recordIds+'/'+uid ;
-                window.location.href = url;
+                if(uid && uid!=''){
+                    var url = '/family/saveBatchAppoint/'+recordIds+'/'+uid ;
+                    window.location.href = url;
+                }else{
+                    alert("指定经理不能为空！");
+                }
+
             });
 
             //关闭

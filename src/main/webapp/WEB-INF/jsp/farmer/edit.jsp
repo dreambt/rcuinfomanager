@@ -2445,40 +2445,48 @@
         您目前使用我行（社）的哪些产品
     </td>
     <td align="left" colspan="3">
-        <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox19" value="option1"> 存款
-        </label>
-        <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox20" value="option2"> 贷款
-        </label>
-        <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox21" value="option3"> 信用卡
-        </label>
-        <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox22" value="option1"> POS机
-        </label>
-        <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox23" value="option2"> 保管箱
-        </label>
-        <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox24" value="option3"> 网上银行
-        </label>
-        <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox25" value="option1"> 居家银行
-        </label>
-        <br>
-        <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox26" value="option2"> 短信银行
-        </label>
-        <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox27" value="option3"> 电话银行
-        </label>
-        <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox28" value="option2"> 手机银行
-        </label>
-        <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox29" value="option3"> 其他
-        </label>
+        <core:choose>
+            <core:when test="${usedProducts=='存款'&& usedProducts=='贷款' && usedProducts=='信用卡' && usedProducts=='POS机' && usedProducts=='保管箱'
+            && usedProducts=='网上银行' && usedProducts=='居家银行' && usedProducts=='短信银行' && usedProducts=='电话银行' && usedProducts=='手机银行' && usedProducts=='其他'}">
+                <label class="checkbox inline">
+                    <input type="checkbox" id="inlineCheckbox19" value="option1" name="" checked="checked"> 存款
+                </label>
+                <label class="checkbox inline">
+                    <input type="checkbox" id="inlineCheckbox20" value="option2" name="" checked="checked"> 贷款
+                </label>
+                <label class="checkbox inline">
+                    <input type="checkbox" id="inlineCheckbox21" value="option3" name="" checked="checked"> 信用卡
+                </label>
+                <label class="checkbox inline">
+                    <input type="checkbox" id="inlineCheckbox22" value="option1" name="" checked="checked"> POS机
+                </label>
+                <label class="checkbox inline">
+                    <input type="checkbox" id="inlineCheckbox23" value="option2" name="" checked="checked"> 保管箱
+                </label>
+                <label class="checkbox inline">
+                    <input type="checkbox" id="inlineCheckbox24" value="option3" name="" checked="checked"> 网上银行
+                </label>
+                <label class="checkbox inline">
+                    <input type="checkbox" id="inlineCheckbox25" value="option1" name="" checked="checked"> 居家银行
+                </label>
+                <br>
+                <label class="checkbox inline">
+                    <input type="checkbox" id="inlineCheckbox26" value="option2" name="" checked="checked"> 短信银行
+                </label>
+                <label class="checkbox inline">
+                    <input type="checkbox" id="inlineCheckbox27" value="option3" name="" checked="checked"> 电话银行
+                </label>
+                <label class="checkbox inline">
+                    <input type="checkbox" id="inlineCheckbox28" value="option2" name="" checked="checked"> 手机银行
+                </label>
+                <label class="checkbox inline">
+                    <input type="checkbox" id="inlineCheckbox29" value="option3" name="" checked="checked"> 其他
+                </label>
+            </core:when>
+            <core:otherwise>
+
+            </core:otherwise>
+        </core:choose>
     </td>
 </tr>
 <tr>
@@ -2507,7 +2515,7 @@
 </tr>
 <tr>
     <td align="center" rowspan="3" bgcolor="#b4d8ed" style="color:#161823">
-        如果需要贷款的话，您计划用这笔贷款做什么？
+        如果需要贷款的话,您计划用这笔贷款做什么？
     </td>
     <td align="left" rowspan="3">
         <label class="checkbox inline" style="width: 125px; margin-top: 5px;">
@@ -2619,7 +2627,7 @@
             <input type="checkbox" id="inlineCheckbox51" value="option3"> 信用卡办理
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox52" value="option3"> 个人理财服务，需要
+            <input type="checkbox" id="inlineCheckbox52" value="option3"> 个人理财服务,需要
         </label>
         <input type="text" name="" value=""
                style="width: 55px;height: 25px; margin-top: 5px;">项目
@@ -2627,7 +2635,7 @@
 </tr>
 <tr>
     <td align="center"  colspan="2" bgcolor="#b4d8ed" style="color:#161823">
-        除了上述业务，您还需要哪些服务？
+        除了上述业务,您还需要哪些服务？
     </td>
     <td align="left" colspan="2">
         <label class="checkbox inline" style="width: 155px; margin-top: 5px;">
@@ -2949,12 +2957,12 @@
         <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="localLivingTime">
             <core:choose>
                 <core:when test="${villageManagerEvaList.localLivingTime=='5年(含)以下'}">
-                    <option value="${villageManagerEvaList.localLivingTime}" selected="selected">5年（含）以下</option>
-                    <option value="6年(含)以上">6年（含）以上</option>
+                    <option value="${villageManagerEvaList.localLivingTime}" selected="selected">5年(含)以下</option>
+                    <option value="6年(含)以上">6年(含)以上</option>
                 </core:when>
                 <core:otherwise>
-                    <option value="5年(含)以下">5年（含）以下</option>
-                    <option value="${villageManagerEvaList.localLivingTime}" selected="selected">6年（含）以上</option>
+                    <option value="5年(含)以下">5年(含)以下</option>
+                    <option value="${villageManagerEvaList.localLivingTime}" selected="selected">6年(含)以上</option>
                 </core:otherwise>
             </core:choose>
         </select>
@@ -2966,10 +2974,32 @@
     </td>
     <td width="73%" align="left">
         <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="operatingCapacity">
-            <option value="${villageManagerEvaList.operatingCapacity}">经验丰富，技术水平高，能力强</option>
-            <option value="">经验丰富，技术水平高，能力较强</option>
-            <option value="">经验、技术水和能力均一般</option>
-            <option value="">经验较欠缺，技术水平和能力较低</option>
+            <core:choose>
+                <core:when test="${villageManagerEvaList.operatingCapacity=='经验丰富,技术水平高,能力强'}">
+                    <option value="${villageManagerEvaList.operatingCapacity}" selected="selected">经验丰富,技术水平高,能力强</option>
+                    <option value="经验丰富,技术水平高,能力较强">经验丰富,技术水平高,能力较强</option>
+                    <option value="经验,技术水和能力均一般">经验,技术水和能力均一般</option>
+                    <option value="经验较欠缺,技术水平和能力较低">经验较欠缺,技术水平和能力较低</option>
+                </core:when>
+                <core:when test="${villageManagerEvaList.operatingCapacity=='经验丰富,技术水平高,能力较强'}">
+                    <option value="经验丰富,技术水平高,能力强">经验丰富,技术水平高,能力强</option>
+                    <option value="${villageManagerEvaList.operatingCapacity}" selected="selected">经验丰富,技术水平高,能力较强</option>
+                    <option value="经验,技术水和能力均一般">经验,技术水和能力均一般</option>
+                    <option value="经验较欠缺,技术水平和能力较低">经验较欠缺,技术水平和能力较低</option>
+                </core:when>
+                <core:when test="${villageManagerEvaList.operatingCapacity=='经验,技术水和能力均一般'}">
+                    <option value="经验丰富,技术水平高,能力强">经验丰富,技术水平高,能力强</option>
+                    <option value="经验丰富,技术水平高,能力较强">经验丰富,技术水平高,能力较强</option>
+                    <option value="${villageManagerEvaList.operatingCapacity}" selected="selected">经验,技术水和能力均一般</option>
+                    <option value="经验较欠缺,技术水平和能力较低">经验较欠缺,技术水平和能力较低</option>
+                </core:when>
+                <core:otherwise>
+                    <option value="经验丰富,技术水平高,能力强">经验丰富,技术水平高,能力强</option>
+                    <option value="经验丰富,技术水平高,能力较强">经验丰富,技术水平高,能力较强</option>
+                    <option value="经验,技术水和能力均一般">经验,技术水和能力均一般</option>
+                    <option value="${villageManagerEvaList.operatingCapacity}" selected="selected">经验较欠缺,技术水平和能力较低</option>
+                </core:otherwise>
+            </core:choose>
         </select>
     </td>
 </tr>
@@ -2979,10 +3009,32 @@
     </td>
     <td align="left">
         <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="projectPotential">
-            <option value="${villageManagerEvaList.projectPotential}">优秀</option>
-            <option value="">良好</option>
-            <option value="">一般</option>
-            <option value="">差</option>
+            <core:choose>
+                <core:when test="${villageManagerEvaList.projectPotential=='优秀'}">
+                    <option value="${villageManagerEvaList.projectPotential}" selected="selected">优秀</option>
+                    <option value="良好">良好</option>
+                    <option value="一般">一般</option>
+                    <option value="差">差</option>
+                </core:when>
+                <core:when test="${villageManagerEvaList.projectPotential=='良好'}">
+                    <option value="优秀">优秀</option>
+                    <option value="${villageManagerEvaList.projectPotential}" selected="selected">良好</option>
+                    <option value="一般">一般</option>
+                    <option value="差">差</option>
+                </core:when>
+                <core:when test="${villageManagerEvaList.projectPotential=='一般'}">
+                    <option value="优秀">优秀</option>
+                    <option value="良好">良好</option>
+                    <option value="${villageManagerEvaList.projectPotential}" selected="selected">一般</option>
+                    <option value="差">差</option>
+                </core:when>
+                <core:otherwise>
+                    <option value="优秀">优秀</option>
+                    <option value="良好">良好</option>
+                    <option value="一般">一般</option>
+                    <option value="${villageManagerEvaList.projectPotential}" selected="selected">差</option>
+                </core:otherwise>
+            </core:choose>
         </select>
     </td>
 </tr>
@@ -2992,10 +3044,32 @@
     </td>
     <td width="73%" align="left">
         <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="operationalRisks">
-            <option value="${villageManagerEvaList.operationalRisks}">很低</option>
-            <option value="">较低</option>
-            <option value="">一般</option>
-            <option value="">较高</option>
+            <core:choose>
+                <core:when test="${villageManagerEvaList.operationalRisks=='很低'}">
+                    <option value="${villageManagerEvaList.operationalRisks}" selected="selected">很低</option>
+                    <option value="较低">较低</option>
+                    <option value="一般">一般</option>
+                    <option value="较高">较高</option>
+                </core:when>
+                <core:when test="${villageManagerEvaList.operationalRisks=='较低'}">
+                    <option value="很低">很低</option>
+                    <option value="${villageManagerEvaList.operationalRisks}" selected="selected">较低</option>
+                    <option value="一般">一般</option>
+                    <option value="较高">较高</option>
+                </core:when>
+                <core:when test="${villageManagerEvaList.operationalRisks=='一般'}">
+                    <option value="很低">很低</option>
+                    <option value="较低">较低</option>
+                    <option value="${villageManagerEvaList.operationalRisks}" selected="selected">一般</option>
+                    <option value="较高">较高</option>
+                </core:when>
+                <core:otherwise>
+                    <option value="很低">很低</option>
+                    <option value="较低">较低</option>
+                    <option value="一般">一般</option>
+                    <option value="${villageManagerEvaList.operationalRisks}" selected="selected">较高</option>
+                </core:otherwise>
+            </core:choose>
         </select>
     </td>
 </tr>
@@ -3005,10 +3079,32 @@
     </td>
     <td align="left">
         <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="developmentProspects">
-            <option value="${villageManagerEvaList.developmentProspects}">很好</option>
-            <option value="">较好</option>
-            <option value="">一般</option>
-            <option value="">较差</option>
+            <core:choose>
+                <core:when test="${villageManagerEvaList.developmentProspects=='很好'}">
+                    <option value="${villageManagerEvaList.developmentProspects}" selected="selected">很好</option>
+                    <option value="较好">较好</option>
+                    <option value="一般">一般</option>
+                    <option value="较高">较高</option>
+                </core:when>
+                <core:when test="${villageManagerEvaList.developmentProspects=='较好'}">
+                    <option value="很好">很好</option>
+                    <option value="${villageManagerEvaList.developmentProspects}" selected="selected">较好</option>
+                    <option value="一般">一般</option>
+                    <option value="较高">较高</option>
+                </core:when>
+                <core:when test="${villageManagerEvaList.developmentProspects=='一般'}">
+                    <option value="很好">很好</option>
+                    <option value="较好">较好</option>
+                    <option value="${villageManagerEvaList.developmentProspects}" selected="selected">一般</option>
+                    <option value="较差">较差</option>
+                </core:when>
+                <core:otherwise>
+                    <option value="很好">很好</option>
+                    <option value="较好">较好</option>
+                    <option value="一般">一般</option>
+                    <option value="${villageManagerEvaList.developmentProspects}" selected="selected">较差</option>
+                </core:otherwise>
+            </core:choose>
         </select>
     </td>
 </tr>
@@ -3018,11 +3114,43 @@
     </td>
     <td width="73%" align="left">
         <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="operatingStability">
-            <option value="${villageManagerEvaList.operatingStability}">强</option>
-            <option value="">中等</option>
-            <option value="">一般</option>
-            <option value="">差</option>
-            <option value="">不清楚</option>
+            <core:choose>
+                <core:when test="${villageManagerEvaList.operatingStability=='强'}">
+                    <option value="${villageManagerEvaList.operatingStability}" selected="selected">强</option>
+                    <option value="中等">中等</option>
+                    <option value="一般">一般</option>
+                    <option value="差">差</option>
+                    <option value="">不清楚</option>
+                </core:when>
+                <core:when test="${villageManagerEvaList.operatingStability=='中等'}">
+                    <option value="强">强</option>
+                    <option value="${villageManagerEvaList.operatingStability}" selected="selected">中等</option>
+                    <option value="一般">一般</option>
+                    <option value="差">差</option>
+                    <option value="">不清楚</option>
+                </core:when>
+                <core:when test="${villageManagerEvaList.operatingStability=='一般'}">
+                    <option value="强">强</option>
+                    <option value="中等">中等</option>
+                    <option value="${villageManagerEvaList.operatingStability}" selected="selected">一般</option>
+                    <option value="差">差</option>
+                    <option value="">不清楚</option>
+                </core:when>
+                <core:when test="${villageManagerEvaList.operatingStability=='差'}">
+                    <option value="强">强</option>
+                    <option value="中等">中等</option>
+                    <option value="一般">一般</option>
+                    <option value="${villageManagerEvaList.operatingStability}" selected="selected">差</option>
+                    <option value="">不清楚</option>
+                </core:when>
+                <core:otherwise>
+                    <option value="强">强</option>
+                    <option value="中等">中等</option>
+                    <option value="一般">一般</option>
+                    <option value="差">差</option>
+                    <option value="${villageManagerEvaList.operatingStability}" selected="selected">不清楚</option>
+                </core:otherwise>
+            </core:choose>
         </select>
     </td>
 </tr>
@@ -3032,11 +3160,43 @@
     </td>
     <td align="left">
         <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="capitaNetIncomeLevel">
-            <option value="${villageManagerEvaList.capitaNetIncomeLevel}">高收入</option>
-            <option value="">中高收入</option>
-            <option value="">中等收入</option>
-            <option value="">中低收入</option>
-            <option value="">低收入</option>
+            <core:choose>
+                <core:when test="${villageManagerEvaList.capitaNetIncomeLevel=='高收入'}">
+                    <option value="${villageManagerEvaList.capitaNetIncomeLevel}" selected="selected">高收入</option>
+                    <option value="中高收入">中高收入</option>
+                    <option value="中等收入">中等收入</option>
+                    <option value="中低收入">中低收入</option>
+                    <option value="低收入">低收入</option>
+                </core:when>
+                <core:when test="${villageManagerEvaList.capitaNetIncomeLevel=='中等'}">
+                    <option >高收入</option>
+                    <option value="${villageManagerEvaList.capitaNetIncomeLevel}" selected="selected">中高收入</option>
+                    <option value="中等收入">中等收入</option>
+                    <option value="中低收入">中低收入</option>
+                    <option value="低收入">低收入</option>
+                </core:when>
+                <core:when test="${villageManagerEvaList.capitaNetIncomeLevel=='一般'}">
+                    <option value="高收入">高收入</option>
+                    <option value="中高收入">中高收入</option>
+                    <option value="${villageManagerEvaList.capitaNetIncomeLevel}" selected="selected">中等收入</option>
+                    <option value="中低收入">中低收入</option>
+                    <option value="低收入">低收入</option>
+                </core:when>
+                <core:when test="${villageManagerEvaList.capitaNetIncomeLevel=='差'}">
+                    <option value="高收入">高收入</option>
+                    <option value="中高收入">中高收入</option>
+                    <option value="中等收入">中等收入</option>
+                    <option value="${villageManagerEvaList.capitaNetIncomeLevel}" selected="selected">中低收入</option>
+                    <option value="低收入">低收入</option>
+                </core:when>
+                <core:otherwise>
+                    <option value="高收入">高收入</option>
+                    <option value="中高收入">中高收入</option>
+                    <option value="中等收入">中等收入</option>
+                    <option value="中低收入">中低收入</option>
+                    <option value="${villageManagerEvaList.capitaNetIncomeLevel}" selected="selected">低收入</option>
+                </core:otherwise>
+            </core:choose> 
         </select>
     </td>
 </tr>
@@ -3046,13 +3206,71 @@
     </td>
     <td width="73%" align="left">
         <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="disposableIncomeLevel">
-            <option value="${villageManagerEvaList.disposableIncomeLevel}">最高收入</option>
-            <option value="">高收入</option>
-            <option value="">中等偏上收入</option>
-            <option value="">中等收入</option>
-            <option value="">中等偏下收入</option>
-            <option value="">低收入</option>
-            <option value="">最低收入</option>
+            <core:choose>
+                <core:when test="${villageManagerEvaList.disposableIncomeLevel=='最高收入'}">
+                    <option value="${villageManagerEvaList.disposableIncomeLevel}" selected="selected">最高收入</option>
+                    <option value="高收入">高收入</option>
+                    <option value="中等偏上收入">中等偏上收入</option>
+                    <option value="中等收入">中等收入</option>
+                    <option value="中等偏下收入">中等偏下收入</option>
+                    <option value="低收入">低收入</option>
+                    <option value="最低收入">最低收入</option>
+                </core:when>
+                <core:when test="${villageManagerEvaList.capitaNetIncomeLevel=='高收入'}">
+                    <option value="最高收入">最高收入</option>
+                    <option value="${villageManagerEvaList.disposableIncomeLevel}" selected="selected">高收入</option>
+                    <option value="中等偏上收入">中等偏上收入</option>
+                    <option value="中等收入">中等收入</option>
+                    <option value="中等偏下收入">中等偏下收入</option>
+                    <option value="低收入">低收入</option>
+                    <option value="最低收入">最低收入</option>
+                </core:when>
+                <core:when test="${villageManagerEvaList.capitaNetIncomeLevel=='中等偏上收入'}">
+                    <option value="最高收入">最高收入</option>
+                    <option value="高收入">高收入</option>
+                    <option  value="${villageManagerEvaList.disposableIncomeLevel}" selected="selected">中等偏上收入</option>
+                    <option value="中等收入">中等收入</option>
+                    <option value="中等偏下收入">中等偏下收入</option>
+                    <option value="低收入">低收入</option>
+                    <option value="最低收入">最低收入</option>
+                </core:when>
+                <core:when test="${villageManagerEvaList.capitaNetIncomeLevel=='中等收入'}">
+                    <option value="最高收入">最高收入</option>
+                    <option value="高收入">高收入</option>
+                    <option value="中等偏上收入">中等偏上收入</option>
+                    <option value="${villageManagerEvaList.disposableIncomeLevel}" selected="selected">中等收入</option>
+                    <option value="中等偏下收入">中等偏下收入</option>
+                    <option value="低收入">低收入</option>
+                    <option value="最低收入">最低收入</option>
+                </core:when>
+                <core:when test="${villageManagerEvaList.capitaNetIncomeLevel=='中等偏下收入'}">
+                    <option value="最高收入">最高收入</option>
+                    <option value="高收入">高收入</option>
+                    <option value="中等偏上收入">中等偏上收入</option>
+                    <option value="中等收入">中等收入</option>
+                    <option value="${villageManagerEvaList.disposableIncomeLevel}" selected="selected">中等偏下收入</option>
+                    <option value="低收入">低收入</option>
+                    <option value="最低收入">最低收入</option>
+                </core:when>
+                <core:when test="${villageManagerEvaList.capitaNetIncomeLevel=='低收入'}">
+                    <option value="最高收入">最高收入</option>
+                    <option value="高收入">高收入</option>
+                    <option value="中等偏上收入">中等偏上收入</option>
+                    <option value="中等收入">中等收入</option>
+                    <option value="中等偏下收入">中等偏下收入</option>
+                    <option value="${villageManagerEvaList.disposableIncomeLevel}" selected="selected">低收入</option>
+                    <option value="最低收入">最低收入</option>
+                </core:when>
+                <core:otherwise>
+                    <option value="最高收入">最高收入</option>
+                    <option value="高收入">高收入</option>
+                    <option value="中等偏上收入">中等偏上收入</option>
+                    <option value="中等收入">中等收入</option>
+                    <option value="中等偏下收入">中等偏下收入</option>
+                    <option value="低收入">低收入</option>
+                    <option value="${villageManagerEvaList.disposableIncomeLevel}" selected="selected">最低收入</option>
+                </core:otherwise>
+            </core:choose>
         </select>
     </td>
 </tr>
@@ -3062,12 +3280,56 @@
     </td>
     <td align="left">
         <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="familyPropertyLevel">
-            <option value="${villageManagerEvaList.familyPropertyLevel}">富足家庭</option>
-            <option value="">富裕家庭</option>
-            <option value="">殷实家庭</option>
-            <option value="">一般家庭</option>
-            <option value="">较差家庭</option>
-            <option value="">贫困家庭</option>
+            <core:choose>
+                <core:when test="${villageManagerEvaList.familyPropertyLevel=='富足家庭'}">
+                    <option value="${villageManagerEvaList.familyPropertyLevel}" selected="selected">富足家庭</option>
+                    <option value="富裕家庭">富裕家庭</option>
+                    <option value="殷实家庭">殷实家庭</option>
+                    <option value="一般家庭">一般家庭</option>
+                    <option value="较差家庭">较差家庭</option>
+                    <option value="贫困家庭">贫困家庭</option>
+                </core:when>
+                <core:when test="${villageManagerEvaList.familyPropertyLevel=='富裕家庭'}">
+                    <option value="富足家庭">富足家庭</option>
+                    <option value="${villageManagerEvaList.familyPropertyLevel}" selected="selected">富裕家庭</option>
+                    <option value="殷实家庭">殷实家庭</option>
+                    <option value="一般家庭">一般家庭</option>
+                    <option value="较差家庭">较差家庭</option>
+                    <option value="贫困家庭">贫困家庭</option>
+                </core:when>
+                <core:when test="${villageManagerEvaList.familyPropertyLevel=='殷实家庭'}">
+                    <option value="富足家庭">富足家庭</option>
+                    <option value="富裕家庭">富裕家庭</option>
+                    <option value="${villageManagerEvaList.familyPropertyLevel}" selected="selected">殷实家庭</option>
+                    <option value="一般家庭">一般家庭</option>
+                    <option value="较差家庭">较差家庭</option>
+                    <option value="贫困家庭">贫困家庭</option>
+                </core:when>
+                <core:when test="${villageManagerEvaList.familyPropertyLevel=='一般家庭'}">
+                    <option value="富足家庭">富足家庭</option>
+                    <option value="富裕家庭">富裕家庭</option>
+                    <option value="殷实家庭">殷实家庭</option>
+                    <option value="${villageManagerEvaList.familyPropertyLevel}" selected="selected">一般家庭</option>
+                    <option value="较差家庭">较差家庭</option>
+                    <option value="贫困家庭">贫困家庭</option>
+                </core:when>
+                <core:when test="${villageManagerEvaList.familyPropertyLevel=='较差家庭'}">
+                    <option value="富足家庭">富足家庭</option>
+                    <option value="富裕家庭">富裕家庭</option>
+                    <option value="殷实家庭">殷实家庭</option>
+                    <option value="一般家庭">一般家庭</option>
+                    <option value="${villageManagerEvaList.familyPropertyLevel}" selected="selected">较差家庭</option>
+                    <option value="贫困家庭">贫困家庭</option>
+                </core:when>
+                <core:otherwise>
+                    <option value="富足家庭">富足家庭</option>
+                    <option value="富裕家庭">富裕家庭</option>
+                    <option value="殷实家庭">殷实家庭</option>
+                    <option value="一般家庭">一般家庭</option>
+                    <option value="较差家庭">较差家庭</option>
+                    <option value="${villageManagerEvaList.familyPropertyLevel}" selected="selected">贫困家庭</option>
+                </core:otherwise>
+            </core:choose> 
         </select>
     </td>
 </tr>
@@ -3077,12 +3339,56 @@
     </td>
     <td width="73%" align="left">
         <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="payTaxes">
-            <option value="${villageManagerEvaList.payTaxes}">正常缴纳</option>
-            <option value="">拖欠罚款2次（含）以内</option>
-            <option value="">拖欠罚款2次以上</option>
-            <option value="">拖欠超过1年</option>
-            <option value="">较差家庭</option>
-            <option value="">贫困家庭</option>
+            <core:choose>
+                <core:when test="${villageManagerEvaList.payTaxes=='正常缴纳'}">
+                    <option value="${villageManagerEvaList.payTaxes}" selected="selected">正常缴纳</option>
+                    <option value="拖欠罚款2次(含)以内">拖欠罚款2次(含)以内</option>
+                    <option value="拖欠罚款2次以上">拖欠罚款2次以上</option>
+                    <option value="拖欠超过1年">拖欠超过1年</option>
+                    <option value="较差家庭">较差家庭</option>
+                    <option value="贫困家庭">贫困家庭</option>
+                </core:when>
+                <core:when test="${villageManagerEvaList.payTaxes=='拖欠罚款2次(含)以内'}">
+                    <option value="正常缴纳">正常缴纳</option>
+                    <option value="${villageManagerEvaList.payTaxes}" selected="selected">拖欠罚款2次(含)以内</option>
+                    <option value="拖欠罚款2次以上">拖欠罚款2次以上</option>
+                    <option value="拖欠超过1年">拖欠超过1年</option>
+                    <option value="较差家庭">较差家庭</option>
+                    <option value="贫困家庭">贫困家庭</option>
+                </core:when>
+                <core:when test="${villageManagerEvaList.payTaxes=='拖欠罚款2次以上'}">
+                    <option value="正常缴纳">正常缴纳</option>
+                    <option value="拖欠罚款2次(含)以内">拖欠罚款2次(含)以内</option>
+                    <option value="${villageManagerEvaList.payTaxes}" selected="selected">拖欠罚款2次以上</option>
+                    <option value="拖欠超过1年">拖欠超过1年</option>
+                    <option value="较差家庭">较差家庭</option>
+                    <option value="贫困家庭">贫困家庭</option>
+                </core:when>
+                <core:when test="${villageManagerEvaList.payTaxes=='拖欠超过1年'}">
+                    <option value="正常缴纳">正常缴纳</option>
+                    <option value="拖欠罚款2次(含)以内">拖欠罚款2次(含)以内</option>
+                    <option value="拖欠罚款2次以上">拖欠罚款2次以上</option>
+                    <option value="${villageManagerEvaList.payTaxes}" selected="selected">拖欠超过1年</option>
+                    <option value="较差家庭">较差家庭</option>
+                    <option value="贫困家庭">贫困家庭</option>
+                </core:when>
+                <core:when test="${villageManagerEvaList.payTaxes=='较差家庭'}">
+                    <option value="正常缴纳">正常缴纳</option>
+                    <option value="拖欠罚款2次(含)以内">拖欠罚款2次(含)以内</option>
+                    <option value="拖欠罚款2次以上">拖欠罚款2次以上</option>
+                    <option value="拖欠超过1年">拖欠超过1年</option>
+                    <option value="${villageManagerEvaList.payTaxes}" selected="selected">较差家庭</option>
+                    <option value="贫困家庭">贫困家庭</option>
+                </core:when>
+                <core:otherwise>
+                    <option value="正常缴纳">正常缴纳</option>
+                    <option value="拖欠罚款2次(含)以内">拖欠罚款2次(含)以内</option>
+                    <option value="拖欠罚款2次以上">拖欠罚款2次以上</option>
+                    <option value="拖欠超过1年">拖欠超过1年</option>
+                    <option value="较差家庭">较差家庭</option>
+                    <option value="${villageManagerEvaList.payTaxes}" selected="selected">贫困家庭</option>
+                </core:otherwise>
+            </core:choose>
         </select>
     </td>
 </tr>
@@ -3092,12 +3398,56 @@
     </td>
     <td align="left">
         <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="respectSitu">
-            <option value="${villageManagerEvaList.respectSitu}">好</option>
-            <option value="">较好</option>
-            <option value="">一般</option>
-            <option value="">差</option>
-            <option value="">很差</option>
-            <option value="">不清楚</option>
+            <core:choose>
+                <core:when test="${villageManagerEvaList.respectSitu=='好'}">
+                    <option value="${villageManagerEvaList.respectSitu}" selected="selected">好</option>
+                    <option value="较好">较好</option>
+                    <option value="一般">一般</option>
+                    <option value="差">差</option>
+                    <option value="很差">很差</option>
+                    <option value="不清楚">不清楚</option>
+                </core:when>
+                <core:when test="${villageManagerEvaList.respectSitu=='较好'}">
+                    <option value="好">好</option>
+                    <option value="${villageManagerEvaList.respectSitu}" selected="selected">较好</option>
+                    <option value="一般">一般</option>
+                    <option value="差">差</option>
+                    <option value="很差">很差</option>
+                    <option value="不清楚">不清楚</option>
+                </core:when>
+                <core:when test="${villageManagerEvaList.respectSitu=='一般'}">
+                    <option value="好">好</option>
+                    <option value="较好">较好</option>
+                    <option value="${villageManagerEvaList.respectSitu}" selected="selected">一般</option>
+                    <option value="差">差</option>
+                    <option value="很差">很差</option>
+                    <option value="不清楚">不清楚</option>
+                </core:when>
+                <core:when test="${villageManagerEvaList.respectSitu=='差'}">
+                    <option value="好">好</option>
+                    <option value="较好">较好</option>
+                    <option value="一般">一般</option>
+                    <option value="${villageManagerEvaList.respectSitu}" selected="selected">差</option>
+                    <option value="很差">很差</option>
+                    <option value="不清楚">不清楚</option>
+                </core:when>
+                <core:when test="${villageManagerEvaList.respectSitu=='很差'}">
+                    <option value="好">好</option>
+                    <option value="较好">较好</option>
+                    <option value="一般">一般</option>
+                    <option value="差">差</option>
+                    <option value="${villageManagerEvaList.respectSitu}" selected="selected">很差</option>
+                    <option value="不清楚">不清楚</option>
+                </core:when>
+                <core:otherwise>
+                    <option value="好">好</option>
+                    <option value="较好">较好</option>
+                    <option value="一般">一般</option>
+                    <option value="差">差</option>
+                    <option value="很差">很差</option>
+                    <option value="${villageManagerEvaList.respectSitu}" selected="selected">不清楚</option>
+                </core:otherwise>
+            </core:choose>
         </select>
     </td>
 </tr>
@@ -3107,12 +3457,56 @@
     </td>
     <td width="73%" align="left">
         <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="neighborhood">
-            <option value="${villageManagerEvaList.neighborhood}">好</option>
-            <option value="">较好</option>
-            <option value="">一般</option>
-            <option value="">差</option>
-            <option value="">很差</option>
-            <option value="">不清楚</option>
+            <core:choose>
+                <core:when test="${villageManagerEvaList.neighborhood=='好'}">
+                    <option value="${villageManagerEvaList.neighborhood}" selected="selected">好</option>
+                    <option value="较好">较好</option>
+                    <option value="一般">一般</option>
+                    <option value="差">差</option>
+                    <option value="很差">很差</option>
+                    <option value="不清楚">不清楚</option>
+                </core:when>
+                <core:when test="${villageManagerEvaList.neighborhood=='较好'}">
+                    <option value="好">好</option>
+                    <option value="${villageManagerEvaList.neighborhood}" selected="selected">较好</option>
+                    <option value="一般">一般</option>
+                    <option value="差">差</option>
+                    <option value="很差">很差</option>
+                    <option value="不清楚">不清楚</option>
+                </core:when>
+                <core:when test="${villageManagerEvaList.neighborhood=='一般'}">
+                    <option value="好">好</option>
+                    <option value="较好">较好</option>
+                    <option value="${villageManagerEvaList.neighborhood}" selected="selected">一般</option>
+                    <option value="差">差</option>
+                    <option value="很差">很差</option>
+                    <option value="不清楚">不清楚</option>
+                </core:when>
+                <core:when test="${villageManagerEvaList.neighborhood=='差'}">
+                    <option value="好">好</option>
+                    <option value="较好">较好</option>
+                    <option value="一般">一般</option>
+                    <option value="${villageManagerEvaList.neighborhood}" selected="selected">差</option>
+                    <option value="很差">很差</option>
+                    <option value="不清楚">不清楚</option>
+                </core:when>
+                <core:when test="${villageManagerEvaList.neighborhood=='很差'}">
+                    <option value="好">好</option>
+                    <option value="较好">较好</option>
+                    <option value="一般">一般</option>
+                    <option value="差">差</option>
+                    <option value="${villageManagerEvaList.neighborhood}" selected="selected">很差</option>
+                    <option value="不清楚">不清楚</option>
+                </core:when>
+                <core:otherwise>
+                    <option value="好">好</option>
+                    <option value="较好">较好</option>
+                    <option value="一般">一般</option>
+                    <option value="差">差</option>
+                    <option value="很差">很差</option>
+                    <option value="${villageManagerEvaList.neighborhood}" selected="selected">不清楚</option>
+                </core:otherwise>
+            </core:choose>
         </select>
     </td>
 </tr>
@@ -3122,11 +3516,43 @@
     </td>
     <td align="left">
         <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="publicWelfareLevel">
-            <option value="${villageManagerEvaList.publicWelfareLevel}">高</option>
-            <option value="">较高</option>
-            <option value="">一般</option>
-            <option value="">从不关心</option>
-            <option value="">不清楚</option>
+            <core:choose>
+                <core:when test="${villageManagerEvaList.publicWelfareLevel=='高'}">
+                    <option value="${villageManagerEvaList.publicWelfareLevel}" selected="selected">高</option>
+                    <option value="较高">较高</option>
+                    <option value="一般">一般</option>
+                    <option value="从不关心">从不关心</option>
+                    <option value="不清楚">不清楚</option>
+                </core:when>
+                <core:when test="${villageManagerEvaList.publicWelfareLevel=='较高'}">
+                    <option value="高">高</option>
+                    <option value="${villageManagerEvaList.publicWelfareLevel}" selected="selected">较高</option>
+                    <option value="一般">一般</option>
+                    <option value="从不关心">从不关心</option>
+                    <option value="不清楚">不清楚</option>
+                </core:when>
+                <core:when test="${villageManagerEvaList.publicWelfareLevel=='一般'}">
+                    <option value="高">高</option>
+                    <option value="较高">较高</option>
+                    <option value="${villageManagerEvaList.publicWelfareLevel}" selected="selected">一般</option>
+                    <option value="从不关心">从不关心</option>
+                    <option value="不清楚">不清楚</option>
+                </core:when>
+                <core:when test="${villageManagerEvaList.publicWelfareLevel=='从不关心'}">
+                    <option value="高">高</option>
+                    <option value="较高">较高</option>
+                    <option value="一般">一般</option>
+                    <option value="${villageManagerEvaList.publicWelfareLevel}" selected="selected">从不关心</option>
+                    <option value="不清楚">不清楚</option>
+                </core:when>
+                <core:otherwise>
+                    <option value="高">高</option>
+                    <option value="较高">较高</option>
+                    <option value="一般">一般</option>
+                    <option value="从不关心">从不关心</option>
+                    <option value="${villageManagerEvaList.publicWelfareLevel}" selected="selected">不清楚</option>
+                </core:otherwise>
+            </core:choose>
         </select>
     </td>
 </tr>
@@ -3136,10 +3562,32 @@
     </td>
     <td width="73%" align="left">
         <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="creditworthiness">
-            <option value="${villageManagerEvaList.creditworthiness}">好</option>
-            <option value="">较好</option>
-            <option value="">一般</option>
-            <option value="">较差</option>
+            <core:choose>
+                <core:when test="${villageManagerEvaList.creditworthiness=='好'}">
+                    <option value="${villageManagerEvaList.creditworthiness}" selected="selected">好</option>
+                    <option value="较好">较好</option>
+                    <option value="一般">一般</option>
+                    <option value="较差">较差</option>
+                </core:when>
+                <core:when test="${villageManagerEvaList.creditworthiness=='较好'}">
+                    <option value="好">好</option>
+                    <option value="${villageManagerEvaList.creditworthiness}" selected="selected">较好</option>
+                    <option value="一般">一般</option>
+                    <option value="较差">较差</option>
+                </core:when>
+                <core:when test="${villageManagerEvaList.creditworthiness=='一般'}">
+                    <option value="好">好</option>
+                    <option value="较好">较好</option>
+                    <option value="${villageManagerEvaList.creditworthiness}" selected="selected">一般</option>
+                    <option value="较差">较差</option>
+                </core:when>
+                <core:otherwise>
+                    <option value="好">好</option>
+                    <option value="较好">较好</option>
+                    <option value="一般">一般</option>
+                    <option value="${villageManagerEvaList.creditworthiness}" selected="selected">较差</option>
+                </core:otherwise>
+            </core:choose>
         </select>
     </td>
 </tr>
@@ -3149,12 +3597,56 @@
     </td>
     <td align="left">
         <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="conduct">
-            <option value="${villageManagerEvaList.conduct}">优秀</option>
-            <option value="">良好</option>
-            <option value="">中等</option>
-            <option value="">一般</option>
-            <option value="">较差</option>
-            <option value="">有不良或违法、违规行为</option>
+            <core:choose>
+                <core:when test="${villageManagerEvaList.conduct=='优秀'}">
+                    <option value="${villageManagerEvaList.conduct}" selected="selected">优秀</option>
+                    <option value="良好">良好</option>
+                    <option value="中等">中等</option>
+                    <option value="一般">一般</option>
+                    <option value="较差">较差</option>
+                    <option value="有不良或违法、违规行为">有不良或违法、违规行为</option>
+                </core:when>
+                <core:when test="${villageManagerEvaList.conduct=='良好'}">
+                    <option value="优秀">优秀</option>
+                    <option value="${villageManagerEvaList.conduct}" selected="selected">良好</option>
+                    <option value="中等">中等</option>
+                    <option value="一般">一般</option>
+                    <option value="较差">较差</option>
+                    <option value="有不良或违法、违规行为">有不良或违法、违规行为</option>
+                </core:when>
+                <core:when test="${villageManagerEvaList.conduct=='中等'}">
+                    <option value="优秀">优秀</option>
+                    <option value="良好">良好</option>
+                    <option value="${villageManagerEvaList.conduct}" selected="selected">中等</option>
+                    <option value="一般">一般</option>
+                    <option value="较差">较差</option>
+                    <option value="有不良或违法、违规行为">有不良或违法、违规行为</option>
+                </core:when>
+                <core:when test="${villageManagerEvaList.conduct=='一般'}">
+                    <option value="优秀">优秀</option>
+                    <option value="良好">良好</option>
+                    <option value="中等">中等</option>
+                    <option value="${villageManagerEvaList.conduct}" selected="selected">一般</option>
+                    <option value="较差">较差</option>
+                    <option value="有不良或违法、违规行为">有不良或违法、违规行为</option>
+                </core:when>
+                <core:when test="${villageManagerEvaList.conduct=='较差'}">
+                    <option value="优秀">优秀</option>
+                    <option value="良好">良好</option>
+                    <option value="中等">中等</option>
+                    <option value="一般">一般</option>
+                    <option value="${villageManagerEvaList.conduct}" selected="selected">较差</option>
+                    <option value="有不良或违法、违规行为">有不良或违法、违规行为</option>
+                </core:when>
+                <core:otherwise>
+                    <option value="优秀">优秀</option>
+                    <option value="良好">良好</option>
+                    <option value="中等">中等</option>
+                    <option value="一般">一般</option>
+                    <option value="较差">较差</option>
+                    <option value="${villageManagerEvaList.conduct}" selected="selected">有不良或违法、违规行为</option>
+                </core:otherwise>
+            </core:choose>
         </select>
     </td>
 </tr>
@@ -3164,9 +3656,23 @@
     </td>
     <td width="73%" align="left">
         <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="praised">
-            <option value="${villageManagerEvaList.praised}">有</option>
-            <option value="">无</option>
-            <option value="">不清楚</option>
+            <core:choose>
+                <core:when test="${villageManagerEvaList.praised=='有'}">
+                    <option value="${villageManagerEvaList.praised}" selected="selected">有</option>
+                    <option value="无">无</option>
+                    <option value="不清楚">不清楚</option>
+                </core:when>
+                <core:when test="${villageManagerEvaList.praised=='无'}">
+                    <option value="有">有</option>
+                    <option value="${villageManagerEvaList.praised}" selected="selected">无</option>
+                    <option value="不清楚">不清楚</option>
+                </core:when>
+                <core:otherwise>
+                    <option value="有">有</option>
+                    <option value="无">无</option>
+                    <option value="${villageManagerEvaList.praised}" selected="selected">不清楚</option>
+                </core:otherwise>
+            </core:choose>
         </select>
     </td>
 </tr>
@@ -3185,9 +3691,23 @@
     </td>
     <td width="73%" align="left">
         <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="importantObject">
-            <option value="${villageManagerEvaList.importantObject}">是</option>
-            <option value="">否</option>
-            <option value="">一般</option>
+            <core:choose>
+                <core:when test="${villageManagerEvaList.importantObject=='是'}">
+                    <option value="${villageManagerEvaList.importantObject}" selected="selected">是</option>
+                    <option value="否">否</option>
+                    <option value="一般">一般</option>
+                </core:when>
+                <core:when test="${villageManagerEvaList.importantObject=='否'}">
+                    <option value="是">是</option>
+                    <option value="${villageManagerEvaList.importantObject}" selected="selected">否</option>
+                    <option value="一般">一般</option>
+                </core:when>
+                <core:otherwise>
+                    <option value="是">是</option>
+                    <option value="否">否</option>
+                    <option value="${villageManagerEvaList.importantObject}" selected="selected">一般</option>
+                </core:otherwise>
+            </core:choose>
         </select>
     </td>
 </tr>
@@ -3218,7 +3738,7 @@
                     <td align="left">            <%--${customerManagerEvaList.creditRecord}  --%>
                         <label class="checkbox inline">
                             <input type="checkbox" id="inlineCheckbox111" value="option3">
-                            报告期内能积极主动按期偿本付息，无违约记录
+                            报告期内能积极主动按期偿本付息,无违约记录
                         </label>
                         <br>
                         <label class="checkbox inline">

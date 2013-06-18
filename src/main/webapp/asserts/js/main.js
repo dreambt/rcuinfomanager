@@ -9,7 +9,7 @@ $(function () {
     $('.showOperate').click(function () {
         var me = $(this);
         var recordId = me.attr('recordId');
-        var url = 'family/' + recordId;
+        var url = '/family/' + recordId;
         window.location.href = url;
     });
 
@@ -17,7 +17,7 @@ $(function () {
     $('.editOperate').click(function () {
         var me = $(this);
         var recordId = me.attr('recordId');
-        var url = 'family/edit/' + recordId;
+        var url = '/family/edit/' + recordId;
         window.location.href = url;
     });
 
@@ -27,7 +27,7 @@ $(function () {
         if (confirm('确定要删除吗？')) {
             var me = $(this);
             var recordId = me.attr('recordId');
-            var url = 'family/delete/' + recordId;
+            var url = '/family/delete/' + recordId;
             window.location.href = url;
         }
     });
@@ -54,7 +54,7 @@ $(function () {
     $('.appointOperate').click(function () {
         var me = $(this);
         var id = me.attr('recordId');
-        var url = 'family/appoint/' + id;
+        var url = '/family/appoint/' + id;
         window.art.dialog({
             id: 'assign',
             title: '指派信息',

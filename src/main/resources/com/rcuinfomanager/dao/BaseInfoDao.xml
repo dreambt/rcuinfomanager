@@ -388,17 +388,18 @@
             where u.userId=#{userId}
     </select>
 
-    <resultMap id="appointMap" type="com.rcuinfomanager.model.AppointInfo">
+    <!--<resultMap id="appointMap" type="com.rcuinfomanager.model.AppointInfo">
         <result property="recordId" column="recordId"></result>
         <result property="customerName" column="customerName"></result>
         <result property="telephone" column="telephone"></result>
         <result property="organizationName" column="organizationName"></result>
         <result property="displayUserName" column="displayUserName"></result>
-    </resultMap>
+    </resultMap>-->
     <!--指派-->
-    <select id="getAppointInfoList" parameterType="java.lang.Long" resultMap="appointMap">
+    <select id="getAppointInfoList" parameterType="java.lang.Long" resultType="com.rcuinfomanager.model.AppointInfo">
           select b.recordId,b.customerName,b.telephone
           from baseinfo b
+          where b.recordId=#{recordId}
     </select>
     <!--保存指派-->
     <insert id="saveAppointInfo" parameterType="com.rcuinfomanager.model.AppointInfo">
@@ -570,19 +571,24 @@
     <result column="privateLoan" property="privateLoan"></result>
     <result column="note1" property="note1"></result>
 </resultMap>-->
-    <select id="getFinanceServicesList" resultType="com.rcuinfomanager.model.FinanceServices" >
+    <select id="getFinanceServicesList" parameterType="java.lang.Long" resultType="com.rcuinfomanager.model.FinanceServices" >
         select  f.recordId,f.usedProduct,f.satisfaction,f.isMoneyNeed,f.moneyTodo,f.moneyCount,f.timeLimit,
         f.guarantee,f.fmDepositTodo,f.needServices,f.needServicesElse,f.holpForServices,f.suggestion,f.bankCard,
         f.electronBank,f.agentPay,f.auto,f.newRequirement,f.publicLoan,f.privateLoan
         from financeservices f
+        where f.recordId=#{id}
     </select>
+    <!--usedProduct-->
+   <!-- <select id="getUsedProduct" parameterType="java.lang.Long" resultType="com.rcuinfomanager.model.FinanceServices" >
+        select f.usedProduct from financeservices f where f.recordId=#{id}
+    </select>-->
     <!--三-->
     <select id="getVillageManagerEvaList" resultType="com.rcuinfomanager.model.VillageManagerEva">
-          select * from villagemanagereva
+          select * from villagemanagereva  where recordId=#{id}
     </select>
     <!--四-->
     <select id="getCustomerManagerEvaList" resultType="com.rcuinfomanager.model.CustomerManagerEva">
-          select * from customermanagereva
+          select * from customermanagereva where recordId=#{id}
     </select>
 
    <select id="getBaseInfoByRecordId" resultType="com.rcuinfomanager.model.BaseInfo" parameterType="java.lang.Long">

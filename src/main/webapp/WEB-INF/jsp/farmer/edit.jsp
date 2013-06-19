@@ -1,5 +1,6 @@
 <%@ taglib prefix="core" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -392,9 +393,6 @@
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">社会保障情况</td>
     <td align="left" colspan="4"><%--${personBasicList.socialSecurity}--%>
-        <core:forEach items="${usedProducts}" var="usedProduct">
-            <input value="${usedProduct}" class="usedProductHid" style="display:none" />
-        </core:forEach>
 
         <label class="checkbox inline">
             <input type="checkbox" id="inlineCheckbox1" value="养老保险" class="养老保险">养老保险
@@ -2445,8 +2443,8 @@
 <!--2-->
 <div class="tab-pane" id="tab2">
 <div class="pad-10">
-<div class="table-list">
-<table width="100%" border="1" cellspacing="0" width="732px" color="#727f8a;">
+<div class="table-list" style="table-layout:fixed; height:345px; overflow:scroll;">
+<table width="100%" border="1">
 <tbody>
 <tr>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">
@@ -2457,38 +2455,38 @@
                 <input type="text" value="${usedProduct}" style="display: none" class="usedProduct"/>
         </core:forEach>
         <label class="checkbox inline">
-            <input type="checkbox" class="存款" value="存款" name="" > 存款
+            <input type="checkbox" class="存款" value="存款" name="usedProduct" > 存款
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="贷款" value="贷款" name=""> 贷款
+            <input type="checkbox" class="贷款" value="贷款" name="usedProduct"> 贷款
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="信用卡" value="信用卡" name=""> 信用卡
+            <input type="checkbox" class="信用卡" value="信用卡" name="usedProduct"> 信用卡
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="POS机" value="POS机" name="" > POS机
+            <input type="checkbox" class="POS机" value="POS机" name="usedProduct" > POS机
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="保管箱" value="保管箱" name="" > 保管箱
+            <input type="checkbox" class="保管箱" value="保管箱" name="usedProduct" > 保管箱
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="网上银行" value="网上银行" name="" > 网上银行
+            <input type="checkbox" class="网上银行" value="网上银行" name="usedProduct" > 网上银行
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="居家银行" value="居家银行" name="" > 居家银行
+            <input type="checkbox" class="居家银行" value="居家银行" name="usedProduct" > 居家银行
         </label>
         <br>
         <label class="checkbox inline">
-            <input type="checkbox" class="短信银行" value="短信银行" name="" > 短信银行
+            <input type="checkbox" class="短信银行" value="短信银行" name="usedProduct" > 短信银行
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="电话银行" value="电话银行" name="" > 电话银行
+            <input type="checkbox" class="电话银行" value="电话银行" name="usedProduct" > 电话银行
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="手机银行" value="手机银行" name="" > 手机银行
+            <input type="checkbox" class="手机银行" value="手机银行" name="usedProduct" > 手机银行
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="其他" value="其他" name="" > 其他
+            <input type="checkbox" class="其他" value="其他" name="usedProduct" > 其他
         </label>
     </td>
 </tr>
@@ -2498,9 +2496,23 @@
     </td>
     <td align="left" colspan="3">
         <select class="selectpicker" style="width: 270px; margin-top: 5px;">
-            <option value="">较为适用</option>
-            <option value="">需进一步改进</option>
-            <option value="">较差</option>
+            <core:choose>
+                <core:when test="${financeServicesLists.satisfaction=='较为适用'}">
+                    <option value="${financeServicesLists.satisfaction}" selected="selected">较为适用</option>
+                    <option value="需进一步改进">需进一步改进</option>
+                    <option value="较差">较差</option>
+                </core:when>
+                <core:when test="${financeServicesLists.satisfaction=='需进一步改进'}">
+                    <option value="较为适用">较为适用</option>
+                    <option value="${financeServicesLists.satisfaction}" selected="selected">需进一步改进</option>
+                    <option value="较差">较差</option>
+                </core:when>
+                <core:otherwise>
+                    <option value="较为适用">较为适用</option>
+                    <option value="需进一步改进">需进一步改进</option>
+                    <option value="${financeServicesLists.satisfaction}" selected="selected">较差</option>
+                </core:otherwise>
+            </core:choose>
         </select>
     </td>
 </tr>
@@ -2510,9 +2522,23 @@
     </td>
     <td align="left" colspan="3">
         <select class="selectpicker" style="width: 270px; margin-top: 5px;">
-            <option value="">很需要</option>
-            <option value="">需要</option>
-            <option value="">不需要</option>
+            <core:choose>
+                <core:when test="${financeServicesLists.moneyNeed=='2'}">
+                    <option value="${financeServicesLists.moneyNeed}" selected="selected">很需要</option>
+                    <option value="需要">需要</option>
+                    <option value="不需要">不需要</option>
+                </core:when>
+                <core:when test="${financeServicesLists.moneyNeed=='1'}">
+                    <option value="很需要">很需要</option>
+                    <option value="${financeServicesLists.moneyNeed}" selected="selected">需要</option>
+                    <option value="不需要">不需要</option>
+                </core:when>
+                <core:otherwise>
+                    <option value="很需要">很需要</option>
+                    <option value="需要">需要</option>
+                    <option value="${financeServicesLists.moneyNeed}" selected="selected">不需要</option>
+                </core:otherwise>
+            </core:choose>
         </select>
     </td>
 </tr>
@@ -2549,7 +2575,7 @@
         您希望得到的贷款金额是多少？
     </td>
     <td align="left">
-        <input type="text" name="" value=""
+        <input type="text" name="moneyCount" value="${financeServicesLists.moneyCount}"
                style="width: 165px;height: 30px; margin-top: 5px;">
     </td>
 </tr>
@@ -2580,7 +2606,7 @@
         您希望得到的贷款期限是多久？
     </td>
     <td align="left">
-        <input class="input-small" type="text" name="" value=""
+        <input class="input-small" type="text" name="timeLimit" value="${financeServicesLists.timeLimit}"
                style="width: 165px;height: 30px; margin-top: 5px;">
     </td>
 </tr>
@@ -2679,7 +2705,9 @@
         您希望我行（社）增加哪些方面的服务？
     </td>
     <td align="left" colspan="2">
-        <textarea rows="3" style="width: 355px;height: 85px; margin-top: 5px;" name=""></textarea>
+        <textarea rows="3" style="width: 355px;height: 85px; margin-top: 5px;" name="holpForServices">
+            ${financeServicesLists.holpForServices}
+        </textarea>
     </td>
 </tr>
 <tr>
@@ -2687,7 +2715,9 @@
         您对我行（社）服务有何建议？
     </td>
     <td align="left" colspan="2">
-        <textarea rows="3" style="width: 355px;height: 85px; margin-top: 5px;" name=""></textarea>
+        <textarea rows="3" style="width: 355px;height: 85px; margin-top: 5px;" name="suggestion">
+            ${financeServicesLists.suggestion}
+        </textarea>
     </td>
 </tr>
 <tr>
@@ -2901,7 +2931,9 @@
         客户新需求登记
     </td>
     <td align="left" colspan="2">
-        <textarea rows="3" style="width: 355px;height: 85px; margin-top: 5px;" name=""></textarea>
+        <textarea rows="3" style="width: 355px;height: 85px; margin-top: 5px;" name="newRequirement">
+            ${financeServicesLists.newRequirement}
+        </textarea>
     </td>
 </tr>
 </tbody>
@@ -3801,9 +3833,23 @@
                     </td>
                     <td width="73%" align="left">
                         <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="otherBankRecord">
-                            <option value="${customerManagerEvaList.otherBankRecord}">良好</option>
-                            <option value="">一般</option>
-                            <option value="">较差</option>
+                            <core:choose>
+                                <core:when test="${customerManagerEvaList.otherBankRecord=='良好'}">
+                                    <option value="${customerManagerEvaList.otherBankRecord}" selected="selected">良好</option>
+                                    <option value="一般">一般</option>
+                                    <option value="较差">较差</option>
+                                </core:when>
+                                <core:when test="${customerManagerEvaList.otherBankRecord=='一般'}">
+                                    <option value="良好">良好</option>
+                                    <option value="${customerManagerEvaList.otherBankRecord}" selected="selected">一般</option>
+                                    <option value="较差">较差</option>
+                                </core:when>
+                                <core:otherwise>
+                                    <option value="良好">良好</option>
+                                    <option value="一般">一般</option>
+                                    <option value="${customerManagerEvaList.otherBankRecord}" selected="selected">较差</option>
+                                </core:otherwise>
+                            </core:choose>
                         </select>
                     </td>
                 </tr>
@@ -3813,10 +3859,32 @@
                     </td>
                     <td align="left">
                         <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="houseToMoney">
-                            <option value="${customerManagerEvaList.houseToMoney}">优秀</option>
-                            <option value="">较好</option>
-                            <option value="">一般</option>
-                            <option value="">难以处置</option>
+                            <core:choose>
+                                <core:when test="${customerManagerEvaList.houseToMoney=='优秀'}">
+                                    <option value="${customerManagerEvaList.houseToMoney}" selected="selected">优秀</option>
+                                    <option value="较好">较好</option>
+                                    <option value="一般">一般</option>
+                                    <option value="难以处置">难以处置</option>
+                                </core:when>
+                                <core:when test="${customerManagerEvaList.houseToMoney=='较好'}">
+                                    <option value="优秀">优秀</option>
+                                    <option value="${customerManagerEvaList.houseToMoney}" selected="selected">较好</option>
+                                    <option value="一般">一般</option>
+                                    <option value="难以处置">难以处置</option>
+                                </core:when>
+                                <core:when test="${customerManagerEvaList.houseToMoney=='一般'}">
+                                    <option value="优秀">优秀</option>
+                                    <option value="较好">较好</option>
+                                    <option value="${customerManagerEvaList.houseToMoney}" selected="selected">一般</option>
+                                    <option value="难以处置">难以处置</option>
+                                </core:when>
+                                <core:otherwise>
+                                    <option value="优秀">优秀</option>
+                                    <option value="较好">较好</option>
+                                    <option value="一般">一般</option>
+                                    <option value="${customerManagerEvaList.houseToMoney}" selected="selected">难以处置</option>
+                                </core:otherwise>
+                            </core:choose>
                         </select>
                     </td>
                 </tr>

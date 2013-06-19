@@ -369,7 +369,7 @@
                     </core:forEach>
                 </ul>--%>
                     <core:forEach items="${imgList}" var="img" varStatus="idx">
-                        <div style="hidden" img="/img/${img}" class="img"></div>
+                        <div style="hidden:hidden" img="/img/${img}" class="img"></div>
                     </core:forEach>
                     <img id="photo" src="/img/${imgList[0]}" class="img-rounded photo">
             </td>
@@ -1910,7 +1910,7 @@
                             <td width="73%" align="center">&nbsp;</td>
                         </core:when>
                         <core:otherwise>
-                            <td width="73%" align="center"></td>
+                            <td width="73%" align="center">${villageManagerEvaList.truth}</td>
                         </core:otherwise>
                     </core:choose>
                 </tr>

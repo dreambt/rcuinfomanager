@@ -64,6 +64,7 @@ public class BaseInfoController {
 
         CusBaseInfo cusBasicInfo = baseInfoService.getCusBasicInfo(id);
         map.put("personBasicList", cusBasicInfo);
+
         //家庭收支情况
         map.put("personIncomeExpensesList", baseInfoService.getIncomeExpenses(id));
         // 家庭资产情况
@@ -91,7 +92,6 @@ public class BaseInfoController {
         } else {
             map.put("imgList", null);
         }
-
 
         return "farmer/show";
     }
@@ -215,8 +215,8 @@ public class BaseInfoController {
         map.put("customerManagerEvaList", baseInfoService.getCustomerManagerEvaList(id));
 
         FinanceServices financeServices=baseInfoService.getFinanceService(id);
-        String[] usedProducts =financeServices.getUsedProduct().split(",");
-        map.put("usedProducts",usedProducts);
+        String[] usedPro=financeServices.getUsedProduct().split(",");
+        map.put("usedProducts",usedPro);
 
         return "farmer/edit";
     }

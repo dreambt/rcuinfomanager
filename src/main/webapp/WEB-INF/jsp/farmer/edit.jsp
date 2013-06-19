@@ -24,17 +24,56 @@
             $('.usedProduct').each(function(index,element){
                 $('.'+$(element).val()).prop('checked', true);
             });
+
+            $('.socialSecurity').each(function(index,element){
+                $('.'+$(element).val()).prop('checked', true);
+            });
+            $('.mainAssets').each(function(index,element){
+                $('.'+$(element).val()).prop('checked', true);
+            });
+            $('.financialInfo').each(function(index,element){
+                $('.'+$(element).val()).prop('checked', true);
+            });
+            $('.guarantee').each(function(index,element){
+                $('.'+$(element).val()).prop('checked', true);
+            });
+            $('.moneyTodo').each(function(index,element){
+                $('.'+$(element).val()).prop('checked', true);
+            });
+            $('.fmDepositTodo').each(function(index,element){
+                $('.'+$(element).val()).prop('checked', true);
+            });
+            $('.needServices').each(function(index,element){
+                $('.'+$(element).val()).prop('checked', true);
+            });
+            $('.needServicesElse').each(function(index,element){
+                $('.'+$(element).val()).prop('checked', true);
+            });
+            $('.bankCard').each(function(index,element){
+                $('.'+$(element).val()).prop('checked', true);
+            });
+
+            $('.electronBank').each(function(index,element){
+                $('.'+$(element).val()).prop('checked', true);
+            });
+
+            $('.agentPay').each(function(index,element){
+                $('.'+$(element).val()).prop('checked', true);
+            });
+            $('.auto').each(function(index,element){
+                $('.'+$(element).val()).prop('checked', true);
+            });
+            $('.privateLoan').each(function(index,element){
+                $('.'+$(element).val()).prop('checked', true);
+            });
+            $('.publicLoan').each(function(index,element){
+                $('.'+$(element).val()).prop('checked', true);
+            });
+
+            $('.creditRecord').each(function(index,element){
+                $('.'+$(element).val()).prop('checked', true);
+            });
         });
-
-        //添加
-        function addItem(){
-            var option="";
-            var li="${personHousePropertyInfoList}";
-            for(var i;li.length;i++){
-
-            }
-
-        }
     </script>
 </head>
 <body>
@@ -393,21 +432,23 @@
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">社会保障情况</td>
     <td align="left" colspan="4"><%--${personBasicList.socialSecurity}--%>
-
+        <core:forEach items="${personBasicList.socialSecurity}" var="socialSecurity">
+            <input type="text" value="${socialSecurity}" style="display: none" class="socialSecurity"/>
+        </core:forEach>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox1" value="养老保险" class="养老保险">养老保险
+            <input type="checkbox" value="养老保险" class="养老保险" name="socialSecurity">养老保险
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox2" value="失业保险" class="失业保险">失业保险
+            <input type="checkbox" value="失业保险" class="失业保险" name="socialSecurity">失业保险
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox3" value="医疗保险" class="医疗保险">医疗保险
+            <input type="checkbox" value="医疗保险" class="医疗保险" name="socialSecurity">医疗保险
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox4" value="生育保险" class="生育保险">生育保险
+            <input type="checkbox" value="生育保险" class="生育保险" name="socialSecurity">生育保险
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox5" value="住房公积金" class="住房公积金">住房公积金
+            <input type="checkbox" value="住房公积金" class="住房公积金" name="socialSecurity">住房公积金
         </label>
     </td>
 </tr>
@@ -1564,8 +1605,8 @@
     <td align="center" colspan="8" style="font-size:22px">
         家庭资产情况
         <button class="btn btn-info" type="button" onclick="addItem();return false;">增加房产</button>
-        <button class="btn btn-info" type="button">增加车辆</button>
         <button class="btn btn-info" type="button">增加土地</button>
+        <button class="btn btn-info" type="button">增加车辆</button>
     </td>
 </tr>
 <tr>
@@ -1576,23 +1617,26 @@
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">主要资产</td>
     <td align="left" colspan="5"><%--${personFamilyAssets.mainAssets}--%>
+        <core:forEach items="${personFamilyAssets.mainAssets}" var="mainAssets">
+            <input type="text" value="${mainAssets}" style="display: none" class="mainAssets"/>
+        </core:forEach>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox6" value="option1"> 房屋
+            <input type="checkbox" class="房屋" value="房屋" name="mainAssets"> 房屋
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox7" value="option2"> 土地
+            <input type="checkbox" class="土地" value="土地" name="mainAssets"> 土地
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox8" value="option3"> 车辆
+            <input type="checkbox" class="车辆" value="车辆" name="mainAssets"> 车辆
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox9" value="option1"> 金融资产
+            <input type="checkbox" class="金融资产" value="金融资产" name="mainAssets"> 金融资产
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox10" value="option2"> 经营资金
+            <input type="checkbox" class="经营资金" value="经营资金" name="mainAssets"> 经营资金
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox11" value="option3"> 其他
+            <input type="checkbox" class="其他" value="其他" name="mainAssets"> 其他
         </label>
     </td>
 </tr>
@@ -2174,26 +2218,29 @@
     <tr>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">情况</td>
         <td align="left" colspan="3"><%--${personFinancialAssets.financialInfo}--%>
+            <core:forEach items="${personFinancialAssets.financialInfo}" var="financialInfo">
+                <input type="text" value="${financialInfo}" style="display: none" class="financialInfo"/>
+            </core:forEach>
             <label class="checkbox inline">
-                <input type="checkbox" id="inlineCheckbox12" value="option1"> 活期存款
+                <input type="checkbox" class="活期存款" value="活期存款" name="financialInfo"> 活期存款
             </label>
             <label class="checkbox inline">
-                <input type="checkbox" id="inlineCheckbox13" value="option2"> 定期存款
+                <input type="checkbox" class="定期存款" value="定期存款" name="financialInfo">定期存款
             </label>
             <label class="checkbox inline">
-                <input type="checkbox" id="inlineCheckbox14" value="option3"> 股票
+                <input type="checkbox" class="股票" value="股票" name="financialInfo"> 股票
             </label>
             <label class="checkbox inline">
-                <input type="checkbox" id="inlineCheckbox15" value="option1"> 基金
+                <input type="checkbox" class="基金" value="基金" name="financialInfo"> 基金
             </label>
             <label class="checkbox inline">
-                <input type="checkbox" id="inlineCheckbox16" value="option2"> 债券
+                <input type="checkbox" class="债券" value="债券" name="financialInfo">债券
             </label>
             <label class="checkbox inline">
-                <input type="checkbox" id="inlineCheckbox17" value="option3"> 投资性保险
+                <input type="checkbox" class="投资性保险" value="投资性保险" name="financialInfo"> 投资性保险
             </label>
             <label class="checkbox inline">
-                <input type="checkbox" id="inlineCheckbox18" value="option3"> 其他
+                <input type="checkbox" class="其他" value="其他" name="financialInfo"> 其他
             </label>
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">我社存款</td>
@@ -2547,28 +2594,31 @@
         如果需要贷款的话,您计划用这笔贷款做什么？
     </td>
     <td align="left" rowspan="3">
+        <core:forEach items="${financeServicesLists.moneyTodo}" var="moneyTodo">
+            <input type="text" value="${moneyTodo}" style="display: none" class="moneyTodo"/>
+        </core:forEach>
         <label class="checkbox inline" style="width: 125px; margin-top: 5px;">
-            <input type="checkbox" id="inlineCheckbox30" value="option2" > 做生意周转
+            <input type="checkbox" class="做生意周转" value="做生意周转" name="moneyTodo"> 做生意周转
         </label>
         <br>
         <label class="checkbox inline" style="width: 125px; margin-top: 5px;">
-            <input type="checkbox" id="inlineCheckbox31" value="option3"> 购买农业生产资料
+            <input type="checkbox" class="购买农业生产资料" value="购买农业生产资料" name="moneyTodo">  购买农业生产资料
         </label>
         <br>
         <label class="checkbox inline" style="width: 125px; margin-top: 5px;">
-            <input type="checkbox" id="inlineCheckbox32" value="option1"> 子女上学
+            <input type="checkbox" class="子女上学" value="子女上学" name="moneyTodo">  子女上学
         </label>
         <br>
         <label class="checkbox inline" style="width: 125px; margin-top: 5px;">
-            <input type="checkbox" id="inlineCheckbox33" value="option2"> 盖（买）房子
+            <input type="checkbox" class="盖(买)房子" value="盖(买)房子" name="moneyTodo"> 盖(买)房子
         </label>
         <br>
         <label class="checkbox inline" style="width: 125px; margin-top: 5px;">
-            <input type="checkbox" id="inlineCheckbox34" value="option3"> 购买大件物品
+            <input type="checkbox" class="购买大件物品" value="购买大件物品" name="moneyTodo"> 购买大件物品
         </label>
         <br>
         <label class="checkbox inline" style="width: 125px; margin-top: 5px;">
-            <input type="checkbox" id="inlineCheckbox35" value="option3"> 其他
+            <input type="checkbox" class="其他" value="其他" name="moneyTodo"> 其他
         </label>
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">
@@ -2584,20 +2634,23 @@
         您可以提供的担保物有？
     </td>
     <td align="left">
+        <core:forEach items="${financeServicesLists.guarantee}" var="guarantee">
+            <input type="text" value="${guarantee}" style="display: none" class="guarantee"/>
+        </core:forEach>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox36" value="option1"> 房地产
+            <input type="checkbox" class="房地产" value="房地产" name="guarantee"> 房地产
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox37" value="option2"> 存单
+            <input type="checkbox" class="存单" value="存单" name="guarantee"> 存单
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox38" value="option3"> 债券
+            <input type="checkbox" class="债券" value="债券" name="guarantee"> 债券
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox39" value="option3"> 保证人
+            <input type="checkbox" class="保证人" value="保证人" name="guarantee"> 保证人
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox40" value="option3"> 无
+            <input type="checkbox" class="无" value="无" name="guarantee"> 无
         </label>
     </td>
 </tr>
@@ -2615,26 +2668,29 @@
         未来1-2年家庭储蓄的主要目的和用途？
     </td>
     <td align="left" colspan="2">
+        <core:forEach items="${financeServicesLists.fmDepositTodo}" var="fmDepositTodo">
+            <input type="text" value="${fmDepositTodo}" style="display: none" class="fmDepositTodo"/>
+        </core:forEach>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox41" value="option1"> 做生意
+            <input type="checkbox" class="做生意" value="做生意" name="fmDepositTodo"> 做生意
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox42" value="option2"> 子女上学
+            <input type="checkbox" class="子女上学" value="子女上学" name="fmDepositTodo"> 子女上学
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox43" value="option3"> 盖（买）房子
+            <input type="checkbox" class="盖(买)房子" value="盖(买)房子" name="fmDepositTodo">  盖(买)房子
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox44" value="option3"> 购买大件物品
+            <input type="checkbox" class="购买大件物品" value="购买大件物品" name="fmDepositTodo"> 购买大件物品
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox45" value="option3"> 获得利息
+            <input type="checkbox" class="获得利息" value="获得利息" name="fmDepositTodo">获得利息
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox46" value="option3"> 购买其他金融资产（如股票、债券、基金、保险单）
+            <input type="checkbox" class="购买其他金融资产(如股票、债券、基金、保险单)" value="购买其他金融资产(如股票、债券、基金、保险单)" name="fmDepositTodo">购买其他金融资产（如股票、债券、基金、保险单）
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox47" value="option3"> 其他
+            <input type="checkbox" class="其他" value="其他" name="fmDepositTodo"> 其他
         </label>
     </td>
 </tr>
@@ -2643,23 +2699,25 @@
         您目前希望得到我行（社）的哪些服务？
     </td>
     <td align="left" colspan="2">
+        <core:forEach items="${financeServicesLists.needServices}" var="needServices">
+            <input type="text" value="${needServices}" style="display: none" class="needServices"/>
+        </core:forEach>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox48" value="option1"> 存款
+            <input type="checkbox" class="存款" value="存款" name="needServices"> 存款
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox49" value="option2"> 结算
+            <input type="checkbox" class="结算" value="结算" name="needServices"> 结算
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox50" value="option3"> 贷款
+            <input type="checkbox" class="贷款" value="贷款" name="needServices">贷款
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox51" value="option3"> 信用卡办理
+            <input type="checkbox" class="信用卡办理" value="信用卡办理" name="needServices">信用卡办理
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox52" value="option3"> 个人理财服务,需要
+            <input type="checkbox" class="个人理财服务,需要" value="个人理财服务,需要" name="needServices"> 个人理财服务,需要
         </label>
-        <input type="text" name="" value=""
-               style="width: 55px;height: 25px; margin-top: 5px;">项目
+        <input type="text" name="needServices" style="width: 55px;height: 25px; margin-top: 5px;">项目
     </td>
 </tr>
 <tr>
@@ -2667,37 +2725,38 @@
         除了上述业务,您还需要哪些服务？
     </td>
     <td align="left" colspan="2">
+        <core:forEach items="${financeServicesLists.needServicesElse}" var="needServicesElse">
+            <input type="text" value="${needServicesElse}" style="display: none" class="needServicesElse"/>
+        </core:forEach>
         <label class="checkbox inline" style="width: 155px; margin-top: 5px;">
-            <input type="checkbox" id="inlineCheckbox53" value="option1"> 代缴代收服务：
+            <input type="checkbox" class="代缴代收服务" value="代缴代收服务" name="needServicesElse"> 代缴代收服务
         </label>
-        <input type="text" name="" value=""
-               style="width: 155px;height: 25px; margin-top: 5px;">
+        <input type="text" name="needServicesElse" style="width: 155px;height: 25px; margin-top: 5px;">
         <br>
         <label class="checkbox inline" style="width: 155px; margin-top: 5px;">
-            <input type="checkbox" id="inlineCheckbox54" value="option2">贵重物品保管
-        </label>
-        <br>
-        <label class="checkbox inline" style="width: 155px; margin-top: 5px;">
-            <input type="checkbox" id="inlineCheckbox55" value="option3"> 黄金卖买
-        </label>
-        <br>
-        <label class="checkbox inline" style="width: 155px; margin-top: 5px;">
-            <input type="checkbox" id="inlineCheckbox56" value="option3"> 外汇卖买
+            <input type="checkbox" class="贵重物品保管" value="贵重物品保管" name="needServicesElse">贵重物品保管
         </label>
         <br>
         <label class="checkbox inline" style="width: 155px; margin-top: 5px;">
-            <input type="checkbox" id="inlineCheckbox57" value="option3"> 个人征信咨询
+            <input type="checkbox" class="黄金卖买" value="黄金卖买" name="needServicesElse">黄金卖买
         </label>
         <br>
         <label class="checkbox inline" style="width: 155px; margin-top: 5px;">
-            <input type="checkbox" id="inlineCheckbox58" value="option3"> 金融政策、知识的宣传
+            <input type="checkbox" class="外汇卖买" value="外汇卖买" name="needServicesElse">外汇卖买
         </label>
         <br>
         <label class="checkbox inline" style="width: 155px; margin-top: 5px;">
-            <input type="checkbox" id="inlineCheckbox59" value="option3"> 其他：
+            <input type="checkbox" class="个人征信咨询" value="个人征信咨询" name="needServicesElse"> 个人征信咨询
         </label>
-        <input type="text" name="" value=""
-               style="width: 155px;height: 25px; margin-top: 5px;">
+        <br>
+        <label class="checkbox inline" style="width: 155px; margin-top: 5px;">
+            <input type="checkbox" class="金融政策、知识的宣传" value="金融政策、知识的宣传" name="needServicesElse"> 金融政策、知识的宣传
+        </label>
+        <br>
+        <label class="checkbox inline" style="width: 155px; margin-top: 5px;">
+            <input type="checkbox" class="个人征信咨询" value="个人征信咨询" name="needServicesElse"> 其他：
+        </label>
+        <input type="text" name="needServicesElse" style="width: 155px;height: 25px; margin-top: 5px;">
     </td>
 </tr>
 <tr>
@@ -2728,14 +2787,17 @@
         金融业务需求
     </td>
     <td align="left" colspan="2">
+        <core:forEach items="${financeServicesLists.bankCard}" var="bankCard">
+            <input type="text" value="${bankCard}" style="display: none" class="bankCard"/>
+        </core:forEach>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox60" value="option3"> 信用卡
+            <input type="checkbox" class="信用卡" value="信用卡" name="bankCard"> 信用卡
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox61" value="option3"> 福万通卡
+            <input type="checkbox" class="福万通卡" value="福万通卡" name="bankCard"> 福万通卡
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox62" value="option3"> 贵宾卡
+            <input type="checkbox" class="贵宾卡" value="贵宾卡" name="bankCard"> 贵宾卡
         </label>
     </td>
 </tr>
@@ -2744,17 +2806,20 @@
         电子银行业务
     </td>
     <td align="left" colspan="2">
+        <core:forEach items="${financeServicesLists.electronBank}" var="electronBank">
+            <input type="text" value="${electronBank}" style="display: none" class="electronBank"/>
+        </core:forEach>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox63" value="option3"> 短信银行
+            <input type="checkbox" class="短信银行" value="短信银行" name="electronBank"> 短信银行
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox64" value="option3"> 电话银行
+            <input type="checkbox" class="电话银行" value="电话银行" name="electronBank"> 电话银行
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox65" value="option3"> 网上银行
+            <input type="checkbox" class="网上银行" value="网上银行" name="electronBank">  网上银行
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox66" value="option3"> 手机银行
+            <input type="checkbox" class="手机银行" value="手机银行" name="electronBank"> 手机银行
         </label>
     </td>
 </tr>
@@ -2763,23 +2828,26 @@
         代缴代扣业务
     </td>
     <td align="left" colspan="2">
+        <core:forEach items="${financeServicesLists.agentPay}" var="agentPay">
+            <input type="text" value="${agentPay}" style="display: none" class="agentPay"/>
+        </core:forEach>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox67" value="option3"> 代缴水费
+            <input type="checkbox" class="代缴水费" value="代缴水费" name="agentPay"> 代缴水费
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox68" value="option3"> 代缴电费
+            <input type="checkbox" class="代缴电费" value="代缴电费" name="agentPay"> 代缴电费
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox69" value="option3"> 代缴烟草费
+            <input type="checkbox" class="代缴烟草费" value="代缴烟草费" name="agentPay"> 代缴烟草费
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox70" value="option3"> 代发工资
+            <input type="checkbox" class="代发工资" value="代发工资" name="agentPay"> 代发工资
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox71" value="option3"> 电子扣税
+            <input type="checkbox" class="电子扣税" value="电子扣税" name="agentPay">  电子扣税
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox72" value="option3"> 保险费代扣
+            <input type="checkbox" class="保险费代扣" value="保险费代扣" name="agentPay"> 保险费代扣
         </label>
     </td>
 </tr>
@@ -2788,20 +2856,23 @@
         自助机具业务
     </td>
     <td align="left" colspan="2">
+        <core:forEach items="${financeServicesLists.auto}" var="auto">
+            <input type="text" value="${auto}" style="display: none" class="auto"/>
+        </core:forEach>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox73" value="option3"> 银联POS机
+            <input type="checkbox" class="银联POS机" value="银联POS机" name="auto"> 银联POS机
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox74" value="option3"> 福农通
+            <input type="checkbox" class="福农通" value="福农通" name="auto"> 福农通
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox75" value="option3"> 小额支付便民点
+            <input type="checkbox" class="小额支付便民点" value="小额支付便民点" name="auto"> 小额支付便民点
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox76" value="option3"> 生意通
+            <input type="checkbox" class="生意通" value="生意通" name="auto">  生意通
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox77" value="option3">  居家银行
+            <input type="checkbox" class="居家银行" value="居家银行" name="auto">  居家银行
         </label>
     </td>
 </tr>
@@ -2810,79 +2881,82 @@
         对私贷款业务
     </td>
     <td align="left" colspan="2">
+        <core:forEach items="${financeServicesLists.privateLoan}" var="privateLoan">
+            <input type="text" value="${privateLoan}" style="display: none" class="privateLoan"/>
+        </core:forEach>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox78" value="option3"> 农户小额信用贷款
+            <input type="checkbox" class="农户小额信用贷款" value="农户小额信用贷款" name="privateLoan"> 农户小额信用贷款
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox79" value="option3"> 农户联保贷款
+            <input type="checkbox" class="农户联保贷款" value="农户联保贷款" name="privateLoan"> 农户联保贷款
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox80" value="option3"> 农户保证贷款
-        </label>
-        <br>
-        <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox81" value="option3"> 农户抵押贷款
-        </label>
-        <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox82" value="option3"> 农户质押贷款
-        </label>
-        <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox83" value="option3"> 个人存单质押贷款
+            <input type="checkbox" class="农户保证贷款" value="农户保证贷款" name="privateLoan">农户保证贷款
         </label>
         <br>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox84" value="option3"> “万通宝”农户小额贷
+            <input type="checkbox" class="农户抵押贷款" value="农户抵押贷款" name="privateLoan"> 农户抵押贷款
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox85" value="option3"> “万通宝”个人经营贷款
-        </label>
-        <br>
-        <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox86" value="option3"> 组合宝”农户小额贷
+            <input type="checkbox" class="农户质押贷款" value="农户质押贷款" name="privateLoan">农户质押贷款
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox87" value="option3"> 组合宝”个人经营贷款
+            <input type="checkbox" class="个人存单质押贷款" value="个人存单质押贷款" name="privateLoan">个人存单质押贷款
         </label>
         <br>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox88" value="option3"> 保无忧”新农保参保人员贷款
+            <input type="checkbox" class="万通宝”农户小额贷" value="“万通宝”农户小额贷" name="privateLoan"> “万通宝”农户小额贷
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox89" value="option3"> “两女”户计生贴息贷
-        </label>
-        <br>
-        <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox90" value="option3"> 生源地信用助学贷款
-        </label>
-        <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox91" value="option3"> 农村青年创业贷款
-        </label>
-        <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox92" value="option3"> 巾帼创业贷款
+            <input type="checkbox" class="“万通宝”个人经营贷款" value="“万通宝”个人经营贷款" name="privateLoan"> “万通宝”个人经营贷款
         </label>
         <br>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox93" value="option3"> 农户异地创业贷款
+            <input type="checkbox" class="组合宝”农户小额贷" value="“组合宝”农户小额贷" name="privateLoan"> 组合宝”农户小额贷
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox94" value="option3"> “惠村通”
-        </label>
-        <br>
-        <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox95" value="option3"> 农户建房贷款
-        </label>
-        <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox96" value="option3"> 个人住房按揭贷款
-        </label>
-        <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox97" value="option3"> 个人汽车按揭贷款
+            <input type="checkbox" class="组合宝”个人经营贷款" value="组合宝”个人经营贷款" name="privateLoan"> 组合宝”个人经营贷款
         </label>
         <br>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox98" value="option3"> 农民专业合作社贷款
+            <input type="checkbox" class="保无忧”新农保参保人员贷款" value="保无忧”新农保参保人员贷款" name="privateLoan"> 保无忧”新农保参保人员贷款
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox99" value="option3"> 公职人员消费贷款
+            <input type="checkbox" class="“两女”户计生贴息贷" value="“两女”户计生贴息贷" name="privateLoan"> “两女”户计生贴息贷
+        </label>
+        <br>
+        <label class="checkbox inline">
+            <input type="checkbox" class="生源地信用助学贷款" value="生源地信用助学贷款" name="privateLoan"> 生源地信用助学贷款
+        </label>
+        <label class="checkbox inline">
+            <input type="checkbox" class="农村青年创业贷款" value="农村青年创业贷款" name="privateLoan"> 农村青年创业贷款
+        </label>
+        <label class="checkbox inline">
+            <input type="checkbox" class="巾帼创业贷款" value="巾帼创业贷款" name="privateLoan"> 巾帼创业贷款
+        </label>
+        <br>
+        <label class="checkbox inline">
+            <input type="checkbox" class="农户异地创业贷款" value="农户异地创业贷款" name="privateLoan">农户异地创业贷款
+        </label>
+        <label class="checkbox inline">
+            <input type="checkbox" class="“惠村通”" value="“惠村通”" name="privateLoan">“惠村通”
+        </label>
+        <br>
+        <label class="checkbox inline">
+            <input type="checkbox" class="农户建房贷款" value="农户建房贷款" name="privateLoan"> 农户建房贷款
+        </label>
+        <label class="checkbox inline">
+            <input type="checkbox" class="个人住房按揭贷款" value="个人住房按揭贷款" name="privateLoan">个人住房按揭贷款
+        </label>
+        <label class="checkbox inline">
+            <input type="checkbox" class="个人汽车按揭贷款" value="个人汽车按揭贷款" name="privateLoan">个人汽车按揭贷款
+        </label>
+        <br>
+        <label class="checkbox inline">
+            <input type="checkbox" class="农民专业合作社贷款" value="农民专业合作社贷款" name="privateLoan">农民专业合作社贷款
+        </label>
+        <label class="checkbox inline">
+            <input type="checkbox" class="公职人员消费贷款" value="公职人员消费贷款" name="privateLoan">公职人员消费贷款
         </label>
     </td>
 </tr>
@@ -2891,38 +2965,41 @@
         对公贷款业务
     </td>
     <td align="left" colspan="2">
+        <core:forEach items="${financeServicesLists.publicLoan}" var="publicLoan">
+            <input type="text" value="${publicLoan}" style="display: none" class="publicLoan"/>
+        </core:forEach>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox100" value="option3"> 流动资金贷款
+            <input type="checkbox" class="流动资金贷款" value="流动资金贷款" name="publicLoan"> 流动资金贷款
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox101" value="option3"> 固定资产贷款
+            <input type="checkbox" class="固定资产贷款" value="固定资产贷款" name="publicLoan">固定资产贷款
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox102" value="option3"> 小企业联保贷款
+            <input type="checkbox" class="小企业联保贷款" value="小企业联保贷款" name="publicLoan">小企业联保贷款
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox103" value="option3"> 中小企业保证贷款
+            <input type="checkbox" class="中小企业保证贷款" value="中小企业保证贷款" name="publicLoan">中小企业保证贷款
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox104" value="option3"> 担保公司担保贷款
+            <input type="checkbox" class="担保公司担保贷款" value="担保公司担保贷款" name="publicLoan">担保公司担保贷款
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox105" value="option3"> 海域使用权抵押贷款
+            <input type="checkbox" class="海域使用权抵押贷款" value="海域使用权抵押贷款" name="publicLoan"> 海域使用权抵押贷款
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox106" value="option3"> 船舶抵押贷款
+            <input type="checkbox" class="船舶抵押贷款" value="船舶抵押贷款" name="publicLoan"> 船舶抵押贷款
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox107" value="option3"> 银行承兑汇票
+            <input type="checkbox" class="银行承兑汇票" value="银行承兑汇票" name="publicLoan">银行承兑汇票
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox108" value="option3"> 商标专用权质押贷款
+            <input type="checkbox" class="商标专用权质押贷款" value="商标专用权质押贷款" name="publicLoan">商标专用权质押贷款
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox109" value="option3"> 保函业务
+            <input type="checkbox" class="保函业务" value="保函业务" name="publicLoan"> 保函业务
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox110" value="option3"> 银行承兑汇票贴现
+            <input type="checkbox" class="银行承兑汇票贴现" value="银行承兑汇票贴现" name="publicLoan"> 银行承兑汇票贴现
         </label>
     </td>
 </tr>
@@ -3771,58 +3848,61 @@
                         个人银行信用记录
                     </td>
                     <td align="left">            <%--${customerManagerEvaList.creditRecord}  --%>
+                        <core:forEach items="${customerManagerEvaList.creditRecord}" var="creditRecord">
+                            <input type="text" value="${creditRecord}" style="display: none" class="creditRecord"/>
+                        </core:forEach>
                         <label class="checkbox inline">
-                            <input type="checkbox" id="inlineCheckbox111" value="option3">
+                            <input type="checkbox" class="报告期内能积极主动按期偿本付息,无违约记录" value="报告期内能积极主动按期偿本付息,无违约记录" name="creditRecord">
                             报告期内能积极主动按期偿本付息,无违约记录
                         </label>
                         <br>
                         <label class="checkbox inline">
-                            <input type="checkbox" id="inlineCheckbox112" value="option3">
+                            <input type="checkbox" class="存在2次(含)以内本金.利息不超过1个月已还清的不良记录,无超过1个月以上不良记录" value="存在2次(含)以内本金.利息不超过1个月已还清的不良记录,无超过1个月以上不良记录" name="creditRecord">
                             存在2次(含)以内本金.利息不超过1个月已还清的不良记录,无超过1个月以上不良记录
                         </label>
                         <br>
                         <label class="checkbox inline">
-                            <input type="checkbox" id="inlineCheckbox113" value="option3">
+                            <input type="checkbox" class="存在3次(含)以上本金.利息不超过1个月已还清的不良记录,无超过1个月以上不良记录" value="存在3次(含)以上本金.利息不超过1个月已还清的不良记录,无超过1个月以上不良记录" name="creditRecord">
                             存在3次(含)以上本金.利息不超过1个月已还清的不良记录,无超过1个月以上不良记录
                         </label>
                         <br>
                         <label class="checkbox inline">
-                            <input type="checkbox" id="inlineCheckbox114" value="option3">
+                            <input type="checkbox" class="存在1-2次(含)本金.利息超过1个月但在3个月以内已还清的不良记录,无超过3个月以上不良记录" value="存在1-2次(含)本金.利息超过1个月但在3个月以内已还清的不良记录,无超过3个月以上不良记录" name="creditRecord">
                             存在1-2次(含)本金.利息超过1个月但在3个月以内已还清的不良记录,无超过3个月以上不良记录
                         </label>
                         <br>
                         <label class="checkbox inline">
-                            <input type="checkbox" id="inlineCheckbox115" value="option3">
+                            <input type="checkbox" class="存在3次(含)以上本金.利息超过1个月但在3个月以内已还清的不良记录,无超过3个月以上不良记录" value="存在3次(含)以上本金.利息超过1个月但在3个月以内已还清的不良记录,无超过3个月以上不良记录" name="creditRecord">
                             存在3次(含)以上本金.利息超过1个月但在3个月以内已还清的不良记录,无超过3个月以上不良记录
                         </label>
                         <br>
                         <label class="checkbox inline">
-                            <input type="checkbox" id="inlineCheckbox116" value="option3">
+                            <input type="checkbox" class="存在1-2次(含)本金或利息超过3个月以后才还清的不良记录" value="存在1-2次(含)本金或利息超过3个月以后才还清的不良记录" name="creditRecord">
                             存在1-2次(含)本金或利息超过3个月以后才还清的不良记录
                         </label>
                         <br>
                         <label class="checkbox inline">
-                            <input type="checkbox" id="inlineCheckbox117" value="option3">
+                            <input type="checkbox" class="存在3次(含)以上本金或利息超过3个月以后才还清的不良记录" value="存在3次(含)以上本金或利息超过3个月以后才还清的不良记录" name="creditRecord">
                             存在3次(含)以上本金或利息超过3个月以后才还清的不良记录
                         </label>
                         <br>
                         <label class="checkbox inline">
-                            <input type="checkbox" id="inlineCheckbox118" value="option3">
+                            <input type="checkbox" class="评估时点有拖欠利息超过1个月" value="评估时点有拖欠利息超过1个月" name="creditRecord">
                             评估时点有拖欠利息超过1个月
                         </label>
                         <br>
                         <label class="checkbox inline">
-                            <input type="checkbox" id="inlineCheckbox119" value="option3">
+                            <input type="checkbox" class="评估时点有次级类贷款,无可疑或损失类贷款" value="评估时点有次级类贷款,无可疑或损失类贷款" name="creditRecord">
                             评估时点有次级类贷款,无可疑或损失类贷款
                         </label>
                         <br>
                         <label class="checkbox inline">
-                            <input type="checkbox" id="inlineCheckbox120" value="option3">
+                            <input type="checkbox" class="评估时点有可疑或损失类贷款" value="评估时点有可疑或损失类贷款" name="creditRecord">
                             评估时点有可疑或损失类贷款
                         </label>
                         <br>
                         <label class="checkbox inline">
-                            <input type="checkbox" id="inlineCheckbox121" value="option3">
+                            <input type="checkbox" class="报告期内无银行信用记录" value="报告期内无银行信用记录" name="creditRecord">
                             报告期内无银行信用记录
                         </label>
                     </td>

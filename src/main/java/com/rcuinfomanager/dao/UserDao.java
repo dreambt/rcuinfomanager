@@ -17,9 +17,9 @@ public interface UserDao {
 
     User getUserManager(String userName);  // 获取管理员和普通用户
 
-    void saveUser(User user);
+    void saveUserWithOutOrganization(User user);
 
-    void updateUser(User user);
+    void changePassword(User user);
 
     void deleteUser(int id);
 

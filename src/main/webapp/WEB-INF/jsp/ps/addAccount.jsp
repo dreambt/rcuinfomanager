@@ -15,7 +15,7 @@
         $(function(){
 
             //确定   使用json
-            $('#okOperate').click(function(){
+           /* $('#okOperate').click(function(){
                 var url='';
                 var scuessUrl='';
                 var params={'':''};
@@ -26,7 +26,7 @@
                            alert("失败");
                        }
                 },'json');
-            });
+            });*/
 
             //关闭
             $('#cancelOperate').click(function() {
@@ -45,7 +45,7 @@
 </head>
 <body>
 
-<form method="post">
+<form method="post" action="/systemAccount/addAccount">
     <table width="100%" border="0">
         <tbody>
         <tr>
@@ -53,7 +53,7 @@
                 客户经理：
             </td>
             <td align="left">
-                <input  type="text" name="" value="" placeholder="请输入客户经理的姓名"
+                <input  type="text" name="displayUserName" value="${user.displayUserName}" placeholder="请输入客户经理的姓名"
                         style="width: 200px;height: 30px; margin-top: 10px;"/>
             </td>
         </tr>
@@ -62,7 +62,7 @@
                 帐号：
             </td>
             <td align="left">
-                <input type="text" name="customerName" value=""
+                <input type="text" name="userName" value="${user.userName}"
                        style="width: 200px;height: 30px; margin-top: 10px;" placeholder="请输入要创建的帐号">
             </td>
         </tr>
@@ -71,7 +71,7 @@
                 密码：
             </td>
             <td align="left">
-                <input type="text" name="customerName" value=""
+                <input type="text" name="password" value="${user.password}"
                        style="width: 200px;height: 30px; margin-top: 10px;" placeholder="请输入密码">
             </td>
         </tr>
@@ -80,7 +80,7 @@
                 确认密码：
             </td>
             <td align="left">
-                <input type="text" name="customerName" value=""
+                <input type="text" name="confirmPassword" value="${user.confirmPassword}"
                        style="width: 200px;height: 30px; margin-top: 10px;" placeholder="请再次输入密码">
             </td>
         </tr>
@@ -109,10 +109,12 @@
         </tr>
         </tbody>
     </table>
+    <button type="submit" class="btn">确定</button>
+    <button type="cancel" class="btn">取消</button>
 </form>
-<p align="center">
+<%--<p align="center">
     <a class="btn" href="#" id="okOperate">确定</a>&nbsp;
     <a class="btn" href="#" id="cancelOperate">取消</a>
-</p>
+</p>--%>
 </body>
 </html>

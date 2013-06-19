@@ -124,6 +124,12 @@ public class UserService {
         return userDao.getUserManager(uname);
     }
 
+    public void addUser(User user) {
+        if (user.getOrganizationId() == 0) {
+            userDao.saveUserWithOutOrganization(user);
+        }
+    }
+
     public static class LogonResult {
         /**
          * 登录结果代码

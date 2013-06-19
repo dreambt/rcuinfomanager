@@ -48,7 +48,7 @@ public class UserDaoTest {
 
         //修改
       //  user.setPassword("654321");
-      //  userDao.updateUser(user);
+      //  userDao.changePassword(user);
 
         //修改后的结果
        // User updateResult = userDao.getUserById(id);

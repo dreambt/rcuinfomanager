@@ -4,10 +4,7 @@ import com.rcuinfomanager.dao.UserDao;
 import com.rcuinfomanager.model.User;
 import com.rcuinfomanager.service.BaseInfoService;
 import com.rcuinfomanager.util.JsonParser;
-import com.rcuinfomanager.webservice.model.AllColumnInfo;
-import com.rcuinfomanager.webservice.model.UploadData;
-import com.rcuinfomanager.webservice.model.WebResponseData;
-import com.rcuinfomanager.webservice.model.WebServiceResponseData;
+import com.rcuinfomanager.webservice.model.*;
 import com.security.mdfive.MDFive;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,5 +81,29 @@ public class FarmerInfoWebService {
         }
 
         return webResponseData;
+    }
+
+
+    @RequestMapping(value = "/baseinfo/submitlist/{username}/{password}", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    SubmitWebResponseData getSubmitList(@PathVariable String username, @PathVariable String password) {
+
+        SubmitWebResponseData submitWebResponseData = new SubmitWebResponseData();
+        submitWebResponseData.setStatus(0);
+
+        User user = userDao.getUserByUserName(username);
+        if (user != null) {
+            String pwdMD5 = MDFive.getEncryptPwd(user.getPassword());
+            if (pwdMD5.equals(password)) {
+                List<SubmitItem> data = baseInfoService.querySubmitList(username);
+                if (data != null) {
+                    submitWebResponseData.setStatus(1);
+                    submitWebResponseData.setSubmitList(data);
+                }
+            }
+        }
+
+        return submitWebResponseData;
     }
 }

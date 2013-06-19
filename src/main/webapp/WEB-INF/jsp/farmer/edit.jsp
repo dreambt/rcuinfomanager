@@ -19,6 +19,10 @@
                 $("li[class='active']").removeAttr("class");
                 $(this).addClass("active");
             });
+
+            $('.usedProduct').each(function(index,element){
+                $('.'+$(element).val()).prop('checked', true);
+            });
         });
 
         //添加
@@ -101,8 +105,8 @@
 <div class="tab-pane active" id="tab1">
 <div class="farmer_info">
 <!--table-->
-<div class="table-list" style="table-layout:fixed; height:345px; overflow:scroll;">
-<table width="100%" border="1">
+<div class="table-list">
+<table width="100%" border="1" cellspacing="0" width="732px" color="#727f8a;">
 <tbody>
 
 <tr>
@@ -388,20 +392,24 @@
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">社会保障情况</td>
     <td align="left" colspan="4"><%--${personBasicList.socialSecurity}--%>
+        <core:forEach items="${usedProducts}" var="usedProduct">
+            <input value="${usedProduct}" class="usedProductHid" style="display:none" />
+        </core:forEach>
+
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox1" value="option1">养老保险
+            <input type="checkbox" id="inlineCheckbox1" value="养老保险" class="养老保险">养老保险
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox2" value="option2">失业保险
+            <input type="checkbox" id="inlineCheckbox2" value="失业保险" class="失业保险">失业保险
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox3" value="option3">医疗保险
+            <input type="checkbox" id="inlineCheckbox3" value="医疗保险" class="医疗保险">医疗保险
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox4" value="option4">生育保险
+            <input type="checkbox" id="inlineCheckbox4" value="生育保险" class="生育保险">生育保险
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" id="inlineCheckbox5" value="option5">住房公积金
+            <input type="checkbox" id="inlineCheckbox5" value="住房公积金" class="住房公积金">住房公积金
         </label>
     </td>
 </tr>
@@ -2437,56 +2445,51 @@
 <!--2-->
 <div class="tab-pane" id="tab2">
 <div class="pad-10">
-<div class="table-list" style="table-layout:fixed; height:345px; overflow:scroll;">
-<table width="100%" border="1">
+<div class="table-list">
+<table width="100%" border="1" cellspacing="0" width="732px" color="#727f8a;">
 <tbody>
 <tr>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">
         您目前使用我行（社）的哪些产品
     </td>
     <td align="left" colspan="3">
-        <core:choose>
-            <core:when test="${usedProducts=='存款'&& usedProducts=='贷款' && usedProducts=='信用卡' && usedProducts=='POS机' && usedProducts=='保管箱'
-            && usedProducts=='网上银行' && usedProducts=='居家银行' && usedProducts=='短信银行' && usedProducts=='电话银行' && usedProducts=='手机银行' && usedProducts=='其他'}">
-                <label class="checkbox inline">
-                    <input type="checkbox" id="inlineCheckbox19" value="option1" name="" checked="checked"> 存款
-                </label>
-                <label class="checkbox inline">
-                    <input type="checkbox" id="inlineCheckbox20" value="option2" name="" checked="checked"> 贷款
-                </label>
-                <label class="checkbox inline">
-                    <input type="checkbox" id="inlineCheckbox21" value="option3" name="" checked="checked"> 信用卡
-                </label>
-                <label class="checkbox inline">
-                    <input type="checkbox" id="inlineCheckbox22" value="option1" name="" checked="checked"> POS机
-                </label>
-                <label class="checkbox inline">
-                    <input type="checkbox" id="inlineCheckbox23" value="option2" name="" checked="checked"> 保管箱
-                </label>
-                <label class="checkbox inline">
-                    <input type="checkbox" id="inlineCheckbox24" value="option3" name="" checked="checked"> 网上银行
-                </label>
-                <label class="checkbox inline">
-                    <input type="checkbox" id="inlineCheckbox25" value="option1" name="" checked="checked"> 居家银行
-                </label>
-                <br>
-                <label class="checkbox inline">
-                    <input type="checkbox" id="inlineCheckbox26" value="option2" name="" checked="checked"> 短信银行
-                </label>
-                <label class="checkbox inline">
-                    <input type="checkbox" id="inlineCheckbox27" value="option3" name="" checked="checked"> 电话银行
-                </label>
-                <label class="checkbox inline">
-                    <input type="checkbox" id="inlineCheckbox28" value="option2" name="" checked="checked"> 手机银行
-                </label>
-                <label class="checkbox inline">
-                    <input type="checkbox" id="inlineCheckbox29" value="option3" name="" checked="checked"> 其他
-                </label>
-            </core:when>
-            <core:otherwise>
-
-            </core:otherwise>
-        </core:choose>
+        <core:forEach items="${usedProducts}" var="usedProduct">
+                <input type="text" value="${usedProduct}" style="display: none" class="usedProduct"/>
+        </core:forEach>
+        <label class="checkbox inline">
+            <input type="checkbox" class="存款" value="存款" name="" > 存款
+        </label>
+        <label class="checkbox inline">
+            <input type="checkbox" class="贷款" value="贷款" name=""> 贷款
+        </label>
+        <label class="checkbox inline">
+            <input type="checkbox" class="信用卡" value="信用卡" name=""> 信用卡
+        </label>
+        <label class="checkbox inline">
+            <input type="checkbox" class="POS机" value="POS机" name="" > POS机
+        </label>
+        <label class="checkbox inline">
+            <input type="checkbox" class="保管箱" value="保管箱" name="" > 保管箱
+        </label>
+        <label class="checkbox inline">
+            <input type="checkbox" class="网上银行" value="网上银行" name="" > 网上银行
+        </label>
+        <label class="checkbox inline">
+            <input type="checkbox" class="居家银行" value="居家银行" name="" > 居家银行
+        </label>
+        <br>
+        <label class="checkbox inline">
+            <input type="checkbox" class="短信银行" value="短信银行" name="" > 短信银行
+        </label>
+        <label class="checkbox inline">
+            <input type="checkbox" class="电话银行" value="电话银行" name="" > 电话银行
+        </label>
+        <label class="checkbox inline">
+            <input type="checkbox" class="手机银行" value="手机银行" name="" > 手机银行
+        </label>
+        <label class="checkbox inline">
+            <input type="checkbox" class="其他" value="其他" name="" > 其他
+        </label>
     </td>
 </tr>
 <tr>
@@ -2910,8 +2913,8 @@
 <!-- 3村委会（居委会）评价-->
 <div class="tab-pane" id="tab3">
 <div class="pad-10">
-<div class="table-list" style="table-layout:fixed; height:345px; overflow:scroll;">
-<table width="100%">
+<div class="table-list">
+<table width="100%" border="1" cellspacing="0" width="732px" color="#727f8a;">
 <tbody>
 
 <tr>
@@ -3720,7 +3723,7 @@
 <div class="tab-pane" id="tab4">
     <div class="pad-10">
         <div class="table-list">
-            <table width="100%" border="1">
+            <table width="100%" border="1" cellspacing="0" width="732px" color="#727f8a;">
                 <tbody>
                 <tr>
                     <td width="27%" align="center" bgcolor="#b4d8ed" style="color:#161823">

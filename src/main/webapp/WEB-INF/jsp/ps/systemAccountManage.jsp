@@ -9,10 +9,10 @@
     <link href="/asserts/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
     <link href="/asserts/css/doc.css" rel="stylesheet" media="screen">
     <link href="/asserts/css/style.css" rel="stylesheet" media="screen">
-    <link id="artDialog-skin" href="/asserts/js/dialog/skins/opera.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/asserts/css/jquery.fancybox.css"/>
     <script src="/asserts/js/jquery-1.7.2.min.js"></script>
     <script src="/asserts/js/bootstrap.min.js"></script>
-    <script src="/asserts/js/dialog/artDialog.js"></script>
+    <script src="/asserts/js/jquery.fancybox.js"></script>
     <script type="text/javascript">
         $(function(){
 
@@ -23,13 +23,18 @@
 
             //添加帐号
             $('#addAccount').click(function(){
-                var url='systemAccount/addAccount';
+
+                $("#addAccount").fancybox({
+                    'hideOnContentClick': true,
+                    'closeBtn' : false
+                });
+                /*var url='systemAccount/addAccount';
                 window.top.artDialog({
                     id: 'addAccount',
                     title: '添加帐号',
                     lock:true,
                     content:'<iframe scrolling="auto" width="500" height="380" frameborder="0" style="border: none;margin: -20px -25px;"marginheight="0" marginwidth="0" src="'+ url +'"/>'
-                });
+                });*/
             });
             //添加网点
             $('#addStipple').click(function(){
@@ -109,9 +114,11 @@
                 </select>
                 <input id="keyword" name="keyword" type="text" style="color:#999999;width:120px; height:30px"
                        class="input-text" value="请输入关键字"/>
-                <input type="submit" name="" value="查询" style="width:80px; height:30px"/>
-                <input type="button" id="addAccount" value="添加账号" style="width:80px; height:30px"/>
-                <input type="button" id="addStipple" value="添加网点" style="width:80px; height:30px"/>
+                <div class="btn-group">
+                    <button class="btn">查询</button>
+                    <a id="addAccount" class="btn" href="#addUser">添加账号</a>
+                    <button class="btn" id="addStipple">添加网点</button>
+                </div>
             </div>
 
             <div class="table-list">
@@ -154,6 +161,55 @@
                     </ul>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- add user -->
+    <div style="display:none">
+        <div id="addUser">
+            <form method="post" action="/systemAccount/addAccount">
+                <table width="100%" border="0">
+                    <tbody>
+                    <tr>
+                        <td align="right">客户经理：</td>
+                        <td align="left"><input  type="text" name="displayUserName" style="width: 200px;height: 30px;margin-top: 10px;" value="${user.displayUserName}" placeholder="请输入客户经理的姓名"/> </td>
+                    </tr>
+                    <tr>
+                        <td align="right">帐号：</td>
+                        <td align="left"> <input type="text" name="userName" style="width: 200px;height: 30px;margin-top: 10px;" value="${user.userName}" placeholder="请输入要创建的帐号"></td>
+                    </tr>
+                    <tr>
+                        <td align="right"> 密码： </td>
+                        <td align="left"> <input type="text" name="password" style="width: 200px;height: 30px;margin-top: 10px;" value="${user.password}"  placeholder="请输入密码"></td>
+                    </tr>
+                    <tr>
+                        <td align="right"> 确认密码：</td>
+                        <td align="left"> <input type="text" name="confirmPassword" style="width: 200px;height: 30px;margin-top: 10px;" value="${user.confirmPassword}" placeholder="请再次输入密码"></td>
+                    </tr>
+                    <tr>
+                        <td align="right">对应的网点：</td>
+                        <td align="left">
+                            <select class="span3" name="organizationName" id="organizationName" style="width:202px;">
+                                <option value="">选择网点</option>
+                                <option value="" ></option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right">指定角色：</td>
+                        <td align="left">
+                            <label class="checkbox inline"><input type="checkbox" id="inlineCheckbox36" value="option1"> 系统管理员 </label>
+                            <br>
+                            <label class="checkbox inline"> <input type="checkbox" id="inlineCheckbox37" value="option2"> 客户经理 </label>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div style="margin-left: 100px;">
+                    <button type="submit" class="btn">确定</button>
+                    <button type="cancel" class="btn" onClick="parent.jQuery.fancybox.close();return false">取消</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

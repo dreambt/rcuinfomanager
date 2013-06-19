@@ -3,6 +3,7 @@ package com.rcuinfomanager.service;
 import com.rcuinfomanager.dao.BaseInfoDao;
 import com.rcuinfomanager.model.*;
 import com.rcuinfomanager.webservice.model.AllColumnInfo;
+import com.rcuinfomanager.webservice.model.SubmitItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -224,5 +225,9 @@ public class BaseInfoService {
 
     public List<Long> getAllHouseholdInfos() {
         return baseInfoDao.getAllHouseholdInfos();
+    }
+
+    public List<SubmitItem> querySubmitList(String userName) {
+        return baseInfoDao.querySubmitList(userName);
     }
 }

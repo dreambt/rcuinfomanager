@@ -32,12 +32,12 @@
           select u.userId, u.lastLoginTime from usersinfo u where u.userName=#{userName}
     </select>
 
-    <insert id="saveUser" parameterType="com.rcuinfomanager.model.User">
-        INSERT INTO usersinfo(organization_id,user_name,password,named,cur_designate_flag,create_time,last_login_time,note1,note2,note3,note4)
-        VALUES(#{organizationId},#{userName},#{password},#{name},#{curDesignateFlag},#{createTime},,#{lastLoginTime},#{note1},#{note2},#{note3},#{note4})
+    <insert id="saveUserWithOutOrganization" parameterType="com.rcuinfomanager.model.User">
+        INSERT INTO usersinfo(userName,password,displayUserName,curDesignateFlag,createTime,needModifyPassword,lastLoginTime,note1,note2,note3,note4)
+        VALUES(#{userName},#{password},#{displayUserName},#{curDesignateFlag},#{createTime},#{needModifyPassword},#{lastLoginTime},#{note1},#{note2},#{note3},#{note4})
     </insert>
 
-    <update id="updateUser" parameterType="com.rcuinfomanager.model.User">
+    <update id="changePassword" parameterType="com.rcuinfomanager.model.User">
         UPDATE usersinfo SET password = #{password}, needModifyPassword = 1 WHERE userId=#{userId}
     </update>
 

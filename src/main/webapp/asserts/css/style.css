@@ -37,7 +37,7 @@
 
 .table-list {
     overflow: auto;
-/*    height: 550px;*/
+    /*    height: 550px;*/
 }
 
 .table-list td, .table-list th {
@@ -128,4 +128,10 @@ a.close-own:hover {
 .photo {
     max-height: 200px;
     max-width: 300px;
+}
+
+.myinput {
+    width: 200px;
+    height: 30px;
+    margin-top: 10px;
 }

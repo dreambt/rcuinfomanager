@@ -64,10 +64,6 @@ public class BaseInfoController {
 
         CusBaseInfo cusBasicInfo = baseInfoService.getCusBasicInfo(id);
         map.put("personBasicList", cusBasicInfo);
-        FinanceServices financeServices=baseInfoService.getFinanceService(id);
-        String[] usedPro=financeServices.getUsedProduct().toString().split(",");
-        map.put("usedProducts",usedPro);
-
         //家庭收支情况
         map.put("personIncomeExpensesList", baseInfoService.getIncomeExpenses(id));
         // 家庭资产情况
@@ -95,6 +91,7 @@ public class BaseInfoController {
         } else {
             map.put("imgList", null);
         }
+
 
         return "farmer/show";
     }
@@ -216,6 +213,10 @@ public class BaseInfoController {
         map.put("villageManagerEvaList", baseInfoService.getVillageManagerEvaList(id));
         //四
         map.put("customerManagerEvaList", baseInfoService.getCustomerManagerEvaList(id));
+
+        FinanceServices financeServices=baseInfoService.getFinanceService(id);
+        String[] usedProducts =financeServices.getUsedProduct().split(",");
+        map.put("usedProducts",usedProducts);
 
         return "farmer/edit";
     }

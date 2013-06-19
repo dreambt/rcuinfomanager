@@ -145,7 +145,7 @@
 <div class="tab-pane active" id="tab1">
 
 <div class="farmer_info">
-<div class="table-list" style="table-layout:fixed; height:345px; overflow:scroll;">
+<div class="table-list">
 <table width="100%" border="1" cellspacing="0" width="732px" color="#727f8a;">
 <tbody>
 
@@ -1636,8 +1636,8 @@
 </div>
 <div class="tab-pane" id="tab2">
     <div class="pad-10">
-        <div class="table-list" style="table-layout:fixed; height:345px; overflow:scroll;">
-           <table width="100%" border="0">
+        <div class="table-list">
+           <table width="100%" border="1" cellspacing="0" width="732px" color="#727f8a;">
                 <tbody>
                     <tr>
                         <td align="center" bgcolor="#b4d8ed" style="color:#161823">
@@ -1898,8 +1898,8 @@
 <!--村委会（居委会）评价-->
 <div class="tab-pane" id="tab3">
     <div class="pad-10">
-        <div class="table-list" style="table-layout:fixed; height:345px; overflow:scroll;">
-            <table width="100%" border="0">
+        <div class="table-list">
+            <table width="100%" border="1" cellspacing="0" width="732px" color="#727f8a;">
                 <tbody>
                 <tr>
                     <td width="27%" align="left" bgcolor="#b4d8ed" style="color:#161823">
@@ -2157,7 +2157,7 @@
 <div class="tab-pane" id="tab4">
     <div class="pad-10">
         <div class="table-list">
-            <table width="100%" border="1">
+            <table width="100%" border="1" cellspacing="0" width="732px" color="#727f8a;">
                 <tbody>
                 <tr>
                     <td width="27%" align="center" bgcolor="#b4d8ed" style="color:#161823">

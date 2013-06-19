@@ -2,6 +2,7 @@ package com.rcuinfomanager.dao;
 
 import com.rcuinfomanager.model.*;
 import com.rcuinfomanager.webservice.model.AllColumnInfo;
+import com.rcuinfomanager.webservice.model.SubmitItem;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -120,4 +121,6 @@ public interface BaseInfoDao {
     List<Long> getAllHouseholdInfos();
 
     void updateAppointStatus(long recordId);
+
+    List<SubmitItem> querySubmitList(String userName);
 }

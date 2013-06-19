@@ -63,7 +63,7 @@ public class AuthWebService {
 
         user.setPassword(newPassword);
 
-        userDao.updateUser(user);
+        userDao.changePassword(user);
 
         return new WebResponseData(0);
     }

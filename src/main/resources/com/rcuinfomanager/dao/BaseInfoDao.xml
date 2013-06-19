@@ -594,4 +594,14 @@
     <select id="getAllHouseholdInfos" resultType="java.lang.Long">
        select recordId from baseinfo
     </select>
+
+    <resultMap id="submitItemMap" type="com.rcuinfomanager.webservice.model.SubmitItem">
+        <result property="customerName" column="customerName"></result>
+        <result property="cerNum" column="cerNum"></result>
+        <result property="address" column="address"></result>
+    </resultMap>
+
+    <select id="querySubmitList" resultMap="submitItemMap" parameterType="java.lang.String">
+        SELECT customerName, cerNum, address FROM baseinfo WHERE username = #{userName}
+    </select>
 </mapper>

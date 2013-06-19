@@ -110,7 +110,6 @@ public interface BaseInfoDao {
 
     //二
     FinanceServices getFinanceServicesList(long id);
-    List getUsedProduct(long id);
     //三
     VillageManagerEva getVillageManagerEvaList(long id);
     //四

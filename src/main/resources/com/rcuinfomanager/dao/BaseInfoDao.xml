@@ -578,10 +578,6 @@
         from financeservices f
         where f.recordId=#{id}
     </select>
-    <!--usedProduct-->
-   <!-- <select id="getUsedProduct" parameterType="java.lang.Long" resultType="com.rcuinfomanager.model.FinanceServices" >
-        select f.usedProduct from financeservices f where f.recordId=#{id}
-    </select>-->
     <!--三-->
     <select id="getVillageManagerEvaList" resultType="com.rcuinfomanager.model.VillageManagerEva">
           select * from villagemanagereva  where recordId=#{id}

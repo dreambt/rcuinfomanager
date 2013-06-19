@@ -213,9 +213,6 @@ public class BaseInfoService {
     public FinanceServices getFinanceService(long id){
         return baseInfoDao.getFinanceServicesList(id);
     }
-    public List getUsedProduct(long id){
-        return baseInfoDao.getUsedProduct(id);
-    }
     //三
     public VillageManagerEva getVillageManagerEvaList(long id){
         return baseInfoDao.getVillageManagerEvaList(id);

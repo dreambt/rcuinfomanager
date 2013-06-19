@@ -2,6 +2,7 @@ package com.rcuinfomanager.web.controller;
 
 
 import com.rcuinfomanager.model.CusBaseInfo;
+import com.rcuinfomanager.model.FinanceServices;
 import com.rcuinfomanager.model.LogsInfo;
 import com.rcuinfomanager.service.BaseInfoService;
 import com.rcuinfomanager.service.ExportInfo2VillagerCommittee4Estimation;
@@ -57,13 +58,16 @@ public class BaseInfoController {
         SimpleDateFormat dateFm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); //格式化当前系统日期
         String logsDate = dateFm.format(new java.util.Date());
         logsInfoService.saveLogsInfo(new LogsInfo(logsDate, sessionUser.getId(), "查看"));
-        logsInfoService.saveLogsInfo(new LogsInfo(logsDate, sessionUser.getId(), "查看"));
         map.put("displayUserName", sessionUser.getDisplayUserName());
         map.put("personInfoList", baseInfoService.getPersonBasicInfo(id));
         //基础概况信息
 
         CusBaseInfo cusBasicInfo = baseInfoService.getCusBasicInfo(id);
         map.put("personBasicList", cusBasicInfo);
+        FinanceServices financeServices=baseInfoService.getFinanceService(id);
+        String[] usedPro=financeServices.getUsedProduct().toString().split(",");
+        map.put("usedProducts",usedPro);
+
         //家庭收支情况
         map.put("personIncomeExpensesList", baseInfoService.getIncomeExpenses(id));
         // 家庭资产情况

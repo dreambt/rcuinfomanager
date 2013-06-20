@@ -62,6 +62,10 @@ public class BaseInfoService {
     public List<HouseInfo> getHousePropertyInfo(Long recordId){
         return baseInfoDao.getHousePropertyInfo(recordId);
     }
+    //保存房产
+    public void saveHouseInfo(HouseInfo houseInfo){
+        baseInfoDao.saveHouseInfo(houseInfo);
+    }
 
     //土地
     public List<LandInfo> getLandInfo(Long recordId) {

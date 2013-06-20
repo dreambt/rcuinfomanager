@@ -11,8 +11,10 @@
     <link href="/asserts/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
     <link href="/asserts/css/doc.css" rel="stylesheet" media="screen">
     <link href="/asserts/css/style.css" rel="stylesheet" media="screen">
+    <link id="artDialog-skin" href="/asserts/js/dialog/skins/opera.css" rel="stylesheet" />
     <script src="/asserts/js/jquery-1.7.2.min.js"></script>
     <script src="/asserts/js/bootstrap.min.js"></script>
+    <script src="/asserts/js/dialog/artDialog.js"></script>
     <script type="text/javascript">
         $(function(){
             //左侧菜单样式控制
@@ -20,6 +22,10 @@
                 $("li[class='active']").removeAttr("class");
                 $(this).addClass("active");
             });
+            var editSuccess='${editSuccess}';
+            if(editSuccess && editSuccess!=''){
+                alert(editSuccess);
+            }
 
             $('.usedProduct').each(function(index,element){
                 $('.'+$(element).val()).prop('checked', true);
@@ -73,6 +79,48 @@
             $('.creditRecord').each(function(index,element){
                 $('.'+$(element).val()).prop('checked', true);
             });
+
+            //增加房产
+            $('#addHouseOpera').click(function(){
+                var assetsId=$('#assetsId').val();
+                alert(assetsId);
+                var url="/family/addHouse/"+assetsId;
+                window.art.dialog({
+                    id: 'addHouse',
+                    title: '增加房产信息',
+                    lock: true,
+                    content: '<iframe scrolling="auto" width="450" height="210" frameborder="0" style="border: none;margin: -20px -25px;"marginheight="0" marginwidth="0" src="' + url + '"/>'
+                });
+            });
+            //增加土地
+            $('#addLandOpera').click(function(){
+                var assetsId=$('#assetsId').val();
+                alert(assetsId);
+                var url="/family/addLand/assetsId="+assetsId;
+                window.art.dialog({
+                    id: 'addLand',
+                    title: '增加土地信息',
+                    lock: true,
+                    content: '<iframe scrolling="auto" width="450" height="210" frameborder="0" style="border: none;margin: -20px -25px;"marginheight="0" marginwidth="0" src="' + url + '"/>'
+                });
+            });
+            //增加车辆
+            $('#addCarOpera').click(function(){
+
+                var url="/family/addCar/recordId="+recordId;
+                window.art.dialog({
+                    id: 'addCar',
+                    title: '增加车辆信息',
+                    lock: true,
+                    content: '<iframe scrolling="auto" width="450" height="210" frameborder="0" style="border: none;margin: -20px -25px;"marginheight="0" marginwidth="0" src="' + url + '"/>'
+                });
+            });
+            //保存修改
+            $('#saveEditOpera').click(function(){
+                $('#editForm').submit();
+            });
+
+
         });
     </script>
 </head>
@@ -130,10 +178,11 @@
 </table>
 
 <div class="form-actions">
-<a class="btn btn-primary" href="#">保存</a>
-<a class="btn" href="#">取消</a>
+<a class="btn btn-primary" href="#" id="saveEditOpera">保存</a>
+<%--<a class="btn" href="#" >取消</a>--%>
 
 <hr  size="1" width="100%" style="margin-bottom: -1px;"/>
+<form id="editForm" action="/family/saveEditInfo" method="post">
 <div class="tabbable">
 <ul class="nav nav-tabs">
     <li class="active"><a href="#tab1" data-toggle="tab">个人基本概况信息</a></li>
@@ -157,10 +206,18 @@
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">性别</td>
     <td align="left">
-
+        <% %>
         <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="gender">
-
-            <option value="${personBasicList.gender}">${personBasicList.gender}</option>
+            <core:choose>
+                <core:when test="${personBasicList.gender=='0'}">
+                    <option value="${personBasicList.gender}" selected="selected">女</option>
+                    <option value="1">男</option>
+                </core:when>
+                <core:otherwise>
+                    <option value="0">女</option>
+                    <option value="${personBasicList.gender}" selected="selected">男</option>
+                </core:otherwise>
+            </core:choose>
         </select>
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">是否农户</td>
@@ -1604,9 +1661,9 @@
 <tr>
     <td align="center" colspan="8" style="font-size:22px">
         家庭资产情况
-        <button class="btn btn-info" type="button" onclick="addItem();return false;">增加房产</button>
-        <button class="btn btn-info" type="button">增加土地</button>
-        <button class="btn btn-info" type="button">增加车辆</button>
+        <button class="btn btn-info" type="button" id="addHouseOpera">增加房产</button>
+        <button class="btn btn-info" type="button" id="addlandOpera">增加土地</button>
+        <button class="btn btn-info" type="button" id="addCarOpera">增加车辆</button>
     </td>
 </tr>
 <tr>
@@ -1642,6 +1699,7 @@
 </tr>
 
 <core:forEach items="${personHousePropertyInfoList}" var="personHousePropertyInfo" varStatus="idx">
+     <input type="hidden" id="assetsId" name="assetsId" value="${personHousePropertyInfo.assetsId}"/>
     <tr>
         <td align="left" colspan="8" style="font-size:18px">
             房产：<core:out value="${idx.index+1}"></core:out>
@@ -3975,6 +4033,7 @@
 </div>
 </div>
 </div>
+</form>
 </div>
 <!--submit  end-->
 </div>

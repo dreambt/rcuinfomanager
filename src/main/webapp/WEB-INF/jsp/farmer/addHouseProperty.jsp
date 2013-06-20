@@ -1,4 +1,5 @@
 <%@ taglib prefix="core" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -14,39 +15,33 @@
     <script type="text/javascript">
 
         $(function () {
-            var scuccessInfo='${isUserName}';
-            if(scuccessInfo){
-                alert(scuccessInfo);
+            var houseSuccess='${houseSuccess}';
+            if(houseSuccess && houseSuccess!=''){
+                alert(houseSuccess);
             }
             //确定
             $('#okOperate').click(function () {
-                var id = $('#recordId').val();
-                var uid =$('#userId').val();
-                if(uid && uid!=''){
-                    var url = '/family/saveAppoint/'+id+'/'+uid;
-                    window.location.href = url;
-                }else{
-                    alert("指定客户经理不能为空！");
-                }
+                  $('#houseForm').submit();
             });
 
             //关闭
             $('#cancelOperate').click(function () {
-                window.top.art.dialog({id: 'assign' }).close();
+                window.top.art.dialog({id: 'addHouse' }).close();
             });
             //返回main
             var success = '${success}';
             if (success && success != '') {
                 var url = 'farmer/main';
-                window.top.art.dialog({id: 'assign'}).close();
+                window.top.art.dialog({id: 'addHouse'}).close();
             }
 
         });
     </script>
 </head>
 <body>
-
-<form method="post">
+<form:form modelAttriubte = "houseInfo"  action="/family/saveHouse" method = "post">
+<%--<form id="houseForm" action="/family/saveHouse" method="post">--%>
+    <input type="hidden" name="assetsId" value="${assetsId}">
     <table width="100%" border="0">
         <tbody>
         <tr>
@@ -95,8 +90,7 @@
         <tr>
             <td align="center" bgcolor="#b4d8ed" style="color:#161823">层数</td>
             <td align="left">
-                <input class="input-small" type="text" name="floorNum" value=""
-                       style="width: 95px;height: 30px; margin-top: 5px;">
+                <%--<form:input path="floorNum" class="input-small" style="width: 95px;height: 30px; margin-top: 5px;"/>--%>
             </td>
             <td align="center" bgcolor="#b4d8ed" style="color:#161823">使用情况</td>
             <td align="left">
@@ -144,12 +138,12 @@
             </td>
             <td align="center" bgcolor="#b4d8ed" style="color:#161823">备注</td>
             <td align="left" colspan="3">
-                <input class="input-small" type="text" name="note1" style="width: 280px;height: 30px; margin-top: 5px;">
+                <form:input path="note1" class="input-small" style="width: 280px;height: 30px; margin-top: 5px;"/>
             </td>
         </tr>
         </tbody>
     </table>
-</form>
+</form:form>
 <p align="center">
     <a class="btn" href="#" id="okOperate">确定</a>&nbsp;
     <a class="btn" href="#" id="cancelOperate">取消</a>

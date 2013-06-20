@@ -168,6 +168,11 @@
             left outer join  familyassets f on f.assetsId=h.assetsId
             where f.recordId=#{recordId}
      </select>
+     <!--<insert id="saveHouseInfo" parameterType="com.rcuinfomanager.model.HouseInfo">
+         insert into housepropertyinfo (nature,purpose,site,structure,floorNum,usedSitu,houseArea,houseWorth,isInstallment,hasCredentials,note1)
+         values (#{nature},#{purpose},#{site},#{structure},#{floorNum},#{usedSitu},#{houseArea},#{houseWorth},#{isInstallment},#{hasCredentials},#{note1})
+         where assetsId=#{assetsId}
+     </insert>-->
 
     <!--获取土地信息-->
     <resultMap id="landInfoMap" type="com.rcuinfomanager.model.LandInfo">

@@ -141,7 +141,7 @@ $(function () {
     });
     //导入村委会评价表
     $('#importVillageAssess').click(function () {
-        var url = '/family/importBasicData';
+        var url = '/family/importVillageAssess';
         window.top.artDialog({
             id: 'import',
             title: '导入数据信息',

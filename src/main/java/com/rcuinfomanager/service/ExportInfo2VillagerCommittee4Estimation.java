@@ -1,5 +1,6 @@
 package com.rcuinfomanager.service;
 
+import com.google.common.base.Strings;
 import com.rcuinfomanager.dao.BaseInfoDao;
 import com.rcuinfomanager.model.BaseInfo;
 import com.rcuinfomanager.util.Files;
@@ -16,7 +17,9 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -70,6 +73,41 @@ public class ExportInfo2VillagerCommittee4Estimation {
             response.addHeader("content-disposition",
                     "attachment;filename=" + fileName);
             wb.write(outputStream);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (outputStream != null) {
+                try {
+                    outputStream.close();
+                } catch (IOException e) {
+                    //just ignored.
+                }
+            }
+        }
+    }
+
+    public void readExport(InputStream is) {
+        ServletOutputStream outputStream = null;
+        try {
+            POIFSFileSystem fs = new POIFSFileSystem(is);
+            HSSFWorkbook wb = new HSSFWorkbook(fs);
+            HSSFSheet sheet = wb.getSheetAt(0);
+
+            Iterator rows = sheet.rowIterator();
+            while (rows.hasNext()) {
+                HSSFRow row = (HSSFRow) rows.next();
+                Iterator cells = row.cellIterator();
+                if (row.getRowNum() == 0) {
+                    continue;
+                }
+                while (cells.hasNext()) {
+                    HSSFCell cell = (HSSFCell) cells.next();
+                    if (!Strings.isNullOrEmpty(cell.getStringCellValue())) {
+                        System.out.println(cell.getStringCellValue());
+                    }
+                }
+
+            }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

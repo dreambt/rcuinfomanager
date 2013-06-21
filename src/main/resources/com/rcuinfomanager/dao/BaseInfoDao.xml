@@ -610,4 +610,8 @@
     <select id="querySubmitList" resultMap="submitItemMap" parameterType="java.lang.String">
         SELECT customerName, cerNum, address FROM baseinfo WHERE username = #{userName}
     </select>
+
+    <select id="getStatusByCerNum" parameterType="java.lang.String">
+        select state from baseinfo where cerNum = #{cerNum}
+    </select>
 </mapper>

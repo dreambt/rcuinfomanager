@@ -125,7 +125,7 @@ public class SessionFilter implements Filter {
      * @param request
      * @param response
      */
-    private void forwardToLogonPage(ServletRequest request, ServletResponse response) throws
+    public static void forwardToLogonPage(ServletRequest request, ServletResponse response) throws
             IOException, ServletException {
 
         HttpServletRequest httpRequest = (HttpServletRequest) request;

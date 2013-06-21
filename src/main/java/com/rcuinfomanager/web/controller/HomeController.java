@@ -2,15 +2,19 @@ package com.rcuinfomanager.web.controller;
 
 import com.rcuinfomanager.model.OrganizationInfo;
 import com.rcuinfomanager.service.*;
-import com.rcuinfomanager.session.SessionUser;
-import com.rcuinfomanager.session.UserSessionContext;
-import com.rcuinfomanager.session.UserSessionContextHolder;
+import com.rcuinfomanager.session.*;
+import com.rcuinfomanager.util.CookieUtil;
 import com.rcuinfomanager.web.form.AddUserForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * @author 王文庭(xorbytes@qq.com)
@@ -30,6 +34,11 @@ public class HomeController {
     private SystemRoleService systemRoleService;
     @Autowired
     private OrganizationInfoService organizationInfoService;
+
+    @RequestMapping(value = "/")
+    public String home() {
+       return "redirect:/index";
+    }
 
     //客户电子信息管理
     @RequestMapping(value ="/index")
@@ -123,11 +132,16 @@ public class HomeController {
 
     //退出
     @RequestMapping(value ="/logout")
-    public String logout(){
-        UserSessionContext userSessionContext = UserSessionContextHolder.getUserSessionContext();
-        SessionUser sessionUser = userSessionContext.getSessionUser();
-
-        return "login";
+    public void logout(HttpServletRequest request, HttpServletResponse response){
+        String sessionId = CookieUtil.getCookieValue(request, UserSessionCookieName.SESSION_ID);
+        UserSessionContextManager.getInstance().removeUserSessionContext(sessionId);
+        try {
+            SessionFilter.forwardToLogonPage(request,response);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ServletException e) {
+            e.printStackTrace();
+        }
     }
 
 }

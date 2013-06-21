@@ -140,6 +140,10 @@ public class UserService {
         userDao.update(user);
     }
 
+    public void changePassword(User user) {
+        userDao.changePassword(user);
+    }
+
     public static class LogonResult {
         /**
          * 登录结果代码

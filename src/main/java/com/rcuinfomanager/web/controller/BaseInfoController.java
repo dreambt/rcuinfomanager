@@ -248,6 +248,19 @@ public class BaseInfoController {
         return "farmer/importBasicData";
     }
 
+    //导入村委会评价表页面
+    @RequestMapping("/importVillageAssess")
+    public String importVillageAssess(Map map) {
+        //记录日志
+        UserSessionContext userSessionContext = UserSessionContextHolder.getUserSessionContext();
+        SessionUser sessionUser = userSessionContext.getSessionUser();
+        SimpleDateFormat dateFm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); //格式化当前系统日期
+        String logsDate = dateFm.format(new java.util.Date());
+        logsInfoService.saveLogsInfo(new LogsInfo(logsDate, sessionUser.getId(), "导入村委会评价表数据"));
+
+        return "farmer/importVillageAssess";
+    }
+
     //保存导入基础数据
     @RequestMapping("/saveImportBasicData")
     public String saveImportBasicData(HttpServletRequest request, HttpServletResponse response, Map map) {
@@ -268,6 +281,30 @@ public class BaseInfoController {
         }
         map.put("success", true);
         return "farmer/importBasicData";
+    }
+
+    //保存导入村委会评价表数据
+    @RequestMapping("/saveVillageAssessData")
+    public String saveVillageAssessData(HttpServletRequest request, HttpServletResponse response, Map map) {
+        if (ServletFileUpload.isMultipartContent(request)) {
+            try {
+                List<FileItem> fileItems = new ServletFileUpload(new DiskFileItemFactory(1024 * 1024, new File("c:/tmp"))).
+                        parseRequest(request);
+                for (FileItem item : fileItems) {
+                    if (!item.isFormField()) {
+                        exportInfo2VillagerCommittee4Estimation.readExport(item.getInputStream());
+                    }
+                }
+            } catch (FileUploadException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+        }
+        map.put("success", true);
+        return "farmer/importVillageAssess";
     }
 
 

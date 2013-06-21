@@ -10,29 +10,45 @@
     <link href="/asserts/css/doc.css" rel="stylesheet" media="screen">
     <link href="/asserts/css/style.css" rel="stylesheet" media="screen">
     <link id="artDialog-skin" href="/asserts/js/dialog/skins/opera.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/asserts/css/jquery.fancybox.css"/>
     <script src="/asserts/js/jquery-1.7.2.min.js"></script>
     <script src="/asserts/js/bootstrap.min.js"></script>
     <script src="/asserts/js/dialog/artDialog.js"></script>
     <script src="/asserts/js/main.js"></script>
+    <script src="/asserts/js/jquery.fancybox.js"></script>
+
     <script type="text/javascript">
         $(function(){
-            if(${needModifyPassword}){
-                if(confirm('第一次登录，是否需要修改密码？')){
-                    var url='/systemAccount/editAccount';
-                    window.top.artDialog({
-                        id: 'editAccount',
-                        title: '修改帐号',
-                        lock:true,
-                        content:'<iframe scrolling="auto" width="500" height="380" frameborder="0" style="border: none;margin: -20px -25px;"marginheight="0" marginwidth="0" src="'+ url +'"/>'
-                    });
-                }
-            }
+
+
+            handerChangePasswordSubmit = function(){
+
+                $.ajax({
+                    type: "post",
+                    url: "/systemAccount/changePassword",
+                    dataType: "json",
+                    data:'oldpassword=' + $("#oldpassword").val() + "&password=" + $("#password").val() + "&confirmPassword=" + $("#confirmPassword").val(),
+                    success: function (data) {
+                        if (data.errMsg) {
+                            $(".errMsg").append(data.errMsg).show();
+                        } else {
+                            $.fancybox.close();
+                            location.reload(true);
+                        }
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+                });
+            };
+
             var delMsg="${delSuccess}";
             if(delMsg){
                 alert(delMsg);
             }
         });
     </script>
+
 </head>
 <body>
 
@@ -168,5 +184,48 @@
         </div>
     </div>
 </div>
+
+
+<div id="changePassword" style="display:none">
+    <div class="errMsg alert" style="display:none"></div>
+    <input type="text" style="display: none" id="userId"/>
+    <table width="100%" border="0">
+        <tbody>
+            <tr>
+                <td align="right"> 旧密码： </td>
+                <td align="left"> <input type="text" id="oldpassword" name="oldpassword" style="width: 200px;height: 30px;margin-top: 10px;"   placeholder="请输入密码"/></td>
+            </tr>
+            <tr>
+                <td align="right"> 新密码： </td>
+                <td align="left"> <input type="text" id="password" name="password" style="width: 200px;height: 30px;margin-top: 10px;"   placeholder="请输入密码"/></td>
+            </tr>
+            <tr>
+                <td align="right"> 确认新密码：</td>
+                <td align="left"> <input type="text" id="confirmPassword" name="confirmPassword" style="width: 200px;height: 30px;margin-top: 10px;" placeholder="请再次输入密码"/></td>
+            </tr>
+        </tbody>
+    </table>
+    <div style="margin-left: 100px;">
+        <button type="submit" class="btn userSubmit" onclick="handerChangePasswordSubmit()" id="changePasswordSubmit" >确定</button>
+        <button type="cancel" class="btn" onClick="parent.jQuery.fancybox.close();return false">取消</button>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function(){
+        if(${needModifyPassword}){
+            if(confirm('第一次登录，是否需要修改密码？')){
+                var content = $('#changePassword').html();
+                $('#changePassword').remove();
+                $.fancybox({
+                    'content': content,
+                    'hideOnContentClick': true,
+                    'closeBtn' : false
+                });
+
+            }
+        }
+    });
+</script>
 </body>
 </html>

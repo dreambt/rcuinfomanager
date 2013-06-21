@@ -21,6 +21,21 @@
             $('#finishOperate').click(function(){
                 $('#submitForm').submit();
             });
+
+            /*$("#upload").click(function () {
+                var filename = $("#file").val();
+                $.ajax({
+                    type: "POST",
+                    url: "/client/uploadFile",
+                    contentType: 'multipart/form-data',
+                    data: {
+                        file: filename
+                    },
+                    success: function () {
+                        alert("Data Uploaded: ");
+                    }
+                });
+            });*/
         });
     </script>
 
@@ -75,16 +90,25 @@
 
                         <div class="farmer_info">
                             <div class="table-list" >
-
+                                当前客户端版本：V1.0.0
+                                <form action="/client/uploadFile" method="POST" enctype="multipart/form-data">
+                                    <table>
+                                        <tr>
+                                            <td align="center" bgcolor="#b4d8ed" style="color:#161823">
+                                                选择要导入的客户端文件：
+                                            </td>
+                                            <td align="left">
+                                                <input type="file" id="file" name="file" size="10"/>
+                                                <%--<input type="file" name="url" id="fileName"  value="" style="color:#999999"
+                                                       readonly="readonly"/>--%>
+                                                <button class="btn" id="upload" type="submit">上传</button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </form>
                                 <form id="submitForm" action="/client/saveClient" method="post">
+                                    <input type="hidden" value="${fileName}" name="url">
                                 <table width="100%" border="0">
-                                    <tbody>
-                                    <tr>
-                                        <td align="left" colspan="4">
-                                            当前客户端版本：V1.0.0
-                                        </td>
-                                    </tr>
-
                                     <tr>
                                         <td align="center" bgcolor="#b4d8ed" style="color:#161823">
                                             填写要导入的客户端版本：
@@ -99,17 +123,16 @@
                                     </tr>
                                     <tr>
                                         <td align="center" bgcolor="#b4d8ed" style="color:#161823">
-                                            选择要导入的客户端文件：
-                                        </td>
-                                        <td align="left">
-                                            <input type="file" name="url"  value="" style="color:#999999"
-                                                   readonly="readonly"/>
-                                        </td>
-                                        <td align="center" bgcolor="#b4d8ed" style="color:#161823">
                                             <input type="checkbox" name="isCoerce"/>是否强制更新
                                         </td>
                                         <td align="center">
                                             <a class="btn" href="#" id="finishOperate">完成</a>
+                                        </td>
+                                        <td>
+                                            &nbsp;
+                                        </td>
+                                        <td>
+                                            &nbsp;
                                         </td>
                                     </tr>
                                     </tbody>
@@ -134,9 +157,7 @@
                                             <a href="#">删除</a>
                                         </td>
                                     </tr>
-                                    </tbody>
                                 </table>
-
                             </div>
                         </div>
                     </div>

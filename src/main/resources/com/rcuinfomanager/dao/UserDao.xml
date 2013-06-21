@@ -46,7 +46,7 @@
     </delete>
 
     <update id="update" parameterType="com.rcuinfomanager.model.User">
-        update usersinfo set userName = #{userName}, password = #{password},displayUserName=#{displayUserName}, #{organizationId}=#{organizationId} where userId=#{userId}
+        update usersinfo set userName = #{userName}, password = #{password},displayUserName=#{displayUserName}, organizationId=#{organizationId} where userId=#{userId}
     </update>
 
 </mapper>

@@ -87,6 +87,29 @@ public class SystemAccountController {
         return new AjaxResponseData();
     }
 
+    @RequestMapping(value ="/changePassword")
+    public @ResponseBody
+    AjaxResponseData changePassword(HttpServletRequest request, HttpServletResponse response){
+        String oldpassword = request.getParameter("oldpassword");
+        String password = request.getParameter("password");
+        String confirmPassword = request.getParameter("confirmPassword");
+        UserSessionContext userSessionContext = UserSessionContextHolder.getUserSessionContext();
+        SessionUser sessionUser = userSessionContext.getSessionUser();
+        User user = userService.getUserByUserName(sessionUser.getUserName());
+        if (!oldpassword.equals(user.getPassword())) {
+            return new AjaxResponseData("密码不正确");
+        }
+
+        if (!password.equals(confirmPassword)) {
+            return new AjaxResponseData("两次新密码不匹配");
+        }
+
+        user.setPassword(password);
+        userService.changePassword(user);
+        sessionUser.setNeedModifyPassword(1);
+        return new AjaxResponseData();
+    }
+
     @RequestMapping(value ="/deleteAccount/{id}", method = RequestMethod.GET)
     public String deleteAccount(@PathVariable long id){
 

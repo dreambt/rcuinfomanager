@@ -1,8 +1,8 @@
 package com.rcuinfomanager.util;
 
-import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeUtility;
 import org.apache.commons.lang.StringUtils;
 
+import javax.mail.internet.MimeUtility;
 import javax.servlet.http.HttpServletRequest;
 import java.net.URLEncoder;
 

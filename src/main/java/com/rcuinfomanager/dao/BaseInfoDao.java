@@ -101,6 +101,8 @@ public interface BaseInfoDao {
 
     void saveHouseInfo(HouseInfo houseInfo);
 
+    void updateHouseInfo(HouseInfo houseInfo);
+
     void saveFamilyMember(FamilyMember familyMember);
 
     void saveBaseInfoFromClient(AllColumnInfo allColumnInfo);

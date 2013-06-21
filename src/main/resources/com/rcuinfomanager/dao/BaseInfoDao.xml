@@ -168,11 +168,12 @@
             left outer join  familyassets f on f.assetsId=h.assetsId
             where f.recordId=#{recordId}
      </select>
-     <!--<insert id="saveHouseInfo" parameterType="com.rcuinfomanager.model.HouseInfo">
+
+     <update id="updateHouseInfo" parameterType="com.rcuinfomanager.model.HouseInfo">
          insert into housepropertyinfo (nature,purpose,site,structure,floorNum,usedSitu,houseArea,houseWorth,isInstallment,hasCredentials,note1)
          values (#{nature},#{purpose},#{site},#{structure},#{floorNum},#{usedSitu},#{houseArea},#{houseWorth},#{isInstallment},#{hasCredentials},#{note1})
          where assetsId=#{assetsId}
-     </insert>-->
+     </update>
 
     <!--获取土地信息-->
     <resultMap id="landInfoMap" type="com.rcuinfomanager.model.LandInfo">
@@ -526,8 +527,8 @@
     </delete>
 
     <insert id="saveHouseInfo" parameterType="com.rcuinfomanager.model.HouseInfo">
-        insert into housepropertyinfo(assetsId,nature,site,structure,purpose,floorNum,usedSitu,houseArea,houseWorth,isInstallment,hasCredentials)
-         values(#{assetsId},#{nature},#{site},#{structure},#{purpose},#{floorNum},#{usedSitu},#{houseArea}, #{houseWorth},#{isInstallment},#{hasCredentials})
+        insert into housepropertyinfo(assetsId,nature,site,structure,purpose,floorNum,usedSitu,houseArea,houseWorth,isInstallment,hasCredentials,note1)
+         values(#{assetsId},#{nature},#{site},#{structure},#{purpose},#{floorNum},#{usedSitu},#{houseArea}, #{houseWorth},#{isInstallment},#{hasCredentials},#{note1})
     </insert>
 
     <delete id="deleteLandInfoByAssetsId" parameterType="java.lang.Long">

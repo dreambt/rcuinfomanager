@@ -412,8 +412,8 @@ public class BaseInfoController {
     @RequestMapping(value = "/saveHouse", method = RequestMethod.POST)
     public String saveHouse(HttpServletRequest request, HttpServletResponse response,@ModelAttribute("houseInfo")HouseInfo houseInfo,Map map){
 
-        //baseInfoService.saveHouseInfo(houseInfo);
-        map.put("houseSuccess","增加房地产成功！");
+        baseInfoService.saveHouseInfo(houseInfo);
+        map.put("houseSuccess","true");
         return "farmer/addHouseProperty";
     }
     //增加土地

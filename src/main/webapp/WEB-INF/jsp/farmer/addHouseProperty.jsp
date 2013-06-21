@@ -35,7 +35,6 @@
     </script>
 </head>
 <body>
-<%--<form:form modelAttriubte = "houseInfo"  action="/family/saveHouse" method = "post">--%>
 <form id="houseForm" action="/family/saveHouse" method="post">
     <input type="hidden" name="assetsId" value="${assetsId}">
     <table width="100%" border="0">
@@ -57,8 +56,8 @@
             <td align="left">
                 <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="purpose">
                             <option value="商用楼">商用楼</option>
-                            <option value="店铺"></option>
-                            <option value="居住"></option>
+                            <option value="店铺">店铺</option>
+                            <option value="居住">居住</option>
                             <option value="其他">其他</option>
                 </select>
             </td>
@@ -86,7 +85,7 @@
         <tr>
             <td align="center" bgcolor="#b4d8ed" style="color:#161823">层数</td>
             <td align="left">
-                <%--<form:input path="floorNum" class="input-small" style="width: 95px;height: 30px; margin-top: 5px;"/>--%>
+                <input name="floorNum" class="input-small" style="width: 95px;height: 30px; margin-top: 5px;" />
             </td>
             <td align="center" bgcolor="#b4d8ed" style="color:#161823">使用情况</td>
             <td align="left">
@@ -134,7 +133,7 @@
             </td>
             <td align="center" bgcolor="#b4d8ed" style="color:#161823">备注</td>
             <td align="left" colspan="3">
-                <%--<form:input path="note1" class="input-small" style="width: 280px;height: 30px; margin-top: 5px;"/>--%>
+                <input class="input-small" style="width: 280px;height: 30px; margin-top: 5px;" name="note1">
             </td>
         </tr>
         </tbody>

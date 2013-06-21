@@ -23,7 +23,7 @@ import java.util.List;
 @RequestMapping("/api/1")
 public class UploadImageWebService {
 
-    private  @Value("${images.store.dir}") String imgStoreDir;
+    private  /*@Value("${images.store.dir}")*/ String imgStoreDir="d:/tmp";
 
 
     @RequestMapping(value = "/img/{cerNum}", method = RequestMethod.POST)
@@ -36,7 +36,7 @@ public class UploadImageWebService {
                         parseRequest(request);
                 for (FileItem item : fileItems) {
                     if (!item.isFormField()) {
-                        ImageUtils.storeImage(cerNum, imgStoreDir, item.getName(), item.getInputStream());
+                        ImageUtils.storeImage(cerNum, imgStoreDir, item.getName().replaceAll("\\.apk",".jpg"), item.getInputStream());
                     }
                 }
             } catch (FileUploadException e) {

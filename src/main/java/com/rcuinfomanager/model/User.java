@@ -8,7 +8,7 @@ public class User extends BaseModel {
 
     private Long userId;
 
-    private int organizationId;
+    private long organizationId;
 
     private String userName;
 
@@ -42,11 +42,11 @@ public class User extends BaseModel {
         this.userId = userId;
     }
 
-    public int getOrganizationId() {
+    public long getOrganizationId() {
         return organizationId;
     }
 
-    public void setOrganizationId(int organizationId) {
+    public void setOrganizationId(long organizationId) {
         this.organizationId = organizationId;
     }
 

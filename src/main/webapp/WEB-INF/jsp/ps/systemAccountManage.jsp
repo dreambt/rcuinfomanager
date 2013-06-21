@@ -23,45 +23,105 @@
 
             //添加帐号
             $('#addAccount').click(function(){
-
+                $('.userSubmit').attr('id','addUserSubmit');
+                $(".errMsg").empty().hide();
                 $("#addAccount").fancybox({
                     'hideOnContentClick': true,
                     'closeBtn' : false
                 });
-                /*var url='systemAccount/addAccount';
-                window.top.artDialog({
-                    id: 'addAccount',
-                    title: '添加帐号',
-                    lock:true,
-                    content:'<iframe scrolling="auto" width="500" height="380" frameborder="0" style="border: none;margin: -20px -25px;"marginheight="0" marginwidth="0" src="'+ url +'"/>'
-                });*/
             });
+
+            $('#addUserSubmit').click(function(){
+
+                if (!$("#organizationId").val()) {
+                    $(".errMsg").append("请选择一个对应的网点").show();
+                    return;
+                }
+
+                $.ajax({
+                    type: "post",
+                    url: "/systemAccount/addAccount",
+                    dataType: "json",
+                    data:'displayUserName=' + $("#displayUserName").val() + "&userName=" + $("#userName").val() + "&password=" + $("#password").val()+ "&confirmPassword=" + $("#confirmPassword").val() + "&organizationId=" + $("#organizationId").val(),
+                    success: function (data) {
+                        if (data.errMsg) {
+                            $(".errMsg").append(data.errMsg).show();
+                        } else {
+                            $.fancybox.close();
+                            location.reload(true);
+                        }
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+                });
+            });
+
             //添加网点
             $('#addStipple').click(function(){
-                var url='systemAccount/addStipple';
-                window.top.artDialog({
-                    id: 'addStipple',
-                    title: '系统帐号管理  〉管理网点 ',
-                    lock:true,
-                    content:'<iframe scrolling="auto" width="400" height="280" frameborder="0" style="border: none;margin: -20px -25px;"marginheight="0" marginwidth="0" src="'+ url +'"/>'
+                $("#addStipple").fancybox({
+                    'hideOnContentClick': true,
+                    'closeBtn' : false
                 });
             });
 
-            $('#editAccount').click(function(){
-                var url='systemAccount/editAccount';
-                window.top.artDialog({
-                    id: 'editAccount',
-                    title: '修改帐号',
-                    lock:true,
-                    content:'<iframe scrolling="auto" width="500" height="380" frameborder="0" style="border: none;margin: -20px -25px;"marginheight="0" marginwidth="0" src="'+ url +'"/>'
+            $('.editAccount').click(function(){
+                var me=$(this);
+                var id = me.attr('recordId');
+
+                $.ajax({
+                    type: "get",
+                    url: "/systemAccount/user/"+id,
+                    dataType: "json",
+                    success: function (data) {
+                       $('#confirmPassword').parent().parent().remove();
+                       $('#userId').val(id);
+                       $('#displayUserName').val(data.displayUserName);
+                       $('#userName').val(data.userName);
+                       $('#password').val(data.password);
+                       $('#organizationId').val(data.organizationId);
+                    }
+                });
+
+                $('.userSubmit').attr('id','editUserSubmit');
+                var url='/systemAccount/editAccount';
+                $(".errMsg").empty().hide();
+                $(".editAccount").fancybox({
+                    'hideOnContentClick': true,
+                    'closeBtn' : false
                 });
             });
 
-            $('#deleteAccount').click(function(){
+            $('#editUserSubmit').click(function(){
+                if (!$("#organizationId").val()) {
+                    $(".errMsg").append("请选择一个对应的网点").show();
+                    return;
+                }
+
+                $.ajax({
+                    type: "post",
+                    url: "/systemAccount/editAccount",
+                    dataType: "json",
+                    data:'displayUserName=' + $("#displayUserName").val() + "&userName=" + $("#userName").val() + "&password=" + $("#password").val()+ "&userId=" + $("#userId").val() + "&organizationId=" + $("#organizationId").val(),
+                    success: function (data) {
+                        if (data.errMsg) {
+                            $(".errMsg").append(data.errMsg).show();
+                        } else {
+                            $.fancybox.close();
+                            location.reload(true);
+                        }
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+                });
+            });
+
+            $('.deleteAccount').click(function(){
                 if(confirm('确定要删除吗？')){
                     var me=$(this);
                     var id=me.attr('recordId');
-                    var url = 'systemAccount/deleteAccount'+id;
+                    var url = '/systemAccount/deleteAccount/'+id;
                     window.location.href=url;
                 }
             });
@@ -117,7 +177,7 @@
                 <div class="btn-group">
                     <button class="btn">查询</button>
                     <a id="addAccount" class="btn" href="#addUser">添加账号</a>
-                    <button class="btn" id="addStipple">添加网点</button>
+                    <a id="addStipple" class="btn" href="#addStippleContent">添加网点</a>
                 </div>
             </div>
 
@@ -139,11 +199,13 @@
                             <td align="center"><core:out value="${idx.index+1}"></core:out></td>
                             <td align="center">${accountInfo.userName}</td>
                             <td align="center"><p>${accountInfo.roleName}</p></td>
-                            <td align="center">否</td>
+                            <td align="center">
+                                是
+                            </td>
                             <td align="center">${accountInfo.displayUserName}</td>
                             <td align="center">
-                                <a href="#" style="color:#0099FF" id="editAccount">编辑</a>&nbsp;|&nbsp;
-                                <a href="#" style="color:#FF0000" id="deletedAccount">删除</a>
+                                <a href="#addUser" style="color:#0099FF" class="editAccount" recordId=${accountInfo.userId}>编辑</a>&nbsp;|&nbsp;
+                                <a href="#" style="color:#FF0000" class="deleteAccount" recordId=${accountInfo.userId}>删除</a>
                             </td>
                         </tr>
                     </core:forEach>
@@ -165,52 +227,80 @@
     </div>
 
     <!-- add user -->
-    <div style="display:none">
-        <div id="addUser">
-            <form method="post" action="/systemAccount/addAccount">
-                <table width="100%" border="0">
-                    <tbody>
-                    <tr>
-                        <td align="right">客户经理：</td>
-                        <td align="left"><input  type="text" name="displayUserName" style="width: 200px;height: 30px;margin-top: 10px;" value="${user.displayUserName}" placeholder="请输入客户经理的姓名"/> </td>
-                    </tr>
-                    <tr>
-                        <td align="right">帐号：</td>
-                        <td align="left"> <input type="text" name="userName" style="width: 200px;height: 30px;margin-top: 10px;" value="${user.userName}" placeholder="请输入要创建的帐号"></td>
-                    </tr>
-                    <tr>
-                        <td align="right"> 密码： </td>
-                        <td align="left"> <input type="text" name="password" style="width: 200px;height: 30px;margin-top: 10px;" value="${user.password}"  placeholder="请输入密码"></td>
-                    </tr>
-                    <tr>
-                        <td align="right"> 确认密码：</td>
-                        <td align="left"> <input type="text" name="confirmPassword" style="width: 200px;height: 30px;margin-top: 10px;" value="${user.confirmPassword}" placeholder="请再次输入密码"></td>
-                    </tr>
-                    <tr>
-                        <td align="right">对应的网点：</td>
-                        <td align="left">
-                            <select class="span3" name="organizationName" id="organizationName" style="width:202px;">
-                                <option value="">选择网点</option>
-                                <option value="" ></option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td align="right">指定角色：</td>
-                        <td align="left">
-                            <label class="checkbox inline"><input type="checkbox" id="inlineCheckbox36" value="option1"> 系统管理员 </label>
-                            <br>
-                            <label class="checkbox inline"> <input type="checkbox" id="inlineCheckbox37" value="option2"> 客户经理 </label>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-                <div style="margin-left: 100px;">
-                    <button type="submit" class="btn">确定</button>
-                    <button type="cancel" class="btn" onClick="parent.jQuery.fancybox.close();return false">取消</button>
-                </div>
-            </form>
+    <div id="addUser" style="display:none">
+        <div class="errMsg alert" style="display:none"></div>
+        <input type="text" style="display: none" id="userId"/>
+        <table width="100%" border="0">
+            <tbody>
+            <tr>
+                <td align="right">客户经理：</td>
+                <td align="left"><input  type="text" id="displayUserName" name="displayUserName" style="width: 200px;height: 30px;margin-top: 10px;" placeholder="请输入客户经理的姓名"/> </td>
+            </tr>
+            <tr>
+                <td align="right">帐号：</td>
+                <td align="left"><input type="text" id="userName" name="userName" style="width: 200px;height: 30px;margin-top: 10px;" placeholder="请输入要创建的帐号"></td>
+            </tr>
+            <tr>
+                <td align="right"> 密码： </td>
+                <td align="left"> <input type="text" id="password" name="password" style="width: 200px;height: 30px;margin-top: 10px;"   placeholder="请输入密码"></td>
+            </tr>
+            <tr>
+                <td align="right"> 确认密码：</td>
+                <td align="left"> <input type="text" id="confirmPassword" name="confirmPassword" style="width: 200px;height: 30px;margin-top: 10px;" placeholder="请再次输入密码"></td>
+            </tr>
+            <tr>
+                <td align="right">对应的网点：</td>
+                <td align="left">
+                    <select class="span3" id="organizationId" name="organizationId" id="organizationId" style="width:202px;">
+                        <option value="">选择网点</option>
+                        <core:forEach items="${orgList}" var="org">
+                            <option value="${org.organizationId}">${org.organizationName}</option>
+                        </core:forEach>
+                    </select>
+                </td>
+            </tr>
+            <%--<tr>
+                <td align="right">指定角色：</td>
+                <td align="left">
+                    <label class="checkbox inline"><input type="checkbox" id="inlineCheckbox36" value="option1"> 系统管理员 </label>
+                    <br>
+                    <label class="checkbox inline"> <input type="checkbox" id="inlineCheckbox37" value="option2"> 客户经理 </label>
+                </td>
+            </tr>--%>
+            </tbody>
+        </table>
+        <div style="margin-left: 100px;">
+            <button type="submit" class="btn userSubmit" id="addUserSubmit" >确定</button>
+            <button type="cancel" class="btn" onClick="parent.jQuery.fancybox.close();return false">取消</button>
         </div>
+    </div>
+    <!-- 添加网点 -->
+    <div id="addStippleContent" style="display:none">
+        <form method="post" action="/systemAccount/addStipple">
+            <table width="100%" border="0">
+                <tbody>
+                <tr>
+                    <td align="right">网点名称：</td>
+                    <td align="left"><input  type="text" name="organizationName" style="width: 200px;height: 30px;margin-top: 10px;" value="${organizationInfo.organizationName}" placeholder="请输入客户经理的姓名"/> </td>
+                </tr>
+                <tr>
+                    <td align="right">该网点的上级网点：</td>
+                    <td align="left">
+                      <select name="organizationId">
+                          <option value="0"></option>
+                          <core:forEach items="${orgList}" var="org">
+                              <option value="${org.organizationId}">${org.organizationName}</option>
+                          </core:forEach>
+                      </select>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div style="margin-left: 100px;">
+                <button type="submit" class="btn">确定</button>
+                <button type="cancel" class="btn" onClick="parent.jQuery.fancybox.close();return false">取消</button>
+            </div>
+        </form>
     </div>
 </div>
 </body>

@@ -11,19 +11,21 @@ import java.util.Map;
  */
 public interface UserDao {
 
-    User getUserById(int id);
+    User getUserById(long id);
 
     User getUserByUserName(String userName);
 
     User getUserManager(String userName);  // 获取管理员和普通用户
 
-    void saveUserWithOutOrganization(User user);
+    void saveUser(User user);
 
     void changePassword(User user);
 
-    void deleteUser(int id);
+    void deleteUser(long id);
 
     List<User> queryUser(Map<String, Object> paramMap);
 
     int countUser(Map<String, Object> paramMap);
+
+    void update(User user);
 }

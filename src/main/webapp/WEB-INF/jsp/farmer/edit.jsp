@@ -83,17 +83,17 @@
             //增加房产
             $('#addHouseOpera').click(function(){
                 var assetsId=$('#assetsId').val();
-                alert(assetsId);
+                //alert(assetsId);
                 var url="/family/addHouse/"+assetsId;
                 window.art.dialog({
                     id: 'addHouse',
                     title: '增加房产信息',
                     lock: true,
-                    content: '<iframe scrolling="auto" width="450" height="210" frameborder="0" style="border: none;margin: -20px -25px;"marginheight="0" marginwidth="0" src="' + url + '"/>'
+                    content: '<iframe scrolling="auto" width="800" height="240" frameborder="0" style="border: none;margin: -20px -25px;"marginheight="0" marginwidth="0" src="' + url + '"/>'
                 });
             });
             //增加土地
-            $('#addLandOpera').click(function(){
+            $('#addlandOpera').click(function(){
                 var assetsId=$('#assetsId').val();
                 alert(assetsId);
                 var url="/family/addLand/assetsId="+assetsId;
@@ -183,6 +183,7 @@
 
 <hr  size="1" width="100%" style="margin-bottom: -1px;"/>
 <form id="editForm" action="/family/saveEditInfo" method="post">
+<input type="hidden" id="recordId" name="recordId" value="${recordId}"/>
 <div class="tabbable">
 <ul class="nav nav-tabs">
     <li class="active"><a href="#tab1" data-toggle="tab">个人基本概况信息</a></li>
@@ -1661,12 +1662,13 @@
 <tr>
     <td align="center" colspan="8" style="font-size:22px">
         家庭资产情况
-        <button class="btn btn-info" type="button" id="addHouseOpera">增加房产</button>
+        <a class="btn btn-info" id="addHouseOpera" href="#">增加房产</a>
         <button class="btn btn-info" type="button" id="addlandOpera">增加土地</button>
         <button class="btn btn-info" type="button" id="addCarOpera">增加车辆</button>
     </td>
 </tr>
 <tr>
+    <input type="hidden" id="assetsId" name="assetsId" value="${personFamilyAssets.assetsId}"/>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">总资产（万元）</td>
     <td align="left">
         <input class="input-small" type="text" name="fmAllAssets" value="${personFamilyAssets.fmAllAssets}"
@@ -1699,7 +1701,6 @@
 </tr>
 
 <core:forEach items="${personHousePropertyInfoList}" var="personHousePropertyInfo" varStatus="idx">
-     <input type="hidden" id="assetsId" name="assetsId" value="${personHousePropertyInfo.assetsId}"/>
     <tr>
         <td align="left" colspan="8" style="font-size:18px">
             房产：<core:out value="${idx.index+1}"></core:out>
@@ -4039,5 +4040,6 @@
 </div>
 </div>
 </div>
+
 </body>
 </html>

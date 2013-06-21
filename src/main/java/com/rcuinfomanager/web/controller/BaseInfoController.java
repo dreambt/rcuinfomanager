@@ -221,7 +221,7 @@ public class BaseInfoController {
         FinanceServices financeServices=baseInfoService.getFinanceService(id);
         String[] usedPro=financeServices.getUsedProduct().split(",");
         map.put("usedProducts",usedPro);
-
+        map.put("recordId",id);
         return "farmer/edit";
     }
 
@@ -231,8 +231,8 @@ public class BaseInfoController {
 
 
         System.out.print(allColumnInfo);
-        map.put("editSuccess","编辑成功！");
-        return "farmer/edit";
+        //map.put("editSuccess","编辑成功！");
+        return "redirect:/family/edit/"+allColumnInfo.getRecordId();
     }
 
     /*@RequestMapping(value = "/saveEditInfo", method = RequestMethod.POST)
@@ -402,7 +402,7 @@ public class BaseInfoController {
     }
 
     //增加房产
-    @RequestMapping(value = "/addHouse/{assetsId}")
+    @RequestMapping(value = "/addHouse/{assetsId}", method = RequestMethod.GET)
     public String addHouse(@PathVariable long assetsId,Map map){
         map.put("assetsId", assetsId);
         map.put("houseInfo", new HouseInfo());

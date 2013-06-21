@@ -5,6 +5,7 @@ public class AddUserForm {
     private String password;
     private String confirmPassword;
     private String displayUserName;
+    private long organizationId;
 
     public String getUserName() {
         return userName;
@@ -36,5 +37,13 @@ public class AddUserForm {
 
     public void setDisplayUserName(String displayUserName) {
         this.displayUserName = displayUserName;
+    }
+
+    public long getOrganizationId() {
+        return organizationId;
+    }
+
+    public void setOrganizationId(long organizationId) {
+        this.organizationId = organizationId;
     }
 }

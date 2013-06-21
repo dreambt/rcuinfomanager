@@ -7,4 +7,6 @@ import java.util.List;
 public interface OrganizationInfoDao {
 
     public List<OrganizationInfo> queryAllOrganizationInfo();
+
+    void saveOrganizationInfo(OrganizationInfo organizationInfo);
 }

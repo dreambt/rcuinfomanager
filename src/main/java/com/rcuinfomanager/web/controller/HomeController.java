@@ -1,12 +1,11 @@
 package com.rcuinfomanager.web.controller;
 
-import com.rcuinfomanager.service.BaseInfoService;
-import com.rcuinfomanager.service.LogsInfoService;
-import com.rcuinfomanager.service.SystemAccountService;
-import com.rcuinfomanager.service.SystemRoleService;
+import com.rcuinfomanager.model.OrganizationInfo;
+import com.rcuinfomanager.service.*;
 import com.rcuinfomanager.session.SessionUser;
 import com.rcuinfomanager.session.UserSessionContext;
 import com.rcuinfomanager.session.UserSessionContextHolder;
+import com.rcuinfomanager.web.form.AddUserForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -29,6 +28,8 @@ public class HomeController {
     private LogsInfoService logsInfoService;
     @Autowired
     private SystemRoleService systemRoleService;
+    @Autowired
+    private OrganizationInfoService organizationInfoService;
 
     //客户电子信息管理
     @RequestMapping(value ="/index")
@@ -71,6 +72,9 @@ public class HomeController {
         UserSessionContext userSessionContext = UserSessionContextHolder.getUserSessionContext();
         SessionUser sessionUser = userSessionContext.getSessionUser();
         map.put("displayUserName", sessionUser.getDisplayUserName());
+
+        map.put("orgList", organizationInfoService.getAllOrganizations());
+        map.put("organizationInfo", new OrganizationInfo());
         if(sessionUser.getId()==1){
             map.put("accountList",systemAccountService.getSystemAccountByAdminList());
         }else{

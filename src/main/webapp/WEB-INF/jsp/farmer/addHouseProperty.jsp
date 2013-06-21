@@ -13,12 +13,8 @@
     <script src="/asserts/js/jquery-1.7.2.min.js"></script>
     <script src="/asserts/js/bootstrap.min.js"></script>
     <script type="text/javascript">
-
         $(function () {
-            var houseSuccess='${houseSuccess}';
-            if(houseSuccess && houseSuccess!=''){
-                alert(houseSuccess);
-            }
+
             //确定
             $('#okOperate').click(function () {
                   $('#houseForm').submit();
@@ -29,18 +25,18 @@
                 window.top.art.dialog({id: 'addHouse' }).close();
             });
             //返回main
-            var success = '${success}';
+            var success = '${houseSuccess}';
             if (success && success != '') {
-                var url = 'farmer/main';
                 window.top.art.dialog({id: 'addHouse'}).close();
+                window.location.reload();
             }
 
         });
     </script>
 </head>
 <body>
-<form:form modelAttriubte = "houseInfo"  action="/family/saveHouse" method = "post">
-<%--<form id="houseForm" action="/family/saveHouse" method="post">--%>
+<%--<form:form modelAttriubte = "houseInfo"  action="/family/saveHouse" method = "post">--%>
+<form id="houseForm" action="/family/saveHouse" method="post">
     <input type="hidden" name="assetsId" value="${assetsId}">
     <table width="100%" border="0">
         <tbody>
@@ -138,12 +134,12 @@
             </td>
             <td align="center" bgcolor="#b4d8ed" style="color:#161823">备注</td>
             <td align="left" colspan="3">
-                <form:input path="note1" class="input-small" style="width: 280px;height: 30px; margin-top: 5px;"/>
+                <%--<form:input path="note1" class="input-small" style="width: 280px;height: 30px; margin-top: 5px;"/>--%>
             </td>
         </tr>
         </tbody>
     </table>
-</form:form>
+</form>
 <p align="center">
     <a class="btn" href="#" id="okOperate">确定</a>&nbsp;
     <a class="btn" href="#" id="cancelOperate">取消</a>

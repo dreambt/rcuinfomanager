@@ -3,6 +3,7 @@ package com.rcuinfomanager.webservice;
 import com.rcuinfomanager.dao.UserDao;
 import com.rcuinfomanager.model.User;
 import com.rcuinfomanager.service.BaseInfoService;
+import com.rcuinfomanager.util.EncryptUtils;
 import com.rcuinfomanager.util.JsonParser;
 import com.rcuinfomanager.webservice.model.*;
 import com.security.mdfive.MDFive;
@@ -40,7 +41,7 @@ public class FarmerInfoWebService {
                 if (data != null && !data.isEmpty()) {
                     webServiceResponseData.setStatus(0);
                     String rawData = JsonParser.toJSON(data);
-                    webServiceResponseData.setData(rawData);
+                    webServiceResponseData.setData(EncryptUtils.encryptStr(rawData));
                 }
             }
         }
@@ -61,7 +62,7 @@ public class FarmerInfoWebService {
             if (pwdMD5.equals(password)) {
                 try {
                     ObjectMapper mapper = new ObjectMapper();
-                    UploadData uploadData = mapper.readValue(rawData, UploadData.class);
+                    UploadData uploadData = mapper.readValue(EncryptUtils.decryptStr(rawData), UploadData.class);
                     if (uploadData != null) {
                         AllColumnInfo allColumnInfo = uploadData.getAllColumnInfo();
                         allColumnInfo.setUserName(username);

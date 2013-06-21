@@ -125,9 +125,19 @@ public class UserService {
     }
 
     public void addUser(User user) {
-        if (user.getOrganizationId() == 0) {
-            userDao.saveUserWithOutOrganization(user);
-        }
+        userDao.saveUser(user);
+    }
+
+    public User getUserById(long userId) {
+        return userDao.getUserById(userId);
+    }
+
+    public void deleteAccount(long userId) {
+        userDao.deleteUser(userId);
+    }
+
+    public void update(User user) {
+        userDao.update(user);
     }
 
     public static class LogonResult {

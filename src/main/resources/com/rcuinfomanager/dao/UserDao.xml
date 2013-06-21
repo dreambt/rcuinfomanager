@@ -19,7 +19,7 @@
         <result column="note4" property="note4"></result>
     </resultMap>
 
-    <select id="getUserById" parameterType="java.lang.Integer" resultMap="userMap">
+    <select id="getUserById" parameterType="java.lang.Long" resultType="com.rcuinfomanager.model.User">
         SELECT * FROM usersinfo u WHERE u.userId = #{id}
     </select>
 
@@ -32,19 +32,21 @@
           select u.userId, u.lastLoginTime from usersinfo u where u.userName=#{userName}
     </select>
 
-    <insert id="saveUserWithOutOrganization" parameterType="com.rcuinfomanager.model.User">
-        INSERT INTO usersinfo(userName,password,displayUserName,curDesignateFlag,createTime,needModifyPassword,lastLoginTime,note1,note2,note3,note4)
-        VALUES(#{userName},#{password},#{displayUserName},#{curDesignateFlag},#{createTime},#{needModifyPassword},#{lastLoginTime},#{note1},#{note2},#{note3},#{note4})
+    <insert id="saveUser" parameterType="com.rcuinfomanager.model.User">
+        INSERT INTO usersinfo(organizationId,userName,password,displayUserName,curDesignateFlag,createTime,needModifyPassword,lastLoginTime,note1,note2,note3,note4)
+        VALUES(#{organizationId},#{userName},#{password},#{displayUserName},#{curDesignateFlag},#{createTime},#{needModifyPassword},#{lastLoginTime},#{note1},#{note2},#{note3},#{note4})
     </insert>
 
     <update id="changePassword" parameterType="com.rcuinfomanager.model.User">
         UPDATE usersinfo SET password = #{password}, needModifyPassword = 1 WHERE userId=#{userId}
     </update>
 
-    <delete id="deleteUser" parameterType="java.lang.Integer">
-        DELETE FROM user_info WHERE user_id=#{id}
+    <delete id="deleteUser" parameterType="java.lang.Long">
+        DELETE FROM usersinfo WHERE userId=#{id}
     </delete>
 
-
+    <update id="update" parameterType="com.rcuinfomanager.model.User">
+        update usersinfo set userName = #{userName}, password = #{password},displayUserName=#{displayUserName}, #{organizationId}=#{organizationId} where userId=#{userId}
+    </update>
 
 </mapper>

@@ -1,10 +1,7 @@
 package com.rcuinfomanager.web.controller;
 
 
-import com.rcuinfomanager.model.CusBaseInfo;
-import com.rcuinfomanager.model.FinanceServices;
-import com.rcuinfomanager.model.HouseInfo;
-import com.rcuinfomanager.model.LogsInfo;
+import com.rcuinfomanager.model.*;
 import com.rcuinfomanager.service.BaseInfoService;
 import com.rcuinfomanager.service.ExportInfo2VillagerCommittee4Estimation;
 import com.rcuinfomanager.service.ImportFarmerInfoService;
@@ -222,27 +219,9 @@ public class BaseInfoController {
         String[] usedPro=financeServices.getUsedProduct().split(",");
         map.put("usedProducts",usedPro);
         map.put("recordId",id);
+        map.put("allColumnInfo", new AllColumnInfo());
         return "farmer/edit";
     }
-
-    //保存编辑
-    @RequestMapping(value = "/saveEditInfo",method = RequestMethod.POST)
-    public String saveEditInfo(@ModelAttribute("allColumnInfo")AllColumnInfo allColumnInfo,Map map){
-
-
-        System.out.print(allColumnInfo);
-        //map.put("editSuccess","编辑成功！");
-        return "redirect:/family/edit/"+allColumnInfo.getRecordId();
-    }
-
-    /*@RequestMapping(value = "/saveEditInfo", method = RequestMethod.POST)
-    public String saveEditInfo(HttpServletRequest request, HttpServletResponse response,Map map){
-
-
-        *//*System.out.print(allColumnInfo);*//*
-        map.put("editSuccess","编辑成功！");
-        return "farmer/edit";
-    }*/
 
     //删除
     @RequestMapping("/delete/{id}")
@@ -286,8 +265,6 @@ public class BaseInfoController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-
         }
         map.put("success", true);
         return "farmer/importBasicData";
@@ -417,18 +394,46 @@ public class BaseInfoController {
         return "farmer/addHouseProperty";
     }
     //增加土地
-    @RequestMapping(value = "/addLand/{id}")
-    public String addLand(@PathVariable long id){
+    @RequestMapping(value = "/addLand/{assetsId}", method = RequestMethod.GET)
+    public String addLand(@PathVariable long assetsId,Map map){
+        map.put("assetsId", assetsId);
+        map.put("landInfo", new LandInfo());
 
-        return "";
+        return "farmer/addLand";
+    }
+    //保存土地
+    @RequestMapping(value = "/saveLand", method = RequestMethod.POST)
+    public String saveLand(HttpServletRequest request, HttpServletResponse response,@ModelAttribute("landInfo")LandInfo landInfo,Map map){
+
+        baseInfoService.saveLandInfo(landInfo);
+        map.put("houseSuccess","true");
+        return "farmer/addLand";
     }
     //增加车辆
-    @RequestMapping(value = "/addCar/{}")
-     public String addCar(@PathVariable long id){
-
-         return "";
+    @RequestMapping(value = "/addCar/{assetsId}", method = RequestMethod.GET)
+     public String addCar(@PathVariable long assetsId,Map map){
+        map.put("assetsId", assetsId);
+        map.put("carsInfo", new CarsInfo());
+        return "farmer/addCars";
      }
+    //保存车辆
+    @RequestMapping(value = "/saveCar", method = RequestMethod.POST)
+    public String saveCar(HttpServletRequest request, HttpServletResponse response,@ModelAttribute("carsInfo")CarsInfo carsInfo,Map map){
 
+        baseInfoService.saveCarsinfo(carsInfo);
+        map.put("houseSuccess","true");
+        return "farmer/addCars";
+    }
+
+    //保存编辑
+    @RequestMapping(value = "/saveEditInfo",method = RequestMethod.POST)
+    public String saveEditInfo(HttpServletRequest request, HttpServletResponse response,@ModelAttribute("allColumnInfo")AllColumnInfo allColumnInfo,Map map){
+
+        baseInfoService.updateBaseInfoById(allColumnInfo);
+        map.put("editSuccess","编辑成功！");
+       // return "redirect:/family/edit/"+allColumnInfo.getRecordId();
+        return "farmer/edit";
+    }
 
 }
 

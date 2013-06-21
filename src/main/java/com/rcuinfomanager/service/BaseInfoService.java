@@ -58,6 +58,11 @@ public class BaseInfoService {
         return baseInfoDao.getFamilyAssets(recordId);
     }
 
+    //保存编辑
+    public void updateBaseInfoById(AllColumnInfo allColumnInfo){
+        baseInfoDao.updateBaseInfoById(allColumnInfo);
+    }
+
     //房产
     public List<HouseInfo> getHousePropertyInfo(Long recordId){
         return baseInfoDao.getHousePropertyInfo(recordId);
@@ -237,5 +242,13 @@ public class BaseInfoService {
 
     public List<SubmitItem> querySubmitList(String userName) {
         return baseInfoDao.querySubmitList(userName);
+    }
+    //保存土地
+    public void saveLandInfo(LandInfo landInfo){
+        baseInfoDao.saveLandInfo(landInfo);
+    }
+    //保存车辆
+    public void saveCarsinfo(CarsInfo carsInfo){
+        baseInfoDao.saveCarsinfo(carsInfo);
     }
 }

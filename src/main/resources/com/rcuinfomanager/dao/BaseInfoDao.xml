@@ -432,7 +432,7 @@
     </select>
 
     <update id="updateBaseInfoById" parameterType="com.rcuinfomanager.webservice.model.AllColumnInfo">
-        update baseinfo set village = #{village}, gender = #{gender}, isFarmer = #{isFarmer}, cerType = #{cerType},cerValidityFrom = #{cerValidityFrom} ,
+        update baseinfo set customerName = #{customerName},cerNum = #{cerNum},village = #{village}, gender = #{gender}, isFarmer = #{isFarmer}, cerType = #{cerType},cerValidityFrom = #{cerValidityFrom} ,
            cerValidityTo = #{cerValidityTo}, customerType = #{custType}, birthday = #{birthday}, nationality = #{nationality}, isHavePassport = #{isHavePassport},
            nation = #{nation}, poliLaspect = #{poliLaspect}, address = #{address}, postcode = #{postcode}, telephone = #{telephone}, mbPhoneNum = #{mbPhoneNum},
            areaCode = #{areaCode}, areaName = #{areaName}, highestDegree = #{highestDegree}, highestEdu = #{highestEdu}, health = #{health},
@@ -441,7 +441,7 @@
            businessSite = #{businessSite}, businessProp = #{businessProp}, moneySitu = #{moneySitu},  inputMoney = #{inputMoney},
            ownMoney = #{ownMoney}, yearIncome = #{yearIncome}, annualWageIncome = #{annualWageIncome}, workYears = #{workYears}, workSitu = #{workSitu},
            unitProp = #{unitProp}, unitIndustryId = #{unitIndustryId}, unitIndustryName = #{unitIndustryName}, department = #{department}, unitType = #{unitType},
-           duties = #{duties}, workTitle = #{workTitle}, status = #{status}, userName = #{userName}
+           duties = #{duties}, workTitle = #{workTitle}, state = #{status}, userName = #{userName}
         where recordId = #{recordId}
     </update>
 
@@ -457,7 +457,7 @@
            bankPartnership, profession, businessProj, businessYear,
            businessSite, businessProp, moneySitu,inputMoney,
            ownMoney, yearIncome, annualWageIncome, workYears, workSitu,
-           unitProp, unitIndustryId, unitIndustryName, department,unitType, duties, workTitle, customerName,cerNum, status, userName)
+           unitProp, unitIndustryId, unitIndustryName, department,unitType, duties, workTitle, customerName,cerNum, state, userName)
         values(#{village}, #{gender}, #{isFarmer}, #{cerType}, #{cerValidityFrom},#{cerValidityTo}, #{custType}, #{birthday}, #{nationality}, #{isHavePassport}, #{nation}, #{poliLaspect},
            #{address}, #{postcode},#{telephone}, #{mbPhoneNum}, #{areaCode},  #{areaName}, #{highestDegree}, #{highestEdu}, #{health},
            #{bankRelation}, #{liveCondition}, #{maritalStatus}, #{socialSecurity},

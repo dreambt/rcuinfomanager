@@ -83,7 +83,6 @@
             //增加房产
             $('#addHouseOpera').click(function(){
                 var assetsId=$('#assetsId').val();
-                //alert(assetsId);
                 var url="/family/addHouse/"+assetsId;
                 window.art.dialog({
                     id: 'addHouse',
@@ -95,19 +94,18 @@
             //增加土地
             $('#addlandOpera').click(function(){
                 var assetsId=$('#assetsId').val();
-                alert(assetsId);
-                var url="/family/addLand/assetsId="+assetsId;
+                var url="/family/addLand/"+assetsId;
                 window.art.dialog({
                     id: 'addLand',
                     title: '增加土地信息',
                     lock: true,
-                    content: '<iframe scrolling="auto" width="450" height="210" frameborder="0" style="border: none;margin: -20px -25px;"marginheight="0" marginwidth="0" src="' + url + '"/>'
+                    content: '<iframe scrolling="auto" width="650" height="210" frameborder="0" style="border: none;margin: -20px -25px;"marginheight="0" marginwidth="0" src="' + url + '"/>'
                 });
             });
             //增加车辆
             $('#addCarOpera').click(function(){
-
-                var url="/family/addCar/recordId="+recordId;
+                var assetsId=$('#assetsId').val();
+                var url="/family/addCar/"+assetsId;
                 window.art.dialog({
                     id: 'addCar',
                     title: '增加车辆信息',
@@ -180,8 +178,8 @@
 <div class="form-actions">
 <a class="btn btn-primary" href="#" id="saveEditOpera">保存</a>
 <%--<a class="btn" href="#" >取消</a>--%>
-
 <hr  size="1" width="100%" style="margin-bottom: -1px;"/>
+
 <form id="editForm" action="/family/saveEditInfo" method="post">
 <input type="hidden" id="recordId" name="recordId" value="${recordId}"/>
 <div class="tabbable">
@@ -1663,8 +1661,8 @@
     <td align="center" colspan="8" style="font-size:22px">
         家庭资产情况
         <a class="btn btn-info" id="addHouseOpera" href="#">增加房产</a>
-        <button class="btn btn-info" type="button" id="addlandOpera">增加土地</button>
-        <button class="btn btn-info" type="button" id="addCarOpera">增加车辆</button>
+        <a class="btn btn-info" id="addlandOpera" href="#">增加土地</a>
+        <a class="btn btn-info" id="addCarOpera" href="#">增加车辆</a>
     </td>
 </tr>
 <tr>

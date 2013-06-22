@@ -8,6 +8,8 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface BaseInfoDao {
+    //改状态
+    void updateStatus(int status,Long recordId);
     //管理员获取数据列表
     List<CustomerListInfo> queryAdminByBaseInfoByPage(@Param("beginPageNum") int beginPageNum, @Param("endPageNum") int endPageNum);
 
@@ -77,6 +79,7 @@ public interface BaseInfoDao {
 
     BaseInfo getBaseInfoByCerNum(String cerNum);
 
+
     void updateFamilyincurdebts(AllColumnInfo allColumnInfo);
 
     void updateFinancialassets(AllColumnInfo allColumnInfo);
@@ -86,6 +89,15 @@ public interface BaseInfoDao {
     void updateFinanceservices(AllColumnInfo allColumnInfo);
 
     void updateCustomermanagereva(AllColumnInfo allColumnInfo);
+
+    void updateHousePropertyInfo(HouseInfo houseInfo);
+
+    void updateLandInfo(LandInfo landInfo);
+
+    void updateCarsInfo(CarsInfo carsInfo);
+
+    void updateFamilyMembers(FamilyMember familyMember);
+
 
     void deleteCarsinfoByAssetsId(long assetsId);
 
@@ -125,4 +137,6 @@ public interface BaseInfoDao {
     void updateAppointStatus(long recordId);
 
     List<SubmitItem> querySubmitList(String userName);
+    // 城乡
+    List<AreasInfo> getAreasInfo();
 }

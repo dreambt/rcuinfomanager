@@ -96,6 +96,13 @@ public class AllColumnInfo implements Serializable {
     private List<FamilyMember> familyMembers;
 
     private String finaServiceUsedProduct;
+    private String finaServiceSatisfaction;
+    private String finaServicesFmDepositTodo;
+    private String finaServicesNeedServices;
+    private String finaServicesNeedServicesElse;
+    private String finaServicesHolpForServices;
+    private String finaServicesSuggestion;
+
     private int finaServiceIsMoneyNeed;
     private String finaServiceMoneyTodo;
     private int finaServiceMoneyCount;
@@ -842,5 +849,73 @@ public class AllColumnInfo implements Serializable {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public int getFarmer() {
+        return isFarmer;
+    }
+
+    public void setFarmer(int farmer) {
+        isFarmer = farmer;
+    }
+
+    public int getHavePassport() {
+        return isHavePassport;
+    }
+
+    public void setHavePassport(int havePassport) {
+        isHavePassport = havePassport;
+    }
+
+    public String getFinaServiceSatisfaction() {
+        return finaServiceSatisfaction;
+    }
+
+    public void setFinaServiceSatisfaction(String finaServiceSatisfaction) {
+        this.finaServiceSatisfaction = finaServiceSatisfaction;
+    }
+
+    public String getFinaServicesFmDepositTodo() {
+        return finaServicesFmDepositTodo;
+    }
+
+    public void setFinaServicesFmDepositTodo(String finaServicesFmDepositTodo) {
+        this.finaServicesFmDepositTodo = finaServicesFmDepositTodo;
+    }
+
+    public String getFinaServicesNeedServices() {
+        return finaServicesNeedServices;
+    }
+
+    public void setFinaServicesNeedServices(String finaServicesNeedServices) {
+        this.finaServicesNeedServices = finaServicesNeedServices;
+    }
+
+    public String getFinaServicesNeedServicesElse() {
+        return finaServicesNeedServicesElse;
+    }
+
+    public void setFinaServicesNeedServicesElse(String finaServicesNeedServicesElse) {
+        this.finaServicesNeedServicesElse = finaServicesNeedServicesElse;
+    }
+
+    public String getFinaServicesHolpForServices() {
+        return finaServicesHolpForServices;
+    }
+
+    public void setFinaServicesHolpForServices(String finaServicesHolpForServices) {
+        this.finaServicesHolpForServices = finaServicesHolpForServices;
+    }
+
+    public String getFinaServicesSuggestion() {
+        return finaServicesSuggestion;
+    }
+
+    public void setFinaServicesSuggestion(String finaServicesSuggestion) {
+        this.finaServicesSuggestion = finaServicesSuggestion;
     }
 }

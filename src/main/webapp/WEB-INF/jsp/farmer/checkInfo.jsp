@@ -63,11 +63,11 @@
         </tr>
         <tr>
             <td>&nbsp;</td>
-            <td align="right">
+            <td align="center">
                 <select class="span3" name="state" id="state" style="width:202px;">
                     <option value="">选择验收结果</option>
-                    <option value="1">验收通过</option>
-                    <option value="2">验收拒绝</option>
+                    <option value="3">验收通过</option>
+                    <option value="4">验收拒绝</option>
                 </select>
             </td>
         </tr>

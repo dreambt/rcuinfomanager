@@ -13,6 +13,10 @@
         <result column="state" property="state"></result>
     </resultMap>
 
+    <update id="updateStatus" parameterType="java.lang.Integer">
+        update baseinfo set state=#{status} where  recordId =#{recordId}
+    </update>
+
     <!-- //管理员获取数据列表-->
     <select id="queryAdminByBaseInfoByPage" resultMap="userListInfo">
         select b.recordId,b.customerName,b.telephone,b.submitTime,org.organizationName,u.displayUserName,b.state
@@ -170,8 +174,8 @@
      </select>
 
      <update id="updateHouseInfo" parameterType="com.rcuinfomanager.model.HouseInfo">
-         insert into housepropertyinfo (nature,purpose,site,structure,floorNum,usedSitu,houseArea,houseWorth,isInstallment,hasCredentials,note1)
-         values (#{nature},#{purpose},#{site},#{structure},#{floorNum},#{usedSitu},#{houseArea},#{houseWorth},#{isInstallment},#{hasCredentials},#{note1})
+         update  housepropertyinfo
+         set  nature=#{nature},purpose=#{purpose},site=#{site},structure=#{structure},floorNum=#{floorNum},usedSitu=#{usedSitu},houseArea=#{houseArea},houseWorth=#{houseWorth},isInstallment=#{isInstallment},hasCredentials=#{hasCredentials},note1=#{note1}
          where assetsId=#{assetsId}
      </update>
 
@@ -186,7 +190,7 @@
         <result column="isMoneyClear" property="isMoneyClear"></result>
     </resultMap>
     <select id="getLandInfo" parameterType="java.lang.Long" resultMap="landInfoMap">
-         select land.area,land.worth,land.property,land.type,land.usedSitu,land.isMoneyClear
+         select land.id,land.area,land.worth,land.property,land.type,land.usedSitu,land.isMoneyClear
          from landinfo land
          left outer join familyassets f on f.assetsId = land.assetsId
          where f.recordId=#{recordId}
@@ -206,6 +210,12 @@
          left outer join familyassets fa on fa.assetsId = car.assetsId
          where fa.recordId=#{recordId}
     </select>
+
+    <update id="updateCarsInfo" parameterType="com.rcuinfomanager.webservice.model.AllColumnInfo">
+         update carsinfo
+         set carsInfo=#{carsInfo},carsWorth=#{carsWorth},carsIsInstallment=#{carsIsInstallment},carsUsingInfo=#{carsUsingInfo},assetsId =#{assetsId}
+         where id=#{id}
+    </update>
 
     <!--负责情况信息-->
     <resultMap id="familyIncurDebtsMap" type="com.rcuinfomanager.model.FamilyIncurDebts">
@@ -235,6 +245,14 @@
         select f.id, f.familyMemberName,f.yearIncome,f.leaderRelation,f.address,f.profession,f.familyMemberCerNum, f.cerNum
         from familymemberinfo f where f.recordId=#{recordId}
     </select>
+    <update id="updateFamilyMembers" parameterType="com.rcuinfomanager.webservice.model.AllColumnInfo">
+         update familymemberinfo
+         set  familyMemberName=#{familyMemberName},yearIncome=#{yearIncome},
+              leaderRelation=#{leaderRelation},address=#{address},
+              profession=#{profession},familyMemberCerNum=#{familyMemberCerNum},
+              cerNum=#{familyMembers.cerNum},recordId=#{recordId}
+         where id=#{id}
+    </update>
 
     <!--金融资产信息-->
     <resultMap id="financialAssetsMap" type="com.rcuinfomanager.model.FinancialAssets">
@@ -467,7 +485,7 @@
            #{unitProp}, #{unitIndustryId}, #{unitIndustryName}, #{department}, #{unitType},
            #{duties}, #{workTitle}, #{customerName}, #{cerNum}, #{status}, #{userName})
     </insert>
-
+     <!--//更新家庭收出-->
     <update id="updateIncomeexpenses" parameterType="com.rcuinfomanager.webservice.model.AllColumnInfo">
         update incomeexpenses set fmAllIncome = #{fmAllIncome}, fmExpenses = #{fmExpenses}, incomeSrc = #{fmIncomeSrc}, perIncome = #{fmPerIncome},
           fmOtherMemberIn = #{fmOtherMemberIn}, fmExpensesProj = #{fmExpensesProj}, fmInOutRatio = #{fmInOutRatio}
@@ -531,14 +549,31 @@
          values(#{assetsId},#{nature},#{site},#{structure},#{purpose},#{floorNum},#{usedSitu},#{houseArea}, #{houseWorth},#{isInstallment},#{hasCredentials},#{note1})
     </insert>
 
+    <update id="updateHousePropertyInfo" parameterType="com.rcuinfomanager.model.HouseInfo">
+          update housepropertyinfo
+           set nature=#{nature},purpose=#{purpose},site=#{site},structure=#{structure},
+                  floorNum=#{floorNum},usedSitu=#{usedSitu},houseArea=#{houseArea},houseWorth=#{houseWorth},
+                  isInstallment=#{isInstallment},hasCredentials=#{hasCredentials} ,note1=#{note1}
+                  assetsId=#{assetsId}
+          where id=#{id}
+    </update>
+
     <delete id="deleteLandInfoByAssetsId" parameterType="java.lang.Long">
-         DELETE FROM landInfo WHERE assetsId = #{assetsId};
+         DELETE FROM landInfo WHERE assetsId = #{assetsId}
     </delete>
 
     <insert id="saveLandInfo" parameterType="com.rcuinfomanager.model.LandInfo">
         insert into landInfo(assetsId,area,worth,property,type,usedSitu,isMoneyClear)
           values(#{assetsId},#{area},#{worth},#{property},#{type},#{usedSitu}, #{isMoneyClear})
     </insert>
+
+    <update id="updateLandInfo" parameterType="com.rcuinfomanager.model.LandInfo">
+        update landinfo
+        set areaCode=#{areaCode},worth=#{worth} ,property=#{property} ,
+            type=#{type} ,usedSitu=#{usedSitu} ,isMoneyClear=#{isMoneyClear},
+            assetsId=#{assetsId}
+        where id=#{id}
+    </update>
 
     <delete id="deleteFamilyMemberInfoByRecordId" parameterType="java.lang.Long">
          DELETE FROM familymemberinfo WHERE recordId = #{recordId};
@@ -613,5 +648,22 @@
 
     <select id="getStatusByCerNum" parameterType="java.lang.String">
         select state from baseinfo where cerNum = #{cerNum}
+    </select>
+    <resultMap id="industryMap" type="com.rcuinfomanager.model.IndustryInfo">
+        <result property="industryId" column="industryId"></result>
+        <result property="industryName" column="industryName"></result>
+        <result property="industryAlias" column="industryAlias"></result>
+        <result property="fatherId" column="fatherId"></result>
+        <result property="infoId" column="infoId"></result>
+        <result property="infoManageId" column="infoManageId"></result>
+    </resultMap>
+    <resultMap id="areasMap" type="com.rcuinfomanager.model.AreasInfo">
+        <result column="areaId" property="areaId"></result>
+        <result column="areaName" property="areaName"></result>
+        <result column="areaAlias" property="areaAlias"></result>
+        <result column="fatherId" property="fatherId"></result>
+    </resultMap>
+    <select id="getAreasInfo" resultMap="areasMap">
+          select * from areasinfo where fatherId=350521
     </select>
 </mapper>

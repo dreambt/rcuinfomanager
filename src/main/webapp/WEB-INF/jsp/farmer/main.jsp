@@ -20,6 +20,10 @@
     <script type="text/javascript">
         $(function(){
 
+            $('#search').click(function(){
+                $('#searchForm').submit();
+            });
+
 
             handerChangePasswordSubmit = function(){
 
@@ -46,6 +50,24 @@
             if(delMsg){
                 alert(delMsg);
             }
+
+           $('#selectAreas').change(function(){
+               var me=$(this);
+               var areaId=me.val();
+               var url=''
+               var params={'areaId':areaId};
+               $.post(url,params,function(data){
+                   var areaNameList=data.areaNameList;
+                   if(areaNameList){
+                       $.each(areaNameList,function(i,v){
+                           var option=$('<option>');
+                           option.val(v.id);
+                           option.text(v.name);
+                           $('#areaName').append(option);
+                       });
+                   }
+               });
+           });
         });
     </script>
 
@@ -87,20 +109,26 @@
             <input class="input-block-level" type="text" placeholder="客户电子信息管理" disabled="disabled" style="color:#0000AA">
             <div class="navbar">
                 <div class="btn-group">
-                    <select class="selectpicker" style="width: 95px; margin-top: 10px;">
+                    <form action="/index" id=""method="post">
+
+                    </form>
+                    <select name="organizationName" class="selectpicker" style="width: 95px; margin-top: 10px;">
                         <option value="">按网点</option>
                         <core:forEach items="${netWorkList}" var="netWork">
                             <option value="${netWork.organizationName}">${netWork.organizationName}</option>
                         </core:forEach>
                     </select>
-                    <select class="selectpicker" style="width: 95px; margin-top: 10px;">
-                        <option value="" selected="selected">按乡镇</option>
+                    <select id="selectAreas" name="areaName" class="selectpicker" style="width: 95px; margin-top: 10px;">
+                        <option value="areaName">按乡镇</option>
+                        <core:forEach items="${areasInfoList}" var="areasInfos">
+                            <option value="${areasInfos.areaName}">${areasInfos.areaName}</option>
+                        </core:forEach>
                     </select>
-                    <select class="selectpicker" style="width: 95px; margin-top: 10px;">
-                        <option value="" selected="selected">按村</option>
+                    <select name="village" class="selectpicker" style="width: 95px; margin-top: 10px;">
+                        <option value="">按村</option>
                     </select>
-                    <input type="text"  name="" value="" placeholder="按客户经理" style="width: 95px; height:30px;margin-top: 10px;">
-                    <a class="btn" href="#">查询</a>
+                    <input type="text"  name="organizationName" value="${params.organizationName}" placeholder="按客户经理" style="width: 95px; height:30px;margin-top: 10px;">
+                    <a class="btn" href="#" id="search">查询</a>
                 </div>
                 <div class="btn-group">
                     <core:choose>
@@ -156,7 +184,23 @@
                             <td align="center">${familyInfo.submitTime}</td>
                             <td align="center">${familyInfo.organizationName}</td>
                             <td align="center">${familyInfo.displayUserName}</td>
-                            <td align="center">${familyInfo.state}</td>
+                            <core:choose>
+                                <core:when test="${familyInfo.state==2}">
+                                    <td align="center">已指派</td>
+                                </core:when>
+                                <core:when test="${familyInfo.state==3}">
+                                    <td align="center">验收通过</td>
+                                </core:when>
+                                <core:when test="${familyInfo.state==4}">
+                                    <td align="center">验收拒绝</td>
+                                </core:when>
+                                <core:when test="${familyInfo.state==5}">
+                                    <td align="center">已提交</td>
+                                </core:when>
+                                <core:otherwise>
+                                    <td align="center">&nbsp;</td>
+                                </core:otherwise>
+                            </core:choose>
                             <td align="center">
                                 <a href="#" style="color:#0099FF" class="showOperate" recordId="${familyInfo.recordId}">查看</a>&nbsp;|&nbsp;
                                 <core:choose>

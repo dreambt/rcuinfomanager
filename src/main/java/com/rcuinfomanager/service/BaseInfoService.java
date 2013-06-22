@@ -14,6 +14,10 @@ public class BaseInfoService {
     @Autowired
     private BaseInfoDao baseInfoDao;
 
+    public void updateStatus(int status,Long id){
+        baseInfoDao.updateStatus(status,id);
+    }
+
     //admin
     public List<CustomerListInfo> getAllFamilyInfoListByPage(int pageNum, int offset) {
         int beginPageNum = (pageNum -1) * offset;
@@ -61,6 +65,40 @@ public class BaseInfoService {
     //保存编辑
     public void updateBaseInfoById(AllColumnInfo allColumnInfo){
         baseInfoDao.updateBaseInfoById(allColumnInfo);
+    }
+    public void updateIncomeexpenses(AllColumnInfo allColumnInfo){
+        baseInfoDao.updateIncomeexpenses(allColumnInfo);
+    }
+    public void updateFamilyassets(AllColumnInfo allColumnInfo){
+        baseInfoDao.updateFamilyassets(allColumnInfo);
+    }
+    public void updateFamilyincurdebts(AllColumnInfo allColumnInfo){
+        baseInfoDao.updateFamilyincurdebts(allColumnInfo);
+    }
+    public void updateFinancialassets(AllColumnInfo allColumnInfo){
+        baseInfoDao.updateFinancialassets(allColumnInfo);
+    }
+    public void updateFinanceservices(AllColumnInfo allColumnInfo){
+        baseInfoDao.updateFinanceservices(allColumnInfo);
+    }
+    public void updateCustomermanagereva(AllColumnInfo allColumnInfo){
+        baseInfoDao.updateCustomermanagereva(allColumnInfo);
+    }
+
+    public void updateHousePropertyInfo(HouseInfo houseInfo){
+        baseInfoDao.updateHousePropertyInfo(houseInfo);
+    }
+
+    public void updateLandInfo(LandInfo landInfo){
+        baseInfoDao.updateLandInfo(landInfo);
+    }
+
+    public void updateCarsInfo(CarsInfo carsInfo){
+        baseInfoDao.updateCarsInfo(carsInfo);
+    }
+
+    public void updateFamilyMembers(FamilyMember familyMember){
+        baseInfoDao.updateFamilyMembers(familyMember);
     }
 
     //房产
@@ -250,5 +288,9 @@ public class BaseInfoService {
     //保存车辆
     public void saveCarsinfo(CarsInfo carsInfo){
         baseInfoDao.saveCarsinfo(carsInfo);
+    }
+    //
+    public List<AreasInfo> getAreasInfo(){
+        return baseInfoDao.getAreasInfo();
     }
 }

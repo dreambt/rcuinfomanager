@@ -157,7 +157,7 @@
 </div>
 <div class="span10" style="margin-left: -8.435897%;">
 <br/>
-<input class="input-block-level" type="text" placeholder="客户电子信息管理>编辑" disabled="disabled" style="color:#0000AA">
+<input class="input-block-level" type="text" placeholder="客户电子信息管理>编辑" readonly="readonly" style="color:#0000AA">
 <table class="table table-condensed">
     <tbody>
     <core:forEach items="${personInfoList}" var="personInfo">
@@ -236,8 +236,24 @@
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">客户类型</td>
     <td align="center">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="customerType">
-            <option value="${personBasicList.customerType}">${personBasicList.customerType}</option>
+        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="custType">
+            <core:choose>
+                <core:when test="${personBasicList.customerType=='一般农户'}">
+                    <option value="${personBasicList.customerType}" selected="selected">一般农户</option>
+                    <option value="其他自然人">其他自然人</option>
+                    <option value="个人经营户">个人经营户</option>
+                </core:when>
+                <core:when test="${personBasicList.customerType=='其他自然人'}">
+                    <option value="一般农户">一般农户</option>
+                    <option value="${personBasicList.customerType}" selected="selected">其他自然人</option>
+                    <option value="个人经营户">个人经营户</option>
+                </core:when>
+                <core:otherwise>
+                    <option value="一般农户">一般农户</option>
+                    <option value="其他自然人">其他自然人</option>
+                    <option value="${personBasicList.customerType}" selected="selected">个人经营户</option>
+                </core:otherwise>
+            </core:choose>
         </select>
     </td>
 </tr>
@@ -954,13 +970,22 @@
                     <option value="${personBasicList.inputMoney}" selected="selected">300-1000万元</option>
                     <option value="1000万元以上">1000万元以上</option>
                 </core:when>
-                <core:otherwise>
+                <core:when test="${personBasicList.inputMoney=='1000万元'}">
                     <option value="10万元以内">10万元以内</option>
                     <option value="10-50万元">10-50万元</option>
                     <option value="50-100万元">50-100万元</option>
                     <option value="100-300万元">100-300万元</option>
                     <option value="300-1000万元">300-1000万元</option>
                     <option value="${personBasicList.inputMoney}" selected="selected">1000万元以上</option>
+                </core:when>
+                <core:otherwise>
+                    <option value="" selected="selected">请选择</option>
+                    <option value="10万元以内">10万元以内</option>
+                    <option value="10-50万元">10-50万元</option>
+                    <option value="50-100万元">50-100万元</option>
+                    <option value="100-300万元">100-300万元</option>
+                    <option value="300-1000万元">300-1000万元</option>
+                    <option value="1000万元以上">1000万元以上</option>
                 </core:otherwise>
             </core:choose>
         </select>
@@ -1009,13 +1034,22 @@
                     <option value="${personBasicList.ownMoney}" selected="selected">300-1000万元</option>
                     <option value="1000万元以上">1000万元以上</option>
                 </core:when>
-                <core:otherwise>
+                <core:when test="${personBasicList.ownMoney}=='300-1000万元'}">
                     <option value="10万元以内">10万元以内</option>
                     <option value="10-50万元">10-50万元</option>
                     <option value="50-100万元">50-100万元</option>
                     <option value="100-300万元">100-300万元</option>
                     <option value="300-1000万元">300-1000万元</option>
                     <option value="${personBasicList.ownMoney}" selected="selected">1000万元以上</option>
+                </core:when>
+                <core:otherwise>
+                    <option value="" selected="selected">请选择</option>
+                    <option value="10万元以内">10万元以内</option>
+                    <option value="10-50万元">10-50万元</option>
+                    <option value="50-100万元">50-100万元</option>
+                    <option value="100-300万元">100-300万元</option>
+                    <option value="300-1000万元">300-1000万元</option>
+                    <option value="1000万元">1000万元以上</option>
                 </core:otherwise>
             </core:choose>
         </select>
@@ -1532,6 +1566,8 @@
     </td>
 </tr>
 <core:forEach items="${personIncomeExpensesList}" var="personIncomeExpenses">
+    <input type="hidden" name="id" value="${personIncomeExpenses.id}">
+    <input type="hidden" name="assetsId" value="${personIncomeExpenses.assetsId}">
     <tr>
         <td align="center" colspan="2" bgcolor="#b4d8ed" style="color:#161823">
             家庭年总收入（万元）
@@ -1569,29 +1605,6 @@
                    style="width: 155px;height: 30px; margin-top: 5px;">
         </td>
     </tr>
-    <%--<tr>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">投资经营性质</td>
-        <td align="left">
-           <input class="input-small" type="text" name="businessProp" value="${personIncomeExpenses.businessProp}"
-                   style="width: 95px;height: 30px; margin-top: 5px;">
-        </td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">投资资金情况</td>
-        <td align="left">
-            <input class="input-small" type="text" name="moneySitu" value="${personIncomeExpenses.moneySitu}"
-                   style="width: 95px;height: 30px; margin-top: 5px;">
-        </td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">投入金额</td>
-        <td align="left">
-            <input class="input-small" type="text" name="inputMoney" value="${personIncomeExpenses.inputMoney}"
-                   style="width: 95px;height: 30px; margin-top: 5px;">
-        </td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">自有资金情况</td>
-        <td align="left">
-
-           &lt;%&ndash; <input class="input-small" type="text" name="ownMoney" value="${personIncomeExpenses.ownMoney}"
-                   style="width: 95px;height: 30px; margin-top: 5px;">&ndash;%&gt;
-        </td>
-    </tr>--%>
     <tr>
         <td align="center"  bgcolor="#b4d8ed" style="color:#161823">家庭主要支出项目</td>
         <td align="left" colspan="3">
@@ -1699,6 +1712,7 @@
 </tr>
 
 <core:forEach items="${personHousePropertyInfoList}" var="personHousePropertyInfo" varStatus="idx">
+<input name="houseInfos[${idx.index}].id" value="${personHousePropertyInfo.id}" type="hidden" />
     <tr>
         <td align="left" colspan="8" style="font-size:18px">
             房产：<core:out value="${idx.index+1}"></core:out>
@@ -1707,7 +1721,7 @@
     <tr id="defaultItem">
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">性质</td>
         <td align="left">
-            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="nature">
+            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="houseInfos[${idx.index}].nature">
                 <core:choose>
                     <core:when test="${personHousePropertyInfo.nature=='商品房'}">
                         <option value="${personHousePropertyInfo.nature}" selected="selected">商品房</option>
@@ -1722,7 +1736,7 @@
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">用途</td>
         <td align="left">
-            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="purpose">
+            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="houseInfos[${idx.index}].purpose">
                 <core:choose>
                     <core:when test="${personHousePropertyInfo.purpose=='商用楼'}">
                         <option value="${personHousePropertyInfo.purpose}" selected="selected">商用楼</option>
@@ -1753,7 +1767,7 @@
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">所在位置</td>
         <td align="left">
-            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="site">
+            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="houseInfos[${idx.index}].site">
                 <core:choose>
                     <core:when test="${personHousePropertyInfo.site=='本市市区'}">
                         <option value="${personHousePropertyInfo.site}" selected="selected">本市市区</option>
@@ -1795,7 +1809,7 @@
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">房屋结构</td>
         <td align="left">
-            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="structure">
+            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="houseInfos[${idx.index}].structure">
                 <core:choose>
                     <core:when test="${personHousePropertyInfo.structure=='钢混'}">
                         <option value="${personHousePropertyInfo.structure}" selected="selected">钢混</option>
@@ -1839,12 +1853,12 @@
     <tr>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">层数</td>
         <td align="left">
-            <input class="input-small" type="text" name="floorNum" value="${personHousePropertyInfo.floorNum}"
+            <input class="input-small" type="text" name="houseInfos[${idx.index}].floorNum" value="${personHousePropertyInfo.floorNum}"
                    style="width: 95px;height: 30px; margin-top: 5px;">
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">使用情况</td>
         <td align="left">
-            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="usedSitu">
+            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="houseInfos[${idx.index}].usedSitu">
                 <core:choose>
                     <core:when test="${personHousePropertyInfo.usedSitu=='自住'}">
                         <option value="${personHousePropertyInfo.usedSitu}" selected="selected">自住</option>
@@ -1866,7 +1880,7 @@
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">建筑面积</td>
         <td align="left">
-            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="houseArea">
+            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="houseInfos[${idx.index}].houseArea">
                 <core:choose>
                     <core:when test="${personHousePropertyInfo.houseArea=='100㎡内'}">
                         <option value="${personHousePropertyInfo.houseArea}" selected="selected">100㎡内</option>
@@ -1897,7 +1911,7 @@
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">房产价值</td>
         <td align="left">
-            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="houseWorth">
+            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="houseInfos[${idx.index}].houseWorth">
                 <core:choose>
                     <core:when test="${personHousePropertyInfo.houseWorth=='10万以内'}">
                         <option value="${personHousePropertyInfo.houseWorth}" selected="selected">10万以内</option>
@@ -1941,7 +1955,7 @@
     <tr>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">是否按揭</td>
         <td align="left">
-            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="installment">
+            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="houseInfos[${idx.index}].installment">
                 <core:choose>
                     <core:when test="${personHousePropertyInfo.installment=='1'}">
                         <option value="${personHousePropertyInfo.installment}" selected="selected">是</option>
@@ -1956,7 +1970,7 @@
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">是否办证</td>
         <td align="left">
-            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="hasCredentials">
+            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="houseInfos[${idx.index}].hasCredentials">
                 <core:choose>
                     <core:when test="${personHousePropertyInfo.hasCredentials=='双证齐全'}">
                         <option value="${personHousePropertyInfo.hasCredentials}" selected="selected">双证齐全</option>
@@ -1978,7 +1992,7 @@
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">备注</td>
         <td align="left" colspan="3">
-            <input class="input-small" type="text" name="note1" value="${personHousePropertyInfo.note1}"
+            <input class="input-small" type="text" name="houseInfos[${idx.index}].note1" value="${personHousePropertyInfo.note1}"
                    style="width: 280px;height: 30px; margin-top: 5px;">
         </td>
     </tr>
@@ -1986,6 +2000,7 @@
 
 
 <core:forEach items="${personLandInfoList}" var="personLandInfo" varStatus="idx">
+    <input name="landInfos[${idx.index}].id" value="${personLandInfo.id}" type="hidden" />
     <tr>
         <td align="left" colspan="8" style="font-size:18px">
             土地：<core:out value="${idx.index+1}"></core:out>
@@ -1994,7 +2009,7 @@
     <tr>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">土地面积</td>
         <td align="left">
-            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="area">
+            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="landInfos[${idx.index}].area">
                 <core:choose>
                     <core:when test="${personLandInfo.area=='100㎡内'}">
                         <option value="${personLandInfo.area}" selected="selected">100㎡内</option>
@@ -2025,12 +2040,12 @@
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">土地价值</td>
         <td align="left">
-            <input class="input-small" type="text" name="worth" value="${personLandInfo.worth}"
+            <input class="input-small" type="text" name="landInfos[${idx.index}].worth" value="${personLandInfo.worth}"
                    style="width: 95px;height: 30px; margin-top: 5px;">
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">土地性质</td>
         <td align="left">
-            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="property">
+            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="landInfos[${idx.index}].property">
                 <core:choose>
                     <core:when test="${personLandInfo.property=='国有出让'}">
                         <option value="${personLandInfo.property}" selected="selected">国有出让</option>
@@ -2061,7 +2076,7 @@
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">土地类型</td>
         <td align="left">
-            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="type">
+            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="landInfos[${idx.index}].type">
                 <core:choose>
                     <core:when test="${personLandInfo.type=='商业地'}">
                         <option value="${personLandInfo.type}" selected="selected">商业地</option>
@@ -2105,7 +2120,7 @@
     <tr>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">土地使用情况</td>
         <td align="left">
-            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="usedSitu">
+            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="landInfos[${idx.index}].usedSitu">
                 <core:choose>
                     <core:when test="${personLandInfo.usedSitu=='自用'}">
                         <option value="${personLandInfo.usedSitu}" selected="selected">自用</option>
@@ -2136,7 +2151,7 @@
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">土地款是否结清</td>
         <td align="left" colspan="5">
-            <select class="selectpicker" style="width: 465px; margin-top: 5px;" name="moneyClear">
+            <select class="selectpicker" style="width: 465px; margin-top: 5px;" name="landInfos[${idx.index}].moneyClear">
                 <core:choose>
                     <core:when test="${personLandInfo.moneyClear=='1'}">
                         <option value="${personLandInfo.moneyClear}" selected="selected">是</option>
@@ -2154,6 +2169,7 @@
 
 
 <core:forEach items="${personCarsInfoList}" var="personCarsInfo" varStatus="idx">
+    <input name="carInfos[${idx.index}].id" value="${personCarsInfo.id}" type="hidden" />
     <tr>
         <td align="left" colspan="8" style="font-size:18px">
             车辆：<core:out value="${idx.index+1}"></core:out>
@@ -2162,7 +2178,7 @@
     <tr>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">情况</td>
         <td align="left">
-            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="carsInfo">
+            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="carInfos[${idx.index}].carsInfo">
                 <core:choose>
                     <core:when test="${personCarsInfo.carsInfo=='轿车'}">
                         <option value="${personCarsInfo.carsInfo}" selected="selected">轿车</option>
@@ -2177,7 +2193,7 @@
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">车辆价值</td>
         <td align="left">
-            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="carsWorth">
+            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="carInfos[${idx.index}].carsWorth">
                 <core:choose>
                     <core:when test="${personCarsInfo.carsWorth=='10万以内'}">
                         <option value="${personCarsInfo.carsWorth}" selected="selected">10万以内</option>
@@ -2208,7 +2224,7 @@
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">是否按揭</td>
         <td align="left">
-            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="carsIsInstallment">
+            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="carInfos[${idx.index}].carsIsInstallment">
                 <core:choose>
                     <core:when test="${personCarsInfo.carsIsInstallment=='1'}">
                         <option value="${personCarsInfo.carsIsInstallment}" selected="selected">是</option>
@@ -2223,7 +2239,7 @@
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">使用情况</td>
         <td align="left">
-            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="carsUsingInfo">
+            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="carInfos[${idx.index}].carsUsingInfo">
                 <core:choose>
                     <core:when test="${personCarsInfo.carsUsingInfo=='营运'}">
                         <option value="${personCarsInfo.carsUsingInfo}" selected="selected">营运</option>
@@ -2272,6 +2288,7 @@
     </td>
 </tr>
 <core:forEach items="${personFinancialAssetsList}" var="personFinancialAssets">
+    <input type="hidden" name="id" value="${personFinancialAssets.id}">
     <tr>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">情况</td>
         <td align="left" colspan="3"><%--${personFinancialAssets.financialInfo}--%>
@@ -2302,7 +2319,7 @@
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">我社存款</td>
         <td align="left">
-            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="depositOurBank">
+            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="financialDepositOurBank">
                 <core:choose>
                     <core:when test="${personFinancialAssets.depositOurBank=='3万元内'}">
                         <option value="${personFinancialAssets.depositOurBank}" selected="selected">3万元内</option>
@@ -2344,7 +2361,7 @@
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">他行存款</td>
         <td align="left">
-            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="depositOtherBank">
+            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="financialDepositOtherBank">
                 <core:choose>
                     <core:when test="${personFinancialAssets.depositOtherBank=='3万元内'}">
                         <option value="${personFinancialAssets.depositOtherBank}" selected="selected">3万元内</option>
@@ -2392,6 +2409,7 @@
     </td>
 </tr>
 <core:forEach items="${personFamilyIncurDebtsList}" var="personFamilyIncurDebts">
+    <input type="hidden" name="id" value="${personFamilyIncurDebts.id}"/>
     <tr>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">
             家庭负债总额（万元）
@@ -2402,24 +2420,24 @@
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">本行负债（万元）</td>
         <td align="left" colspan="2">
-            <input class="input-small" type="text" name="ourBankDebts" value="${personFamilyIncurDebts.ourBankDebts}"
+            <input class="input-small" type="text" name="fmIncurOurBankDebts" value="${personFamilyIncurDebts.ourBankDebts}"
                    style="width: 155px;height: 30px; margin-top: 5px;">
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">他行负债（万元）</td>
         <td align="left" colspan="2">
-            <input class="input-small" type="text" name="otherBankDebts" value="${personFamilyIncurDebts.otherBankDebts}"
+            <input class="input-small" type="text" name="fmIncurOtherBankDebts" value="${personFamilyIncurDebts.otherBankDebts}"
                    style="width: 155px;height: 30px; margin-top: 5px;">
         </td>
     </tr>
     <tr>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">贷款用途</td>
         <td align="left" colspan="3">
-            <input class="input-small" type="text" name="loanPurpose" value="${personFamilyIncurDebts.loanPurpose}"
+            <input class="input-small" type="text" name="fmIncurLoanPurpose" value="${personFamilyIncurDebts.loanPurpose}"
                    style="width: 270px;height: 30px; margin-top: 5px;">
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">贷款形态</td>
         <td align="left" colspan="3">
-            <input class="input-small" type="text" name="loanShap" value="${personFamilyIncurDebts.loanShap}"
+            <input class="input-small" type="text" name="fmIncurLoanShap" value="${personFamilyIncurDebts.loanShap}"
                    style="width: 270px;height: 30px; margin-top: 5px;">
         </td>
     </tr>
@@ -2431,6 +2449,7 @@
 </tr>
 
 <core:forEach items="${personFamilyMemberList}" var="personFamilyMember" varStatus="idx">
+    <input name="familyMembers[${idx.index}].id" value="${personFamilyMember.id}" type="hidden" />
     <tr>
         <td align="left" colspan="8" style="font-size:18px">
             成员：<core:out value="${idx.index+1}"></core:out>
@@ -2439,17 +2458,17 @@
     <tr>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">姓名</td>
         <td align="left">
-            <input class="input-small" type="text" name="familyMemberName" value="${personFamilyMember.familyMemberName}"
+            <input class="input-small" type="text" name="familyMembers[${idx.index}].familyMemberName" value="${personFamilyMember.familyMemberName}"
                    style="width: 95px;height: 30px; margin-top: 5px;">
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">年收入（万元）</td>
         <td align="left">
-            <input class="input-small" type="text" name="yearIncome" value="${personFamilyMember.yearIncome}"
+            <input class="input-small" type="text" name="familyMembers[${idx.index}].yearIncome" value="${personFamilyMember.yearIncome}"
                    style="width: 95px;height: 30px; margin-top: 5px;">
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">与户主关系</td>
         <td align="left">
-            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="leaderRelation">
+            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="familyMembers[${idx.index}].leaderRelation">
                 <core:choose>
                     <core:when test="${personFamilyMember.leaderRelation=='配偶'}">
                         <option value="${personFamilyMember.leaderRelation}" selected="selected">配偶</option>
@@ -2491,7 +2510,7 @@
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">常住地址</td>
         <td align="left">
-            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="address">
+            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="familyMembers[${idx.index}].address">
                 <core:choose>
                     <core:when test="${personFamilyMember.address=='本市'}">
                         <option value="${personFamilyMember.address}" selected="selected">本市</option>
@@ -2524,17 +2543,14 @@
     <tr>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">职业</td>
         <td align="left" colspan="3">
-            <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="profession">
-
-
-
+            <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="familyMembers[${idx.index}].profession">
 
                 <option value="${personFamilyMember.profession}">${personFamilyMember.profession}</option>
             </select>
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">证件号码</td>
         <td align="left" colspan="3">
-            <input class="input-small" type="text" name="familyMemberCerNum" value="${personFamilyMember.familyMemberCerNum}"
+            <input class="input-small" type="text" name="familyMembers[${idx.index}].familyMemberCerNum" value="${personFamilyMember.familyMemberCerNum}"
                    style="width: 270px;height: 30px; margin-top: 5px;">
         </td>
     </tr>
@@ -2550,6 +2566,7 @@
 <div class="table-list" style="table-layout:fixed; height:345px; overflow:scroll;">
 <table width="100%" border="1">
 <tbody>
+<input type="hidden" name="id" value="${financeServicesLists.id}"/>
 <tr>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">
         您目前使用我行（社）的哪些产品
@@ -2559,38 +2576,38 @@
                 <input type="text" value="${usedProduct}" style="display: none" class="usedProduct"/>
         </core:forEach>
         <label class="checkbox inline">
-            <input type="checkbox" class="存款" value="存款" name="usedProduct" > 存款
+            <input type="checkbox" class="存款" value="存款" name="finaServiceUsedProduct" > 存款
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="贷款" value="贷款" name="usedProduct"> 贷款
+            <input type="checkbox" class="贷款" value="贷款" name="finaServiceUsedProduct"> 贷款
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="信用卡" value="信用卡" name="usedProduct"> 信用卡
+            <input type="checkbox" class="信用卡" value="信用卡" name="finaServiceUsedProduct"> 信用卡
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="POS机" value="POS机" name="usedProduct" > POS机
+            <input type="checkbox" class="POS机" value="POS机" name="finaServiceUsedProduct" > POS机
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="保管箱" value="保管箱" name="usedProduct" > 保管箱
+            <input type="checkbox" class="保管箱" value="保管箱" name="finaServiceUsedProduct" > 保管箱
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="网上银行" value="网上银行" name="usedProduct" > 网上银行
+            <input type="checkbox" class="网上银行" value="网上银行" name="finaServiceUsedProduct" > 网上银行
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="居家银行" value="居家银行" name="usedProduct" > 居家银行
+            <input type="checkbox" class="居家银行" value="居家银行" name="finaServiceUsedProduct" > 居家银行
         </label>
         <br>
         <label class="checkbox inline">
-            <input type="checkbox" class="短信银行" value="短信银行" name="usedProduct" > 短信银行
+            <input type="checkbox" class="短信银行" value="短信银行" name="finaServiceUsedProduct" > 短信银行
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="电话银行" value="电话银行" name="usedProduct" > 电话银行
+            <input type="checkbox" class="电话银行" value="电话银行" name="finaServiceUsedProduct" > 电话银行
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="手机银行" value="手机银行" name="usedProduct" > 手机银行
+            <input type="checkbox" class="手机银行" value="手机银行" name="finaServiceUsedProduct" > 手机银行
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="其他" value="其他" name="usedProduct" > 其他
+            <input type="checkbox" class="其他" value="其他" name="finaServiceUsedProduct" > 其他
         </label>
     </td>
 </tr>
@@ -2599,7 +2616,7 @@
         您对我行（社）产品满意度
     </td>
     <td align="left" colspan="3">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;">
+        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="finaServiceSatisfaction">
             <core:choose>
                 <core:when test="${financeServicesLists.satisfaction=='较为适用'}">
                     <option value="${financeServicesLists.satisfaction}" selected="selected">较为适用</option>
@@ -2625,7 +2642,7 @@
         您在未来两年内是否有资金需求
     </td>
     <td align="left" colspan="3">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;">
+        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="finaServiceIsMoneyNeed">
             <core:choose>
                 <core:when test="${financeServicesLists.moneyNeed=='2'}">
                     <option value="${financeServicesLists.moneyNeed}" selected="selected">很需要</option>
@@ -2652,37 +2669,37 @@
     </td>
     <td align="left" rowspan="3">
         <core:forEach items="${financeServicesLists.moneyTodo}" var="moneyTodo">
-            <input type="text" value="${moneyTodo}" style="display: none" class="moneyTodo"/>
+            <input type="text" value="${moneyTodo}" style="display: none" class="finaServiceMoneyTodo"/>
         </core:forEach>
         <label class="checkbox inline" style="width: 125px; margin-top: 5px;">
-            <input type="checkbox" class="做生意周转" value="做生意周转" name="moneyTodo"> 做生意周转
+            <input type="checkbox" class="做生意周转" value="做生意周转" name="finaServiceMoneyTodo"> 做生意周转
         </label>
         <br>
         <label class="checkbox inline" style="width: 125px; margin-top: 5px;">
-            <input type="checkbox" class="购买农业生产资料" value="购买农业生产资料" name="moneyTodo">  购买农业生产资料
+            <input type="checkbox" class="购买农业生产资料" value="购买农业生产资料" name="finaServiceMoneyTodo">  购买农业生产资料
         </label>
         <br>
         <label class="checkbox inline" style="width: 125px; margin-top: 5px;">
-            <input type="checkbox" class="子女上学" value="子女上学" name="moneyTodo">  子女上学
+            <input type="checkbox" class="子女上学" value="子女上学" name="finaServiceMoneyTodo">  子女上学
         </label>
         <br>
         <label class="checkbox inline" style="width: 125px; margin-top: 5px;">
-            <input type="checkbox" class="盖(买)房子" value="盖(买)房子" name="moneyTodo"> 盖(买)房子
+            <input type="checkbox" class="盖(买)房子" value="盖(买)房子" name="finaServiceMoneyTodo"> 盖(买)房子
         </label>
         <br>
         <label class="checkbox inline" style="width: 125px; margin-top: 5px;">
-            <input type="checkbox" class="购买大件物品" value="购买大件物品" name="moneyTodo"> 购买大件物品
+            <input type="checkbox" class="购买大件物品" value="购买大件物品" name="finaServiceMoneyTodo"> 购买大件物品
         </label>
         <br>
         <label class="checkbox inline" style="width: 125px; margin-top: 5px;">
-            <input type="checkbox" class="其他" value="其他" name="moneyTodo"> 其他
+            <input type="checkbox" class="其他" value="其他" name="finaServiceMoneyTodo"> 其他
         </label>
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">
         您希望得到的贷款金额是多少？
     </td>
     <td align="left">
-        <input type="text" name="moneyCount" value="${financeServicesLists.moneyCount}"
+        <input type="text" name="finaServiceMoneyCount" value="${financeServicesLists.moneyCount}"
                style="width: 165px;height: 30px; margin-top: 5px;">
     </td>
 </tr>
@@ -2695,19 +2712,19 @@
             <input type="text" value="${guarantee}" style="display: none" class="guarantee"/>
         </core:forEach>
         <label class="checkbox inline">
-            <input type="checkbox" class="房地产" value="房地产" name="guarantee"> 房地产
+            <input type="checkbox" class="房地产" value="房地产" name="finaServiceGuarantee"> 房地产
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="存单" value="存单" name="guarantee"> 存单
+            <input type="checkbox" class="存单" value="存单" name="finaServiceGuarantee"> 存单
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="债券" value="债券" name="guarantee"> 债券
+            <input type="checkbox" class="债券" value="债券" name="finaServiceGuarantee"> 债券
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="保证人" value="保证人" name="guarantee"> 保证人
+            <input type="checkbox" class="保证人" value="保证人" name="finaServiceGuarantee"> 保证人
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="无" value="无" name="guarantee"> 无
+            <input type="checkbox" class="无" value="无" name="finaServiceGuarantee"> 无
         </label>
     </td>
 </tr>
@@ -2716,7 +2733,7 @@
         您希望得到的贷款期限是多久？
     </td>
     <td align="left">
-        <input class="input-small" type="text" name="timeLimit" value="${financeServicesLists.timeLimit}"
+        <input class="input-small" type="text" name="financeServiceTimeLimit" value="${financeServicesLists.timeLimit}"
                style="width: 165px;height: 30px; margin-top: 5px;">
     </td>
 </tr>
@@ -2724,30 +2741,30 @@
     <td align="center"  colspan="2" bgcolor="#b4d8ed" style="color:#161823">
         未来1-2年家庭储蓄的主要目的和用途？
     </td>
-    <td align="left" colspan="2">
+    <td align="left" colspan="2">       <%--ii--%>
         <core:forEach items="${financeServicesLists.fmDepositTodo}" var="fmDepositTodo">
             <input type="text" value="${fmDepositTodo}" style="display: none" class="fmDepositTodo"/>
         </core:forEach>
         <label class="checkbox inline">
-            <input type="checkbox" class="做生意" value="做生意" name="fmDepositTodo"> 做生意
+            <input type="checkbox" class="做生意" value="做生意" name=" finaServicesFmDepositTodo"> 做生意
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="子女上学" value="子女上学" name="fmDepositTodo"> 子女上学
+            <input type="checkbox" class="子女上学" value="子女上学" name="finaServicesFmDepositTodo"> 子女上学
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="盖(买)房子" value="盖(买)房子" name="fmDepositTodo">  盖(买)房子
+            <input type="checkbox" class="盖(买)房子" value="盖(买)房子" name="finaServicesFmDepositTodo">  盖(买)房子
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="购买大件物品" value="购买大件物品" name="fmDepositTodo"> 购买大件物品
+            <input type="checkbox" class="购买大件物品" value="购买大件物品" name="finaServicesFmDepositTodo"> 购买大件物品
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="获得利息" value="获得利息" name="fmDepositTodo">获得利息
+            <input type="checkbox" class="获得利息" value="获得利息" name="finaServicesFmDepositTodo">获得利息
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="购买其他金融资产(如股票、债券、基金、保险单)" value="购买其他金融资产(如股票、债券、基金、保险单)" name="fmDepositTodo">购买其他金融资产（如股票、债券、基金、保险单）
+            <input type="checkbox" class="购买其他金融资产(如股票、债券、基金、保险单)" value="购买其他金融资产(如股票、债券、基金、保险单)" name="finaServicesFmDepositTodo">购买其他金融资产（如股票、债券、基金、保险单）
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="其他" value="其他" name="fmDepositTodo"> 其他
+            <input type="checkbox" class="其他" value="其他" name="finaServicesFmDepositTodo"> 其他
         </label>
     </td>
 </tr>
@@ -2760,21 +2777,21 @@
             <input type="text" value="${needServices}" style="display: none" class="needServices"/>
         </core:forEach>
         <label class="checkbox inline">
-            <input type="checkbox" class="存款" value="存款" name="needServices"> 存款
+            <input type="checkbox" class="存款" value="存款" name="finaServicesNeedServices"> 存款
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="结算" value="结算" name="needServices"> 结算
+            <input type="checkbox" class="结算" value="结算" name="finaServicesNeedServices"> 结算
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="贷款" value="贷款" name="needServices">贷款
+            <input type="checkbox" class="贷款" value="贷款" name="finaServicesNeedServices">贷款
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="信用卡办理" value="信用卡办理" name="needServices">信用卡办理
+            <input type="checkbox" class="信用卡办理" value="信用卡办理" name="finaServicesNeedServices">信用卡办理
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="个人理财服务,需要" value="个人理财服务,需要" name="needServices"> 个人理财服务,需要
+            <input type="checkbox" class="个人理财服务,需要" value="个人理财服务,需要" name="finaServicesNeedServices"> 个人理财服务,需要
         </label>
-        <input type="text" name="needServices" style="width: 55px;height: 25px; margin-top: 5px;">项目
+        <input type="text" name="finaServicesNeedServices" style="width: 55px;height: 25px; margin-top: 5px;">项目
     </td>
 </tr>
 <tr>
@@ -2783,37 +2800,37 @@
     </td>
     <td align="left" colspan="2">
         <core:forEach items="${financeServicesLists.needServicesElse}" var="needServicesElse">
-            <input type="text" value="${needServicesElse}" style="display: none" class="needServicesElse"/>
+            <input type="text" value="${needServicesElse}" style="display: none" class="finaServicesNeedServicesElse"/>
         </core:forEach>
         <label class="checkbox inline" style="width: 155px; margin-top: 5px;">
-            <input type="checkbox" class="代缴代收服务" value="代缴代收服务" name="needServicesElse"> 代缴代收服务
+            <input type="checkbox" class="代缴代收服务" value="代缴代收服务" name="finaServicesNeedServicesElse"> 代缴代收服务
         </label>
         <input type="text" name="needServicesElse" style="width: 155px;height: 25px; margin-top: 5px;">
         <br>
         <label class="checkbox inline" style="width: 155px; margin-top: 5px;">
-            <input type="checkbox" class="贵重物品保管" value="贵重物品保管" name="needServicesElse">贵重物品保管
+            <input type="checkbox" class="贵重物品保管" value="贵重物品保管" name="finaServicesNeedServicesElse">贵重物品保管
         </label>
         <br>
         <label class="checkbox inline" style="width: 155px; margin-top: 5px;">
-            <input type="checkbox" class="黄金卖买" value="黄金卖买" name="needServicesElse">黄金卖买
+            <input type="checkbox" class="黄金卖买" value="黄金卖买" name="finaServicesNeedServicesElse">黄金卖买
         </label>
         <br>
         <label class="checkbox inline" style="width: 155px; margin-top: 5px;">
-            <input type="checkbox" class="外汇卖买" value="外汇卖买" name="needServicesElse">外汇卖买
+            <input type="checkbox" class="外汇卖买" value="外汇卖买" name="finaServicesNeedServicesElse">外汇卖买
         </label>
         <br>
         <label class="checkbox inline" style="width: 155px; margin-top: 5px;">
-            <input type="checkbox" class="个人征信咨询" value="个人征信咨询" name="needServicesElse"> 个人征信咨询
+            <input type="checkbox" class="个人征信咨询" value="个人征信咨询" name="finaServicesNeedServicesElse"> 个人征信咨询
         </label>
         <br>
         <label class="checkbox inline" style="width: 155px; margin-top: 5px;">
-            <input type="checkbox" class="金融政策、知识的宣传" value="金融政策、知识的宣传" name="needServicesElse"> 金融政策、知识的宣传
+            <input type="checkbox" class="金融政策、知识的宣传" value="金融政策、知识的宣传" name="finaServicesNeedServicesElse"> 金融政策、知识的宣传
         </label>
         <br>
         <label class="checkbox inline" style="width: 155px; margin-top: 5px;">
-            <input type="checkbox" class="个人征信咨询" value="个人征信咨询" name="needServicesElse"> 其他：
+            <input type="checkbox" class="个人征信咨询" value="个人征信咨询" name="finaServicesNeedServicesElse"> 其他：
         </label>
-        <input type="text" name="needServicesElse" style="width: 155px;height: 25px; margin-top: 5px;">
+        <input type="text" name="finaServicesNeedServicesElse" style="width: 155px;height: 25px; margin-top: 5px;">
     </td>
 </tr>
 <tr>
@@ -2821,7 +2838,7 @@
         您希望我行（社）增加哪些方面的服务？
     </td>
     <td align="left" colspan="2">
-        <textarea rows="3" style="width: 355px;height: 85px; margin-top: 5px;" name="holpForServices">
+        <textarea rows="3" style="width: 355px;height: 85px; margin-top: 5px;" name="finaServicesHolpForServices">
             ${financeServicesLists.holpForServices}
         </textarea>
     </td>
@@ -2831,7 +2848,7 @@
         您对我行（社）服务有何建议？
     </td>
     <td align="left" colspan="2">
-        <textarea rows="3" style="width: 355px;height: 85px; margin-top: 5px;" name="suggestion">
+        <textarea rows="3" style="width: 355px;height: 85px; margin-top: 5px;" name="finaServicesSuggestion">
             ${financeServicesLists.suggestion}
         </textarea>
     </td>
@@ -2848,13 +2865,13 @@
             <input type="text" value="${bankCard}" style="display: none" class="bankCard"/>
         </core:forEach>
         <label class="checkbox inline">
-            <input type="checkbox" class="信用卡" value="信用卡" name="bankCard"> 信用卡
+            <input type="checkbox" class="信用卡" value="信用卡" name="finaServiceBankCard"> 信用卡
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="福万通卡" value="福万通卡" name="bankCard"> 福万通卡
+            <input type="checkbox" class="福万通卡" value="福万通卡" name="finaServiceBankCard"> 福万通卡
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="贵宾卡" value="贵宾卡" name="bankCard"> 贵宾卡
+            <input type="checkbox" class="贵宾卡" value="贵宾卡" name="finaServiceBankCard"> 贵宾卡
         </label>
     </td>
 </tr>
@@ -2867,16 +2884,16 @@
             <input type="text" value="${electronBank}" style="display: none" class="electronBank"/>
         </core:forEach>
         <label class="checkbox inline">
-            <input type="checkbox" class="短信银行" value="短信银行" name="electronBank"> 短信银行
+            <input type="checkbox" class="短信银行" value="短信银行" name="finaServiceElectronBank"> 短信银行
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="电话银行" value="电话银行" name="electronBank"> 电话银行
+            <input type="checkbox" class="电话银行" value="电话银行" name="finaServiceElectronBank"> 电话银行
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="网上银行" value="网上银行" name="electronBank">  网上银行
+            <input type="checkbox" class="网上银行" value="网上银行" name="finaServiceElectronBank">  网上银行
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="手机银行" value="手机银行" name="electronBank"> 手机银行
+            <input type="checkbox" class="手机银行" value="手机银行" name="finaServiceElectronBank"> 手机银行
         </label>
     </td>
 </tr>
@@ -2889,22 +2906,22 @@
             <input type="text" value="${agentPay}" style="display: none" class="agentPay"/>
         </core:forEach>
         <label class="checkbox inline">
-            <input type="checkbox" class="代缴水费" value="代缴水费" name="agentPay"> 代缴水费
+            <input type="checkbox" class="代缴水费" value="代缴水费" name="finaServiceAgentPay"> 代缴水费
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="代缴电费" value="代缴电费" name="agentPay"> 代缴电费
+            <input type="checkbox" class="代缴电费" value="代缴电费" name="finaServiceAgentPay"> 代缴电费
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="代缴烟草费" value="代缴烟草费" name="agentPay"> 代缴烟草费
+            <input type="checkbox" class="代缴烟草费" value="代缴烟草费" name="finaServiceAgentPay"> 代缴烟草费
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="代发工资" value="代发工资" name="agentPay"> 代发工资
+            <input type="checkbox" class="代发工资" value="代发工资" name="finaServiceAgentPay"> 代发工资
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="电子扣税" value="电子扣税" name="agentPay">  电子扣税
+            <input type="checkbox" class="电子扣税" value="电子扣税" name="finaServiceAgentPay">  电子扣税
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="保险费代扣" value="保险费代扣" name="agentPay"> 保险费代扣
+            <input type="checkbox" class="保险费代扣" value="保险费代扣" name="finaServiceAgentPay"> 保险费代扣
         </label>
     </td>
 </tr>
@@ -2917,19 +2934,19 @@
             <input type="text" value="${auto}" style="display: none" class="auto"/>
         </core:forEach>
         <label class="checkbox inline">
-            <input type="checkbox" class="银联POS机" value="银联POS机" name="auto"> 银联POS机
+            <input type="checkbox" class="银联POS机" value="银联POS机" name="finaServiceAutoBusiness"> 银联POS机
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="福农通" value="福农通" name="auto"> 福农通
+            <input type="checkbox" class="福农通" value="福农通" name="finaServiceAutoBusiness"> 福农通
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="小额支付便民点" value="小额支付便民点" name="auto"> 小额支付便民点
+            <input type="checkbox" class="小额支付便民点" value="小额支付便民点" name="finaServiceAutoBusiness"> 小额支付便民点
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="生意通" value="生意通" name="auto">  生意通
+            <input type="checkbox" class="生意通" value="生意通" name="finaServiceAutoBusiness">  生意通
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="居家银行" value="居家银行" name="auto">  居家银行
+            <input type="checkbox" class="居家银行" value="居家银行" name="finaServiceAutoBusiness">  居家银行
         </label>
     </td>
 </tr>
@@ -2942,78 +2959,78 @@
             <input type="text" value="${privateLoan}" style="display: none" class="privateLoan"/>
         </core:forEach>
         <label class="checkbox inline">
-            <input type="checkbox" class="农户小额信用贷款" value="农户小额信用贷款" name="privateLoan"> 农户小额信用贷款
+            <input type="checkbox" class="农户小额信用贷款" value="农户小额信用贷款" name="finaServicePrivateLoan"> 农户小额信用贷款
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="农户联保贷款" value="农户联保贷款" name="privateLoan"> 农户联保贷款
+            <input type="checkbox" class="农户联保贷款" value="农户联保贷款" name="finaServicePrivateLoan"> 农户联保贷款
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="农户保证贷款" value="农户保证贷款" name="privateLoan">农户保证贷款
-        </label>
-        <br>
-        <label class="checkbox inline">
-            <input type="checkbox" class="农户抵押贷款" value="农户抵押贷款" name="privateLoan"> 农户抵押贷款
-        </label>
-        <label class="checkbox inline">
-            <input type="checkbox" class="农户质押贷款" value="农户质押贷款" name="privateLoan">农户质押贷款
-        </label>
-        <label class="checkbox inline">
-            <input type="checkbox" class="个人存单质押贷款" value="个人存单质押贷款" name="privateLoan">个人存单质押贷款
+            <input type="checkbox" class="农户保证贷款" value="农户保证贷款" name="finaServicePrivateLoan">农户保证贷款
         </label>
         <br>
         <label class="checkbox inline">
-            <input type="checkbox" class="万通宝”农户小额贷" value="“万通宝”农户小额贷" name="privateLoan"> “万通宝”农户小额贷
+            <input type="checkbox" class="农户抵押贷款" value="农户抵押贷款" name="finaServicePrivateLoan"> 农户抵押贷款
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="“万通宝”个人经营贷款" value="“万通宝”个人经营贷款" name="privateLoan"> “万通宝”个人经营贷款
-        </label>
-        <br>
-        <label class="checkbox inline">
-            <input type="checkbox" class="组合宝”农户小额贷" value="“组合宝”农户小额贷" name="privateLoan"> 组合宝”农户小额贷
+            <input type="checkbox" class="农户质押贷款" value="农户质押贷款" name="finaServicePrivateLoan">农户质押贷款
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="组合宝”个人经营贷款" value="组合宝”个人经营贷款" name="privateLoan"> 组合宝”个人经营贷款
+            <input type="checkbox" class="个人存单质押贷款" value="个人存单质押贷款" name="finaServicePrivateLoan">个人存单质押贷款
         </label>
         <br>
         <label class="checkbox inline">
-            <input type="checkbox" class="保无忧”新农保参保人员贷款" value="保无忧”新农保参保人员贷款" name="privateLoan"> 保无忧”新农保参保人员贷款
+            <input type="checkbox" class="万通宝”农户小额贷" value="“万通宝”农户小额贷" name="finaServicePrivateLoan"> “万通宝”农户小额贷
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="“两女”户计生贴息贷" value="“两女”户计生贴息贷" name="privateLoan"> “两女”户计生贴息贷
-        </label>
-        <br>
-        <label class="checkbox inline">
-            <input type="checkbox" class="生源地信用助学贷款" value="生源地信用助学贷款" name="privateLoan"> 生源地信用助学贷款
-        </label>
-        <label class="checkbox inline">
-            <input type="checkbox" class="农村青年创业贷款" value="农村青年创业贷款" name="privateLoan"> 农村青年创业贷款
-        </label>
-        <label class="checkbox inline">
-            <input type="checkbox" class="巾帼创业贷款" value="巾帼创业贷款" name="privateLoan"> 巾帼创业贷款
+            <input type="checkbox" class="“万通宝”个人经营贷款" value="“万通宝”个人经营贷款" name="finaServicePrivateLoan"> “万通宝”个人经营贷款
         </label>
         <br>
         <label class="checkbox inline">
-            <input type="checkbox" class="农户异地创业贷款" value="农户异地创业贷款" name="privateLoan">农户异地创业贷款
+            <input type="checkbox" class="组合宝”农户小额贷" value="“组合宝”农户小额贷" name="finaServicePrivateLoan"> 组合宝”农户小额贷
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="“惠村通”" value="“惠村通”" name="privateLoan">“惠村通”
-        </label>
-        <br>
-        <label class="checkbox inline">
-            <input type="checkbox" class="农户建房贷款" value="农户建房贷款" name="privateLoan"> 农户建房贷款
-        </label>
-        <label class="checkbox inline">
-            <input type="checkbox" class="个人住房按揭贷款" value="个人住房按揭贷款" name="privateLoan">个人住房按揭贷款
-        </label>
-        <label class="checkbox inline">
-            <input type="checkbox" class="个人汽车按揭贷款" value="个人汽车按揭贷款" name="privateLoan">个人汽车按揭贷款
+            <input type="checkbox" class="组合宝”个人经营贷款" value="组合宝”个人经营贷款" name="finaServicePrivateLoan"> 组合宝”个人经营贷款
         </label>
         <br>
         <label class="checkbox inline">
-            <input type="checkbox" class="农民专业合作社贷款" value="农民专业合作社贷款" name="privateLoan">农民专业合作社贷款
+            <input type="checkbox" class="保无忧”新农保参保人员贷款" value="保无忧”新农保参保人员贷款" name="finaServicePrivateLoan"> 保无忧”新农保参保人员贷款
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="公职人员消费贷款" value="公职人员消费贷款" name="privateLoan">公职人员消费贷款
+            <input type="checkbox" class="“两女”户计生贴息贷" value="“两女”户计生贴息贷" name="finaServicePrivateLoan"> “两女”户计生贴息贷
+        </label>
+        <br>
+        <label class="checkbox inline">
+            <input type="checkbox" class="生源地信用助学贷款" value="生源地信用助学贷款" name="finaServicePrivateLoan"> 生源地信用助学贷款
+        </label>
+        <label class="checkbox inline">
+            <input type="checkbox" class="农村青年创业贷款" value="农村青年创业贷款" name="finaServicePrivateLoan"> 农村青年创业贷款
+        </label>
+        <label class="checkbox inline">
+            <input type="checkbox" class="巾帼创业贷款" value="巾帼创业贷款" name="finaServicePrivateLoan"> 巾帼创业贷款
+        </label>
+        <br>
+        <label class="checkbox inline">
+            <input type="checkbox" class="农户异地创业贷款" value="农户异地创业贷款" name="finaServicePrivateLoan">农户异地创业贷款
+        </label>
+        <label class="checkbox inline">
+            <input type="checkbox" class="“惠村通”" value="“惠村通”" name="finaServicePrivateLoan">“惠村通”
+        </label>
+        <br>
+        <label class="checkbox inline">
+            <input type="checkbox" class="农户建房贷款" value="农户建房贷款" name="finaServicePrivateLoan"> 农户建房贷款
+        </label>
+        <label class="checkbox inline">
+            <input type="checkbox" class="个人住房按揭贷款" value="个人住房按揭贷款" name="finaServicePrivateLoan">个人住房按揭贷款
+        </label>
+        <label class="checkbox inline">
+            <input type="checkbox" class="个人汽车按揭贷款" value="个人汽车按揭贷款" name="finaServicePrivateLoan">个人汽车按揭贷款
+        </label>
+        <br>
+        <label class="checkbox inline">
+            <input type="checkbox" class="农民专业合作社贷款" value="农民专业合作社贷款" name="finaServicePrivateLoan">农民专业合作社贷款
+        </label>
+        <label class="checkbox inline">
+            <input type="checkbox" class="公职人员消费贷款" value="公职人员消费贷款" name="finaServicePrivateLoan">公职人员消费贷款
         </label>
     </td>
 </tr>
@@ -3023,40 +3040,40 @@
     </td>
     <td align="left" colspan="2">
         <core:forEach items="${financeServicesLists.publicLoan}" var="publicLoan">
-            <input type="text" value="${publicLoan}" style="display: none" class="publicLoan"/>
+            <input type="text" value="${publicLoan}" style="display: none" class="finaServicePublicLoan"/>
         </core:forEach>
         <label class="checkbox inline">
-            <input type="checkbox" class="流动资金贷款" value="流动资金贷款" name="publicLoan"> 流动资金贷款
+            <input type="checkbox" class="流动资金贷款" value="流动资金贷款" name="finaServicePublicLoan"> 流动资金贷款
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="固定资产贷款" value="固定资产贷款" name="publicLoan">固定资产贷款
+            <input type="checkbox" class="固定资产贷款" value="固定资产贷款" name="finaServicePublicLoan">固定资产贷款
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="小企业联保贷款" value="小企业联保贷款" name="publicLoan">小企业联保贷款
+            <input type="checkbox" class="小企业联保贷款" value="小企业联保贷款" name="finaServicePublicLoan">小企业联保贷款
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="中小企业保证贷款" value="中小企业保证贷款" name="publicLoan">中小企业保证贷款
+            <input type="checkbox" class="中小企业保证贷款" value="中小企业保证贷款" name="finaServicePublicLoan">中小企业保证贷款
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="担保公司担保贷款" value="担保公司担保贷款" name="publicLoan">担保公司担保贷款
+            <input type="checkbox" class="担保公司担保贷款" value="担保公司担保贷款" name="finaServicePublicLoan">担保公司担保贷款
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="海域使用权抵押贷款" value="海域使用权抵押贷款" name="publicLoan"> 海域使用权抵押贷款
+            <input type="checkbox" class="海域使用权抵押贷款" value="海域使用权抵押贷款" name="finaServicePublicLoan"> 海域使用权抵押贷款
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="船舶抵押贷款" value="船舶抵押贷款" name="publicLoan"> 船舶抵押贷款
+            <input type="checkbox" class="船舶抵押贷款" value="船舶抵押贷款" name="finaServicePublicLoan"> 船舶抵押贷款
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="银行承兑汇票" value="银行承兑汇票" name="publicLoan">银行承兑汇票
+            <input type="checkbox" class="银行承兑汇票" value="银行承兑汇票" name="finaServicePublicLoan">银行承兑汇票
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="商标专用权质押贷款" value="商标专用权质押贷款" name="publicLoan">商标专用权质押贷款
+            <input type="checkbox" class="商标专用权质押贷款" value="商标专用权质押贷款" name="finaServicePublicLoan">商标专用权质押贷款
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="保函业务" value="保函业务" name="publicLoan"> 保函业务
+            <input type="checkbox" class="保函业务" value="保函业务" name="finaServicePublicLoan"> 保函业务
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="银行承兑汇票贴现" value="银行承兑汇票贴现" name="publicLoan"> 银行承兑汇票贴现
+            <input type="checkbox" class="银行承兑汇票贴现" value="银行承兑汇票贴现" name="finaServicePublicLoan"> 银行承兑汇票贴现
         </label>
     </td>
 </tr>
@@ -3065,7 +3082,7 @@
         客户新需求登记
     </td>
     <td align="left" colspan="2">
-        <textarea rows="3" style="width: 355px;height: 85px; margin-top: 5px;" name="newRequirement">
+        <textarea rows="3" style="width: 355px;height: 85px; margin-top: 5px;" name="finaServiceNewRequirement">
             ${financeServicesLists.newRequirement}
         </textarea>
     </td>
@@ -3082,7 +3099,7 @@
 <div class="table-list">
 <table width="100%" border="1" cellspacing="0" width="732px" color="#727f8a;">
 <tbody>
-
+ <input type="hidden" name="id" value="${villageManagerEvaList.id}"/>
 <tr>
     <td width="27%" align="left" bgcolor="#b4d8ed" style="color:#161823">
         一、客户基本资料真实性
@@ -3365,7 +3382,7 @@
                     <option value="中低收入">中低收入</option>
                     <option value="${villageManagerEvaList.capitaNetIncomeLevel}" selected="selected">低收入</option>
                 </core:otherwise>
-            </core:choose> 
+            </core:choose>
         </select>
     </td>
 </tr>
@@ -3498,7 +3515,7 @@
                     <option value="较差家庭">较差家庭</option>
                     <option value="${villageManagerEvaList.familyPropertyLevel}" selected="selected">贫困家庭</option>
                 </core:otherwise>
-            </core:choose> 
+            </core:choose>
         </select>
     </td>
 </tr>
@@ -3891,12 +3908,13 @@
         <div class="table-list">
             <table width="100%" border="1" cellspacing="0" width="732px" color="#727f8a;">
                 <tbody>
+                <input type="hidden" name="id" value="${customerManagerEvaList.id}"/>
                 <tr>
                     <td width="27%" align="center" bgcolor="#b4d8ed" style="color:#161823">
                         客户在他行贷款情况
                     </td>
                     <td width="73%" align="left">
-                        <input type="text" name="loanSitu" value="${customerManagerEvaList.loanSitu}"
+                        <input type="text" name="custManagerLoanSitu" value="${customerManagerEvaList.loanSitu}"
                                style="width: 270px;height: 30px; margin-top: 5px;">
                     </td>
                 </tr>
@@ -3909,57 +3927,57 @@
                             <input type="text" value="${creditRecord}" style="display: none" class="creditRecord"/>
                         </core:forEach>
                         <label class="checkbox inline">
-                            <input type="checkbox" class="报告期内能积极主动按期偿本付息,无违约记录" value="报告期内能积极主动按期偿本付息,无违约记录" name="creditRecord">
+                            <input type="checkbox" class="报告期内能积极主动按期偿本付息,无违约记录" value="报告期内能积极主动按期偿本付息,无违约记录" name="custManagerCreditRecord">
                             报告期内能积极主动按期偿本付息,无违约记录
                         </label>
                         <br>
                         <label class="checkbox inline">
-                            <input type="checkbox" class="存在2次(含)以内本金.利息不超过1个月已还清的不良记录,无超过1个月以上不良记录" value="存在2次(含)以内本金.利息不超过1个月已还清的不良记录,无超过1个月以上不良记录" name="creditRecord">
+                            <input type="checkbox" class="存在2次(含)以内本金.利息不超过1个月已还清的不良记录,无超过1个月以上不良记录" value="存在2次(含)以内本金.利息不超过1个月已还清的不良记录,无超过1个月以上不良记录" name="custManagerCreditRecord">
                             存在2次(含)以内本金.利息不超过1个月已还清的不良记录,无超过1个月以上不良记录
                         </label>
                         <br>
                         <label class="checkbox inline">
-                            <input type="checkbox" class="存在3次(含)以上本金.利息不超过1个月已还清的不良记录,无超过1个月以上不良记录" value="存在3次(含)以上本金.利息不超过1个月已还清的不良记录,无超过1个月以上不良记录" name="creditRecord">
+                            <input type="checkbox" class="存在3次(含)以上本金.利息不超过1个月已还清的不良记录,无超过1个月以上不良记录" value="存在3次(含)以上本金.利息不超过1个月已还清的不良记录,无超过1个月以上不良记录" name="custManagerCreditRecord">
                             存在3次(含)以上本金.利息不超过1个月已还清的不良记录,无超过1个月以上不良记录
                         </label>
                         <br>
                         <label class="checkbox inline">
-                            <input type="checkbox" class="存在1-2次(含)本金.利息超过1个月但在3个月以内已还清的不良记录,无超过3个月以上不良记录" value="存在1-2次(含)本金.利息超过1个月但在3个月以内已还清的不良记录,无超过3个月以上不良记录" name="creditRecord">
+                            <input type="checkbox" class="存在1-2次(含)本金.利息超过1个月但在3个月以内已还清的不良记录,无超过3个月以上不良记录" value="存在1-2次(含)本金.利息超过1个月但在3个月以内已还清的不良记录,无超过3个月以上不良记录" name="custManagerCreditRecord">
                             存在1-2次(含)本金.利息超过1个月但在3个月以内已还清的不良记录,无超过3个月以上不良记录
                         </label>
                         <br>
                         <label class="checkbox inline">
-                            <input type="checkbox" class="存在3次(含)以上本金.利息超过1个月但在3个月以内已还清的不良记录,无超过3个月以上不良记录" value="存在3次(含)以上本金.利息超过1个月但在3个月以内已还清的不良记录,无超过3个月以上不良记录" name="creditRecord">
+                            <input type="checkbox" class="存在3次(含)以上本金.利息超过1个月但在3个月以内已还清的不良记录,无超过3个月以上不良记录" value="存在3次(含)以上本金.利息超过1个月但在3个月以内已还清的不良记录,无超过3个月以上不良记录" name="custManagerCreditRecord">
                             存在3次(含)以上本金.利息超过1个月但在3个月以内已还清的不良记录,无超过3个月以上不良记录
                         </label>
                         <br>
                         <label class="checkbox inline">
-                            <input type="checkbox" class="存在1-2次(含)本金或利息超过3个月以后才还清的不良记录" value="存在1-2次(含)本金或利息超过3个月以后才还清的不良记录" name="creditRecord">
+                            <input type="checkbox" class="存在1-2次(含)本金或利息超过3个月以后才还清的不良记录" value="存在1-2次(含)本金或利息超过3个月以后才还清的不良记录" name="custManagerCreditRecord">
                             存在1-2次(含)本金或利息超过3个月以后才还清的不良记录
                         </label>
                         <br>
                         <label class="checkbox inline">
-                            <input type="checkbox" class="存在3次(含)以上本金或利息超过3个月以后才还清的不良记录" value="存在3次(含)以上本金或利息超过3个月以后才还清的不良记录" name="creditRecord">
+                            <input type="checkbox" class="存在3次(含)以上本金或利息超过3个月以后才还清的不良记录" value="存在3次(含)以上本金或利息超过3个月以后才还清的不良记录" name="custManagerCreditRecord">
                             存在3次(含)以上本金或利息超过3个月以后才还清的不良记录
                         </label>
                         <br>
                         <label class="checkbox inline">
-                            <input type="checkbox" class="评估时点有拖欠利息超过1个月" value="评估时点有拖欠利息超过1个月" name="creditRecord">
+                            <input type="checkbox" class="评估时点有拖欠利息超过1个月" value="评估时点有拖欠利息超过1个月" name="custManagerCreditRecord">
                             评估时点有拖欠利息超过1个月
                         </label>
                         <br>
                         <label class="checkbox inline">
-                            <input type="checkbox" class="评估时点有次级类贷款,无可疑或损失类贷款" value="评估时点有次级类贷款,无可疑或损失类贷款" name="creditRecord">
+                            <input type="checkbox" class="评估时点有次级类贷款,无可疑或损失类贷款" value="评估时点有次级类贷款,无可疑或损失类贷款" name="custManagerCreditRecord">
                             评估时点有次级类贷款,无可疑或损失类贷款
                         </label>
                         <br>
                         <label class="checkbox inline">
-                            <input type="checkbox" class="评估时点有可疑或损失类贷款" value="评估时点有可疑或损失类贷款" name="creditRecord">
+                            <input type="checkbox" class="评估时点有可疑或损失类贷款" value="评估时点有可疑或损失类贷款" name="custManagerCreditRecord">
                             评估时点有可疑或损失类贷款
                         </label>
                         <br>
                         <label class="checkbox inline">
-                            <input type="checkbox" class="报告期内无银行信用记录" value="报告期内无银行信用记录" name="creditRecord">
+                            <input type="checkbox" class="报告期内无银行信用记录" value="报告期内无银行信用记录" name="custManagerCreditRecord">
                             报告期内无银行信用记录
                         </label>
                     </td>
@@ -3969,7 +3987,7 @@
                         他行信用记录
                     </td>
                     <td width="73%" align="left">
-                        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="otherBankRecord">
+                        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="custManagerOtherBankRecord">
                             <core:choose>
                                 <core:when test="${customerManagerEvaList.otherBankRecord=='良好'}">
                                     <option value="${customerManagerEvaList.otherBankRecord}" selected="selected">良好</option>
@@ -3995,7 +4013,7 @@
                         变现能力
                     </td>
                     <td align="left">
-                        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="houseToMoney">
+                        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="custManagerHouseToMoney">
                             <core:choose>
                                 <core:when test="${customerManagerEvaList.houseToMoney=='优秀'}">
                                     <option value="${customerManagerEvaList.houseToMoney}" selected="selected">优秀</option>

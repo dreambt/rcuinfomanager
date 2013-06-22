@@ -1,6 +1,7 @@
 package com.rcuinfomanager.web.controller;
 
 
+import com.google.common.base.Strings;
 import com.rcuinfomanager.model.*;
 import com.rcuinfomanager.service.BaseInfoService;
 import com.rcuinfomanager.service.ExportInfo2VillagerCommittee4Estimation;
@@ -18,10 +19,7 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -61,8 +59,8 @@ public class BaseInfoController {
         logsInfoService.saveLogsInfo(new LogsInfo(logsDate, sessionUser.getId(), "查看"));
         map.put("displayUserName", sessionUser.getDisplayUserName());
         map.put("personInfoList", baseInfoService.getPersonBasicInfo(id));
-        //基础概况信息
 
+        //基础概况信息
         CusBaseInfo cusBasicInfo = baseInfoService.getCusBasicInfo(id);
         map.put("personBasicList", cusBasicInfo);
 
@@ -88,6 +86,7 @@ public class BaseInfoController {
         map.put("villageManagerEvaList", baseInfoService.getVillageManagerEvaList(id));
         //四
         map.put("customerManagerEvaList", baseInfoService.getCustomerManagerEvaList(id));
+
         if (cusBasicInfo != null) {
             map.put("imgList", ImageUtils.getFileNames(cusBasicInfo.getCerNum(),imgStoreDir));
         } else {
@@ -116,7 +115,10 @@ public class BaseInfoController {
     //保存指派
     @RequestMapping("/saveAppoint/{id}/{uid}")
     public String saveAppoint(@PathVariable long id, @PathVariable long uid, Map map) {
+        //该状态
+        int status=2;
         baseInfoService.saveAppointInfo(id, uid);
+        baseInfoService.updateStatus(status,id);
         boolean success = true;
         map.put("success", success);
         map.put("isUserName", "指派成功！");
@@ -141,8 +143,10 @@ public class BaseInfoController {
     @RequestMapping("/saveBatchAppoint/{recordIds}/{uid}")
     public String saveBatchAppoint(@PathVariable String recordIds, @PathVariable long uid, Map map) {
         String[] ids = recordIds.split(",");
+        int status=2;
         for (String id : ids) {
             baseInfoService.saveAppointInfo(Long.parseLong(id), uid);
+            baseInfoService.updateStatus(status,Long.parseLong(id));
         }
         boolean success = true;
         map.put("success", success);
@@ -214,10 +218,13 @@ public class BaseInfoController {
         map.put("villageManagerEvaList", baseInfoService.getVillageManagerEvaList(id));
         //四
         map.put("customerManagerEvaList", baseInfoService.getCustomerManagerEvaList(id));
-
+        map.put("areasInfoList",baseInfoService.getAreasInfo());
         FinanceServices financeServices=baseInfoService.getFinanceService(id);
-        String[] usedPro=financeServices.getUsedProduct().split(",");
-        map.put("usedProducts",usedPro);
+        String usedProduct = financeServices.getUsedProduct();
+        if (!Strings.isNullOrEmpty(usedProduct)) {
+            String[] usedPro=financeServices.getUsedProduct().split(",");
+            map.put("usedProducts",usedPro);
+        }
         map.put("recordId",id);
         map.put("allColumnInfo", new AllColumnInfo());
         return "farmer/edit";
@@ -465,11 +472,42 @@ public class BaseInfoController {
     //保存编辑
     @RequestMapping(value = "/saveEditInfo",method = RequestMethod.POST)
     public String saveEditInfo(HttpServletRequest request, HttpServletResponse response,@ModelAttribute("allColumnInfo")AllColumnInfo allColumnInfo,Map map){
-
+        allColumnInfo.setStatus(5);
         baseInfoService.updateBaseInfoById(allColumnInfo);
+        //家庭收支情况表
+        baseInfoService.updateIncomeexpenses(allColumnInfo);
+        //家庭资产情况表
+        baseInfoService.updateFamilyassets(allColumnInfo);
+        //家庭负债表
+        baseInfoService.updateFamilyincurdebts(allColumnInfo);
+        //金融资产表
+        baseInfoService.updateFinancialassets(allColumnInfo);
+         //金融服务需求表
+        baseInfoService.updateFinanceservices(allColumnInfo);
+        //客户经理评价表
+        baseInfoService.updateCustomermanagereva(allColumnInfo);
+
+        List<HouseInfo> houseInfos=allColumnInfo.getHouseInfos();
+        for (HouseInfo houseInfo : houseInfos){
+            baseInfoService.updateHousePropertyInfo(houseInfo);
+        }
+        List<LandInfo> landInfos = allColumnInfo.getLandInfos();
+        for (LandInfo landInfo : landInfos) {
+            baseInfoService.updateLandInfo(landInfo);
+        }
+        List<CarsInfo> carsInfos=allColumnInfo.getCarInfos();
+        for (CarsInfo carsInfo : carsInfos){
+            baseInfoService.updateCarsInfo(carsInfo);
+        }
+        List<FamilyMember> familyMembers=allColumnInfo.getFamilyMembers();
+        for (FamilyMember familyMember : familyMembers){
+            baseInfoService.updateFamilyMembers(familyMember);
+        }
+
+
         map.put("editSuccess","编辑成功！");
        // return "redirect:/family/edit/"+allColumnInfo.getRecordId();
-        return "farmer/edit";
+        return "farmer/main";
     }
 
 }

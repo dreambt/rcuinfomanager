@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rcuinfomanager.dao.IndustryInfoDao">
+
+    <resultMap id="industryMap" type="com.rcuinfomanager.model.IndustryInfo">
+        <result property="industryId" column="industryId"></result>
+        <result property="industryName" column="industryName"></result>
+        <result property="industryAlias" column="industryAlias"></result>
+        <result property="fatherId" column="fatherId"></result>
+        <result property="infoId" column="infoId"></result>
+        <result property="infoManageId" column="infoManageId"></result>
+    </resultMap>
+
+    <select id="getIndustryInfoListByFatherId" resultMap="industryMap" parameterType="java.lang.Long">
+        select * from industriesinfo WHERE fatherId = #{fatherId}
+    </select>
+
+    <select id="getAllTopIndustryInfoList" resultMap="industryMap">
+        select * from industriesinfo WHERE fatherId IS NULL
+    </select>
+
+</mapper>

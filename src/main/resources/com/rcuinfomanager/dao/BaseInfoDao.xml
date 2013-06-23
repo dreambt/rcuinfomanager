@@ -325,20 +325,6 @@
          where id=#{id}
     </update>
 
-    <!--金融资产信息-->
-    <resultMap id="financialAssetsMap" type="com.rcuinfomanager.model.FinancialAssets">
-        <result column="id" property="id"></result>
-        <result column="assetsId" property="assetsId"></result>
-        <result column="financialInfo" property="financialInfo"></result>
-        <result column="depositOurBank" property="depositOurBank"></result>
-        <result column="depositOtherBank" property="depositOtherBank"></result>
-    </resultMap>
-    <select id="getFinancialAssets" parameterType="java.lang.Long" resultMap="financialAssetsMap">
-         select fin.id,fin.assetsId,fin.financialInfo,fin.depositOurBank,fin.depositOtherBank
-         from familyassets fa
-           left outer join financialAssets fin on fa.assetsId = fin.assetsId
-           where fa.recordId=#{recordId}
-    </select>
     <!--指派网点-->
     <select id="getAdminOrganizationName" resultMap="userListInfo">
          select org.organizationName from organizationInfo org
@@ -571,33 +557,12 @@
     </update>
 
     <insert id="saveFamilyassets" parameterType="com.rcuinfomanager.model.FamilyAssets">
-        <selectKey resultType="java.lang.Long" keyProperty="assetsId" order="AFTER">
-            SELECT @@IDENTITY
-        </selectKey>
-
-        insert into familyassets(recordId,fmAllAssets, mainAssets) values (recordId,fmAllAssets, mainAssets)
+        insert into familyassets(recordId,fmAllAssets, mainAssets) values (#{recordId},#{fmAllAssets}, #{mainAssets})
     </insert>
 
     <update id="updateFamilyincurdebts" parameterType="com.rcuinfomanager.webservice.model.AllColumnInfo">
         update familyincurdebts set fmIncurDebts = #{fmIncurDebts}, ourBankDebts = #{fmIncurOurBankDebts},
          otherBankDebts = #{fmIncurOtherBankDebts}, loanPurpose = #{fmIncurLoanPurpose}, loanShap = #{fmIncurLoanPurpose}
-        where recordId = #{recordId}
-    </update>
-
-    <update id="updateFinancialassets" parameterType="com.rcuinfomanager.webservice.model.AllColumnInfo">
-        update financialassets set financialInfo = #{financialInfo}, depositOurBank = #{financialDepositOurBank}, depositOtherBank = #{financialDepositOtherBank}
-         where  assetsId = #{assetsId}
-    </update>
-
-    <update id="updateFinanceservices" parameterType="com.rcuinfomanager.webservice.model.AllColumnInfo">
-        update financeservices set usedProduct = #{finaServiceUsedProduct}, isMoneyNeed = #{finaServiceIsMoneyNeed},
-          moneyTodo = #{finaServiceMoneyTodo}, moneyCount = #{finaServiceMoneyCount},
-          timeLimit = #{finaServiceTimeLimit}, guarantee = #{finaServiceGuarantee},
-          bankCard = #{finaServiceBankCard}, electronBank = #{finaServiceEleBankBusiness},
-          agentPay = #{finaServiceAgentPayBusiness}, auto = #{finaServiceAutoBusiness},
-          privateLoan = #{finaServicePrivateLoan}, publicLoan = #{finaServicePublicLoan}, newRequirement = #{finaServiceNewRequirement},
-          needServices = #{finaServicesNeedServices},holpForServices=#{finaServicesHolpForServices},suggestion=#{finaServicesSuggestion},
-          electronBank=#{finaServiceElectronBank},needServicesElse = #{finaServicesNeedServicesElse}
         where recordId = #{recordId}
     </update>
 
@@ -688,38 +653,6 @@
         select state from baseinfo where cerNum = #{cerNum}
     </select>
 
-    <!--二-->
-    <!--<resultMap id="financeServicesMap" type="com.rcuinfomanager.model.FinanceServices">
-    <result column="recordId" property="recordId"></result>
-    <result column="usedProduct" property="usedProduct"></result>
-    <result column="satisfaction" property="satisfaction"></result>
-    <result column="isMoneyNeed" property="isMoneyNeed"></result>
-    <result column="moneyTodo" property="moneyTodo"></result>
-    <result column="moneyCount" property="moneyCount"></result>
-    <result column="timeLimit" property="timeLimit"></result>
-    <result column="guarantee" property="guarantee"></result>
-    <result column="fmDepositTodo" property="fmDepositTodo"></result>
-    <result column="needServices" property="needServices"></result>
-    <result column="needServicesElse" property="needServicesElse"></result>
-    <result column="holpForServices" property="holpForServices"></result>
-    <result column="suggestion" property="suggestion"></result>
-    <result column="bankCard" property="bankCard"></result>
-    <result column="electronBank" property="electronBank"></result>
-    <result column="agentPay" property="agentPay"></result>
-    <result column="auto" property="auto"></result>
-    <result column="newRequirement" property="newRequirement"></result>
-    <result column="publicLoan" property="publicLoan"></result>
-    <result column="privateLoan" property="privateLoan"></result>
-    <result column="note1" property="note1"></result>
-</resultMap>-->
-    <select id="getFinanceServicesList" parameterType="java.lang.Long" resultType="com.rcuinfomanager.model.FinanceServices" >
-        select  f.recordId,f.usedProduct,f.satisfaction,f.isMoneyNeed,f.moneyTodo,f.moneyCount,f.timeLimit,
-        f.guarantee,f.fmDepositTodo,f.needServices,f.needServicesElse,f.holpForServices,f.suggestion,f.bankCard,
-        f.electronBank,f.agentPay,f.auto,f.newRequirement,f.publicLoan,f.privateLoan
-        from financeservices f
-        where f.recordId=#{id}
-    </select>
-
     <!--四-->
     <select id="getCustomerManagerEvaList" resultType="com.rcuinfomanager.model.CustomerManagerEva">
           select * from customermanagereva where recordId=#{id}
@@ -746,15 +679,4 @@
     <select id="getStatusByCerNum" parameterType="java.lang.String">
         select state from baseinfo where cerNum = #{cerNum}
     </select>
-    <resultMap id="industryMap" type="com.rcuinfomanager.model.IndustryInfo">
-        <result property="industryId" column="industryId"></result>
-        <result property="industryName" column="industryName"></result>
-        <result property="industryAlias" column="industryAlias"></result>
-        <result property="fatherId" column="fatherId"></result>
-        <result property="infoId" column="infoId"></result>
-        <result property="infoManageId" column="infoManageId"></result>
-    </resultMap>
-
-
-
 </mapper>

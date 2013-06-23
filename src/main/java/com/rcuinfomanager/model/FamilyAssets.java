@@ -3,6 +3,7 @@ package com.rcuinfomanager.model;
 public class FamilyAssets {
 
     private long assetsId;
+    private long recordId;
     private Double fmAllAssets;
     private String mainAssets;
 
@@ -28,5 +29,13 @@ public class FamilyAssets {
 
     public void setAssetsId(long assetsId) {
         this.assetsId = assetsId;
+    }
+
+    public long getRecordId() {
+        return recordId;
+    }
+
+    public void setRecordId(long recordId) {
+        this.recordId = recordId;
     }
 }

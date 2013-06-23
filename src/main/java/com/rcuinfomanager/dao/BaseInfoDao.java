@@ -37,9 +37,6 @@ public interface BaseInfoDao {
     //获取车辆信息
     List<CarsInfo> getCarsInfo(Long recordId);
 
-    //金融资产信息
-    FinancialAssets getFinancialAssets(Long recordId);
-
     //获取家庭资产情况
     FamilyAssets getFamilyAssets(long recordId);
 
@@ -82,11 +79,8 @@ public interface BaseInfoDao {
 
     void updateFamilyincurdebts(AllColumnInfo allColumnInfo);
 
-    void updateFinancialassets(AllColumnInfo allColumnInfo);
 
     void updateFamilyassets(AllColumnInfo allColumnInfo);
-
-    void updateFinanceservices(AllColumnInfo allColumnInfo);
 
     void updateCustomermanagereva(AllColumnInfo allColumnInfo);
 
@@ -138,8 +132,6 @@ public interface BaseInfoDao {
 
     int getStatusByCerNum(String cerNum);
 
-    //二
-    FinanceServices getFinanceServicesList(long id);
     //四
     CustomerManagerEva getCustomerManagerEvaList(long id);
 

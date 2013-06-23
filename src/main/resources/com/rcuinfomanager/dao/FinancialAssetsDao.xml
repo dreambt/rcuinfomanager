@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rcuinfomanager.dao.FinancialAssetsDao">
+    <!--金融资产信息-->
+    <resultMap id="financialAssetsMap" type="com.rcuinfomanager.model.FinancialAssets">
+        <result column="id" property="id"></result>
+        <result column="financialInfo" property="financialInfo"></result>
+        <result column="depositOurBank" property="depositOurBank"></result>
+        <result column="depositOtherBank" property="depositOtherBank"></result>
+    </resultMap>
+
+    <update id="updateFinancialAssets" parameterType="com.rcuinfomanager.webservice.model.AllColumnInfo">
+        update financialassets set financialInfo = #{financialInfo}, depositOurBank = #{financialDepositOurBank}, depositOtherBank = #{financialDepositOtherBank}
+         where  assetsId = #{assetsId}
+    </update>
+
+    <insert id="saveFinancialAssets" parameterType="com.rcuinfomanager.webservice.model.AllColumnInfo">
+        insert into financialassets(assetsId,financialInfo, depositOurBank, depositOtherBank)
+          values(#{assetsId},#{financialInfo}, #{financialDepositOurBank},#{financialDepositOtherBank})
+    </insert>
+
+    <select id="getFinancialAssets" parameterType="java.lang.Long" resultMap="financialAssetsMap">
+         select fin.financialInfo,fin.depositOurBank,fin.depositOtherBank
+         from familyassets fa
+           left outer join financialAssets fin on fa.assetsId = fin.assetsId
+           where fa.recordId=#{recordId}
+    </select>
+
+</mapper>

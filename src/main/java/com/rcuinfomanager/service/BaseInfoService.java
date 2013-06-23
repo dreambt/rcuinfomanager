@@ -1,6 +1,8 @@
 package com.rcuinfomanager.service;
 
 import com.rcuinfomanager.dao.BaseInfoDao;
+import com.rcuinfomanager.dao.FinanceServicesDao;
+import com.rcuinfomanager.dao.FinancialAssetsDao;
 import com.rcuinfomanager.model.*;
 import com.rcuinfomanager.webservice.model.AllColumnInfo;
 import com.rcuinfomanager.webservice.model.SubmitItem;
@@ -13,6 +15,10 @@ import java.util.List;
 public class BaseInfoService {
     @Autowired
     private BaseInfoDao baseInfoDao;
+    @Autowired
+    private FinanceServicesDao financeServicesDao;
+    @Autowired
+    private FinancialAssetsDao financialAssetsDao;
 
     public void updateStatus(int status,Long id){
         baseInfoDao.updateStatus(status,id);
@@ -72,16 +78,35 @@ public class BaseInfoService {
         baseInfoDao.updateIncomeexpenses(allColumnInfo);
     }
     public void updateFamilyassets(AllColumnInfo allColumnInfo){
-        baseInfoDao.updateFamilyassets(allColumnInfo);
+        FamilyAssets familyAssets = baseInfoDao.getFamilyAssets(allColumnInfo.getRecordId());
+        if (familyAssets == null) {
+            familyAssets = new FamilyAssets();
+            familyAssets.setRecordId(allColumnInfo.getRecordId());
+            familyAssets.setMainAssets(allColumnInfo.getMainAssets());
+            familyAssets.setFmAllAssets(allColumnInfo.getFmAllAssets());
+            baseInfoDao.saveFamilyassets(familyAssets);
+        } else {
+            baseInfoDao.updateFamilyassets(allColumnInfo);
+        }
     }
     public void updateFamilyincurdebts(AllColumnInfo allColumnInfo){
         baseInfoDao.updateFamilyincurdebts(allColumnInfo);
     }
     public void updateFinancialassets(AllColumnInfo allColumnInfo){
-        baseInfoDao.updateFinancialassets(allColumnInfo);
+        List<FinancialAssets> financialAssets = financialAssetsDao.getFinancialAssets(allColumnInfo.getRecordId());
+        if (financialAssets == null) {
+            financialAssetsDao.saveFinancialAssets(allColumnInfo);
+        } else {
+            financialAssetsDao.updateFinancialAssets(allColumnInfo);
+        }
     }
     public void updateFinanceservices(AllColumnInfo allColumnInfo){
-        baseInfoDao.updateFinanceservices(allColumnInfo);
+        FinanceServices financeServices = financeServicesDao.getFinanceServicesList(allColumnInfo.getRecordId());
+        if (financeServices == null) {
+            financeServicesDao.saveFinanceServices(allColumnInfo);
+        } else {
+            financeServicesDao.updateFinanceServices(allColumnInfo);
+        }
     }
     public void updateCustomermanagereva(AllColumnInfo allColumnInfo){
         baseInfoDao.updateCustomermanagereva(allColumnInfo);
@@ -127,8 +152,8 @@ public class BaseInfoService {
     }
 
     //金融资产信息
-    public FinancialAssets getFinancialAssets(Long recordId) {
-        return baseInfoDao.getFinancialAssets(recordId);
+    public List<FinancialAssets> getFinancialAssets(Long recordId) {
+        return financialAssetsDao.getFinancialAssets(recordId);
     }
 
     //负责情况信息
@@ -195,8 +220,8 @@ public class BaseInfoService {
             baseInfoDao.updateBaseInfoById(allColumnInfo);
             baseInfoDao.updateIncomeexpenses(allColumnInfo);
             baseInfoDao.updateFamilyincurdebts(allColumnInfo);
-            baseInfoDao.updateFinancialassets(allColumnInfo);
-            baseInfoDao.updateFinanceservices(allColumnInfo);
+            financialAssetsDao.updateFinancialAssets(allColumnInfo);
+            financeServicesDao.updateFinanceServices(allColumnInfo);
             baseInfoDao.updateCustomermanagereva(allColumnInfo);
             familyAssets = baseInfoDao.getFamilyAssets(baseInfo.getRecordId());
             if (familyAssets != null) {
@@ -265,7 +290,7 @@ public class BaseInfoService {
 
     //二
     public FinanceServices getFinanceService(long id){
-        return baseInfoDao.getFinanceServicesList(id);
+        return financeServicesDao.getFinanceServicesList(id);
     }
     //四
     public CustomerManagerEva getCustomerManagerEvaList(long id){

@@ -213,7 +213,7 @@ DROP TABLE IF EXISTS `familyassets`;
 CREATE TABLE `familyassets` (
   `assetsId` bigint(20) NOT NULL AUTO_INCREMENT,
   `recordId` bigint(20) DEFAULT NULL,
-  `fmAllAssets` double(8,4) DEFAULT NULL,
+  `fmAllAssets` decimal(10,4) DEFAULT NULL,
   `mainAssets` varchar(50) DEFAULT NULL,
   `depositOurBank` varchar(20) DEFAULT NULL,
   `depositOtherBank` varchar(20) DEFAULT NULL,

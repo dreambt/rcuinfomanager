@@ -29,71 +29,17 @@
                 alert(editSuccess);
             }
 
-            $('.usedProduct').each(function(index,element){
-                $('.'+$(element).val().split(",")[$(element).val().split(",").length-1].replace(/\“|（|、|）|”/g, '')).prop('checked', true);
-            });
+            var classCheckbox = ['.usedProduct','.socialSecurity','.mainAssets','.financialInfo','.guarantee','.moneyTodo','.fmDepositTodo','.needServices','.needServicesElse','.bankCard','.electronBank','.agentPay','.auto','.privateLoan','.publicLoan','.creditRecord','.finaServiceMoneyTodo','.finaServicesNeedServicesElse','.finaServicePublicLoan'];
 
-            $('.socialSecurity').each(function(index,element){
-                $('.'+$(element).val().split(",")[$(element).val().split(",").length-1].replace(/\“|（|、|）|”/g, '')).prop('checked', true);
+            $.each(classCheckbox, function(idx, value) {
+                if ($(value)) {
+                    $(value).each(function(index,element){
+                        if ($(element).val().split(",")[$(element).val().split(",").length-1].replace(/\“|（|、|）|”/g, '')!=''){
+                            $('.'+$(element).val().split(",")[$(element).val().split(",").length-1].replace(/\“|（|、|）|”/g, '')).prop('checked', true);
+                        }
+                    });
+                }
             });
-            $('.mainAssets').each(function(index,element){
-                $('.'+$(element).val().split(",")[$(element).val().split(",").length-1].replace(/\“|（|、|）|”/g, '')).prop('checked', true);
-            });
-            $('.financialInfo').each(function(index,element){
-                $('.'+$(element).val().split(",")[$(element).val().split(",").length-1].replace(/\“|（|、|）|”/g, '')).prop('checked', true);
-            });
-            $('.guarantee').each(function(index,element){
-                $('.'+$(element).val().split(",")[$(element).val().split(",").length-1].replace(/\“|（|、|）|”/g, '')).prop('checked', true);
-            });
-            $('.moneyTodo').each(function(index,element){
-                $('.'+$(element).val().split(",")[$(element).val().split(",").length-1].replace(/\“|（|、|）|”/g, '')).prop('checked', true);
-            });
-            $('.fmDepositTodo').each(function(index,element){
-                $('.'+$(element).val().split(",")[$(element).val().split(",").length-1].replace(/\“|（|、|）|”/g, '')).prop('checked', true);
-            });
-            $('.needServices').each(function(index,element){
-                $('.'+$(element).val().split(",")[$(element).val().split(",").length-1].replace(/\“|（|、|）|”/g, '')).prop('checked', true);
-            });
-            $('.needServicesElse').each(function(index,element){
-                $('.'+$(element).val().split(",")[$(element).val().split(",").length-1].replace(/\“|（|、|）|”/g, '')).prop('checked', true);
-            });
-            $('.bankCard').each(function(index,element){
-                $('.'+$(element).val().split(",")[$(element).val().split(",").length-1].replace(/\“|（|、|）|”/g, '')).prop('checked', true);
-            });
-
-            $('.electronBank').each(function(index,element){
-                $('.'+$(element).val().split(",")[$(element).val().split(",").length-1].replace(/\“|（|、|）|”/g, '')).prop('checked', true);
-            });
-
-            $('.agentPay').each(function(index,element){
-                $('.'+$(element).val().split(",")[$(element).val().split(",").length-1].replace(/\“|（|、|）|”/g, '')).prop('checked', true);
-            });
-            $('.auto').each(function(index,element){
-                $('.'+$(element).val().split(",")[$(element).val().split(",").length-1].replace(/\“|（|、|）|”/g, '')).prop('checked', true);
-            });
-            $('.privateLoan').each(function(index,element){
-                $('.'+$(element).val().split(",")[$(element).val().split(",").length-1].replace(/\“|（|、|）|”/g, '')).prop('checked', true);
-            });
-            $('.publicLoan').each(function(index,element){
-                $('.'+$(element).val().split(",")[$(element).val().split(",").length-1].replace(/\“|（|、|）|”/g, '')).prop('checked', true);
-            });
-
-            $('.creditRecord').each(function(index,element){
-                $('.'+$(element).val().split(",")[$(element).val().split(",").length-1].replace(/\“|（|、|）|”/g, '')).prop('checked', true);
-            });
-
-            $('.finaServiceMoneyTodo').each(function(index,element){
-                $('.'+$(element).val().split(",")[$(element).val().split(",").length-1].replace(/\“|（|、|）|”/g, '')).prop('checked', true);
-            });
-
-            $('.finaServicesNeedServicesElse').each(function(index,element){
-                $('.'+$(element).val().split(",")[$(element).val().split(",").length-1].replace(/\“|（|、|）|”/g, '')).prop('checked', true);
-            });
-
-            $('.finaServicePublicLoan').each(function(index,element){
-                $('.'+$(element).val().split(",")[$(element).val().split(",").length-1].replace(/\“|（|、|）|”/g, '')).prop('checked', true);
-            });
-
 
             //增加房产
             $('#addHouseOpera').click(function(){
@@ -147,6 +93,75 @@
                 });
             });
 
+            $('#industryLevel1').change(function(){
+                var me=$(this);
+                var industryId=me.val();
+                var url='/industry/'+ industryId;
+                var params={'industryId':industryId};
+                $.post(url,params,function(data){
+                    $('#industryLevel2').children().remove();
+                    if (data) {
+                        data.forEach(function(item) {
+                            var option=$('<option>');
+                            option.val(item.industryId);
+                            option.text(item.industryName);
+                            $('#industryLevel2').append(option);
+                        });
+                    }
+                });
+            });
+
+            $('#industryLevel2').change(function(){
+                var me=$(this);
+                var industryId=me.val();
+                var url='/industry/'+ industryId;
+                var params={'industryId':industryId};
+                $.post(url,params,function(data){
+                    $('#industryLevel3').children().remove();
+                    if (data) {
+                        data.forEach(function(item) {
+                            var option=$('<option>');
+                            option.val(item.industryId);
+                            option.text(item.industryName);
+                            $('#industryLevel3').append(option);
+                        });
+                    }
+                });
+            });
+
+            $('#industryLevel3').change(function(){
+                var me=$(this);
+                var industryId=me.val();
+                var url='/industry/'+ industryId;
+                var params={'industryId':industryId};
+                $.post(url,params,function(data){
+                    $('#industryLevel4').children().remove();
+                    if (data) {
+                        data.forEach(function(item) {
+                            var option=$('<option>');
+                            option.val(item.industryId);
+                            option.text(item.industryName);
+                            $('#industryLevel4').append(option);
+                        });
+                    }
+                });
+            });
+
+            if ($('#industry').val()) {
+                var url='/industry/'+ $('#industry').val().substring(0,5);
+                var params={'industryId':$('#industry').val().substring(0,5)};
+                $.post(url,params,function(data){
+                    $('#industryLevel4').children().remove();
+                    if (data) {
+                        data.forEach(function(item) {
+                            var option=$('<option>');
+                            option.val(item.industryId);
+                            option.text(item.industryName);
+                            $('#industryLevel4').append(option);
+                        });
+                    }
+                });
+            }
         });
     </script>
 </head>
@@ -236,13 +251,13 @@
         <% %>
         <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="gender">
             <core:choose>
-                <core:when test="${personBasicList.gender=='0'}">
-                    <option value="${personBasicList.gender}" selected="selected">女</option>
+                <core:when test="${personBasicList.gender==0}">
+                    <option value="0" selected="selected">女</option>
                     <option value="1">男</option>
                 </core:when>
                 <core:otherwise>
                     <option value="0">女</option>
-                    <option value="${personBasicList.gender}" selected="selected">男</option>
+                    <option value="1" selected="selected">男</option>
                 </core:otherwise>
             </core:choose>
         </select>
@@ -252,12 +267,12 @@
         <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="isFarmer">
             <core:choose>
                 <core:when test="${personBasicList.farmer==0}">
-                    <option value="${personBasicList.farmer}" selected="selected">否</option>
+                    <option value="0" selected="selected">否</option>
                     <option value="1">是</option>
                 </core:when>
                 <core:otherwise>
                     <option value="0">否</option>
-                    <option value="${personBasicList.farmer}" selected="selected">是</option>
+                    <option value="1" selected="selected">是</option>
                 </core:otherwise>
             </core:choose>
         </select>
@@ -337,12 +352,12 @@
         <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="isHavePassport">
             <core:choose>
                 <core:when test="${personBasicList.havePassport==0}">
-                    <option value="${personBasicList.havePassport}" selected="selected">否</option>
+                    <option value="0" selected="selected">否</option>
                     <option value="1">是</option>
                 </core:when>
                 <core:otherwise>
                     <option value="0">否</option>
-                    <option value="${personBasicList.havePassport}" selected="selected">是</option>
+                    <option value="1" selected="selected">是</option>
                 </core:otherwise>
             </core:choose>
         </select>
@@ -427,9 +442,6 @@
     </td>
     <td align="left">
         <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="areaName">
-
-
-
             <option value="${personBasicList.areaName}">${personBasicList.areaName}</option>
         </select>
     </td>
@@ -881,8 +893,16 @@
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">经营年限</td>
     <td align="left" colspan="3">
-        <input class="input-small" type="text" name="businessYear" value="${personBasicList.businessYear}"
-               style="width: 275px;height: 30px; margin-top: 5px;">
+        <core:choose>
+            <core:when test="${personBasicList.businessYear != ''}">
+                <input class="input-small" type="text" name="businessYear" value="${personBasicList.businessYear}"
+                       style="width: 275px;height: 30px; margin-top: 5px;">
+            </core:when>
+            <core:otherwise>
+                <input class="input-small" type="text" name="businessYear" value="0"
+                       style="width: 275px;height: 30px; margin-top: 5px;">
+            </core:otherwise>
+        </core:choose>
     </td>
 </tr>
 <tr>
@@ -968,7 +988,7 @@
     <td align="left">
         <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="inputMoney">
             <core:choose>
-                <core:when test="${personBasicList.inputMoney}=='10万元以内'}">
+                <core:when test="${personBasicList.inputMoney=='10万元以内'}">
                     <option value="${personBasicList.inputMoney}" selected="selected">10万元以内</option>
                     <option value="10-50万元">10-50万元</option>
                     <option value="50-100万元">50-100万元</option>
@@ -976,7 +996,7 @@
                     <option value="300-1000万元">300-1000万元</option>
                     <option value="1000万元以上">1000万元以上</option>
                 </core:when>
-                <core:when test="${personBasicList.inputMoney}=='10-50万元'}">
+                <core:when test="${personBasicList.inputMoney=='10-50万元'}">
                     <option value="10万元以内">10万元以内</option>
                     <option value="${personBasicList.inputMoney}" selected="selected">10-50万元</option>
                     <option value="50-100万元">50-100万元</option>
@@ -984,7 +1004,7 @@
                     <option value="300-1000万元">300-1000万元</option>
                     <option value="1000万元以上">1000万元以上</option>
                 </core:when>
-                <core:when test="${personBasicList.inputMoney}=='50-100万元'}">
+                <core:when test="${personBasicList.inputMoney=='50-100万元'}">
                     <option value="10万元以内">10万元以内</option>
                     <option value="10-50万元">10-50万元</option>
                     <option value="${personBasicList.inputMoney}" selected="selected">50-100万元</option>
@@ -992,7 +1012,7 @@
                     <option value="300-1000万元">300-1000万元</option>
                     <option value="1000万元以上">1000万元以上</option>
                 </core:when>
-                <core:when test="${personBasicList.inputMoney}=='100-300万元'}">
+                <core:when test="${personBasicList.inputMoney=='100-300万元'}">
                     <option value="10万元以内">10万元以内</option>
                     <option value="10-50万元">10-50万元</option>
                     <option value="50-100万元">50-100万元</option>
@@ -1000,7 +1020,7 @@
                     <option value="300-1000万元">300-1000万元</option>
                     <option value="1000万元以上">1000万元以上</option>
                 </core:when>
-                <core:when test="${personBasicList.inputMoney}=='300-1000万元'}">
+                <core:when test="${personBasicList.inputMoney=='300-1000万元'}">
                     <option value="10万元以内">10万元以内</option>
                     <option value="10-50万元">10-50万元</option>
                     <option value="50-100万元">50-100万元</option>
@@ -1030,9 +1050,10 @@
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">自有资金情况</td>
     <td align="left">
+
         <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="ownMoney">
             <core:choose>
-                <core:when test="${personBasicList.ownMoney}=='10万元以内'}">
+                <core:when test="${personBasicList.ownMoney=='10万元以内'}">
                     <option value="${personBasicList.ownMoney}" selected="selected">10万元以内</option>
                     <option value="10-50万元">10-50万元</option>
                     <option value="50-100万元">50-100万元</option>
@@ -1040,7 +1061,7 @@
                     <option value="300-1000万元">300-1000万元</option>
                     <option value="1000万元以上">1000万元以上</option>
                 </core:when>
-                <core:when test="${personBasicList.ownMoney}=='10-50万元'}">
+                <core:when test="${personBasicList.ownMoney=='10-50万元'}">
                     <option value="10万元以内">10万元以内</option>
                     <option value="${personBasicList.ownMoney}" selected="selected">10-50万元</option>
                     <option value="50-100万元">50-100万元</option>
@@ -1048,7 +1069,7 @@
                     <option value="300-1000万元">300-1000万元</option>
                     <option value="1000万元以上">1000万元以上</option>
                 </core:when>
-                <core:when test="${personBasicList.ownMoney}=='50-100万元'}">
+                <core:when test="${personBasicList.ownMoney=='50-100万元'}">
                     <option value="10万元以内">10万元以内</option>
                     <option value="10-50万元">10-50万元</option>
                     <option value="${personBasicList.ownMoney}" selected="selected">50-100万元</option>
@@ -1056,7 +1077,7 @@
                     <option value="300-1000万元">300-1000万元</option>
                     <option value="1000万元以上">1000万元以上</option>
                 </core:when>
-                <core:when test="${personBasicList.ownMoney}=='100-300万元'}">
+                <core:when test="${personBasicList.ownMoney=='100-300万元'}">
                     <option value="10万元以内">10万元以内</option>
                     <option value="10-50万元">10-50万元</option>
                     <option value="50-100万元">50-100万元</option>
@@ -1064,7 +1085,7 @@
                     <option value="300-1000万元">300-1000万元</option>
                     <option value="1000万元以上">1000万元以上</option>
                 </core:when>
-                <core:when test="${personBasicList.ownMoney}=='300-1000万元'}">
+                <core:when test="${personBasicList.ownMoney=='300-1000万元'}">
                     <option value="10万元以内">10万元以内</option>
                     <option value="10-50万元">10-50万元</option>
                     <option value="50-100万元">50-100万元</option>
@@ -1072,7 +1093,7 @@
                     <option value="${personBasicList.ownMoney}" selected="selected">300-1000万元</option>
                     <option value="1000万元以上">1000万元以上</option>
                 </core:when>
-                <core:when test="${personBasicList.ownMoney}=='300-1000万元'}">
+                <core:when test="${personBasicList.ownMoney=='300-1000万元'}">
                     <option value="10万元以内">10万元以内</option>
                     <option value="10-50万元">10-50万元</option>
                     <option value="50-100万元">50-100万元</option>
@@ -1391,8 +1412,20 @@
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">单位所属行业</td>
     <td align="left" colspan="3">
-        <select class="selectpicker" style="width: 255px; margin-top: 5px;" name="unitIndustryId">
-            <option value="${personBasicList.unitIndustryId}">${personBasicList.unitIndustryId}</option>
+        <input type="hidden" id="industry" value="${personBasicList.unitIndustryId}">
+        <select id="industryLevel1" name="industryLevel1" style="width: 70px; margin-top: 5px;">
+            <core:forEach items="${industryInfoList}" var="industry">
+                <option value="${industry.industryId}">${industry.industryName}</option>
+            </core:forEach>
+        </select>
+        <select id="industryLevel2" style="width: 70px; margin-top: 5px;">
+            <option value="-1"></option>
+        </select>
+        <select id="industryLevel3" style="width: 70px; margin-top: 5px;">
+            <option value="-1"></option>
+        </select>
+        <select id="industryLevel4" class="selectpicker" style="width: 70px; margin-top: 5px;" name="unitIndustryId">
+            <option value=""></option>
         </select>
     </td>
 </tr>
@@ -1603,110 +1636,107 @@
         家庭收支情况
     </td>
 </tr>
-<core:forEach items="${personIncomeExpensesList}" var="personIncomeExpenses">
-    <%--<input type="hidden" name="id" value="${personIncomeExpenses.id}">--%>
-    <tr>
-        <td align="center" colspan="2" bgcolor="#b4d8ed" style="color:#161823">
-            家庭年总收入（万元）
-        </td>
-        <td align="left" colspan="2">
-            <input class="input-small" type="text" name="fmAllIncome" value="${personIncomeExpenses.fmAllIncome}"
-                   style="width: 155px;height: 30px; margin-top: 5px;">
-        </td>
-        <td align="center" colspan="2" bgcolor="#b4d8ed" style="color:#161823">家庭支出（万元）</td>
-        <td align="left" colspan="2">
-            <input class="input-small" type="text" name="fmExpenses" value="${personIncomeExpenses.fmExpenses}"
-                   style="width: 155px;height: 30px; margin-top: 5px;">
-        </td>
-    </tr>
-    <tr>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">
-            收入来源
-        </td>
-        <td align="left" colspan="7">
-            <input class="input-small" type="text" name="fmIncomeSrc" value="${personIncomeExpenses.incomeSrc}"
-                   style="width: 595px;height: 30px; margin-top: 5px;">
-        </td>
-    </tr>
-    <tr>
-        <td align="center" colspan="2" bgcolor="#b4d8ed" style="color:#161823">
-            其中：个人年收入（万元）
-        </td>
-        <td align="left" colspan="2">
-            <input class="input-small" type="text" name="fmPerIncome" value="${personIncomeExpenses.perIncome}"
-                   style="width: 155px;height: 30px; margin-top: 5px;">
-        </td>
-        <td align="center" colspan="2" bgcolor="#b4d8ed" style="color:#161823">家庭其他成员年收入（万元）</td>
-        <td align="left" colspan="2">
-            <input class="input-small" type="text" name="fmOtherMemberIn" value="${personIncomeExpenses.fmOtherMemberIn}"
-                   style="width: 155px;height: 30px; margin-top: 5px;">
-        </td>
-    </tr>
-    <tr>
-        <td align="center"  bgcolor="#b4d8ed" style="color:#161823">家庭主要支出项目</td>
-        <td align="left" colspan="3">
-            <select class="selectpicker" style="width: 255px; margin-top: 5px;" name="fmExpensesProj">
-                <core:choose>
-                    <core:when test="${personIncomeExpenses.fmExpensesProj=='生活性支出'}">
-                        <option value="${personIncomeExpenses.fmExpensesProj}" selected="selected">生活性支出</option>
-                        <option value="交际应酬等消费支出">交际应酬等消费支出</option>
-                        <option value="投资性支出">投资性支出</option>
-                        <option value="其他支出">其他支出</option>
-                    </core:when>
-                    <core:when test="${personIncomeExpenses.fmExpensesProj=='生活性支出'}">
-                        <option value="生活性支出">生活性支出</option>
-                        <option value="${personIncomeExpenses.fmExpensesProj}" selected="selected">交际应酬等消费支出</option>
-                        <option value="投资性支出">投资性支出</option>
-                        <option value="其他支出">其他支出</option>
-                    </core:when>
-                    <core:when test="${personIncomeExpenses.fmExpensesProj=='投资性支出'}">
-                        <option value="生活性支出">生活性支出</option>
-                        <option value="交际应酬等消费支出">交际应酬等消费支出</option>
-                        <option value="${personIncomeExpenses.fmExpensesProj}" selected="selected">投资性支出</option>
-                        <option value="其他支出">其他支出</option>
-                    </core:when>
-                    <core:otherwise>
-                        <option value="生活性支出">生活性支出</option>
-                        <option value="交际应酬等消费支出">交际应酬等消费支出</option>
-                        <option value="投资性支出">投资性支出</option>
-                        <option value="${personIncomeExpenses.fmExpensesProj}" selected="selected">其他支出</option>
-                    </core:otherwise>
-                </core:choose>
-            </select>
-        </td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">家庭收入能否应付支出</td>
-        <td align="left" colspan="3">
-            <select class="selectpicker" style="width: 255px; margin-top: 5px;" name="fmInOutRatio">
-                <core:choose>
-                    <core:when test="${personIncomeExpenses.fmInOutRatio=='能、绰绰有余'}">
-                        <option value="${personIncomeExpenses.fmInOutRatio}" selected="selected">能、绰绰有余</option>
-                        <option value="能、还有余盈">能、还有余盈</option>
-                        <option value="能、刚刚够">能、刚刚够</option>
-                        <option value="不能">不能</option>
-                    </core:when>
-                    <core:when test="${personIncomeExpenses.fmInOutRatio=='能、还有余盈'}">
-                        <option value="能、绰绰有余">能、绰绰有余</option>
-                        <option value="${personIncomeExpenses.fmInOutRatio}" selected="selected">能、还有余盈</option>
-                        <option value="能、刚刚够">能、刚刚够</option>
-                        <option value="不能">不能</option>
-                    </core:when>
-                    <core:when test="${personIncomeExpenses.fmInOutRatio=='能、刚刚够'}">
-                        <option value="能、绰绰有余">能、绰绰有余</option>
-                        <option value="能、还有余盈">能、还有余盈</option>
-                        <option value="${personIncomeExpenses.fmInOutRatio}" selected="selected">能、刚刚够</option>
-                        <option value="不能">不能</option>
-                    </core:when>
-                    <core:otherwise>
-                        <option value="能、绰绰有余">能、绰绰有余</option>
-                        <option value="能、还有余盈">能、还有余盈</option>
-                        <option value="能、刚刚够">能、刚刚够</option>
-                        <option value="${personIncomeExpenses.fmInOutRatio}" selected="selected">不能</option>
-                    </core:otherwise>
-                </core:choose>
-            </select>
-        </td>
-    </tr>
-</core:forEach>
+<tr>
+    <td align="center" colspan="2" bgcolor="#b4d8ed" style="color:#161823">
+        家庭年总收入（万元）
+    </td>
+    <td align="left" colspan="2">
+        <input class="input-small" type="text" name="fmAllIncome" value="${personIncomeExpenses.fmAllIncome}"
+               style="width: 155px;height: 30px; margin-top: 5px;">
+    </td>
+    <td align="center" colspan="2" bgcolor="#b4d8ed" style="color:#161823">家庭支出（万元）</td>
+    <td align="left" colspan="2">
+        <input class="input-small" type="text" name="fmExpenses" value="${personIncomeExpenses.fmExpenses}"
+               style="width: 155px;height: 30px; margin-top: 5px;">
+    </td>
+</tr>
+<tr>
+    <td align="center" bgcolor="#b4d8ed" style="color:#161823">
+        收入来源
+    </td>
+    <td align="left" colspan="7">
+        <input class="input-small" type="text" name="fmIncomeSrc" value="${personIncomeExpenses.incomeSrc}"
+               style="width: 595px;height: 30px; margin-top: 5px;">
+    </td>
+</tr>
+<tr>
+    <td align="center" colspan="2" bgcolor="#b4d8ed" style="color:#161823">
+        其中：个人年收入（万元）
+    </td>
+    <td align="left" colspan="2">
+        <input class="input-small" type="text" name="fmPerIncome" value="${personIncomeExpenses.perIncome}"
+               style="width: 155px;height: 30px; margin-top: 5px;">
+    </td>
+    <td align="center" colspan="2" bgcolor="#b4d8ed" style="color:#161823">家庭其他成员年收入（万元）</td>
+    <td align="left" colspan="2">
+        <input class="input-small" type="text" name="fmOtherMemberIn" value="${personIncomeExpenses.fmOtherMemberIn}"
+               style="width: 155px;height: 30px; margin-top: 5px;">
+    </td>
+</tr>
+<tr>
+    <td align="center"  bgcolor="#b4d8ed" style="color:#161823">家庭主要支出项目</td>
+    <td align="left" colspan="3">
+        <select class="selectpicker" style="width: 255px; margin-top: 5px;" name="fmExpensesProj">
+            <core:choose>
+                <core:when test="${personIncomeExpenses.fmExpensesProj=='生活性支出'}">
+                    <option value="${personIncomeExpenses.fmExpensesProj}" selected="selected">生活性支出</option>
+                    <option value="交际应酬等消费支出">交际应酬等消费支出</option>
+                    <option value="投资性支出">投资性支出</option>
+                    <option value="其他支出">其他支出</option>
+                </core:when>
+                <core:when test="${personIncomeExpenses.fmExpensesProj=='生活性支出'}">
+                    <option value="生活性支出">生活性支出</option>
+                    <option value="${personIncomeExpenses.fmExpensesProj}" selected="selected">交际应酬等消费支出</option>
+                    <option value="投资性支出">投资性支出</option>
+                    <option value="其他支出">其他支出</option>
+                </core:when>
+                <core:when test="${personIncomeExpenses.fmExpensesProj=='投资性支出'}">
+                    <option value="生活性支出">生活性支出</option>
+                    <option value="交际应酬等消费支出">交际应酬等消费支出</option>
+                    <option value="${personIncomeExpenses.fmExpensesProj}" selected="selected">投资性支出</option>
+                    <option value="其他支出">其他支出</option>
+                </core:when>
+                <core:otherwise>
+                    <option value="生活性支出">生活性支出</option>
+                    <option value="交际应酬等消费支出">交际应酬等消费支出</option>
+                    <option value="投资性支出">投资性支出</option>
+                    <option value="${personIncomeExpenses.fmExpensesProj}" selected="selected">其他支出</option>
+                </core:otherwise>
+            </core:choose>
+        </select>
+    </td>
+    <td align="center" bgcolor="#b4d8ed" style="color:#161823">家庭收入能否应付支出</td>
+    <td align="left" colspan="3">
+        <select class="selectpicker" style="width: 255px; margin-top: 5px;" name="fmInOutRatio">
+            <core:choose>
+                <core:when test="${personIncomeExpenses.fmInOutRatio=='能、绰绰有余'}">
+                    <option value="${personIncomeExpenses.fmInOutRatio}" selected="selected">能、绰绰有余</option>
+                    <option value="能、还有余盈">能、还有余盈</option>
+                    <option value="能、刚刚够">能、刚刚够</option>
+                    <option value="不能">不能</option>
+                </core:when>
+                <core:when test="${personIncomeExpenses.fmInOutRatio=='能、还有余盈'}">
+                    <option value="能、绰绰有余">能、绰绰有余</option>
+                    <option value="${personIncomeExpenses.fmInOutRatio}" selected="selected">能、还有余盈</option>
+                    <option value="能、刚刚够">能、刚刚够</option>
+                    <option value="不能">不能</option>
+                </core:when>
+                <core:when test="${personIncomeExpenses.fmInOutRatio=='能、刚刚够'}">
+                    <option value="能、绰绰有余">能、绰绰有余</option>
+                    <option value="能、还有余盈">能、还有余盈</option>
+                    <option value="${personIncomeExpenses.fmInOutRatio}" selected="selected">能、刚刚够</option>
+                    <option value="不能">不能</option>
+                </core:when>
+                <core:otherwise>
+                    <option value="能、绰绰有余">能、绰绰有余</option>
+                    <option value="能、还有余盈">能、还有余盈</option>
+                    <option value="能、刚刚够">能、刚刚够</option>
+                    <option value="${personIncomeExpenses.fmInOutRatio}" selected="selected">不能</option>
+                </core:otherwise>
+            </core:choose>
+        </select>
+    </td>
+</tr>
 <tr>
     <td align="center" colspan="8" style="font-size:22px">
         家庭资产情况
@@ -1716,11 +1746,21 @@
     </td>
 </tr>
 <tr>
-    <input type="hidden" id="assetsId" name="assetsId" value="${personFamilyAssets.assetsId}"/>
+    <core:if test="${personFamilyAssets.assetsId != '' and personFamilyAssets.assetsId != null}">
+        <input type="hidden" id="assetsId" name="assetsId" value="${personFamilyAssets.assetsId}"/>
+    </core:if>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">总资产（万元）</td>
     <td align="left">
-        <input class="input-small" type="text" name="fmAllAssets" value="${personFamilyAssets.fmAllAssets}"
-               style="width: 95px;height: 30px; margin-top: 5px;">
+        <core:choose>
+            <core:when test="${personFamilyAssets.fmAllAssets != '' and personFamilyAssets.fmAllAssets != null}">
+                <input class="input-small" type="text" name="fmAllAssets" value="${personFamilyAssets.fmAllAssets}"
+                       style="width: 275px;height: 30px; margin-top: 5px;">
+            </core:when>
+            <core:otherwise>
+                <input class="input-small" type="text" name="fmAllAssets" value="0"
+                       style="width: 275px;height: 30px; margin-top: 5px;">
+            </core:otherwise>
+        </core:choose>
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">主要资产</td>
     <td align="left" colspan="5"><%--${personFamilyAssets.mainAssets}--%>
@@ -2681,21 +2721,14 @@
     <td align="left" colspan="3">
         <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="finaServiceIsMoneyNeed">
             <core:choose>
-                <core:when test="${financeServicesLists.moneyNeed=='2'}">
-                    <option value="${financeServicesLists.moneyNeed}" selected="selected">很需要</option>
-                    <option value="需要">需要</option>
-                    <option value="不需要">不需要</option>
+                <core:when test="${financeServicesLists.moneyNeed==0}">
+                    <option value="0" selected="selected">需要</option>
+                    <option value="1">不需要</option>
                 </core:when>
-                <core:when test="${financeServicesLists.moneyNeed=='1'}">
-                    <option value="很需要">很需要</option>
-                    <option value="${financeServicesLists.moneyNeed}" selected="selected">需要</option>
-                    <option value="不需要">不需要</option>
+                <core:when test="${financeServicesLists.moneyNeed==1}">
+                    <option value="0">需要</option>
+                    <option value="1" selected="selected">不需要</option>
                 </core:when>
-                <core:otherwise>
-                    <option value="很需要">很需要</option>
-                    <option value="需要">需要</option>
-                    <option value="${financeServicesLists.moneyNeed}" selected="selected">不需要</option>
-                </core:otherwise>
             </core:choose>
         </select>
     </td>
@@ -2736,8 +2769,16 @@
         您希望得到的贷款金额是多少？
     </td>
     <td align="left">
-        <input type="text" name="finaServiceMoneyCount" value="${financeServicesLists.moneyCount}"
-               style="width: 165px;height: 30px; margin-top: 5px;">
+        <core:choose>
+            <core:when test="${financeServicesLists.moneyCount != ''}">
+                <input class="input-small" type="text" name="finaServiceMoneyCount" value="${financeServicesLists.moneyCount}"
+                       style="width: 275px;height: 30px; margin-top: 5px;">
+            </core:when>
+            <core:otherwise>
+                <input class="input-small" type="text" name="finaServiceMoneyCount" value="0"
+                       style="width: 275px;height: 30px; margin-top: 5px;">
+            </core:otherwise>
+        </core:choose>
     </td>
 </tr>
 <tr>
@@ -2770,8 +2811,16 @@
         您希望得到的贷款期限是多久？
     </td>
     <td align="left">
-        <input class="input-small" type="text" name="finaServiceTimeLimit" value="${financeServicesLists.timeLimit}"
-               style="width: 165px;height: 30px; margin-top: 5px;">
+        <core:choose>
+            <core:when test="${financeServicesLists.timeLimit!= ''}">
+                <input class="input-small" type="text" name="finaServiceTimeLimit" value="${financeServicesLists.timeLimit}"
+                       style="width: 275px;height: 30px; margin-top: 5px;">
+            </core:when>
+            <core:otherwise>
+                <input class="input-small" type="text" name="finaServiceTimeLimit" value="0"
+                       style="width: 275px;height: 30px; margin-top: 5px;">
+            </core:otherwise>
+        </core:choose>
     </td>
 </tr>
 <tr>
@@ -3136,7 +3185,6 @@
 <div class="table-list">
 <table width="100%" border="1" cellspacing="0" width="732px" color="#727f8a;">
 <tbody>
-<%-- <input type="hidden" name="id" value="${villageManagerEvaList.id}"/>--%>
 <tr>
     <td width="27%" align="left" bgcolor="#b4d8ed" style="color:#161823">
         一、客户基本资料真实性
@@ -3913,7 +3961,15 @@
         十九、是否为我行（社）重点服务对象
     </td>
     <td width="73%" align="left">
-        <input type="hidden" name="villageManagerEva.id" value="${villageManagerEvaList.id}">
+        <core:choose>
+            <core:when test="${villageManagerEvaList} != null">
+                <input type="hidden" name="villageManagerEva.id" value="${villageManagerEvaList.id}">
+            </core:when>
+            <core:otherwise>
+                <input type="hidden" name="villageManagerEva.id" value="0">
+            </core:otherwise>
+        </core:choose>
+
         <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="villageManagerEva.importantObject">
             <core:choose>
                 <core:when test="${villageManagerEvaList.importantObject=='是'}">

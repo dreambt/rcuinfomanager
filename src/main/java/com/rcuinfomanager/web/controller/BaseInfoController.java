@@ -47,6 +47,12 @@ public class BaseInfoController {
     @Autowired
     VillageManagerEvaService villageManagerEvaService;
 
+    @Autowired
+    private IndustryInfoService industryInfoService;
+
+    @Autowired
+    private FinancialAssetsService financialAssetsService;
+
     private  /*@Value("${images.store.dir}")*/ String imgStoreDir = "d:/tmp";
 
     //查看
@@ -68,7 +74,7 @@ public class BaseInfoController {
         map.put("personBasicList", cusBasicInfo);
 
         //家庭收支情况
-        map.put("personIncomeExpensesList", baseInfoService.getIncomeExpenses(id));
+        map.put("personIncomeExpenses", baseInfoService.getIncomeExpenses(id));
         // 家庭资产情况
         map.put("personFamilyAssets", baseInfoService.getFamilyAssets(id));
         //房产
@@ -78,7 +84,7 @@ public class BaseInfoController {
         //车辆
         map.put("personCarsInfoList", baseInfoService.getCarsInfo(id));
         //金融资产
-        map.put("personFinancialAssetsList", baseInfoService.getFinancialAssets(id));
+        map.put("personFinancialAssetsList", financialAssetsService.getFinancialAssets(id));
         //家庭负债
         map.put("personFamilyIncurDebtsList", baseInfoService.getFamilyIncurDebts(id));
         //家庭成员
@@ -201,7 +207,7 @@ public class BaseInfoController {
         CusBaseInfo cusBasicInfo = baseInfoService.getCusBasicInfo(id);
         map.put("personBasicList", cusBasicInfo);
         //家庭收支情况
-        map.put("personIncomeExpensesList", baseInfoService.getIncomeExpenses(id));
+        map.put("personIncomeExpenses", baseInfoService.getIncomeExpenses(id));
         // 家庭资产情况
         map.put("personFamilyAssets", baseInfoService.getFamilyAssets(id));
         //房产
@@ -211,7 +217,7 @@ public class BaseInfoController {
         //车辆
         map.put("personCarsInfoList", baseInfoService.getCarsInfo(id));
         //金融资产
-        map.put("personFinancialAssetsList", baseInfoService.getFinancialAssets(id));
+        map.put("personFinancialAssetsList", financialAssetsService.getFinancialAssets(id));
         //家庭负债
         map.put("personFamilyIncurDebtsList", baseInfoService.getFamilyIncurDebts(id));
         //家庭成员
@@ -231,6 +237,7 @@ public class BaseInfoController {
                 map.put("usedProducts",usedPro);
             }
         }
+        map.put("industryInfoList", industryInfoService.getIndustryInfoListByFatherId(-1));
         map.put("recordId",id);
         map.put("allColumnInfo", new AllColumnInfo());
 
@@ -251,7 +258,7 @@ public class BaseInfoController {
         if(incomeExpenses!=null){
             baseInfoService.deleteIncomeExpensesByRecordId(incomeExpenses.getId());
         }
-        FinancialAssets financialAssets=baseInfoService.getFinancialAssets(recordId);
+        FinancialAssets financialAssets=financialAssetsService.getFinancialAssets(recordId);
         if(financialAssets!=null){
             baseInfoService.deleteFinancialAssetsByAssetsId(financialAssets.getId());
         }
@@ -578,24 +585,34 @@ public class BaseInfoController {
         }
 
         List<HouseInfo> houseInfos=allColumnInfo.getHouseInfos();
-        for (HouseInfo houseInfo : houseInfos){
-            houseInfo.setAssetsId(allColumnInfo.getAssetsId());
-            baseInfoService.updateHousePropertyInfo(houseInfo);
+        if (houseInfos!= null) {
+            for (HouseInfo houseInfo : houseInfos){
+                houseInfo.setAssetsId(allColumnInfo.getAssetsId());
+                baseInfoService.updateHousePropertyInfo(houseInfo);
+            }
         }
+
         List<LandInfo> landInfos = allColumnInfo.getLandInfos();
-        for (LandInfo landInfo : landInfos) {
-            landInfo.setAssetsId(allColumnInfo.getAssetsId());
-            baseInfoService.updateLandInfo(landInfo);
+        if (landInfos != null) {
+            for (LandInfo landInfo : landInfos) {
+                landInfo.setAssetsId(allColumnInfo.getAssetsId());
+                baseInfoService.updateLandInfo(landInfo);
+            }
         }
         List<CarsInfo> carsInfos=allColumnInfo.getCarInfos();
-        for (CarsInfo carsInfo : carsInfos){
-            carsInfo.setAssetsId(allColumnInfo.getAssetsId());
-            baseInfoService.updateCarsInfo(carsInfo);
+        if (carsInfos != null) {
+            for (CarsInfo carsInfo : carsInfos){
+                carsInfo.setAssetsId(allColumnInfo.getAssetsId());
+                baseInfoService.updateCarsInfo(carsInfo);
+            }
         }
+
         List<FamilyMember> familyMembers=allColumnInfo.getFamilyMembers();
-        for (FamilyMember familyMember : familyMembers){
-            familyMember.setRecordId(allColumnInfo.getRecordId());
-            baseInfoService.updateFamilyMembers(familyMember);
+        if (familyMembers != null) {
+            for (FamilyMember familyMember : familyMembers){
+                familyMember.setRecordId(allColumnInfo.getRecordId());
+                baseInfoService.updateFamilyMembers(familyMember);
+            }
         }
 
         return "redirect:/index";

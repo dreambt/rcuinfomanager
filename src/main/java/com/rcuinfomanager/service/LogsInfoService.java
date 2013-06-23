@@ -16,28 +16,32 @@ public class LogsInfoService {
     public void saveLogsInfo(LogsInfo logs){
         logsInfoDao.saveLogsInfo(logs);
     }
-    //获取日志 List
-    public List<LogsInfo> getLogsInfoByAdminListPage(int pageNum,int offset){
+    //获取/查询日志 List
+    public List<LogsInfo> getLogsInfoByAdminListPage(String beginTime,String endTime,String userName,int pageNum,int offset){
         int beginPageNum = (pageNum -1) * offset;
         int engPageNum = pageNum * offset;
-        return logsInfoDao.getLogsInfoByAdminListPage(beginPageNum,engPageNum);//getLogsInfoByAdminList();
+        return logsInfoDao.getLogsInfoByAdminListPage(beginTime,endTime,userName,beginPageNum,engPageNum);//getLogsInfoByAdminList();
     }
-    public Long getAllLogsInfoListByCount() {
-        return logsInfoDao.queryAdminByLogsInfoByCount();
+    public Long getAllLogsInfoListByCount(String beginTime,String endTime,String userName,int pageNum,int offset) {
+        int beginPageNum = (pageNum -1) * offset;
+        int engPageNum = pageNum * offset;
+        return logsInfoDao.queryAdminByLogsInfoByCount(beginTime,endTime,userName,beginPageNum,engPageNum);
     }
 
-    public List<LogsInfo> getLogsInfoByNormalListPage(long userId,int pageNum, int offset){
+    public List<LogsInfo> getLogsInfoByNormalListPage(String beginTime,String endTime,String userName,Long userId,int pageNum,int offset){
         int beginPageNum = (pageNum -1) * offset;
         int engPageNum = pageNum * offset;
-        return logsInfoDao.queryNormalByLogsInfoByPage(userId,beginPageNum,engPageNum);//getLogsInfoByNormalList(userId,beginPageNum,engPageNum);
+        return logsInfoDao.queryNormalByLogsInfoByPage(beginTime,endTime,userName,userId,beginPageNum,engPageNum);
     }
-    public Long getLogsInfoListByCount(Long userId) {
-        return logsInfoDao.queryNormalByLogsInfoByCount(userId);
+    public Long getLogsInfoListByCount( String beginTime,String endTime,String userName,Long userId,int pageNum,int offset) {
+        int beginPageNum = (pageNum -1) * offset;
+        int engPageNum = pageNum * offset;
+        return logsInfoDao.queryNormalByLogsInfoByCount(beginTime,endTime,userName,userId,beginPageNum,engPageNum);
     }
 
     //查询
     //admin
-    public List<LogsInfo> getLogsAllByAdminList(String beginTime,String endTime,String userName,int pageNum,int offset){
+   /* public List<LogsInfo> getLogsAllByAdminList(String beginTime,String endTime,String userName,int pageNum,int offset){
         int beginPageNum = (pageNum -1) * offset;
         int engPageNum = pageNum * offset;
         return logsInfoDao.getLogsAllByAdminList(beginTime,endTime,userName,beginPageNum,engPageNum);
@@ -87,5 +91,5 @@ public class LogsInfoService {
         int beginPageNum = (pageNum -1) * offset;
         int engPageNum = pageNum * offset;
         return logsInfoDao.getLogsUNameList(userName,userId,beginPageNum,engPageNum);
-    }
+    }*/
 }

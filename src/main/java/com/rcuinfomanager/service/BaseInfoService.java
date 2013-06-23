@@ -1,7 +1,6 @@
 package com.rcuinfomanager.service;
 
 import com.rcuinfomanager.dao.BaseInfoDao;
-import com.rcuinfomanager.dao.VillageManagerEvaDao;
 import com.rcuinfomanager.model.*;
 import com.rcuinfomanager.webservice.model.AllColumnInfo;
 import com.rcuinfomanager.webservice.model.SubmitItem;
@@ -20,29 +19,31 @@ public class BaseInfoService {
     }
 
     //admin
-    public List<CustomerListInfo> getAllFamilyInfoListByPage(int pageNum, int offset) {
+    public List<CustomerListInfo> getAllFamilyInfoListByPage(String organizationName,String areaId,String areaName,String displayUserName,int pageNum, int offset) {
         int beginPageNum = (pageNum -1) * offset;
         int engPageNum = pageNum * offset;
-
-        return baseInfoDao.queryAdminByBaseInfoByPage(beginPageNum, engPageNum);
+        return baseInfoDao.queryAdminByBaseInfoByPage(organizationName,areaId,areaName,displayUserName,beginPageNum, engPageNum);
     }
 
-    public Long getAllFamilyInfoListByCount() {
-        return baseInfoDao.queryAdminByBaseInfoByCount();
+    public Long getAllFamilyInfoListByCount(String organizationName,String areaId,String areaName,String displayUserName,int pageNum, int offset) {
+        int beginPageNum = (pageNum -1) * offset;
+        int engPageNum = pageNum * offset;
+        return baseInfoDao.queryAdminByBaseInfoByCount(organizationName,areaId,areaName,displayUserName,beginPageNum, engPageNum);
     }
 
     //Normal
-    public List<CustomerListInfo> getFamilyInfoListByPage(Long userId, int pageNum, int offset) {
+    public List<CustomerListInfo> getFamilyInfoListByPage(String organizationName,String areaId,String areaName,String displayUserName,Long userId, int pageNum, int offset) {
         int beginPageNum = (pageNum -1) * offset;
         int engPageNum = pageNum * offset;
-
-        return baseInfoDao.queryNormalByBaseInfoByPage(userId, beginPageNum, engPageNum);
+        return baseInfoDao.queryNormalByBaseInfoByPage(organizationName,areaId,areaName,displayUserName,userId, beginPageNum, engPageNum);
     }
 
-    public Long getFamilyInfoListByCount(Long userId) {
-        return baseInfoDao.queryNormalByBaseInfoByCount(userId);
+    public Long getFamilyInfoListByCount(String organizationName,String areaId,String areaName,String displayUserName,Long userId,int pageNum, int offset) {
+        int beginPageNum = (pageNum -1) * offset;
+        int engPageNum = pageNum * offset;
+        return baseInfoDao.queryNormalByBaseInfoByCount(organizationName,areaId,areaName,displayUserName,userId,beginPageNum, engPageNum);
     }
-
+   /*end*/
     //显示客户个人信息
     public List<CustomerListInfo> getPersonBasicInfo(Long recordId) {
         return baseInfoDao.getPersonBasicInfo(recordId);
@@ -286,4 +287,44 @@ public class BaseInfoService {
     public void saveCarsinfo(CarsInfo carsInfo){
         baseInfoDao.saveCarsinfo(carsInfo);
     }
+
+    //删除
+    public void deleteHouseInfoByAssetsId(long assetsId){
+        baseInfoDao.deleteHouseInfoByAssetsId(assetsId);
+    }
+    public void deleteLandInfoByAssetsId(long assetsId){
+        baseInfoDao.deleteLandInfoByAssetsId(assetsId);
+    }
+    public void deleteCarsinfoByAssetsId(long assetsId){
+        baseInfoDao.deleteCarsinfoByAssetsId(assetsId);
+    }
+
+    public void deleteBaseInfoByRecordId(Long recordId){
+        baseInfoDao.deleteBaseInfoByRecordId(recordId);
+    }
+    public void deleteIncomeExpensesByRecordId(Long id){
+        baseInfoDao.deleteIncomeExpensesByRecordId(id);
+    }
+    public void deleteFamilyAssetsByAssetsId(Long assetsId){
+        baseInfoDao.deleteFamilyAssetsByAssetsId(assetsId);
+    }
+    public void deleteFinancialAssetsByAssetsId(Long id){
+        baseInfoDao.deleteFinancialAssetsByAssetsId(id);
+    }
+    public void deleteFamilyIncurDebtsByRecordId(Long id){
+        baseInfoDao.deleteFamilyIncurDebtsByRecordId(id);
+    }
+    public void deleteFamilyMemberInfoByRecordId(Long id){
+        baseInfoDao.deleteFamilyMemberInfoByRecordId(id);
+    }
+    public void deleteFinanceServicesByRecordId(Long recordId){
+        baseInfoDao.deleteFinanceServicesByRecordId(recordId);
+    }
+    public void deleteVillageManagerEvaByRecordId(Long recordId){
+        baseInfoDao.deleteVillageManagerEvaByRecordId(recordId);
+    }
+    public void deleteCustomerManagerEvaByRecordId(Long recordId){
+        baseInfoDao.deleteCustomerManagerEvaByRecordId(recordId);
+    }
+
 }

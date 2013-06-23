@@ -16,7 +16,10 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -116,9 +119,9 @@ public class BaseInfoController {
     @RequestMapping("/saveAppoint/{id}/{uid}")
     public String saveAppoint(@PathVariable long id, @PathVariable long uid, Map map) {
         //该状态
-        int status=2;
+        int state=2;
         baseInfoService.saveAppointInfo(id, uid);
-        baseInfoService.updateStatus(status,id);
+        baseInfoService.updateStatus(state,id);
         boolean success = true;
         map.put("success", success);
         map.put("isUserName", "指派成功！");
@@ -180,7 +183,7 @@ public class BaseInfoController {
         boolean success = true;
         map.put("success", success);
         map.put("isCheck", "验收成功！");
-        return "farmer/checkInfo";
+       return "farmer/checkInfo";
     }
 
     //编辑
@@ -240,49 +243,62 @@ public class BaseInfoController {
     }
 
     //删除
-    @RequestMapping("/delete/{recordId}/{assetsId}")
-    public String deleteInfo(@PathVariable long recordId,@PathVariable long assetsId, Map map) {
-        //int result = 0;
+    @RequestMapping("/delete/{recordId}")
+    public String deleteInfo(@PathVariable long recordId, Map map) {
+
+     if(recordId!=0){
         IncomeExpenses incomeExpenses=baseInfoService.getIncomeExpenses(recordId);
-        baseInfoService.deleteIncomeExpensesByRecordId(incomeExpenses.getId());
-
-        FinancialAssets financialAssets=baseInfoService.getFinancialAssets(assetsId);
-        baseInfoService.deleteFinancialAssetsByAssetsId(financialAssets.getId());
-
+        if(incomeExpenses!=null){
+            baseInfoService.deleteIncomeExpensesByRecordId(incomeExpenses.getId());
+        }
+        FinancialAssets financialAssets=baseInfoService.getFinancialAssets(recordId);
+        if(financialAssets!=null){
+            baseInfoService.deleteFinancialAssetsByAssetsId(financialAssets.getId());
+        }
         FamilyIncurDebts familyIncurDebts=baseInfoService.getFamilyIncurDebts(recordId);
-        baseInfoService.deleteFamilyIncurDebtsByRecordId(familyIncurDebts.getId());
+        if(familyIncurDebts!=null){
+            baseInfoService.deleteFamilyIncurDebtsByRecordId(familyIncurDebts.getId());
+        }
 
         List<FamilyMember> familyMemberInfos=baseInfoService.getFamilyMember(recordId);
-        for (FamilyMember familyMemberInfo: familyMemberInfos ){
-            baseInfoService.deleteFamilyMemberInfoByRecordId(familyMemberInfo.getId());
+        if(familyMemberInfos!=null){
+            for (FamilyMember familyMemberInfo: familyMemberInfos ){
+                baseInfoService.deleteFamilyMemberInfoByRecordId(familyMemberInfo.getId());
+            }
         }
+
         List<HouseInfo> houseInfos=baseInfoService.getHousePropertyInfo(recordId);
-        for(HouseInfo houseInfo: houseInfos){
-            baseInfoService.deleteHouseInfoByAssetsId(houseInfo.getAssetsId());
+        if(houseInfos!=null){
+            for(HouseInfo houseInfo: houseInfos){
+                baseInfoService.deleteHouseInfoByAssetsId(houseInfo.getAssetsId());
+            }
         }
 
         List<LandInfo> landInfos=baseInfoService.getLandInfo(recordId);
-        for (LandInfo landInfo:landInfos){
-            baseInfoService.deleteLandInfoByAssetsId(landInfo.getAssetsId());
+        if(landInfos!=null){
+            for (LandInfo landInfo:landInfos){
+                baseInfoService.deleteLandInfoByAssetsId(landInfo.getAssetsId());
+            }
         }
 
         List<CarsInfo> carsInfos =baseInfoService.getCarsInfo(recordId);
-        for (CarsInfo carsInfo: carsInfos){
-            baseInfoService.deleteCarsinfoByAssetsId(carsInfo.getAssetsId());
+        if(carsInfos!=null){
+            for (CarsInfo carsInfo: carsInfos){
+                baseInfoService.deleteCarsinfoByAssetsId(carsInfo.getAssetsId());
+            }
         }
+
         baseInfoService.deleteFinanceServicesByRecordId(recordId);
         baseInfoService.deleteVillageManagerEvaByRecordId(recordId);
         baseInfoService.deleteCustomerManagerEvaByRecordId(recordId);
 
-        baseInfoService.deleteFamilyAssetsByAssetsId(assetsId); //assetsId 主键
+        baseInfoService.deleteFamilyAssetsByAssetsId(recordId); //assetsId 主键
         baseInfoService.deleteBaseInfoByRecordId(recordId);
-
-        /*if (result != 0) {
-            map.put("delSuccess", "删除成功！");
-        } else {
-            map.put("delSuccess", "删除失败！");
-        }*/
-        return "/farmer/main";
+     }else {
+         map.put("msg","删除失败！");
+         return "redirect:/index";
+     }
+     return "redirect:/index";
     }
 
     //导入基础数据页面
@@ -541,7 +557,7 @@ public class BaseInfoController {
     //保存编辑
     @RequestMapping(value = "/saveEditInfo",method = RequestMethod.POST)
     public String saveEditInfo(HttpServletRequest request, HttpServletResponse response,@ModelAttribute("allColumnInfo")AllColumnInfo allColumnInfo,Map map){
-        allColumnInfo.setStatus(5);
+
         baseInfoService.updateBaseInfoById(allColumnInfo);
         //家庭收支情况表
         baseInfoService.updateIncomeexpenses(allColumnInfo);

@@ -46,9 +46,9 @@
                 });
             };
 
-            var delMsg="${delSuccess}";
-            if(delMsg){
-                alert(delMsg);
+            var msg="${msg}";
+            if(msg){
+                alert(msg);
             }
 
            $('#selectAreas').change(function(){
@@ -57,14 +57,14 @@
                var url='/area/'+ areaId;
                var params={'areaId':areaId};
                $.post(url,params,function(data){
-                   $('#village').children().remove();
-                   $('#village').append('<option value="">按村</option>');
+                   $('#areaName').children().remove();
+                   $('#areaName').append('<option value="">按村</option>');
                    if (data) {
                        data.forEach(function(item) {
                            var option=$('<option>');
-                           option.val(item.areaId);
+                           option.val(item.areaName);
                            option.text(item.areaName);
-                           $('#village').append(option);
+                           $('#areaName').append(option);
                        });
                    }
                });
@@ -117,16 +117,16 @@
                                 <option value="${netWork.organizationName}">${netWork.organizationName}</option>
                             </core:forEach>
                         </select>
-                        <select id="selectAreas" name="areaName" class="selectpicker" style="width: 95px;">
-                            <option value="areaName">按乡镇</option>
+                        <select id="selectAreas" name="areaId" class="selectpicker" style="width: 95px;">
+                            <option value="-1">按乡镇</option>
                             <core:forEach items="${areasInfoList}" var="areasInfos">
                                 <option value="${areasInfos.areaId}">${areasInfos.areaName}</option>
                             </core:forEach>
                         </select>
-                        <select id="village" name="village" class="selectpicker" style="width: 95px;">
+                        <select id="areaName" name="areaName" class="selectpicker" style="width: 95px;">
                             <option value="">按村</option>
                         </select>
-                        <input type="text"  name="organizationName" value="${params.organizationName}" placeholder="按客户经理" style="width: 95px; height:30px;">
+                        <input type="text"  name="displayUserName" value="${params.displayUserName}" placeholder="按客户经理" style="width: 95px; height:30px;">
                         <button type="submit" class="btn" href="#" id="search" style="margin-top: -10px;">查询</button>
                     </form>
                 </div>
@@ -186,6 +186,9 @@
                             <td align="center">${familyInfo.organizationName}</td>
                             <td align="center">${familyInfo.displayUserName}</td>
                             <core:choose>
+                                <core:when test="${familyInfo.state==1}">
+                                    <td align="center">已提交</td>
+                                </core:when>
                                 <core:when test="${familyInfo.state==2}">
                                     <td align="center">已指派</td>
                                 </core:when>
@@ -194,9 +197,6 @@
                                 </core:when>
                                 <core:when test="${familyInfo.state==4}">
                                     <td align="center">验收拒绝</td>
-                                </core:when>
-                                <core:when test="${familyInfo.state==5}">
-                                    <td align="center">已提交</td>
                                 </core:when>
                                 <core:otherwise>
                                     <td align="center">&nbsp;</td>

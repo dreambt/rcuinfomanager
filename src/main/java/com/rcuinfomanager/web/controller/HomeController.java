@@ -1,6 +1,5 @@
 package com.rcuinfomanager.web.controller;
 
-import com.rcuinfomanager.model.ClientManager;
 import com.rcuinfomanager.model.OrganizationInfo;
 import com.rcuinfomanager.service.*;
 import com.rcuinfomanager.session.*;
@@ -15,7 +14,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 /**
  * @author 王文庭(xorbytes@qq.com)
@@ -49,13 +47,16 @@ public class HomeController {
     @RequestMapping(value ="/index")
     public String index(@RequestParam(value = "page", required = false) Integer pageNum,
                         @RequestParam(value="organizationName", required=false) String organizationName,
+                        @RequestParam(value="areaId", required=false) String areaId,
                         @RequestParam(value="areaName", required=false) String areaName,
-                        @RequestParam(value="village", required=false) String village,
-                        @RequestParam(value="customerName", required=false) String customerName,
+                        @RequestParam(value="displayUserName", required=false) String displayUserName,
                         ModelMap map) {
 
         if (pageNum == null) {
             pageNum = 1;
+        }
+        if("-1".equals(areaId)){
+            areaId = "";
         }
 
         UserSessionContext userSessionContext = UserSessionContextHolder.getUserSessionContext();
@@ -64,46 +65,16 @@ public class HomeController {
         map.put("displayUserName", sessionUser.getDisplayUserName());
         map.put("userNameByAdmin", sessionUser.getUserName());
         int offset = 20;
-        if("admin".equalsIgnoreCase(sessionUser.getUserName())){
-            /*if(!Strings.isNullOrEmpty(organizationName) && !Strings.isNullOrEmpty(areaName) && !Strings.isNullOrEmpty(village) && !Strings.isNullOrEmpty(customerName)){
-            map.put("pageCount", baseInfoService.getAllFamilyInfoListByCount() / offset);
-            map.put("familyInfoList",baseInfoService.getAllFamilyInfoListByPage(organizationName,areaName,village,customerName,pageNum, offset));
-            map.put("areasInfoList",baseInfoService.getAreasInfo());
-            map.put("netWorkList",baseInfoService.getNetWorkByAdmin());
-          }else if (!Strings.isNullOrEmpty(organizationName) && !Strings.isNullOrEmpty(areaName) && !Strings.isNullOrEmpty(village)){
-              map.put("pageCount", baseInfoService.getAllFamilyInfoListByCount() / offset);
-              map.put("familyInfoList",baseInfoService.getAllFamilyInfoListByPage(organizationName,areaName,village,customerName,pageNum, offset));
-              map.put("areasInfoList",baseInfoService.getAreasInfo());
+          if("admin".equalsIgnoreCase(sessionUser.getUserName())){
+              map.put("pageCount", baseInfoService.getAllFamilyInfoListByCount(organizationName,areaId,areaName,displayUserName,pageNum, offset) / offset);
+              map.put("familyInfoList",baseInfoService.getAllFamilyInfoListByPage(organizationName,areaId,areaName,displayUserName,pageNum, offset));
+              map.put("areasInfoList",areasInfoService.getAreasInfoByFatherId(350521));
               map.put("netWorkList",baseInfoService.getNetWorkByAdmin());
-          }else if (!Strings.isNullOrEmpty(organizationName) && !Strings.isNullOrEmpty(areaName)){
-              map.put("pageCount", baseInfoService.getAllFamilyInfoListByCount() / offset);
-              map.put("familyInfoList",baseInfoService.getAllFamilyInfoListByPage(organizationName,areaName,village,customerName,pageNum, offset));
-              map.put("areasInfoList",baseInfoService.getAreasInfo());
-              map.put("netWorkList",baseInfoService.getNetWorkByAdmin());
-          } else if (!Strings.isNullOrEmpty(organizationName)){
-              map.put("pageCount", baseInfoService.getAllFamilyInfoListByCount() / offset);
-              map.put("familyInfoList",baseInfoService.getAllFamilyInfoListByPage(organizationName,areaName,village,customerName,pageNum, offset));
-              map.put("areasInfoList",baseInfoService.getAreasInfo());
-              map.put("netWorkList",baseInfoService.getNetWorkByAdmin());
-          }
-            else {
-              map.put("pageCount", baseInfoService.getAllFamilyInfoListByCount() / offset);
-              map.put("familyInfoList",baseInfoService.getAllFamilyInfoListByPage(pageNum, offset));
-              map.put("areasInfoList",baseInfoService.getAreasInfo());
-              map.put("netWorkList",baseInfoService.getNetWorkByAdmin());
-          }
-        }else{*/
-
-
-            map.put("pageCount", baseInfoService.getAllFamilyInfoListByCount() / offset);
-            map.put("familyInfoList",baseInfoService.getAllFamilyInfoListByPage(pageNum, offset));
-            map.put("areasInfoList",areasInfoService.getAreasInfoByFatherId(350521));
-            map.put("netWorkList",baseInfoService.getNetWorkByAdmin());
         }else{
-            map.put("pageCount", baseInfoService.getFamilyInfoListByCount(sessionUser.getId()) / offset);
-            map.put("familyInfoList", baseInfoService.getFamilyInfoListByPage(sessionUser.getId(), pageNum, offset));
-            map.put("netWorkList",baseInfoService.getNetWorkByNormal(sessionUser.getId()));
-            map.put("areasInfoList",areasInfoService.getAreasInfoByFatherId(350521));
+              map.put("pageCount", baseInfoService.getFamilyInfoListByCount(organizationName,areaId,areaName,displayUserName,sessionUser.getId(),pageNum, offset) / offset);
+              map.put("familyInfoList", baseInfoService.getFamilyInfoListByPage(organizationName,areaId,areaName,displayUserName,sessionUser.getId(), pageNum, offset));
+              map.put("areasInfoList",areasInfoService.getAreasInfoByFatherId(350521));
+              map.put("netWorkList",baseInfoService.getNetWorkByNormal(sessionUser.getId()));
         }
         return "farmer/main";
     }
@@ -159,7 +130,12 @@ public class HomeController {
 
     //系统日志
     @RequestMapping(value ="/systemLogManager")
-    public String systemLogManager(@RequestParam(value = "page", required = false) Integer pageNum,ModelMap map) {
+    public String systemLogManager(@RequestParam(value = "page", required = false) Integer pageNum,
+                                   @RequestParam(value="beginTime", required=false) String beginTime,
+                                   @RequestParam(value="endTime", required=false) String endTime,
+                                   @RequestParam(value="userName", required=false) String userName,
+                                   ModelMap map)  {
+
         if (pageNum == null) {
             pageNum = 1;
         }
@@ -168,12 +144,12 @@ public class HomeController {
         map.put("displayUserName", sessionUser.getDisplayUserName());
         int offset = 20;
         if("admin".equalsIgnoreCase(sessionUser.getUserName())){
-            map.put("pageCount", logsInfoService.getAllLogsInfoListByCount() / offset);
-            map.put("logsInfoList",logsInfoService.getLogsInfoByAdminListPage(pageNum,offset));
+            map.put("pageCount", logsInfoService.getAllLogsInfoListByCount(beginTime,endTime,userName,pageNum,offset) / offset);
+            map.put("logsInfoList",logsInfoService.getLogsInfoByAdminListPage(beginTime,endTime,userName,pageNum,offset));
 
         }else{
-            map.put("pageCount", logsInfoService.getLogsInfoListByCount(sessionUser.getId()) / offset);
-            map.put("logsInfoList",logsInfoService.getLogsInfoByNormalListPage(sessionUser.getId(), pageNum, offset));
+            map.put("pageCount", logsInfoService.getLogsInfoListByCount(beginTime,endTime,userName,sessionUser.getId(),pageNum,offset) / offset);
+            map.put("logsInfoList",logsInfoService.getLogsInfoByNormalListPage(beginTime,endTime,userName,sessionUser.getId(),pageNum,offset));
         }
         return "logsystem/systemLog";
     }

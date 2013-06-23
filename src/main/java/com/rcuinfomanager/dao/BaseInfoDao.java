@@ -9,16 +9,16 @@ import java.util.List;
 
 public interface BaseInfoDao {
     //改状态
-    void updateStatus(int status,Long recordId);
+    void updateStatus(@Param("status")int status,@Param("recordId")Long recordId);
     //管理员获取数据列表
-    List<CustomerListInfo> queryAdminByBaseInfoByPage(@Param("beginPageNum") int beginPageNum, @Param("endPageNum") int endPageNum);
+    List<CustomerListInfo> queryAdminByBaseInfoByPage(@Param("organizationName")String organizationName,@Param("areaId")String areaId,@Param("areaName")String areaName,@Param("displayUserName")String displayUserName,@Param("beginPageNum") int beginPageNum, @Param("endPageNum") int endPageNum);
 
-    Long queryAdminByBaseInfoByCount();
+    Long queryAdminByBaseInfoByCount(@Param("organizationName")String organizationName,@Param("areaId")String areaId,@Param("areaName")String areaName,@Param("displayUserName")String displayUserName,@Param("beginPageNum") int beginPageNum, @Param("endPageNum") int endPageNum);
 
     //普通用户获取数据列表
-    List<CustomerListInfo> queryNormalByBaseInfoByPage(@Param("userId") Long userId, @Param("beginPageNum") int beginPageNum, @Param("endPageNum") int endPageNum);
+    List<CustomerListInfo> queryNormalByBaseInfoByPage(@Param("organizationName")String organizationName,@Param("areaId")String areaId,@Param("areaName")String areaName,@Param("displayUserName")String displayUserName,@Param("userId") Long userId, @Param("beginPageNum") int beginPageNum, @Param("endPageNum") int endPageNum);
 
-    Long queryNormalByBaseInfoByCount(@Param("userId")Long userId);
+    Long queryNormalByBaseInfoByCount(@Param("organizationName")String organizationName,@Param("areaId")String areaId,@Param("areaName")String areaName,@Param("displayUserName")String displayUserName,@Param("userId")Long userId,@Param("beginPageNum") int beginPageNum, @Param("endPageNum") int endPageNum);
 
     //显示客户个人信息
     List<CustomerListInfo> getPersonBasicInfo(Long recordId);
@@ -109,7 +109,7 @@ public interface BaseInfoDao {
 
     void deleteBaseInfoByRecordId(Long recordId);
     void deleteIncomeExpensesByRecordId(Long id);
-    void deleteFamilyAssetsByAssetsId(Long assetsId);
+    void deleteFamilyAssetsByAssetsId(Long recordId);
     void deleteFinancialAssetsByAssetsId(Long id);
     void deleteFamilyIncurDebtsByRecordId(Long id);
     void deleteFinanceServicesByRecordId(Long recordId);

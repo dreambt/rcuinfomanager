@@ -10,14 +10,20 @@ public interface LogsInfoDao {
     void saveLogsInfo(LogsInfo logs);
     //获取日志
     //admin
-    List<LogsInfo> getLogsInfoByAdminListPage(@Param("beginPageNum") int beginPageNum, @Param("endPageNum") int endPageNum);
-    Long queryAdminByLogsInfoByCount();
+    List<LogsInfo> getLogsInfoByAdminListPage(@Param("beginTime")String beginTime,@Param("endTime")String endTime,@Param("userName")String userName,@Param("beginPageNum") int beginPageNum, @Param("endPageNum") int endPageNum);
+    long queryAdminByLogsInfoByCount(@Param("beginTime")String beginTime,@Param("endTime")String endTime,@Param("userName")String userName,@Param("beginPageNum") int beginPageNum, @Param("endPageNum") int endPageNum);
     //Normal
-    List<LogsInfo> queryNormalByLogsInfoByPage(@Param("userId") Long userId,@Param("beginPageNum") int beginPageNum, @Param("endPageNum") int endPageNum);//getLogsInfoByNormalList(long userId);
-    Long queryNormalByLogsInfoByCount(@Param("userId")Long userId);
+    List<LogsInfo> queryNormalByLogsInfoByPage(@Param("beginTime")String beginTime,@Param("endTime")String endTime,@Param("userName")String userName,@Param("userId") Long userId,@Param("beginPageNum") int beginPageNum, @Param("endPageNum") int endPageNum);//getLogsInfoByNormalList(long userId);
+    long queryNormalByLogsInfoByCount(@Param("beginTime")String beginTime,@Param("endTime")String endTime,@Param("userName")String userName,@Param("userId") Long userId,@Param("beginPageNum") int beginPageNum, @Param("endPageNum") int endPageNum);
+
+
+
+
+
+
     //查询
     //Admin
-    List<LogsInfo> getLogsAllByAdminList(@Param("beginTime") String beginTime,@Param("endTime")String endTime,@Param("userName")String userName,@Param("beginPageNum") int beginPageNum, @Param("endPageNum") int endPageNum);
+    /*List<LogsInfo> getLogsAllByAdminList(@Param("beginTime") String beginTime,@Param("endTime")String endTime,@Param("userName")String userName,@Param("beginPageNum") int beginPageNum, @Param("endPageNum") int endPageNum);
     List<LogsInfo> getLogsBeginAndEndTimeByAdminList(@Param("beginTime")String beginTime,@Param("endTime")String endTime,@Param("beginPageNum") int beginPageNum, @Param("endPageNum") int endPageNum);
     List<LogsInfo> getLogsBeginTimeByAdminList(@Param("beginTime")String beginTime,@Param("beginPageNum") int beginPageNum, @Param("endPageNum") int endPageNum);
     List<LogsInfo> getLogsEndTimeByAdminList(@Param("endTime")String endTime,@Param("beginPageNum") int beginPageNum, @Param("endPageNum") int endPageNum);
@@ -28,5 +34,5 @@ public interface LogsInfoDao {
     List<LogsInfo> getLogsBeginTimeList(@Param("beginTime")String beginTime,@Param("userId")long userId,@Param("beginPageNum") int beginPageNum, @Param("endPageNum") int endPageNum);
     List<LogsInfo> getLogsEndTimeList(@Param("endTime")String endTime,@Param("userId")long userId,@Param("beginPageNum") int beginPageNum, @Param("endPageNum") int endPageNum);
     List<LogsInfo> getLogsUNameList(@Param("userName")String userName,@Param("userId")long userId,@Param("beginPageNum") int beginPageNum, @Param("endPageNum") int endPageNum);
-
+*/
 }

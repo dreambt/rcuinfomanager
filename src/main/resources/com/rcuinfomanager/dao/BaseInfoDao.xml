@@ -14,7 +14,7 @@
     </resultMap>
 
     <update id="updateStatus" parameterType="java.lang.Integer">
-        update baseinfo set state=#{status} where  recordId =#{recordId}
+        update baseinfo set state=#{status} where recordId =#{recordId}
     </update>
 
     <!-- //管理员获取数据列表-->
@@ -23,30 +23,93 @@
         from baseinfo b
         left outer join usersinfo u on b.userName=u.userName
         left outer join familyassets fa on b.recordId=fa.assetsId
-        left outer join organizationInfo org on u.organizationId=org.organizationId limit #{beginPageNum}, #{endPageNum}
+        left outer join organizationInfo org on org.organizationId=u.organizationId
+        where 1=1
+        <if test="organizationName != null and organizationName != ''">
+            and org.organizationName like #{organizationName}
+        </if>
+        <choose>
+            <when test="areaId != null and areaId !=''">
+                and b.areaCode like #{areaId}
+            </when>
+            <when test="areaName != null and areaName != ''">
+                and b.areaName like #{areaName}
+            </when>
+        </choose>
+        <if test="displayUserName != null and displayUserName !=''">
+            and u.displayUserName like #{displayUserName}
+        </if>
+        limit #{beginPageNum}, #{endPageNum}
     </select>
 
     <select id="queryAdminByBaseInfoByCount" resultType="java.lang.Long">
         select count(*)
         from baseinfo b
         left outer join usersinfo u on b.userName=u.userName
+        left outer join familyassets fa on b.recordId=fa.assetsId
         left outer join organizationInfo org on u.organizationId=org.organizationId
+        where 1=1
+        <if test="organizationName != null and organizationName != ''">
+            and org.organizationName like #{organizationName}
+        </if>
+        <choose>
+            <when test="areaId != null and areaId !=''">
+                and b.areaCode like #{areaId}
+            </when>
+            <when test="areaName != null and areaName != ''">
+                and b.areaName like #{areaName}
+            </when>
+        </choose>
+        <if test="displayUserName != null and displayUserName !=''">
+            and u.displayUserName like #{displayUserName}
+        </if>
     </select>
     <!-- 普通用户获取数据列表-->
     <select id="queryNormalByBaseInfoByPage" parameterType="java.lang.Long" resultMap="userListInfo">
-        select b.recordId,b.customerName,b.telephone,b.submitTime,org.organizationName,u.displayUserName,b.state
+        select b.recordId,fa.assetsId,customerName,b.telephone,b.submitTime,org.organizationName,u.displayUserName,b.state
         from baseinfo b
         left outer join usersinfo u on b.userName=u.userName
+        left outer join familyassets fa on b.recordId=fa.assetsId
         left outer join organizationInfo org on u.organizationId=org.organizationId
-        where u.userId=#{userId} limit #{beginPageNum}, #{endPageNum}
+        where u.userId=#{userId}
+        <if test="organizationName != null and organizationName != ''">
+            and org.organizationName like #{organizationName}
+        </if>
+        <choose>
+            <when test="areaId != null and areaId !=''">
+                and b.areaCode like #{areaId}
+            </when>
+            <when test="areaName != null and areaName != ''">
+                and b.areaName like #{areaName}
+            </when>
+        </choose>
+        <if test="displayUserName != null and displayUserName !=''">
+            and u.displayUserName like #{displayUserName}
+        </if>
+        limit #{beginPageNum}, #{endPageNum}
     </select>
 
     <select id="queryNormalByBaseInfoByCount" parameterType="java.lang.Long" resultType="java.lang.Long">
         select count(*)
         from baseinfo b
         left outer join usersinfo u on b.userName=u.userName
+        left outer join familyassets fa on b.recordId=fa.assetsId
         left outer join organizationInfo org on u.organizationId=org.organizationId
         where u.userId=#{userId}
+        <if test="organizationName != null and organizationName != ''">
+            and org.organizationName like #{organizationName}
+        </if>
+        <choose>
+            <when test="areaId != null and areaId !=''">
+                and b.areaCode like #{areaId}
+            </when>
+            <when test="areaName != null and areaName != ''">
+                and b.areaName like #{areaName}
+            </when>
+        </choose>
+        <if test="displayUserName != null and displayUserName !=''">
+            and u.displayUserName like #{displayUserName}
+        </if>
     </select>
 
 
@@ -598,7 +661,7 @@
          DELETE FROM incomeexpenses WHERE id = #{id};
     </delete>
     <delete id="deleteFamilyAssetsByAssetsId" parameterType="java.lang.Long">
-         DELETE FROM familyassets WHERE assetsId = #{assetsId};
+         DELETE FROM familyassets WHERE recordId = #{recordId};
     </delete>
     <delete id="deleteFinancialAssetsByAssetsId" parameterType="java.lang.Long">
          DELETE FROM financialassets WHERE id = #{id};

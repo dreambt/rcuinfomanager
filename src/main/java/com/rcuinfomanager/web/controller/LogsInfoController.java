@@ -1,6 +1,5 @@
 package com.rcuinfomanager.web.controller;
 
-import com.google.common.base.Strings;
 import com.rcuinfomanager.service.LogsInfoService;
 import com.rcuinfomanager.session.SessionUser;
 import com.rcuinfomanager.session.UserSessionContext;
@@ -30,45 +29,45 @@ public class LogsInfoController {
         map.put("displayUserName", sessionUser.getDisplayUserName());
         int offset = 20;
         if(sessionUser.getId()==1){
-            if(!Strings.isNullOrEmpty(beginTime) && !Strings.isNullOrEmpty(endTime) && !Strings.isNullOrEmpty(userName)){
-                map.put("pageCount", logsInfoService.getAllLogsInfoListByCount() / offset);
+            /*if(!Strings.isNullOrEmpty(beginTime) && !Strings.isNullOrEmpty(endTime) && !Strings.isNullOrEmpty(userName)){
+                map.put("pageCount", logsInfoService.getAllLogsInfoListByCount(beginTime, endTime, userName,pageNum,offset) / offset);
                 map.put("logsInfoList",logsInfoService.getLogsAllByAdminList(beginTime, endTime, userName,pageNum,offset));
             }else if(!Strings.isNullOrEmpty(beginTime) && !Strings.isNullOrEmpty(endTime)){
-                map.put("pageCount", logsInfoService.getAllLogsInfoListByCount() / offset);
+                map.put("pageCount", logsInfoService.getAllLogsInfoListByCount(beginTime, endTime,pageNum,offset) / offset);
                 map.put("logsInfoList",logsInfoService.getLogsBeginAndEndTimeByAdminList(beginTime, endTime,pageNum,offset));
             }else if(!Strings.isNullOrEmpty(beginTime)){
-                map.put("pageCount", logsInfoService.getAllLogsInfoListByCount() / offset);
+                map.put("pageCount", logsInfoService.getAllLogsInfoListByCount(beginTime,pageNum,offset) / offset);
                 map.put("logsInfoList",logsInfoService.getLogsBeginTimeByAdminList(beginTime,pageNum,offset));
             }else if(!Strings.isNullOrEmpty(endTime)){
-                map.put("pageCount", logsInfoService.getAllLogsInfoListByCount() / offset);
+                map.put("pageCount", logsInfoService.getAllLogsInfoListByCount(endTime,pageNum,offset) / offset);
                 map.put("logsInfoList",logsInfoService.getLogsEndTimeByAdminList(endTime,pageNum,offset));
             }else if(!Strings.isNullOrEmpty(userName)){
-                map.put("pageCount", logsInfoService.getAllLogsInfoListByCount() / offset);
+                map.put("pageCount", logsInfoService.getAllLogsInfoListByCount(userName,pageNum,offset) / offset);
                 map.put("logsInfoList",logsInfoService.getLogsUNameByAdminList(userName,pageNum,offset));
             }else{
-                map.put("pageCount", logsInfoService.getAllLogsInfoListByCount() / offset);
+                map.put("pageCount", logsInfoService.getAllLogsInfoListByCount(pageNum,offset) / offset);
                 map.put("logsInfoList",logsInfoService.getLogsInfoByAdminListPage(pageNum,offset));
-            }
+            }*/
         }else {
-            if(!Strings.isNullOrEmpty(beginTime) && !Strings.isNullOrEmpty(endTime) && !Strings.isNullOrEmpty(userName)){
-                map.put("pageCount", logsInfoService.getLogsInfoListByCount(sessionUser.getId()) / offset);
+            /*if(!Strings.isNullOrEmpty(beginTime) && !Strings.isNullOrEmpty(endTime) && !Strings.isNullOrEmpty(userName)){
+                map.put("pageCount", logsInfoService.getLogsInfoListByCount(beginTime, endTime, userName, sessionUser.getId(),pageNum, offset) / offset);
                 map.put("logsInfoList",logsInfoService.getLogsAllList(beginTime, endTime, userName, sessionUser.getId(),pageNum, offset));
             }else if(!Strings.isNullOrEmpty(beginTime) && !Strings.isNullOrEmpty(endTime)){
-                map.put("pageCount", logsInfoService.getLogsInfoListByCount(sessionUser.getId()) / offset);
+                map.put("pageCount", logsInfoService.getLogsInfoListByCount(beginTime, endTime, sessionUser.getId(),pageNum, offset) / offset);
                 map.put("logsInfoList",logsInfoService.getLogsBeginAndEndTimeList(beginTime, endTime, sessionUser.getId(),pageNum, offset));
             }else if(!Strings.isNullOrEmpty(beginTime)){
-                map.put("pageCount", logsInfoService.getLogsInfoListByCount(sessionUser.getId()) / offset);
+                map.put("pageCount", logsInfoService.getLogsInfoListByCount(beginTime, sessionUser.getId(),pageNum, offset) / offset);
                 map.put("logsInfoList",logsInfoService.getLogsBeginTimeList(beginTime, sessionUser.getId(),pageNum, offset));
             }else if(!Strings.isNullOrEmpty(endTime)){
-                map.put("pageCount", logsInfoService.getLogsInfoListByCount(sessionUser.getId()) / offset);
+                map.put("pageCount", logsInfoService.getLogsInfoListByCount(endTime, sessionUser.getId(),pageNum, offset) / offset);
                 map.put("logsInfoList",logsInfoService.getLogsEndTimeList(endTime, sessionUser.getId(),pageNum, offset));
             }else if(!Strings.isNullOrEmpty(userName)){
-                map.put("pageCount", logsInfoService.getLogsInfoListByCount(sessionUser.getId()) / offset);
+                map.put("pageCount", logsInfoService.getLogsInfoListByCount(userName, sessionUser.getId(),pageNum, offset) / offset);
                 map.put("logsInfoList",logsInfoService.getLogsUNameList(userName, sessionUser.getId(),pageNum, offset));
             }else{
-                map.put("pageCount", logsInfoService.getLogsInfoListByCount(sessionUser.getId()) / offset);
+                map.put("pageCount", logsInfoService.getLogsInfoListByCount(sessionUser.getId(), pageNum, offset) / offset);
                 map.put("logsInfoList",logsInfoService.getLogsInfoByNormalListPage(sessionUser.getId(), pageNum, offset));
-            }
+            }*/
         }
         return "logsystem/systemLog";
     }

@@ -36,7 +36,8 @@
             //返回main
             var success = '${success}';
             if (success && success != '') {
-                var url = 'farmer/main';
+                var url = '/index';
+                window.location.href = url;
                 window.top.art.dialog({id: 'check'}).close();
             }
 

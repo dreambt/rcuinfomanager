@@ -15,32 +15,116 @@
         <result column="operation" property="operation"></result>
     </resultMap>
     <!--获取日志信息-->
+    <!--Admin-->
     <select id="getLogsInfoByAdminListPage" resultMap="logsInfoMap">
            select lo.operatedTime,u.userName,lo.operation
            from logsinfo lo
-           left join usersinfo u on lo.userId=u.userId limit #{beginPageNum}, #{endPageNum}
+           left join usersinfo u on lo.userId=u.userId
+           where 1=1
+           <choose>
+            <when test="beginTime != null and endTime != null and beginTime != '' and endTime != ''">
+                and substring(lo.operatedTime, 1, 10) between #{beginTime} and #{endTime}
+            </when>
+            <when test="beginTime != null and beginTime != ''">
+                and substring(lo.operatedTime, 1, 10) like #{beginTime}
+            </when>
+            <when test="endTime != null and endTime != ''">
+                and substring(lo.operatedTime, 1, 10) like #{endTime}
+            </when>
+            <otherwise>
+                AND 1 = 1
+            </otherwise>
+           </choose>
+           <if test="userName != null and userName != ''">
+               and  u.userName like #{userName}
+           </if>
+           limit #{beginPageNum}, #{endPageNum}
     </select>
 
     <select id="queryAdminByLogsInfoByCount" resultType="java.lang.Long">
           select count(*)
-          from logsinfo lo
-          left join usersinfo u on lo.userId=u.userId
+        from logsinfo lo
+        left join usersinfo u on lo.userId=u.userId
+        where 1=1
+        <choose>
+            <when test="beginTime != null and endTime != null and beginTime != '' and endTime != ''">
+                and substring(lo.operatedTime, 1, 10) between #{beginTime} and #{endTime}
+            </when>
+            <when test="beginTime != null and beginTime != ''">
+                and substring(lo.operatedTime, 1, 10) like #{beginTime}
+            </when>
+            <when test="endTime != null and endTime != ''">
+                and substring(lo.operatedTime, 1, 10) like #{endTime}
+            </when>
+            <otherwise>
+                AND 1 = 1
+            </otherwise>
+        </choose>
+        <if test="userName != null and userName != ''">
+            and  u.userName like #{userName}
+        </if>
     </select>
-
+    <!--Normal-->
     <select id="queryNormalByLogsInfoByPage" resultMap="logsInfoMap">
-           select lo.operatedTime,u.userName,lo.operation
-           from logsinfo lo
-           left join usersinfo u on lo.userId=u.userId
-           where lo.userId=#{userId} limit #{beginPageNum}, #{endPageNum}
+        select lo.operatedTime,u.userName,lo.operation
+        from logsinfo lo
+        left join usersinfo u on lo.userId=u.userId
+        where lo.userId=#{userId}
+        <choose>
+            <when test="beginTime != null and endTime != null and beginTime != '' and endTime != ''">
+                and substring(lo.operatedTime, 1, 10) between #{beginTime} and #{endTime}
+            </when>
+            <when test="beginTime != null and beginTime != ''">
+                and substring(lo.operatedTime, 1, 10) like #{beginTime}
+            </when>
+            <when test="endTime != null and endTime != ''">
+                and substring(lo.operatedTime, 1, 10) like #{endTime}
+            </when>
+            <otherwise>
+                AND lo.userId=#{userId}
+            </otherwise>
+        </choose>
+        <if test="userName != null and userName != ''">
+            and  u.userName like #{userName}
+        </if>
+        limit #{beginPageNum}, #{endPageNum}
     </select>
     <select id="queryNormalByLogsInfoByCount" parameterType="java.lang.Long" resultType="java.lang.Long">
-           select lo.operatedTime,u.userName,lo.operation
+           select count(*)
            from logsinfo lo
            left join usersinfo u on lo.userId=u.userId
            where lo.userId=#{userId}
+        <choose>
+            <when test="beginTime != null and endTime != null and beginTime != '' and endTime != ''">
+                and substring(lo.operatedTime, 1, 10) between #{beginTime} and #{endTime}
+            </when>
+            <when test="beginTime != null and beginTime != ''">
+                and substring(lo.operatedTime, 1, 10) like #{beginTime}
+            </when>
+            <when test="endTime != null and endTime != ''">
+                and substring(lo.operatedTime, 1, 10) like #{endTime}
+            </when>
+            <otherwise>
+                AND lo.userId=#{userId}
+            </otherwise>
+        </choose>
+        <if test="userName != null and userName != ''">
+            and  u.userName like #{userName}
+        </if>
     </select>
-    <!--查询-->
-    <!--Admin-->
+
+
+
+
+
+
+
+
+
+
+
+<!--    &lt;!&ndash;查询&ndash;&gt;
+    &lt;!&ndash;Admin&ndash;&gt;
     <select id="getLogsAllByAdminList" parameterType="java.lang.String" resultMap="logsInfoMap">
         select lo.operatedTime,u.userName,lo.operation
            from logsinfo lo
@@ -72,7 +156,17 @@
            left join usersinfo u on lo.userId=u.userId
            where u.userName like #{userName} limit #{beginPageNum}, #{endPageNum}
     </select>
-    <!--Normal-->
+
+
+
+
+
+
+
+
+
+
+    &lt;!&ndash;Normal&ndash;&gt;
     <select id="getLogsAllList" parameterType="java.lang.String" resultMap="logsInfoMap">
         select lo.operatedTime,u.userName,lo.operation
            from logsinfo lo
@@ -108,6 +202,6 @@
            left join usersinfo u on lo.userId=u.userId
            where u.userName like #{userName}
            and lo.userId=#{userId} limit #{beginPageNum}, #{endPageNum}
-    </select>
+    </select>-->
 
 </mapper>

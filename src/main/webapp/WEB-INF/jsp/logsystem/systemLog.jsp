@@ -78,7 +78,7 @@
             <input class="input-block-level" type="text" placeholder="系统日志" disabled="disabled" style="color:#0000AA">
             <div class="pad-10">
                 <div class="btn-default">
-                    <form class="form-search" id="searchForm" action="/logs/queryLogs" method="post">
+                    <form class="form-search" id="searchForm" action="/systemLogManager" method="post">
                         按时间：
                         <input type="text" id="beginTime"  name="beginTime" value="${param.beginTime}" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"
                                style="width: 115px;height: 25px; margin-top: 10px;">&nbsp;-&nbsp;

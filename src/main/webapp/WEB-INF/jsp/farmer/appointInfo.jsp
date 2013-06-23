@@ -34,10 +34,12 @@
             $('#cancelOperate').click(function () {
                 window.top.art.dialog({id: 'assign' }).close();
             });
+
             //返回main
             var success = '${success}';
             if (success && success != '') {
                 var url = 'farmer/main';
+                window.location.href = url;
                 window.top.art.dialog({id: 'assign'}).close();
             }
 
@@ -49,12 +51,12 @@
 <form method="post">
     <table width="100%" border="0">
         <tbody>
-            <input type="hidden" id="recordId" name="recordId" value="${appoint.recordId}">
+            <input type="hidden" id="recordId" name="recordId" value="${appointList.recordId}">
             <tr>
                 <td><span class="label label-info">户主：</span></td>
-                <td>${appoint.customerName}</td>
+                <td>${appointList.customerName}</td>
                 <td><span class="label label-info">电话：</span></td>
-                <td>${appoint.telephone}</td>
+                <td>${appointList.telephone}</td>
             </tr>
         <tr>
             <td align="left" colspan="2">

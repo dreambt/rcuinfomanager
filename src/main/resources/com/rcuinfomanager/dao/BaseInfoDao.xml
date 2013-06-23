@@ -657,13 +657,14 @@
         <result property="infoId" column="infoId"></result>
         <result property="infoManageId" column="infoManageId"></result>
     </resultMap>
-    <resultMap id="areasMap" type="com.rcuinfomanager.model.AreasInfo">
-        <result column="areaId" property="areaId"></result>
-        <result column="areaName" property="areaName"></result>
-        <result column="areaAlias" property="areaAlias"></result>
-        <result column="fatherId" property="fatherId"></result>
-    </resultMap>
-    <select id="getAreasInfo" resultMap="areasMap">
-          select * from areasinfo where fatherId=350521
-    </select>
+
+    <insert id="saveVillageManagerEva" parameterType="com.rcuinfomanager.model.VillageManagerEva">
+        insert into villagemanagereva(recordId,truth,localLivingTime,operatingCapacity,projectPotential,operationalRisks,
+          developmentProspects,operatingStability,capitaNetIncomeLevel,disposableIncomeLevel,familyPropertyLevel,payTaxes,
+          respectSitu,neighborhood,publicWelfareLevel,creditworthiness,conduct,praised,supplement,isImportantObject)
+        values(#{recordId},#{truth},#{localLivingTime},#{operatingCapacity},#{projectPotential},#{operationalRisks},
+        #{developmentProspects},#{operatingStability},#{capitaNetIncomeLevel},#{disposableIncomeLevel},#{familyPropertyLevel},#{payTaxes},
+        #{respectSitu},#{neighborhood},#{publicWelfareLevel},#{creditworthiness},#{conduct},#{praised},#{supplement},#{isImportantObject})
+    </insert>
+
 </mapper>

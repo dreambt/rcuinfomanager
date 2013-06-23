@@ -218,7 +218,7 @@ public class BaseInfoController {
         map.put("villageManagerEvaList", baseInfoService.getVillageManagerEvaList(id));
         //四
         map.put("customerManagerEvaList", baseInfoService.getCustomerManagerEvaList(id));
-        map.put("areasInfoList",baseInfoService.getAreasInfo());
+        //map.put("areasInfoList",baseInfoService.getAreasInfo());
         FinanceServices financeServices=baseInfoService.getFinanceService(id);
         String usedProduct = financeServices.getUsedProduct();
         if (!Strings.isNullOrEmpty(usedProduct)) {
@@ -314,6 +314,32 @@ public class BaseInfoController {
         return "farmer/importVillageAssess";
     }
 
+
+    @RequestMapping("/exportData/{recordIds}")
+    public void exportData(HttpServletRequest request, HttpServletResponse response, @PathVariable String recordIds) {
+        //记录日志
+        UserSessionContext userSessionContext = UserSessionContextHolder.getUserSessionContext();
+        SessionUser sessionUser = userSessionContext.getSessionUser();
+        SimpleDateFormat dateFm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); //格式化当前系统日期
+        String logsDate = dateFm.format(new java.util.Date());
+        logsInfoService.saveLogsInfo(new LogsInfo(logsDate, sessionUser.getId(), "导出户主数据"));
+
+        if ("All".equalsIgnoreCase(recordIds)) {
+            List<Long> allHouseholdInfos = baseInfoService.getAllHouseholdInfos();
+            if (allHouseholdInfos != null && !allHouseholdInfos.isEmpty()) {
+                StringBuffer buffer = new StringBuffer();
+                for (int i = 0; i < allHouseholdInfos.size(); i++) {
+                    if (i != 0) {
+                        buffer.append(",");
+                    }
+                    buffer.append(allHouseholdInfos.get(i));
+                }
+                recordIds = buffer.toString();
+            }
+        }
+
+        importFarmerInfoService.readTemplateAndExport(recordIds,response,request);
+    }
 
     //导出基础数据页面
     @RequestMapping("/exportBasicData4Household/{recordIds}")

@@ -19,7 +19,26 @@
                 $(this).addClass("active");
             });
             $('#finishOperate').click(function(){
-                $('#submitForm').submit();
+                if ($('#fileName').val() != '') {
+                    $('#submitForm').submit();
+                } else {
+                    alert("请先上传客户端文件!");
+                }
+
+            });
+
+            var fileName = '${fileName}';
+            if (fileName && fileName != '') {
+                alert('上传成功');
+            }
+
+            $('.deleteClientVersion').click(function(){
+                if(confirm('确定要删除吗？')){
+                    var me=$(this);
+                    var id=me.attr('recordId');
+                    var url = '/client/deleteClientVersion/'+id;
+                    window.location.href=url;
+                }
             });
 
             /*$("#upload").click(function () {
@@ -90,7 +109,6 @@
 
                         <div class="farmer_info">
                             <div class="table-list" >
-                                当前客户端版本：V1.0.0
                                 <form action="/client/uploadFile" method="POST" enctype="multipart/form-data">
                                     <table>
                                         <tr>
@@ -99,43 +117,40 @@
                                             </td>
                                             <td align="left">
                                                 <input type="file" id="file" name="file" size="10"/>
-                                                <%--<input type="file" name="url" id="fileName"  value="" style="color:#999999"
-                                                       readonly="readonly"/>--%>
                                                 <button class="btn" id="upload" type="submit">上传</button>
                                             </td>
                                         </tr>
                                     </table>
                                 </form>
                                 <form id="submitForm" action="/client/saveClient" method="post">
-                                    <input type="hidden" value="${fileName}" name="url">
-                                <table width="100%" border="0">
-                                    <tr>
-                                        <td align="center" bgcolor="#b4d8ed" style="color:#161823">
-                                            填写要导入的客户端版本：
-                                        </td>
-                                        <td align="left">
-                                            <input type="text" name="appVerName"  value="" style="width: 140px;height: 25px; margin-top: 5px;"/>
-                                        </td>
-                                        <td align="center" bgcolor="#b4d8ed" style="color:#161823">版本描述：</td>
-                                        <td align="left">
-                                            <input type="text" name="descb"  value="" style="width: 140px;height: 25px; margin-top: 5px;"/>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td align="center" bgcolor="#b4d8ed" style="color:#161823">
-                                            <input type="checkbox" name="isCoerce"/>是否强制更新
-                                        </td>
-                                        <td align="center">
-                                            <a class="btn" href="#" id="finishOperate">完成</a>
-                                        </td>
-                                        <td>
-                                            &nbsp;
-                                        </td>
-                                        <td>
-                                            &nbsp;
-                                        </td>
-                                    </tr>
-                                    </tbody>
+                                   <table width="100%" border="0">
+                                        <tr>
+                                            <td align="center" bgcolor="#b4d8ed" style="color:#161823">
+                                                填写要导入的客户端版本：
+                                            </td>
+                                            <td align="left">
+                                                <input type="text" name="appVerName"  value="" style="width: 140px;height: 25px; margin-top: 5px;"/>
+                                            </td>
+                                            <td align="center" bgcolor="#b4d8ed" style="color:#161823">版本描述：</td>
+                                            <td align="left">
+                                                <input type="text" name="descb"  value="" style="width: 140px;height: 25px; margin-top: 5px;"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="center" bgcolor="#b4d8ed" style="color:#161823">
+                                                需要导入的客户端文件名：
+                                            </td>
+                                            <td align="left">
+                                                <input type="text" value="${fileName}" id="fileName" name="url" readonly>
+                                            </td>
+                                            <td align="center" bgcolor="#b4d8ed" style="color:#161823">
+
+                                                <input type="checkbox" name="coerce"/>是否强制更新
+                                            </td>
+                                            <td align="center">
+                                                <a class="btn" href="#" id="finishOperate">完成</a>
+                                            </td>
+                                        </tr>
                                     </table>
                                 </form>
 
@@ -146,18 +161,34 @@
                                             历史版本
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td align="center">3</td>
-                                        <td align="center">3</td>
-                                        <td align="center">
-                                            <a href="#">强制更新</a>
-                                        </td>
-                                        <td align="center">
-                                            <a href="#">下载</a>&nbsp;
-                                            <a href="#">删除</a>
-                                        </td>
-                                    </tr>
+                                    <core:forEach items="${clientManagers}" var="clientManager" varStatus="idx">
+                                        <tr>
+                                            <td align="center">${clientManager.appVerName}</td>
+                                            <td align="center">${clientManager.descb}</td>
+                                            <td align="center">
+                                                <core:if test="${clientManager.isCoerce ne 1}">
+                                                    强制更新
+                                                </core:if>
+                                                <core:if test="${clientManager.isCoerce ne 0}">
+                                                    非强制更新
+                                                </core:if>
+                                            </td>
+                                            <td align="center">
+                                                <a href="${clientManager.url}">下载</a>&nbsp;
+                                                <a href="#" class="deleteClientVersion" recordId="${clientManager.id}">删除</a>
+                                            </td>
+                                        </tr>
+                                    </core:forEach>
                                 </table>
+                                <div class="pagination" style="text-align: center;">
+                                    <ul>
+                                        <li> <a href="/clientManager/?page=1">首页</a> </li>
+                                        <c:forEach begin="1" end="${pageCount}" var="p">
+                                            <li> <a href="/clientManager/?page=${p}">${p}</a> </li>
+                                        </c:forEach>
+                                        <li> <a href="/clientManager/?page=${pageCount}">尾页</a> </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -214,12 +245,12 @@
                                                         &nbsp;1&nbsp;/&nbsp;1&nbsp;
                                                     </td>
                                                     <td align="center" style="border-bottom-color:#FFFFFF">
-                                                        共&nbsp;1&nbsp;页&nbsp;
+                                                        ?&nbsp;1&nbsp;?&nbsp;
                                                     </td>
                                                     <td align="center" style="border-bottom-color:#FFFFFF">
-                                                        共&nbsp;4&nbsp;条&nbsp;
+                                                        ?&nbsp;4&nbsp;?&nbsp;
                                                     </td>
-                                                    <td align="center" style="border-bottom-color:#FFFFFF">每页&nbsp;5条</td>
+                                                    <td align="center" style="border-bottom-color:#FFFFFF">??&nbsp;5?</td>
                                                 </tr>
                                                 </tbody>
                                             </table>

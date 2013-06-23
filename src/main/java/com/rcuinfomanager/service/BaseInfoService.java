@@ -289,8 +289,8 @@ public class BaseInfoService {
     public void saveCarsinfo(CarsInfo carsInfo){
         baseInfoDao.saveCarsinfo(carsInfo);
     }
-    //
-    public List<AreasInfo> getAreasInfo(){
-        return baseInfoDao.getAreasInfo();
+
+    public void saveVillageManagerEva(VillageManagerEva villageManagerEva) {
+        baseInfoDao.saveVillageManagerEva(villageManagerEva);
     }
 }

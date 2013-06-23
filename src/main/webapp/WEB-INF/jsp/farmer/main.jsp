@@ -54,16 +54,17 @@
            $('#selectAreas').change(function(){
                var me=$(this);
                var areaId=me.val();
-               var url=''
+               var url='/area/'+ areaId;
                var params={'areaId':areaId};
                $.post(url,params,function(data){
-                   var areaNameList=data.areaNameList;
-                   if(areaNameList){
-                       $.each(areaNameList,function(i,v){
+                   $('#village').children().remove();
+                   $('#village').append('<option value="">按村</option>');
+                   if (data) {
+                       data.forEach(function(item) {
                            var option=$('<option>');
-                           option.val(v.id);
-                           option.text(v.name);
-                           $('#areaName').append(option);
+                           option.val(item.areaId);
+                           option.text(item.areaName);
+                           $('#village').append(option);
                        });
                    }
                });
@@ -110,27 +111,26 @@
             <div class="navbar">
                 <div class="btn-group">
                     <form action="/index" id=""method="post">
-
+                        <select name="organizationName" class="selectpicker" style="width: 95px;">
+                            <option value="">按网点</option>
+                            <core:forEach items="${netWorkList}" var="netWork">
+                                <option value="${netWork.organizationName}">${netWork.organizationName}</option>
+                            </core:forEach>
+                        </select>
+                        <select id="selectAreas" name="areaName" class="selectpicker" style="width: 95px;">
+                            <option value="areaName">按乡镇</option>
+                            <core:forEach items="${areasInfoList}" var="areasInfos">
+                                <option value="${areasInfos.areaId}">${areasInfos.areaName}</option>
+                            </core:forEach>
+                        </select>
+                        <select id="village" name="village" class="selectpicker" style="width: 95px;">
+                            <option value="">按村</option>
+                        </select>
+                        <input type="text"  name="organizationName" value="${params.organizationName}" placeholder="按客户经理" style="width: 95px; height:30px;">
+                        <button type="submit" class="btn" href="#" id="search" style="margin-top: -10px;">查询</button>
                     </form>
-                    <select name="organizationName" class="selectpicker" style="width: 95px; margin-top: 10px;">
-                        <option value="">按网点</option>
-                        <core:forEach items="${netWorkList}" var="netWork">
-                            <option value="${netWork.organizationName}">${netWork.organizationName}</option>
-                        </core:forEach>
-                    </select>
-                    <select id="selectAreas" name="areaName" class="selectpicker" style="width: 95px; margin-top: 10px;">
-                        <option value="areaName">按乡镇</option>
-                        <core:forEach items="${areasInfoList}" var="areasInfos">
-                            <option value="${areasInfos.areaName}">${areasInfos.areaName}</option>
-                        </core:forEach>
-                    </select>
-                    <select name="village" class="selectpicker" style="width: 95px; margin-top: 10px;">
-                        <option value="">按村</option>
-                    </select>
-                    <input type="text"  name="organizationName" value="${params.organizationName}" placeholder="按客户经理" style="width: 95px; height:30px;margin-top: 10px;">
-                    <a class="btn" href="#" id="search">查询</a>
                 </div>
-                <div class="btn-group">
+                <div class="btn-group" style="margin-top: -24px;">
                     <core:choose>
                         <core:when test="${userNameByAdmin=='admin'}">
                             <button class="btn" type="button" id="assignOperate">批量指派</button>
@@ -138,16 +138,17 @@
                         </core:when>
                     </core:choose>
                 </div>
-                <div class="btn-group">
+                <div class="btn-group" style="margin-top: -24px;">
                     <button class="btn dropdown-toggle" data-toggle="dropdown">导入 <span class="caret"></span></button>
                     <ul class="dropdown-menu">
                         <li><a href="#" id="importBasicOperate">导入基础数据</a></li>
                         <li><a href="#" id="importVillageAssess">导入村委会评价表</a></li>
                     </ul>
                 </div>
-                <div class="btn-group">
+                <div class="btn-group" style="margin-top: -24px;">
                     <button class="btn dropdown-toggle" data-toggle="dropdown">导出 <span class="caret"></span></button>
                     <ul class="dropdown-menu">
+                        <li><a href="#" id="exportData">导出数据</a></li>
                         <li><a href="#" id="exportBasicData4Household">导出户主数据</a></li>
                         <li><a href="#" id="exportBasicData4Members">导出家庭成员数据</a></li>
                         <li><a href="#" id="exportVillageAssess">导出村委会评价表</a></li>

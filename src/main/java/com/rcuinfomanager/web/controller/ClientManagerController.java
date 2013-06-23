@@ -2,6 +2,7 @@ package com.rcuinfomanager.web.controller;
 
 import com.rcuinfomanager.model.ClientManager;
 import com.rcuinfomanager.service.ClientManagerService;
+import com.rcuinfomanager.util.DateUtils;
 import com.rcuinfomanager.util.ImageUtils;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
@@ -10,6 +11,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -54,11 +56,24 @@ public class ClientManagerController {
     }
 
     @RequestMapping(value ="/saveClient")
-    public String saveClient(@ModelAttribute("clientManager") ClientManager clientManager) {
+    public String saveClient(@ModelAttribute("clientManager") ClientManager clientManager, @RequestParam(required = false) String coerce) {
 
-        //clientManagerService.saveClientInfo(appVerName,descb,url,isCoerce,new Date().toString());
+        clientManager.setCreateTime(DateUtils.getDateCurrStrOfStoreFormat());
+        if ("on".equals(coerce)) {
+            clientManager.setIsCoerce(1);
+        }
+        clientManager.setUrl("/asserts/client/"+clientManager.getUrl());
+        clientManagerService.saveClientInfo(clientManager);
 
-        return "device/clientVersion";
+        return "redirect:/clientManager";
 
     }
+
+    @RequestMapping(value = "/deleteClientVersion/{id}")
+    public String deleteClientVersion(@PathVariable long id) {
+        clientManagerService.deleteClientManager(id);
+        return "redirect:/clientManager";
+    }
+
+
 }

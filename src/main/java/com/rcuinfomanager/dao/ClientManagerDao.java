@@ -7,8 +7,13 @@ import java.util.List;
 
 public interface ClientManagerDao {
     //保存客户端
-    void saveClientInfo(@Param("appVerName")String appVerName,@Param("descb")String descb,
-                        @Param("url")String url,@Param("isCoerce")int isCoerce,@Param("createTime")String createTime);
+    void saveClientInfo(ClientManager clientManager);
 
     List<ClientManager> queryAll();
+
+    List<ClientManager> queryAllByPage(@Param("beginPageNum")int beginPageNum, @Param("endPageNum")int endPageNum);
+
+    long getAllClientManagerCount();
+
+    void deleteById(long id);
 }

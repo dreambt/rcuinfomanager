@@ -14,8 +14,18 @@ public class ClientManagerService {
     @Autowired
     ClientManagerDao clientManagerDao;
     //保存客户端
-    public void saveClientInfo(String appVerName,String descb,String url,int isCoerce,String createTime){
-        clientManagerDao.saveClientInfo(appVerName,descb,url,isCoerce,createTime);
+    public void saveClientInfo(ClientManager clientManager){
+        clientManagerDao.saveClientInfo(clientManager);
+    }
+
+    public List<ClientManager> getAllClientManagerByPage(int pageNum, int offset) {
+        int beginPageNum = (pageNum -1) * offset;
+        int endPageNum = pageNum * offset;
+        return clientManagerDao.queryAllByPage(beginPageNum, endPageNum);
+    }
+
+    public long getAllClientManagerCount() {
+        return clientManagerDao.getAllClientManagerCount();
     }
 
     public ClientManager getUpgradeVersion(String currentVersion) {
@@ -30,5 +40,9 @@ public class ClientManagerService {
         }
 
         return null;
+    }
+
+    public void deleteClientManager(long id) {
+        clientManagerDao.deleteById(id);
     }
 }

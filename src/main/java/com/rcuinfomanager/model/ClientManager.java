@@ -1,6 +1,7 @@
 package com.rcuinfomanager.model;
 
 public class ClientManager {
+    private long id;
     private String appVerName;
     private String descb;
     private String url;
@@ -34,11 +35,11 @@ public class ClientManager {
         this.createTime = createTime;
     }
 
-    public int getCoerce() {
+    public int getIsCoerce() {
         return isCoerce;
     }
 
-    public void setCoerce(int coerce) {
+    public void setIsCoerce(int coerce) {
         isCoerce = coerce;
     }
 
@@ -56,5 +57,13 @@ public class ClientManager {
 
     public void setDescb(String descb) {
         this.descb = descb;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

@@ -152,6 +152,9 @@ public interface BaseInfoDao {
     void updateAppointStatus(long recordId);
 
     List<SubmitItem> querySubmitList(String userName);
-    // 城乡
-    List<AreasInfo> getAreasInfo();
+
+    void saveVillageManagerEva(VillageManagerEva villageManagerEva);
+
+    AllColumnInfo queryAllColumnByRecordId(long recordId);
+
 }

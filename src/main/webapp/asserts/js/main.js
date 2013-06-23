@@ -151,6 +151,41 @@ $(function () {
         });
     });
 
+    $('#exportData').click(function () {
+        var me = $(this);
+        var checkOperaNodes = $('.checkOpera');
+        var isExist = false;
+        var recordIds = '';
+        var j = 0;
+        $.each(checkOperaNodes, function (i, checkOperaNode) {
+            checkOperaNode = $(checkOperaNode);
+            if (checkOperaNode.attr('checked')) {
+                isExist = true;
+                if (j == 0) {
+                    recordIds = checkOperaNode.attr('recordId');
+                } else {
+                    recordIds = recordIds + ',' + checkOperaNode.attr('recordId');
+                }
+                j++;
+            }
+        });
+        if (isExist) {
+            if ($('#selectAll').is(':checked')) {
+                recordIds = 'All';
+            }
+            var url = '/family/exportData/' + recordIds;
+            document.location.href = url;
+            /*window.top.artDialog({
+             id: 'export',
+             title: '导出数据信息',
+             lock: true,
+             content: '<iframe scrolling="auto" width="400" height="250" frameborder="0" style="border: none;margin: -20px -25px;"marginheight="0" marginwidth="0" src="' + url + '"/>'
+             });*/
+        } else {
+            alert("未勾选任何客户信息！");
+        }
+    });
+
     //导出数据
     $('#exportBasicData4Household').click(function () {
         var me = $(this);

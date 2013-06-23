@@ -30,7 +30,7 @@ public class ClientUpgradeWebService {
             appStatus.setDesc(clientManager.getDescb());
             appStatus.setLatestVersion(clientManager.getAppVerName());
             upgradeResponseData.setStatus(0);
-            upgradeResponseData.setForce(clientManager.getCoerce());
+            upgradeResponseData.setForce(clientManager.getIsCoerce());
             upgradeResponseData.setApp(appStatus);
         }
 

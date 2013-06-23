@@ -3,6 +3,7 @@ package com.rcuinfomanager.service;
 import com.google.common.base.Strings;
 import com.rcuinfomanager.dao.BaseInfoDao;
 import com.rcuinfomanager.model.BaseInfo;
+import com.rcuinfomanager.model.VillageManagerEva;
 import com.rcuinfomanager.util.Files;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -96,17 +97,104 @@ public class ExportInfo2VillagerCommittee4Estimation {
             Iterator rows = sheet.rowIterator();
             while (rows.hasNext()) {
                 HSSFRow row = (HSSFRow) rows.next();
-                Iterator cells = row.cellIterator();
                 if (row.getRowNum() == 0) {
                     continue;
                 }
-                while (cells.hasNext()) {
-                    HSSFCell cell = (HSSFCell) cells.next();
-                    if (!Strings.isNullOrEmpty(cell.getStringCellValue())) {
-                        System.out.println(cell.getStringCellValue());
-                    }
+                HSSFCell customerNameCell = row.getCell(0);
+                HSSFCell cerNumCell = row.getCell(1);
+                String customerName = customerNameCell.getStringCellValue();
+                String cerNum = cerNumCell.getStringCellValue();
+                if (Strings.isNullOrEmpty(customerName) || Strings.isNullOrEmpty(cerNum)) {
+                    break;
                 }
-
+                BaseInfo baseInfo = baseInfoDao.getBaseInfoByCustomerAndCerNum(customerName, cerNum);
+                if (baseInfo != null) {
+                    VillageManagerEva villageManagerEva = new VillageManagerEva();
+                    HSSFCell cell = row.getCell(4);
+                    String evaValue = cell.getStringCellValue();
+                    if ("较好（建议3（含）-5万）".equals(evaValue)) {
+                        villageManagerEva.setRecordId(baseInfo.getRecordId());
+                        villageManagerEva.setTruth("基本准确");
+                        villageManagerEva.setLocalLivingTime("6年（含）以上");
+                        villageManagerEva.setOperatingCapacity("经验丰富、技术水平较高、能力较强");
+                        villageManagerEva.setProjectPotential("一般");
+                        villageManagerEva.setOperationalRisks("较低");
+                        villageManagerEva.setDevelopmentProspects("较好");
+                        villageManagerEva.setOperatingStability("中等");
+                        villageManagerEva.setCapitaNetIncomeLevel("中高收入");
+                        villageManagerEva.setDisposableIncomeLevel("中等偏");
+                        villageManagerEva.setFamilyPropertyLevel("富裕");
+                        villageManagerEva.setPayTaxes("正常缴纳");
+                        villageManagerEva.setRespectSitu("较好");
+                        villageManagerEva.setNeighborhood("较好");
+                        villageManagerEva.setPublicWelfareLevel("较高");
+                        villageManagerEva.setCreditworthiness("较好");
+                        villageManagerEva.setConduct("良好");
+                        villageManagerEva.setPraised("不清楚");
+                        villageManagerEva.setImportantObject("一般");
+                    }  else if ("一般（建议3万以下）".equals(evaValue)) {
+                        villageManagerEva.setRecordId(baseInfo.getRecordId());
+                        villageManagerEva.setTruth("基本准确");
+                        villageManagerEva.setLocalLivingTime("6年（含）以上");
+                        villageManagerEva.setOperatingCapacity("经验丰富、技术水平较高、能力较强");
+                        villageManagerEva.setProjectPotential("一般");
+                        villageManagerEva.setOperationalRisks("一般");
+                        villageManagerEva.setDevelopmentProspects("一般");
+                        villageManagerEva.setOperatingStability("一般");
+                        villageManagerEva.setCapitaNetIncomeLevel("中等收入");
+                        villageManagerEva.setDisposableIncomeLevel("中等收入");
+                        villageManagerEva.setFamilyPropertyLevel("殷实");
+                        villageManagerEva.setPayTaxes("正常缴纳");
+                        villageManagerEva.setRespectSitu("较好");
+                        villageManagerEva.setNeighborhood("较好");
+                        villageManagerEva.setPublicWelfareLevel("一般");
+                        villageManagerEva.setCreditworthiness("较好");
+                        villageManagerEva.setConduct("良好");
+                        villageManagerEva.setPraised("不清楚");
+                        villageManagerEva.setImportantObject("一般");
+                    }  else if ("好（建议5（含）-10万）".equals(evaValue)) {
+                        villageManagerEva.setRecordId(baseInfo.getRecordId());
+                        villageManagerEva.setTruth("基本准确");
+                        villageManagerEva.setLocalLivingTime("6年（含）以上");
+                        villageManagerEva.setOperatingCapacity("经验丰富、技术水平较高、能力较强");
+                        villageManagerEva.setProjectPotential("良好");
+                        villageManagerEva.setOperationalRisks("较低");
+                        villageManagerEva.setDevelopmentProspects("较好");
+                        villageManagerEva.setOperatingStability("中等");
+                        villageManagerEva.setCapitaNetIncomeLevel("中高收入");
+                        villageManagerEva.setDisposableIncomeLevel("高收入");
+                        villageManagerEva.setFamilyPropertyLevel("富裕");
+                        villageManagerEva.setPayTaxes("正常缴纳");
+                        villageManagerEva.setRespectSitu("较好");
+                        villageManagerEva.setNeighborhood("较好");
+                        villageManagerEva.setPublicWelfareLevel("较高");
+                        villageManagerEva.setCreditworthiness("较好");
+                        villageManagerEva.setConduct("良好");
+                        villageManagerEva.setPraised("不清楚");
+                        villageManagerEva.setImportantObject("一般");
+                    } else if ("很好（建议10万以上）".equals(evaValue)) {
+                        villageManagerEva.setRecordId(baseInfo.getRecordId());
+                        villageManagerEva.setTruth("基本准确");
+                        villageManagerEva.setLocalLivingTime("6年（含）以上");
+                        villageManagerEva.setOperatingCapacity("经验丰富、技术水平较高、能力较强");
+                        villageManagerEva.setProjectPotential("优秀");
+                        villageManagerEva.setOperationalRisks("很低");
+                        villageManagerEva.setDevelopmentProspects("很好");
+                        villageManagerEva.setOperatingStability("强");
+                        villageManagerEva.setCapitaNetIncomeLevel("高收入");
+                        villageManagerEva.setDisposableIncomeLevel("最高收入");
+                        villageManagerEva.setFamilyPropertyLevel("富足");
+                        villageManagerEva.setPayTaxes("正常缴纳");
+                        villageManagerEva.setRespectSitu("好");
+                        villageManagerEva.setNeighborhood("好");
+                        villageManagerEva.setPublicWelfareLevel("较高");
+                        villageManagerEva.setCreditworthiness("较好");
+                        villageManagerEva.setConduct("优秀");
+                        villageManagerEva.setPraised("不清楚");
+                        villageManagerEva.setImportantObject("一般");
+                    }
+                    baseInfoDao.saveVillageManagerEva(villageManagerEva);
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();

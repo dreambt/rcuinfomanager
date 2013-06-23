@@ -26,7 +26,7 @@ public class VillageManagerEva {
         return recordId;
     }
 
-    public void setRecordId(Long recordId) {
+    public void setRecordId(long recordId) {
         this.recordId = recordId;
     }
 

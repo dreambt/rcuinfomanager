@@ -1,5 +1,6 @@
 package com.rcuinfomanager.web.controller;
 
+import com.rcuinfomanager.model.ClientManager;
 import com.rcuinfomanager.model.OrganizationInfo;
 import com.rcuinfomanager.service.*;
 import com.rcuinfomanager.session.*;
@@ -14,6 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * @author 王文庭(xorbytes@qq.com)
@@ -33,6 +35,10 @@ public class HomeController {
     private SystemRoleService systemRoleService;
     @Autowired
     private OrganizationInfoService organizationInfoService;
+    @Autowired
+    private ClientManagerService clientManagerService;
+    @Autowired
+    private AreasInfoService areasInfoService;
 
     @RequestMapping(value = "/")
     public String home() {
@@ -91,25 +97,30 @@ public class HomeController {
 
             map.put("pageCount", baseInfoService.getAllFamilyInfoListByCount() / offset);
             map.put("familyInfoList",baseInfoService.getAllFamilyInfoListByPage(pageNum, offset));
-            map.put("areasInfoList",baseInfoService.getAreasInfo());
+            map.put("areasInfoList",areasInfoService.getAreasInfoByFatherId(350521));
             map.put("netWorkList",baseInfoService.getNetWorkByAdmin());
         }else{
             map.put("pageCount", baseInfoService.getFamilyInfoListByCount(sessionUser.getId()) / offset);
             map.put("familyInfoList", baseInfoService.getFamilyInfoListByPage(sessionUser.getId(), pageNum, offset));
             map.put("netWorkList",baseInfoService.getNetWorkByNormal(sessionUser.getId()));
-            map.put("areasInfoList",baseInfoService.getAreasInfo());
+            map.put("areasInfoList",areasInfoService.getAreasInfoByFatherId(350521));
         }
         return "farmer/main";
     }
 
     //客户端管理
     @RequestMapping(value ="/clientManager")
-    public String clientManager(ModelMap map) {
+    public String clientManager(@RequestParam(value = "page", required = false) Integer pageNum,ModelMap map) {
+        if (pageNum == null) {
+            pageNum = 1;
+        }
+        int offset = 10;
         UserSessionContext userSessionContext = UserSessionContextHolder.getUserSessionContext();
         SessionUser sessionUser = userSessionContext.getSessionUser();
         map.put("displayUserName", sessionUser.getDisplayUserName());
 
-
+        map.put("pageCount", clientManagerService.getAllClientManagerCount() /offset );
+        map.put("clientManagers", clientManagerService.getAllClientManagerByPage(pageNum, offset));
         return "device/clientVersion";
     }
 

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rcuinfomanager.dao.AreasInfoDao">
+
+    <resultMap id="areasMap" type="com.rcuinfomanager.model.AreasInfo">
+        <result column="areaId" property="areaId"></result>
+        <result column="areaName" property="areaName"></result>
+        <result column="areaAlias" property="areaAlias"></result>
+        <result column="fatherId" property="fatherId"></result>
+    </resultMap>
+
+    <select id="getAreasInfoByFatherId" resultMap="areasMap">
+        select * from areasinfo where fatherId=#{id}
+    </select>
+
+</mapper>

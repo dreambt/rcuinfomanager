@@ -53,6 +53,9 @@ public class BaseInfoController {
     @Autowired
     private FinancialAssetsService financialAssetsService;
 
+    @Autowired
+    private AreasInfoService areasInfoService;
+
     private  /*@Value("${images.store.dir}")*/ String imgStoreDir = "d:/tmp";
 
     //查看
@@ -228,7 +231,8 @@ public class BaseInfoController {
         map.put("villageManagerEvaList", villageManagerEvaService.getVillageManagerEvaList(id));
         //四
         map.put("customerManagerEvaList", baseInfoService.getCustomerManagerEvaList(id));
-        //map.put("areasInfoList",baseInfoService.getAreasInfo());
+
+        map.put("areasInfoList",areasInfoService.getAreasInfoByFatherId(350521));
         FinanceServices financeServices=baseInfoService.getFinanceService(id);
         if (financeServices != null) {
             String usedProduct = financeServices.getUsedProduct();

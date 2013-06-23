@@ -20,11 +20,6 @@
     <script type="text/javascript">
         $(function(){
 
-            $('#search').click(function(){
-                $('#searchForm').submit();
-            });
-
-
             handerChangePasswordSubmit = function(){
 
                 $.ajax({
@@ -50,6 +45,12 @@
             if(msg){
                 alert(msg);
             }
+            $('#cleanOpera').click(function(){
+                $('#organizationName').val('');
+                $('#selectAreas').val('');
+                $('#areaName').val('');
+                $('#displayUserName').val('');
+            });
 
            $('#selectAreas').change(function(){
                var me=$(this);
@@ -110,8 +111,8 @@
             <input class="input-block-level" type="text" placeholder="客户电子信息管理" disabled="disabled" style="color:#0000AA">
             <div class="navbar">
                 <div class="btn-group">
-                    <form action="/index" id=""method="post">
-                        <select name="organizationName" class="selectpicker" style="width: 95px;">
+                    <form action="/index" method="post">
+                        <select name="organizationName" class="selectpicker" style="width: 95px;" id="organizationName">
                             <option value="">按网点</option>
                             <core:forEach items="${netWorkList}" var="netWork">
                                 <option value="${netWork.organizationName}">${netWork.organizationName}</option>
@@ -126,8 +127,9 @@
                         <select id="areaName" name="areaName" class="selectpicker" style="width: 95px;">
                             <option value="">按村</option>
                         </select>
-                        <input type="text"  name="displayUserName" value="${params.displayUserName}" placeholder="按客户经理" style="width: 95px; height:30px;">
-                        <button type="submit" class="btn" href="#" id="search" style="margin-top: -10px;">查询</button>
+                        <input type="text" id="displayUserName" name="displayUserName" value="${params.displayUserName}" placeholder="按客户经理" style="width: 95px; height:30px;">
+                        <button type="submit" class="btn" id="search" style="margin-top: -10px;">查询</button>
+                        <a class="btn" href="#" id="cleanOpera" style="margin-top: -10px;">重置</a>
                     </form>
                 </div>
                 <div class="btn-group" style="margin-top: -24px;">

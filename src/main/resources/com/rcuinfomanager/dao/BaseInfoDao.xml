@@ -177,7 +177,7 @@
                b.nation,b.poliLaspect,b.health,b.maritalStatus,b.address,b.postcode,b.areaName,b.village,b.telephone,b.mbPhoneNum,b.liveCondition,
                b.socialSecurity,b.highestDegree,b.highestEdu,b.bankRelation,b.bankPartnership,b.profession,b.businessProj,b.businessYear,
                b.businessSite,b.industry,b.businessProp,b.moneySitu,b.inputMoney,b.ownMoney,b.yearIncome,b.workSitu,b.unitProp,b.unitIndustryId,
-               b.department,b.unitType,b.duties,b.annualWageIncome,b.workYears,b.workTitle,p.photoUri
+               b.department,b.unitType,b.duties,b.annualWageIncome,b.workYears,b.workTitle,b.areaCode,p.photoUri
 	   from baseinfo b
 	   left outer join photosInfo p on b.recordId = p.recordId
        where b.recordId=#{recordId}

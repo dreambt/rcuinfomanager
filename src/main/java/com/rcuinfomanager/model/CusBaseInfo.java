@@ -48,6 +48,15 @@ public class CusBaseInfo {
     private String workTitle;
     private String cerValidityTo;
     private String photoUri;
+    private String areaCode;
+
+    public String getAreaCode() {
+        return areaCode;
+    }
+
+    public void setAreaCode(String areaCode) {
+        this.areaCode = areaCode;
+    }
 
     public String getPhotoUri() {
         return photoUri;

@@ -162,6 +162,25 @@
                     }
                 });
             }
+
+            $('#selectAreas').change(function(){
+                var me=$(this);
+                var areaId=me.val();
+                var url='/area/'+ areaId;
+                var params={'areaId':areaId};
+                $.post(url,params,function(data){
+                    $('#village').children().remove();
+                    $('#village').append('<option value="">按村</option>');
+                    if (data) {
+                        data.forEach(function(item) {
+                            var option=$('<option>');
+                            option.val(item.areaName);
+                            option.text(item.areaName);
+                            $('#village').append(option);
+                        });
+                    }
+                });
+            });
         });
     </script>
 </head>
@@ -248,7 +267,6 @@
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">性别</td>
     <td align="left">
-        <% %>
         <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="gender">
             <core:choose>
                 <core:when test="${personBasicList.gender==0}">
@@ -270,9 +288,14 @@
                     <option value="0" selected="selected">否</option>
                     <option value="1">是</option>
                 </core:when>
+                <core:when test="${personBasicList.farmer==1}">
+                    <option value="0" >否</option>
+                    <option  value="1" selected="selected">是</option>
+                </core:when>
                 <core:otherwise>
                     <option value="0">否</option>
-                    <option value="1" selected="selected">是</option>
+                    <option value="1">是</option>
+                    <option value="" selected="selected">请选择</option>
                 </core:otherwise>
             </core:choose>
         </select>
@@ -291,10 +314,16 @@
                     <option value="${personBasicList.customerType}" selected="selected">其他自然人</option>
                     <option value="个人经营户">个人经营户</option>
                 </core:when>
-                <core:otherwise>
+                <core:when test="${personBasicList.customerType=='个人经营户'}">
                     <option value="一般农户">一般农户</option>
                     <option value="其他自然人">其他自然人</option>
                     <option value="${personBasicList.customerType}" selected="selected">个人经营户</option>
+                </core:when>
+                <core:otherwise>
+                    <option value="一般农户">一般农户</option>
+                    <option value="其他自然人">其他自然人</option>
+                    <option value="个人经营户">个人经营户</option>
+                    <option value="" selected="selected">请选择</option>
                 </core:otherwise>
             </core:choose>
         </select>
@@ -304,7 +333,7 @@
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">证件类型</td>
     <td align="left" colspan="2">
         <select class="selectpicker" style="width: 155px; margin-top: 5px;" name="cerType">
-            <option value="${personBasicList.cerType}">${personBasicList.cerType}</option>
+            <option value="身份证" selected="selected">身份证</option>
         </select>
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">证件号码</td>
@@ -355,9 +384,14 @@
                     <option value="0" selected="selected">否</option>
                     <option value="1">是</option>
                 </core:when>
-                <core:otherwise>
+                <core:when test="${personBasicList.havePassport==1}">
                     <option value="0">否</option>
                     <option value="1" selected="selected">是</option>
+                </core:when>
+                <core:otherwise>
+                    <option value="0">否</option>
+                    <option value="1">是</option>
+                    <option value="" selected="selected">请选择</option>
                 </core:otherwise>
             </core:choose>
         </select>
@@ -441,14 +475,17 @@
         区域名称
     </td>
     <td align="left">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="areaName">
-            <option value="${personBasicList.areaName}">${personBasicList.areaName}</option>
+        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="areaCode" id="selectAreas">
+            <option value="">按乡镇</option>
+            <core:forEach items="${areasInfoList}" var="areasInfos">
+                <option value="${areasInfos.areaId}">${areasInfos.areaName}</option>
+            </core:forEach>
         </select>
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">村别</td>
     <td align="left">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="village">
-            <option value="${personBasicList.village}">${personBasicList.village}</option>
+        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="village" id="village">
+            <option value="${personBasicList.village}">按村</option>
         </select>
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">联系电话</td>
@@ -762,13 +799,13 @@
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">与我行（社）关系</td>
     <td align="left">
         <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="bankRelation">
-            <option value="${personBasicList.bankRelation}">${personBasicList.bankRelation}</option>
+            <option value="普通客户">普通客户</option>
         </select>
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">与我行（社）合作关系</td>
     <td align="left">
         <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="bankPartnership">
-            <option value="${personBasicList.bankPartnership}">${personBasicList.bankPartnership}</option>
+            <option value="一般">一般</option>
         </select>
     </td>
 </tr>
@@ -2615,8 +2652,108 @@
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">职业</td>
         <td align="left" colspan="3">
             <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="familyMembers[${idx.index}].profession">
-
-                <option value="${personFamilyMember.profession}">${personFamilyMember.profession}</option>
+                <core:choose>
+                    <core:when test="${personFamilyMember.profession=='国家机关、党群组织、企业、事业单位负责人'}">
+                        <option value="${personFamilyMember.profession}" selected="selected">国家机关、党群组织、企业、事业单位负责人</option>
+                        <option value="专业技术人员">专业技术人员</option>
+                        <option value="办事人员和有关人员">办事人员和有关人员</option>
+                        <option value="商业、服务业人员">商业、服务业人员</option>
+                        <option value="农、林、木、渔、水利业生产人员">农、林、木、渔、水利业生产人员</option>
+                        <option value="生产、运输设备操作人员及有关人员">生产、运输设备操作人员及有关人员</option>
+                        <option value="军人">军人</option>
+                        <option value="不便分类的其他从业人员">不便分类的其他从业人员</option>
+                        <option value="未知">未知</option>
+                    </core:when>
+                    <core:when test="${personFamilyMember.profession=='专业技术人员'}">
+                        <option value="国家机关、党群组织、企业、事业单位负责人">国家机关、党群组织、企业、事业单位负责人</option>
+                        <option value="${personFamilyMember.profession}" selected="selected">专业技术人员</option>
+                        <option value="办事人员和有关人员">办事人员和有关人员</option>
+                        <option value="商业、服务业人员">商业、服务业人员</option>
+                        <option value="农、林、木、渔、水利业生产人员">农、林、木、渔、水利业生产人员</option>
+                        <option value="生产、运输设备操作人员及有关人员">生产、运输设备操作人员及有关人员</option>
+                        <option value="军人">军人</option>
+                        <option value="不便分类的其他从业人员">不便分类的其他从业人员</option>
+                        <option value="未知">未知</option>
+                    </core:when>
+                    <core:when test="${personFamilyMember.profession=='办事人员和有关人员'}">
+                        <option value="国家机关、党群组织、企业、事业单位负责人">国家机关、党群组织、企业、事业单位负责人</option>
+                        <option value="专业技术人员">专业技术人员</option>
+                        <option value="${personFamilyMember.profession}" selected="selected">办事人员和有关人员</option>
+                        <option value="商业、服务业人员">商业、服务业人员</option>
+                        <option value="农、林、木、渔、水利业生产人员">农、林、木、渔、水利业生产人员</option>
+                        <option value="生产、运输设备操作人员及有关人员">生产、运输设备操作人员及有关人员</option>
+                        <option value="军人">军人</option>
+                        <option value="不便分类的其他从业人员">不便分类的其他从业人员</option>
+                        <option value="未知">未知</option>
+                    </core:when>
+                    <core:when test="${personFamilyMember.profession=='商业、服务业人员'}">
+                        <option value="国家机关、党群组织、企业、事业单位负责人">国家机关、党群组织、企业、事业单位负责人</option>
+                        <option value="专业技术人员">专业技术人员</option>
+                        <option value="办事人员和有关人员">办事人员和有关人员</option>
+                        <option value="${personFamilyMember.profession}" selected="selected">商业、服务业人员</option>
+                        <option value="农、林、木、渔、水利业生产人员">农、林、木、渔、水利业生产人员</option>
+                        <option value="生产、运输设备操作人员及有关人员">生产、运输设备操作人员及有关人员</option>
+                        <option value="军人">军人</option>
+                        <option value="不便分类的其他从业人员">不便分类的其他从业人员</option>
+                        <option value="未知">未知</option>
+                    </core:when>
+                    <core:when test="${personFamilyMember.profession=='农、林、木、渔、水利业生产人员'}">
+                        <option value="国家机关、党群组织、企业、事业单位负责人">国家机关、党群组织、企业、事业单位负责人</option>
+                        <option value="专业技术人员">专业技术人员</option>
+                        <option value="办事人员和有关人员">办事人员和有关人员</option>
+                        <option value="商业、服务业人员">商业、服务业人员</option>
+                        <option value="${personFamilyMember.profession}" selected="selected">农、林、木、渔、水利业生产人员</option>
+                        <option value="生产、运输设备操作人员及有关人员">生产、运输设备操作人员及有关人员</option>
+                        <option value="军人">军人</option>
+                        <option value="不便分类的其他从业人员">不便分类的其他从业人员</option>
+                        <option value="未知">未知</option>
+                    </core:when>
+                    <core:when test="${personFamilyMember.profession=='生产、运输设备操作人员及有关人员'}">
+                        <option value="国家机关、党群组织、企业、事业单位负责人">国家机关、党群组织、企业、事业单位负责人</option>
+                        <option value="专业技术人员">专业技术人员</option>
+                        <option value="办事人员和有关人员">办事人员和有关人员</option>
+                        <option value="商业、服务业人员">商业、服务业人员</option>
+                        <option value="农、林、木、渔、水利业生产人员">农、林、木、渔、水利业生产人员</option>
+                        <option value="${personFamilyMember.profession}" selected="selected">生产、运输设备操作人员及有关人员</option>
+                        <option value="军人">军人</option>
+                        <option value="不便分类的其他从业人员">不便分类的其他从业人员</option>
+                        <option value="未知">未知</option>
+                    </core:when>
+                    <core:when test="${personFamilyMember.profession=='军人'}">
+                        <option value="国家机关、党群组织、企业、事业单位负责人">国家机关、党群组织、企业、事业单位负责人</option>
+                        <option value="专业技术人员">专业技术人员</option>
+                        <option value="办事人员和有关人员">办事人员和有关人员</option>
+                        <option value="商业、服务业人员">商业、服务业人员</option>
+                        <option value="农、林、木、渔、水利业生产人员">农、林、木、渔、水利业生产人员</option>
+                        <option value="生产、运输设备操作人员及有关人员">生产、运输设备操作人员及有关人员</option>
+                        <option value="${personFamilyMember.profession}" selected="selected">军人</option>
+                        <option value="不便分类的其他从业人员">不便分类的其他从业人员</option>
+                        <option value="未知">未知</option>
+                    </core:when>
+                    <core:when test="${personFamilyMember.profession=='不便分类的其他从业人员'}">
+                        <option value="国家机关、党群组织、企业、事业单位负责人">国家机关、党群组织、企业、事业单位负责人</option>
+                        <option value="专业技术人员">专业技术人员</option>
+                        <option value="办事人员和有关人员">办事人员和有关人员</option>
+                        <option value="商业、服务业人员">商业、服务业人员</option>
+                        <option value="农、林、木、渔、水利业生产人员">农、林、木、渔、水利业生产人员</option>
+                        <option value="生产、运输设备操作人员及有关人员">生产、运输设备操作人员及有关人员</option>
+                        <option value="军人">军人</option>
+                        <option value="${personFamilyMember.profession}" selected="selected">不便分类的其他从业人员</option>
+                        <option value="未知">未知</option>
+                    </core:when>
+                    <core:otherwise>
+                        <option value="国家机关、党群组织、企业、事业单位负责人">国家机关、党群组织、企业、事业单位负责人</option>
+                        <option value="专业技术人员">专业技术人员</option>
+                        <option value="办事人员和有关人员">办事人员和有关人员</option>
+                        <option value="商业、服务业人员">商业、服务业人员</option>
+                        <option value="农、林、木、渔、水利业生产人员">农、林、木、渔、水利业生产人员</option>
+                        <option value="生产、运输设备操作人员及有关人员">生产、运输设备操作人员及有关人员</option>
+                        <option value="军人">军人</option>
+                        <option value="不便分类的其他从业人员">不便分类的其他从业人员</option>
+                        <option value="未知">未知</option>
+                        <option value="${personFamilyMember.profession}" selected="selected">未说明</option>
+                    </core:otherwise>
+                </core:choose>
             </select>
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">证件号码</td>

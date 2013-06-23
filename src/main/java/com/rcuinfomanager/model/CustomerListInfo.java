@@ -3,7 +3,8 @@ package com.rcuinfomanager.model;
 import com.rcuinfomanager.util.DateUtils;
 
 public class CustomerListInfo {
-    private int recordId;
+    private Long recordId;
+    private Long assetsId;
     private String customerName;
     private String telephone;
     private String submitTime;
@@ -16,12 +17,20 @@ public class CustomerListInfo {
         return DateUtils.toDisplayStr(submitTime, DateUtils.CN_DISPLAY_DATE);
     }
 
-    public int getRecordId() {
+    public Long getRecordId() {
         return recordId;
     }
 
-    public void setRecordId(int recordId) {
+    public void setRecordId(Long recordId) {
         this.recordId = recordId;
+    }
+
+    public Long getAssetsId() {
+        return assetsId;
+    }
+
+    public void setAssetsId(Long assetsId) {
+        this.assetsId = assetsId;
     }
 
     public String getCustomerName() {

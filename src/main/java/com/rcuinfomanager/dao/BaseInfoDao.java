@@ -27,7 +27,7 @@ public interface BaseInfoDao {
     CusBaseInfo getCusBasicInfo(Long recordId);
 
     //获取家庭收支情况
-    List<IncomeExpenses> getIncomeExpenses(Long recordId);
+    IncomeExpenses getIncomeExpenses(Long recordId);
 
     //房产
     List<HouseInfo> getHousePropertyInfo(Long recordId);
@@ -38,13 +38,13 @@ public interface BaseInfoDao {
     List<CarsInfo> getCarsInfo(Long recordId);
 
     //金融资产信息
-    List<FinancialAssets> getFinancialAssets(Long recordId);
+    FinancialAssets getFinancialAssets(Long recordId);
 
     //获取家庭资产情况
     FamilyAssets getFamilyAssets(long recordId);
 
     //负责情况信息
-    List<FamilyIncurDebts> getFamilyIncurDebts(Long recordId);
+    FamilyIncurDebts getFamilyIncurDebts(Long recordId);
 
     //获取家庭成员信息
     List<FamilyMember> getFamilyMember(Long recordId);
@@ -56,7 +56,7 @@ public interface BaseInfoDao {
     List<CustomerListInfo> getNetWorkByNormal(long userId);
 
     //删除客户信息
-    int getDeleteCusBasicInfo(int recordId);
+    /*int getDeleteCusBasicInfo(int recordId);*/
 
     //指派用户信息
     List<AllColumnInfo> queryAppointInfoByUserId(long userId);
@@ -105,7 +105,22 @@ public interface BaseInfoDao {
 
     void deleteLandInfoByAssetsId(long assetsId);
 
-    void deleteFamilyMemberInfoByRecordId(long recordId);
+    void deleteFamilyMemberInfoByRecordId(long id);
+
+    void deleteBaseInfoByRecordId(Long recordId);
+    void deleteIncomeExpensesByRecordId(Long id);
+    void deleteFamilyAssetsByAssetsId(Long assetsId);
+    void deleteFinancialAssetsByAssetsId(Long id);
+    void deleteFamilyIncurDebtsByRecordId(Long id);
+    void deleteFinanceServicesByRecordId(Long recordId);
+    void deleteVillageManagerEvaByRecordId(Long recordId);
+    void deleteCustomerManagerEvaByRecordId(Long recordId);
+
+
+
+
+
+
 
     void saveCarsinfo(CarsInfo carsInfo);
 

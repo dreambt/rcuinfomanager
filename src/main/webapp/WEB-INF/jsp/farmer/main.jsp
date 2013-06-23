@@ -209,7 +209,7 @@
                                  </core:when>
                                 </core:choose>
                                 <a href="#" style="color:#0099FF" class="editOperate" recordId="${familyInfo.recordId}">编辑</a>&nbsp;|&nbsp;
-                                <a href="#" style="color:#FF0000" class="deleteOperate" recordId="${familyInfo.recordId}">删除</a>
+                                <a href="#" style="color:#FF0000" class="deleteOperate" recordId="${familyInfo.recordId}" assetsId="${familyInfo.assetsId}">删除</a>
                             </td>
                         </tr>
                     </core:forEach>

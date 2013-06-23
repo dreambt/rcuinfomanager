@@ -19,9 +19,10 @@
 
     <!-- //管理员获取数据列表-->
     <select id="queryAdminByBaseInfoByPage" resultMap="userListInfo">
-        select b.recordId,b.customerName,b.telephone,b.submitTime,org.organizationName,u.displayUserName,b.state
+        select b.recordId,fa.assetsId,customerName,b.telephone,b.submitTime,org.organizationName,u.displayUserName,b.state
         from baseinfo b
         left outer join usersinfo u on b.userName=u.userName
+        left outer join familyassets fa on b.recordId=fa.assetsId
         left outer join organizationInfo org on u.organizationId=org.organizationId limit #{beginPageNum}, #{endPageNum}
     </select>
 
@@ -120,6 +121,8 @@
     </select>
 
     <resultMap id="incomeExpensesMap" type="com.rcuinfomanager.model.IncomeExpenses">
+        <result column="id" property="id"></result>
+        <result column="recordId" property="recordId"></result>
         <result column="fmAllIncome" property="fmAllIncome"></result>
         <result column="fmExpenses" property="fmExpenses"></result>
         <result column="incomeSrc" property="incomeSrc"></result>
@@ -134,7 +137,7 @@
     </resultMap>
     <!--获取家庭收支情况-->
     <select id="getIncomeExpenses" parameterType="java.lang.Long" resultMap="incomeExpensesMap">
-        select i.fmAllIncome,i.fmExpenses,i.incomeSrc,i.perIncome,i.fmOtherMemberIn,b.businessProp,b.moneySitu,
+        select i.id,i.recordId,i.fmAllIncome,i.fmExpenses,i.incomeSrc,i.perIncome,i.fmOtherMemberIn,b.businessProp,b.moneySitu,
                 b.inputMoney,b.ownMoney,i.fmExpensesProj,i.fmInOutRatio
           from baseInfo b
           left outer join incomeexpenses i on b.recordId = i.recordId
@@ -153,6 +156,7 @@
     <!--房产-->
     <resultMap id="housePropertyInfoMap" type="com.rcuinfomanager.model.HouseInfo">
         <result column="id" property="id"></result>
+        <result column="assetsId" property="assetsId"></result>
         <result column="nature" property="nature"></result>
         <result column="use" property="use"></result>
         <result column="site" property="site"></result>
@@ -166,7 +170,7 @@
         <result column="note1" property="note1"></result>
     </resultMap>
     <select id="getHousePropertyInfo" parameterType="java.lang.Long" resultMap="housePropertyInfoMap">
-            select h.id, h.nature,h.purpose,h.site,h.structure,h.floorNum,h.usedSitu,h.houseArea,h.houseWorth,
+            select h.id,h.assetsId,h.nature,h.purpose,h.site,h.structure,h.floorNum,h.usedSitu,h.houseArea,h.houseWorth,
                     h.isInstallment,h.hasCredentials,h.note1
             from housepropertyinfo h
             left outer join  familyassets f on f.assetsId=h.assetsId
@@ -182,6 +186,7 @@
     <!--获取土地信息-->
     <resultMap id="landInfoMap" type="com.rcuinfomanager.model.LandInfo">
         <result column="id" property="id"></result>
+        <result column="assetsId" property="assetsId"></result>
         <result column="area" property="area"></result>
         <result column="worth" property="worth"></result>
         <result column="property" property="property"></result>
@@ -190,7 +195,7 @@
         <result column="isMoneyClear" property="isMoneyClear"></result>
     </resultMap>
     <select id="getLandInfo" parameterType="java.lang.Long" resultMap="landInfoMap">
-         select land.id,land.area,land.worth,land.property,land.type,land.usedSitu,land.isMoneyClear
+         select land.id,land.assetsId,land.area,land.worth,land.property,land.type,land.usedSitu,land.isMoneyClear
          from landinfo land
          left outer join familyassets f on f.assetsId = land.assetsId
          where f.recordId=#{recordId}
@@ -199,13 +204,14 @@
     <!--获取车辆信息-->
     <resultMap id="carsInfoMap" type="com.rcuinfomanager.model.CarsInfo">
         <result column="id" property="id"></result>
+        <result column="assetsId" property="assetsId"></result>
         <result column="carsInfo" property="carsInfo"></result>
         <result column="carsWorth" property="carsWorth"></result>
         <result column="carsIsInstallment" property="carsIsInstallment"></result>
         <result column="carsUsingInfo" property="carsUsingInfo"></result>
     </resultMap>
     <select id="getCarsInfo" parameterType="java.lang.Long" resultMap="carsInfoMap">
-         select car.id, car.carsInfo,car.carsWorth,car.carsIsInstallment,car.carsUsingInfo
+         select car.id,car.assetsId, car.carsInfo,car.carsWorth,car.carsIsInstallment,car.carsUsingInfo
          from carsInfo car
          left outer join familyassets fa on fa.assetsId = car.assetsId
          where fa.recordId=#{recordId}
@@ -219,6 +225,8 @@
 
     <!--负责情况信息-->
     <resultMap id="familyIncurDebtsMap" type="com.rcuinfomanager.model.FamilyIncurDebts">
+        <result column="id" property="id"></result>
+        <result column="recordId" property="recordId"></result>
         <result column="fmIncurDebts" property="fmIncurDebts"></result>
         <result column="ourBankDebts" property="ourBankDebts"></result>
         <result column="otherBankDebts" property="otherBankDebts"></result>
@@ -226,7 +234,7 @@
         <result column="loanShap" property="loanShap"></result>
     </resultMap>
     <select id="getFamilyIncurDebts" parameterType="java.lang.Long" resultMap="familyIncurDebtsMap">
-         select fid.fmIncurDebts,fid.ourBankDebts,fid.otherBankDebts,fid.loanPurpose,fid.loanShap
+         select fid.id,fid.recordId,fid.fmIncurDebts,fid.ourBankDebts,fid.otherBankDebts,fid.loanPurpose,fid.loanShap
          from  familyincurdebts fid where fid.recordId=#{recordId}
     </select>
 
@@ -256,12 +264,14 @@
 
     <!--金融资产信息-->
     <resultMap id="financialAssetsMap" type="com.rcuinfomanager.model.FinancialAssets">
+        <result column="id" property="id"></result>
+        <result column="assetsId" property="assetsId"></result>
         <result column="financialInfo" property="financialInfo"></result>
         <result column="depositOurBank" property="depositOurBank"></result>
         <result column="depositOtherBank" property="depositOtherBank"></result>
     </resultMap>
     <select id="getFinancialAssets" parameterType="java.lang.Long" resultMap="financialAssetsMap">
-         select fin.financialInfo,fin.depositOurBank,fin.depositOtherBank
+         select fin.id,fin.assetsId,fin.financialInfo,fin.depositOurBank,fin.depositOtherBank
          from familyassets fa
            left outer join financialAssets fin on fa.assetsId = fin.assetsId
            where fa.recordId=#{recordId}
@@ -574,11 +584,36 @@
             assetsId=#{assetsId}
         where id=#{id}
     </update>
-
+     <!--删除-->
     <delete id="deleteFamilyMemberInfoByRecordId" parameterType="java.lang.Long">
-         DELETE FROM familymemberinfo WHERE recordId = #{recordId};
+         DELETE FROM familymemberinfo WHERE id = #{id};
     </delete>
 
+    <delete id="deleteBaseInfoByRecordId" parameterType="java.lang.Long">
+         DELETE FROM baseinfo WHERE recordId = #{recordId};
+    </delete>
+    <delete id="deleteIncomeExpensesByRecordId" parameterType="java.lang.Long">
+         DELETE FROM incomeexpenses WHERE id = #{id};
+    </delete>
+    <delete id="deleteFamilyAssetsByAssetsId" parameterType="java.lang.Long">
+         DELETE FROM familyassets WHERE assetsId = #{assetsId};
+    </delete>
+    <delete id="deleteFinancialAssetsByAssetsId" parameterType="java.lang.Long">
+         DELETE FROM financialassets WHERE id = #{id};
+    </delete>
+    <delete id="deleteFamilyIncurDebtsByRecordId" parameterType="java.lang.Long">
+         DELETE FROM familyincurdebts WHERE id = #{id};
+    </delete>
+    <delete id="deleteFinanceServicesByRecordId" parameterType="java.lang.Long">
+         DELETE FROM financeservices WHERE recordId = #{recordId};
+    </delete>
+    <delete id="deleteVillageManagerEvaByRecordId" parameterType="java.lang.Long">
+         DELETE FROM villagemanagereva WHERE recordId = #{recordId};
+    </delete>
+    <delete id="deleteCustomerManagerEvaByRecordId" parameterType="java.lang.Long">
+         DELETE FROM customermanagereva WHERE recordId = #{recordId};
+    </delete>
+     <!--end-->
     <insert id="saveFamilyMember" parameterType="com.rcuinfomanager.model.FamilyMember">
         insert into familymemberinfo(recordId,familyMemberCerNum,cerNum,familyMemberName,yearIncome,leaderRelation,profession,address)
           values(#{recordId},#{familyMemberCerNum},#{cerNum},#{familyMemberName},#{yearIncome},#{leaderRelation},#{profession}, #{address})

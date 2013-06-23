@@ -312,7 +312,14 @@
             <td align="center">&nbsp;</td>
         </core:when>
         <core:otherwise>
-            <td align="center">${personBasicList.gender}</td>
+            <core:choose>
+                <core:when test="${personBasicList.gender=='0'}">
+                    <td align="center">女</td>
+                </core:when>
+                <core:otherwise>
+                    <td align="center">男</td>
+                </core:otherwise>
+            </core:choose>
         </core:otherwise>
     </core:choose>
 
@@ -322,7 +329,15 @@
             <td align="center">&nbsp;</td>
         </core:when>
         <core:otherwise>
-            <td align="center">${personBasicList.farmer}</td>
+
+            <core:choose>
+                <core:when test="${personBasicList.farmer=='0'}">
+                    <td align="center">否</td>
+                </core:when>
+                <core:otherwise>
+                    <td align="center">是</td>
+                </core:otherwise>
+            </core:choose>
         </core:otherwise>
     </core:choose>
 
@@ -417,7 +432,14 @@
             <td align="center">&nbsp;</td>
         </core:when>
         <core:otherwise>
-            <td align="center">${personBasicList.havePassport}</td>
+            <core:choose>
+                <core:when test="${personBasicList.havePassport=='0'}">
+                    <td align="center">否</td>
+                </core:when>
+                <core:otherwise>
+                    <td align="center">是</td>
+                </core:otherwise>
+            </core:choose>
         </core:otherwise>
     </core:choose>
 
@@ -633,7 +655,7 @@
             <td align="center">&nbsp;</td>
         </core:when>
         <core:otherwise>
-            <td align="center" colspan="2">${personBasicList.businessYear}</td>
+            <td align="center" colspan="2">${personBasicList.businessYear}年</td>
         </core:otherwise>
     </core:choose>
 
@@ -764,10 +786,10 @@
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">工作单位类别</td>
     <core:choose>
         <core:when test="${empty personBasicList.unitType}">
-            <td align="center">&nbsp;</td>
+            <td align="center" colspan="5">&nbsp;</td>
         </core:when>
         <core:otherwise>
-            <td align="center" colspan="3">${personBasicList.unitType}</td>
+            <td align="center" colspan="5">${personBasicList.unitType}</td>
         </core:otherwise>
     </core:choose>
 
@@ -867,27 +889,26 @@
         </tr>
     </core:when>
     <core:otherwise>
-        <core:forEach items="${personIncomeExpensesList}" var="personIncomeExpenses">
             <tr>
                 <td align="center" colspan="2" bgcolor="#b4d8ed" style="color:#161823">
                     家庭年总收入（万元）
                 </td>
                 <core:choose>
-                    <core:when test="${empty personIncomeExpenses.fmAllIncome}">
+                    <core:when test="${empty personIncomeExpensesList.fmAllIncome}">
                         <td align="center">&nbsp;</td>
                     </core:when>
                     <core:otherwise>
-                        <td align="center" colspan="2">${personIncomeExpenses.fmAllIncome}</td>
+                        <td align="center" colspan="2">${personIncomeExpensesList.fmAllIncome}</td>
                     </core:otherwise>
                 </core:choose>
 
                 <td align="center" colspan="2" bgcolor="#b4d8ed" style="color:#161823">家庭支出（万元）</td>
                 <core:choose>
-                    <core:when test="${empty personIncomeExpenses.fmExpenses}">
+                    <core:when test="${empty personIncomeExpensesList.fmExpenses}">
                         <td align="center">&nbsp;</td>
                     </core:when>
                     <core:otherwise>
-                        <td align="center" colspan="2">${personIncomeExpenses.fmExpenses}</td>
+                        <td align="center" colspan="2">${personIncomeExpensesList.fmExpenses}</td>
                     </core:otherwise>
                 </core:choose>
 
@@ -897,11 +918,11 @@
                     收入来源
                 </td>
                 <core:choose>
-                    <core:when test="${empty personIncomeExpenses.incomeSrc}">
-                        <td align="center">&nbsp;</td>
+                    <core:when test="${empty personIncomeExpensesList.incomeSrc}">
+                        <td align="center" colspan="7">&nbsp;</td>
                     </core:when>
                     <core:otherwise>
-                        <td align="center" colspan="7">${personIncomeExpenses.incomeSrc}</td>
+                        <td align="center" colspan="7">${personIncomeExpensesList.incomeSrc}</td>
                     </core:otherwise>
                 </core:choose>
 
@@ -911,21 +932,28 @@
                     其中：个人年收入（万元）
                 </td>
                 <core:choose>
-                    <core:when test="${empty personIncomeExpenses.perIncome}">
-                        <td align="center">&nbsp;</td>
+                    <core:when test="${empty personIncomeExpensesList.perIncome}">
+                        <td align="center" colspan="2">&nbsp;</td>
                     </core:when>
                     <core:otherwise>
-                        <td align="center" colspan="2">${personIncomeExpenses.perIncome}</td>
+                        <core:choose>
+                            <core:when test="${personIncomeExpensesList.perIncome=='0.0000'}">
+                                <td align="center" colspan="2">0</td>
+                            </core:when>
+                            <core:otherwise>
+                                <td align="center" colspan="2">${personIncomeExpensesList.perIncome}</td>
+                            </core:otherwise>
+                        </core:choose>
                     </core:otherwise>
                 </core:choose>
 
                 <td align="center" colspan="2" bgcolor="#b4d8ed" style="color:#161823">家庭其他成员年收入（万元）</td>
                 <core:choose>
-                    <core:when test="${empty personIncomeExpenses.fmOtherMemberIn}">
+                    <core:when test="${empty personIncomeExpensesList.fmOtherMemberIn}">
                         <td align="center">&nbsp;</td>
                     </core:when>
                     <core:otherwise>
-                        <td align="center" colspan="2">${personIncomeExpenses.fmOtherMemberIn}</td>
+                        <td align="center" colspan="2">${personIncomeExpensesList.fmOtherMemberIn}</td>
                     </core:otherwise>
                 </core:choose>
 
@@ -933,41 +961,41 @@
             <tr>
                 <td align="center" bgcolor="#b4d8ed" style="color:#161823">投资经营性质</td>
                 <core:choose>
-                    <core:when test="${empty personIncomeExpenses.businessProp}">
+                    <core:when test="${empty personIncomeExpensesList.businessProp}">
                         <td align="center">&nbsp;</td>
                     </core:when>
                     <core:otherwise>
-                        <td align="center">${personIncomeExpenses.businessProp}</td>
+                        <td align="center">${personIncomeExpensesList.businessProp}</td>
                     </core:otherwise>
                 </core:choose>
 
                 <td align="center" bgcolor="#b4d8ed" style="color:#161823">投资资金情况</td>
                 <core:choose>
-                    <core:when test="${empty personIncomeExpenses.moneySitu}">
+                    <core:when test="${empty personIncomeExpensesList.moneySitu}">
                         <td align="center">&nbsp;</td>
                     </core:when>
                     <core:otherwise>
-                        <td align="center">${personIncomeExpenses.moneySitu}</td>
+                        <td align="center">${personIncomeExpensesList.moneySitu}</td>
                     </core:otherwise>
                 </core:choose>
 
                 <td align="center" bgcolor="#b4d8ed" style="color:#161823">投入金额</td>
                 <core:choose>
-                    <core:when test="${empty personIncomeExpenses.inputMoney}">
+                    <core:when test="${empty personIncomeExpensesList.inputMoney}">
                         <td align="center">&nbsp;</td>
                     </core:when>
                     <core:otherwise>
-                        <td align="center">${personIncomeExpenses.inputMoney}</td>
+                        <td align="center">${personIncomeExpensesList.inputMoney}</td>
                     </core:otherwise>
                 </core:choose>
 
                 <td align="center" bgcolor="#b4d8ed" style="color:#161823">自有资金情况</td>
                 <core:choose>
-                    <core:when test="${empty personIncomeExpenses.ownMoney}">
+                    <core:when test="${empty personIncomeExpensesList.ownMoney}">
                         <td align="center">&nbsp;</td>
                     </core:when>
                     <core:otherwise>
-                        <td align="center">${personIncomeExpenses.ownMoney}</td>
+                        <td align="center">${personIncomeExpensesList.ownMoney}</td>
                     </core:otherwise>
                 </core:choose>
 
@@ -975,26 +1003,24 @@
             <tr>
                 <td align="center"  bgcolor="#b4d8ed" style="color:#161823">家庭主要支出项目</td>
                 <core:choose>
-                    <core:when test="${empty personIncomeExpenses.fmExpensesProj}">
+                    <core:when test="${empty personIncomeExpensesList.fmExpensesProj}">
                         <td align="center">&nbsp;</td>
                     </core:when>
                     <core:otherwise>
-                        <td align="center" colspan="3">${personIncomeExpenses.fmExpensesProj}</td>
+                        <td align="center" colspan="3">${personIncomeExpensesList.fmExpensesProj}</td>
                     </core:otherwise>
                 </core:choose>
 
                 <td align="center" bgcolor="#b4d8ed" style="color:#161823">家庭收入能否应付支出</td>
                 <core:choose>
-                    <core:when test="${empty personIncomeExpenses.fmInOutRatio}">
+                    <core:when test="${empty personIncomeExpensesList.fmInOutRatio}">
                         <td align="center">&nbsp;</td>
                     </core:when>
                     <core:otherwise>
-                        <td align="center" colspan="3">${personIncomeExpenses.fmInOutRatio}</td>
+                        <td align="center" colspan="3">${personIncomeExpensesList.fmInOutRatio}</td>
                     </core:otherwise>
                 </core:choose>
-
             </tr>
-        </core:forEach>
     </core:otherwise>
 </core:choose>
 
@@ -1175,7 +1201,14 @@
                         <td align="center">&nbsp;</td>
                     </core:when>
                     <core:otherwise>
-                        <td align="center">${personHousePropertyInfo.installment}</td>
+                        <core:choose>
+                            <core:when test="${personHousePropertyInfo.installment=='0'}">
+                                <td align="center">否</td>
+                            </core:when>
+                            <core:otherwise>
+                                <td align="center">是</td>
+                            </core:otherwise>
+                        </core:choose>
                     </core:otherwise>
                 </core:choose>
 
@@ -1192,10 +1225,10 @@
                 <td align="center" bgcolor="#b4d8ed" style="color:#161823">备注</td>
                 <core:choose>
                     <core:when test="${empty personHousePropertyInfo.note1}">
-                        <td align="center">&nbsp;</td>
+                        <td align="center" colspan="3">&nbsp;</td>
                     </core:when>
                     <core:otherwise>
-                        <td align="center">${personHousePropertyInfo.note1}</td>
+                        <td align="center" colspan="3">${personHousePropertyInfo.note1}</td>
                     </core:otherwise>
                 </core:choose>
 
@@ -1256,7 +1289,7 @@
                         <td align="center">&nbsp;</td>
                     </core:when>
                     <core:otherwise>
-                        <td align="center">${personLandInfo.worth}</td>
+                        <td align="center">${personLandInfo.worth}万</td>
                     </core:otherwise>
                 </core:choose>
 
@@ -1298,7 +1331,14 @@
                         <td align="center">&nbsp;</td>
                     </core:when>
                     <core:otherwise>
-                        <td align="center" colspan="5">${personLandInfo.moneyClear}</td>
+                        <core:choose>
+                            <core:when test="${personLandInfo.moneyClear=='0'}">
+                                <td align="center" colspan="5">否</td>
+                            </core:when>
+                            <core:otherwise>
+                                <td align="center" colspan="5">是</td>
+                            </core:otherwise>
+                        </core:choose>
                     </core:otherwise>
                 </core:choose>
 
@@ -1360,7 +1400,14 @@
                         <td align="center">&nbsp;</td>
                     </core:when>
                     <core:otherwise>
-                        <td align="center">${personCarsInfo.carsIsInstallment}</td>
+                        <core:choose>
+                            <core:when test="${personCarsInfo.carsIsInstallment=='0'}">
+                                <td align="center">否</td>
+                            </core:when>
+                            <core:otherwise>
+                                <td align="center">是</td>
+                            </core:otherwise>
+                        </core:choose>
                     </core:otherwise>
                 </core:choose>
 
@@ -1396,39 +1443,38 @@
         </tr>
     </core:when>
     <core:otherwise>
-        <core:forEach items="${personFinancialAssetsList}" var="personFinancialAssets">
+        <%--<core:forEach items="${personFinancialAssetsList}" var="personFinancialAssets">--%>
             <tr>
                 <td align="center" bgcolor="#b4d8ed" style="color:#161823">情况</td>
                 <core:choose>
-                    <core:when test="${empty personFinancialAssets.financialInfo}">
+                    <core:when test="${empty personFinancialAssetsList.financialInfo}">
                         <td align="center" colspan="3">&nbsp;</td>
                     </core:when>
                     <core:otherwise>
-                        <td align="center" colspan="3">${personFinancialAssets.financialInfo}</td>
+                        <td align="center" colspan="3">${personFinancialAssetsList.financialInfo}</td>
                     </core:otherwise>
                 </core:choose>
 
                 <td align="center" bgcolor="#b4d8ed" style="color:#161823">我社存款</td>
                 <core:choose>
-                    <core:when test="${empty personFinancialAssets.depositOurBank}">
+                    <core:when test="${empty personFinancialAssetsList.depositOurBank}">
                         <td align="center">&nbsp;</td>
                     </core:when>
                     <core:otherwise>
-                        <td align="center">${personFinancialAssets.depositOurBank}</td>
+                        <td align="center">${personFinancialAssetsList.depositOurBank}</td>
                     </core:otherwise>
                 </core:choose>
 
                 <td align="center" bgcolor="#b4d8ed" style="color:#161823">他行存款</td>
                 <core:choose>
-                    <core:when test="${empty personFinancialAssets.depositOtherBank}">
+                    <core:when test="${empty personFinancialAssetsList.depositOtherBank}">
                         <td align="center">&nbsp;</td>
                     </core:when>
                     <core:otherwise>
-                        <td align="center">${personFinancialAssets.depositOtherBank}</td>
+                        <td align="center">${personFinancialAssetsList.depositOtherBank}</td>
                     </core:otherwise>
                 </core:choose>
             </tr>
-        </core:forEach>
     </core:otherwise>
 </core:choose>
 
@@ -1458,37 +1504,36 @@
         </tr>
     </core:when>
     <core:otherwise>
-        <core:forEach items="${personFamilyIncurDebtsList}" var="personFamilyIncurDebts">
             <tr>
                 <td align="center" bgcolor="#b4d8ed" style="color:#161823">
                     家庭负债总额（万元）
                 </td>
                 <core:choose>
-                    <core:when test="${empty personFamilyIncurDebts.fmIncurDebts}">
+                    <core:when test="${empty personFamilyIncurDebtsList.fmIncurDebts}">
                         <td align="center">&nbsp;</td>
                     </core:when>
                     <core:otherwise>
-                        <td align="center">${personFamilyIncurDebts.fmIncurDebts}</td>
+                        <td align="center">${personFamilyIncurDebtsList.fmIncurDebts}</td>
                     </core:otherwise>
                 </core:choose>
 
                 <td align="center" bgcolor="#b4d8ed" style="color:#161823">本行负债（万元）</td>
                 <core:choose>
-                    <core:when test="${empty personFamilyIncurDebts.ourBankDebts}">
+                    <core:when test="${empty personFamilyIncurDebtsList.ourBankDebts}">
                         <td align="center" colspan="2">&nbsp;</td>
                     </core:when>
                     <core:otherwise>
-                        <td align="center" colspan="2">${personFamilyIncurDebts.ourBankDebts}</td>
+                        <td align="center" colspan="2">${personFamilyIncurDebtsList.ourBankDebts}</td>
                     </core:otherwise>
                 </core:choose>
 
                 <td align="center" bgcolor="#b4d8ed" style="color:#161823">他行负债（万元）</td>
                 <core:choose>
-                    <core:when test="${empty personFamilyIncurDebts.otherBankDebts}">
+                    <core:when test="${empty personFamilyIncurDebtsList.otherBankDebts}">
                         <td align="center" colspan="2">&nbsp;</td>
                     </core:when>
                     <core:otherwise>
-                        <td align="center" colspan="2">${personFamilyIncurDebts.otherBankDebts}</td>
+                        <td align="center" colspan="2">${personFamilyIncurDebtsList.otherBankDebts}</td>
                     </core:otherwise>
                 </core:choose>
 
@@ -1496,26 +1541,24 @@
             <tr>
                 <td align="center" bgcolor="#b4d8ed" style="color:#161823">贷款用途</td>
                 <core:choose>
-                    <core:when test="${empty personFamilyIncurDebts.loanPurpose}">
+                    <core:when test="${empty personFamilyIncurDebtsList.loanPurpose}">
                         <td align="center" colspan="3">&nbsp;</td>
                     </core:when>
                     <core:otherwise>
-                        <td align="center" colspan="3">${personFamilyIncurDebts.loanPurpose}</td>
+                        <td align="center" colspan="3">${personFamilyIncurDebtsList.loanPurpose}</td>
                     </core:otherwise>
                 </core:choose>
 
                 <td align="center" bgcolor="#b4d8ed" style="color:#161823">贷款形态</td>
                 <core:choose>
-                    <core:when test="${empty personFamilyIncurDebts.loanShap}">
+                    <core:when test="${empty personFamilyIncurDebtsList.loanShap}">
                         <td align="center" colspan="3">&nbsp;</td>
                     </core:when>
                     <core:otherwise>
-                        <td align="center" colspan="3">${personFamilyIncurDebts.loanShap}</td>
+                        <td align="center" colspan="3">${personFamilyIncurDebtsList.loanShap}</td>
                     </core:otherwise>
                 </core:choose>
-
             </tr>
-        </core:forEach>
     </core:otherwise>
 </core:choose>
 

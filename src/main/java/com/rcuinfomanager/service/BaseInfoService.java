@@ -53,7 +53,7 @@ public class BaseInfoService {
     }
 
     //获取家庭收支情况
-    public List<IncomeExpenses> getIncomeExpenses(Long recordId) {
+    public IncomeExpenses getIncomeExpenses(Long recordId) {
         return baseInfoDao.getIncomeExpenses(recordId);
     }
 
@@ -125,12 +125,12 @@ public class BaseInfoService {
     }
 
     //金融资产信息
-    public List<FinancialAssets> getFinancialAssets(Long recordId) {
+    public FinancialAssets getFinancialAssets(Long recordId) {
         return baseInfoDao.getFinancialAssets(recordId);
     }
 
     //负责情况信息
-    public List<FamilyIncurDebts> getFamilyIncurDebts(Long recordId) {
+    public FamilyIncurDebts getFamilyIncurDebts(Long recordId) {
         return baseInfoDao.getFamilyIncurDebts(recordId);
     }
 
@@ -293,4 +293,43 @@ public class BaseInfoService {
     public List<AreasInfo> getAreasInfo(){
         return baseInfoDao.getAreasInfo();
     }
+    //删除
+    public void deleteHouseInfoByAssetsId(long assetsId){
+        baseInfoDao.deleteHouseInfoByAssetsId(assetsId);
+    }
+    public void deleteLandInfoByAssetsId(long assetsId){
+        baseInfoDao.deleteLandInfoByAssetsId(assetsId);
+    }
+    public void deleteCarsinfoByAssetsId(long assetsId){
+        baseInfoDao.deleteCarsinfoByAssetsId(assetsId);
+    }
+
+    public void deleteBaseInfoByRecordId(Long recordId){
+        baseInfoDao.deleteBaseInfoByRecordId(recordId);
+    }
+    public void deleteIncomeExpensesByRecordId(Long id){
+        baseInfoDao.deleteIncomeExpensesByRecordId(id);
+    }
+    public void deleteFamilyAssetsByAssetsId(Long assetsId){
+        baseInfoDao.deleteFamilyAssetsByAssetsId(assetsId);
+    }
+    public void deleteFinancialAssetsByAssetsId(Long id){
+        baseInfoDao.deleteFinancialAssetsByAssetsId(id);
+    }
+    public void deleteFamilyIncurDebtsByRecordId(Long id){
+        baseInfoDao.deleteFamilyIncurDebtsByRecordId(id);
+    }
+    public void deleteFamilyMemberInfoByRecordId(Long id){
+        baseInfoDao.deleteFamilyMemberInfoByRecordId(id);
+    }
+    public void deleteFinanceServicesByRecordId(Long recordId){
+        baseInfoDao.deleteFinanceServicesByRecordId(recordId);
+    }
+    public void deleteVillageManagerEvaByRecordId(Long recordId){
+        baseInfoDao.deleteVillageManagerEvaByRecordId(recordId);
+    }
+    public void deleteCustomerManagerEvaByRecordId(Long recordId){
+        baseInfoDao.deleteCustomerManagerEvaByRecordId(recordId);
+    }
+
 }

@@ -231,15 +231,49 @@ public class BaseInfoController {
     }
 
     //删除
-    @RequestMapping("/delete/{id}")
-    public String deleteInfo(@PathVariable long id, Map map) {
-        int result = 0;//baseInfoServer.deleteInfo(id);
-        if (result != 0) {
+    @RequestMapping("/delete/{recordId}/{assetsId}")
+    public String deleteInfo(@PathVariable long recordId,@PathVariable long assetsId, Map map) {
+        //int result = 0;
+        IncomeExpenses incomeExpenses=baseInfoService.getIncomeExpenses(recordId);
+        baseInfoService.deleteIncomeExpensesByRecordId(incomeExpenses.getId());
+
+        FinancialAssets financialAssets=baseInfoService.getFinancialAssets(assetsId);
+        baseInfoService.deleteFinancialAssetsByAssetsId(financialAssets.getId());
+
+        FamilyIncurDebts familyIncurDebts=baseInfoService.getFamilyIncurDebts(recordId);
+        baseInfoService.deleteFamilyIncurDebtsByRecordId(familyIncurDebts.getId());
+
+        List<FamilyMember> familyMemberInfos=baseInfoService.getFamilyMember(recordId);
+        for (FamilyMember familyMemberInfo: familyMemberInfos ){
+            baseInfoService.deleteFamilyMemberInfoByRecordId(familyMemberInfo.getId());
+        }
+        List<HouseInfo> houseInfos=baseInfoService.getHousePropertyInfo(recordId);
+        for(HouseInfo houseInfo: houseInfos){
+            baseInfoService.deleteHouseInfoByAssetsId(houseInfo.getAssetsId());
+        }
+
+        List<LandInfo> landInfos=baseInfoService.getLandInfo(recordId);
+        for (LandInfo landInfo:landInfos){
+            baseInfoService.deleteLandInfoByAssetsId(landInfo.getAssetsId());
+        }
+
+        List<CarsInfo> carsInfos =baseInfoService.getCarsInfo(recordId);
+        for (CarsInfo carsInfo: carsInfos){
+            baseInfoService.deleteCarsinfoByAssetsId(carsInfo.getAssetsId());
+        }
+        baseInfoService.deleteFinanceServicesByRecordId(recordId);
+        baseInfoService.deleteVillageManagerEvaByRecordId(recordId);
+        baseInfoService.deleteCustomerManagerEvaByRecordId(recordId);
+
+        baseInfoService.deleteFamilyAssetsByAssetsId(assetsId); //assetsId 主键
+        baseInfoService.deleteBaseInfoByRecordId(recordId);
+
+        /*if (result != 0) {
             map.put("delSuccess", "删除成功！");
         } else {
             map.put("delSuccess", "删除失败！");
-        }
-        return "farmer/main";
+        }*/
+        return "/farmer/main";
     }
 
     //导入基础数据页面

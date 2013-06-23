@@ -27,7 +27,8 @@ $(function () {
         if (confirm('确定要删除吗？')) {
             var me = $(this);
             var recordId = me.attr('recordId');
-            var url = '/family/delete/' + recordId;
+            var assetsId = me.attr('assetsId');
+            var url = '/family/delete/'+recordId+'/'+assetsId;
             window.location.href = url;
         }
     });

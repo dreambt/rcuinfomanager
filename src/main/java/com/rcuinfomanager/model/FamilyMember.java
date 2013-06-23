@@ -1,7 +1,7 @@
 package com.rcuinfomanager.model;
 
 public class FamilyMember {
-    private int id;
+    private Long id;
     private long recordId;
     private String familyMemberName;
     private String yearIncome;
@@ -67,11 +67,11 @@ public class FamilyMember {
         this.cerNum = cerNum;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

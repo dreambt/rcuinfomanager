@@ -1,9 +1,7 @@
 package com.rcuinfomanager.webservice.model;
 
-import com.rcuinfomanager.model.CarsInfo;
-import com.rcuinfomanager.model.FamilyMember;
-import com.rcuinfomanager.model.HouseInfo;
-import com.rcuinfomanager.model.LandInfo;
+import com.google.common.base.Strings;
+import com.rcuinfomanager.model.*;
 
 import java.io.Serializable;
 import java.util.List;
@@ -102,6 +100,7 @@ public class AllColumnInfo implements Serializable {
     private String finaServicesNeedServicesElse;
     private String finaServicesHolpForServices;
     private String finaServicesSuggestion;
+    private String finaServiceElectronBank;
 
     private int finaServiceIsMoneyNeed;
     private String finaServiceMoneyTodo;
@@ -120,6 +119,8 @@ public class AllColumnInfo implements Serializable {
     private String custManagerCreditRecord;
     private String custManagerOtherBankRecord;
     private String custManagerHouseToMoney;
+
+    private VillageManagerEva villageManagerEva;
 
     private int status;
 
@@ -796,7 +797,10 @@ public class AllColumnInfo implements Serializable {
     }
 
     public String getFinaServiceNewRequirement() {
-        return finaServiceNewRequirement;
+        if (Strings.isNullOrEmpty(finaServiceNewRequirement)) {
+            return "";
+        }
+        return finaServiceNewRequirement.trim();
     }
 
     public void setFinaServiceNewRequirement(String finaServiceNewRequirement) {
@@ -904,7 +908,10 @@ public class AllColumnInfo implements Serializable {
     }
 
     public String getFinaServicesHolpForServices() {
-        return finaServicesHolpForServices;
+        if (Strings.isNullOrEmpty(finaServicesHolpForServices)) {
+            return "";
+        }
+        return finaServicesHolpForServices.trim();
     }
 
     public void setFinaServicesHolpForServices(String finaServicesHolpForServices) {
@@ -912,10 +919,29 @@ public class AllColumnInfo implements Serializable {
     }
 
     public String getFinaServicesSuggestion() {
-        return finaServicesSuggestion;
+        if (Strings.isNullOrEmpty(finaServicesSuggestion))  {
+            return "";
+        }
+        return finaServicesSuggestion.trim();
     }
 
     public void setFinaServicesSuggestion(String finaServicesSuggestion) {
         this.finaServicesSuggestion = finaServicesSuggestion;
+    }
+
+    public String getFinaServiceElectronBank() {
+        return finaServiceElectronBank;
+    }
+
+    public void setFinaServiceElectronBank(String finaServiceElectronBank) {
+        this.finaServiceElectronBank = finaServiceElectronBank;
+    }
+
+    public VillageManagerEva getVillageManagerEva() {
+        return villageManagerEva;
+    }
+
+    public void setVillageManagerEva(VillageManagerEva villageManagerEva) {
+        this.villageManagerEva = villageManagerEva;
     }
 }

@@ -250,7 +250,7 @@
          set  familyMemberName=#{familyMemberName},yearIncome=#{yearIncome},
               leaderRelation=#{leaderRelation},address=#{address},
               profession=#{profession},familyMemberCerNum=#{familyMemberCerNum},
-              cerNum=#{familyMembers.cerNum},recordId=#{recordId}
+              cerNum=#{cerNum},recordId=#{recordId}
          where id=#{id}
     </update>
 
@@ -522,7 +522,9 @@
           timeLimit = #{finaServiceTimeLimit}, guarantee = #{finaServiceGuarantee},
           bankCard = #{finaServiceBankCard}, electronBank = #{finaServiceEleBankBusiness},
           agentPay = #{finaServiceAgentPayBusiness}, auto = #{finaServiceAutoBusiness},
-          privateLoan = #{finaServicePrivateLoan}, publicLoan = #{finaServicePublicLoan}, newRequirement = #{finaServiceNewRequirement}
+          privateLoan = #{finaServicePrivateLoan}, publicLoan = #{finaServicePublicLoan}, newRequirement = #{finaServiceNewRequirement},
+          needServices = #{finaServicesNeedServices},holpForServices=#{finaServicesHolpForServices},suggestion=#{finaServicesSuggestion},
+          electronBank=#{finaServiceElectronBank},needServicesElse = #{finaServicesNeedServicesElse}
         where recordId = #{recordId}
     </update>
 
@@ -553,7 +555,7 @@
           update housepropertyinfo
            set nature=#{nature},purpose=#{purpose},site=#{site},structure=#{structure},
                   floorNum=#{floorNum},usedSitu=#{usedSitu},houseArea=#{houseArea},houseWorth=#{houseWorth},
-                  isInstallment=#{isInstallment},hasCredentials=#{hasCredentials} ,note1=#{note1}
+                  isInstallment=#{isInstallment},hasCredentials=#{hasCredentials} ,note1=#{note1},
                   assetsId=#{assetsId}
           where id=#{id}
     </update>
@@ -569,7 +571,7 @@
 
     <update id="updateLandInfo" parameterType="com.rcuinfomanager.model.LandInfo">
         update landinfo
-        set areaCode=#{areaCode},worth=#{worth} ,property=#{property} ,
+        set area=#{area},worth=#{worth} ,property=#{property} ,
             type=#{type} ,usedSitu=#{usedSitu} ,isMoneyClear=#{isMoneyClear},
             assetsId=#{assetsId}
         where id=#{id}
@@ -619,10 +621,7 @@
         from financeservices f
         where f.recordId=#{id}
     </select>
-    <!--三-->
-    <select id="getVillageManagerEvaList" resultType="com.rcuinfomanager.model.VillageManagerEva">
-          select * from villagemanagereva  where recordId=#{id}
-    </select>
+
     <!--四-->
     <select id="getCustomerManagerEvaList" resultType="com.rcuinfomanager.model.CustomerManagerEva">
           select * from customermanagereva where recordId=#{id}
@@ -658,13 +657,6 @@
         <result property="infoManageId" column="infoManageId"></result>
     </resultMap>
 
-    <insert id="saveVillageManagerEva" parameterType="com.rcuinfomanager.model.VillageManagerEva">
-        insert into villagemanagereva(recordId,truth,localLivingTime,operatingCapacity,projectPotential,operationalRisks,
-          developmentProspects,operatingStability,capitaNetIncomeLevel,disposableIncomeLevel,familyPropertyLevel,payTaxes,
-          respectSitu,neighborhood,publicWelfareLevel,creditworthiness,conduct,praised,supplement,isImportantObject)
-        values(#{recordId},#{truth},#{localLivingTime},#{operatingCapacity},#{projectPotential},#{operationalRisks},
-        #{developmentProspects},#{operatingStability},#{capitaNetIncomeLevel},#{disposableIncomeLevel},#{familyPropertyLevel},#{payTaxes},
-        #{respectSitu},#{neighborhood},#{publicWelfareLevel},#{creditworthiness},#{conduct},#{praised},#{supplement},#{isImportantObject})
-    </insert>
+
 
 </mapper>

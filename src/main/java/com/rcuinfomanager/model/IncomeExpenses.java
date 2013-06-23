@@ -1,6 +1,7 @@
 package com.rcuinfomanager.model;
 
 public class IncomeExpenses {
+    private long id;
     private String fmAllIncome;
     private String fmExpenses;
     private String incomeSrc;
@@ -100,5 +101,13 @@ public class IncomeExpenses {
 
     public void setFmInOutRatio(String fmInOutRatio) {
         this.fmInOutRatio = fmInOutRatio;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

@@ -2,6 +2,7 @@ package com.rcuinfomanager.service;
 
 import com.google.common.base.Strings;
 import com.rcuinfomanager.dao.BaseInfoDao;
+import com.rcuinfomanager.dao.VillageManagerEvaDao;
 import com.rcuinfomanager.model.BaseInfo;
 import com.rcuinfomanager.model.VillageManagerEva;
 import com.rcuinfomanager.util.Files;
@@ -30,6 +31,8 @@ public class ExportInfo2VillagerCommittee4Estimation {
 
     @Autowired
     private BaseInfoDao baseInfoDao;
+    @Autowired
+    private VillageManagerEvaDao villageManagerEvaDao;
 
     public void readTemplateAndExport(String recordIds, HttpServletResponse response,HttpServletRequest request) {
         List<BaseInfo> baseInfoList = new ArrayList<BaseInfo>();
@@ -193,7 +196,7 @@ public class ExportInfo2VillagerCommittee4Estimation {
                         villageManagerEva.setPraised("不清楚");
                         villageManagerEva.setImportantObject("一般");
                     }
-                    baseInfoDao.saveVillageManagerEva(villageManagerEva);
+                    villageManagerEvaDao.saveVillageManagerEva(villageManagerEva);
                 }
             }
         } catch (Exception e) {

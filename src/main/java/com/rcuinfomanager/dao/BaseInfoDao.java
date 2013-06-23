@@ -125,8 +125,6 @@ public interface BaseInfoDao {
 
     //二
     FinanceServices getFinanceServicesList(long id);
-    //三
-    VillageManagerEva getVillageManagerEvaList(long id);
     //四
     CustomerManagerEva getCustomerManagerEvaList(long id);
 
@@ -137,8 +135,6 @@ public interface BaseInfoDao {
     void updateAppointStatus(long recordId);
 
     List<SubmitItem> querySubmitList(String userName);
-
-    void saveVillageManagerEva(VillageManagerEva villageManagerEva);
 
     AllColumnInfo queryAllColumnByRecordId(long recordId);
 

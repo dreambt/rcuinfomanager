@@ -1,6 +1,7 @@
 package com.rcuinfomanager.service;
 
 import com.rcuinfomanager.dao.BaseInfoDao;
+import com.rcuinfomanager.dao.VillageManagerEvaDao;
 import com.rcuinfomanager.model.*;
 import com.rcuinfomanager.webservice.model.AllColumnInfo;
 import com.rcuinfomanager.webservice.model.SubmitItem;
@@ -254,7 +255,7 @@ public class BaseInfoService {
 
     public boolean isAccepted(String cerNum) {
         int status = baseInfoDao.getStatusByCerNum(cerNum);
-        if (status == 2) {
+        if (status == 3 || status == 4) {
             return true;
         }
 
@@ -264,10 +265,6 @@ public class BaseInfoService {
     //二
     public FinanceServices getFinanceService(long id){
         return baseInfoDao.getFinanceServicesList(id);
-    }
-    //三
-    public VillageManagerEva getVillageManagerEvaList(long id){
-        return baseInfoDao.getVillageManagerEvaList(id);
     }
     //四
     public CustomerManagerEva getCustomerManagerEvaList(long id){
@@ -288,9 +285,5 @@ public class BaseInfoService {
     //保存车辆
     public void saveCarsinfo(CarsInfo carsInfo){
         baseInfoDao.saveCarsinfo(carsInfo);
-    }
-
-    public void saveVillageManagerEva(VillageManagerEva villageManagerEva) {
-        baseInfoDao.saveVillageManagerEva(villageManagerEva);
     }
 }

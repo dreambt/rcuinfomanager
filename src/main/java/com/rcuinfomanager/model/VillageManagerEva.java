@@ -1,6 +1,7 @@
 package com.rcuinfomanager.model;
 
 public class VillageManagerEva {
+    private long id;
     private Long recordId;
     private String truth;
     private String localLivingTime;
@@ -180,5 +181,17 @@ public class VillageManagerEva {
 
     public void setImportantObject(String importantObject) {
         isImportantObject = importantObject;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setRecordId(Long recordId) {
+        this.recordId = recordId;
     }
 }

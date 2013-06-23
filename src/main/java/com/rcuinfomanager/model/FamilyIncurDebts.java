@@ -1,6 +1,7 @@
 package com.rcuinfomanager.model;
 
 public class FamilyIncurDebts {
+    private long id;
     private String fmIncurDebts;
     private String ourBankDebts;
     private String otherBankDebts;
@@ -45,5 +46,13 @@ public class FamilyIncurDebts {
 
     public void setLoanShap(String loanShap) {
         this.loanShap = loanShap;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

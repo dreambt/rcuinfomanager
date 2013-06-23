@@ -1,6 +1,7 @@
 package com.rcuinfomanager.model;
 
 public class FinancialAssets {
+    private long id;
     private String financialInfo;
     private String depositOurBank;
     private String depositOtherBank;
@@ -27,5 +28,13 @@ public class FinancialAssets {
 
     public void setDepositOtherBank(String depositOtherBank) {
         this.depositOtherBank = depositOtherBank;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

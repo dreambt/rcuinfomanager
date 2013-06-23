@@ -217,9 +217,9 @@ public class BaseInfoController {
         //车辆
         map.put("personCarsInfoList", baseInfoService.getCarsInfo(id));
         //金融资产
-        map.put("personFinancialAssetsList", financialAssetsService.getFinancialAssets(id));
+        map.put("personFinancialAssets", financialAssetsService.getFinancialAssets(id));
         //家庭负债
-        map.put("personFamilyIncurDebtsList", baseInfoService.getFamilyIncurDebts(id));
+        map.put("personFamilyIncurDebts", baseInfoService.getFamilyIncurDebts(id));
         //家庭成员
         map.put("personFamilyMemberList", baseInfoService.getFamilyMember(id));
         //二

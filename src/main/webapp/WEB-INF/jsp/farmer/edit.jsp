@@ -1180,7 +1180,7 @@
 </tr>
 <tr>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">单位性质</td>
-    <td align="left" colspan="3">
+    <td align="left">
         <select class="selectpicker" style="width: 255px; margin-top: 5px;" name="unitProp">
             <core:choose>
                 <core:when test="${personBasicList.unitProp}=='党政机关'}">
@@ -1411,7 +1411,7 @@
         </select>
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">单位所属行业</td>
-    <td align="left" colspan="3">
+    <td align="left" colspan="6">
         <input type="hidden" id="industry" value="${personBasicList.unitIndustryId}">
         <select id="industryLevel1" name="industryLevel1" style="width: 70px; margin-top: 5px;">
             <core:forEach items="${industryInfoList}" var="industry">
@@ -2364,129 +2364,124 @@
         使用金融资产情况
     </td>
 </tr>
-<core:forEach items="${personFinancialAssetsList}" var="personFinancialAssets">
-    <%--<input type="hidden" name="id" value="${personFinancialAssets.id}">--%>
-    <tr>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">情况</td>
-        <td align="left" colspan="3"><%--${personFinancialAssets.financialInfo}--%>
-            <core:forEach items="${personFinancialAssets.financialInfo}" var="financialInfo">
-                <input type="text" value="${financialInfo}" style="display: none" class="financialInfo"/>
-            </core:forEach>
-            <label class="checkbox inline">
-                <input type="checkbox" class="活期存款" value="活期存款" name="financialInfo"> 活期存款
-            </label>
-            <label class="checkbox inline">
-                <input type="checkbox" class="定期存款" value="定期存款" name="financialInfo">定期存款
-            </label>
-            <label class="checkbox inline">
-                <input type="checkbox" class="股票" value="股票" name="financialInfo"> 股票
-            </label>
-            <label class="checkbox inline">
-                <input type="checkbox" class="基金" value="基金" name="financialInfo"> 基金
-            </label>
-            <label class="checkbox inline">
-                <input type="checkbox" class="债券" value="债券" name="financialInfo">债券
-            </label>
-            <label class="checkbox inline">
-                <input type="checkbox" class="投资性保险" value="投资性保险" name="financialInfo"> 投资性保险
-            </label>
-            <label class="checkbox inline">
-                <input type="checkbox" class="其他" value="其他" name="financialInfo"> 其他
-            </label>
-        </td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">我社存款</td>
-        <td align="left">
-            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="financialDepositOurBank">
-                <core:choose>
-                    <core:when test="${personFinancialAssets.depositOurBank=='3万元内'}">
-                        <option value="${personFinancialAssets.depositOurBank}" selected="selected">3万元内</option>
-                        <option value="3-10万元内">3-10万元内</option>
-                        <option value="10-30万元内">10-30万元内</option>
-                        <option value="30-100万元内">30-100万元内</option>
-                        <option value="100万元以上">100万元以上</option>
-                    </core:when>
-                    <core:when test="${personFinancialAssets.depositOurBank=='3-10万元内'}">
-                        <option value="3万元内">3万元内</option>
-                        <option value="${personFinancialAssets.depositOurBank}" selected="selected">3-10万元内</option>
-                        <option value="10-30万元内">10-30万元内</option>
-                        <option value="30-100万元内">30-100万元内</option>
-                        <option value="100万元以上">100万元以上</option>
-                    </core:when>
-                    <core:when test="${personFinancialAssets.depositOurBank=='10-30万元内'}">
-                        <option value="3万元内">3万元内</option>
-                        <option value="3-10万元内">3-10万元内</option>
-                        <option value="${personFinancialAssets.depositOurBank}" selected="selected">10-30万元内</option>
-                        <option value="30-100万元内">30-100万元内</option>
-                        <option value="100万元以上">100万元以上</option>
-                    </core:when>
-                    <core:when test="${personFinancialAssets.depositOurBank=='30-100万元内'}">
-                        <option value="3万元内">3万元内</option>
-                        <option value="3-10万元内">3-10万元内</option>
-                        <option value="10-30万元内">10-30万元内</option>
-                        <option value="${personFinancialAssets.depositOurBank}" selected="selected">30-100万元内</option>
-                        <option value="100万元以上">100万元以上</option>
-                    </core:when>
-                    <core:otherwise>
-                        <option value="10万以内">10万以内</option>
-                        <option value="10-30万">10-30万</option>
-                        <option value="30-60万">30-60万</option>
-                        <option value="60-100万">60-100万</option>
-                        <option value="${personFinancialAssets.depositOurBank}" selected="selected">100万以上</option>
-                    </core:otherwise>
-                </core:choose>
-            </select>
-        </td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">他行存款</td>
-        <td align="left">
-            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="financialDepositOtherBank">
-                <core:choose>
-                    <core:when test="${personFinancialAssets.depositOtherBank=='3万元内'}">
-                        <option value="${personFinancialAssets.depositOtherBank}" selected="selected">3万元内</option>
-                        <option value="3-10万元内">3-10万元内</option>
-                        <option value="10-30万元内">10-30万元内</option>
-                        <option value="30-100万元内">30-100万元内</option>
-                        <option value="100万元以上">100万元以上</option>
-                    </core:when>
-                    <core:when test="${personFinancialAssets.depositOtherBank=='3-10万元内'}">
-                        <option value="3万元内">3万元内</option>
-                        <option value="${personFinancialAssets.depositOtherBank}" selected="selected">3-10万元内</option>
-                        <option value="10-30万元内">10-30万元内</option>
-                        <option value="30-100万元内">30-100万元内</option>
-                        <option value="100万元以上">100万元以上</option>
-                    </core:when>
-                    <core:when test="${personFinancialAssets.depositOtherBank=='10-30万元内'}">
-                        <option value="3万元内">3万元内</option>
-                        <option value="3-10万元内">3-10万元内</option>
-                        <option value="${personFinancialAssets.depositOtherBank}" selected="selected">10-30万元内</option>
-                        <option value="30-100万元内">30-100万元内</option>
-                        <option value="100万元以上">100万元以上</option>
-                    </core:when>
-                    <core:when test="${personFinancialAssets.depositOtherBank=='30-100万元内'}">
-                        <option value="3万元内">3万元内</option>
-                        <option value="3-10万元内">3-10万元内</option>
-                        <option value="10-30万元内">10-30万元内</option>
-                        <option value="${personFinancialAssets.depositOtherBank}" selected="selected">30-100万元内</option>
-                        <option value="100万元以上">100万元以上</option>
-                    </core:when>
-                    <core:otherwise>
-                        <option value="10万以内">10万以内</option>
-                        <option value="10-30万">10-30万</option>
-                        <option value="30-60万">30-60万</option>
-                        <option value="60-100万">60-100万</option>
-                        <option value="${personFinancialAssets.depositOtherBank}" selected="selected">100万以上</option>
-                    </core:otherwise>
-                </core:choose>
-            </select>
-        </td>
-    </tr>
-</core:forEach>
+<tr>
+    <td align="center" bgcolor="#b4d8ed" style="color:#161823">情况</td>
+    <td align="left" colspan="3"><%--${personFinancialAssets.financialInfo}--%>
+        <core:forEach items="${personFinancialAssets.financialInfo}" var="financialInfo">
+            <input type="text" value="${financialInfo}" style="display: none" class="financialInfo"/>
+        </core:forEach>
+        <label class="checkbox inline">
+            <input type="checkbox" class="活期存款" value="活期存款" name="financialInfo"> 活期存款
+        </label>
+        <label class="checkbox inline">
+            <input type="checkbox" class="定期存款" value="定期存款" name="financialInfo">定期存款
+        </label>
+        <label class="checkbox inline">
+            <input type="checkbox" class="股票" value="股票" name="financialInfo"> 股票
+        </label>
+        <label class="checkbox inline">
+            <input type="checkbox" class="基金" value="基金" name="financialInfo"> 基金
+        </label>
+        <label class="checkbox inline">
+            <input type="checkbox" class="债券" value="债券" name="financialInfo">债券
+        </label>
+        <label class="checkbox inline">
+            <input type="checkbox" class="投资性保险" value="投资性保险" name="financialInfo"> 投资性保险
+        </label>
+        <label class="checkbox inline">
+            <input type="checkbox" class="其他" value="其他" name="financialInfo"> 其他
+        </label>
+    </td>
+    <td align="center" bgcolor="#b4d8ed" style="color:#161823">我社存款</td>
+    <td align="left">
+        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="financialDepositOurBank">
+            <core:choose>
+                <core:when test="${personFinancialAssets.depositOurBank=='3万元内'}">
+                    <option value="${personFinancialAssets.depositOurBank}" selected="selected">3万元内</option>
+                    <option value="3-10万元内">3-10万元内</option>
+                    <option value="10-30万元内">10-30万元内</option>
+                    <option value="30-100万元内">30-100万元内</option>
+                    <option value="100万元以上">100万元以上</option>
+                </core:when>
+                <core:when test="${personFinancialAssets.depositOurBank=='3-10万元内'}">
+                    <option value="3万元内">3万元内</option>
+                    <option value="${personFinancialAssets.depositOurBank}" selected="selected">3-10万元内</option>
+                    <option value="10-30万元内">10-30万元内</option>
+                    <option value="30-100万元内">30-100万元内</option>
+                    <option value="100万元以上">100万元以上</option>
+                </core:when>
+                <core:when test="${personFinancialAssets.depositOurBank=='10-30万元内'}">
+                    <option value="3万元内">3万元内</option>
+                    <option value="3-10万元内">3-10万元内</option>
+                    <option value="${personFinancialAssets.depositOurBank}" selected="selected">10-30万元内</option>
+                    <option value="30-100万元内">30-100万元内</option>
+                    <option value="100万元以上">100万元以上</option>
+                </core:when>
+                <core:when test="${personFinancialAssets.depositOurBank=='30-100万元内'}">
+                    <option value="3万元内">3万元内</option>
+                    <option value="3-10万元内">3-10万元内</option>
+                    <option value="10-30万元内">10-30万元内</option>
+                    <option value="${personFinancialAssets.depositOurBank}" selected="selected">30-100万元内</option>
+                    <option value="100万元以上">100万元以上</option>
+                </core:when>
+                <core:otherwise>
+                    <option value="10万以内">10万以内</option>
+                    <option value="10-30万">10-30万</option>
+                    <option value="30-60万">30-60万</option>
+                    <option value="60-100万">60-100万</option>
+                    <option value="${personFinancialAssets.depositOurBank}" selected="selected">100万以上</option>
+                </core:otherwise>
+            </core:choose>
+        </select>
+    </td>
+    <td align="center" bgcolor="#b4d8ed" style="color:#161823">他行存款</td>
+    <td align="left">
+        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="financialDepositOtherBank">
+            <core:choose>
+                <core:when test="${personFinancialAssets.depositOtherBank=='3万元内'}">
+                    <option value="${personFinancialAssets.depositOtherBank}" selected="selected">3万元内</option>
+                    <option value="3-10万元内">3-10万元内</option>
+                    <option value="10-30万元内">10-30万元内</option>
+                    <option value="30-100万元内">30-100万元内</option>
+                    <option value="100万元以上">100万元以上</option>
+                </core:when>
+                <core:when test="${personFinancialAssets.depositOtherBank=='3-10万元内'}">
+                    <option value="3万元内">3万元内</option>
+                    <option value="${personFinancialAssets.depositOtherBank}" selected="selected">3-10万元内</option>
+                    <option value="10-30万元内">10-30万元内</option>
+                    <option value="30-100万元内">30-100万元内</option>
+                    <option value="100万元以上">100万元以上</option>
+                </core:when>
+                <core:when test="${personFinancialAssets.depositOtherBank=='10-30万元内'}">
+                    <option value="3万元内">3万元内</option>
+                    <option value="3-10万元内">3-10万元内</option>
+                    <option value="${personFinancialAssets.depositOtherBank}" selected="selected">10-30万元内</option>
+                    <option value="30-100万元内">30-100万元内</option>
+                    <option value="100万元以上">100万元以上</option>
+                </core:when>
+                <core:when test="${personFinancialAssets.depositOtherBank=='30-100万元内'}">
+                    <option value="3万元内">3万元内</option>
+                    <option value="3-10万元内">3-10万元内</option>
+                    <option value="10-30万元内">10-30万元内</option>
+                    <option value="${personFinancialAssets.depositOtherBank}" selected="selected">30-100万元内</option>
+                    <option value="100万元以上">100万元以上</option>
+                </core:when>
+                <core:otherwise>
+                    <option value="10万以内">10万以内</option>
+                    <option value="10-30万">10-30万</option>
+                    <option value="30-60万">30-60万</option>
+                    <option value="60-100万">60-100万</option>
+                    <option value="${personFinancialAssets.depositOtherBank}" selected="selected">100万以上</option>
+                </core:otherwise>
+            </core:choose>
+        </select>
+    </td>
+</tr>
 <tr>
     <td align="center" colspan="8" style="font-size:22px">
         家庭负债情况
     </td>
 </tr>
-<core:forEach items="${personFamilyIncurDebtsList}" var="personFamilyIncurDebts">
-   <%-- <input type="hidden" name="id" value="${personFamilyIncurDebts.id}"/>--%>
     <tr>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">
             家庭负债总额（万元）
@@ -2518,7 +2513,6 @@
                    style="width: 270px;height: 30px; margin-top: 5px;">
         </td>
     </tr>
-</core:forEach>
 <tr>
     <td align="center" colspan="8" style="font-size:22px">
         家庭成员基本情况

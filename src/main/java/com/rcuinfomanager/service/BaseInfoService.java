@@ -1,6 +1,7 @@
 package com.rcuinfomanager.service;
 
 import com.rcuinfomanager.dao.BaseInfoDao;
+import com.rcuinfomanager.dao.VillageManagerEvaDao;
 import com.rcuinfomanager.model.*;
 import com.rcuinfomanager.webservice.model.AllColumnInfo;
 import com.rcuinfomanager.webservice.model.SubmitItem;
@@ -254,7 +255,7 @@ public class BaseInfoService {
 
     public boolean isAccepted(String cerNum) {
         int status = baseInfoDao.getStatusByCerNum(cerNum);
-        if (status == 2) {
+        if (status == 3 || status == 4) {
             return true;
         }
 
@@ -264,10 +265,6 @@ public class BaseInfoService {
     //二
     public FinanceServices getFinanceService(long id){
         return baseInfoDao.getFinanceServicesList(id);
-    }
-    //三
-    public VillageManagerEva getVillageManagerEvaList(long id){
-        return baseInfoDao.getVillageManagerEvaList(id);
     }
     //四
     public CustomerManagerEva getCustomerManagerEvaList(long id){
@@ -289,47 +286,4 @@ public class BaseInfoService {
     public void saveCarsinfo(CarsInfo carsInfo){
         baseInfoDao.saveCarsinfo(carsInfo);
     }
-
-    public void saveVillageManagerEva(VillageManagerEva villageManagerEva) {
-        baseInfoDao.saveVillageManagerEva(villageManagerEva);
-    }
-    //删除
-    public void deleteHouseInfoByAssetsId(long assetsId){
-        baseInfoDao.deleteHouseInfoByAssetsId(assetsId);
-    }
-    public void deleteLandInfoByAssetsId(long assetsId){
-        baseInfoDao.deleteLandInfoByAssetsId(assetsId);
-    }
-    public void deleteCarsinfoByAssetsId(long assetsId){
-        baseInfoDao.deleteCarsinfoByAssetsId(assetsId);
-    }
-
-    public void deleteBaseInfoByRecordId(Long recordId){
-        baseInfoDao.deleteBaseInfoByRecordId(recordId);
-    }
-    public void deleteIncomeExpensesByRecordId(Long id){
-        baseInfoDao.deleteIncomeExpensesByRecordId(id);
-    }
-    public void deleteFamilyAssetsByAssetsId(Long assetsId){
-        baseInfoDao.deleteFamilyAssetsByAssetsId(assetsId);
-    }
-    public void deleteFinancialAssetsByAssetsId(Long id){
-        baseInfoDao.deleteFinancialAssetsByAssetsId(id);
-    }
-    public void deleteFamilyIncurDebtsByRecordId(Long id){
-        baseInfoDao.deleteFamilyIncurDebtsByRecordId(id);
-    }
-    public void deleteFamilyMemberInfoByRecordId(Long id){
-        baseInfoDao.deleteFamilyMemberInfoByRecordId(id);
-    }
-    public void deleteFinanceServicesByRecordId(Long recordId){
-        baseInfoDao.deleteFinanceServicesByRecordId(recordId);
-    }
-    public void deleteVillageManagerEvaByRecordId(Long recordId){
-        baseInfoDao.deleteVillageManagerEvaByRecordId(recordId);
-    }
-    public void deleteCustomerManagerEvaByRecordId(Long recordId){
-        baseInfoDao.deleteCustomerManagerEvaByRecordId(recordId);
-    }
-
 }

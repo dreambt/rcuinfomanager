@@ -190,7 +190,7 @@ CREATE TABLE `customermanagereva` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `recordId` bigint(20) DEFAULT NULL,
   `loanSitu` varchar(50) DEFAULT NULL,
-  `creditRecord` varchar(150) DEFAULT NULL,
+  `creditRecord` varchar(500) DEFAULT NULL,
   `otherBankRecord` varchar(150) DEFAULT NULL,
   `houseToMoney` varchar(20) DEFAULT NULL,
   `note1` varchar(200) DEFAULT NULL,

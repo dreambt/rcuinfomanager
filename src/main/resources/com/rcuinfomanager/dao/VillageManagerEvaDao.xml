@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rcuinfomanager.dao.VillageManagerEvaDao">
+
+    <insert id="saveVillageManagerEva" parameterType="com.rcuinfomanager.model.VillageManagerEva">
+        insert into villagemanagereva(recordId,truth,localLivingTime,operatingCapacity,projectPotential,operationalRisks,
+          developmentProspects,operatingStability,capitaNetIncomeLevel,disposableIncomeLevel,familyPropertyLevel,payTaxes,
+          respectSitu,neighborhood,publicWelfareLevel,creditworthiness,conduct,praised,supplement,isImportantObject)
+        values(#{recordId},#{truth},#{localLivingTime},#{operatingCapacity},#{projectPotential},#{operationalRisks},
+        #{developmentProspects},#{operatingStability},#{capitaNetIncomeLevel},#{disposableIncomeLevel},#{familyPropertyLevel},#{payTaxes},
+        #{respectSitu},#{neighborhood},#{publicWelfareLevel},#{creditworthiness},#{conduct},#{praised},#{supplement},#{isImportantObject})
+    </insert>
+
+    <update id="updateVillageManagerEva" parameterType="com.rcuinfomanager.model.VillageManagerEva">
+        update villagemanagereva set recordId = #{recordId},truth = #{truth},localLivingTime = #{localLivingTime},operatingCapacity = #{operatingCapacity},
+          projectPotential = #{projectPotential},operationalRisks = #{operationalRisks},developmentProspects = #{developmentProspects},
+          operatingStability = #{operatingStability},capitaNetIncomeLevel = #{capitaNetIncomeLevel},disposableIncomeLevel = #{disposableIncomeLevel},
+          familyPropertyLevel = #{familyPropertyLevel},payTaxes = #{payTaxes},respectSitu = #{respectSitu},neighborhood = #{neighborhood},
+          publicWelfareLevel = #{publicWelfareLevel},creditworthiness = #{creditworthiness},conduct = #{conduct},praised = #{praised},
+          supplement = #{supplement},isImportantObject = #{importantObject}
+        where id = #{id}
+    </update>
+
+
+    <select id="getVillageManagerEvaList" resultType="com.rcuinfomanager.model.VillageManagerEva">
+          select * from villagemanagereva  where recordId=#{id}
+    </select>
+
+</mapper>

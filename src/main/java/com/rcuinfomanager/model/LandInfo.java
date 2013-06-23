@@ -65,4 +65,12 @@ public class LandInfo {
     public void setAssetsId(long assetsId) {
         this.assetsId = assetsId;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

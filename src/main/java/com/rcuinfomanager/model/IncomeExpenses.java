@@ -15,15 +15,6 @@ public class IncomeExpenses {
     private String fmExpensesProj;
     private String fmInOutRatio;
 
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
     public long getRecordId() {
         return recordId;
     }
@@ -31,7 +22,7 @@ public class IncomeExpenses {
     public void setRecordId(long recordId) {
         this.recordId = recordId;
     }
-
+    
     public String getFmAllIncome() {
         return fmAllIncome;
     }
@@ -118,5 +109,13 @@ public class IncomeExpenses {
 
     public void setFmInOutRatio(String fmInOutRatio) {
         this.fmInOutRatio = fmInOutRatio;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

@@ -12,9 +12,11 @@
     <link href="/asserts/css/doc.css" rel="stylesheet" media="screen">
     <link href="/asserts/css/style.css" rel="stylesheet" media="screen">
     <link id="artDialog-skin" href="/asserts/js/dialog/skins/opera.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/asserts/css/jquery.fancybox.css"/>
     <script src="/asserts/js/jquery-1.7.2.min.js"></script>
     <script src="/asserts/js/bootstrap.min.js"></script>
     <script src="/asserts/js/dialog/artDialog.js"></script>
+    <script src="/asserts/js/jquery.fancybox.js"></script>
     <script type="text/javascript">
         $(function(){
             //左侧菜单样式控制
@@ -28,57 +30,70 @@
             }
 
             $('.usedProduct').each(function(index,element){
-                $('.'+$(element).val()).prop('checked', true);
+                $('.'+$(element).val().split(",")[$(element).val().split(",").length-1].replace(/\“|（|、|）|”/g, '')).prop('checked', true);
             });
 
             $('.socialSecurity').each(function(index,element){
-                $('.'+$(element).val()).prop('checked', true);
+                $('.'+$(element).val().split(",")[$(element).val().split(",").length-1].replace(/\“|（|、|）|”/g, '')).prop('checked', true);
             });
             $('.mainAssets').each(function(index,element){
-                $('.'+$(element).val()).prop('checked', true);
+                $('.'+$(element).val().split(",")[$(element).val().split(",").length-1].replace(/\“|（|、|）|”/g, '')).prop('checked', true);
             });
             $('.financialInfo').each(function(index,element){
-                $('.'+$(element).val()).prop('checked', true);
+                $('.'+$(element).val().split(",")[$(element).val().split(",").length-1].replace(/\“|（|、|）|”/g, '')).prop('checked', true);
             });
             $('.guarantee').each(function(index,element){
-                $('.'+$(element).val()).prop('checked', true);
+                $('.'+$(element).val().split(",")[$(element).val().split(",").length-1].replace(/\“|（|、|）|”/g, '')).prop('checked', true);
             });
             $('.moneyTodo').each(function(index,element){
-                $('.'+$(element).val()).prop('checked', true);
+                $('.'+$(element).val().split(",")[$(element).val().split(",").length-1].replace(/\“|（|、|）|”/g, '')).prop('checked', true);
             });
             $('.fmDepositTodo').each(function(index,element){
-                $('.'+$(element).val()).prop('checked', true);
+                $('.'+$(element).val().split(",")[$(element).val().split(",").length-1].replace(/\“|（|、|）|”/g, '')).prop('checked', true);
             });
             $('.needServices').each(function(index,element){
-                $('.'+$(element).val()).prop('checked', true);
+                $('.'+$(element).val().split(",")[$(element).val().split(",").length-1].replace(/\“|（|、|）|”/g, '')).prop('checked', true);
             });
             $('.needServicesElse').each(function(index,element){
-                $('.'+$(element).val()).prop('checked', true);
+                $('.'+$(element).val().split(",")[$(element).val().split(",").length-1].replace(/\“|（|、|）|”/g, '')).prop('checked', true);
             });
             $('.bankCard').each(function(index,element){
-                $('.'+$(element).val()).prop('checked', true);
+                $('.'+$(element).val().split(",")[$(element).val().split(",").length-1].replace(/\“|（|、|）|”/g, '')).prop('checked', true);
             });
 
             $('.electronBank').each(function(index,element){
-                $('.'+$(element).val()).prop('checked', true);
+                $('.'+$(element).val().split(",")[$(element).val().split(",").length-1].replace(/\“|（|、|）|”/g, '')).prop('checked', true);
             });
 
             $('.agentPay').each(function(index,element){
-                $('.'+$(element).val()).prop('checked', true);
+                $('.'+$(element).val().split(",")[$(element).val().split(",").length-1].replace(/\“|（|、|）|”/g, '')).prop('checked', true);
             });
             $('.auto').each(function(index,element){
-                $('.'+$(element).val()).prop('checked', true);
+                $('.'+$(element).val().split(",")[$(element).val().split(",").length-1].replace(/\“|（|、|）|”/g, '')).prop('checked', true);
             });
             $('.privateLoan').each(function(index,element){
-                $('.'+$(element).val()).prop('checked', true);
+                $('.'+$(element).val().split(",")[$(element).val().split(",").length-1].replace(/\“|（|、|）|”/g, '')).prop('checked', true);
             });
             $('.publicLoan').each(function(index,element){
-                $('.'+$(element).val()).prop('checked', true);
+                $('.'+$(element).val().split(",")[$(element).val().split(",").length-1].replace(/\“|（|、|）|”/g, '')).prop('checked', true);
             });
 
             $('.creditRecord').each(function(index,element){
-                $('.'+$(element).val()).prop('checked', true);
+                $('.'+$(element).val().split(",")[$(element).val().split(",").length-1].replace(/\“|（|、|）|”/g, '')).prop('checked', true);
             });
+
+            $('.finaServiceMoneyTodo').each(function(index,element){
+                $('.'+$(element).val().split(",")[$(element).val().split(",").length-1].replace(/\“|（|、|）|”/g, '')).prop('checked', true);
+            });
+
+            $('.finaServicesNeedServicesElse').each(function(index,element){
+                $('.'+$(element).val().split(",")[$(element).val().split(",").length-1].replace(/\“|（|、|）|”/g, '')).prop('checked', true);
+            });
+
+            $('.finaServicePublicLoan').each(function(index,element){
+                $('.'+$(element).val().split(",")[$(element).val().split(",").length-1].replace(/\“|（|、|）|”/g, '')).prop('checked', true);
+            });
+
 
             //增加房产
             $('#addHouseOpera').click(function(){
@@ -118,6 +133,19 @@
                 $('#editForm').submit();
             });
 
+            $('#photo').click(function(){
+                var imgs = new Array()
+                $(".img").each(function( index,element ) {
+                    imgs[index] = $(element).attr('img')
+                });
+                $.fancybox(imgs, {
+                    'padding'			: 0,
+                    'transitionIn'		: 'none',
+                    'transitionOut'		: 'none',
+                    'type'              : 'image',
+                    'changeFade'        : 0
+                });
+            });
 
         });
     </script>
@@ -221,7 +249,7 @@
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">是否农户</td>
     <td align="left">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="farmer">
+        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="isFarmer">
             <core:choose>
                 <core:when test="${personBasicList.farmer==0}">
                     <option value="${personBasicList.farmer}" selected="selected">否</option>
@@ -270,7 +298,17 @@
                style="width: 175px;height: 30px; margin-top: 5px;">
     </td>
     <td align="center" colspan="2" rowspan="4">
-        <img src="${personBasicList.photoUri}" class="img-rounded">
+        <core:choose>
+            <core:when test="${empty imgList}">
+                 &nbsp;
+            </core:when>
+            <core:otherwise>
+                <core:forEach items="${imgList}" var="img" varStatus="idx">
+                    <div style="hidden:hidden" img="/img/${img}" class="img"></div>
+                </core:forEach>
+                <img id="photo" src="/img/${imgList[0]}" class="img-rounded photo">
+            </core:otherwise>
+        </core:choose>
     </td>
 </tr>
 <tr>
@@ -296,7 +334,7 @@
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">是否拥有外国护照或居住权</td>
     <td align="left">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="havePassport">
+        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="isHavePassport">
             <core:choose>
                 <core:when test="${personBasicList.havePassport==0}">
                     <option value="${personBasicList.havePassport}" selected="selected">否</option>
@@ -504,9 +542,9 @@
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">社会保障情况</td>
     <td align="left" colspan="4"><%--${personBasicList.socialSecurity}--%>
-        <core:forEach items="${personBasicList.socialSecurity}" var="socialSecurity">
-            <input type="text" value="${socialSecurity}" style="display: none" class="socialSecurity"/>
-        </core:forEach>
+        <core:if test="${personBasicList.socialSecurity != ''}">
+            <input type="text" value="${personBasicList.socialSecurity}" style="display: none" class="socialSecurity"/>
+        </core:if>
         <label class="checkbox inline">
             <input type="checkbox" value="养老保险" class="养老保险" name="socialSecurity">养老保险
         </label>
@@ -1566,8 +1604,7 @@
     </td>
 </tr>
 <core:forEach items="${personIncomeExpensesList}" var="personIncomeExpenses">
-    <input type="hidden" name="id" value="${personIncomeExpenses.id}">
-    <input type="hidden" name="assetsId" value="${personIncomeExpenses.assetsId}">
+    <%--<input type="hidden" name="id" value="${personIncomeExpenses.id}">--%>
     <tr>
         <td align="center" colspan="2" bgcolor="#b4d8ed" style="color:#161823">
             家庭年总收入（万元）
@@ -1587,7 +1624,7 @@
             收入来源
         </td>
         <td align="left" colspan="7">
-            <input class="input-small" type="text" name="incomeSrc" value="${personIncomeExpenses.incomeSrc}"
+            <input class="input-small" type="text" name="fmIncomeSrc" value="${personIncomeExpenses.incomeSrc}"
                    style="width: 595px;height: 30px; margin-top: 5px;">
         </td>
     </tr>
@@ -1596,7 +1633,7 @@
             其中：个人年收入（万元）
         </td>
         <td align="left" colspan="2">
-            <input class="input-small" type="text" name="perIncome" value="${personIncomeExpenses.perIncome}"
+            <input class="input-small" type="text" name="fmPerIncome" value="${personIncomeExpenses.perIncome}"
                    style="width: 155px;height: 30px; margin-top: 5px;">
         </td>
         <td align="center" colspan="2" bgcolor="#b4d8ed" style="color:#161823">家庭其他成员年收入（万元）</td>
@@ -1712,7 +1749,7 @@
 </tr>
 
 <core:forEach items="${personHousePropertyInfoList}" var="personHousePropertyInfo" varStatus="idx">
-<input name="houseInfos[${idx.index}].id" value="${personHousePropertyInfo.id}" type="hidden" />
+    <input name="houseInfos[${idx.index}].id" value="${personHousePropertyInfo.id}" type="hidden" />
     <tr>
         <td align="left" colspan="8" style="font-size:18px">
             房产：<core:out value="${idx.index+1}"></core:out>
@@ -2288,7 +2325,7 @@
     </td>
 </tr>
 <core:forEach items="${personFinancialAssetsList}" var="personFinancialAssets">
-    <input type="hidden" name="id" value="${personFinancialAssets.id}">
+    <%--<input type="hidden" name="id" value="${personFinancialAssets.id}">--%>
     <tr>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">情况</td>
         <td align="left" colspan="3"><%--${personFinancialAssets.financialInfo}--%>
@@ -2409,7 +2446,7 @@
     </td>
 </tr>
 <core:forEach items="${personFamilyIncurDebtsList}" var="personFamilyIncurDebts">
-    <input type="hidden" name="id" value="${personFamilyIncurDebts.id}"/>
+   <%-- <input type="hidden" name="id" value="${personFamilyIncurDebts.id}"/>--%>
     <tr>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">
             家庭负债总额（万元）
@@ -2563,10 +2600,10 @@
 <!--2-->
 <div class="tab-pane" id="tab2">
 <div class="pad-10">
-<div class="table-list" style="table-layout:fixed; height:345px; overflow:scroll;">
+<div class="table-list" >
 <table width="100%" border="1">
 <tbody>
-<input type="hidden" name="id" value="${financeServicesLists.id}"/>
+<%--<input type="hidden" name="id" value="${financeServicesLists.id}"/>--%>
 <tr>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">
         您目前使用我行（社）的哪些产品
@@ -2733,7 +2770,7 @@
         您希望得到的贷款期限是多久？
     </td>
     <td align="left">
-        <input class="input-small" type="text" name="financeServiceTimeLimit" value="${financeServicesLists.timeLimit}"
+        <input class="input-small" type="text" name="finaServiceTimeLimit" value="${financeServicesLists.timeLimit}"
                style="width: 165px;height: 30px; margin-top: 5px;">
     </td>
 </tr>
@@ -2746,7 +2783,7 @@
             <input type="text" value="${fmDepositTodo}" style="display: none" class="fmDepositTodo"/>
         </core:forEach>
         <label class="checkbox inline">
-            <input type="checkbox" class="做生意" value="做生意" name=" finaServicesFmDepositTodo"> 做生意
+            <input type="checkbox" class="做生意" value="做生意" name="finaServicesFmDepositTodo"> 做生意
         </label>
         <label class="checkbox inline">
             <input type="checkbox" class="子女上学" value="子女上学" name="finaServicesFmDepositTodo"> 子女上学
@@ -2884,10 +2921,10 @@
             <input type="text" value="${electronBank}" style="display: none" class="electronBank"/>
         </core:forEach>
         <label class="checkbox inline">
-            <input type="checkbox" class="短信银行" value="短信银行" name="finaServiceElectronBank"> 短信银行
+            <input type="checkbox" class="短信银行" value="短信银行" name="finaServiceEleBankBusiness"> 短信银行
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="电话银行" value="电话银行" name="finaServiceElectronBank"> 电话银行
+            <input type="checkbox" class="电话银行" value="电话银行" name="finaServiceEleBankBusiness"> 电话银行
         </label>
         <label class="checkbox inline">
             <input type="checkbox" class="网上银行" value="网上银行" name="finaServiceElectronBank">  网上银行
@@ -2906,22 +2943,22 @@
             <input type="text" value="${agentPay}" style="display: none" class="agentPay"/>
         </core:forEach>
         <label class="checkbox inline">
-            <input type="checkbox" class="代缴水费" value="代缴水费" name="finaServiceAgentPay"> 代缴水费
+            <input type="checkbox" class="代缴水费" value="代缴水费" name="finaServiceAgentPayBusiness"> 代缴水费
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="代缴电费" value="代缴电费" name="finaServiceAgentPay"> 代缴电费
+            <input type="checkbox" class="代缴电费" value="代缴电费" name="finaServiceAgentPayBusiness"> 代缴电费
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="代缴烟草费" value="代缴烟草费" name="finaServiceAgentPay"> 代缴烟草费
+            <input type="checkbox" class="代缴烟草费" value="代缴烟草费" name="finaServiceAgentPayBusiness"> 代缴烟草费
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="代发工资" value="代发工资" name="finaServiceAgentPay"> 代发工资
+            <input type="checkbox" class="代发工资" value="代发工资" name="finaServiceAgentPayBusiness"> 代发工资
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="电子扣税" value="电子扣税" name="finaServiceAgentPay">  电子扣税
+            <input type="checkbox" class="电子扣税" value="电子扣税" name="finaServiceAgentPayBusiness">  电子扣税
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="保险费代扣" value="保险费代扣" name="finaServiceAgentPay"> 保险费代扣
+            <input type="checkbox" class="保险费代扣" value="保险费代扣" name="finaServiceAgentPayBusiness"> 保险费代扣
         </label>
     </td>
 </tr>
@@ -2979,24 +3016,24 @@
         </label>
         <br>
         <label class="checkbox inline">
-            <input type="checkbox" class="万通宝”农户小额贷" value="“万通宝”农户小额贷" name="finaServicePrivateLoan"> “万通宝”农户小额贷
+            <input type="checkbox" class="万通宝农户小额贷" value="“万通宝”农户小额贷" name="finaServicePrivateLoan"> “万通宝”农户小额贷
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="“万通宝”个人经营贷款" value="“万通宝”个人经营贷款" name="finaServicePrivateLoan"> “万通宝”个人经营贷款
-        </label>
-        <br>
-        <label class="checkbox inline">
-            <input type="checkbox" class="组合宝”农户小额贷" value="“组合宝”农户小额贷" name="finaServicePrivateLoan"> 组合宝”农户小额贷
-        </label>
-        <label class="checkbox inline">
-            <input type="checkbox" class="组合宝”个人经营贷款" value="组合宝”个人经营贷款" name="finaServicePrivateLoan"> 组合宝”个人经营贷款
+            <input type="checkbox" class="万通宝个人经营贷款" value="“万通宝”个人经营贷款" name="finaServicePrivateLoan"> “万通宝”个人经营贷款
         </label>
         <br>
         <label class="checkbox inline">
-            <input type="checkbox" class="保无忧”新农保参保人员贷款" value="保无忧”新农保参保人员贷款" name="finaServicePrivateLoan"> 保无忧”新农保参保人员贷款
+            <input type="checkbox" class="组合宝农户小额贷" value="“组合宝”农户小额贷" name="finaServicePrivateLoan"> 组合宝”农户小额贷
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="“两女”户计生贴息贷" value="“两女”户计生贴息贷" name="finaServicePrivateLoan"> “两女”户计生贴息贷
+            <input type="checkbox" class="组合宝个人经营贷款" value="组合宝”个人经营贷款" name="finaServicePrivateLoan"> 组合宝”个人经营贷款
+        </label>
+        <br>
+        <label class="checkbox inline">
+            <input type="checkbox" class="保无忧新农保参保人员贷款" value="保无忧”新农保参保人员贷款" name="finaServicePrivateLoan"> 保无忧”新农保参保人员贷款
+        </label>
+        <label class="checkbox inline">
+            <input type="checkbox" class="两女户计生贴息贷" value="“两女”户计生贴息贷" name="finaServicePrivateLoan"> “两女”户计生贴息贷
         </label>
         <br>
         <label class="checkbox inline">
@@ -3013,7 +3050,7 @@
             <input type="checkbox" class="农户异地创业贷款" value="农户异地创业贷款" name="finaServicePrivateLoan">农户异地创业贷款
         </label>
         <label class="checkbox inline">
-            <input type="checkbox" class="“惠村通”" value="“惠村通”" name="finaServicePrivateLoan">“惠村通”
+            <input type="checkbox" class="惠村通" value="“惠村通”" name="finaServicePrivateLoan">“惠村通”
         </label>
         <br>
         <label class="checkbox inline">
@@ -3099,13 +3136,13 @@
 <div class="table-list">
 <table width="100%" border="1" cellspacing="0" width="732px" color="#727f8a;">
 <tbody>
- <input type="hidden" name="id" value="${villageManagerEvaList.id}"/>
+<%-- <input type="hidden" name="id" value="${villageManagerEvaList.id}"/>--%>
 <tr>
     <td width="27%" align="left" bgcolor="#b4d8ed" style="color:#161823">
         一、客户基本资料真实性
     </td>
     <td width="73%" align="left">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="truth">
+        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="villageManagerEva.truth">
             <core:choose>
                 <core:when test="${villageManagerEvaList.truth=='基本准确'}">
                     <option value="${villageManagerEvaList.truth}" selected="selected">基本准确</option>
@@ -3140,7 +3177,7 @@
         二、本地居住时间（农户）
     </td>
     <td align="left">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="localLivingTime">
+        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="villageManagerEva.localLivingTime">
             <core:choose>
                 <core:when test="${villageManagerEvaList.localLivingTime=='5年(含)以下'}">
                     <option value="${villageManagerEvaList.localLivingTime}" selected="selected">5年(含)以下</option>
@@ -3159,7 +3196,7 @@
         三、经营能力
     </td>
     <td width="73%" align="left">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="operatingCapacity">
+        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="villageManagerEva.operatingCapacity">
             <core:choose>
                 <core:when test="${villageManagerEvaList.operatingCapacity=='经验丰富,技术水平高,能力强'}">
                     <option value="${villageManagerEvaList.operatingCapacity}" selected="selected">经验丰富,技术水平高,能力强</option>
@@ -3194,7 +3231,7 @@
         四、项目潜质
     </td>
     <td align="left">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="projectPotential">
+        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="villageManagerEva.projectPotential">
             <core:choose>
                 <core:when test="${villageManagerEvaList.projectPotential=='优秀'}">
                     <option value="${villageManagerEvaList.projectPotential}" selected="selected">优秀</option>
@@ -3229,7 +3266,7 @@
         五、市场经营风险
     </td>
     <td width="73%" align="left">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="operationalRisks">
+        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="villageManagerEva.operationalRisks">
             <core:choose>
                 <core:when test="${villageManagerEvaList.operationalRisks=='很低'}">
                     <option value="${villageManagerEvaList.operationalRisks}" selected="selected">很低</option>
@@ -3264,7 +3301,7 @@
         六、市场竞争力和发展前景
     </td>
     <td align="left">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="developmentProspects">
+        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="villageManagerEva.developmentProspects">
             <core:choose>
                 <core:when test="${villageManagerEvaList.developmentProspects=='很好'}">
                     <option value="${villageManagerEvaList.developmentProspects}" selected="selected">很好</option>
@@ -3299,7 +3336,7 @@
         七、生产经营力或工作稳定情况
     </td>
     <td width="73%" align="left">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="operatingStability">
+        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="villageManagerEva.operatingStability">
             <core:choose>
                 <core:when test="${villageManagerEvaList.operatingStability=='强'}">
                     <option value="${villageManagerEvaList.operatingStability}" selected="selected">强</option>
@@ -3345,7 +3382,7 @@
         八、家庭人均纯收入水平（农户）
     </td>
     <td align="left">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="capitaNetIncomeLevel">
+        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="villageManagerEva.capitaNetIncomeLevel">
             <core:choose>
                 <core:when test="${villageManagerEvaList.capitaNetIncomeLevel=='高收入'}">
                     <option value="${villageManagerEvaList.capitaNetIncomeLevel}" selected="selected">高收入</option>
@@ -3391,7 +3428,7 @@
         九、家庭人均可支配收入水平（非农户）
     </td>
     <td width="73%" align="left">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="disposableIncomeLevel">
+        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="villageManagerEva.disposableIncomeLevel">
             <core:choose>
                 <core:when test="${villageManagerEvaList.disposableIncomeLevel=='最高收入'}">
                     <option value="${villageManagerEvaList.disposableIncomeLevel}" selected="selected">最高收入</option>
@@ -3465,7 +3502,7 @@
         十、家庭财产水平
     </td>
     <td align="left">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="familyPropertyLevel">
+        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="villageManagerEva.familyPropertyLevel">
             <core:choose>
                 <core:when test="${villageManagerEvaList.familyPropertyLevel=='富足家庭'}">
                     <option value="${villageManagerEvaList.familyPropertyLevel}" selected="selected">富足家庭</option>
@@ -3524,7 +3561,7 @@
         十一、税费缴纳情况（含土地、房产款项）
     </td>
     <td width="73%" align="left">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="payTaxes">
+        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="villageManagerEva.payTaxes">
             <core:choose>
                 <core:when test="${villageManagerEvaList.payTaxes=='正常缴纳'}">
                     <option value="${villageManagerEvaList.payTaxes}" selected="selected">正常缴纳</option>
@@ -3583,7 +3620,7 @@
         十二、敬老情况
     </td>
     <td align="left">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="respectSitu">
+        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="villageManagerEva.respectSitu">
             <core:choose>
                 <core:when test="${villageManagerEvaList.respectSitu=='好'}">
                     <option value="${villageManagerEvaList.respectSitu}" selected="selected">好</option>
@@ -3642,7 +3679,7 @@
         十三、邻里关系
     </td>
     <td width="73%" align="left">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="neighborhood">
+        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="villageManagerEva.neighborhood">
             <core:choose>
                 <core:when test="${villageManagerEvaList.neighborhood=='好'}">
                     <option value="${villageManagerEvaList.neighborhood}" selected="selected">好</option>
@@ -3701,7 +3738,7 @@
         十四、对公益事业关心程度
     </td>
     <td align="left">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="publicWelfareLevel">
+        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="villageManagerEva.publicWelfareLevel">
             <core:choose>
                 <core:when test="${villageManagerEvaList.publicWelfareLevel=='高'}">
                     <option value="${villageManagerEvaList.publicWelfareLevel}" selected="selected">高</option>
@@ -3747,7 +3784,7 @@
         十五、信誉情况
     </td>
     <td width="73%" align="left">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="creditworthiness">
+        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="villageManagerEva.creditworthiness">
             <core:choose>
                 <core:when test="${villageManagerEvaList.creditworthiness=='好'}">
                     <option value="${villageManagerEvaList.creditworthiness}" selected="selected">好</option>
@@ -3782,7 +3819,7 @@
         十六、个人品行综合评价
     </td>
     <td align="left">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="conduct">
+        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="villageManagerEva.conduct">
             <core:choose>
                 <core:when test="${villageManagerEvaList.conduct=='优秀'}">
                     <option value="${villageManagerEvaList.conduct}" selected="selected">优秀</option>
@@ -3841,7 +3878,7 @@
         十七、受表彰情况
     </td>
     <td width="73%" align="left">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="praised">
+        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="villageManagerEva.praised">
             <core:choose>
                 <core:when test="${villageManagerEvaList.praised=='有'}">
                     <option value="${villageManagerEvaList.praised}" selected="selected">有</option>
@@ -3876,7 +3913,8 @@
         十九、是否为我行（社）重点服务对象
     </td>
     <td width="73%" align="left">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="importantObject">
+        <input type="hidden" name="villageManagerEva.id" value="${villageManagerEvaList.id}">
+        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="villageManagerEva.importantObject">
             <core:choose>
                 <core:when test="${villageManagerEvaList.importantObject=='是'}">
                     <option value="${villageManagerEvaList.importantObject}" selected="selected">是</option>
@@ -3908,7 +3946,6 @@
         <div class="table-list">
             <table width="100%" border="1" cellspacing="0" width="732px" color="#727f8a;">
                 <tbody>
-                <input type="hidden" name="id" value="${customerManagerEvaList.id}"/>
                 <tr>
                     <td width="27%" align="center" bgcolor="#b4d8ed" style="color:#161823">
                         客户在他行贷款情况
@@ -3923,31 +3960,29 @@
                         个人银行信用记录
                     </td>
                     <td align="left">            <%--${customerManagerEvaList.creditRecord}  --%>
-                        <core:forEach items="${customerManagerEvaList.creditRecord}" var="creditRecord">
-                            <input type="text" value="${creditRecord}" style="display: none" class="creditRecord"/>
-                        </core:forEach>
+                        <input type="text" value="${customerManagerEvaList.creditRecord}" style="display: none" class="creditRecord"/>
                         <label class="checkbox inline">
-                            <input type="checkbox" class="报告期内能积极主动按期偿本付息,无违约记录" value="报告期内能积极主动按期偿本付息,无违约记录" name="custManagerCreditRecord">
+                            <input type="checkbox" class="无违约记录" value="报告期内能积极主动按期偿本付息,无违约记录" name="custManagerCreditRecord">
                             报告期内能积极主动按期偿本付息,无违约记录
                         </label>
                         <br>
                         <label class="checkbox inline">
-                            <input type="checkbox" class="存在2次(含)以内本金.利息不超过1个月已还清的不良记录,无超过1个月以上不良记录" value="存在2次(含)以内本金.利息不超过1个月已还清的不良记录,无超过1个月以上不良记录" name="custManagerCreditRecord">
+                            <input type="checkbox" class="无超过1个月以上不良记录" value="存在2次(含)以内本金.利息不超过1个月已还清的不良记录,无超过1个月以上不良记录" name="custManagerCreditRecord">
                             存在2次(含)以内本金.利息不超过1个月已还清的不良记录,无超过1个月以上不良记录
                         </label>
                         <br>
                         <label class="checkbox inline">
-                            <input type="checkbox" class="存在3次(含)以上本金.利息不超过1个月已还清的不良记录,无超过1个月以上不良记录" value="存在3次(含)以上本金.利息不超过1个月已还清的不良记录,无超过1个月以上不良记录" name="custManagerCreditRecord">
+                            <input type="checkbox" class="无超过1个月以上不良记录" value="存在3次(含)以上本金.利息不超过1个月已还清的不良记录,无超过1个月以上不良记录" name="custManagerCreditRecord">
                             存在3次(含)以上本金.利息不超过1个月已还清的不良记录,无超过1个月以上不良记录
                         </label>
                         <br>
                         <label class="checkbox inline">
-                            <input type="checkbox" class="存在1-2次(含)本金.利息超过1个月但在3个月以内已还清的不良记录,无超过3个月以上不良记录" value="存在1-2次(含)本金.利息超过1个月但在3个月以内已还清的不良记录,无超过3个月以上不良记录" name="custManagerCreditRecord">
+                            <input type="checkbox" class="无超过3个月以上不良记录" value="存在1-2次(含)本金.利息超过1个月但在3个月以内已还清的不良记录,无超过3个月以上不良记录" name="custManagerCreditRecord">
                             存在1-2次(含)本金.利息超过1个月但在3个月以内已还清的不良记录,无超过3个月以上不良记录
                         </label>
                         <br>
                         <label class="checkbox inline">
-                            <input type="checkbox" class="存在3次(含)以上本金.利息超过1个月但在3个月以内已还清的不良记录,无超过3个月以上不良记录" value="存在3次(含)以上本金.利息超过1个月但在3个月以内已还清的不良记录,无超过3个月以上不良记录" name="custManagerCreditRecord">
+                            <input type="checkbox" class="无超过3个月以上不良记录" value="存在3次(含)以上本金.利息超过1个月但在3个月以内已还清的不良记录,无超过3个月以上不良记录" name="custManagerCreditRecord">
                             存在3次(含)以上本金.利息超过1个月但在3个月以内已还清的不良记录,无超过3个月以上不良记录
                         </label>
                         <br>
@@ -3967,7 +4002,7 @@
                         </label>
                         <br>
                         <label class="checkbox inline">
-                            <input type="checkbox" class="评估时点有次级类贷款,无可疑或损失类贷款" value="评估时点有次级类贷款,无可疑或损失类贷款" name="custManagerCreditRecord">
+                            <input type="checkbox" class="无可疑或损失类贷款" value="评估时点有次级类贷款,无可疑或损失类贷款" name="custManagerCreditRecord">
                             评估时点有次级类贷款,无可疑或损失类贷款
                         </label>
                         <br>

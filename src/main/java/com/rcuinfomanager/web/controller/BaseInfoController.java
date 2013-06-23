@@ -3,10 +3,7 @@ package com.rcuinfomanager.web.controller;
 
 import com.google.common.base.Strings;
 import com.rcuinfomanager.model.*;
-import com.rcuinfomanager.service.BaseInfoService;
-import com.rcuinfomanager.service.ExportInfo2VillagerCommittee4Estimation;
-import com.rcuinfomanager.service.ImportFarmerInfoService;
-import com.rcuinfomanager.service.LogsInfoService;
+import com.rcuinfomanager.service.*;
 import com.rcuinfomanager.session.SessionUser;
 import com.rcuinfomanager.session.UserSessionContext;
 import com.rcuinfomanager.session.UserSessionContextHolder;
@@ -43,6 +40,9 @@ public class BaseInfoController {
 
     @Autowired
     ExportInfo2VillagerCommittee4Estimation exportInfo2VillagerCommittee4Estimation;
+
+    @Autowired
+    VillageManagerEvaService villageManagerEvaService;
 
     private  /*@Value("${images.store.dir}")*/ String imgStoreDir = "d:/tmp";
 
@@ -83,7 +83,7 @@ public class BaseInfoController {
         //二
         map.put("financeService", baseInfoService.getFinanceService(id));
         //三
-        map.put("villageManagerEvaList", baseInfoService.getVillageManagerEvaList(id));
+        map.put("villageManagerEvaList", villageManagerEvaService.getVillageManagerEvaList(id));
         //四
         map.put("customerManagerEvaList", baseInfoService.getCustomerManagerEvaList(id));
 
@@ -195,7 +195,8 @@ public class BaseInfoController {
         map.put("displayUserName", sessionUser.getDisplayUserName());
         map.put("personInfoList", baseInfoService.getPersonBasicInfo(id));
         //基础概况信息
-        map.put("personBasicList", baseInfoService.getCusBasicInfo(id));
+        CusBaseInfo cusBasicInfo = baseInfoService.getCusBasicInfo(id);
+        map.put("personBasicList", cusBasicInfo);
         //家庭收支情况
         map.put("personIncomeExpensesList", baseInfoService.getIncomeExpenses(id));
         // 家庭资产情况
@@ -215,18 +216,26 @@ public class BaseInfoController {
         //二
         map.put("financeServicesLists", baseInfoService.getFinanceService(id));
         //三
-        map.put("villageManagerEvaList", baseInfoService.getVillageManagerEvaList(id));
+        map.put("villageManagerEvaList", villageManagerEvaService.getVillageManagerEvaList(id));
         //四
         map.put("customerManagerEvaList", baseInfoService.getCustomerManagerEvaList(id));
         //map.put("areasInfoList",baseInfoService.getAreasInfo());
         FinanceServices financeServices=baseInfoService.getFinanceService(id);
-        String usedProduct = financeServices.getUsedProduct();
-        if (!Strings.isNullOrEmpty(usedProduct)) {
-            String[] usedPro=financeServices.getUsedProduct().split(",");
-            map.put("usedProducts",usedPro);
+        if (financeServices != null) {
+            String usedProduct = financeServices.getUsedProduct();
+            if (!Strings.isNullOrEmpty(usedProduct)) {
+                String[] usedPro=financeServices.getUsedProduct().split(",");
+                map.put("usedProducts",usedPro);
+            }
         }
         map.put("recordId",id);
         map.put("allColumnInfo", new AllColumnInfo());
+
+        if (cusBasicInfo != null) {
+            map.put("imgList", ImageUtils.getFileNames(cusBasicInfo.getCerNum(),imgStoreDir));
+        } else {
+            map.put("imgList", null);
+        }
         return "farmer/edit";
     }
 
@@ -546,28 +555,34 @@ public class BaseInfoController {
         baseInfoService.updateFinanceservices(allColumnInfo);
         //客户经理评价表
         baseInfoService.updateCustomermanagereva(allColumnInfo);
+        VillageManagerEva villageManagerEva = allColumnInfo.getVillageManagerEva();
+        if (villageManagerEva != null && villageManagerEva.getId() != 0) {
+            villageManagerEva.setRecordId(allColumnInfo.getRecordId());
+            villageManagerEvaService.updateVillageManagerEva(villageManagerEva);
+        }
 
         List<HouseInfo> houseInfos=allColumnInfo.getHouseInfos();
         for (HouseInfo houseInfo : houseInfos){
+            houseInfo.setAssetsId(allColumnInfo.getAssetsId());
             baseInfoService.updateHousePropertyInfo(houseInfo);
         }
         List<LandInfo> landInfos = allColumnInfo.getLandInfos();
         for (LandInfo landInfo : landInfos) {
+            landInfo.setAssetsId(allColumnInfo.getAssetsId());
             baseInfoService.updateLandInfo(landInfo);
         }
         List<CarsInfo> carsInfos=allColumnInfo.getCarInfos();
         for (CarsInfo carsInfo : carsInfos){
+            carsInfo.setAssetsId(allColumnInfo.getAssetsId());
             baseInfoService.updateCarsInfo(carsInfo);
         }
         List<FamilyMember> familyMembers=allColumnInfo.getFamilyMembers();
         for (FamilyMember familyMember : familyMembers){
+            familyMember.setRecordId(allColumnInfo.getRecordId());
             baseInfoService.updateFamilyMembers(familyMember);
         }
 
-
-        map.put("editSuccess","编辑成功！");
-       // return "redirect:/family/edit/"+allColumnInfo.getRecordId();
-        return "farmer/main";
+        return "redirect:/index";
     }
 
 }

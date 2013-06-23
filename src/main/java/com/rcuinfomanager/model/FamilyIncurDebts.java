@@ -1,29 +1,13 @@
 package com.rcuinfomanager.model;
 
 public class FamilyIncurDebts {
-    private Long id;
-    private Long recordId;
+    private long id;
+    private long recordId;
     private String fmIncurDebts;
     private String ourBankDebts;
     private String otherBankDebts;
     private String loanPurpose;
     private String loanShap;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getRecordId() {
-        return recordId;
-    }
-
-    public void setRecordId(Long recordId) {
-        this.recordId = recordId;
-    }
 
     public String getFmIncurDebts() {
         return fmIncurDebts;
@@ -63,5 +47,21 @@ public class FamilyIncurDebts {
 
     public void setLoanShap(String loanShap) {
         this.loanShap = loanShap;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getRecordId() {
+        return recordId;
+    }
+
+    public void setRecordId(long recordId) {
+        this.recordId = recordId;
     }
 }

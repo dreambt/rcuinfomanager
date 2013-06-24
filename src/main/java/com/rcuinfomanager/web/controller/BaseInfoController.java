@@ -189,10 +189,7 @@ public class BaseInfoController {
         for (String id : ids) {
             baseInfoService.saveChecksInfo(Long.parseLong(id), Integer.parseInt(state));
         }
-        boolean success = true;
-        map.put("success", success);
-        map.put("isCheck", "验收成功！");
-       return "farmer/checkInfo";
+       return "redirect:/index";
     }
 
     //编辑

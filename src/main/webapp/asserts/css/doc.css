@@ -824,9 +824,11 @@ form.bs-docs-example {
 -------------------------------------------------- */
 
 .bs-docs-sidenav {
-    width: 180px;
+    width: 175px;
     position: absolute;
-    margin: 106px -18 0;
+    margin-top: 106px;
+    margin-left: -18px;
+    /*margin: 106px -18 0;*/
     padding: 0;
     background-color: #fff;
     -webkit-border-radius: 6px;
@@ -839,7 +841,7 @@ form.bs-docs-example {
 
 .bs-docs-sidenav > li > a {
     display: block;
-    width: 190px  \9;
+    width: 175px  ;
     margin: 0 0 -1px;
     padding: 8px 14px;
     border: 1px solid #e5e5e5;

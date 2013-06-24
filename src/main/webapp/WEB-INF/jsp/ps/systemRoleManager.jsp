@@ -7,6 +7,7 @@
     <!-- Bootstrap -->
     <link href="/asserts/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="/asserts/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+    <!--[if IE 8]><link rel="stylesheet" href="/asserts/css/bootstrap-ie8buttonfix.css"><![endif]-->
     <link href="/asserts/css/doc.css" rel="stylesheet" media="screen">
     <link href="/asserts/css/style.css" rel="stylesheet" media="screen">
     <link id="artDialog-skin" href="/asserts/js/dialog/skins/opera.css" rel="stylesheet" />
@@ -88,7 +89,7 @@
         </div>
         <div class="span10" style="margin-left: -8.435897%;">
             <br/>
-            <input class="input-block-level" type="text" placeholder="系统角色管理" disabled="disabled" style="color:#0000AA">
+            <input class="input-block-level" type="text" value="系统角色管理" disabled="disabled" style="color:#0000AA;margin-bottom: 0px; margin-top: -18px;">
             <div class="pad-10">
                 <div class="content-menu ib-a blue line-x">
                     <input id="addRoleOperate" type="button" value="添加" style="width:80px; height:30px"/>

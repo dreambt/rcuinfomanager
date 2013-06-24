@@ -7,12 +7,14 @@
     <!-- Bootstrap -->
     <link href="/asserts/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="/asserts/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+    <!--[if IE 8]><link rel="stylesheet" href="/asserts/css/bootstrap-ie8buttonfix.css"><![endif]-->
     <link href="/asserts/css/doc.css" rel="stylesheet" media="screen">
     <link href="/asserts/css/style.css" rel="stylesheet" media="screen">
     <link id="artDialog-skin" href="/asserts/js/dialog/skins/opera.css" rel="stylesheet" />
     <link rel="stylesheet" href="/asserts/css/jquery.fancybox.css"/>
     <script src="/asserts/js/jquery-1.7.2.min.js"></script>
     <script src="/asserts/js/bootstrap.min.js"></script>
+    <script src="/asserts/js/modernizr.js"></script>
     <script src="/asserts/js/dialog/artDialog.js"></script>
     <script src="/asserts/js/main.js"></script>
     <script src="/asserts/js/jquery.fancybox.js"></script>
@@ -108,46 +110,42 @@
         </div>
         <div class="span10" style="margin-left: -8.435897%;">
             <br/>
-            <input class="input-block-level" type="text" placeholder="客户电子信息管理" disabled="disabled" style="color:#0000AA">
-            <div class="navbar">
+            <input class="input-block-level" type="text" value="客户电子信息管理" disabled="disabled" style="color:#0000AA; margin-bottom: 0px; margin-top: -18px;" >
+            <div class="navbar" style="margin-bottom: -10px;">
                 <div class="btn-group">
                     <form action="/index" method="post">
-                        <select name="organizationName" class="selectpicker" style="width: 95px;" id="organizationName">
+                        <select name="organizationName" class="selectpicker" style="width: 95px;margin-left: 5px;margin-right: 5px;" id="organizationName">
                             <option value="">按网点</option>
                             <core:forEach items="${netWorkList}" var="netWork">
                                 <option value="${netWork.organizationName}">${netWork.organizationName}</option>
                             </core:forEach>
                         </select>
-                        <select id="selectAreas" name="areaId" class="selectpicker" style="width: 95px;">
+                        <select id="selectAreas" name="areaId" class="selectpicker" style="width: 95px;margin-left: 5px;margin-right: 5px;">
                             <option value="-1">按乡镇</option>
                             <core:forEach items="${areasInfoList}" var="areasInfos">
                                 <option value="${areasInfos.areaId}">${areasInfos.areaName}</option>
                             </core:forEach>
                         </select>
-                        <select id="areaName" name="areaName" class="selectpicker" style="width: 95px;">
+                        <select id="areaName" name="areaName" class="selectpicker" style="width: 95px;margin-left: 5px;margin-right: 5px;">
                             <option value="">按村</option>
                         </select>
-                        <input type="text" id="displayUserName" name="displayUserName" value="${params.displayUserName}" placeholder="按客户经理" style="width: 95px; height:30px;">
-                        <button type="submit" class="btn" id="search" style="margin-top: -10px;">查询</button>
-                        <a class="btn" href="#" id="cleanOpera" style="margin-top: -10px;">重置</a>
+                        <input type="text" id="displayUserName" name="displayUserName" value="${params.displayUserName}" placeholder="按客户经理" style="width: 95px; height:20px; margin-right: 5px">
+                        <button type="submit" class="btn" id="search" style="margin-top: 0px;">查询</button>
+                        <a class="btn" href="#" id="cleanOpera" style="margin-top: 0px;">重置</a>
                     </form>
                 </div>
-                <div class="btn-group" style="margin-top: -24px;">
-                    <core:choose>
-                        <core:when test="${userNameByAdmin=='admin'}">
-                            <button class="btn" type="button" id="assignOperate">批量指派</button>
-                            <button class="btn" type="button" id="checkOperate">验收</button>
-                        </core:when>
-                    </core:choose>
+                <div class="btn-group" style="margin-top: -16px;">
+                    <button class="btn" type="button" id="assignOperate">批量指派</button>
+                    <a class="btn" href="#check" id="checkOperate">验收</a>
                 </div>
-                <div class="btn-group" style="margin-top: -24px;">
+                <div class="btn-group" style="margin-top: -16px;">
                     <button class="btn dropdown-toggle" data-toggle="dropdown">导入 <span class="caret"></span></button>
                     <ul class="dropdown-menu">
                         <li><a href="#" id="importBasicOperate">导入基础数据</a></li>
                         <li><a href="#" id="importVillageAssess">导入村委会评价表</a></li>
                     </ul>
                 </div>
-                <div class="btn-group" style="margin-top: -24px;">
+                <div class="btn-group" style="margin-top: -16px;">
                     <button class="btn dropdown-toggle" data-toggle="dropdown">导出 <span class="caret"></span></button>
                     <ul class="dropdown-menu">
                         <li><a href="#" id="exportData">导出数据</a></li>
@@ -206,11 +204,7 @@
                             </core:choose>
                             <td align="center">
                                 <a href="#" style="color:#0099FF" class="showOperate" recordId="${familyInfo.recordId}">查看</a>&nbsp;|&nbsp;
-                                <core:choose>
-                                 <core:when test="${userNameByAdmin=='admin'}">
-                                    <a href="#" style="color:#0099FF" class="appointOperate" recordId="${familyInfo.recordId}">指派</a>&nbsp;|&nbsp;
-                                 </core:when>
-                                </core:choose>
+                                <a href="#" style="color:#0099FF" class="appointOperate" recordId="${familyInfo.recordId}">指派</a>&nbsp;|&nbsp;
                                 <a href="#" style="color:#0099FF" class="editOperate" recordId="${familyInfo.recordId}">编辑</a>&nbsp;|&nbsp;
                                 <a href="#" style="color:#FF0000" class="deleteOperate" recordId="${familyInfo.recordId}" assetsId="${familyInfo.assetsId}">删除</a>
                             </td>
@@ -256,6 +250,41 @@
         <button type="submit" class="btn userSubmit" onclick="handerChangePasswordSubmit()" id="changePasswordSubmit" >确定</button>
         <button type="cancel" class="btn" onClick="parent.jQuery.fancybox.close();return false">取消</button>
     </div>
+</div>
+
+<div id="check" style="display:none">
+    <form method="post">
+        <table width="100%" border="0">
+            <tbody>
+            <%--<core:forEach items="${appointList}" var="appointPeople">
+                <input type="hidden" id="recordId" name="recordId" value="${appointPeople.recordId}">
+                <tr>
+                    <td><span class="label label-info">户主：</span></td>
+                    <td>${appointPeople.customerName}</td>
+                    <td><span class="label label-info">电话：</span></td>
+                    <td>${appointPeople.telephone}</td>
+                </tr>
+            </core:forEach>--%>
+            <tr>
+                <td align="left">
+                    <span>验收</span>
+                </td>
+                <td align="right">
+                    <select class="span3" name="state" id="state" style="width:202px;">
+                        <option value="">选择验收结果</option>
+                        <option value="3">验收通过</option>
+                        <option value="4">验收拒绝</option>
+                    </select>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+    </form>
+    <p align="center">
+        <a class="btn" href="#" id="checkOkOperate">确定</a>&nbsp;
+        <a class="btn" href="#" id="checkCancelOperate" onClick="parent.jQuery.fancybox.close();return false">取消</a>
+    </p>
 </div>
 
 <script type="text/javascript">

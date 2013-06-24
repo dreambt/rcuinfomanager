@@ -7,6 +7,7 @@
     <!-- Bootstrap -->
     <link href="/asserts/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="/asserts/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+    <!--[if IE 8]><link rel="stylesheet" href="/asserts/css/bootstrap-ie8buttonfix.css"><![endif]-->
     <link href="/asserts/css/doc.css" rel="stylesheet" media="screen">
     <link href="/asserts/css/style.css" rel="stylesheet" media="screen">
     <link rel="stylesheet" href="/asserts/css/jquery.fancybox.css"/>
@@ -158,25 +159,25 @@
         </div>
         <div class="span10" style="margin-left: -8.435897%;">
             <br/>
-            <input class="input-block-level" type="text" placeholder="系统帐号管理" disabled="disabled"
-                   style="color:#0000AA">
+            <input class="input-block-level" type="text" value="系统帐号管理" disabled="disabled"
+                   style="color:#0000AA;margin-bottom: 0px; margin-top: -18px;">
 
-            <div class="content-menu ib-a blue line-x">
+            <div class="content-menu ib-a blue line-x" style="margin-top: 10px;">
                 <select name="" style="width:120px; height:30px">
                     <option value="" selected="selected">按账号</option>
                     <option value="">按客户经理姓名</option>
                     <option value="">按角色</option>
                 </select>
-                <input id="keyword" name="keyword" type="text" style="color:#999999;width:120px; height:30px"
+                <input id="keyword" name="keyword" type="text" style="color:#999999;width:120px; height:20px; margin-right: 5px"
                        class="input-text" value="请输入关键字"/>
-                <div class="btn-group" style="margin-top: -10px;">
+                <div class="btn-group" style="margin-top: 0px;">
                     <button class="btn">查询</button>
                     <a id="addAccount" class="btn" href="#addUser">添加账号</a>
                     <a id="addStipple" class="btn" href="#addStippleContent">添加网点</a>
                 </div>
             </div>
 
-            <div class="table-list">
+            <div class="table-list" style="margin-top: 10px;">
                 <table width="100%">
                     <thead>
                     <tr>

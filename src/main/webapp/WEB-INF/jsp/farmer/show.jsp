@@ -8,6 +8,7 @@
     <!-- Bootstrap -->
     <link href="/asserts/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="/asserts/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+    <!--[if IE 8]><link rel="stylesheet" href="/asserts/css/bootstrap-ie8buttonfix.css"><![endif]-->
     <link href="/asserts/css/doc.css" rel="stylesheet" media="screen">
     <link href="/asserts/css/style.css" rel="stylesheet" media="screen">
     <link id="artDialog-skin" href="/asserts/js/dialog/skins/opera.css" rel="stylesheet" />
@@ -36,7 +37,7 @@
             });
             $('#delete').click(function(){
                 if (confirm('确定要删除吗？')) {
-                    var url="/delete/"+id;
+                    var url="/family/delete/"+id;
                     window.location.href=url;
                 }
             });
@@ -106,7 +107,7 @@
 </div>
 <div class="span10" style="margin-left: -8.435897%;">
 <br/>
-<input class="input-block-level" type="text" placeholder="客户电子信息管理>查看" disabled="disabled" style="color:#0000AA">
+<input class="input-block-level" type="text" value="客户电子信息管理>查看" disabled="disabled" style="color:#0000AA;margin-bottom: 0px; margin-top: -18px;">
 <table class="table table-condensed">
     <tbody>
     <core:forEach items="${personInfoList}" var="personInfo">
@@ -124,12 +125,8 @@
     </tbody>
 </table>
 <p class="text-center">
-    <core:choose>
-      <core:when test="${userNameByAdmin=='admin'}">
-          <button class="btn" type="button" id="appoint">指派</button>
-          <button class="btn" type="button" id="check">验收</button>
-      </core:when>
-    </core:choose>
+    <button class="btn" type="button" id="appoint">指派</button>
+    <button class="btn" type="button" id="check">验收</button>
     <button class="btn" type="button" id="editor">编辑</button>
     <button class="btn" type="button" id="delete">删除</button>
 </p>

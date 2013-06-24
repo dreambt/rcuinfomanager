@@ -72,7 +72,7 @@
                             <td width="40%" align="right" valign="bottom" >
                                 <div style="margin-bottom:10px; margin-right:10px; color:#FFFFFF">您好！
                                     <span id="uName">[<c:out value="${displayUserName}"/>]</span>
-                                    <a href="" style="color:#FFFFFF">&nbsp;[退出]</a>
+                                    <a href="/logout" style="color:#FFFFFF">&nbsp;退出</a>
                                 </div>
                             </td>
                         </tr>
@@ -95,7 +95,7 @@
         </div>
         <div class="span10" style="margin-left: -8.435897%;">
             <br/>
-            <input class="input-block-level" type="text" placeholder="客户端管理" disabled="disabled" style="color:#0000AA">
+            <input class="input-block-level" type="text" value="客户端管理" disabled="disabled" style="color:#0000AA;margin-bottom: 0px; margin-top: -18px;">
 
             <hr  size="1" width="100%" style="margin-bottom: -1px;"/>
             <div class="tabbable">

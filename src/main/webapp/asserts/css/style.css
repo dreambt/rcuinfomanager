@@ -41,7 +41,7 @@
 }
 
 .table-list td, .table-list th {
-    padding-left: 18px
+    //padding-left: 18px
 }
 
 .table-list thead th {
@@ -53,8 +53,8 @@
 
 .table-list tbody td, .table-list .btn {
     border-bottom: #CCCCCC 1px solid;
-    padding-top: 5px;
-    padding-bottom: 5px
+    /*padding-top: 5px;
+    padding-bottom: 5px*/
 }
 
 div.btn {
@@ -75,7 +75,7 @@ div.btn {
 
 .table-list .input-text-c {
     padding: 0;
-    height: 18px
+    height: 18px;
 }
 
 .input-text-c {

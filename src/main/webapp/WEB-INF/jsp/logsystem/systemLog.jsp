@@ -7,6 +7,7 @@
     <!-- Bootstrap -->
     <link href="/asserts/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="/asserts/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+    <!--[if IE 8]><link rel="stylesheet" href="/asserts/css/bootstrap-ie8buttonfix.css"><![endif]-->
     <link href="/asserts/css/doc.css" rel="stylesheet" media="screen">
     <link href="/asserts/css/style.css" rel="stylesheet" media="screen">
     <link id="artDialog-skin" href="/asserts/js/dialog/skins/opera.css" rel="stylesheet" />
@@ -75,17 +76,17 @@
         </div>
         <div class="span10" style="margin-left: -8.435897%;">
             <br/>
-            <input class="input-block-level" type="text" placeholder="系统日志" disabled="disabled" style="color:#0000AA">
+            <input class="input-block-level" type="text" value="系统日志" disabled="disabled" style="color:#0000AA;margin-bottom: 0px; margin-top: -18px;">
             <div class="pad-10">
-                <div class="btn-default">
+                <div class="btn-default" style="margin-top: 10px;">
                     <form class="form-search" id="searchForm" action="/systemLogManager" method="post">
                         按时间：
                         <input type="text" id="beginTime"  name="beginTime" value="${param.beginTime}" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"
-                               style="width: 115px;height: 25px; margin-top: 10px;">&nbsp;-&nbsp;
+                               style="width: 115px; height: 16px; margin-top: 2px;">&nbsp;-&nbsp;
                         <input type="text" id="endTime" name="endTime" value="${param.endTime}" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'});"
-                               style="width: 115px;height: 25px; margin-top: 10px;">
+                               style="width: 115px; height: 16px; margin-top: 2px;">
                         <input type="text" id="userName" name="userName" value="${param.userName}" placeholder="按系统帐号"
-                               style="width: 140px;height: 25px; margin-top: 10px;">
+                               style="width: 140px; height: 16px; margin-top: 2px;">
                         <a href="#" class="btn btn-small" id="searchLogs">查询</a>
                         <a href="#" class="btn btn-small" id="cleanLogs">重置</a>
                     </form>

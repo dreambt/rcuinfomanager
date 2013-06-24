@@ -9,6 +9,7 @@
 <!-- Bootstrap -->
 <link href="/asserts/css/bootstrap.min.css" rel="stylesheet" media="screen">
 <link href="/asserts/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+<!--[if IE 8]><link rel="stylesheet" href="/asserts/css/bootstrap-ie8buttonfix.css"><![endif]-->
 <link href="/asserts/css/doc.css" rel="stylesheet" media="screen">
 <link href="/asserts/css/style.css" rel="stylesheet" media="screen">
 <link id="artDialog-skin" href="/asserts/js/dialog/skins/opera.css" rel="stylesheet" />
@@ -17,6 +18,7 @@
 <script src="/asserts/js/bootstrap.min.js"></script>
 <script src="/asserts/js/dialog/artDialog.js"></script>
 <script src="/asserts/js/jquery.fancybox.js"></script>
+<script src="/asserts/js/modernizr.js"></script>
 <script type="text/javascript">
 $(function(){
     //左侧菜单样式控制
@@ -273,7 +275,7 @@ $(function(){
 </div>
 <div class="span10" style="margin-left: -8.435897%;">
 <br/>
-<input class="input-block-level" type="text" placeholder="客户电子信息管理>编辑"  style="color:#0000AA">
+<input class="input-block-level" type="text" value="客户电子信息管理>编辑" disabled="disabled"  style="color:#0000AA; margin-bottom: 0px; margin-top: -18px;">
 <table class="table table-condensed">
     <tbody>
     <core:forEach items="${personInfoList}" var="personInfo">
@@ -316,12 +318,12 @@ $(function(){
 <tr>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">姓名</td>
     <td align="center">
-        <input class="input-small" type="text" name="customerName" value="${personBasicList.customerName}"
-               style="width: 95px;height: 30px; margin-top: 5px;">
+        <input class="input-text-c" type="text" name="customerName" value="${personBasicList.customerName}"
+               style="width: 100%;height: 30px;">
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">性别</td>
     <td align="left">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="gender">
+        <select class="selectpicker" style="width: 95px;" name="gender">
             <core:choose>
                 <core:when test="${personBasicList.gender==0}">
                     <option value="0" selected="selected">女</option>
@@ -336,7 +338,7 @@ $(function(){
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">是否农户</td>
     <td align="left">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="isFarmer">
+        <select class="selectpicker" style="width: 95px;" name="isFarmer">
             <core:choose>
                 <core:when test="${personBasicList.farmer==0}">
                     <option value="0" selected="selected">否</option>
@@ -355,7 +357,7 @@ $(function(){
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">客户类型</td>
     <td align="center">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="custType">
+        <select class="selectpicker" style="width: 95px;" name="custType">
             <core:choose>
                 <core:when test="${personBasicList.customerType=='一般农户'}">
                     <option value="${personBasicList.customerType}" selected="selected">一般农户</option>
@@ -385,16 +387,16 @@ $(function(){
 <tr>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">证件类型</td>
     <td align="left" colspan="2">
-        <select class="selectpicker" style="width: 155px; margin-top: 5px;" name="cerType">
+        <select class="selectpicker" style="width: 155px;" name="cerType">
             <option value="身份证" selected="selected">身份证</option>
         </select>
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">证件号码</td>
     <td align="left" colspan="2">
-        <input class="input-small" type="text" name="cerNum" value="${personBasicList.cerNum}"
-               style="width: 175px;height: 30px; margin-top: 5px;">
+        <input class="input-text-c" type="text" name="cerNum" value="${personBasicList.cerNum}"
+               style="width: 175px;height: 30px; ">
     </td>
-    <td align="center" colspan="2" rowspan="4">
+    <td align="center" colspan="2" rowspan="5">
         <core:choose>
             <core:when test="${empty imgList}">
                 &nbsp;
@@ -411,27 +413,27 @@ $(function(){
 <tr>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">证件有效期</td>
     <td align="left" colspan="3">
-        <input class="input-small" type="text" name="cerValidityFrom" value="${personBasicList.cerValidityFrom}"
-               style="width: 125px;height: 30px; margin-top: 5px;"> -
-        <input class="input-small" type="text" name="cerValidityTo" value="${personBasicList.cerValidityTo}"
-               style="width: 125px;height: 30px; margin-top: 5px;">
+        <input class="input-text-c" type="text" name="cerValidityFrom" value="${personBasicList.cerValidityFrom}"
+               style="width: 125px;height: 30px; "> -
+        <input class="input-text-c" type="text" name="cerValidityTo" value="${personBasicList.cerValidityTo}"
+               style="width: 125px;height: 30px; ">
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">出生年月</td>
     <td align="left">
-        <input class="input-small" type="text" name="birthday" value="${personBasicList.birthday}"
-               style="width: 95px;height: 30px; margin-top: 5px;">
+        <input class="input-text-c" type="text" name="birthday" value="${personBasicList.birthday}"
+               style="width: 95px;height: 30px; ">
     </td>
 </tr>
 <tr>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">国籍</td>
     <td align="left">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="nationality">
+        <select class="selectpicker" style="width: 95px;" name="nationality">
             <option value="中国">中国</option>
         </select>
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">是否拥有外国护照或居住权</td>
     <td align="left">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="isHavePassport">
+        <select class="selectpicker" style="width: 95px;" name="isHavePassport">
             <core:choose>
                 <core:when test="${personBasicList.havePassport==0}">
                     <option value="0" selected="selected">否</option>
@@ -450,14 +452,14 @@ $(function(){
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">民族</td>
     <td align="left">
-        <input class="input-small" type="text" name="nation" value="${personBasicList.nation}"
-               style="width: 95px;height: 30px; margin-top: 5px;">
+        <input class="input-text-c" type="text" name="nation" value="${personBasicList.nation}"
+               style="width: 95px;height: 30px;">
     </td>
 </tr>
 <tr>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">政治面貌</td>
     <td align="left">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="poliLaspect">
+        <select class="selectpicker" style="width: 95px; " name="poliLaspect">
             <core:choose>
                 <core:when test="${personBasicList.poliLaspect=='群众'}">
                     <option value="${personBasicList.poliLaspect}" selected="selected">群众</option>
@@ -472,7 +474,7 @@ $(function(){
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">健康状况</td>
     <td align="left">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="health">
+        <select class="selectpicker" style="width: 95px; " name="health">
             <core:choose>
                 <core:when test="${personBasicList.health=='良好'}">
                     <option value="${personBasicList.health}" selected="selected">良好</option>
@@ -494,7 +496,7 @@ $(function(){
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">婚姻状况</td>
     <td align="left">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="maritalStatus">
+        <select class="selectpicker" style="width: 95px; " name="maritalStatus">
             <core:choose>
                 <core:when test="${personBasicList.maritalStatus=='已婚'}">
                     <option value="${personBasicList.maritalStatus}" selected="selected">已婚</option>
@@ -512,14 +514,14 @@ $(function(){
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">
         居住地址
     </td>
-    <td align="left" colspan="5">
-        <input class="input-small" type="text" name="address" value="${personBasicList.address}"
-               style="width: 465px;height: 30px; margin-top: 5px;">
+    <td align="left" colspan="3">
+        <input class="input-text-c" type="text" name="address" value="${personBasicList.address}"
+               style="width: 465px;height: 30px; ">
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">居住编码</td>
     <td align="left">
-        <input class="input-small" type="text" name="postcode" value="${personBasicList.postcode}"
-               style="width: 95px;height: 30px; margin-top: 5px;">
+        <input class="input-text-c" type="text" name="postcode" value="${personBasicList.postcode}"
+               style="width: 95px;height: 30px; ">
     </td>
 </tr>
 <tr>
@@ -528,7 +530,7 @@ $(function(){
     </td>
     <td align="left">
         <input type="hidden" value="${personBasicList.areaCode}" id="areaCode">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="areaCode" id="selectAreas">
+        <select class="selectpicker" style="width: 95px; " name="areaCode" id="selectAreas">
             <option value="">按乡镇</option>
             <core:forEach items="${areasInfoList}" var="areasInfos">
                 <option value="${areasInfos.areaId}">${areasInfos.areaName}</option>
@@ -538,19 +540,19 @@ $(function(){
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">村别</td>
     <input type="hidden" value="${personBasicList.village}" id="villageName">
     <td align="left">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="village" id="village">
+        <select class="selectpicker" style="width: 95px; " name="village" id="village">
             <option value="">按村</option>
         </select>
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">联系电话</td>
     <td align="left">
-        <input class="input-small" type="text" name="telephone" value="${personBasicList.telephone}"
-               style="width: 95px;height: 30px; margin-top: 5px;">
+        <input class="input-text-c" type="text" name="telephone" value="${personBasicList.telephone}"
+               style="width: 95px;height: 30px; ">
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">手机号码</td>
     <td align="left">
-        <input class="input-small" type="text" name="mbPhoneNum" value="${personBasicList.mbPhoneNum}"
-               style="width: 95px;height: 30px; margin-top: 5px;">
+        <input class="input-text-c" type="text" name="mbPhoneNum" value="${personBasicList.mbPhoneNum}"
+               style="width: 95px;height: 30px; ">
     </td>
 </tr>
 <tr>
@@ -558,7 +560,7 @@ $(function(){
         居住状况
     </td>
     <td align="left" colspan="2">
-        <select class="selectpicker" style="width: 155px; margin-top: 5px;" name="liveCondition">
+        <select class="selectpicker" style="width: 155px; " name="liveCondition">
             <core:choose>
                 <core:when test="${personBasicList.liveCondition=='自置'}">
                     <option value="${personBasicList.liveCondition}" selected="selected">自置</option>
@@ -670,7 +672,7 @@ $(function(){
         最高学位
     </td>
     <td align="left">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="highestDegree">
+        <select class="selectpicker" style="width: 95px; " name="highestDegree">
             <core:choose>
                 <core:when test="${personBasicList.highestDegree=='名誉博士'}">
                     <option value="${personBasicList.highestDegree}" selected="selected">名誉博士</option>
@@ -725,7 +727,7 @@ $(function(){
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">最高学历</td>
     <td align="left">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="highestEdu">
+        <select class="selectpicker" style="width: 95px; " name="highestEdu">
             <core:choose>
                 <core:when test="${personBasicList.highestEdu=='研究生'}">
                     <option value="${personBasicList.highestEdu}" selected="selected">研究生</option>
@@ -852,13 +854,13 @@ $(function(){
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">与我行（社）关系</td>
     <td align="left">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="bankRelation">
+        <select class="selectpicker" style="width: 95px; " name="bankRelation">
             <option value="普通客户">普通客户</option>
         </select>
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">与我行（社）合作关系</td>
     <td align="left">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="bankPartnership">
+        <select class="selectpicker" style="width: 95px; " name="bankPartnership">
             <option value="一般">一般</option>
         </select>
     </td>
@@ -868,7 +870,7 @@ $(function(){
         职业
     </td>
     <td align="left" colspan="7">
-        <select class="selectpicker" style="width: 495px; margin-top: 5px;" name="profession">
+        <select class="selectpicker" style="width: 495px; " name="profession">
             <core:choose>
                 <core:when test="${personBasicList.profession=='国家机关、党群组织、企业、事业单位负责人'}">
                     <option value="${personBasicList.profession}" selected="selected">国家机关、党群组织、企业、事业单位负责人</option>
@@ -979,19 +981,19 @@ $(function(){
         个人经营项目
     </td>
     <td align="left" colspan="3">
-        <input class="input-small" type="text" name="businessProj" value="${personBasicList.businessProj}"
-               style="width: 300px;height: 30px; margin-top: 5px;">
+        <input class="input-text-c" type="text" name="businessProj" value="${personBasicList.businessProj}"
+               style="width: 300px;height: 30px; ">
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">经营年限</td>
     <td align="left" colspan="3">
         <core:choose>
             <core:when test="${personBasicList.businessYear != '' and personBasicList.businessYear != null}">
-                <input class="input-small" type="text" name="businessYear" value="${personBasicList.businessYear}"
-                       style="width: 275px;height: 30px; margin-top: 5px;">
+                <input class="input-text-c" type="text" name="businessYear" value="${personBasicList.businessYear}"
+                       style="width: 275px;height: 30px; ">
             </core:when>
             <core:otherwise>
-                <input class="input-small" type="text" name="businessYear" value="0"
-                       style="width: 275px;height: 30px; margin-top: 5px;">
+                <input class="input-text-c" type="text" name="businessYear" value="0"
+                       style="width: 275px;height: 30px; ">
             </core:otherwise>
         </core:choose>
     </td>
@@ -1002,12 +1004,12 @@ $(function(){
     </td>
     <td align="left" colspan="3">
 
-        <input class="input-small" type="text" name="businessSite" value="${personBasicList.businessSite}"
-               style="width: 300px;height: 30px; margin-top: 5px;">
+        <input class="input-text-c" type="text" name="businessSite" value="${personBasicList.businessSite}"
+               style="width: 300px;height: 30px; ">
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">从事行业</td> <%--从数据库取--%>
     <td align="left" colspan="3">
-        <select class="selectpicker" style="width: 275px; margin-top: 5px;" name="industry">
+        <select class="selectpicker" style="width: 275px; " name="industry">
             <option value="${personBasicList.industry}">${personBasicList.industry}</option>
         </select>
     </td>
@@ -1015,7 +1017,7 @@ $(function(){
 <tr>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">投资经营性质</td>
     <td align="left">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="businessProp">
+        <select class="selectpicker" style="width: 95px; " name="businessProp">
             <core:choose>
                 <core:when test="${personBasicList.businessProp=='个体工商户'}">
                     <option value="${personBasicList.businessProp}" selected="selected">个体工商户</option>
@@ -1046,7 +1048,7 @@ $(function(){
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">投资资金情况</td>
     <td align="left">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="moneySitu">
+        <select class="selectpicker" style="width: 95px; " name="moneySitu">
             <core:choose>
                 <core:when test="${personBasicList.moneySitu=='独自投入'}">
                     <option value="${personBasicList.moneySitu}" selected="selected">独自投入</option>
@@ -1077,7 +1079,7 @@ $(function(){
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">投入金额</td>
     <td align="left">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="inputMoney">
+        <select class="selectpicker" style="width: 95px; " name="inputMoney">
             <core:choose>
                 <core:when test="${personBasicList.inputMoney=='10万元以内'}">
                     <option value="${personBasicList.inputMoney}" selected="selected">10万元以内</option>
@@ -1142,7 +1144,7 @@ $(function(){
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">自有资金情况</td>
     <td align="left">
 
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="ownMoney">
+        <select class="selectpicker" style="width: 95px; " name="ownMoney">
             <core:choose>
                 <core:when test="${personBasicList.ownMoney=='10万元以内'}">
                     <option value="${personBasicList.ownMoney}" selected="selected">10万元以内</option>
@@ -1208,7 +1210,7 @@ $(function(){
 <tr>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823"> 年收益情况</td>
     <td align="left" colspan="7">
-        <select class="selectpicker" style="width: 595px; margin-top: 5px;" name="yearIncome">
+        <select class="selectpicker" style="width: 595px; " name="yearIncome">
             <core:choose>
                 <core:when test="${personBasicList.yearIncome=='10万元以内'}">
                     <option value="${personBasicList.yearIncome}" selected="selected">10万元以内</option>
@@ -1265,14 +1267,14 @@ $(function(){
 <tr>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">工作情况</td>
     <td align="left" colspan="7">
-        <input class="input-small" type="text" name="workSitu" value="${personBasicList.workSitu}"
-               style="width: 595px;height: 30px; margin-top: 5px;">
+        <input class="input-text-c" type="text" name="workSitu" value="${personBasicList.workSitu}"
+               style="width: 595px;height: 30px; ">
     </td>
 </tr>
 <tr>
 <td align="center" bgcolor="#b4d8ed" style="color:#161823">单位性质</td>
 <td align="left">
-<select class="selectpicker" style="width: 255px; margin-top: 5px;" name="unitProp">
+<select class="selectpicker" style="width: 255px; " name="unitProp">
 <core:choose>
 <core:when test="${personBasicList.unitProp=='党政机关'}">
     <option value="${personBasicList.unitProp}" selected="selected">党政机关</option>
@@ -1504,18 +1506,18 @@ $(function(){
 <td align="center" bgcolor="#b4d8ed" style="color:#161823">单位所属行业</td>
 <td align="left" colspan="6">
     <input type="hidden" id="industry" value="${personBasicList.unitIndustryId}">
-    <select id="industryLevel1" name="industryLevel1" style="width: 130px; margin-top: 5px;">
+    <select id="industryLevel1" name="industryLevel1" style="width: 130px; ">
         <core:forEach items="${industryInfoList}" var="industry">
             <option value="${industry.industryId}">${industry.industryName}</option>
         </core:forEach>
     </select>
-    <select id="industryLevel2" style="width: 120px; margin-top: 5px;">
+    <select id="industryLevel2" style="width: 120px; ">
         <option value="-1"></option>
     </select>
-    <select id="industryLevel3" style="width: 120px; margin-top: 5px;">
+    <select id="industryLevel3" style="width: 120px; ">
         <option value="-1"></option>
     </select>
-    <select id="industryLevel4" class="selectpicker" style="width: 100px; margin-top: 5px;" name="unitIndustryId">
+    <select id="industryLevel4" class="selectpicker" style="width: 100px; " name="unitIndustryId">
         <option value=""></option>
     </select>
 </td>
@@ -1523,12 +1525,12 @@ $(function(){
 <tr>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">任职部门</td>
     <td align="left" colspan="3">
-        <input class="input-small" type="text" name="department" value="${personBasicList.department}"
-               style="width: 255px;height: 30px; margin-top: 5px;">
+        <input class="input-text-c" type="text" name="department" value="${personBasicList.department}"
+               style="width: 255px;height: 30px; ">
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">工作单位类别</td>
     <td align="left" colspan="3">
-        <select class="selectpicker" style="width: 255px; margin-top: 5px;" name="unitType">
+        <select class="selectpicker" style="width: 255px; " name="unitType">
             <core:choose>
                 <core:when test="${personBasicList.unitType=='国家机关、团体、事业单位等'}">
                     <option value="${personBasicList.unitType}" selected="selected">国家机关、团体、事业单位等</option>
@@ -1585,7 +1587,7 @@ $(function(){
 <tr>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">职务</td>
     <td align="left">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="duties">
+        <select class="selectpicker" style="width: 95px; " name="duties">
             <core:choose>
                 <core:when test="${personBasicList.duties=='高级领导'}">
                     <option value="${personBasicList.duties}" selected="selected">高级领导</option>
@@ -1627,7 +1629,7 @@ $(function(){
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">年工资收入（万元）</td>
     <td align="left">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="annualWageIncome">
+        <select class="selectpicker" style="width: 95px; " name="annualWageIncome">
             <core:choose>
                 <core:when test="${personBasicList.annualWageIncome=='3万元以内'}">
                     <option value="${personBasicList.annualWageIncome}" selected="selected">3万元以内</option>
@@ -1658,7 +1660,7 @@ $(function(){
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">工作年限</td>
     <td align="left">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="workYears">
+        <select class="selectpicker" style="width: 95px; " name="workYears">
             <core:choose>
                 <core:when test="${personBasicList.workYears=='5年(含)以上'}">
                     <option value="${personBasicList.workYears}" selected="selected">5年(含)以上</option>
@@ -1680,7 +1682,7 @@ $(function(){
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">职称</td>
     <td align="left">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="workTitle">
+        <select class="selectpicker" style="width: 95px; " name="workTitle">
             <core:choose>
                 <core:when test="${personBasicList.workTitle=='高级'}">
                     <option value="无">无</option>
@@ -1735,11 +1737,11 @@ $(function(){
 
         <core:choose>
             <core:when test="${personIncomeExpenses.fmAllIncome != '' and personIncomeExpenses.fmAllIncome != null}">
-                <input class="input-small" type="text" name="fmAllIncome" value="${personIncomeExpenses.fmAllIncome}"
-                       style="width: 155px;height: 30px; margin-top: 5px;">
+                <input class="input-text-c" type="text" name="fmAllIncome" value="${personIncomeExpenses.fmAllIncome}"
+                       style="width: 155px;height: 30px; ">
             </core:when>
             <core:otherwise>
-                <input class="input-small" type="text" name="fmAllIncome" value="0" style="width: 155px;height: 30px; margin-top: 5px;">
+                <input class="input-text-c" type="text" name="fmAllIncome" value="0" style="width: 155px;height: 30px; ">
             </core:otherwise>
         </core:choose>
     </td>
@@ -1747,11 +1749,11 @@ $(function(){
     <td align="left" colspan="2">
         <core:choose>
             <core:when test="${personIncomeExpenses.fmExpenses != '' and personIncomeExpenses.fmExpenses != null}">
-                <input class="input-small" type="text" name="fmExpenses" value="${personIncomeExpenses.fmExpenses}"
-                       style="width: 155px;height: 30px; margin-top: 5px;">
+                <input class="input-text-c" type="text" name="fmExpenses" value="${personIncomeExpenses.fmExpenses}"
+                       style="width: 155px;height: 30px; ">
             </core:when>
             <core:otherwise>
-                <input class="input-small" type="text" name="fmExpenses" value="0" style="width: 155px;height: 30px; margin-top: 5px;">
+                <input class="input-text-c" type="text" name="fmExpenses" value="0" style="width: 155px;height: 30px; ">
             </core:otherwise>
         </core:choose>
     </td>
@@ -1761,8 +1763,8 @@ $(function(){
         收入来源
     </td>
     <td align="left" colspan="7">
-        <input class="input-small" type="text" name="fmIncomeSrc" value="${personIncomeExpenses.incomeSrc}"
-               style="width: 595px;height: 30px; margin-top: 5px;">
+        <input class="input-text-c" type="text" name="fmIncomeSrc" value="${personIncomeExpenses.incomeSrc}"
+               style="width: 595px;height: 30px; ">
     </td>
 </tr>
 <tr>
@@ -1772,11 +1774,11 @@ $(function(){
     <td align="left" colspan="2">
         <core:choose>
             <core:when test="${personIncomeExpenses.perIncome != '' and personIncomeExpenses.perIncome != null}">
-                <input class="input-small" type="text" name="fmPerIncome" value="${personIncomeExpenses.perIncome}"
-                       style="width: 155px;height: 30px; margin-top: 5px;">
+                <input class="input-text-c" type="text" name="fmPerIncome" value="${personIncomeExpenses.perIncome}"
+                       style="width: 155px;height: 30px; ">
             </core:when>
             <core:otherwise>
-                <input class="input-small" type="text" name="fmPerIncome" value="0" style="width: 155px;height: 30px; margin-top: 5px;">
+                <input class="input-text-c" type="text" name="fmPerIncome" value="0" style="width: 155px;height: 30px; ">
             </core:otherwise>
         </core:choose>
     </td>
@@ -1784,11 +1786,11 @@ $(function(){
     <td align="left" colspan="2">
         <core:choose>
             <core:when test="${personIncomeExpenses.fmOtherMemberIn != '' and personIncomeExpenses.fmOtherMemberIn != null}">
-                <input class="input-small" type="text" name="fmOtherMemberIn" value="${personIncomeExpenses.fmOtherMemberIn}"
-                       style="width: 155px;height: 30px; margin-top: 5px;">
+                <input class="input-text-c" type="text" name="fmOtherMemberIn" value="${personIncomeExpenses.fmOtherMemberIn}"
+                       style="width: 155px;height: 30px; ">
             </core:when>
             <core:otherwise>
-                <input class="input-small" type="text" name="fmOtherMemberIn" value="0" style="width: 155px;height: 30px; margin-top: 5px;">
+                <input class="input-text-c" type="text" name="fmOtherMemberIn" value="0" style="width: 155px;height: 30px; ">
             </core:otherwise>
         </core:choose>
     </td>
@@ -1796,7 +1798,7 @@ $(function(){
 <tr>
     <td align="center"  bgcolor="#b4d8ed" style="color:#161823">家庭主要支出项目</td>
     <td align="left" colspan="3">
-        <select class="selectpicker" style="width: 255px; margin-top: 5px;" name="fmExpensesProj">
+        <select class="selectpicker" style="width: 255px; " name="fmExpensesProj">
             <core:choose>
                 <core:when test="${personIncomeExpenses.fmExpensesProj=='生活性支出'}">
                     <option value="${personIncomeExpenses.fmExpensesProj}" selected="selected">生活性支出</option>
@@ -1827,7 +1829,7 @@ $(function(){
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">家庭收入能否应付支出</td>
     <td align="left" colspan="3">
-        <select class="selectpicker" style="width: 255px; margin-top: 5px;" name="fmInOutRatio">
+        <select class="selectpicker" style="width: 255px; " name="fmInOutRatio">
             <core:choose>
                 <core:when test="${personIncomeExpenses.fmInOutRatio=='能、绰绰有余'}">
                     <option value="${personIncomeExpenses.fmInOutRatio}" selected="selected">能、绰绰有余</option>
@@ -1873,12 +1875,12 @@ $(function(){
     <td align="left">
         <core:choose>
             <core:when test="${personFamilyAssets.fmAllAssets != '' and personFamilyAssets.fmAllAssets != null}">
-                <input class="input-small" type="text" name="fmAllAssets" value="${personFamilyAssets.fmAllAssets}"
-                       style="width: 275px;height: 30px; margin-top: 5px;">
+                <input class="input-text-c" type="text" name="fmAllAssets" value="${personFamilyAssets.fmAllAssets}"
+                       style="width: 275px;height: 30px; ">
             </core:when>
             <core:otherwise>
-                <input class="input-small" type="text" name="fmAllAssets" value="0"
-                       style="width: 275px;height: 30px; margin-top: 5px;">
+                <input class="input-text-c" type="text" name="fmAllAssets" value="0"
+                       style="width: 275px;height: 30px; ">
             </core:otherwise>
         </core:choose>
     </td>
@@ -1918,7 +1920,7 @@ $(function(){
 <tr id="defaultItem">
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">性质</td>
     <td align="left">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="houseInfos[${idx.index}].nature">
+        <select class="selectpicker" style="width: 95px; " name="houseInfos[${idx.index}].nature">
             <core:choose>
                 <core:when test="${personHousePropertyInfo.nature=='商品房'}">
                     <option value="${personHousePropertyInfo.nature}" selected="selected">商品房</option>
@@ -1933,7 +1935,7 @@ $(function(){
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">用途</td>
     <td align="left">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="houseInfos[${idx.index}].purpose">
+        <select class="selectpicker" style="width: 95px; " name="houseInfos[${idx.index}].purpose">
             <core:choose>
                 <core:when test="${personHousePropertyInfo.purpose=='商用楼'}">
                     <option value="${personHousePropertyInfo.purpose}" selected="selected">商用楼</option>
@@ -1964,7 +1966,7 @@ $(function(){
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">所在位置</td>
     <td align="left">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="houseInfos[${idx.index}].site">
+        <select class="selectpicker" style="width: 95px; " name="houseInfos[${idx.index}].site">
             <core:choose>
                 <core:when test="${personHousePropertyInfo.site=='本市市区'}">
                     <option value="${personHousePropertyInfo.site}" selected="selected">本市市区</option>
@@ -2006,7 +2008,7 @@ $(function(){
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">房屋结构</td>
     <td align="left">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="houseInfos[${idx.index}].structure">
+        <select class="selectpicker" style="width: 95px; " name="houseInfos[${idx.index}].structure">
             <core:choose>
                 <core:when test="${personHousePropertyInfo.structure=='钢混'}">
                     <option value="${personHousePropertyInfo.structure}" selected="selected">钢混</option>
@@ -2050,12 +2052,12 @@ $(function(){
 <tr>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">层数</td>
     <td align="left">
-        <input class="input-small" type="text" name="houseInfos[${idx.index}].floorNum" value="${personHousePropertyInfo.floorNum}"
-               style="width: 95px;height: 30px; margin-top: 5px;">
+        <input class="input-text-c" type="text" name="houseInfos[${idx.index}].floorNum" value="${personHousePropertyInfo.floorNum}"
+               style="width: 95px;height: 30px; ">
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">使用情况</td>
     <td align="left">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="houseInfos[${idx.index}].usedSitu">
+        <select class="selectpicker" style="width: 95px; " name="houseInfos[${idx.index}].usedSitu">
             <core:choose>
                 <core:when test="${personHousePropertyInfo.usedSitu=='自住'}">
                     <option value="${personHousePropertyInfo.usedSitu}" selected="selected">自住</option>
@@ -2077,7 +2079,7 @@ $(function(){
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">建筑面积</td>
     <td align="left">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="houseInfos[${idx.index}].houseArea">
+        <select class="selectpicker" style="width: 95px; " name="houseInfos[${idx.index}].houseArea">
             <core:choose>
                 <core:when test="${personHousePropertyInfo.houseArea=='100㎡内'}">
                     <option value="${personHousePropertyInfo.houseArea}" selected="selected">100㎡内</option>
@@ -2108,7 +2110,7 @@ $(function(){
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">房产价值</td>
     <td align="left">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="houseInfos[${idx.index}].houseWorth">
+        <select class="selectpicker" style="width: 95px; " name="houseInfos[${idx.index}].houseWorth">
             <core:choose>
                 <core:when test="${personHousePropertyInfo.houseWorth=='10万以内'}">
                     <option value="${personHousePropertyInfo.houseWorth}" selected="selected">10万以内</option>
@@ -2152,7 +2154,7 @@ $(function(){
 <tr>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">是否按揭</td>
     <td align="left">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="houseInfos[${idx.index}].installment">
+        <select class="selectpicker" style="width: 95px; " name="houseInfos[${idx.index}].installment">
             <core:choose>
                 <core:when test="${personHousePropertyInfo.installment=='1'}">
                     <option value="${personHousePropertyInfo.installment}" selected="selected">是</option>
@@ -2167,7 +2169,7 @@ $(function(){
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">是否办证</td>
     <td align="left">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="houseInfos[${idx.index}].hasCredentials">
+        <select class="selectpicker" style="width: 95px; " name="houseInfos[${idx.index}].hasCredentials">
             <core:choose>
                 <core:when test="${personHousePropertyInfo.hasCredentials=='双证齐全'}">
                     <option value="${personHousePropertyInfo.hasCredentials}" selected="selected">双证齐全</option>
@@ -2189,8 +2191,8 @@ $(function(){
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">备注</td>
     <td align="left" colspan="3">
-        <input class="input-small" type="text" name="houseInfos[${idx.index}].note1" value="${personHousePropertyInfo.note1}"
-               style="width: 280px;height: 30px; margin-top: 5px;">
+        <input class="input-text-c" type="text" name="houseInfos[${idx.index}].note1" value="${personHousePropertyInfo.note1}"
+               style="width: 280px;height: 30px; ">
     </td>
 </tr>
 </core:forEach>
@@ -2206,7 +2208,7 @@ $(function(){
     <tr>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">土地面积</td>
         <td align="left">
-            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="landInfos[${idx.index}].area">
+            <select class="selectpicker" style="width: 95px; " name="landInfos[${idx.index}].area">
                 <core:choose>
                     <core:when test="${personLandInfo.area=='100㎡内'}">
                         <option value="${personLandInfo.area}" selected="selected">100㎡内</option>
@@ -2237,12 +2239,12 @@ $(function(){
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">土地价值</td>
         <td align="left">
-            <input class="input-small" type="text" name="landInfos[${idx.index}].worth" value="${personLandInfo.worth}"
-                   style="width: 95px;height: 30px; margin-top: 5px;">
+            <input class="input-text-c" type="text" name="landInfos[${idx.index}].worth" value="${personLandInfo.worth}"
+                   style="width: 95px;height: 30px; ">
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">土地性质</td>
         <td align="left">
-            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="landInfos[${idx.index}].property">
+            <select class="selectpicker" style="width: 95px; " name="landInfos[${idx.index}].property">
                 <core:choose>
                     <core:when test="${personLandInfo.property=='国有出让'}">
                         <option value="${personLandInfo.property}" selected="selected">国有出让</option>
@@ -2273,7 +2275,7 @@ $(function(){
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">土地类型</td>
         <td align="left">
-            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="landInfos[${idx.index}].type">
+            <select class="selectpicker" style="width: 95px; " name="landInfos[${idx.index}].type">
                 <core:choose>
                     <core:when test="${personLandInfo.type=='商业地'}">
                         <option value="${personLandInfo.type}" selected="selected">商业地</option>
@@ -2317,7 +2319,7 @@ $(function(){
     <tr>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">土地使用情况</td>
         <td align="left">
-            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="landInfos[${idx.index}].usedSitu">
+            <select class="selectpicker" style="width: 95px; " name="landInfos[${idx.index}].usedSitu">
                 <core:choose>
                     <core:when test="${personLandInfo.usedSitu=='自用'}">
                         <option value="${personLandInfo.usedSitu}" selected="selected">自用</option>
@@ -2348,7 +2350,7 @@ $(function(){
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">土地款是否结清</td>
         <td align="left" colspan="5">
-            <select class="selectpicker" style="width: 465px; margin-top: 5px;" name="landInfos[${idx.index}].moneyClear">
+            <select class="selectpicker" style="width: 465px; " name="landInfos[${idx.index}].moneyClear">
                 <core:choose>
                     <core:when test="${personLandInfo.moneyClear=='1'}">
                         <option value="${personLandInfo.moneyClear}" selected="selected">是</option>
@@ -2375,7 +2377,7 @@ $(function(){
     <tr>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">情况</td>
         <td align="left">
-            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="carInfos[${idx.index}].carsInfo">
+            <select class="selectpicker" style="width: 95px; " name="carInfos[${idx.index}].carsInfo">
                 <core:choose>
                     <core:when test="${personCarsInfo.carsInfo=='轿车'}">
                         <option value="${personCarsInfo.carsInfo}" selected="selected">轿车</option>
@@ -2390,7 +2392,7 @@ $(function(){
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">车辆价值</td>
         <td align="left">
-            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="carInfos[${idx.index}].carsWorth">
+            <select class="selectpicker" style="width: 95px; " name="carInfos[${idx.index}].carsWorth">
                 <core:choose>
                     <core:when test="${personCarsInfo.carsWorth=='10万以内'}">
                         <option value="${personCarsInfo.carsWorth}" selected="selected">10万以内</option>
@@ -2421,7 +2423,7 @@ $(function(){
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">是否按揭</td>
         <td align="left">
-            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="carInfos[${idx.index}].carsIsInstallment">
+            <select class="selectpicker" style="width: 95px; " name="carInfos[${idx.index}].carsIsInstallment">
                 <core:choose>
                     <core:when test="${personCarsInfo.carsIsInstallment=='1'}">
                         <option value="${personCarsInfo.carsIsInstallment}" selected="selected">是</option>
@@ -2436,7 +2438,7 @@ $(function(){
         </td>
         <td align="center" bgcolor="#b4d8ed" style="color:#161823">使用情况</td>
         <td align="left">
-            <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="carInfos[${idx.index}].carsUsingInfo">
+            <select class="selectpicker" style="width: 95px; " name="carInfos[${idx.index}].carsUsingInfo">
                 <core:choose>
                     <core:when test="${personCarsInfo.carsUsingInfo=='营运'}">
                         <option value="${personCarsInfo.carsUsingInfo}" selected="selected">营运</option>
@@ -2514,7 +2516,7 @@ $(function(){
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">我社存款</td>
     <td align="left">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="financialDepositOurBank">
+        <select class="selectpicker" style="width: 95px; " name="financialDepositOurBank">
             <core:choose>
                 <core:when test="${personFinancialAssets.depositOurBank=='3万元内'}">
                     <option value="${personFinancialAssets.depositOurBank}" selected="selected">3万元内</option>
@@ -2556,7 +2558,7 @@ $(function(){
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">他行存款</td>
     <td align="left">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="financialDepositOtherBank">
+        <select class="selectpicker" style="width: 95px; " name="financialDepositOtherBank">
             <core:choose>
                 <core:when test="${personFinancialAssets.depositOtherBank=='3万元内'}">
                     <option value="${personFinancialAssets.depositOtherBank}" selected="selected">3万元内</option>
@@ -2609,11 +2611,11 @@ $(function(){
     <td align="left">
         <core:choose>
             <core:when test="${personFamilyIncurDebts.fmIncurDebts != '' and personFamilyIncurDebts.fmIncurDebts != null}">
-                <input class="input-small" type="text" name="fmIncurDebts" value="${personFamilyIncurDebts.fmIncurDebts}"
-                       style="width: 155px;height: 30px; margin-top: 5px;">
+                <input class="input-text-c" type="text" name="fmIncurDebts" value="${personFamilyIncurDebts.fmIncurDebts}"
+                       style="width: 155px;height: 30px; ">
             </core:when>
             <core:otherwise>
-                <input class="input-small" type="text" name="fmIncurDebts" value="0" style="width: 155px;height: 30px; margin-top: 5px;">
+                <input class="input-text-c" type="text" name="fmIncurDebts" value="0" style="width: 155px;height: 30px; ">
             </core:otherwise>
         </core:choose>
     </td>
@@ -2621,11 +2623,11 @@ $(function(){
     <td align="left" colspan="2">
         <core:choose>
             <core:when test="${personFamilyIncurDebts.ourBankDebts != '' and personFamilyIncurDebts.ourBankDebts != null}">
-                <input class="input-small" type="text" name="fmIncurOurBankDebts" value="${personFamilyIncurDebts.ourBankDebts}"
-                       style="width: 155px;height: 30px; margin-top: 5px;">
+                <input class="input-text-c" type="text" name="fmIncurOurBankDebts" value="${personFamilyIncurDebts.ourBankDebts}"
+                       style="width: 155px;height: 30px; ">
             </core:when>
             <core:otherwise>
-                <input class="input-small" type="text" name="fmIncurOurBankDebts" value="0" style="width: 155px;height: 30px; margin-top: 5px;">
+                <input class="input-text-c" type="text" name="fmIncurOurBankDebts" value="0" style="width: 155px;height: 30px; ">
             </core:otherwise>
         </core:choose>
     </td>
@@ -2633,11 +2635,11 @@ $(function(){
     <td align="left" colspan="2">
         <core:choose>
             <core:when test="${personFamilyIncurDebts.otherBankDebts != '' and personFamilyIncurDebts.otherBankDebts != null}">
-                <input class="input-small" type="text" name="fmIncurOtherBankDebts" value="${personFamilyIncurDebts.otherBankDebts}"
-                       style="width: 155px;height: 30px; margin-top: 5px;">
+                <input class="input-text-c" type="text" name="fmIncurOtherBankDebts" value="${personFamilyIncurDebts.otherBankDebts}"
+                       style="width: 155px;height: 30px; ">
             </core:when>
             <core:otherwise>
-                <input class="input-small" type="text" name="fmIncurOtherBankDebts" value="0" style="width: 155px;height: 30px; margin-top: 5px;">
+                <input class="input-text-c" type="text" name="fmIncurOtherBankDebts" value="0" style="width: 155px;height: 30px; ">
             </core:otherwise>
         </core:choose>
     </td>
@@ -2645,13 +2647,13 @@ $(function(){
 <tr>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">贷款用途</td>
     <td align="left" colspan="3">
-        <input class="input-small" type="text" name="fmIncurLoanPurpose" value="${personFamilyIncurDebts.loanPurpose}"
-               style="width: 270px;height: 30px; margin-top: 5px;">
+        <input class="input-text-c" type="text" name="fmIncurLoanPurpose" value="${personFamilyIncurDebts.loanPurpose}"
+               style="width: 270px;height: 30px; ">
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">贷款形态</td>
     <td align="left" colspan="3">
-        <input class="input-small" type="text" name="fmIncurLoanShap" value="${personFamilyIncurDebts.loanShap}"
-               style="width: 270px;height: 30px; margin-top: 5px;">
+        <input class="input-text-c" type="text" name="fmIncurLoanShap" value="${personFamilyIncurDebts.loanShap}"
+               style="width: 270px;height: 30px; ">
     </td>
 </tr>
 <tr>
@@ -2670,17 +2672,17 @@ $(function(){
 <tr>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">姓名</td>
     <td align="left">
-        <input class="input-small" type="text" name="familyMembers[${idx.index}].familyMemberName" value="${personFamilyMember.familyMemberName}"
-               style="width: 95px;height: 30px; margin-top: 5px;">
+        <input class="input-text-c" type="text" name="familyMembers[${idx.index}].familyMemberName" value="${personFamilyMember.familyMemberName}"
+               style="width: 95px;height: 30px; ">
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">年收入（万元）</td>
     <td align="left">
-        <input class="input-small" type="text" name="familyMembers[${idx.index}].yearIncome" value="${personFamilyMember.yearIncome}"
-               style="width: 95px;height: 30px; margin-top: 5px;">
+        <input class="input-text-c" type="text" name="familyMembers[${idx.index}].yearIncome" value="${personFamilyMember.yearIncome}"
+               style="width: 95px;height: 30px; ">
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">与户主关系</td>
     <td align="left">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="familyMembers[${idx.index}].leaderRelation">
+        <select class="selectpicker" style="width: 95px; " name="familyMembers[${idx.index}].leaderRelation">
             <core:choose>
                 <core:when test="${personFamilyMember.leaderRelation=='配偶'}">
                     <option value="${personFamilyMember.leaderRelation}" selected="selected">配偶</option>
@@ -2722,7 +2724,7 @@ $(function(){
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">常住地址</td>
     <td align="left">
-        <select class="selectpicker" style="width: 95px; margin-top: 5px;" name="familyMembers[${idx.index}].address">
+        <select class="selectpicker" style="width: 95px; " name="familyMembers[${idx.index}].address">
             <core:choose>
                 <core:when test="${personFamilyMember.address=='本市'}">
                     <option value="${personFamilyMember.address}" selected="selected">本市</option>
@@ -2755,7 +2757,7 @@ $(function(){
 <tr>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">职业</td>
     <td align="left" colspan="3">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="familyMembers[${idx.index}].profession">
+        <select class="selectpicker" style="width: 270px; " name="familyMembers[${idx.index}].profession">
             <core:choose>
                 <core:when test="${personFamilyMember.profession=='国家机关、党群组织、企业、事业单位负责人'}">
                     <option value="${personFamilyMember.profession}" selected="selected">国家机关、党群组织、企业、事业单位负责人</option>
@@ -2862,8 +2864,8 @@ $(function(){
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">证件号码</td>
     <td align="left" colspan="3">
-        <input class="input-small" type="text" name="familyMembers[${idx.index}].familyMemberCerNum" value="${personFamilyMember.familyMemberCerNum}"
-               style="width: 270px;height: 30px; margin-top: 5px;">
+        <input class="input-text-c" type="text" name="familyMembers[${idx.index}].familyMemberCerNum" value="${personFamilyMember.familyMemberCerNum}"
+               style="width: 270px;height: 30px; ">
     </td>
 </tr>
 </core:forEach>
@@ -2928,7 +2930,7 @@ $(function(){
         您对我行（社）产品满意度
     </td>
     <td align="left" colspan="3">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="finaServiceSatisfaction">
+        <select class="selectpicker" style="width: 270px; " name="finaServiceSatisfaction">
             <core:choose>
                 <core:when test="${financeServicesLists.satisfaction=='较为适用'}">
                     <option value="${financeServicesLists.satisfaction}" selected="selected">较为适用</option>
@@ -2954,7 +2956,7 @@ $(function(){
         您在未来两年内是否有资金需求
     </td>
     <td align="left" colspan="3">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="finaServiceIsMoneyNeed">
+        <select class="selectpicker" style="width: 270px; " name="finaServiceIsMoneyNeed">
             <core:choose>
                 <core:when test="${financeServicesLists.moneyNeed==0}">
                     <option value="0" selected="selected">需要</option>
@@ -2976,27 +2978,27 @@ $(function(){
         <core:forEach items="${financeServicesLists.moneyTodo}" var="moneyTodo">
             <input type="text" value="${moneyTodo}" style="display: none" class="finaServiceMoneyTodo"/>
         </core:forEach>
-        <label class="checkbox inline" style="width: 125px; margin-top: 5px;">
+        <label class="checkbox inline" style="width: 125px; ">
             <input type="checkbox" class="做生意周转" value="做生意周转" name="finaServiceMoneyTodo"> 做生意周转
         </label>
         <br>
-        <label class="checkbox inline" style="width: 125px; margin-top: 5px;">
+        <label class="checkbox inline" style="width: 125px; ">
             <input type="checkbox" class="购买农业生产资料" value="购买农业生产资料" name="finaServiceMoneyTodo">  购买农业生产资料
         </label>
         <br>
-        <label class="checkbox inline" style="width: 125px; margin-top: 5px;">
+        <label class="checkbox inline" style="width: 125px; ">
             <input type="checkbox" class="子女上学" value="子女上学" name="finaServiceMoneyTodo">  子女上学
         </label>
         <br>
-        <label class="checkbox inline" style="width: 125px; margin-top: 5px;">
+        <label class="checkbox inline" style="width: 125px; ">
             <input type="checkbox" class="盖(买)房子" value="盖(买)房子" name="finaServiceMoneyTodo"> 盖(买)房子
         </label>
         <br>
-        <label class="checkbox inline" style="width: 125px; margin-top: 5px;">
+        <label class="checkbox inline" style="width: 125px; ">
             <input type="checkbox" class="购买大件物品" value="购买大件物品" name="finaServiceMoneyTodo"> 购买大件物品
         </label>
         <br>
-        <label class="checkbox inline" style="width: 125px; margin-top: 5px;">
+        <label class="checkbox inline" style="width: 125px; ">
             <input type="checkbox" class="其他" value="其他" name="finaServiceMoneyTodo"> 其他
         </label>
     </td>
@@ -3006,12 +3008,12 @@ $(function(){
     <td align="left">
         <core:choose>
             <core:when test="${financeServicesLists.moneyCount != '' and financeServicesLists.moneyCount != null}">
-                <input class="input-small" type="text" name="finaServiceMoneyCount" value="${financeServicesLists.moneyCount}"
-                       style="width: 275px;height: 30px; margin-top: 5px;">
+                <input class="input-text-c" type="text" name="finaServiceMoneyCount" value="${financeServicesLists.moneyCount}"
+                       style="width: 275px;height: 30px; ">
             </core:when>
             <core:otherwise>
-                <input class="input-small" type="text" name="finaServiceMoneyCount" value="0"
-                       style="width: 275px;height: 30px; margin-top: 5px;">
+                <input class="input-text-c" type="text" name="finaServiceMoneyCount" value="0"
+                       style="width: 275px;height: 30px; ">
             </core:otherwise>
         </core:choose>
     </td>
@@ -3048,12 +3050,12 @@ $(function(){
     <td align="left">
         <core:choose>
             <core:when test="${financeServicesLists.timeLimit!= '' and financeServicesLists.timeLimit != null}">
-                <input class="input-small" type="text" name="finaServiceTimeLimit" value="${financeServicesLists.timeLimit}"
-                       style="width: 275px;height: 30px; margin-top: 5px;">
+                <input class="input-text-c" type="text" name="finaServiceTimeLimit" value="${financeServicesLists.timeLimit}"
+                       style="width: 275px;height: 30px; ">
             </core:when>
             <core:otherwise>
-                <input class="input-small" type="text" name="finaServiceTimeLimit" value="0"
-                       style="width: 275px;height: 30px; margin-top: 5px;">
+                <input class="input-text-c" type="text" name="finaServiceTimeLimit" value="0"
+                       style="width: 275px;height: 30px; ">
             </core:otherwise>
         </core:choose>
     </td>
@@ -3112,7 +3114,7 @@ $(function(){
         <label class="checkbox inline">
             <input type="checkbox" class="个人理财服务,需要" value="个人理财服务,需要" name="finaServicesNeedServices"> 个人理财服务,需要
         </label>
-        <input type="text" name="finaServicesNeedServices" style="width: 55px;height: 25px; margin-top: 5px;">项目
+        <input type="text" name="finaServicesNeedServices" style="width: 55px;height: 25px; ">项目
     </td>
 </tr>
 <tr>
@@ -3123,35 +3125,35 @@ $(function(){
         <core:forEach items="${financeServicesLists.needServicesElse}" var="needServicesElse">
             <input type="text" value="${needServicesElse}" style="display: none" class="finaServicesNeedServicesElse"/>
         </core:forEach>
-        <label class="checkbox inline" style="width: 155px; margin-top: 5px;">
+        <label class="checkbox inline" style="width: 155px; ">
             <input type="checkbox" class="代缴代收服务" value="代缴代收服务" name="finaServicesNeedServicesElse"> 代缴代收服务
         </label>
-        <input type="text" name="needServicesElse" style="width: 155px;height: 25px; margin-top: 5px;">
+        <input type="text" name="needServicesElse" style="width: 155px;height: 25px; ">
         <br>
-        <label class="checkbox inline" style="width: 155px; margin-top: 5px;">
+        <label class="checkbox inline" style="width: 155px; ">
             <input type="checkbox" class="贵重物品保管" value="贵重物品保管" name="finaServicesNeedServicesElse">贵重物品保管
         </label>
         <br>
-        <label class="checkbox inline" style="width: 155px; margin-top: 5px;">
+        <label class="checkbox inline" style="width: 155px; ">
             <input type="checkbox" class="黄金卖买" value="黄金卖买" name="finaServicesNeedServicesElse">黄金卖买
         </label>
         <br>
-        <label class="checkbox inline" style="width: 155px; margin-top: 5px;">
+        <label class="checkbox inline" style="width: 155px; ">
             <input type="checkbox" class="外汇卖买" value="外汇卖买" name="finaServicesNeedServicesElse">外汇卖买
         </label>
         <br>
-        <label class="checkbox inline" style="width: 155px; margin-top: 5px;">
+        <label class="checkbox inline" style="width: 155px; ">
             <input type="checkbox" class="个人征信咨询" value="个人征信咨询" name="finaServicesNeedServicesElse"> 个人征信咨询
         </label>
         <br>
-        <label class="checkbox inline" style="width: 155px; margin-top: 5px;">
+        <label class="checkbox inline" style="width: 155px; ">
             <input type="checkbox" class="金融政策、知识的宣传" value="金融政策、知识的宣传" name="finaServicesNeedServicesElse"> 金融政策、知识的宣传
         </label>
         <br>
-        <label class="checkbox inline" style="width: 155px; margin-top: 5px;">
+        <label class="checkbox inline" style="width: 155px; ">
             <input type="checkbox" class="个人征信咨询" value="个人征信咨询" name="finaServicesNeedServicesElse"> 其他：
         </label>
-        <input type="text" name="finaServicesNeedServicesElse" style="width: 155px;height: 25px; margin-top: 5px;">
+        <input type="text" name="finaServicesNeedServicesElse" style="width: 155px;height: 25px; ">
     </td>
 </tr>
 <tr>
@@ -3159,7 +3161,7 @@ $(function(){
         您希望我行（社）增加哪些方面的服务？
     </td>
     <td align="left" colspan="2">
-        <textarea rows="3" style="width: 355px;height: 85px; margin-top: 5px;" name="finaServicesHolpForServices">
+        <textarea rows="3" style="width: 355px;height: 85px; " name="finaServicesHolpForServices">
             ${financeServicesLists.holpForServices}
         </textarea>
     </td>
@@ -3169,7 +3171,7 @@ $(function(){
         您对我行（社）服务有何建议？
     </td>
     <td align="left" colspan="2">
-        <textarea rows="3" style="width: 355px;height: 85px; margin-top: 5px;" name="finaServicesSuggestion">
+        <textarea rows="3" style="width: 355px;height: 85px; " name="finaServicesSuggestion">
             ${financeServicesLists.suggestion}
         </textarea>
     </td>
@@ -3403,7 +3405,7 @@ $(function(){
         客户新需求登记
     </td>
     <td align="left" colspan="2">
-        <textarea rows="3" style="width: 355px;height: 85px; margin-top: 5px;" name="finaServiceNewRequirement">
+        <textarea rows="3" style="width: 355px;height: 85px; " name="finaServiceNewRequirement">
             ${financeServicesLists.newRequirement}
         </textarea>
     </td>
@@ -3425,7 +3427,7 @@ $(function(){
         一、客户基本资料真实性
     </td>
     <td width="73%" align="left">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="villageManagerEva.truth">
+        <select class="selectpicker" style="width: 270px; " name="villageManagerEva.truth">
             <core:choose>
                 <core:when test="${villageManagerEvaList.truth=='基本准确'}">
                     <option value="${villageManagerEvaList.truth}" selected="selected">基本准确</option>
@@ -3460,7 +3462,7 @@ $(function(){
         二、本地居住时间（农户）
     </td>
     <td align="left">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="villageManagerEva.localLivingTime">
+        <select class="selectpicker" style="width: 270px; " name="villageManagerEva.localLivingTime">
             <core:choose>
                 <core:when test="${villageManagerEvaList.localLivingTime=='5年(含)以下'}">
                     <option value="${villageManagerEvaList.localLivingTime}" selected="selected">5年(含)以下</option>
@@ -3479,7 +3481,7 @@ $(function(){
         三、经营能力
     </td>
     <td width="73%" align="left">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="villageManagerEva.operatingCapacity">
+        <select class="selectpicker" style="width: 270px; " name="villageManagerEva.operatingCapacity">
             <core:choose>
                 <core:when test="${villageManagerEvaList.operatingCapacity=='经验丰富,技术水平高,能力强'}">
                     <option value="${villageManagerEvaList.operatingCapacity}" selected="selected">经验丰富,技术水平高,能力强</option>
@@ -3514,7 +3516,7 @@ $(function(){
         四、项目潜质
     </td>
     <td align="left">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="villageManagerEva.projectPotential">
+        <select class="selectpicker" style="width: 270px; " name="villageManagerEva.projectPotential">
             <core:choose>
                 <core:when test="${villageManagerEvaList.projectPotential=='优秀'}">
                     <option value="${villageManagerEvaList.projectPotential}" selected="selected">优秀</option>
@@ -3549,7 +3551,7 @@ $(function(){
         五、市场经营风险
     </td>
     <td width="73%" align="left">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="villageManagerEva.operationalRisks">
+        <select class="selectpicker" style="width: 270px; " name="villageManagerEva.operationalRisks">
             <core:choose>
                 <core:when test="${villageManagerEvaList.operationalRisks=='很低'}">
                     <option value="${villageManagerEvaList.operationalRisks}" selected="selected">很低</option>
@@ -3584,7 +3586,7 @@ $(function(){
         六、市场竞争力和发展前景
     </td>
     <td align="left">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="villageManagerEva.developmentProspects">
+        <select class="selectpicker" style="width: 270px; " name="villageManagerEva.developmentProspects">
             <core:choose>
                 <core:when test="${villageManagerEvaList.developmentProspects=='很好'}">
                     <option value="${villageManagerEvaList.developmentProspects}" selected="selected">很好</option>
@@ -3619,7 +3621,7 @@ $(function(){
         七、生产经营力或工作稳定情况
     </td>
     <td width="73%" align="left">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="villageManagerEva.operatingStability">
+        <select class="selectpicker" style="width: 270px; " name="villageManagerEva.operatingStability">
             <core:choose>
                 <core:when test="${villageManagerEvaList.operatingStability=='强'}">
                     <option value="${villageManagerEvaList.operatingStability}" selected="selected">强</option>
@@ -3665,7 +3667,7 @@ $(function(){
         八、家庭人均纯收入水平（农户）
     </td>
     <td align="left">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="villageManagerEva.capitaNetIncomeLevel">
+        <select class="selectpicker" style="width: 270px; " name="villageManagerEva.capitaNetIncomeLevel">
             <core:choose>
                 <core:when test="${villageManagerEvaList.capitaNetIncomeLevel=='高收入'}">
                     <option value="${villageManagerEvaList.capitaNetIncomeLevel}" selected="selected">高收入</option>
@@ -3711,7 +3713,7 @@ $(function(){
         九、家庭人均可支配收入水平（非农户）
     </td>
     <td width="73%" align="left">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="villageManagerEva.disposableIncomeLevel">
+        <select class="selectpicker" style="width: 270px; " name="villageManagerEva.disposableIncomeLevel">
             <core:choose>
                 <core:when test="${villageManagerEvaList.disposableIncomeLevel=='最高收入'}">
                     <option value="${villageManagerEvaList.disposableIncomeLevel}" selected="selected">最高收入</option>
@@ -3785,7 +3787,7 @@ $(function(){
         十、家庭财产水平
     </td>
     <td align="left">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="villageManagerEva.familyPropertyLevel">
+        <select class="selectpicker" style="width: 270px; " name="villageManagerEva.familyPropertyLevel">
             <core:choose>
                 <core:when test="${villageManagerEvaList.familyPropertyLevel=='富足家庭'}">
                     <option value="${villageManagerEvaList.familyPropertyLevel}" selected="selected">富足家庭</option>
@@ -3844,7 +3846,7 @@ $(function(){
         十一、税费缴纳情况（含土地、房产款项）
     </td>
     <td width="73%" align="left">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="villageManagerEva.payTaxes">
+        <select class="selectpicker" style="width: 270px; " name="villageManagerEva.payTaxes">
             <core:choose>
                 <core:when test="${villageManagerEvaList.payTaxes=='正常缴纳'}">
                     <option value="${villageManagerEvaList.payTaxes}" selected="selected">正常缴纳</option>
@@ -3903,7 +3905,7 @@ $(function(){
         十二、敬老情况
     </td>
     <td align="left">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="villageManagerEva.respectSitu">
+        <select class="selectpicker" style="width: 270px; " name="villageManagerEva.respectSitu">
             <core:choose>
                 <core:when test="${villageManagerEvaList.respectSitu=='好'}">
                     <option value="${villageManagerEvaList.respectSitu}" selected="selected">好</option>
@@ -3962,7 +3964,7 @@ $(function(){
         十三、邻里关系
     </td>
     <td width="73%" align="left">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="villageManagerEva.neighborhood">
+        <select class="selectpicker" style="width: 270px; " name="villageManagerEva.neighborhood">
             <core:choose>
                 <core:when test="${villageManagerEvaList.neighborhood=='好'}">
                     <option value="${villageManagerEvaList.neighborhood}" selected="selected">好</option>
@@ -4021,7 +4023,7 @@ $(function(){
         十四、对公益事业关心程度
     </td>
     <td align="left">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="villageManagerEva.publicWelfareLevel">
+        <select class="selectpicker" style="width: 270px; " name="villageManagerEva.publicWelfareLevel">
             <core:choose>
                 <core:when test="${villageManagerEvaList.publicWelfareLevel=='高'}">
                     <option value="${villageManagerEvaList.publicWelfareLevel}" selected="selected">高</option>
@@ -4067,7 +4069,7 @@ $(function(){
         十五、信誉情况
     </td>
     <td width="73%" align="left">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="villageManagerEva.creditworthiness">
+        <select class="selectpicker" style="width: 270px; " name="villageManagerEva.creditworthiness">
             <core:choose>
                 <core:when test="${villageManagerEvaList.creditworthiness=='好'}">
                     <option value="${villageManagerEvaList.creditworthiness}" selected="selected">好</option>
@@ -4102,7 +4104,7 @@ $(function(){
         十六、个人品行综合评价
     </td>
     <td align="left">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="villageManagerEva.conduct">
+        <select class="selectpicker" style="width: 270px; " name="villageManagerEva.conduct">
             <core:choose>
                 <core:when test="${villageManagerEvaList.conduct=='优秀'}">
                     <option value="${villageManagerEvaList.conduct}" selected="selected">优秀</option>
@@ -4161,7 +4163,7 @@ $(function(){
         十七、受表彰情况
     </td>
     <td width="73%" align="left">
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="villageManagerEva.praised">
+        <select class="selectpicker" style="width: 270px; " name="villageManagerEva.praised">
             <core:choose>
                 <core:when test="${villageManagerEvaList.praised=='有'}">
                     <option value="${villageManagerEvaList.praised}" selected="selected">有</option>
@@ -4188,7 +4190,7 @@ $(function(){
     </td>
     <td align="left">
         <input type="text" name="supplement" value="${villageManagerEvaList.supplement}"
-               style="width: 270px; height: 30px;margin-top: 5px;">
+               style="width: 270px; height: 30px;">
     </td>
 </tr>
 <tr>
@@ -4205,7 +4207,7 @@ $(function(){
             </core:otherwise>
         </core:choose>
 
-        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="villageManagerEva.importantObject">
+        <select class="selectpicker" style="width: 270px; " name="villageManagerEva.importantObject">
             <core:choose>
                 <core:when test="${villageManagerEvaList.importantObject=='是'}">
                     <option value="${villageManagerEvaList.importantObject}" selected="selected">是</option>
@@ -4243,7 +4245,7 @@ $(function(){
                     </td>
                     <td width="73%" align="left">
                         <input type="text" name="custManagerLoanSitu" value="${customerManagerEvaList.loanSitu}"
-                               style="width: 270px;height: 30px; margin-top: 5px;">
+                               style="width: 270px;height: 30px; ">
                     </td>
                 </tr>
                 <tr>
@@ -4313,7 +4315,7 @@ $(function(){
                         他行信用记录
                     </td>
                     <td width="73%" align="left">
-                        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="custManagerOtherBankRecord">
+                        <select class="selectpicker" style="width: 270px; " name="custManagerOtherBankRecord">
                             <core:choose>
                                 <core:when test="${customerManagerEvaList.otherBankRecord=='良好'}">
                                     <option value="${customerManagerEvaList.otherBankRecord}" selected="selected">良好</option>
@@ -4339,7 +4341,7 @@ $(function(){
                         变现能力
                     </td>
                     <td align="left">
-                        <select class="selectpicker" style="width: 270px; margin-top: 5px;" name="custManagerHouseToMoney">
+                        <select class="selectpicker" style="width: 270px; " name="custManagerHouseToMoney">
                             <core:choose>
                                 <core:when test="${customerManagerEvaList.houseToMoney=='优秀'}">
                                     <option value="${customerManagerEvaList.houseToMoney}" selected="selected">优秀</option>

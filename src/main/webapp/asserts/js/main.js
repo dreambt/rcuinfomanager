@@ -1,4 +1,22 @@
 $(function () {
+
+    $('input[placeholder]').each(function(){
+        var input = $(this);
+        $(input).val(input.attr('placeholder'));
+
+        $(input).focus(function(){
+            if (input.val() == input.attr('placeholder')) {
+                input.val('');
+            }
+        });
+
+        $(input).blur(function(){
+            if (input.val() == '' || input.val() == input.attr('placeholder')) {
+                input.val(input.attr('placeholder'));
+            }
+        });
+    });
+
     //左侧菜单样式控制
     $('.span3').click(function () {
         $("li[class='active']").removeAttr("class");
@@ -118,12 +136,26 @@ $(function () {
             }
         });
         if (isExist) {
-            var url = '/family/batchChecks/' + recordIds;
+            $("#checkOperate").fancybox({
+                'hideOnContentClick': true,
+                'closeBtn' : false
+            });
+
+            /*var url = '/family/batchChecks/' + recordIds;
             window.art.dialog({
                 id: 'check',
                 title: '验收信息',
                 lock: true,
                 content: '<iframe scrolling="auto" width="450" height="210" frameborder="0" style="border: none;margin: -20px -25px;"marginheight="0" marginwidth="0" src="' + url + '"/>'
+            });*/
+            $('#checkOkOperate').click(function () {
+                var state = $('#state').val();
+                if(state && state!=''){
+                    var url = '/family/saveBatchChecks/'+recordIds+'/'+state;
+                    window.location.href = url;
+                }else{
+                    alert("未选择验收结果！");
+                }
             });
         } else {
             alert("未勾选任何客户信息！");

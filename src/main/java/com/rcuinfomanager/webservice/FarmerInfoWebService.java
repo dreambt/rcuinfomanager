@@ -38,6 +38,9 @@ public class FarmerInfoWebService {
             String pwdMD5 = MDFive.getEncryptPwd(user.getPassword());
             if (pwdMD5.equals(password)) {
                 List<AllColumnInfo> data = baseInfoService.queryAllColumnInfoListAndUpdateAppointStatus(user.getUserId());
+                for (AllColumnInfo allColumnInfo : data) {
+                    allColumnInfo.setUserName(username);
+                }
                 if (data != null && !data.isEmpty()) {
                     webServiceResponseData.setStatus(0);
                     String rawData = JsonParser.toJSON(data);

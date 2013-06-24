@@ -557,6 +557,10 @@
     </update>
 
     <insert id="saveFamilyassets" parameterType="com.rcuinfomanager.model.FamilyAssets">
+        <selectKey resultType="java.lang.Long" keyProperty="assetsId" order="AFTER">
+            SELECT @@IDENTITY
+        </selectKey>
+
         insert into familyassets(recordId,fmAllAssets, mainAssets) values (#{recordId},#{fmAllAssets}, #{mainAssets})
     </insert>
 
@@ -571,6 +575,11 @@
           otherBankRecord = #{custManagerOtherBankRecord}, houseToMoney = #{custManagerHouseToMoney}
         where recordId = #{recordId}
     </update>
+
+    <insert id="saveCustomerManagerEva" parameterType="com.rcuinfomanager.webservice.model.AllColumnInfo">
+        insert into customermanagereva (recordId,loanSitu,creditRecord,otherBankRecord,houseToMoney)
+        values (#{recordId},#{custManagerLoanSitu},#{custManagerCreditRecord},#{custManagerOtherBankRecord},#{custManagerHouseToMoney})
+    </insert>
 
     <delete id="deleteCarsinfoByAssetsId" parameterType="java.lang.Long">
         DELETE FROM carsinfo WHERE assetsId = #{assetsId};
@@ -676,7 +685,7 @@
         SELECT customerName, cerNum, address FROM baseinfo WHERE username = #{userName}
     </select>
 
-    <select id="getStatusByCerNum" parameterType="java.lang.String">
+    <select id="getStatusByCerNum" parameterType="java.lang.String" resultType="java.lang.Integer">
         select state from baseinfo where cerNum = #{cerNum}
     </select>
 </mapper>

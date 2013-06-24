@@ -143,7 +143,6 @@ CREATE TABLE `baseinfo` (
   `note3` varchar(200) DEFAULT NULL,
   `note4` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`recordId`),
-  UNIQUE KEY `Index_2` (`address`),
   KEY `Index_3` (`state`),
   KEY `Index_4` (`userName`),
   KEY `Index_6` (`recordTime`),

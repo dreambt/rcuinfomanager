@@ -190,8 +190,4 @@ public class VillageManagerEva {
     public void setId(long id) {
         this.id = id;
     }
-
-    public void setRecordId(Long recordId) {
-        this.recordId = recordId;
-    }
 }

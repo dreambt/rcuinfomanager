@@ -109,7 +109,13 @@ public class BaseInfoService {
         }
     }
     public void updateCustomermanagereva(AllColumnInfo allColumnInfo){
-        baseInfoDao.updateCustomermanagereva(allColumnInfo);
+        CustomerManagerEva customerManagerEva = baseInfoDao.getCustomerManagerEvaList(allColumnInfo.getRecordId());
+        if (customerManagerEva == null) {
+            baseInfoDao.saveCustomerManagerEva(allColumnInfo);
+        } else {
+            baseInfoDao.updateCustomermanagereva(allColumnInfo);
+        }
+
     }
 
     public void updateHousePropertyInfo(HouseInfo houseInfo){
@@ -248,6 +254,7 @@ public class BaseInfoService {
 
         if (familyAssets == null) {
             familyAssets = new FamilyAssets();
+            familyAssets.setRecordId(allColumnInfo.getRecordId());
             familyAssets.setFmAllAssets(allColumnInfo.getFmAllAssets());
             familyAssets.setMainAssets(allColumnInfo.getMainAssets());
             baseInfoDao.saveFamilyassets(familyAssets);
@@ -280,8 +287,8 @@ public class BaseInfoService {
     }
 
     public boolean isAccepted(String cerNum) {
-        int status = baseInfoDao.getStatusByCerNum(cerNum);
-        if (status == 3 || status == 4) {
+        Integer status = baseInfoDao.getStatusByCerNum(cerNum);
+        if (status != null && (status == 3 || status == 4)) {
             return true;
         }
 

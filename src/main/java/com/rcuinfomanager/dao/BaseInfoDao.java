@@ -130,7 +130,7 @@ public interface BaseInfoDao {
 
     void saveFamilyassets(FamilyAssets familyAssets);
 
-    int getStatusByCerNum(String cerNum);
+    Integer getStatusByCerNum(String cerNum);
 
     //四
     CustomerManagerEva getCustomerManagerEvaList(long id);
@@ -145,4 +145,5 @@ public interface BaseInfoDao {
 
     AllColumnInfo queryAllColumnByRecordId(long recordId);
 
+    void saveCustomerManagerEva(AllColumnInfo allColumnInfo);
 }

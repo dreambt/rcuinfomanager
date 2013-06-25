@@ -59,6 +59,10 @@ public class HomeController {
             areaId = "";
         }
 
+        if ("按客户经理".equals(displayUserName)) {
+            displayUserName = "";
+        }
+
         UserSessionContext userSessionContext = UserSessionContextHolder.getUserSessionContext();
         SessionUser sessionUser = userSessionContext.getSessionUser();
         map.put("needModifyPassword",sessionUser.isNeedModifyPassword());

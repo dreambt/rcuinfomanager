@@ -486,8 +486,8 @@
     </select>
     <!--保存指派-->
     <insert id="saveAppointInfo" parameterType="com.rcuinfomanager.model.AppointInfo">
-          insert into t_appoint(recordId,user_id)
-          values (#{id},#{userId})
+          insert into t_appoint(recordId,user_id,downloaded)
+          values (#{id},#{userId},0)
     </insert>
     <resultMap id="userNameMap" type="com.rcuinfomanager.model.User">
         <result column="userId" property="userId"></result>

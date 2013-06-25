@@ -19,6 +19,7 @@
 <script src="/asserts/js/dialog/artDialog.js"></script>
 <script src="/asserts/js/jquery.fancybox.js"></script>
 <script src="/asserts/js/modernizr.js"></script>
+<script src="/asserts/js/IE8.js"></script>
 <script type="text/javascript">
 $(function(){
     //左侧菜单样式控制

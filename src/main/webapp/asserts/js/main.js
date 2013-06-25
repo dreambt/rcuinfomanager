@@ -137,6 +137,8 @@ $(function () {
         });
         if (isExist) {
             $("#checkOperate").fancybox({
+                'transitionIn'		: 'elastic',
+                'transitionOut'		: 'elastic',
                 'hideOnContentClick': true,
                 'closeBtn' : false
             });

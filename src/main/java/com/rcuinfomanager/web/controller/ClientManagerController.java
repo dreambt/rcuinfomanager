@@ -39,8 +39,13 @@ public class ClientManagerController {
                     if (!item.isFormField()) {
                         String storeDir = getClass().getClassLoader().getResource("/").getPath().replaceAll("/WEB-INF/classes","")+"asserts/client";
                         try {
-                            ImageUtils.storeFile(storeDir, item.getName(), item.getInputStream());
-                            map.put("fileName", item.getName());
+                            String fileName = item.getName();
+                            String[] temp = fileName.split("\\\\");
+                            if (temp.length > 1) {
+                                fileName = temp[temp.length-1];
+                            }
+                            ImageUtils.storeFile(storeDir, fileName, item.getInputStream());
+                            map.put("fileName", fileName);
                         } catch (IOException e) {
                             e.printStackTrace();
                         }

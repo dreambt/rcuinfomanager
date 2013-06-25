@@ -145,7 +145,7 @@ public class SessionFilter implements Filter {
             httpRequest.getSession().setAttribute(CommonConst.LOGIN_RRETURN_URL_KEY, requestUrl);
             request.setAttribute("requestUrl", requestUrl);
             //转发到登录页面
-            request.getRequestDispatcher("/login.html").forward(request, response);
+            ((HttpServletResponse) response).sendRedirect("/login.html");
             return;
         } else {
             try {

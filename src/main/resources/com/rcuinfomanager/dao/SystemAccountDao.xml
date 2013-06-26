@@ -10,12 +10,18 @@
 
     </resultMap>
     <!--admin-->
-    <select id="getSystemAccountByAdminList" resultMap="accountInfoMap">
+    <select id="getSystemAccountByPage" resultMap="accountInfoMap">
             select u.userId,u.userName,u.displayUserName,ri.roleName
             from usersinfo u
             left outer join userroleinfo ur on u.userId=ur.userId
+            left outer join rolesinfo ri on ur.roleId=ri.roleId limit #{beginPageNum}, #{endPageNum}
+    </select>
+    <select id="getSystemAccountByCount" resultType="java.lang.Long">
+            select count(*)
+            from usersinfo u
+            left outer join userroleinfo ur on u.userId=ur.userId
             left outer join rolesinfo ri on ur.roleId=ri.roleId
-       </select>
+    </select>
     <!--Normal-->
     <select id="getSystemAccountByCommonList" parameterType="java.lang.Long" resultMap="accountInfoMap">
             select u.userId,u.userName,u.displayUserName,ri.roleName

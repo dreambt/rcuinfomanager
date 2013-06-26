@@ -166,7 +166,7 @@ $(function(){
                     $('#industryLevel4').append(option);
                 });
             }
-            $("option[value="+ $('#industry').val() +"]").attr('selected', 'selected')
+            $('#industryLevel4').find("option[value="+ $('#industry').val() +"]").attr('selected', 'selected')
         });
 
         var url='/industry/'+ $('#industry').val().substring(0,3);
@@ -181,7 +181,7 @@ $(function(){
                     $('#industryLevel3').append(option);
                 });
             }
-            $("option[value="+ $('#industry').val().substring(0,5) +"]").attr('selected', 'selected')
+            $('#industryLevel3').find("option[value="+ $('#industry').val().substring(0,5) +"]").attr('selected', 'selected')
         });
 
         var url='/industry/'+ $('#industry').val().substring(0,1);
@@ -196,9 +196,9 @@ $(function(){
                     $('#industryLevel2').append(option);
                 });
             }
-            $("option[value="+ $('#industry').val().substring(0,3) +"]").attr('selected', 'selected')
+            $('#industryLevel2').find("option[value="+ $('#industry').val().substring(0,3) +"]").attr('selected', 'selected')
         });
-        $("option[value="+ $('#industry').val().substring(0,1) +"]").attr('selected', 'selected')
+        $('#industry').find("option[value="+ $('#industry').val().substring(0,1) +"]").attr('selected', 'selected')
     }
 
     $('#selectAreas').change(function(){
@@ -220,7 +220,7 @@ $(function(){
          });
     });
 
-    $("option[value="+ $('#areaCode').val() +"]").attr('selected', 'selected');
+    $('#selectAreas').find("option[value="+ $('#areaCode').val() +"]").attr('selected', 'selected');
     if ($("#selectAreas option[value="+ $('#areaCode').val()  +"]").attr('selected')) {
         var url='/area/'+ $('#areaCode').val();
         var params={'areaId':$('#areaCode').val()};
@@ -234,7 +234,7 @@ $(function(){
                     option.text(item.areaName);
                     $('#village').append(option);
                 });
-                $("option[value="+ $('#villageName').val() +"]").attr('selected', 'selected');
+                $('#village').find("option[value="+ $('#villageName').val() +"]").attr('selected', 'selected');
             }
         });
     }
@@ -325,63 +325,23 @@ $(function(){
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">性别</td>
     <td align="left">
         <select class="selectpicker" style="width: 95px;" name="gender">
-            <core:choose>
-                <core:when test="${personBasicList.gender==0}">
-                    <option value="0" selected="selected">女</option>
-                    <option value="1">男</option>
-                </core:when>
-                <core:otherwise>
-                    <option value="0">女</option>
-                    <option value="1" selected="selected">男</option>
-                </core:otherwise>
-            </core:choose>
+            <option value="0" ${personBasicList.gender==0 ? 'selected' : ''}>女</option>
+            <option value="1" ${personBasicList.gender==1 ? 'selected' : ''}>男</option>
         </select>
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">是否农户</td>
     <td align="left">
         <select class="selectpicker" style="width: 95px;" name="isFarmer">
-            <core:choose>
-                <core:when test="${personBasicList.farmer==0}">
-                    <option value="0" selected="selected">否</option>
-                    <option value="1">是</option>
-                </core:when>
-                <core:when test="${personBasicList.farmer==1}">
-                    <option value="0" >否</option>
-                    <option  value="1" selected="selected">是</option>
-                </core:when>
-                <core:otherwise>
-                    <option value="0" selected="selected">否</option>
-                    <option value="1">是</option>
-                </core:otherwise>
-            </core:choose>
+            <option value="0" ${personBasicList.farmer==0 ? 'selected' : ''}>否</option>
+            <option value="1" ${personBasicList.farmer==1 ? 'selected' : ''}>是</option>
         </select>
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">客户类型</td>
     <td align="center">
         <select class="selectpicker" style="width: 95px;" name="custType">
-            <core:choose>
-                <core:when test="${personBasicList.customerType=='一般农户'}">
-                    <option value="${personBasicList.customerType}" selected="selected">一般农户</option>
-                    <option value="其他自然人">其他自然人</option>
-                    <option value="个人经营户">个人经营户</option>
-                </core:when>
-                <core:when test="${personBasicList.customerType=='其他自然人'}">
-                    <option value="一般农户">一般农户</option>
-                    <option value="${personBasicList.customerType}" selected="selected">其他自然人</option>
-                    <option value="个人经营户">个人经营户</option>
-                </core:when>
-                <core:when test="${personBasicList.customerType=='个人经营户'}">
-                    <option value="一般农户">一般农户</option>
-                    <option value="其他自然人">其他自然人</option>
-                    <option value="${personBasicList.customerType}" selected="selected">个人经营户</option>
-                </core:when>
-                <core:otherwise>
-                    <option value="一般农户">一般农户</option>
-                    <option value="其他自然人">其他自然人</option>
-                    <option value="个人经营户">个人经营户</option>
-                    <option value="" selected="selected">请选择</option>
-                </core:otherwise>
-            </core:choose>
+            <option value="0" ${personBasicList.customerType=='一般农户' ? 'selected' : ''}>一般农户</option>
+            <option value="1" ${personBasicList.customerType=='其他自然人' ? 'selected' : ''}>其他自然人</option>
+            <option value="个人经营户" ${personBasicList.customerType=='个人经营户' ? 'selected' : ''}>个人经营户</option>
         </select>
     </td>
 </tr>
@@ -435,20 +395,8 @@ $(function(){
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">是否拥有外国护照或居住权</td>
     <td align="left">
         <select class="selectpicker" style="width: 95px;" name="isHavePassport">
-            <core:choose>
-                <core:when test="${personBasicList.havePassport==0}">
-                    <option value="0" selected="selected">否</option>
-                    <option value="1">是</option>
-                </core:when>
-                <core:when test="${personBasicList.havePassport==1}">
-                    <option value="0">否</option>
-                    <option value="1" selected="selected">是</option>
-                </core:when>
-                <core:otherwise>
-                    <option value="0" selected="selected">否</option>
-                    <option value="1">是</option>
-                </core:otherwise>
-            </core:choose>
+            <option value="0" ${personBasicList.havePassport==0 ? 'selected' : ''}>否</option>
+            <option value="1" ${personBasicList.havePassport==1 ? 'selected' : ''}>是</option>
         </select>
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">民族</td>

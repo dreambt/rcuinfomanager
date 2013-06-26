@@ -14,8 +14,14 @@ public class SystemAccountService {
     private SystemAccountDao systemAccountDao;
 
     //admin
-    public List<SystemAccount> getSystemAccountByAdminList(){
-        return systemAccountDao.getSystemAccountByAdminList();
+    public List<SystemAccount> getSystemAccountByPage(int pageNum, int offset){
+        int beginPageNum = (pageNum -1) * offset;
+        int endPageNum = pageNum * offset;
+        return systemAccountDao.getSystemAccountByPage(beginPageNum, endPageNum);
+    }
+
+    public Long getSystemAccountByCount(){
+        return systemAccountDao.getSystemAccountByCount();
     }
     //Normal
     public List<SystemAccount> getSystemAccountByCommonList(long userId){

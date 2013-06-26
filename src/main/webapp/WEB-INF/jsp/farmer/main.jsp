@@ -220,6 +220,7 @@
                             <li> <a href="/index/?page=${p}">${p}</a> </li>
                         </c:forEach>
                         <li> <a href="/index/?page=${pageCount}">尾页</a> </li>
+                        <li> <span>总${pageCount}页</span> </li>
                     </ul>
                 </div>
             </div>

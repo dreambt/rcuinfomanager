@@ -1,6 +1,7 @@
 package com.rcuinfomanager.model;
 
 public class CusBaseInfo {
+    private long recordId;
     private String customerName;
     private String gender;
     private String isFarmer;
@@ -49,6 +50,7 @@ public class CusBaseInfo {
     private String cerValidityTo;
     private String photoUri;
     private String areaCode;
+    private int state;
 
     public String getAreaCode() {
         return areaCode;
@@ -432,5 +434,21 @@ public class CusBaseInfo {
 
     public void setWorkTitle(String workTitle) {
         this.workTitle = workTitle;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
+
+    public long getRecordId() {
+        return recordId;
+    }
+
+    public void setRecordId(long recordId) {
+        this.recordId = recordId;
     }
 }

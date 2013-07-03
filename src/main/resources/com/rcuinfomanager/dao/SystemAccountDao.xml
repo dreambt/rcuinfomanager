@@ -14,7 +14,7 @@
             select u.userId,u.userName,u.displayUserName,ri.roleName
             from usersinfo u
             left outer join userroleinfo ur on u.userId=ur.userId
-            left outer join rolesinfo ri on ur.roleId=ri.roleId limit #{beginPageNum}, #{endPageNum}
+            left outer join rolesinfo ri on ur.roleId=ri.roleId limit #{beginPageNum}, #{offset}
     </select>
     <select id="getSystemAccountByCount" resultType="java.lang.Long">
             select count(*)

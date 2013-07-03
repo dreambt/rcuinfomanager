@@ -3,7 +3,9 @@ package com.rcuinfomanager.service;
 import com.rcuinfomanager.dao.BaseInfoDao;
 import com.rcuinfomanager.dao.FinanceServicesDao;
 import com.rcuinfomanager.dao.FinancialAssetsDao;
+import com.rcuinfomanager.dao.UserDao;
 import com.rcuinfomanager.model.*;
+import com.rcuinfomanager.util.DateUtils;
 import com.rcuinfomanager.webservice.model.AllColumnInfo;
 import com.rcuinfomanager.webservice.model.SubmitItem;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,8 @@ public class BaseInfoService {
     private FinanceServicesDao financeServicesDao;
     @Autowired
     private FinancialAssetsDao financialAssetsDao;
+    @Autowired
+    private UserDao userDao;
 
     public void updateStatus(int status,Long id){
         baseInfoDao.updateStatus(status,id);
@@ -27,27 +31,23 @@ public class BaseInfoService {
     //admin
     public List<CustomerListInfo> getAllFamilyInfoListByPage(String organizationName,String areaId,String areaName,String displayUserName,int pageNum, int offset) {
         int beginPageNum = (pageNum -1) * offset;
-        int engPageNum = pageNum * offset;
-        return baseInfoDao.queryAdminByBaseInfoByPage(organizationName,areaId,areaName,displayUserName,beginPageNum, engPageNum);
+        return baseInfoDao.queryAdminByBaseInfoByPage(organizationName,areaId,areaName,displayUserName,beginPageNum, offset);
     }
 
     public Long getAllFamilyInfoListByCount(String organizationName,String areaId,String areaName,String displayUserName,int pageNum, int offset) {
         int beginPageNum = (pageNum -1) * offset;
-        int engPageNum = pageNum * offset;
-        return baseInfoDao.queryAdminByBaseInfoByCount(organizationName,areaId,areaName,displayUserName,beginPageNum, engPageNum);
+        return baseInfoDao.queryAdminByBaseInfoByCount(organizationName,areaId,areaName,displayUserName,beginPageNum, offset);
     }
 
     //Normal
     public List<CustomerListInfo> getFamilyInfoListByPage(String organizationName,String areaId,String areaName,String displayUserName,Long userId, int pageNum, int offset) {
         int beginPageNum = (pageNum -1) * offset;
-        int engPageNum = pageNum * offset;
-        return baseInfoDao.queryNormalByBaseInfoByPage(organizationName,areaId,areaName,displayUserName,userId, beginPageNum, engPageNum);
+        return baseInfoDao.queryNormalByBaseInfoByPage(organizationName,areaId,areaName,displayUserName,userId, beginPageNum, offset);
     }
 
     public Long getFamilyInfoListByCount(String organizationName,String areaId,String areaName,String displayUserName,Long userId,int pageNum, int offset) {
         int beginPageNum = (pageNum -1) * offset;
-        int engPageNum = pageNum * offset;
-        return baseInfoDao.queryNormalByBaseInfoByCount(organizationName,areaId,areaName,displayUserName,userId,beginPageNum, engPageNum);
+        return baseInfoDao.queryNormalByBaseInfoByCount(organizationName,areaId,areaName,displayUserName,userId,beginPageNum, offset);
     }
    /*end*/
     //显示客户个人信息
@@ -194,7 +194,10 @@ public class BaseInfoService {
     }
     //保存验收
     public void saveChecksInfo(long id,int state){
-        baseInfoDao.saveChecksInfo(id, state);
+        BaseInfo baseInfo = baseInfoDao.getBaseInfoByRecordId(id);
+        if (baseInfo.getState() == 1) {
+            baseInfoDao.saveChecksInfo(id, state);
+        }
     }
 
 
@@ -221,6 +224,7 @@ public class BaseInfoService {
     public void saveFarmerInfoFromDownload(AllColumnInfo allColumnInfo) {
         BaseInfo baseInfo = baseInfoDao.getBaseInfoByCustomerAndCerNum(allColumnInfo.getCustomerName(), allColumnInfo.getCerNum());
         FamilyAssets familyAssets = null;
+        allColumnInfo.setSubmitTime(DateUtils.getDateCurrStrOfStoreFormat());
         if (baseInfo != null) {
             allColumnInfo.setRecordId(baseInfo.getRecordId());
             baseInfoDao.updateBaseInfoById(allColumnInfo);

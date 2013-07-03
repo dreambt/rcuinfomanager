@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface SystemAccountDao {
     //admin
-    public List<SystemAccount> getSystemAccountByPage(@Param("beginPageNum") int beginPageNum, @Param("endPageNum")int endPageNum);
+    public List<SystemAccount> getSystemAccountByPage(@Param("beginPageNum") int beginPageNum, @Param("offset")int offset);
 
     public Long getSystemAccountByCount();
     //Normal

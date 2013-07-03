@@ -19,7 +19,7 @@
     </insert>
 
     <select id="queryAll" resultMap="clientMap">
-        select * from appversionsinfo
+        select * from appversionsinfo ORDER BY appVerName DESC
     </select>
 
     <select id="queryAllByPage" resultMap="clientMap">

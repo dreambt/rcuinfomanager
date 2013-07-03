@@ -16,8 +16,7 @@ public class SystemAccountService {
     //admin
     public List<SystemAccount> getSystemAccountByPage(int pageNum, int offset){
         int beginPageNum = (pageNum -1) * offset;
-        int endPageNum = pageNum * offset;
-        return systemAccountDao.getSystemAccountByPage(beginPageNum, endPageNum);
+        return systemAccountDao.getSystemAccountByPage(beginPageNum, offset);
     }
 
     public Long getSystemAccountByCount(){

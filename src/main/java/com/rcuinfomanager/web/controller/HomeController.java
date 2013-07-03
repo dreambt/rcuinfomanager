@@ -69,19 +69,21 @@ public class HomeController {
         map.put("displayUserName", sessionUser.getDisplayUserName());
         map.put("userNameByAdmin", sessionUser.getUserName());
         int offset = 20;
-          if("admin".equalsIgnoreCase(sessionUser.getUserName())){
-              long totalCount = baseInfoService.getAllFamilyInfoListByCount(organizationName, areaId, areaName, displayUserName, pageNum, offset);
-              map.put("pageCount", totalCount % offset == 0 ? totalCount / offset : totalCount / offset +1);
-              map.put("familyInfoList",baseInfoService.getAllFamilyInfoListByPage(organizationName,areaId,areaName,displayUserName,pageNum, offset));
-              map.put("areasInfoList",areasInfoService.getAreasInfoByFatherId(350521));
-              map.put("netWorkList",baseInfoService.getNetWorkByAdmin());
-        }else{
-              Long totalCount = baseInfoService.getFamilyInfoListByCount(organizationName, areaId, areaName, displayUserName, sessionUser.getId(), pageNum, offset);
-              map.put("pageCount", totalCount % offset == 0 ? totalCount / offset : totalCount / offset + 1);
-              map.put("familyInfoList", baseInfoService.getFamilyInfoListByPage(organizationName,areaId,areaName,displayUserName,sessionUser.getId(), pageNum, offset));
-              map.put("areasInfoList",areasInfoService.getAreasInfoByFatherId(350521));
-              map.put("netWorkList",baseInfoService.getNetWorkByNormal(sessionUser.getId()));
+        if ("admin".equalsIgnoreCase(sessionUser.getUserName())){
+            long totalCount = baseInfoService.getAllFamilyInfoListByCount(organizationName, areaId, areaName, displayUserName, pageNum, offset);
+            map.put("pageCount", totalCount % offset == 0 ? totalCount / offset : totalCount / offset +1);
+            map.put("familyInfoList",baseInfoService.getAllFamilyInfoListByPage(organizationName,areaId,areaName,displayUserName,pageNum, offset));
+            map.put("areasInfoList",areasInfoService.getAreasInfoByFatherId(350521));
+            map.put("netWorkList",baseInfoService.getNetWorkByAdmin());
+        } else {
+            Long totalCount = baseInfoService.getFamilyInfoListByCount(organizationName, areaId, areaName, displayUserName, sessionUser.getId(), pageNum, offset);
+            map.put("pageCount", totalCount % offset == 0 ? totalCount / offset : totalCount / offset + 1);
+            map.put("familyInfoList", baseInfoService.getFamilyInfoListByPage(organizationName,areaId,areaName,displayUserName,sessionUser.getId(), pageNum, offset));
+            map.put("areasInfoList",areasInfoService.getAreasInfoByFatherId(350521));
+            map.put("netWorkList",baseInfoService.getNetWorkByNormal(sessionUser.getId()));
         }
+        map.put("userNameList", baseInfoService.getUserNameList());
+        map.put("currentPage", pageNum);
         return "farmer/main";
     }
 
@@ -96,8 +98,10 @@ public class HomeController {
         SessionUser sessionUser = userSessionContext.getSessionUser();
         map.put("displayUserName", sessionUser.getDisplayUserName());
 
-        map.put("pageCount", clientManagerService.getAllClientManagerCount() /offset );
+        long totalCount = clientManagerService.getAllClientManagerCount();
+        map.put("pageCount", totalCount % offset == 0 ? totalCount / offset : totalCount / offset + 1);
         map.put("clientManagers", clientManagerService.getAllClientManagerByPage(pageNum, offset));
+        map.put("currentPage", pageNum);
         return "device/clientVersion";
     }
 
@@ -117,6 +121,7 @@ public class HomeController {
         map.put("accountList",systemAccountService.getSystemAccountByPage(pageNum, offset));
         long totalCount = systemAccountService.getSystemAccountByCount();
         map.put("pageCount", (totalCount % offset) == 0 ? totalCount / offset : totalCount / offset + 1);
+        map.put("currentPage", pageNum);
         return "ps/systemAccountManage";
     }
 
@@ -150,16 +155,11 @@ public class HomeController {
         SessionUser sessionUser = userSessionContext.getSessionUser();
         map.put("displayUserName", sessionUser.getDisplayUserName());
         int offset = 20;
-        if("admin".equalsIgnoreCase(sessionUser.getUserName())){
-            Long totalCount = logsInfoService.getAllLogsInfoListByCount(beginTime, endTime, userName, pageNum, offset);
-            map.put("pageCount", totalCount % offset == 0 ? totalCount / offset : totalCount / offset + 1);
-            map.put("logsInfoList",logsInfoService.getLogsInfoByAdminListPage(beginTime,endTime,userName,pageNum,offset));
+        Long totalCount = logsInfoService.getAllLogsInfoListByCount(beginTime, endTime, userName, pageNum, offset);
+        map.put("pageCount", totalCount % offset == 0 ? totalCount / offset : totalCount / offset + 1);
+        map.put("logsInfoList",logsInfoService.getLogsInfoByAdminListPage(beginTime,endTime,userName,pageNum,offset));
+        map.put("currentPage", pageNum);
 
-        }else{
-            long totalCount = logsInfoService.getLogsInfoListByCount(beginTime, endTime, userName, sessionUser.getId(), pageNum, offset);
-            map.put("pageCount", totalCount % offset == 0 ? totalCount / offset : totalCount / offset + 1);
-            map.put("logsInfoList",logsInfoService.getLogsInfoByNormalListPage(beginTime,endTime,userName,sessionUser.getId(),pageNum,offset));
-        }
         return "logsystem/systemLog";
     }
 

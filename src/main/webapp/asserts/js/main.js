@@ -72,19 +72,19 @@ $(function () {
     //指派
     $('.appointOperate').click(function () {
         var me = $(this);
-        var id = me.attr('recordId');
-        var url = '/family/appoint/' + id;
-        window.art.dialog({
-            id: 'assign',
-            title: '指派信息',
-            lock: true,
-            content: '<iframe scrolling="auto" width="450" height="210" frameborder="0" style="border: none;margin: -20px -25px;"marginheight="0" marginwidth="0" src="' + url + '"/>'
+        var recordId = me.attr('recordId');
+
+        $(".appointOperate").fancybox({
+            'transitionIn'		: 'elastic',
+            'transitionOut'		: 'elastic',
+            'hideOnContentClick': true,
+            'closeBtn' : false
         });
+        $('#recordIds').val(recordId);
     });
 
     // 批量指派
-    var batchAssignNode = $('#assignOperate');
-    batchAssignNode.click(function () {
+    $('#assignOperate').click(function () {
         var me = $(this);
         var checkOperaNodes = $('.checkOpera');
         var isExist = false;
@@ -103,15 +103,26 @@ $(function () {
             }
         });
         if (isExist) {
-            var url = '/family/batchAppoints/' + recordIds;
-            window.art.dialog({
-                id: 'assign',
-                title: '指派信息',
-                lock: true,
-                content: '<iframe scrolling="auto" width="450" height="210" frameborder="0" style="border: none;margin: -20px -25px;"marginheight="0" marginwidth="0" src="' + url + '"/>'
+            $('#recordIds').val(recordIds);
+            $("#assignOperate").fancybox({
+                'transitionIn'		: 'elastic',
+                'transitionOut'		: 'elastic',
+                'hideOnContentClick': true,
+                'closeBtn' : false
             });
         } else {
             alert("未勾选任何客户信息！");
+        }
+    });
+
+    $('#appointOkOperate').click(function () {
+        var uid =$('#selectUserId').val();
+        var recordIds = $('#recordIds').val();
+        if(uid && uid!=''){
+            var url = '/family/saveBatchAppoint/'+recordIds+'/'+uid ;
+            window.location.href = url;
+        }else{
+            alert("指定经理不能为空！");
         }
     });
 

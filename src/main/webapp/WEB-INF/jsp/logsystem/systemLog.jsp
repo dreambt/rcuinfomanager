@@ -115,7 +115,7 @@
                         <ul>
                             <li> <a href="/systemLogManager/?page=1">首页</a> </li>
                             <c:forEach begin="1" end="${pageCount}" var="p">
-                                <li> <a href="/systemLogManager/?page=${p}">${p}</a> </li>
+                                <li class="${currentPage == p ? 'active' : ''}" > <a href="/systemLogManager/?page=${p}">${p}</a> </li>
                             </c:forEach>
                             <li> <a href="/systemLogManager/?page=${pageCount}">尾页</a> </li>
                         </ul>

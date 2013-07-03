@@ -1160,56 +1160,13 @@ $(function(){
     <td align="center" bgcolor="#b4d8ed" style="color:#161823"> 年收益情况</td>
     <td align="left" colspan="7">
         <select class="selectpicker" style="width: 595px; " name="yearIncome">
-            <core:choose>
-                <core:when test="${personBasicList.yearIncome=='10万元以内'}">
-                    <option value="${personBasicList.yearIncome}" selected="selected">10万元以内</option>
-                    <option value="10-50万元">10-50万元</option>
-                    <option value="50-100万元">50-100万元</option>
-                    <option value="100-300万元">100-300万元</option>
-                    <option value="300-1000万元">300-1000万元</option>
-                    <option value="1000万元以上">1000万元以上</option>
-                </core:when>
-                <core:when test="${personBasicList.yearIncome=='10-50万元'}">
-                    <option value="10万元以内">10万元以内</option>
-                    <option value="${personBasicList.yearIncome}" selected="selected">10-50万元</option>
-                    <option value="50-100万元">50-100万元</option>
-                    <option value="100-300万元">100-300万元</option>
-                    <option value="300-1000万元">300-1000万元</option>
-                    <option value="1000万元以上">1000万元以上</option>
-                </core:when>
-                <core:when test="${personBasicList.yearIncome=='50-100万元'}">
-                    <option value="10万元以内">10万元以内</option>
-                    <option value="10-50万元">10-50万元</option>
-                    <option value="${personBasicList.yearIncome}" selected="selected">50-100万元</option>
-                    <option value="100-300万元">100-300万元</option>
-                    <option value="300-1000万元">300-1000万元</option>
-                    <option value="1000万元以上">1000万元以上</option>
-                </core:when>
-                <core:when test="${personBasicList.yearIncome=='100-300万元'}">
-                    <option value="10万元以内">10万元以内</option>
-                    <option value="10-50万元">10-50万元</option>
-                    <option value="50-100万元">50-100万元</option>
-                    <option value="${personBasicList.yearIncome}" selected="selected">100-300万元</option>
-                    <option value="300-1000万元">300-1000万元</option>
-                    <option value="1000万元以上">1000万元以上</option>
-                </core:when>
-                <core:when test="${personBasicList.yearIncome=='300-1000万元'}">
-                    <option value="10万元以内">10万元以内</option>
-                    <option value="10-50万元">10-50万元</option>
-                    <option value="50-100万元">50-100万元</option>
-                    <option value="100-300万元">100-300万元</option>
-                    <option value="${personBasicList.yearIncome}" selected="selected">300-1000万元</option>
-                    <option value="1000万元以上">1000万元以上</option>
-                </core:when>
-                <core:otherwise>
-                    <option value="10万元以内">10万元以内</option>
-                    <option value="10-50万元">10-50万元</option>
-                    <option value="50-100万元">50-100万元</option>
-                    <option value="100-300万元">100-300万元</option>
-                    <option value="300-1000万元">300-1000万元</option>
-                    <option value="${personBasicList.yearIncome}" selected="selected">1000万元以上</option>
-                </core:otherwise>
-            </core:choose>
+            <option value=""></option>
+            <option value="10万元以内" ${personBasicList.yearIncome=='10万元以内' ? 'selected' : ''} >10万元以内</option>
+            <option value="10-50万元" ${personBasicList.yearIncome=='10-50万元' ? 'selected' : ''} >10-50万元</option>
+            <option value="50-100万元" ${personBasicList.yearIncome=='50-100万元' ? 'selected' : ''} >50-100万元</option>
+            <option value="100-300万元" ${personBasicList.yearIncome=='100-300万元' ? 'selected' : ''} >100-300万元</option>
+            <option value="300-1000万元" ${personBasicList.yearIncome=='300-1000万元' ? 'selected' : ''} >300-1000万元</option>
+            <option value="1000万元以上" ${personBasicList.yearIncome=='1000万元以上' ? 'selected' : ''} >1000万元以上</option>
         </select>
     </td>
 </tr>

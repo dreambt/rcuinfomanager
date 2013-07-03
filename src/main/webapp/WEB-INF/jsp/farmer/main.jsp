@@ -74,6 +74,7 @@
                });
            });
         });
+
     </script>
 
 </head>
@@ -103,10 +104,12 @@
         <div class="span3">
             <ul class="nav nav-list bs-docs-sidenav affix">
                 <li class="active"><a href="/index"><i class="icon-chevron-right"></i>客户电子信息管理</a></li>
-                <li class=""><a href="/clientManager"><i class="icon-chevron-right"></i>客户端管理</a></li>
-                <li class=""><a href="/accountManager"><i class="icon-chevron-right"></i>系统账号管理</a></li>
-                <li class=""><a href="/roleManager"><i class="icon-chevron-right"></i>系统角色管理</a></li>
-                <li class=""><a href="/systemLogManager"><i class="icon-chevron-right"></i>系统日志</a></li>
+                <core:if test="${displayUserName == 'admin'}">
+                    <li class=""><a href="/clientManager"><i class="icon-chevron-right"></i>客户端管理</a></li>
+                    <li class=""><a href="/accountManager"><i class="icon-chevron-right"></i>系统账号管理</a></li>
+                    <li class=""><a href="/roleManager"><i class="icon-chevron-right"></i>系统角色管理</a></li>
+                    <li class=""><a href="/systemLogManager"><i class="icon-chevron-right"></i>系统日志</a></li>
+                </core:if>
             </ul>
         </div>
         <div class="span10" style="margin-left: -8.435897%;">
@@ -136,7 +139,7 @@
                     </form>
                 </div>
                 <div class="btn-group" style="margin-top: -16px;">
-                    <button class="btn" type="button" id="assignOperate">批量指派</button>
+                    <a class="btn" href="#appointDiv" id="assignOperate">批量指派</a>
                     <a class="btn" href="#check" id="checkOperate">验收</a>
                 </div>
                 <div class="btn-group" style="margin-top: -16px;">
@@ -150,8 +153,8 @@
                     <button class="btn dropdown-toggle" data-toggle="dropdown">导出 <span class="caret"></span></button>
                     <ul class="dropdown-menu">
                         <li><a href="#" id="exportData">导出数据</a></li>
-                        <li><a href="#" id="exportBasicData4Household">导出户主数据</a></li>
-                        <li><a href="#" id="exportBasicData4Members">导出家庭成员数据</a></li>
+<%--                        <li><a href="#" id="exportBasicData4Household">导出户主数据</a></li>
+                        <li><a href="#" id="exportBasicData4Members">导出家庭成员数据</a></li>--%>
                         <li><a href="#" id="exportVillageAssess">导出村委会评价表</a></li>
                     </ul>
                 </div>
@@ -203,11 +206,15 @@
                                     <td align="center">&nbsp;</td>
                                 </core:otherwise>
                             </core:choose>
-                            <td align="center">
+                            <td align="left">
                                 <a href="#" style="color:#0099FF" class="showOperate" recordId="${familyInfo.recordId}">查看</a>&nbsp;|&nbsp;
-                                <a href="#" style="color:#0099FF" class="appointOperate" recordId="${familyInfo.recordId}">指派</a>&nbsp;|&nbsp;
-                                <a href="#" style="color:#0099FF" class="editOperate" recordId="${familyInfo.recordId}">编辑</a>&nbsp;|&nbsp;
-                                <a href="#" style="color:#FF0000" class="deleteOperate" recordId="${familyInfo.recordId}" assetsId="${familyInfo.assetsId}">删除</a>
+                                <core:if test="${familyInfo.state == 0 or familyInfo.state == null or familyInfo.state == ''}">
+                                    <a href="#appointDiv" style="color:#0099FF" class="appointOperate" recordId="${familyInfo.recordId}">指派</a>&nbsp;|&nbsp;
+                                </core:if>
+                                <core:if test="${familyInfo.state!=3}">
+                                    <a href="#" style="color:#0099FF" class="editOperate" recordId="${familyInfo.recordId}">编辑</a>&nbsp;|&nbsp;
+                                    <a href="#" style="color:#FF0000" class="deleteOperate" recordId="${familyInfo.recordId}" assetsId="${familyInfo.assetsId}">删除</a>
+                                </core:if>
                             </td>
                         </tr>
                     </core:forEach>
@@ -217,7 +224,7 @@
                     <ul>
                         <li> <a href="/index/?page=1">首页</a> </li>
                         <c:forEach begin="1" end="${pageCount}" var="p">
-                            <li> <a href="/index/?page=${p}">${p}</a> </li>
+                            <li class="${currentPage == p ? 'active' : ''}"> <a href="/index/?page=${p}">${p}</a> </li>
                         </c:forEach>
                         <li> <a href="/index/?page=${pageCount}">尾页</a> </li>
                         <li> <span>总${pageCount}页</span> </li>
@@ -286,6 +293,26 @@
     <p align="center">
         <a class="btn" href="#" id="checkOkOperate">确定</a>&nbsp;
         <a class="btn" href="#" id="checkCancelOperate" onClick="parent.jQuery.fancybox.close();return false">取消</a>
+    </p>
+</div>
+
+<div id="appointDiv" style="display:none">
+    <input type="hidden" id="recordIds"/>
+    <h4 style="border-top-color: palevioletred;">指派信息</h4>
+    <div class="row-fluid">
+        <div class="span2">指派给：</div>
+        <div class="span3">
+            <select class="span3" name="userId" id="selectUserId" style="width:202px;">
+                <option value="">指定客户经理</option>
+                <core:forEach items="${userNameList}" var="uList">
+                    <option value="${uList.userId}">${uList.userName}</option>
+                </core:forEach>
+            </select>
+        </div>
+    </div>
+    <p align="center">
+        <a class="btn" href="#" id="appointOkOperate">确定</a>&nbsp;
+        <a class="btn" href="#" id="appointCancelOperate" onClick="parent.jQuery.fancybox.close();return false">取消</a>
     </p>
 </div>
 

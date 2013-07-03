@@ -21,9 +21,10 @@
     <select id="queryAdminByBaseInfoByPage" resultMap="userListInfo">
         select b.recordId,fa.assetsId,customerName,b.telephone,b.submitTime,org.organizationName,u.displayUserName,b.state
         from baseinfo b
-        left outer join usersinfo u on b.userName=u.userName
-        left outer join familyassets fa on b.recordId=fa.assetsId
-        left outer join organizationInfo org on org.organizationId=u.organizationId
+        left join t_appoint ta on ta.recordId = b.recordId
+        LEFT JOIN usersinfo u ON u.userId = ta.user_id
+        left join familyassets fa on b.recordId=fa.recordId
+        left join organizationInfo org on org.organizationId=u.organizationId
         where 1=1
         <if test="organizationName != null and organizationName != ''">
             and org.organizationName like #{organizationName}
@@ -39,7 +40,7 @@
         <if test="displayUserName != null and displayUserName !=''">
             and u.displayUserName like #{displayUserName}
         </if>
-        limit #{beginPageNum}, #{endPageNum}
+        limit #{beginPageNum}, #{offset}
     </select>
 
     <select id="queryAdminByBaseInfoByCount" resultType="java.lang.Long">
@@ -68,9 +69,10 @@
     <select id="queryNormalByBaseInfoByPage" parameterType="java.lang.Long" resultMap="userListInfo">
         select b.recordId,fa.assetsId,customerName,b.telephone,b.submitTime,org.organizationName,u.displayUserName,b.state
         from baseinfo b
-        left outer join usersinfo u on b.userName=u.userName
-        left outer join familyassets fa on b.recordId=fa.assetsId
-        left outer join organizationInfo org on u.organizationId=org.organizationId
+        left join t_appoint ta on ta.recordId = b.recordId
+        LEFT JOIN usersinfo u ON u.userId = ta.user_id
+        left join familyassets fa on b.recordId=fa.recordId
+        left join organizationInfo org on u.organizationId=org.organizationId
         where u.userId=#{userId}
         <if test="organizationName != null and organizationName != ''">
             and org.organizationName like #{organizationName}
@@ -86,7 +88,7 @@
         <if test="displayUserName != null and displayUserName !=''">
             and u.displayUserName like #{displayUserName}
         </if>
-        limit #{beginPageNum}, #{endPageNum}
+        limit #{beginPageNum}, #{offset}
     </select>
 
     <select id="queryNormalByBaseInfoByCount" parameterType="java.lang.Long" resultType="java.lang.Long">
@@ -177,7 +179,7 @@
                b.nation,b.poliLaspect,b.health,b.maritalStatus,b.address,b.postcode,b.areaName,b.village,b.telephone,b.mbPhoneNum,b.liveCondition,
                b.socialSecurity,b.highestDegree,b.highestEdu,b.bankRelation,b.bankPartnership,b.profession,b.businessProj,b.businessYear,
                b.businessSite,b.industry,b.businessProp,b.moneySitu,b.inputMoney,b.ownMoney,b.yearIncome,b.workSitu,b.unitProp,b.unitIndustryId,
-               b.department,b.unitType,b.duties,b.annualWageIncome,b.workYears,b.workTitle,b.areaCode,p.photoUri
+               b.department,b.unitType,b.duties,b.annualWageIncome,b.workYears,b.workTitle,b.areaCode,p.photoUri,b.state,b.recordId
 	   from baseinfo b
 	   left outer join photosInfo p on b.recordId = p.recordId
        where b.recordId=#{recordId}
@@ -518,7 +520,7 @@
            businessSite = #{businessSite}, businessProp = #{businessProp}, moneySitu = #{moneySitu},  inputMoney = #{inputMoney},
            ownMoney = #{ownMoney}, yearIncome = #{yearIncome}, annualWageIncome = #{annualWageIncome}, workYears = #{workYears}, workSitu = #{workSitu},
            unitProp = #{unitProp}, unitIndustryId = #{unitIndustryId}, unitIndustryName = #{unitIndustryName}, department = #{department}, unitType = #{unitType},
-           duties = #{duties}, workTitle = #{workTitle}, state = #{status}, userName = #{userName}
+           duties = #{duties}, workTitle = #{workTitle}, state = #{status}, userName = #{userName},industry=#{industry}, submitTime = #{submitTime}
         where recordId = #{recordId}
     </update>
 
@@ -542,7 +544,7 @@
            #{businessSite}, #{businessProp}, #{moneySitu}, #{inputMoney},
            #{ownMoney}, #{yearIncome}, #{annualWageIncome}, #{workYears}, #{workSitu},
            #{unitProp}, #{unitIndustryId}, #{unitIndustryName}, #{department}, #{unitType},
-           #{duties}, #{workTitle}, #{customerName}, #{cerNum}, #{status}, #{userName})
+           #{duties}, #{workTitle}, #{customerName}, #{cerNum}, #{status}, #{userName}), submitTime = #{submitTime}
     </insert>
      <!--//更新家庭收出-->
     <update id="updateIncomeexpenses" parameterType="com.rcuinfomanager.webservice.model.AllColumnInfo">
@@ -687,5 +689,19 @@
 
     <select id="getStatusByCerNum" parameterType="java.lang.String" resultType="java.lang.Integer">
         select state from baseinfo where cerNum = #{cerNum}
+    </select>
+
+    <select id="getFamilyMemberByMemberNameAndMemberCerNumAndCerNum" resultType="com.rcuinfomanager.model.FamilyMember">
+        SELECT * FROM familymemberinfo WHERE familyMemberName = #{familyMemberName} AND familyMemberCerNum = #{familyMemberCerNum} AND cerNum = #{cerNum}
+    </select>
+
+    <select id="queryAllColumnByRecordId" parameterType="java.lang.Long" resultType="com.rcuinfomanager.webservice.model.AllColumnInfo">
+        SELECT a.*, b.*, c.*, h.*, z.*, w.*, n.* FROM baseinfo a LEFT JOIN incomeexpenses b ON  b.`recordId` = a.`recordId`
+            LEFT JOIN familyassets c ON c.`recordId`=a.`recordId`
+            LEFT JOIN financialassets h ON h.`assetsId`=c.`assetsId`
+            LEFT JOIN familyincurdebts z ON z.`recordId`=a.`recordId`
+            LEFT JOIN financeservices w ON w.`recordId`=a.`recordId`
+            LEFT JOIN customermanagereva n ON n.`recordId`=a.`recordId`
+            WHERE a.`recordId` = #{recordId}
     </select>
 </mapper>

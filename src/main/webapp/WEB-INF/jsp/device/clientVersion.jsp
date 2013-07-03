@@ -101,7 +101,7 @@
             <div class="tabbable">
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#tab1" data-toggle="tab">客户端版本</a></li>
-                    <li><a href="#tab2" data-toggle="tab">安装设备授权</a></li>
+                    <%--<li><a href="#tab2" data-toggle="tab">安装设备授权</a></li>--%>
                 </ul>
 
                 <div class="tab-content">
@@ -167,10 +167,10 @@
                                             <td align="center">${clientManager.descb}</td>
                                             <td align="center">
                                                 <core:if test="${clientManager.isCoerce ne 1}">
-                                                    强制更新
+                                                    非强制更新
                                                 </core:if>
                                                 <core:if test="${clientManager.isCoerce ne 0}">
-                                                    非强制更新
+                                                    强制更新
                                                 </core:if>
                                             </td>
                                             <td align="center">
@@ -192,7 +192,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane" id="tab2">
+                    <%--<div class="tab-pane" id="tab2">
                         <div class="pad-10">
                             <div class="table-list">
                                 <table width="100%" border="1">
@@ -268,7 +268,7 @@
                                 </table>
                             </div>
                         </div>
-                    </div>
+                    </div>--%>
                 </div>
             </div>
         </div>

@@ -11,14 +11,14 @@ public interface BaseInfoDao {
     //改状态
     void updateStatus(@Param("status")int status,@Param("recordId")Long recordId);
     //管理员获取数据列表
-    List<CustomerListInfo> queryAdminByBaseInfoByPage(@Param("organizationName")String organizationName,@Param("areaId")String areaId,@Param("areaName")String areaName,@Param("displayUserName")String displayUserName,@Param("beginPageNum") int beginPageNum, @Param("endPageNum") int endPageNum);
+    List<CustomerListInfo> queryAdminByBaseInfoByPage(@Param("organizationName")String organizationName,@Param("areaId")String areaId,@Param("areaName")String areaName,@Param("displayUserName")String displayUserName,@Param("beginPageNum") int beginPageNum, @Param("offset") int offset);
 
-    Long queryAdminByBaseInfoByCount(@Param("organizationName")String organizationName,@Param("areaId")String areaId,@Param("areaName")String areaName,@Param("displayUserName")String displayUserName,@Param("beginPageNum") int beginPageNum, @Param("endPageNum") int endPageNum);
+    Long queryAdminByBaseInfoByCount(@Param("organizationName")String organizationName,@Param("areaId")String areaId,@Param("areaName")String areaName,@Param("displayUserName")String displayUserName,@Param("beginPageNum") int beginPageNum, @Param("offset") int offset);
 
     //普通用户获取数据列表
-    List<CustomerListInfo> queryNormalByBaseInfoByPage(@Param("organizationName")String organizationName,@Param("areaId")String areaId,@Param("areaName")String areaName,@Param("displayUserName")String displayUserName,@Param("userId") Long userId, @Param("beginPageNum") int beginPageNum, @Param("endPageNum") int endPageNum);
+    List<CustomerListInfo> queryNormalByBaseInfoByPage(@Param("organizationName")String organizationName,@Param("areaId")String areaId,@Param("areaName")String areaName,@Param("displayUserName")String displayUserName,@Param("userId") Long userId, @Param("beginPageNum") int beginPageNum, @Param("offset") int offset);
 
-    Long queryNormalByBaseInfoByCount(@Param("organizationName")String organizationName,@Param("areaId")String areaId,@Param("areaName")String areaName,@Param("displayUserName")String displayUserName,@Param("userId")Long userId,@Param("beginPageNum") int beginPageNum, @Param("endPageNum") int endPageNum);
+    Long queryNormalByBaseInfoByCount(@Param("organizationName")String organizationName,@Param("areaId")String areaId,@Param("areaName")String areaName,@Param("displayUserName")String displayUserName,@Param("userId")Long userId,@Param("beginPageNum") int beginPageNum, @Param("offset") int offset);
 
     //显示客户个人信息
     List<CustomerListInfo> getPersonBasicInfo(Long recordId);
@@ -146,4 +146,6 @@ public interface BaseInfoDao {
     AllColumnInfo queryAllColumnByRecordId(long recordId);
 
     void saveCustomerManagerEva(AllColumnInfo allColumnInfo);
+
+    FamilyMember getFamilyMemberByMemberNameAndMemberCerNumAndCerNum(@Param("familyMemberName")String familyMemberName, @Param("familyMemberCerNum")String familyMemberCerNum, @Param("cerNum")String cerNum);
 }

@@ -94,14 +94,6 @@ public class AllColumnInfo implements Serializable {
     private List<FamilyMember> familyMembers;
 
     private String finaServiceUsedProduct;
-    private String finaServiceSatisfaction;
-    private String finaServicesFmDepositTodo;
-    private String finaServicesNeedServices;
-    private String finaServicesNeedServicesElse;
-    private String finaServicesHolpForServices;
-    private String finaServicesSuggestion;
-    private String finaServiceElectronBank;
-
     private int finaServiceIsMoneyNeed;
     private String finaServiceMoneyTodo;
     private int finaServiceMoneyCount;
@@ -122,7 +114,17 @@ public class AllColumnInfo implements Serializable {
 
     private VillageManagerEva villageManagerEva;
 
+    private String finaServiceSatisfaction;
+    private String finaServicesFmDepositTodo;
+    private String finaServicesNeedServices;
+    private String finaServicesNeedServicesElse;
+    private String finaServicesHolpForServices;
+    private String finaServicesSuggestion;
+    private String finaServiceElectronBank;
+
     private int status;
+
+    private String submitTime;
 
     public long getRecordId() {
         return recordId;
@@ -943,5 +945,13 @@ public class AllColumnInfo implements Serializable {
 
     public void setVillageManagerEva(VillageManagerEva villageManagerEva) {
         this.villageManagerEva = villageManagerEva;
+    }
+
+    public String getSubmitTime() {
+        return submitTime;
+    }
+
+    public void setSubmitTime(String submitTime) {
+        this.submitTime = submitTime;
     }
 }

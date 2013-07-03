@@ -43,12 +43,29 @@
                 }
             });
             $('#check').click(function(){
-                var url = '/family/batchChecks/'+id;
+                /*var url = '/family/batchChecks/'+id;
                 window.art.dialog({
                     id: 'check',
                     title: '验收信息',
                     lock: true,
                     content: '<iframe scrolling="auto" width="450" height="210" frameborder="0" style="border: none;margin: -20px -25px;"marginheight="0" marginwidth="0" src="' + url + '"/>'
+                });*/
+                $("#check").fancybox({
+                    'transitionIn'		: 'elastic',
+                    'transitionOut'		: 'elastic',
+                    'hideOnContentClick': true,
+                    'closeBtn' : false
+                });
+
+                $('#checkOkOperate').click(function () {
+                    var state = $('#state').val();
+                    var recordId = $('#recordId').val();
+                    if(state && state!=''){
+                        var url = '/family/saveBatchChecks/'+recordId+'/'+state;
+                        window.location.href = url;
+                    }else{
+                        alert("未选择验收结果！");
+                    }
                 });
             });
             $('#editor').click(function(){
@@ -126,10 +143,17 @@
     </tbody>
 </table>
 <p class="text-center">
-    <button class="btn" type="button" id="appoint">指派</button>
-    <button class="btn" type="button" id="check">验收</button>
-    <button class="btn" type="button" id="editor">编辑</button>
-    <button class="btn" type="button" id="delete">删除</button>
+    <core:if test="${personBasicList.state == 0 or personBasicList.state == null or personBasicList.state == ''}">
+        <button class="btn" type="button" id="appoint">指派</button>
+    </core:if>
+    <core:if test="${personBasicList.state==1}">
+       <a href='#checkDiv' class="btn" id="check">验收</a>
+    </core:if>
+    <core:if test="${personBasicList.state!=3}">
+        <button class="btn" type="button" id="editor">编辑</button>
+        <button class="btn" type="button" id="delete">删除</button>
+    </core:if>
+
 </p>
 <hr  size="1" width="100%" style="margin-bottom: -1px;"/>
 <div class="tabbable">
@@ -2263,5 +2287,43 @@
 </div>
 </div>
 </div>
+
+
+<div id="checkDiv" style="display:none">
+    <form method="post">
+        <input type="hidden" id="recordId" value="${personBasicList.recordId}"/>
+        <table width="100%" border="0">
+            <tbody>
+            <%--<core:forEach items="${appointList}" var="appointPeople">
+                <input type="hidden" id="recordId" name="recordId" value="${appointPeople.recordId}">
+                <tr>
+                    <td><span class="label label-info">户主：</span></td>
+                    <td>${appointPeople.customerName}</td>
+                    <td><span class="label label-info">电话：</span></td>
+                    <td>${appointPeople.telephone}</td>
+                </tr>
+            </core:forEach>--%>
+            <tr>
+                <td align="left">
+                    <span>验收</span>
+                </td>
+                <td align="right">
+                    <select class="span3" name="state" id="state" style="width:202px;">
+                        <option value="">选择验收结果</option>
+                        <option value="3">验收通过</option>
+                        <option value="4">验收拒绝</option>
+                    </select>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+    </form>
+    <p align="center">
+        <a class="btn" href="#" id="checkOkOperate">确定</a>&nbsp;
+        <a class="btn" href="#" id="checkCancelOperate" onClick="parent.jQuery.fancybox.close();return false">取消</a>
+    </p>
+</div>
+
 </body>
 </html>

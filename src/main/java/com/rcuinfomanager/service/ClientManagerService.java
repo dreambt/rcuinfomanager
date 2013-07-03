@@ -20,7 +20,7 @@ public class ClientManagerService {
 
     public List<ClientManager> getAllClientManagerByPage(int pageNum, int offset) {
         int beginPageNum = (pageNum -1) * offset;
-        int endPageNum = pageNum * offset;
+        int endPageNum = beginPageNum + offset;
         return clientManagerDao.queryAllByPage(beginPageNum, endPageNum);
     }
 

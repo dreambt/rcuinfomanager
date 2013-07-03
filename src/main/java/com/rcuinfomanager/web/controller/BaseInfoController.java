@@ -131,10 +131,7 @@ public class BaseInfoController {
         int state=2;
         baseInfoService.saveAppointInfo(id, uid);
         baseInfoService.updateStatus(state,id);
-        boolean success = true;
-        map.put("success", success);
-        map.put("isUserName", "指派成功！");
-        return "farmer/appointInfo";
+        return "redirect:/index";
     }
 
     //批量指派
@@ -160,10 +157,7 @@ public class BaseInfoController {
             baseInfoService.saveAppointInfo(Long.parseLong(id), uid);
             baseInfoService.updateStatus(status,Long.parseLong(id));
         }
-        boolean success = true;
-        map.put("success", success);
-        map.put("isUserName", "指派成功！");
-        return "farmer/batchAppoint";
+        return "redirect:/index";
     }
 
     //批量验收
@@ -383,7 +377,7 @@ public class BaseInfoController {
 
 
     @RequestMapping("/exportData/{recordIds}")
-    public void exportData(HttpServletRequest request, HttpServletResponse response, @PathVariable String recordIds) {
+    public void exportData(HttpServletRequest request, HttpServletResponse response, @PathVariable String recordIds) throws IOException {
         //记录日志
         UserSessionContext userSessionContext = UserSessionContextHolder.getUserSessionContext();
         SessionUser sessionUser = userSessionContext.getSessionUser();

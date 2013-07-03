@@ -19,12 +19,12 @@ public class LogsInfoService {
     //获取/查询日志 List
     public List<LogsInfo> getLogsInfoByAdminListPage(String beginTime,String endTime,String userName,int pageNum,int offset){
         int beginPageNum = (pageNum -1) * offset;
-        int engPageNum = pageNum * offset;
+        int engPageNum = beginPageNum + offset;
         return logsInfoDao.getLogsInfoByAdminListPage(beginTime,endTime,userName,beginPageNum,engPageNum);//getLogsInfoByAdminList();
     }
     public Long getAllLogsInfoListByCount(String beginTime,String endTime,String userName,int pageNum,int offset) {
         int beginPageNum = (pageNum -1) * offset;
-        int engPageNum = pageNum * offset;
+        int engPageNum = beginPageNum + offset;
         return logsInfoDao.queryAdminByLogsInfoByCount(beginTime,endTime,userName,beginPageNum,engPageNum);
     }
 

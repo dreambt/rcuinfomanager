@@ -1,8 +1,10 @@
 package com.rcuinfomanager.webservice;
 
 import com.rcuinfomanager.dao.UserDao;
+import com.rcuinfomanager.model.LocationInfo;
 import com.rcuinfomanager.model.User;
 import com.rcuinfomanager.service.BaseInfoService;
+import com.rcuinfomanager.service.LocationInfoService;
 import com.rcuinfomanager.util.EncryptUtils;
 import com.rcuinfomanager.util.JsonParser;
 import com.rcuinfomanager.webservice.model.*;
@@ -23,6 +25,9 @@ public class FarmerInfoWebService {
 
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private LocationInfoService locationInfoService;
 
 
     @RequestMapping(value = "/baseinfo/download/{username}/{password}", method = RequestMethod.GET)
@@ -65,7 +70,7 @@ public class FarmerInfoWebService {
             if (pwdMD5.equals(password)) {
                 try {
                     ObjectMapper mapper = new ObjectMapper();
-                    UploadData uploadData = mapper.readValue(EncryptUtils.decryptStr(rawData), UploadData.class);
+                    UploadData uploadData = mapper.readValue(rawData, UploadData.class);
                     if (uploadData != null) {
                         AllColumnInfo allColumnInfo = uploadData.getAllColumnInfo();
                         allColumnInfo.setUserName(username);
@@ -74,6 +79,12 @@ public class FarmerInfoWebService {
                             webResponseData.setStatus(2);
                         } else {
                             allColumnInfo.setStatus(1);
+                            List<LocationInfo> locationInfos = uploadData.getLocationInfo();
+                            if (locationInfos != null && !locationInfos.isEmpty()) {
+                                for (LocationInfo locationInfo : locationInfos) {
+                                    locationInfoService.saveLocationInfo(locationInfo);
+                                }
+                            }
                             baseInfoService.saveFarmerInfoFromDownload(allColumnInfo);
                             webResponseData.setStatus(0);
                         }

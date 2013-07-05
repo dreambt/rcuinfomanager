@@ -296,6 +296,8 @@
     </p>
 </div>
 
+<input type="hidden" name="page" value="${currentPage}" id="currentPage">
+
 <div id="appointDiv" style="display:none">
     <input type="hidden" id="recordIds"/>
     <h4 style="border-top-color: palevioletred;">指派信息</h4>

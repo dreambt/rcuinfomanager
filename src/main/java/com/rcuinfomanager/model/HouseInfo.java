@@ -2,6 +2,7 @@ package com.rcuinfomanager.model;
 
 public class HouseInfo {
     private int id;
+    private long recordId;
     private long assetsId;
     private String nature;
     private String purpose;
@@ -119,5 +120,11 @@ public class HouseInfo {
         this.assetsId = assetsId;
     }
 
+    public long getRecordId() {
+        return recordId;
+    }
 
+    public void setRecordId(long recordId) {
+        this.recordId = recordId;
+    }
 }

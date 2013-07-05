@@ -2,6 +2,7 @@ package com.rcuinfomanager.webservice.model;
 
 import com.google.common.base.Strings;
 import com.rcuinfomanager.model.*;
+import org.apache.ibatis.metadata.Column;
 
 import java.io.Serializable;
 import java.util.List;
@@ -82,10 +83,13 @@ public class AllColumnInfo implements Serializable {
     private List<CarsInfo> carInfos;
 
     private String financialInfo;
+
     private String financialDepositOurBank;
+
     private String financialDepositOtherBank;
 
     private int fmIncurDebts;
+
     private int fmIncurOurBankDebts;
     private int fmIncurOtherBankDebts;
     private String fmIncurLoanPurpose;

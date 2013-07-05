@@ -2,6 +2,7 @@ package com.rcuinfomanager.model;
 
 public class LandInfo {
     private int id;
+    private long recordId;
     private long assetsId;
     private String area;
     private String worth;
@@ -72,5 +73,13 @@ public class LandInfo {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public long getRecordId() {
+        return recordId;
+    }
+
+    public void setRecordId(long recordId) {
+        this.recordId = recordId;
     }
 }

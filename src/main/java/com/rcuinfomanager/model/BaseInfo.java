@@ -55,7 +55,7 @@ public class BaseInfo {
     private int state;
     private Date createTime;
     private Date recordTime;
-    private Date submitTime;
+    private String submitTime;
     private Date lastModifyTime;
     private String note1;
     private String note2;
@@ -487,11 +487,11 @@ public class BaseInfo {
         this.recordTime = recordTime;
     }
 
-    public Date getSubmitTime() {
+    public String getSubmitTime() {
         return submitTime;
     }
 
-    public void setSubmitTime(Date submitTime) {
+    public void setSubmitTime(String submitTime) {
         this.submitTime = submitTime;
     }
 

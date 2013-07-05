@@ -20,23 +20,13 @@
                 $('#carForm').submit();
             });
 
-            //关闭
-            $('#cancelOperate').click(function () {
-                window.top.art.dialog({id: 'addCar' }).close();
-            });
-            //返回main
-            var success = '${houseSuccess}';
-            if (success && success != '') {
-                window.top.art.dialog({id: 'addCar'}).close();
-                window.location.reload();
-            }
-
         });
     </script>
 </head>
 <body>
 <form id="carForm" action="/family/saveCar" method="post">
     <input type="hidden" name="assetsId" value="${assetsId}">
+    <input type="hidden" name="recordId" value="${recordId}"/>
     <table width="100%" border="0">
         <tbody>
         <tr>
@@ -86,7 +76,7 @@
 </form>
 <p align="center">
     <a class="btn" href="#" id="okOperate">确定</a>&nbsp;
-    <a class="btn" href="#" id="cancelOperate">取消</a>
+    <a class="btn" href="/family/edit/${recordId}" id="cancelOperate"  target="_parent">取消</a>
 </p>
 </body>
 </html>

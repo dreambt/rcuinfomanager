@@ -110,12 +110,6 @@ public interface BaseInfoDao {
     void deleteVillageManagerEvaByRecordId(Long recordId);
     void deleteCustomerManagerEvaByRecordId(Long recordId);
 
-
-
-
-
-
-
     void saveCarsinfo(CarsInfo carsInfo);
 
     void saveLandInfo(LandInfo landInfo);
@@ -148,4 +142,8 @@ public interface BaseInfoDao {
     void saveCustomerManagerEva(AllColumnInfo allColumnInfo);
 
     FamilyMember getFamilyMemberByMemberNameAndMemberCerNumAndCerNum(@Param("familyMemberName")String familyMemberName, @Param("familyMemberCerNum")String familyMemberCerNum, @Param("cerNum")String cerNum);
+
+    void saveIncomeexpenses(AllColumnInfo allColumnInfo);
+
+    void saveFamilyincurdebts(AllColumnInfo allColumnInfo);
 }

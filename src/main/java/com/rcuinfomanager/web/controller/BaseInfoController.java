@@ -149,15 +149,18 @@ public class BaseInfoController {
     }
 
     //保存批量指派
-    @RequestMapping("/saveBatchAppoint/{recordIds}/{uid}")
-    public String saveBatchAppoint(@PathVariable String recordIds, @PathVariable long uid, Map map) {
+    @RequestMapping("/saveBatchAppoint/{recordIds}/{uid}/{currentPage}")
+    public String saveBatchAppoint(@PathVariable String recordIds, @PathVariable long uid, @PathVariable long currentPage) {
+        if (currentPage <= 0) {
+            currentPage = 1;
+        }
         String[] ids = recordIds.split(",");
         int status=2;
         for (String id : ids) {
             baseInfoService.saveAppointInfo(Long.parseLong(id), uid);
             baseInfoService.updateStatus(status,Long.parseLong(id));
         }
-        return "redirect:/index";
+        return "redirect:/index/?page="+currentPage;
     }
 
     //批量验收
@@ -175,15 +178,16 @@ public class BaseInfoController {
     }
 
     //保存批量验收
-    @RequestMapping("/saveBatchChecks/{recordIds}/{state}")
-    public String saveBatchChecks(@PathVariable String recordIds, @PathVariable String state, Map map) {
-        UserSessionContext userSessionContext = UserSessionContextHolder.getUserSessionContext();
-        SessionUser sessionUser = userSessionContext.getSessionUser();
+    @RequestMapping("/saveBatchChecks/{recordIds}/{state}/{currentPage}")
+    public String saveBatchChecks(@PathVariable String recordIds, @PathVariable String state, @PathVariable long currentPage) {
+        if (currentPage <= 0) {
+            currentPage = 1;
+        }
         String[] ids = recordIds.split(",");
         for (String id : ids) {
             baseInfoService.saveChecksInfo(Long.parseLong(id), Integer.parseInt(state));
         }
-       return "redirect:/index";
+       return "redirect:/index/?page="+currentPage;
     }
 
     //编辑
@@ -491,7 +495,7 @@ public class BaseInfoController {
 
     //导出基础数据
     @RequestMapping("/exportVillagerEstimation/{recordIds}")
-    public String saveExportBasicData(HttpServletRequest request, HttpServletResponse response,@PathVariable String recordIds) {
+    public void saveExportBasicData(HttpServletRequest request, HttpServletResponse response,@PathVariable String recordIds) {
         if ("All".equalsIgnoreCase(recordIds)) {
             List<Long> allHouseholdInfos = baseInfoService.getAllHouseholdInfos();
             if (allHouseholdInfos != null && !allHouseholdInfos.isEmpty()) {
@@ -506,13 +510,13 @@ public class BaseInfoController {
             }
         }
         exportInfo2VillagerCommittee4Estimation.readTemplateAndExport(recordIds, response,request);
-        return "farmer/exportBasicData";
     }
 
     //增加房产
-    @RequestMapping(value = "/addHouse/{assetsId}", method = RequestMethod.GET)
-    public String addHouse(@PathVariable long assetsId,Map map){
+    @RequestMapping(value = "/addHouse/{recordId}/{assetsId}", method = RequestMethod.GET)
+    public String addHouse(@PathVariable long recordId,@PathVariable long assetsId,Map map){
         map.put("assetsId", assetsId);
+        map.put("recordId", recordId);
         map.put("houseInfo", new HouseInfo());
         return "farmer/addHouseProperty";
     }
@@ -521,13 +525,14 @@ public class BaseInfoController {
     public String saveHouse(HttpServletRequest request, HttpServletResponse response,@ModelAttribute("houseInfo")HouseInfo houseInfo,Map map){
 
         baseInfoService.saveHouseInfo(houseInfo);
-        map.put("houseSuccess","true");
-        return "farmer/addHouseProperty";
+
+        return "redirect:/family/edit/"+houseInfo.getRecordId();
     }
     //增加土地
-    @RequestMapping(value = "/addLand/{assetsId}", method = RequestMethod.GET)
-    public String addLand(@PathVariable long assetsId,Map map){
+    @RequestMapping(value = "/addLand/{recordId}/{assetsId}", method = RequestMethod.GET)
+    public String addLand(@PathVariable long recordId,@PathVariable long assetsId,Map map){
         map.put("assetsId", assetsId);
+        map.put("recordId", recordId);
         map.put("landInfo", new LandInfo());
 
         return "farmer/addLand";
@@ -537,29 +542,30 @@ public class BaseInfoController {
     public String saveLand(HttpServletRequest request, HttpServletResponse response,@ModelAttribute("landInfo")LandInfo landInfo,Map map){
 
         baseInfoService.saveLandInfo(landInfo);
-        map.put("houseSuccess","true");
-        return "farmer/addLand";
+        return "redirect:/family/edit/"+landInfo.getRecordId();
     }
     //增加车辆
-    @RequestMapping(value = "/addCar/{assetsId}", method = RequestMethod.GET)
-     public String addCar(@PathVariable long assetsId,Map map){
+    @RequestMapping(value = "/addCar/{recordId}/{assetsId}", method = RequestMethod.GET)
+     public String addCar(@PathVariable long recordId,@PathVariable long assetsId,Map map){
         map.put("assetsId", assetsId);
+        map.put("recordId", recordId);
         map.put("carsInfo", new CarsInfo());
         return "farmer/addCars";
      }
     //保存车辆
     @RequestMapping(value = "/saveCar", method = RequestMethod.POST)
     public String saveCar(HttpServletRequest request, HttpServletResponse response,@ModelAttribute("carsInfo")CarsInfo carsInfo,Map map){
-
         baseInfoService.saveCarsinfo(carsInfo);
-        map.put("houseSuccess","true");
-        return "farmer/addCars";
+        return "redirect:/family/edit/"+carsInfo.getRecordId();
     }
 
     //保存编辑
     @RequestMapping(value = "/saveEditInfo",method = RequestMethod.POST)
     public String saveEditInfo(HttpServletRequest request, HttpServletResponse response,@ModelAttribute("allColumnInfo")AllColumnInfo allColumnInfo,Map map){
 
+        if (allColumnInfo.getStatus()==4){
+            allColumnInfo.setStatus(1);
+        }
         baseInfoService.updateBaseInfoById(allColumnInfo);
         //家庭收支情况表
         baseInfoService.updateIncomeexpenses(allColumnInfo);

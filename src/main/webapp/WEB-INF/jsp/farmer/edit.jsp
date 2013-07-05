@@ -44,39 +44,6 @@ $(function(){
         }
     });
 
-    //增加房产
-    $('#addHouseOpera').click(function(){
-        var assetsId=$('#assetsId').val();
-        var url="/family/addHouse/"+assetsId;
-        window.art.dialog({
-            id: 'addHouse',
-            title: '增加房产信息',
-            lock: true,
-            content: '<iframe scrolling="auto" width="800" height="240" frameborder="0" style="border: none;margin: -20px -25px;"marginheight="0" marginwidth="0" src="' + url + '"/>'
-        });
-    });
-    //增加土地
-    $('#addlandOpera').click(function(){
-        var assetsId=$('#assetsId').val();
-        var url="/family/addLand/"+assetsId;
-        window.art.dialog({
-            id: 'addLand',
-            title: '增加土地信息',
-            lock: true,
-            content: '<iframe scrolling="auto" width="650" height="210" frameborder="0" style="border: none;margin: -20px -25px;"marginheight="0" marginwidth="0" src="' + url + '"/>'
-        });
-    });
-    //增加车辆
-    $('#addCarOpera').click(function(){
-        var assetsId=$('#assetsId').val();
-        var url="/family/addCar/"+assetsId;
-        window.art.dialog({
-            id: 'addCar',
-            title: '增加车辆信息',
-            lock: true,
-            content: '<iframe scrolling="auto" width="450" height="210" frameborder="0" style="border: none;margin: -20px -25px;"marginheight="0" marginwidth="0" src="' + url + '"/>'
-        });
-    });
     //保存修改
     $('#saveEditOpera').click(function(){
         $('#editForm').submit();
@@ -239,6 +206,43 @@ $(function(){
         });
     }
 });
+
+$(document).ready(function() {
+
+    //增加房产
+    $("#addHouseOpera").fancybox({
+        'height':200,
+        'autoScale':'false',
+        'transitionIn'		: 'elastic',
+        'transitionOut'		: 'elastic',
+        'hideOnContentClick': true,
+        'closeBtn' : false,
+        'type':'ajax'
+    });
+
+    //增加土地
+    $("#addlandOpera").fancybox({
+        'height':200,
+        'autoScale':'false',
+        'transitionIn'		: 'elastic',
+        'transitionOut'		: 'elastic',
+        'hideOnContentClick': true,
+        'closeBtn' : false,
+        'type':'ajax'
+    });
+
+    //增加车辆
+    $("#addCarOpera").fancybox({
+        'height':200,
+        'autoScale':'false',
+        'transitionIn'		: 'elastic',
+        'transitionOut'		: 'elastic',
+        'hideOnContentClick': true,
+        'closeBtn' : false,
+        'type':'ajax'
+    });
+});
+
 </script>
 </head>
 <body>
@@ -268,10 +272,12 @@ $(function(){
 <div class="span3">
     <ul class="nav nav-list bs-docs-sidenav affix">
         <li class="active"><a href="/index"><i class="icon-chevron-right"></i>客户电子信息管理</a></li>
-        <li class=""><a href="/clientManager"><i class="icon-chevron-right"></i>客户端管理</a></li>
-        <li class=""><a href="/accountManager"><i class="icon-chevron-right"></i>系统账号管理</a></li>
-        <li class=""><a href="/roleManager"><i class="icon-chevron-right"></i>系统角色管理</a></li>
-        <li class=""><a href="/systemLogManager"><i class="icon-chevron-right"></i>系统日志</a></li>
+        <core:if test="${displayUserName == 'admin'}">
+            <li class=""><a href="/clientManager"><i class="icon-chevron-right"></i>客户端管理</a></li>
+            <li class=""><a href="/accountManager"><i class="icon-chevron-right"></i>系统账号管理</a></li>
+            <li class=""><a href="/roleManager"><i class="icon-chevron-right"></i>系统角色管理</a></li>
+            <li class=""><a href="/systemLogManager"><i class="icon-chevron-right"></i>系统日志</a></li>
+        </core:if>
     </ul>
 </div>
 <div class="span10" style="margin-left: -8.435897%;">
@@ -1567,23 +1573,9 @@ $(function(){
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">工作年限</td>
     <td align="left">
         <select class="selectpicker" style="width: 95px; " name="workYears">
-            <core:choose>
-                <core:when test="${personBasicList.workYears=='5年(含)以上'}">
-                    <option value="${personBasicList.workYears}" selected="selected">5年(含)以上</option>
-                    <option value="3(含)-5年">3(含)-5年</option>
-                    <option value="3年以内">3年以内</option>
-                </core:when>
-                <core:when test="${personBasicList.workYears=='3(含)-5年'}">
-                    <option value="5年(含)以上">5年(含)以上</option>
-                    <option value="${personBasicList.workYears}" selected="selected">3(含)-5年</option>
-                    <option value="3年以内">3年以内</option>
-                </core:when>
-                <core:otherwise>
-                    <option value="5年(含)以上">5年(含)以上</option>
-                    <option value="3(含)-5年">3(含)-5年</option>
-                    <option value="${personBasicList.workYears}" selected="selected">3年以内</option>
-                </core:otherwise>
-            </core:choose>
+            <option value="5年(含)以上" ${personBasicList.workYears=='5年(含)以上' ? 'selected' : ''}>5年(含)以上</option>
+            <option value="3(含)-5年" ${personBasicList.workYears=='3(含)-5年' ? 'selected' : ''}>3(含)-5年</option>
+            <option value="3年以内" ${personBasicList.workYears=='3年以内' ? 'selected' : ''}>3年以内</option>
         </select>
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">职称</td>
@@ -1768,9 +1760,9 @@ $(function(){
 <tr>
     <td align="center" colspan="8" style="font-size:22px">
         家庭资产情况
-        <a class="btn btn-info" id="addHouseOpera" href="#">增加房产</a>
-        <a class="btn btn-info" id="addlandOpera" href="#">增加土地</a>
-        <a class="btn btn-info" id="addCarOpera" href="#">增加车辆</a>
+        <a class="iframe btn btn-info" id="addHouseOpera" href="/family/addHouse/${recordId}/${personFamilyAssets.assetsId}">增加房产</a>
+        <a class="btn btn-info" id="addlandOpera" href="/family/addLand/${recordId}/${personFamilyAssets.assetsId}">增加土地</a>
+        <a class="btn btn-info" id="addCarOpera" href="/family/addCar/${recordId}/${personFamilyAssets.assetsId}">增加车辆</a>
     </td>
 </tr>
 <tr>
@@ -2423,85 +2415,23 @@ $(function(){
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">我社存款</td>
     <td align="left">
         <select class="selectpicker" style="width: 95px; " name="financialDepositOurBank">
-            <core:choose>
-                <core:when test="${personFinancialAssets.depositOurBank=='3万元内'}">
-                    <option value="${personFinancialAssets.depositOurBank}" selected="selected">3万元内</option>
-                    <option value="3-10万元内">3-10万元内</option>
-                    <option value="10-30万元内">10-30万元内</option>
-                    <option value="30-100万元内">30-100万元内</option>
-                    <option value="100万元以上">100万元以上</option>
-                </core:when>
-                <core:when test="${personFinancialAssets.depositOurBank=='3-10万元内'}">
-                    <option value="3万元内">3万元内</option>
-                    <option value="${personFinancialAssets.depositOurBank}" selected="selected">3-10万元内</option>
-                    <option value="10-30万元内">10-30万元内</option>
-                    <option value="30-100万元内">30-100万元内</option>
-                    <option value="100万元以上">100万元以上</option>
-                </core:when>
-                <core:when test="${personFinancialAssets.depositOurBank=='10-30万元内'}">
-                    <option value="3万元内">3万元内</option>
-                    <option value="3-10万元内">3-10万元内</option>
-                    <option value="${personFinancialAssets.depositOurBank}" selected="selected">10-30万元内</option>
-                    <option value="30-100万元内">30-100万元内</option>
-                    <option value="100万元以上">100万元以上</option>
-                </core:when>
-                <core:when test="${personFinancialAssets.depositOurBank=='30-100万元内'}">
-                    <option value="3万元内">3万元内</option>
-                    <option value="3-10万元内">3-10万元内</option>
-                    <option value="10-30万元内">10-30万元内</option>
-                    <option value="${personFinancialAssets.depositOurBank}" selected="selected">30-100万元内</option>
-                    <option value="100万元以上">100万元以上</option>
-                </core:when>
-                <core:otherwise>
-                    <option value="10万以内">10万以内</option>
-                    <option value="10-30万">10-30万</option>
-                    <option value="30-60万">30-60万</option>
-                    <option value="60-100万">60-100万</option>
-                    <option value="${personFinancialAssets.depositOurBank}" selected="selected">100万以上</option>
-                </core:otherwise>
-            </core:choose>
+            <option value=""></option>
+            <option value="3万元内" ${personFinancialAssets.depositOurBank=='3万元内' ? 'selected' : ''}>3万元内</option>
+            <option value="3-10万元内" ${personFinancialAssets.depositOurBank=='3-10万元内' ? 'selected' : ''}>3-10万元内</option>
+            <option value="10-30万元内" ${personFinancialAssets.depositOurBank=='10-30万元内' ? 'selected' : ''}>10-30万元内</option>
+            <option value="30-100万元内" ${personFinancialAssets.depositOurBank=='30-100万元内' ? 'selected' : ''}>30-100万元内</option>
+            <option value="100万元以上" ${personFinancialAssets.depositOurBank=='100万元以上' ? 'selected' : ''}>100万元以上</option>
         </select>
     </td>
     <td align="center" bgcolor="#b4d8ed" style="color:#161823">他行存款</td>
     <td align="left">
         <select class="selectpicker" style="width: 95px; " name="financialDepositOtherBank">
-            <core:choose>
-                <core:when test="${personFinancialAssets.depositOtherBank=='3万元内'}">
-                    <option value="${personFinancialAssets.depositOtherBank}" selected="selected">3万元内</option>
-                    <option value="3-10万元内">3-10万元内</option>
-                    <option value="10-30万元内">10-30万元内</option>
-                    <option value="30-100万元内">30-100万元内</option>
-                    <option value="100万元以上">100万元以上</option>
-                </core:when>
-                <core:when test="${personFinancialAssets.depositOtherBank=='3-10万元内'}">
-                    <option value="3万元内">3万元内</option>
-                    <option value="${personFinancialAssets.depositOtherBank}" selected="selected">3-10万元内</option>
-                    <option value="10-30万元内">10-30万元内</option>
-                    <option value="30-100万元内">30-100万元内</option>
-                    <option value="100万元以上">100万元以上</option>
-                </core:when>
-                <core:when test="${personFinancialAssets.depositOtherBank=='10-30万元内'}">
-                    <option value="3万元内">3万元内</option>
-                    <option value="3-10万元内">3-10万元内</option>
-                    <option value="${personFinancialAssets.depositOtherBank}" selected="selected">10-30万元内</option>
-                    <option value="30-100万元内">30-100万元内</option>
-                    <option value="100万元以上">100万元以上</option>
-                </core:when>
-                <core:when test="${personFinancialAssets.depositOtherBank=='30-100万元内'}">
-                    <option value="3万元内">3万元内</option>
-                    <option value="3-10万元内">3-10万元内</option>
-                    <option value="10-30万元内">10-30万元内</option>
-                    <option value="${personFinancialAssets.depositOtherBank}" selected="selected">30-100万元内</option>
-                    <option value="100万元以上">100万元以上</option>
-                </core:when>
-                <core:otherwise>
-                    <option value="10万以内">10万以内</option>
-                    <option value="10-30万">10-30万</option>
-                    <option value="30-60万">30-60万</option>
-                    <option value="60-100万">60-100万</option>
-                    <option value="${personFinancialAssets.depositOtherBank}" selected="selected">100万以上</option>
-                </core:otherwise>
-            </core:choose>
+            <option value=""></option>
+            <option value="3万元内" ${personFinancialAssets.depositOtherBank=='3万元内' ? 'selected' : ''}>3万元内</option>
+            <option value="3-10万元内" ${personFinancialAssets.depositOtherBank=='3-10万元内' ? 'selected' : ''}>3-10万元内</option>
+            <option value="10-30万元内" ${personFinancialAssets.depositOtherBank=='10-30万元内' ? 'selected' : ''}>10-30万元内</option>
+            <option value="30-100万元内" ${personFinancialAssets.depositOtherBank=='30-100万元内' ? 'selected' : ''}>30-100万元内</option>
+            <option value="100万元以上" ${personFinancialAssets.depositOtherBank=='100万元以上' ? 'selected' : ''}>100万元以上</option>
         </select>
     </td>
 </tr>

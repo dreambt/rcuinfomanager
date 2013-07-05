@@ -2,6 +2,9 @@ package com.rcuinfomanager.web.controller;
 
 import com.rcuinfomanager.model.ClientManager;
 import com.rcuinfomanager.service.ClientManagerService;
+import com.rcuinfomanager.session.SessionUser;
+import com.rcuinfomanager.session.UserSessionContext;
+import com.rcuinfomanager.session.UserSessionContextHolder;
 import com.rcuinfomanager.util.DateUtils;
 import com.rcuinfomanager.util.ImageUtils;
 import org.apache.commons.fileupload.FileItem;
@@ -33,7 +36,7 @@ public class ClientManagerController {
     public String uploadFile(HttpServletRequest request, HttpServletResponse response, Map map) {
         if (ServletFileUpload.isMultipartContent(request)) {
             try {
-                List<FileItem> fileItems = new ServletFileUpload(new DiskFileItemFactory(1024 * 1024, new File("c:/tmp"))).
+                List<FileItem> fileItems = new ServletFileUpload(new DiskFileItemFactory(1024 * 1024 * 10, new File("c:/tmp"))).
                         parseRequest(request);
                 for (FileItem item : fileItems) {
                     if (!item.isFormField()) {
@@ -54,9 +57,17 @@ public class ClientManagerController {
             } catch (FileUploadException e) {
                 e.printStackTrace();
             }
-
-
         }
+
+        int offset = 10;
+        UserSessionContext userSessionContext = UserSessionContextHolder.getUserSessionContext();
+        SessionUser sessionUser = userSessionContext.getSessionUser();
+        map.put("displayUserName", sessionUser.getDisplayUserName());
+
+        long totalCount = clientManagerService.getAllClientManagerCount();
+        map.put("pageCount", totalCount % offset == 0 ? totalCount / offset : totalCount / offset + 1);
+        map.put("clientManagers", clientManagerService.getAllClientManagerByPage(1, offset));
+        map.put("currentPage", 1);
         return "device/clientVersion";
     }
 

@@ -10,6 +10,7 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+import org.apache.poi.ss.util.CellRangeAddress;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
@@ -57,8 +58,12 @@ public class ImportFarmerInfoService {
                 List<FamilyMember> familyMemberList = baseInfoDao.getFamilyMember(allColumnInfo.getRecordId());
                 allColumnInfo.setFamilyMembers(familyMemberList);
             }
-            dbRecord2ExcelStream(sheet,allColumnInfo,rowIdx);
-            rowIdx++;
+            int margeRowNum = dbRecord2ExcelStream(sheet, allColumnInfo, rowIdx);
+            if (margeRowNum > 0) {
+                rowIdx += margeRowNum;
+            } else {
+                rowIdx++;
+            }
         }
 
         ServletOutputStream outputStream = response.getOutputStream();
@@ -70,7 +75,7 @@ public class ImportFarmerInfoService {
         outputStream.close();
     }
 
-    private void dbRecord2ExcelStream(HSSFSheet sheet,AllColumnInfo allColumnInfo, int rowIdx) throws IOException {
+    private int dbRecord2ExcelStream(HSSFSheet sheet,AllColumnInfo allColumnInfo, int rowIdx) throws IOException {
         HSSFRow row = sheet.createRow(rowIdx);
         HSSFCell customerNameCell = row.createCell(0);
         customerNameCell.setCellValue(allColumnInfo.getCustomerName());
@@ -83,7 +88,11 @@ public class ImportFarmerInfoService {
             genderCell.setCellValue("男");
         }
         HSSFCell isFarmerCell = row.createCell(3);
-        isFarmerCell.setCellValue(allColumnInfo.getIsFarmer());
+        if (allColumnInfo.getIsFarmer() == 0) {
+            isFarmerCell.setCellValue("否");
+        } else {
+            isFarmerCell.setCellValue("是");
+        }
         HSSFCell cerTypeCell = row.createCell(4);
         cerTypeCell.setCellValue(allColumnInfo.getCerType());
         HSSFCell cerValidityCell = row.createCell(5);
@@ -95,7 +104,11 @@ public class ImportFarmerInfoService {
         HSSFCell nationalityCell = row.createCell(8);
         nationalityCell.setCellValue(allColumnInfo.getNationality());
         HSSFCell isHavePassportCell = row.createCell(9);
-        isHavePassportCell.setCellValue(allColumnInfo.getIsHavePassport());
+        if (allColumnInfo.getIsHavePassport() == 0) {
+            isHavePassportCell.setCellValue("否");
+        } else {
+            isHavePassportCell.setCellValue("有");
+        }
         HSSFCell nationCell = row.createCell(10);
         nationCell.setCellValue(allColumnInfo.getNation());
         HSSFCell poliLaspectCell = row.createCell(11);
@@ -192,8 +205,12 @@ public class ImportFarmerInfoService {
         if (houseInfos!= null) {
             for (int i = 0; i < houseInfos.size(); i++) {
                 if (i > 0) {
-                    row = sheet.createRow(++currentRowIdx);
-                    maxMergeRow = maxMergeRow + 1;
+                    if (i > maxMergeRow) {
+                        maxMergeRow = maxMergeRow + 1;
+                        row = sheet.createRow(++currentRowIdx);
+                    } else {
+                        row = sheet.getRow(++currentRowIdx);
+                    }
                 }
                 HSSFCell natureCell = row.createCell(54);
                 HouseInfo houseInfo = houseInfos.get(i);
@@ -253,6 +270,126 @@ public class ImportFarmerInfoService {
                 moneyClearCell.setCellValue(landInfo.getMoneyClear());
             }
         }
+        currentRowIdx = rowIdx;
+        row = sheet.getRow(rowIdx);
+        List<CarsInfo> carInfos = allColumnInfo.getCarInfos();
+        if (carInfos != null) {
+            for (int i = 0; i < carInfos.size(); i ++) {
+                if (i > 0) {
+                    if (i > maxMergeRow) {
+                        maxMergeRow = maxMergeRow + 1;
+                        row = sheet.createRow(++currentRowIdx);
+                    } else {
+                        row = sheet.getRow(++currentRowIdx);
+                    }
+                }
+                CarsInfo carInfo = carInfos.get(i);
+                HSSFCell carsInfoCell = row.createCell(71);
+                carsInfoCell.setCellValue(carInfo.getCarsInfo());
+                HSSFCell carsWorthCell = row.createCell(72);
+                carsWorthCell.setCellValue(carInfo.getCarsWorth());
+                HSSFCell carsIsInstallmentCell = row.createCell(73);
+                carsIsInstallmentCell.setCellValue(carInfo.getCarsIsInstallment());
+                HSSFCell carsUsingInfoCell = row.createCell(74);
+                carsUsingInfoCell.setCellValue(carInfo.getCarsUsingInfo());
+            }
+        }
+        row = sheet.getRow(rowIdx);
+        HSSFCell financialInfoCell = row.createCell(75);
+        financialInfoCell.setCellValue(allColumnInfo.getFinancialInfo());
+        HSSFCell financialDepositOurBankCell = row.createCell(76);
+        financialDepositOurBankCell.setCellValue(allColumnInfo.getFinancialDepositOurBank());
+        HSSFCell financialDepositOtherBankCell = row.createCell(77);
+        financialDepositOtherBankCell.setCellValue(allColumnInfo.getFinancialDepositOtherBank());
+
+        HSSFCell fmIncurDebtsCell = row.createCell(78);
+        fmIncurDebtsCell.setCellValue(allColumnInfo.getFmIncurDebts());
+        HSSFCell fmIncurOtherBankDebtsCell = row.createCell(79);
+        fmIncurOtherBankDebtsCell.setCellValue(allColumnInfo.getFmIncurOtherBankDebts());
+        HSSFCell fmIncurOutBankDebtsCell = row.createCell(80);
+        fmIncurOutBankDebtsCell.setCellValue(allColumnInfo.getFmIncurOurBankDebts());
+        HSSFCell fmIncurLoanPurposeCell = row.createCell(81);
+        fmIncurLoanPurposeCell.setCellValue(allColumnInfo.getFmIncurLoanPurpose());
+        HSSFCell fmIncurLoanShapCell = row.createCell(82);
+        fmIncurLoanShapCell.setCellValue(allColumnInfo.getFmIncurLoanShap());
+
+        List<FamilyMember> familyMembers = allColumnInfo.getFamilyMembers();
+        currentRowIdx = rowIdx;
+        row = sheet.getRow(rowIdx);
+        if (familyMembers != null) {
+            for (int i = 0; i < familyMembers.size(); i++) {
+                if (i > 0) {
+                    if (i > maxMergeRow) {
+                        maxMergeRow = maxMergeRow + 1;
+                        row = sheet.createRow(++currentRowIdx);
+                    } else {
+                        row = sheet.getRow(++currentRowIdx);
+                    }
+                }
+                FamilyMember familyMember = familyMembers.get(i);
+                HSSFCell memberYearIncomeCell = row.createCell(83);
+                memberYearIncomeCell.setCellValue(familyMember.getYearIncome());
+                HSSFCell leaderRelationCell = row.createCell(84);
+                leaderRelationCell.setCellValue(familyMember.getLeaderRelation());
+                HSSFCell memberProfessionCell = row.createCell(85);
+                memberProfessionCell.setCellValue(familyMember.getProfession());
+                HSSFCell cell = row.createCell(86);
+                cell.setCellValue(familyMember.getAddress());
+            }
+        }
+        row = sheet.getRow(rowIdx);
+        HSSFCell finaServiceUsedProductCell = row.createCell(87);
+        finaServiceUsedProductCell.setCellValue(allColumnInfo.getFinaServiceUsedProduct());
+        HSSFCell finaServiceSatisfactionCell = row.createCell(88);
+        finaServiceSatisfactionCell.setCellValue(allColumnInfo.getFinaServiceSatisfaction());
+        HSSFCell finaServiceIsMoneyNeedCell = row.createCell(89);
+        finaServiceIsMoneyNeedCell.setCellValue(allColumnInfo.getFinaServiceIsMoneyNeed());
+        HSSFCell finaServiceMoneyTodoCell = row.createCell(90);
+        finaServiceMoneyTodoCell.setCellValue(allColumnInfo.getFinaServiceMoneyTodo());
+        HSSFCell finaServiceMoneyCountCell = row.createCell(91);
+        finaServiceMoneyCountCell.setCellValue(allColumnInfo.getFinaServiceMoneyCount());
+        HSSFCell timeLimitCell = row.createCell(92);
+        timeLimitCell.setCellValue(allColumnInfo.getFinaServiceTimeLimit());
+        HSSFCell guaranteeCell = row.createCell(93);
+        guaranteeCell.setCellValue(allColumnInfo.getFinaServiceGuarantee());
+        HSSFCell finaServicesFmDepositTodoCell = row.createCell(94);
+        finaServicesFmDepositTodoCell.setCellValue(allColumnInfo.getFinaServicesFmDepositTodo());
+        HSSFCell finaServicesNeedServicesCell = row.createCell(95);
+        finaServicesNeedServicesCell.setCellValue(allColumnInfo.getFinaServicesNeedServices());
+        HSSFCell finaServicesNeedServicesElseCell = row.createCell(96);
+        finaServicesNeedServicesElseCell.setCellValue(allColumnInfo.getFinaServicesNeedServicesElse());
+        HSSFCell finaServicesHolpForServicesCell = row.createCell(97);
+        finaServicesHolpForServicesCell.setCellValue(allColumnInfo.getFinaServicesHolpForServices());
+        HSSFCell finaServicesSuggestionCell = row.createCell(98);
+        finaServicesSuggestionCell.setCellValue(allColumnInfo.getFinaServicesSuggestion());
+
+        HSSFCell finaServiceBankCardCell = row.createCell(99);
+        finaServiceBankCardCell.setCellValue(allColumnInfo.getFinaServiceBankCard());
+        HSSFCell finaServiceElectronBankCell = row.createCell(100);
+        finaServiceElectronBankCell.setCellValue(allColumnInfo.getFinaServiceElectronBank());
+        HSSFCell finaServiceAgentPayBusinessCell = row.createCell(101);
+        finaServiceAgentPayBusinessCell.setCellValue(allColumnInfo.getFinaServiceAgentPayBusiness());
+        HSSFCell finaServicePrivateLoanCell = row.createCell(102);
+        finaServicePrivateLoanCell.setCellValue(allColumnInfo.getFinaServicePrivateLoan());
+        HSSFCell finaServicePublicLoanCell = row.createCell(103);
+        finaServicePublicLoanCell.setCellValue(allColumnInfo.getFinaServicePublicLoan());
+        HSSFCell finaServiceNewRequirementCell = row.createCell(104);
+        finaServiceNewRequirementCell.setCellValue(allColumnInfo.getFinaServiceNewRequirement());
+
+        HSSFCell custManagerLoanSituCell = row.createCell(105);
+        custManagerLoanSituCell.setCellValue(allColumnInfo.getCustManagerLoanSitu());
+        HSSFCell custManagerCreditRecordCell = row.createCell(106);
+        custManagerCreditRecordCell.setCellValue(allColumnInfo.getCustManagerCreditRecord());
+        HSSFCell custManagerOtherBankRecordCell = row.createCell(107);
+        custManagerOtherBankRecordCell.setCellValue(allColumnInfo.getCustManagerOtherBankRecord());
+        HSSFCell custManagerHouseToMoneyCell = row.createCell(108);
+        custManagerHouseToMoneyCell.setCellValue(allColumnInfo.getCustManagerHouseToMoney());
+        if (maxMergeRow > 0) {
+            for (int i =0; i < 54; i++) {
+                sheet.addMergedRegion(new CellRangeAddress(rowIdx,rowIdx+maxMergeRow-1,i,i));
+            }
+        }
+        return maxMergeRow;
     }
 
     public void importFromCSV(InputStream is) throws IOException {

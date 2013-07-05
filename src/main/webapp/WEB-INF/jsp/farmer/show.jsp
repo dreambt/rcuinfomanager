@@ -117,10 +117,12 @@
 <div class="span3">
     <ul class="nav nav-list bs-docs-sidenav affix">
         <li class="active"><a href="/index"><i class="icon-chevron-right"></i>客户电子信息管理</a></li>
-        <li class=""><a href="/clientManager"><i class="icon-chevron-right"></i>客户端管理</a></li>
-        <li class=""><a href="/accountManager"><i class="icon-chevron-right"></i>系统账号管理</a></li>
-        <li class=""><a href="/roleManager"><i class="icon-chevron-right"></i>系统角色管理</a></li>
-        <li class=""><a href="/systemLogManager"><i class="icon-chevron-right"></i>系统日志</a></li>
+        <core:if test="${displayUserName == 'admin'}">
+            <li class=""><a href="/clientManager"><i class="icon-chevron-right"></i>客户端管理</a></li>
+            <li class=""><a href="/accountManager"><i class="icon-chevron-right"></i>系统账号管理</a></li>
+            <li class=""><a href="/roleManager"><i class="icon-chevron-right"></i>系统角色管理</a></li>
+            <li class=""><a href="/systemLogManager"><i class="icon-chevron-right"></i>系统日志</a></li>
+        </core:if>
     </ul>
 </div>
 <div class="span10" style="margin-left: -8.435897%;">

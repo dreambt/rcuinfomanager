@@ -356,99 +356,54 @@
         insert into baseinfo(customerName,cerNum,nation) values (#{customerName},#{cerNum},#{nation})
     </insert>
 
-    <resultMap id="allColumnInfoList" type="com.rcuinfomanager.webservice.model.AllColumnInfo">
-        <result column="recordId" property="recordId"></result>
-        <result column="customerName" property="customerName"></result>
-        <result column="cerNum" property="cerNum"></result>
-        <result column="gender" property="gender"></result>
-        <result column="isFarmer" property="isFarmer"></result>
-        <result column="cerType" property="cerType"></result>
-        <result column="custType" property="customerType"></result>
-        <result column="cerValidityFrom" property="cerValidityFrom"></result>
-        <result column="cerValidityTo" property="cerValidityTo"></result>
-        <result column="birthday" property="birthday"></result>
-        <result column="nationality" property="nationality"></result>
-        <result column="isHavePassport" property="isHavePassport"></result>
-        <result column="nation" property="nation"></result>
-        <result column="poliLaspect" property="poliLaspect"></result>
-        <result column="address" property="address"></result>
-        <result column="postcode" property="postcode"></result>
-        <result column="telephone" property="telephone"></result>
-        <result column="mbPhoneNum" property="mbPhoneNum"></result>
-        <result column="areaCode" property="areaCode"></result>
-        <result column="areaName" property="areaName"></result>
-        <result column="highestDegree" property="highestDegree"></result>
-        <result column="health" property="health"></result>
-        <result column="highestEdu" property="highestEdu"></result>
-        <result column="bankRelation" property="bankRelation"></result>
-        <result column="liveCondition" property="liveCondition"></result>
-        <result column="maritalStatus" property="maritalStatus"></result>
-        <result column="socialSecurity" property="socialSecurity"></result>
-        <result column="bankPartnership" property="bankPartnership"></result>
-        <result column="profession" property="profession"></result>
-        <result column="businessProj" property="businessProj"></result>
-        <result column="businessYear" property="businessYear"></result>
-        <result column="businessSite" property="businessSite"></result>
-        <result column="industry" property="industry"></result>
-        <result column="businessProp" property="businessProp"></result>
-        <result column="moneySitu" property="moneySitu"></result>
-        <result column="inputMoney" property="inputMoney"></result>
-        <result column="ownMoney" property="ownMoney"></result>
-        <result column="yearIncome" property="yearIncome"></result>
-        <result column="workSitu" property="workSitu"></result>
-        <result column="unitProp" property="unitProp"></result>
-        <result column="unitIndustryId" property="unitIndustryId"></result>
-        <result column="unitIndustryName" property="unitIndustryName"></result>
-        <result column="department" property="department"></result>
-        <result column="unitType" property="unitType"></result>
-        <result column="duties" property="duties"></result>
-        <result column="annualWageIncome" property="annualWageIncome"></result>
-        <result column="workYears" property="workYears"></result>
-        <result column="workTitle" property="workTitle"></result>
+    <resultMap id="allColumnInfoMap" type="com.rcuinfomanager.webservice.model.AllColumnInfo">
 
-        <result column="fmAllIncome" property="fmAllIncome"></result>
-        <result column="fmExpenses" property="fmExpenses"></result>
-        <result column="fmincomeSrc" property="incomeSrc"></result>
-        <result column="fmPerIncome" property="perIncome"></result>
-        <result column="fmOtherMemberIn" property="fmOtherMemberIn"></result>
-        <result column="fmExpensesProj" property="fmExpensesProj"></result>
-        <result column="fmInOutRatio" property="fmInOutRatio"></result>
+        <result column="customerType" property="custType"></result>
+        <result column="incomeSrc" property="fmIncomeSrc"></result>
+        <result column="perIncome" property="fmPerIncome"></result>
 
-        <result column="fmAllAssets" property="fmAllAssets"></result>
-        <result column="mainAssets" property="mainAssets"></result>
+        <result column="depositOurBank" property="financialDepositOurBank"></result>
+        <result column="depositOtherBank" property="financialDepositOtherBank"></result>
 
-        <result column="financialInfo" property="financialInfo"></result>
-        <result column="financialDepositOurBank" property="financialDepositOurBank"></result>
-        <result column="financialDepositOtherBank" property="financialDepositOtherBank"></result>
+        <result column="loanSitu" property="custManagerLoanSitu"></result>
+        <result column="creditRecord" property="custManagerCreditRecord"></result>
+        <result column="otherBankRecord" property="custManagerOtherBankRecord"></result>
+        <result column="houseToMoney" property="custManagerHouseToMoney"></result>
+
+        <result column="fmIncurOtherBankDebts" property="otherBankDebts"></result>
+        <result column="fmIncurOurBankDebts" property="ourBankDebts"></result>
+        <result column="fmIncurLoanPurpose" property="loanPurpose"></result>
+        <result column="fmIncurLoanShap" property="loanShap"></result>
+
+        <result column="usedProduct" property="finaServiceUsedProduct"></result>
+        <result column="isMoneyNeed" property="finaServiceIsMoneyNeed"></result>
+        <result column="moneyTodo" property="finaServiceMoneyTodo"></result>
+        <result column="moneyCount" property="finaServiceMoneyCount"></result>
+        <result column="timeLimit" property="finaServiceTimeLimit"></result>
+        <result column="guarantee" property="finaServiceGuarantee"></result>
+        <result column="bankCard" property="finaServiceBankCard"></result>
+        <result column="electronBank" property="finaServiceElectronBank"></result>
+        <result column="agentPay" property="finaServiceAgentPayBusiness"></result>
+        <result column="auto" property="finaServiceAutoBusiness"></result>
+        <result column="privateLoan" property="finaServicePrivateLoan"></result>
+        <result column="publicLoan" property="finaServicePublicLoan"></result>
+        <result column="newRequirement" property="finaServiceNewRequirement"></result>
+        <result column="satisfaction" property="finaServiceSatisfaction"></result>
+        <result column="fmDepositTodo" property="finaServicesFmDepositTodo"></result>
+        <result column="needServices" property="finaServicesNeedServices"></result>
+        <result column="needServicesElse" property="finaServicesNeedServicesElse"></result>
+        <result column="holpForServices" property="finaServicesHolpForServices"></result>
+        <result column="suggestion" property="finaServicesSuggestion"></result>
 
         <result column="fmIncurDebts" property="fmIncurDebts"></result>
-        <result column="fmIncurOurBankDebts" property="fmIncurOurBankDebts"></result>
-        <result column="fmIncurOtherBankDebts" property="fmIncurOtherBankDebts"></result>
-        <result column="fmIncurLoanPurpose" property="fmIncurLoanPurpose"></result>
-        <result column="fmIncurLoanShap" property="fmIncurLoanShap"></result>
-
-        <result column="finaServiceUsedProduct" property="UsedProduct"></result>
-        <result column="finaServiceIsMoneyNeed" property="isMoneyNeed"></result>
-        <result column="finaServiceMoneyTodo" property="moneyTodo"></result>
-        <result column="finaServiceMoneyCount" property="moneyCount"></result>
-        <result column="finaServiceTimeLimit" property="timeLimit"></result>
-        <result column="finaServiceGuarantee" property="Guarantee"></result>
-        <result column="finaServiceBankCard" property="bankCard"></result>
-        <result column="finaServiceEleBankBusiness" property="bankBusiness"></result>
-        <result column="finaServiceAgentPayBusiness" property="agentPayBusiness"></result>
-        <result column="finaServiceAutoBusiness" property="auto"></result>
-        <result column="finaServicePrivateLoan" property="privateLoan"></result>
-        <result column="finaServicePublicLoan" property="publicLoan"></result>
-        <result column="finaServiceNewRequirement" property="newRequirement"></result>
-
-        <result column="custManagerLoanSitu" property="loanSitu"></result>
-        <result column="custManagerCreditRecord" property="creditRecord"></result>
-        <result column="custManagerOtherBankRecord" property="otherBankRecord"></result>
-        <result column="custManagerHouseToMoney" property="houseToMoney"></result>
+        <result column="ourBankDebts" property="fmIncurOurBankDebts"></result>
+        <result column="otherBankDebts" property="fmIncurOtherBankDebts"></result>
+        <result column="loanPurpose" property="fmIncurLoanPurpose"></result>
+        <result column="loanShap" property="fmIncurLoanShap"></result>
 
     </resultMap>
 
-    <select id="queryAppointInfoByUserId" parameterType="java.lang.Long" resultMap="allColumnInfoList">
+    <select id="queryAppointInfoByUserId" parameterType="java.lang.Long" resultMap="allColumnInfoMap">
         SELECT a.*, b.*, c.*, h.*, z.*, w.*, n.* FROM baseinfo a LEFT JOIN incomeexpenses b ON  b.`recordId` = a.`recordId`
             LEFT JOIN familyassets c ON c.`recordId`=a.`recordId`
             LEFT JOIN financialassets h ON h.`assetsId`=c.`assetsId`
@@ -520,7 +475,7 @@
            businessSite = #{businessSite}, businessProp = #{businessProp}, moneySitu = #{moneySitu},  inputMoney = #{inputMoney},
            ownMoney = #{ownMoney}, yearIncome = #{yearIncome}, annualWageIncome = #{annualWageIncome}, workYears = #{workYears}, workSitu = #{workSitu},
            unitProp = #{unitProp}, unitIndustryId = #{unitIndustryId}, unitIndustryName = #{unitIndustryName}, department = #{department}, unitType = #{unitType},
-           duties = #{duties}, workTitle = #{workTitle}, state = #{status}, userName = #{userName},industry=#{industry}, submitTime = #{submitTime}
+           duties = #{duties}, workTitle = #{workTitle}, state = #{status}, userName = #{userName},industry = #{industry}, submitTime = #{submitTime}
         where recordId = #{recordId}
     </update>
 
@@ -536,7 +491,7 @@
            bankPartnership, profession, businessProj, businessYear,
            businessSite, businessProp, moneySitu,inputMoney,
            ownMoney, yearIncome, annualWageIncome, workYears, workSitu,
-           unitProp, unitIndustryId, unitIndustryName, department,unitType, duties, workTitle, customerName,cerNum, state, userName)
+           unitProp, unitIndustryId, unitIndustryName, department,unitType, duties, workTitle, customerName,cerNum, state, userName, industry, submitTime)
         values(#{village}, #{gender}, #{isFarmer}, #{cerType}, #{cerValidityFrom},#{cerValidityTo}, #{custType}, #{birthday}, #{nationality}, #{isHavePassport}, #{nation}, #{poliLaspect},
            #{address}, #{postcode},#{telephone}, #{mbPhoneNum}, #{areaCode},  #{areaName}, #{highestDegree}, #{highestEdu}, #{health},
            #{bankRelation}, #{liveCondition}, #{maritalStatus}, #{socialSecurity},
@@ -544,7 +499,7 @@
            #{businessSite}, #{businessProp}, #{moneySitu}, #{inputMoney},
            #{ownMoney}, #{yearIncome}, #{annualWageIncome}, #{workYears}, #{workSitu},
            #{unitProp}, #{unitIndustryId}, #{unitIndustryName}, #{department}, #{unitType},
-           #{duties}, #{workTitle}, #{customerName}, #{cerNum}, #{status}, #{userName}), submitTime = #{submitTime}
+           #{duties}, #{workTitle}, #{customerName}, #{cerNum}, #{status}, #{userName}, #{industry},#{submitTime})
     </insert>
      <!--//更新家庭收出-->
     <update id="updateIncomeexpenses" parameterType="com.rcuinfomanager.webservice.model.AllColumnInfo">
@@ -552,6 +507,11 @@
           fmOtherMemberIn = #{fmOtherMemberIn}, fmExpensesProj = #{fmExpensesProj}, fmInOutRatio = #{fmInOutRatio}
         where recordId = #{recordId}
     </update>
+
+    <insert id="saveIncomeexpenses" parameterType="com.rcuinfomanager.webservice.model.AllColumnInfo">
+         insert into incomeexpenses (recordId, fmAllIncome, fmExpenses, incomeSrc, perIncome, fmOtherMemberIn, fmExpensesProj,fmInOutRatio)
+         values (#{recordId},#{fmAllIncome},#{fmExpenses}, #{fmIncomeSrc}, #{fmPerIncome}, #{fmOtherMemberIn},#{fmExpensesProj},#{fmInOutRatio})
+    </insert>
 
     <update id="updateFamilyassets" parameterType="com.rcuinfomanager.webservice.model.AllColumnInfo">
         update familyassets set fmAllAssets = #{fmAllAssets}, mainAssets = #{mainAssets}
@@ -568,9 +528,14 @@
 
     <update id="updateFamilyincurdebts" parameterType="com.rcuinfomanager.webservice.model.AllColumnInfo">
         update familyincurdebts set fmIncurDebts = #{fmIncurDebts}, ourBankDebts = #{fmIncurOurBankDebts},
-         otherBankDebts = #{fmIncurOtherBankDebts}, loanPurpose = #{fmIncurLoanPurpose}, loanShap = #{fmIncurLoanPurpose}
+         otherBankDebts = #{fmIncurOtherBankDebts}, loanPurpose = #{fmIncurLoanPurpose}, loanShap = #{fmIncurLoanShap}
         where recordId = #{recordId}
     </update>
+
+    <insert id="saveFamilyincurdebts" parameterType="com.rcuinfomanager.webservice.model.AllColumnInfo">
+       insert into familyincurdebts (recordId, fmIncurDebts, ourBankDebts, otherBankDebts, loanPurpose, loanShap)
+       values(#{recordId},#{fmIncurDebts},#{fmIncurOurBankDebts},#{fmIncurOtherBankDebts},#{fmIncurLoanPurpose},#{fmIncurLoanShap})
+    </insert>
 
     <update id="updateCustomermanagereva" parameterType="com.rcuinfomanager.webservice.model.AllColumnInfo">
         update customermanagereva set loanSitu = #{custManagerLoanSitu},creditRecord = #{custManagerCreditRecord},
@@ -695,7 +660,7 @@
         SELECT * FROM familymemberinfo WHERE familyMemberName = #{familyMemberName} AND familyMemberCerNum = #{familyMemberCerNum} AND cerNum = #{cerNum}
     </select>
 
-    <select id="queryAllColumnByRecordId" parameterType="java.lang.Long" resultType="com.rcuinfomanager.webservice.model.AllColumnInfo">
+    <select id="queryAllColumnByRecordId" parameterType="java.lang.Long" resultMap="allColumnInfoMap">
         SELECT a.*, b.*, c.*, h.*, z.*, w.*, n.* FROM baseinfo a LEFT JOIN incomeexpenses b ON  b.`recordId` = a.`recordId`
             LEFT JOIN familyassets c ON c.`recordId`=a.`recordId`
             LEFT JOIN financialassets h ON h.`assetsId`=c.`assetsId`

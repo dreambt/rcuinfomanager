@@ -75,7 +75,12 @@ public class BaseInfoService {
         baseInfoDao.updateBaseInfoById(allColumnInfo);
     }
     public void updateIncomeexpenses(AllColumnInfo allColumnInfo){
-        baseInfoDao.updateIncomeexpenses(allColumnInfo);
+        IncomeExpenses incomeExpenses = baseInfoDao.getIncomeExpenses(allColumnInfo.getRecordId());
+        if (incomeExpenses == null) {
+            baseInfoDao.saveIncomeexpenses(allColumnInfo);
+        } else {
+            baseInfoDao.updateIncomeexpenses(allColumnInfo);
+        }
     }
     public void updateFamilyassets(AllColumnInfo allColumnInfo){
         FamilyAssets familyAssets = baseInfoDao.getFamilyAssets(allColumnInfo.getRecordId());
@@ -85,12 +90,19 @@ public class BaseInfoService {
             familyAssets.setMainAssets(allColumnInfo.getMainAssets());
             familyAssets.setFmAllAssets(allColumnInfo.getFmAllAssets());
             baseInfoDao.saveFamilyassets(familyAssets);
+            allColumnInfo.setAssetsId(familyAssets.getAssetsId());
         } else {
+            allColumnInfo.setAssetsId(familyAssets.getAssetsId());
             baseInfoDao.updateFamilyassets(allColumnInfo);
         }
     }
     public void updateFamilyincurdebts(AllColumnInfo allColumnInfo){
-        baseInfoDao.updateFamilyincurdebts(allColumnInfo);
+        FamilyIncurDebts familyIncurDebts = baseInfoDao.getFamilyIncurDebts(allColumnInfo.getRecordId());
+        if (familyIncurDebts == null) {
+            baseInfoDao.saveFamilyincurdebts(allColumnInfo);
+        } else {
+            baseInfoDao.updateFamilyincurdebts(allColumnInfo);
+        }
     }
     public void updateFinancialassets(AllColumnInfo allColumnInfo){
         List<FinancialAssets> financialAssets = financialAssetsDao.getFinancialAssets(allColumnInfo.getRecordId());
@@ -242,10 +254,12 @@ public class BaseInfoService {
                 baseInfoDao.deleteLandInfoByAssetsId(familyAssets.getAssetsId());
                 baseInfoDao.deleteFamilyMemberInfoByRecordId(baseInfo.getRecordId());
             }
-
         } else {
             //save new base info.
             baseInfoDao.saveBaseInfoFromClient(allColumnInfo);
+            baseInfoDao.saveIncomeexpenses(allColumnInfo);
+            baseInfoDao.saveFamilyincurdebts(allColumnInfo);
+            baseInfoDao.saveCustomerManagerEva(allColumnInfo);
         }
 
         List<FamilyMember> familyMembers = allColumnInfo.getFamilyMembers();
@@ -262,6 +276,9 @@ public class BaseInfoService {
             familyAssets.setFmAllAssets(allColumnInfo.getFmAllAssets());
             familyAssets.setMainAssets(allColumnInfo.getMainAssets());
             baseInfoDao.saveFamilyassets(familyAssets);
+            allColumnInfo.setAssetsId(familyAssets.getAssetsId());
+            financialAssetsDao.saveFinancialAssets(allColumnInfo);
+            financeServicesDao.saveFinanceServices(allColumnInfo);
         }
 
         List<CarsInfo> carInfos = allColumnInfo.getCarInfos();

@@ -118,8 +118,9 @@ $(function () {
     $('#appointOkOperate').click(function () {
         var uid =$('#selectUserId').val();
         var recordIds = $('#recordIds').val();
+        var pageNum = $('#currentPage').val();
         if(uid && uid!=''){
-            var url = '/family/saveBatchAppoint/'+recordIds+'/'+uid ;
+            var url = '/family/saveBatchAppoint/'+recordIds+'/'+uid+'/'+pageNum ;
             window.location.href = url;
         }else{
             alert("指定经理不能为空！");
@@ -164,7 +165,8 @@ $(function () {
             $('#checkOkOperate').click(function () {
                 var state = $('#state').val();
                 if(state && state!=''){
-                    var url = '/family/saveBatchChecks/'+recordIds+'/'+state;
+                    var pageNum = $('#currentPage').val();
+                    var url = '/family/saveBatchChecks/'+recordIds+'/'+state+'/'+pageNum;
                     window.location.href = url;
                 }else{
                     alert("未选择验收结果！");

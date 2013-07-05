@@ -60,6 +60,9 @@ public class ExportInfo2VillagerCommittee4Estimation {
             for (int i = 1; i <= baseInfoList.size(); i++) {
                 BaseInfo baseInfo = baseInfoList.get(i-1);
                 HSSFRow row = sheet.getRow(i);
+                if (row == null) {
+                   row = sheet.createRow(i);
+                }
                 HSSFCell cell1 = row.createCell(0);
                 cell1.setCellType(HSSFCell.CELL_TYPE_STRING);
                 cell1.setCellValue(baseInfo.getCustomerName());
@@ -69,6 +72,8 @@ public class ExportInfo2VillagerCommittee4Estimation {
                 HSSFCell cell3 = row.createCell(2);
                 cell3.setCellType(HSSFCell.CELL_TYPE_STRING);
                 cell3.setCellValue(baseInfo.getAddress());
+                HSSFCell cell4 = row.createCell(3);
+                cell4.setCellValue(baseInfo.getSubmitTime());
             }
 
             outputStream = response.getOutputStream();

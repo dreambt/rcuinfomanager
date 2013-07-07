@@ -620,6 +620,7 @@ CREATE TABLE `villagemanagereva` (
   `praised` varchar(10) DEFAULT NULL,
   `supplement` varchar(100) DEFAULT NULL,
   `isImportantObject` varchar(10) DEFAULT NULL,
+  `evaItem` varchar(100) DEFAULT NULL,
   `note1` varchar(200) DEFAULT NULL,
   `note2` varchar(200) DEFAULT NULL,
   `note3` varchar(200) DEFAULT NULL,

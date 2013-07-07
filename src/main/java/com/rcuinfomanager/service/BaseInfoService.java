@@ -380,4 +380,19 @@ public class BaseInfoService {
         baseInfoDao.deleteCustomerManagerEvaByRecordId(recordId);
     }
 
+    public void saveFamilyAssets(FamilyAssets familyAssets) {
+        baseInfoDao.saveFamilyassets(familyAssets);
+    }
+
+    public BaseInfoStat getBaseInfoStat(){
+        return baseInfoDao.getBaseInfoStat();
+    }
+
+    public CommonStat getFamilyAssetsStat() {
+        return baseInfoDao.getFamilyAssetsStat();
+    }
+
+    public CommonStat getVillageManagerEvaStat() {
+        return baseInfoDao.getVillageManagerEvaStat();
+    }
 }

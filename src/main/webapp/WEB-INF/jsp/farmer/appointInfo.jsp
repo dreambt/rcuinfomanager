@@ -4,20 +4,10 @@
 <html>
 <head>
     <title>农户建档现场电子信息采集系统</title>
-    <!-- Bootstrap -->
-    <link href="/asserts/css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <link href="/asserts/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
-    <link href="/asserts/css/doc.css" rel="stylesheet" media="screen">
-    <link href="/asserts/css/style.css" rel="stylesheet" media="screen">
     <script src="/asserts/js/jquery-1.7.2.min.js"></script>
-    <script src="/asserts/js/bootstrap.min.js"></script>
     <script type="text/javascript">
 
         $(function () {
-            var scuccessInfo='${isUserName}';
-            if(scuccessInfo){
-                 alert(scuccessInfo);
-            }
             //确定
             $('#okOperate').click(function () {
                 var id = $('#recordId').val();
@@ -30,19 +20,6 @@
                 }
             });
 
-            //关闭
-            $('#cancelOperate').click(function () {
-                window.top.art.dialog({id: 'assign' }).close();
-            });
-
-            //返回main
-            var success = '${success}';
-            if (success && success != '') {
-                var url = 'farmer/main';
-                window.location.href = url;
-                window.top.art.dialog({id: 'assign'}).close();
-            }
-
         });
     </script>
 </head>
@@ -53,41 +30,37 @@
         <tbody>
             <input type="hidden" id="recordId" name="recordId" value="${appointList.recordId}">
             <tr>
-                <td><span class="label label-info">户主：</span></td>
+                <td>户主：</td>
                 <td>${appointList.customerName}</td>
-                <td><span class="label label-info">电话：</span></td>
+                <td>电话：</td>
                 <td>${appointList.telephone}</td>
             </tr>
-        <tr>
-            <td align="left" colspan="2">
-                <span class="label label-info">指派给：</span>
-            </td>
-        </tr>
-        <tr>
-            <td>&nbsp;</td>
-            <td align="right">
-                <select class="span3" name="userId" id="userId" style="width:202px;">
-                    <option value="">指定客户经理</option>
-                     <core:forEach items="${userNameList}" var="uList">
-                         <option value="${uList.userId}">${uList.userName}</option>
-                     </core:forEach>
-                </select>
-            </td>
-        </tr>
-        <%--<tr>
-            <td align="right" colspan="2">
-                <input type="text" id="customerName" name="customerName" value=""
-                       style="width: 200px;height: 30px; margin-top: 10px;" placeholder="指定客户经理">
-            </td>
-            <td><span class="help-inline">(可选)</span></td>
-        </tr>--%>
+            <tr>
+                <td colspan="4">&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="4">&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    指派给：
+                </td>
+                <td colspan="2">
+                    <select class="span3" name="userId" id="userId" style="width:202px;">
+                        <option value="">指定客户经理</option>
+                        <core:forEach items="${userNameList}" var="uList">
+                            <option value="${uList.userId}">${uList.userName}</option>
+                        </core:forEach>
+                    </select>
+                </td>
+            </tr>
 
         </tbody>
     </table>
 </form>
 <p align="center">
     <a class="btn" href="#" id="okOperate">确定</a>&nbsp;
-    <a class="btn" href="#" id="cancelOperate">取消</a>
+    <a class="btn" href="/family/${appointList.recordId}" id="cancelOperate"  target="_parent">取消</a>
 </p>
 </body>
 </html>

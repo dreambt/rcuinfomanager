@@ -669,4 +669,36 @@
             LEFT JOIN customermanagereva n ON n.`recordId`=a.`recordId`
             WHERE a.`recordId` = #{recordId}
     </select>
+
+    <select id="getBaseInfoStat" resultType="com.rcuinfomanager.model.BaseInfoStat">
+         SELECT
+            COUNT(*) AS totalCount,
+            COUNT( CASE WHEN `state` = 1 THEN 1 ELSE NULL END ) AS `submittedCount`,
+            COUNT( CASE WHEN `state` = 2 THEN 1 ELSE NULL END ) AS `acceptedCount`,
+            COUNT( CASE WHEN `state` = 2 THEN 1 ELSE NULL END ) AS `rejectedCount`
+        FROM baseinfo
+    </select>
+
+    <select id="getFamilyAssetsStat" resultType="com.rcuinfomanager.model.CommonStat">
+        <![CDATA[
+           SELECT
+                COUNT( CASE WHEN `fmAllAssets` < 30000 THEN 1 ELSE NULL END ) AS `item1`,
+                COUNT( CASE WHEN `fmAllAssets` >= 30000 AND `fmAllAssets` < 50000 THEN 1 ELSE NULL END ) AS `item2`,
+                COUNT( CASE WHEN `fmAllAssets` >= 50000 AND `fmAllAssets` < 100000 THEN 1 ELSE NULL END ) AS `item3`,
+                COUNT( CASE WHEN `fmAllAssets` >= 100000 THEN 1 ELSE NULL END ) AS `item4`
+           FROM familyassets
+        ]]>
+
+    </select>
+
+    <select id="getVillageManagerEvaStat" resultType="com.rcuinfomanager.model.CommonStat">
+        <![CDATA[
+            SELECT
+                COUNT( CASE WHEN `evaItem` = '一般（建议3万以下）' THEN 1 ELSE NULL END ) AS `item1`,
+                COUNT( CASE WHEN `evaItem` = '较好（建议3（含）-5万）' THEN 1 ELSE NULL END ) AS `item2`,
+                COUNT( CASE WHEN `evaItem` = '好（建议5（含）-10万）' THEN 1 ELSE NULL END ) AS `item3`,
+                COUNT( CASE WHEN `evaItem` = '很好（建议10万以上）' THEN 1 ELSE NULL END ) AS `item4`
+            FROM villagemanagereva;
+        ]]>
+    </select>
 </mapper>

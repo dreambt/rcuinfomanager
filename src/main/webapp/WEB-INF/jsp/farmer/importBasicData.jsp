@@ -18,17 +18,6 @@
                 $('#myForm').submit();
             });
 
-            //关闭
-            $('#cancelOperate').click(function () {
-                window.top.art.dialog({id: 'import' }).close();
-            });
-            //返回main
-            var success = '${success}';
-            if (success && success != '') {
-                var url = 'farmer/main';
-                window.top.art.dialog({id: 'import'}).close();
-            }
-
         });
 
         function fillFileName() {
@@ -51,7 +40,7 @@
             </td>
         </tr>
     </table>
-    <div class="btn-group" style="margin-left: 100px;">
+    <div class="btn-group" style="margin-left: 50px;">
         <input type="submit" value="导入" class="btn" />
         <button class="btn" id="cancelOperate">取消</button>
     </div>

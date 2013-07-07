@@ -6,20 +6,34 @@
 <head>
 <title>农户建档现场电子信息采集系统</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<!-- Bootstrap -->
-<link href="/asserts/css/bootstrap.min.css" rel="stylesheet" media="screen">
-<link href="/asserts/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+<link id="bs-css" href="/asserts/css/bootstrap-cerulean.css" rel="stylesheet">
+<style type="text/css">
+    body {
+        padding-bottom: 40px;
+    }
+    .sidebar-nav {
+        padding: 9px 0;
+    }
+</style>
+<link href="/asserts/css/bootstrap-responsive.css" rel="stylesheet">
+<link href="/asserts/css/charisma-app.css" rel="stylesheet">
+<link href="/asserts/css/jquery-ui-1.8.21.custom.css" rel="stylesheet">
+<link href="/asserts/css/style.css" rel="stylesheet">
 <!--[if IE 8]><link rel="stylesheet" href="/asserts/css/bootstrap-ie8buttonfix.css"><![endif]-->
-<link href="/asserts/css/doc.css" rel="stylesheet" media="screen">
-<link href="/asserts/css/style.css" rel="stylesheet" media="screen">
-<link id="artDialog-skin" href="/asserts/js/dialog/skins/opera.css" rel="stylesheet" />
+
 <link rel="stylesheet" href="/asserts/css/jquery.fancybox.css"/>
 <script src="/asserts/js/jquery-1.7.2.min.js"></script>
 <script src="/asserts/js/bootstrap.min.js"></script>
-<script src="/asserts/js/dialog/artDialog.js"></script>
-<script src="/asserts/js/jquery.fancybox.js"></script>
 <script src="/asserts/js/modernizr.js"></script>
+<script src="/asserts/js/main.js"></script>
+<script src="/asserts/js/jquery.fancybox.js"></script>
 <script src="/asserts/js/IE8.js"></script>
+<script src="/asserts/js/jquery-ui-1.8.21.custom.min.js"></script>
+<!-- select or dropdown enhancer -->
+<script src="/asserts/js/jquery.chosen.min.js"></script>
+<!-- checkbox, radio, and file input styler -->
+<script src="/asserts/js/jquery.uniform.min.js"></script>
+<script src="/asserts/js/app.js"></script>
 <script type="text/javascript">
 $(function(){
     //左侧菜单样式控制
@@ -169,22 +183,22 @@ $(function(){
     }
 
     $('#selectAreas').change(function(){
-         var me=$(this);
-         var areaId=me.val();
-         var url='/area/'+ areaId;
-         var params={'areaId':areaId};
-         $.post(url,params,function(data){
-             $('#village').children().remove();
-             $('#village').append('<option value="">按村</option>');
-             if (data) {
-             data.forEach(function(item) {
-                 var option=$('<option>');
-                 option.val(item.areaName);
-                 option.text(item.areaName);
-                 $('#village').append(option);
-             });
-             }
-         });
+        var me=$(this);
+        var areaId=me.val();
+        var url='/area/'+ areaId;
+        var params={'areaId':areaId};
+        $.post(url,params,function(data){
+            $('#village').children().remove();
+            $('#village').append('<option value="">按村</option>');
+            if (data) {
+                data.forEach(function(item) {
+                    var option=$('<option>');
+                    option.val(item.areaName);
+                    option.text(item.areaName);
+                    $('#village').append(option);
+                });
+            }
+        });
     });
 
     $('#selectAreas').find("option[value="+ $('#areaCode').val() +"]").attr('selected', 'selected');
@@ -247,7 +261,8 @@ $(document).ready(function() {
 </head>
 <body>
 
-<div class="top">
+<!-- topbar starts -->
+<div class="top" style="padding-bottom: 5px;">
     <div class="row" style="margin-left: 2px;margin-top: -40px;">
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr>
@@ -256,7 +271,7 @@ $(document).ready(function() {
                         <tr>
                             <td width="60%" height="145"><img src="/asserts/img/logo.png" width="500" height="145" /></td>
                             <td width="40%" align="right" valign="bottom" >
-                                <div style="margin-bottom:10px; margin-right:10px; color:#FFFFFF">您好！<span>[<c:out value="${displayUserName}"/>]</span><a href="" style="color:#FFFFFF">&nbsp;[退出]</a>
+                                <div style="margin-bottom:10px; margin-right:10px; color:#FFFFFF">您好！<span>[<c:out value="${displayUserName}"/>]</span><a href="/logout" style="color:#FFFFFF">&nbsp;退出</a>
                                 </div>
                             </td>
                         </tr>
@@ -266,23 +281,39 @@ $(document).ready(function() {
         </table>
     </div>
 </div>
+<!-- topbar ends -->
 <div class="container-fluid">
 
 <div class="row-fluid">
-<div class="span3">
-    <ul class="nav nav-list bs-docs-sidenav affix">
-        <li class="active"><a href="/index"><i class="icon-chevron-right"></i>客户电子信息管理</a></li>
-        <core:if test="${displayUserName == 'admin'}">
-            <li class=""><a href="/clientManager"><i class="icon-chevron-right"></i>客户端管理</a></li>
-            <li class=""><a href="/accountManager"><i class="icon-chevron-right"></i>系统账号管理</a></li>
-            <li class=""><a href="/roleManager"><i class="icon-chevron-right"></i>系统角色管理</a></li>
-            <li class=""><a href="/systemLogManager"><i class="icon-chevron-right"></i>系统日志</a></li>
-        </core:if>
-    </ul>
-</div>
-<div class="span10" style="margin-left: -8.435897%;">
-<br/>
-<input class="input-block-level" type="text" value="客户电子信息管理>编辑" disabled="disabled"  style="color:#0000AA; margin-bottom: 0px; margin-top: -18px;">
+
+<!-- left menu starts -->
+<div class="span2 main-menu-span">
+    <div class="well nav-collapse sidebar-nav">
+        <ul class="nav nav-tabs nav-stacked main-menu">
+            <li><a href="/index"><i class="icon-home"></i><span class="hidden-tablet">客户电子信息管理</span></a></li>
+            <core:if test="${userName == 'admin'}">
+                <li><a href="/photo/home"><i class="icon-wrench"></i><span class="hidden-tablet">客户照片管理</span></a></li>
+                <li><a href="/clientManager"><i class="icon-wrench"></i><span class="hidden-tablet">客户端管理</span></a></li>
+                <li><a href="/accountManager"><i class="icon-user"></i><span class="hidden-tablet">系统账号管理</span></a></li>
+                <%--<li><a href="/roleManager"><i class="icon-user"></i><span class="hidden-tablet">系统角色管理</span></a></li>--%>
+                <li><a href="/systemLogManager"><i class="icon-certificate"></i><span class="hidden-tablet">系统日志</span></a></li>
+            </core:if>
+        </ul>
+    </div><!--/.well -->
+</div><!--/span-->
+<!-- left menu ends -->
+
+<div id="content" class="span10">
+<div>
+<ul class="breadcrumb">
+    <li>
+        <a href="#">客户电子信息管理</a> <span class="divider">/</span>
+    </li>
+    <li>
+        <a href="#">编辑</a>
+    </li>
+</ul>
+
 <table class="table table-condensed">
     <tbody>
     <core:forEach items="${personInfoList}" var="personInfo">
@@ -319,31 +350,30 @@ $(document).ready(function() {
 <div class="farmer_info">
 <!--table-->
 <div class="table-list">
-<table width="100%" border="1" cellspacing="0" width="732px" color="#727f8a;">
+<table class="table table-bordered table-striped table-condensed" width="100%" border="1" cellspacing="0" width="732px">
 <tbody>
-
 <tr>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">姓名</td>
-    <td align="center">
+    <td >姓名</td>
+    <td>
         <input class="input-text-c" type="text" name="customerName" value="${personBasicList.customerName}"
                style="width: 100%;height: 30px;">
     </td>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">性别</td>
-    <td align="left">
+    <td >性别</td>
+    <td>
         <select class="selectpicker" style="width: 95px;" name="gender">
             <option value="0" ${personBasicList.gender==0 ? 'selected' : ''}>女</option>
             <option value="1" ${personBasicList.gender==1 ? 'selected' : ''}>男</option>
         </select>
     </td>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">是否农户</td>
-    <td align="left">
+    <td >是否农户</td>
+    <td>
         <select class="selectpicker" style="width: 95px;" name="isFarmer">
             <option value="0" ${personBasicList.farmer==0 ? 'selected' : ''}>否</option>
             <option value="1" ${personBasicList.farmer==1 ? 'selected' : ''}>是</option>
         </select>
     </td>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">客户类型</td>
-    <td align="center">
+    <td >客户类型</td>
+    <td>
         <select class="selectpicker" style="width: 95px;" name="custType">
             <option value="0" ${personBasicList.customerType=='一般农户' ? 'selected' : ''}>一般农户</option>
             <option value="1" ${personBasicList.customerType=='其他自然人' ? 'selected' : ''}>其他自然人</option>
@@ -352,18 +382,18 @@ $(document).ready(function() {
     </td>
 </tr>
 <tr>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">证件类型</td>
-    <td align="left" colspan="2">
+    <td >证件类型</td>
+    <td colspan="2">
         <select class="selectpicker" style="width: 155px;" name="cerType">
             <option value="身份证" selected="selected">身份证</option>
         </select>
     </td>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">证件号码</td>
-    <td align="left" colspan="2">
+    <td >证件号码</td>
+    <td colspan="2">
         <input class="input-text-c" type="text" name="cerNum" value="${personBasicList.cerNum}"
                style="width: 175px;height: 30px; ">
     </td>
-    <td align="center" colspan="2" rowspan="5">
+    <td colspan="2" rowspan="4">
         <core:choose>
             <core:when test="${empty imgList}">
                 &nbsp;
@@ -372,48 +402,48 @@ $(document).ready(function() {
                 <core:forEach items="${imgList}" var="img" varStatus="idx">
                     <div style="hidden:hidden" img="/img/${img}" class="img"></div>
                 </core:forEach>
-                <img id="photo" src="/img/${imgList[0]}" class="img-rounded photo">
+                <img id="photo" src="/img/${imgList[0]}" class="img-rounded photo" style="max-width: 214px;">
             </core:otherwise>
         </core:choose>
     </td>
 </tr>
 <tr>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">证件有效期</td>
-    <td align="left" colspan="3">
+    <td >证件有效期</td>
+    <td colspan="3">
         <input class="input-text-c" type="text" name="cerValidityFrom" value="${personBasicList.cerValidityFrom}"
                style="width: 125px;height: 30px; "> -
         <input class="input-text-c" type="text" name="cerValidityTo" value="${personBasicList.cerValidityTo}"
                style="width: 125px;height: 30px; ">
     </td>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">出生年月</td>
-    <td align="left">
+    <td >出生年月</td>
+    <td>
         <input class="input-text-c" type="text" name="birthday" value="${personBasicList.birthday}"
                style="width: 95px;height: 30px; ">
     </td>
 </tr>
 <tr>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">国籍</td>
-    <td align="left">
+    <td >国籍</td>
+    <td>
         <select class="selectpicker" style="width: 95px;" name="nationality">
             <option value="中国">中国</option>
         </select>
     </td>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">是否拥有外国护照或居住权</td>
-    <td align="left">
+    <td >是否拥有外国护照或居住权</td>
+    <td>
         <select class="selectpicker" style="width: 95px;" name="isHavePassport">
             <option value="0" ${personBasicList.havePassport==0 ? 'selected' : ''}>否</option>
             <option value="1" ${personBasicList.havePassport==1 ? 'selected' : ''}>是</option>
         </select>
     </td>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">民族</td>
-    <td align="left">
+    <td >民族</td>
+    <td>
         <input class="input-text-c" type="text" name="nation" value="${personBasicList.nation}"
                style="width: 95px;height: 30px;">
     </td>
 </tr>
 <tr>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">政治面貌</td>
-    <td align="left">
+    <td >政治面貌</td>
+    <td>
         <select class="selectpicker" style="width: 95px; " name="poliLaspect">
             <core:choose>
                 <core:when test="${personBasicList.poliLaspect=='群众'}">
@@ -427,8 +457,8 @@ $(document).ready(function() {
             </core:choose>
         </select>
     </td>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">健康状况</td>
-    <td align="left">
+    <td >健康状况</td>
+    <td>
         <select class="selectpicker" style="width: 95px; " name="health">
             <core:choose>
                 <core:when test="${personBasicList.health=='良好'}">
@@ -449,8 +479,8 @@ $(document).ready(function() {
             </core:choose>
         </select>
     </td>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">婚姻状况</td>
-    <td align="left">
+    <td >婚姻状况</td>
+    <td>
         <select class="selectpicker" style="width: 95px; " name="maritalStatus">
             <core:choose>
                 <core:when test="${personBasicList.maritalStatus=='已婚'}">
@@ -466,24 +496,24 @@ $(document).ready(function() {
     </td>
 </tr>
 <tr>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">
+    <td >
         居住地址
     </td>
-    <td align="left" colspan="3">
+    <td colspan="4">
         <input class="input-text-c" type="text" name="address" value="${personBasicList.address}"
-               style="width: 465px;height: 30px; ">
+               style="width: 100%;height: 30px; ">
     </td>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">居住编码</td>
-    <td align="left">
+    <td >居住编码</td>
+    <td colspan="2">
         <input class="input-text-c" type="text" name="postcode" value="${personBasicList.postcode}"
-               style="width: 95px;height: 30px; ">
+               style="width: 100%;height: 30px; ">
     </td>
 </tr>
 <tr>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">
+    <td >
         区域名称
     </td>
-    <td align="left">
+    <td>
         <input type="hidden" value="${personBasicList.areaCode}" id="areaCode">
         <select class="selectpicker" style="width: 95px; " name="areaCode" id="selectAreas">
             <option value="">按乡镇</option>
@@ -492,29 +522,29 @@ $(document).ready(function() {
             </core:forEach>
         </select>
     </td>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">村别</td>
+    <td >村别</td>
     <input type="hidden" value="${personBasicList.village}" id="villageName">
-    <td align="left">
+    <td>
         <select class="selectpicker" style="width: 95px; " name="village" id="village">
             <option value="">按村</option>
         </select>
     </td>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">联系电话</td>
-    <td align="left">
+    <td >联系电话</td>
+    <td>
         <input class="input-text-c" type="text" name="telephone" value="${personBasicList.telephone}"
                style="width: 95px;height: 30px; ">
     </td>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">手机号码</td>
-    <td align="left">
+    <td >手机号码</td>
+    <td>
         <input class="input-text-c" type="text" name="mbPhoneNum" value="${personBasicList.mbPhoneNum}"
                style="width: 95px;height: 30px; ">
     </td>
 </tr>
 <tr>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">
+    <td >
         居住状况
     </td>
-    <td align="left" colspan="2">
+    <td colspan="2">
         <select class="selectpicker" style="width: 155px; " name="liveCondition">
             <core:choose>
                 <core:when test="${personBasicList.liveCondition=='自置'}">
@@ -600,8 +630,8 @@ $(document).ready(function() {
             </core:choose>
         </select>
     </td>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">社会保障情况</td>
-    <td align="left" colspan="4"><%--${personBasicList.socialSecurity}--%>
+    <td >社会保障情况</td>
+    <td colspan="4"><%--${personBasicList.socialSecurity}--%>
         <core:if test="${personBasicList.socialSecurity != ''}">
             <input type="text" value="${personBasicList.socialSecurity}" style="display: none" class="socialSecurity"/>
         </core:if>
@@ -623,10 +653,10 @@ $(document).ready(function() {
     </td>
 </tr>
 <tr>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">
+    <td >
         最高学位
     </td>
-    <td align="left">
+    <td>
         <select class="selectpicker" style="width: 95px; " name="highestDegree">
             <core:choose>
                 <core:when test="${personBasicList.highestDegree=='名誉博士'}">
@@ -680,8 +710,8 @@ $(document).ready(function() {
             </core:choose>
         </select>
     </td>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">最高学历</td>
-    <td align="left">
+    <td >最高学历</td>
+    <td>
         <select class="selectpicker" style="width: 95px; " name="highestEdu">
             <core:choose>
                 <core:when test="${personBasicList.highestEdu=='研究生'}">
@@ -807,24 +837,24 @@ $(document).ready(function() {
             </core:choose>
         </select>
     </td>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">与我行（社）关系</td>
-    <td align="left">
+    <td >与我行（社）关系</td>
+    <td>
         <select class="selectpicker" style="width: 95px; " name="bankRelation">
             <option value="普通客户">普通客户</option>
         </select>
     </td>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">与我行（社）合作关系</td>
-    <td align="left">
+    <td >与我行（社）合作关系</td>
+    <td>
         <select class="selectpicker" style="width: 95px; " name="bankPartnership">
             <option value="一般">一般</option>
         </select>
     </td>
 </tr>
 <tr>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">
+    <td >
         职业
     </td>
-    <td align="left" colspan="7">
+    <td colspan="7">
         <select class="selectpicker" style="width: 495px; " name="profession">
             <core:choose>
                 <core:when test="${personBasicList.profession=='国家机关、党群组织、企业、事业单位负责人'}">
@@ -932,15 +962,15 @@ $(document).ready(function() {
     </td>
 </tr>
 <tr>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">
+    <td >
         个人经营项目
     </td>
-    <td align="left" colspan="3">
+    <td colspan="3">
         <input class="input-text-c" type="text" name="businessProj" value="${personBasicList.businessProj}"
                style="width: 300px;height: 30px; ">
     </td>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">经营年限</td>
-    <td align="left" colspan="3">
+    <td >经营年限</td>
+    <td colspan="3">
         <core:choose>
             <core:when test="${personBasicList.businessYear != '' and personBasicList.businessYear != null}">
                 <input class="input-text-c" type="text" name="businessYear" value="${personBasicList.businessYear}"
@@ -954,24 +984,24 @@ $(document).ready(function() {
     </td>
 </tr>
 <tr>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">
+    <td >
         经营场所
     </td>
-    <td align="left" colspan="3">
+    <td colspan="3">
 
         <input class="input-text-c" type="text" name="businessSite" value="${personBasicList.businessSite}"
                style="width: 300px;height: 30px; ">
     </td>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">从事行业</td> <%--从数据库取--%>
-    <td align="left" colspan="3">
+    <td >从事行业</td> <%--从数据库取--%>
+    <td colspan="3">
         <select class="selectpicker" style="width: 275px; " name="industry">
             <option value="${personBasicList.industry}">${personBasicList.industry}</option>
         </select>
     </td>
 </tr>
 <tr>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">投资经营性质</td>
-    <td align="left">
+    <td >投资经营性质</td>
+    <td>
         <select class="selectpicker" style="width: 95px; " name="businessProp">
             <core:choose>
                 <core:when test="${personBasicList.businessProp=='个体工商户'}">
@@ -1001,8 +1031,8 @@ $(document).ready(function() {
             </core:choose>
         </select>
     </td>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">投资资金情况</td>
-    <td align="left">
+    <td >投资资金情况</td>
+    <td>
         <select class="selectpicker" style="width: 95px; " name="moneySitu">
             <core:choose>
                 <core:when test="${personBasicList.moneySitu=='独自投入'}">
@@ -1032,8 +1062,8 @@ $(document).ready(function() {
             </core:choose>
         </select>
     </td>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">投入金额</td>
-    <td align="left">
+    <td >投入金额</td>
+    <td>
         <select class="selectpicker" style="width: 95px; " name="inputMoney">
             <core:choose>
                 <core:when test="${personBasicList.inputMoney=='10万元以内'}">
@@ -1096,8 +1126,8 @@ $(document).ready(function() {
             </core:choose>
         </select>
     </td>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">自有资金情况</td>
-    <td align="left">
+    <td >自有资金情况</td>
+    <td>
 
         <select class="selectpicker" style="width: 95px; " name="ownMoney">
             <core:choose>
@@ -1163,29 +1193,72 @@ $(document).ready(function() {
     </td>
 </tr>
 <tr>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823"> 年收益情况</td>
-    <td align="left" colspan="7">
+    <td > 年收益情况</td>
+    <td colspan="7">
         <select class="selectpicker" style="width: 595px; " name="yearIncome">
-            <option value=""></option>
-            <option value="10万元以内" ${personBasicList.yearIncome=='10万元以内' ? 'selected' : ''} >10万元以内</option>
-            <option value="10-50万元" ${personBasicList.yearIncome=='10-50万元' ? 'selected' : ''} >10-50万元</option>
-            <option value="50-100万元" ${personBasicList.yearIncome=='50-100万元' ? 'selected' : ''} >50-100万元</option>
-            <option value="100-300万元" ${personBasicList.yearIncome=='100-300万元' ? 'selected' : ''} >100-300万元</option>
-            <option value="300-1000万元" ${personBasicList.yearIncome=='300-1000万元' ? 'selected' : ''} >300-1000万元</option>
-            <option value="1000万元以上" ${personBasicList.yearIncome=='1000万元以上' ? 'selected' : ''} >1000万元以上</option>
+            <core:choose>
+                <core:when test="${personBasicList.yearIncome=='10万元以内'}">
+                    <option value="${personBasicList.yearIncome}" selected="selected">10万元以内</option>
+                    <option value="10-50万元">10-50万元</option>
+                    <option value="50-100万元">50-100万元</option>
+                    <option value="100-300万元">100-300万元</option>
+                    <option value="300-1000万元">300-1000万元</option>
+                    <option value="1000万元以上">1000万元以上</option>
+                </core:when>
+                <core:when test="${personBasicList.yearIncome=='10-50万元'}">
+                    <option value="10万元以内">10万元以内</option>
+                    <option value="${personBasicList.yearIncome}" selected="selected">10-50万元</option>
+                    <option value="50-100万元">50-100万元</option>
+                    <option value="100-300万元">100-300万元</option>
+                    <option value="300-1000万元">300-1000万元</option>
+                    <option value="1000万元以上">1000万元以上</option>
+                </core:when>
+                <core:when test="${personBasicList.yearIncome=='50-100万元'}">
+                    <option value="10万元以内">10万元以内</option>
+                    <option value="10-50万元">10-50万元</option>
+                    <option value="${personBasicList.yearIncome}" selected="selected">50-100万元</option>
+                    <option value="100-300万元">100-300万元</option>
+                    <option value="300-1000万元">300-1000万元</option>
+                    <option value="1000万元以上">1000万元以上</option>
+                </core:when>
+                <core:when test="${personBasicList.yearIncome=='100-300万元'}">
+                    <option value="10万元以内">10万元以内</option>
+                    <option value="10-50万元">10-50万元</option>
+                    <option value="50-100万元">50-100万元</option>
+                    <option value="${personBasicList.yearIncome}" selected="selected">100-300万元</option>
+                    <option value="300-1000万元">300-1000万元</option>
+                    <option value="1000万元以上">1000万元以上</option>
+                </core:when>
+                <core:when test="${personBasicList.yearIncome=='300-1000万元'}">
+                    <option value="10万元以内">10万元以内</option>
+                    <option value="10-50万元">10-50万元</option>
+                    <option value="50-100万元">50-100万元</option>
+                    <option value="100-300万元">100-300万元</option>
+                    <option value="${personBasicList.yearIncome}" selected="selected">300-1000万元</option>
+                    <option value="1000万元以上">1000万元以上</option>
+                </core:when>
+                <core:otherwise>
+                    <option value="10万元以内">10万元以内</option>
+                    <option value="10-50万元">10-50万元</option>
+                    <option value="50-100万元">50-100万元</option>
+                    <option value="100-300万元">100-300万元</option>
+                    <option value="300-1000万元">300-1000万元</option>
+                    <option value="${personBasicList.yearIncome}" selected="selected">1000万元以上</option>
+                </core:otherwise>
+            </core:choose>
         </select>
     </td>
 </tr>
 <tr>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">工作情况</td>
-    <td align="left" colspan="7">
+    <td >工作情况</td>
+    <td colspan="7">
         <input class="input-text-c" type="text" name="workSitu" value="${personBasicList.workSitu}"
                style="width: 595px;height: 30px; ">
     </td>
 </tr>
 <tr>
-<td align="center" bgcolor="#b4d8ed" style="color:#161823">单位性质</td>
-<td align="left">
+<td >单位性质</td>
+<td>
 <select class="selectpicker" style="width: 255px; " name="unitProp">
 <core:choose>
 <core:when test="${personBasicList.unitProp=='党政机关'}">
@@ -1415,8 +1488,8 @@ $(document).ready(function() {
 </core:choose>
 </select>
 </td>
-<td align="center" bgcolor="#b4d8ed" style="color:#161823">单位所属行业</td>
-<td align="left" colspan="6">
+<td >单位所属行业</td>
+<td colspan="6">
     <input type="hidden" id="industry" value="${personBasicList.unitIndustryId}">
     <select id="industryLevel1" name="industryLevel1" style="width: 130px; ">
         <core:forEach items="${industryInfoList}" var="industry">
@@ -1435,13 +1508,13 @@ $(document).ready(function() {
 </td>
 </tr>
 <tr>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">任职部门</td>
-    <td align="left" colspan="3">
+    <td >任职部门</td>
+    <td colspan="3">
         <input class="input-text-c" type="text" name="department" value="${personBasicList.department}"
                style="width: 255px;height: 30px; ">
     </td>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">工作单位类别</td>
-    <td align="left" colspan="3">
+    <td >工作单位类别</td>
+    <td colspan="3">
         <select class="selectpicker" style="width: 255px; " name="unitType">
             <core:choose>
                 <core:when test="${personBasicList.unitType=='国家机关、团体、事业单位等'}">
@@ -1497,8 +1570,8 @@ $(document).ready(function() {
     </td>
 </tr>
 <tr>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">职务</td>
-    <td align="left">
+    <td >职务</td>
+    <td>
         <select class="selectpicker" style="width: 95px; " name="duties">
             <core:choose>
                 <core:when test="${personBasicList.duties=='高级领导'}">
@@ -1539,8 +1612,8 @@ $(document).ready(function() {
             </core:choose>
         </select>
     </td>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">年工资收入（万元）</td>
-    <td align="left">
+    <td >年工资收入（万元）</td>
+    <td>
         <select class="selectpicker" style="width: 95px; " name="annualWageIncome">
             <core:choose>
                 <core:when test="${personBasicList.annualWageIncome=='3万元以内'}">
@@ -1570,16 +1643,30 @@ $(document).ready(function() {
             </core:choose>
         </select>
     </td>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">工作年限</td>
-    <td align="left">
+    <td >工作年限</td>
+    <td>
         <select class="selectpicker" style="width: 95px; " name="workYears">
-            <option value="5年(含)以上" ${personBasicList.workYears=='5年(含)以上' ? 'selected' : ''}>5年(含)以上</option>
-            <option value="3(含)-5年" ${personBasicList.workYears=='3(含)-5年' ? 'selected' : ''}>3(含)-5年</option>
-            <option value="3年以内" ${personBasicList.workYears=='3年以内' ? 'selected' : ''}>3年以内</option>
+            <core:choose>
+                <core:when test="${personBasicList.workYears=='5年(含)以上'}">
+                    <option value="${personBasicList.workYears}" selected="selected">5年(含)以上</option>
+                    <option value="3(含)-5年">3(含)-5年</option>
+                    <option value="3年以内">3年以内</option>
+                </core:when>
+                <core:when test="${personBasicList.workYears=='3(含)-5年'}">
+                    <option value="5年(含)以上">5年(含)以上</option>
+                    <option value="${personBasicList.workYears}" selected="selected">3(含)-5年</option>
+                    <option value="3年以内">3年以内</option>
+                </core:when>
+                <core:otherwise>
+                    <option value="5年(含)以上">5年(含)以上</option>
+                    <option value="3(含)-5年">3(含)-5年</option>
+                    <option value="${personBasicList.workYears}" selected="selected">3年以内</option>
+                </core:otherwise>
+            </core:choose>
         </select>
     </td>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">职称</td>
-    <td align="left">
+    <td >职称</td>
+    <td>
         <select class="selectpicker" style="width: 95px; " name="workTitle">
             <core:choose>
                 <core:when test="${personBasicList.workTitle=='高级'}">
@@ -1623,15 +1710,15 @@ $(document).ready(function() {
 </tr>
 
 <tr>
-    <td align="center" colspan="8" style="font-size:22px">
+    <td colspan="8" style="font-size:22px">
         家庭收支情况
     </td>
 </tr>
 <tr>
-    <td align="center" colspan="2" bgcolor="#b4d8ed" style="color:#161823">
+    <td colspan="2" >
         家庭年总收入（万元）
     </td>
-    <td align="left" colspan="2">
+    <td colspan="2">
 
         <core:choose>
             <core:when test="${personIncomeExpenses.fmAllIncome != '' and personIncomeExpenses.fmAllIncome != null}">
@@ -1643,8 +1730,8 @@ $(document).ready(function() {
             </core:otherwise>
         </core:choose>
     </td>
-    <td align="center" colspan="2" bgcolor="#b4d8ed" style="color:#161823">家庭支出（万元）</td>
-    <td align="left" colspan="2">
+    <td colspan="2" >家庭支出（万元）</td>
+    <td colspan="2">
         <core:choose>
             <core:when test="${personIncomeExpenses.fmExpenses != '' and personIncomeExpenses.fmExpenses != null}">
                 <input class="input-text-c" type="text" name="fmExpenses" value="${personIncomeExpenses.fmExpenses}"
@@ -1657,19 +1744,19 @@ $(document).ready(function() {
     </td>
 </tr>
 <tr>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">
+    <td >
         收入来源
     </td>
-    <td align="left" colspan="7">
+    <td colspan="7">
         <input class="input-text-c" type="text" name="fmIncomeSrc" value="${personIncomeExpenses.incomeSrc}"
                style="width: 595px;height: 30px; ">
     </td>
 </tr>
 <tr>
-    <td align="center" colspan="2" bgcolor="#b4d8ed" style="color:#161823">
+    <td colspan="2" >
         其中：个人年收入（万元）
     </td>
-    <td align="left" colspan="2">
+    <td colspan="2">
         <core:choose>
             <core:when test="${personIncomeExpenses.perIncome != '' and personIncomeExpenses.perIncome != null}">
                 <input class="input-text-c" type="text" name="fmPerIncome" value="${personIncomeExpenses.perIncome}"
@@ -1680,8 +1767,8 @@ $(document).ready(function() {
             </core:otherwise>
         </core:choose>
     </td>
-    <td align="center" colspan="2" bgcolor="#b4d8ed" style="color:#161823">家庭其他成员年收入（万元）</td>
-    <td align="left" colspan="2">
+    <td colspan="2" >家庭其他成员年收入（万元）</td>
+    <td colspan="2">
         <core:choose>
             <core:when test="${personIncomeExpenses.fmOtherMemberIn != '' and personIncomeExpenses.fmOtherMemberIn != null}">
                 <input class="input-text-c" type="text" name="fmOtherMemberIn" value="${personIncomeExpenses.fmOtherMemberIn}"
@@ -1694,8 +1781,8 @@ $(document).ready(function() {
     </td>
 </tr>
 <tr>
-    <td align="center"  bgcolor="#b4d8ed" style="color:#161823">家庭主要支出项目</td>
-    <td align="left" colspan="3">
+    <td  >家庭主要支出项目</td>
+    <td colspan="3">
         <select class="selectpicker" style="width: 255px; " name="fmExpensesProj">
             <core:choose>
                 <core:when test="${personIncomeExpenses.fmExpensesProj=='生活性支出'}">
@@ -1725,8 +1812,8 @@ $(document).ready(function() {
             </core:choose>
         </select>
     </td>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">家庭收入能否应付支出</td>
-    <td align="left" colspan="3">
+    <td >家庭收入能否应付支出</td>
+    <td colspan="3">
         <select class="selectpicker" style="width: 255px; " name="fmInOutRatio">
             <core:choose>
                 <core:when test="${personIncomeExpenses.fmInOutRatio=='能、绰绰有余'}">
@@ -1758,19 +1845,19 @@ $(document).ready(function() {
     </td>
 </tr>
 <tr>
-    <td align="center" colspan="8" style="font-size:22px">
+    <td colspan="8" style="font-size:22px">
         家庭资产情况
-        <a class="iframe btn btn-info" id="addHouseOpera" href="/family/addHouse/${recordId}/${personFamilyAssets.assetsId}">增加房产</a>
-        <a class="btn btn-info" id="addlandOpera" href="/family/addLand/${recordId}/${personFamilyAssets.assetsId}">增加土地</a>
-        <a class="btn btn-info" id="addCarOpera" href="/family/addCar/${recordId}/${personFamilyAssets.assetsId}">增加车辆</a>
+        <a class="btn btn-info" id="addHouseOpera" href="/family/addHouse/${recordId}/?assertsId=${personFamilyAssets.assetsId}">增加房产</a>
+        <a class="btn btn-info" id="addlandOpera" href="/family/addLand/${recordId}/?assertsId=${personFamilyAssets.assetsId}">增加土地</a>
+        <a class="btn btn-info" id="addCarOpera" href="/family/addCar/${recordId}/?assertsId=${personFamilyAssets.assetsId}">增加车辆</a>
     </td>
 </tr>
 <tr>
     <core:if test="${personFamilyAssets.assetsId != '' and personFamilyAssets.assetsId != null}">
         <input type="hidden" id="assetsId" name="assetsId" value="${personFamilyAssets.assetsId}"/>
     </core:if>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">总资产（万元）</td>
-    <td align="left">
+    <td >总资产（万元）</td>
+    <td>
         <core:choose>
             <core:when test="${personFamilyAssets.fmAllAssets != '' and personFamilyAssets.fmAllAssets != null}">
                 <input class="input-text-c" type="text" name="fmAllAssets" value="${personFamilyAssets.fmAllAssets}"
@@ -1782,8 +1869,8 @@ $(document).ready(function() {
             </core:otherwise>
         </core:choose>
     </td>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">主要资产</td>
-    <td align="left" colspan="5"><%--${personFamilyAssets.mainAssets}--%>
+    <td >主要资产</td>
+    <td colspan="5"><%--${personFamilyAssets.mainAssets}--%>
         <core:forEach items="${personFamilyAssets.mainAssets}" var="mainAssets">
             <input type="text" value="${mainAssets}" style="display: none" class="mainAssets"/>
         </core:forEach>
@@ -1811,13 +1898,13 @@ $(document).ready(function() {
 <core:forEach items="${personHousePropertyInfoList}" var="personHousePropertyInfo" varStatus="idx">
 <input name="houseInfos[${idx.index}].id" value="${personHousePropertyInfo.id}" type="hidden" />
 <tr>
-    <td align="left" colspan="8" style="font-size:18px">
+    <td colspan="8" style="font-size:18px">
         房产：<core:out value="${idx.index+1}"></core:out>
     </td>
 </tr>
 <tr id="defaultItem">
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">性质</td>
-    <td align="left">
+    <td >性质</td>
+    <td>
         <select class="selectpicker" style="width: 95px; " name="houseInfos[${idx.index}].nature">
             <core:choose>
                 <core:when test="${personHousePropertyInfo.nature=='商品房'}">
@@ -1831,8 +1918,8 @@ $(document).ready(function() {
             </core:choose>
         </select>
     </td>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">用途</td>
-    <td align="left">
+    <td >用途</td>
+    <td>
         <select class="selectpicker" style="width: 95px; " name="houseInfos[${idx.index}].purpose">
             <core:choose>
                 <core:when test="${personHousePropertyInfo.purpose=='商用楼'}">
@@ -1862,8 +1949,8 @@ $(document).ready(function() {
             </core:choose>
         </select>
     </td>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">所在位置</td>
-    <td align="left">
+    <td >所在位置</td>
+    <td>
         <select class="selectpicker" style="width: 95px; " name="houseInfos[${idx.index}].site">
             <core:choose>
                 <core:when test="${personHousePropertyInfo.site=='本市市区'}">
@@ -1904,8 +1991,8 @@ $(document).ready(function() {
             </core:choose>
         </select>
     </td>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">房屋结构</td>
-    <td align="left">
+    <td >房屋结构</td>
+    <td>
         <select class="selectpicker" style="width: 95px; " name="houseInfos[${idx.index}].structure">
             <core:choose>
                 <core:when test="${personHousePropertyInfo.structure=='钢混'}">
@@ -1948,13 +2035,13 @@ $(document).ready(function() {
     </td>
 </tr>
 <tr>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">层数</td>
-    <td align="left">
+    <td >层数</td>
+    <td>
         <input class="input-text-c" type="text" name="houseInfos[${idx.index}].floorNum" value="${personHousePropertyInfo.floorNum}"
                style="width: 95px;height: 30px; ">
     </td>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">使用情况</td>
-    <td align="left">
+    <td >使用情况</td>
+    <td>
         <select class="selectpicker" style="width: 95px; " name="houseInfos[${idx.index}].usedSitu">
             <core:choose>
                 <core:when test="${personHousePropertyInfo.usedSitu=='自住'}">
@@ -1975,8 +2062,8 @@ $(document).ready(function() {
             </core:choose>
         </select>
     </td>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">建筑面积</td>
-    <td align="left">
+    <td >建筑面积</td>
+    <td>
         <select class="selectpicker" style="width: 95px; " name="houseInfos[${idx.index}].houseArea">
             <core:choose>
                 <core:when test="${personHousePropertyInfo.houseArea=='100㎡内'}">
@@ -2006,8 +2093,8 @@ $(document).ready(function() {
             </core:choose>
         </select>
     </td>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">房产价值</td>
-    <td align="left">
+    <td >房产价值</td>
+    <td>
         <select class="selectpicker" style="width: 95px; " name="houseInfos[${idx.index}].houseWorth">
             <core:choose>
                 <core:when test="${personHousePropertyInfo.houseWorth=='10万以内'}">
@@ -2050,8 +2137,8 @@ $(document).ready(function() {
     </td>
 </tr>
 <tr>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">是否按揭</td>
-    <td align="left">
+    <td >是否按揭</td>
+    <td>
         <select class="selectpicker" style="width: 95px; " name="houseInfos[${idx.index}].installment">
             <core:choose>
                 <core:when test="${personHousePropertyInfo.installment=='1'}">
@@ -2065,8 +2152,8 @@ $(document).ready(function() {
             </core:choose>
         </select>
     </td>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">是否办证</td>
-    <td align="left">
+    <td >是否办证</td>
+    <td>
         <select class="selectpicker" style="width: 95px; " name="houseInfos[${idx.index}].hasCredentials">
             <core:choose>
                 <core:when test="${personHousePropertyInfo.hasCredentials=='双证齐全'}">
@@ -2087,8 +2174,8 @@ $(document).ready(function() {
             </core:choose>
         </select>
     </td>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">备注</td>
-    <td align="left" colspan="3">
+    <td >备注</td>
+    <td colspan="3">
         <input class="input-text-c" type="text" name="houseInfos[${idx.index}].note1" value="${personHousePropertyInfo.note1}"
                style="width: 280px;height: 30px; ">
     </td>
@@ -2099,13 +2186,13 @@ $(document).ready(function() {
 <core:forEach items="${personLandInfoList}" var="personLandInfo" varStatus="idx">
     <input name="landInfos[${idx.index}].id" value="${personLandInfo.id}" type="hidden" />
     <tr>
-        <td align="left" colspan="8" style="font-size:18px">
+        <td colspan="8" style="font-size:18px">
             土地：<core:out value="${idx.index+1}"></core:out>
         </td>
     </tr>
     <tr>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">土地面积</td>
-        <td align="left">
+        <td >土地面积</td>
+        <td>
             <select class="selectpicker" style="width: 95px; " name="landInfos[${idx.index}].area">
                 <core:choose>
                     <core:when test="${personLandInfo.area=='100㎡内'}">
@@ -2135,13 +2222,13 @@ $(document).ready(function() {
                 </core:choose>
             </select>
         </td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">土地价值</td>
-        <td align="left">
+        <td >土地价值</td>
+        <td>
             <input class="input-text-c" type="text" name="landInfos[${idx.index}].worth" value="${personLandInfo.worth}"
                    style="width: 95px;height: 30px; ">
         </td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">土地性质</td>
-        <td align="left">
+        <td >土地性质</td>
+        <td>
             <select class="selectpicker" style="width: 95px; " name="landInfos[${idx.index}].property">
                 <core:choose>
                     <core:when test="${personLandInfo.property=='国有出让'}">
@@ -2171,8 +2258,8 @@ $(document).ready(function() {
                 </core:choose>
             </select>
         </td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">土地类型</td>
-        <td align="left">
+        <td >土地类型</td>
+        <td>
             <select class="selectpicker" style="width: 95px; " name="landInfos[${idx.index}].type">
                 <core:choose>
                     <core:when test="${personLandInfo.type=='商业地'}">
@@ -2215,8 +2302,8 @@ $(document).ready(function() {
         </td>
     </tr>
     <tr>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">土地使用情况</td>
-        <td align="left">
+        <td >土地使用情况</td>
+        <td>
             <select class="selectpicker" style="width: 95px; " name="landInfos[${idx.index}].usedSitu">
                 <core:choose>
                     <core:when test="${personLandInfo.usedSitu=='自用'}">
@@ -2246,8 +2333,8 @@ $(document).ready(function() {
                 </core:choose>
             </select>
         </td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">土地款是否结清</td>
-        <td align="left" colspan="5">
+        <td >土地款是否结清</td>
+        <td colspan="5">
             <select class="selectpicker" style="width: 465px; " name="landInfos[${idx.index}].moneyClear">
                 <core:choose>
                     <core:when test="${personLandInfo.moneyClear=='1'}">
@@ -2268,13 +2355,13 @@ $(document).ready(function() {
 <core:forEach items="${personCarsInfoList}" var="personCarsInfo" varStatus="idx">
     <input name="carInfos[${idx.index}].id" value="${personCarsInfo.id}" type="hidden" />
     <tr>
-        <td align="left" colspan="8" style="font-size:18px">
+        <td colspan="8" style="font-size:18px">
             车辆：<core:out value="${idx.index+1}"></core:out>
         </td>
     </tr>
     <tr>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">情况</td>
-        <td align="left">
+        <td >情况</td>
+        <td>
             <select class="selectpicker" style="width: 95px; " name="carInfos[${idx.index}].carsInfo">
                 <core:choose>
                     <core:when test="${personCarsInfo.carsInfo=='轿车'}">
@@ -2288,8 +2375,8 @@ $(document).ready(function() {
                 </core:choose>
             </select>
         </td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">车辆价值</td>
-        <td align="left">
+        <td >车辆价值</td>
+        <td>
             <select class="selectpicker" style="width: 95px; " name="carInfos[${idx.index}].carsWorth">
                 <core:choose>
                     <core:when test="${personCarsInfo.carsWorth=='10万以内'}">
@@ -2319,8 +2406,8 @@ $(document).ready(function() {
                 </core:choose>
             </select>
         </td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">是否按揭</td>
-        <td align="left">
+        <td >是否按揭</td>
+        <td>
             <select class="selectpicker" style="width: 95px; " name="carInfos[${idx.index}].carsIsInstallment">
                 <core:choose>
                     <core:when test="${personCarsInfo.carsIsInstallment=='1'}">
@@ -2334,8 +2421,8 @@ $(document).ready(function() {
                 </core:choose>
             </select>
         </td>
-        <td align="center" bgcolor="#b4d8ed" style="color:#161823">使用情况</td>
-        <td align="left">
+        <td >使用情况</td>
+        <td>
             <select class="selectpicker" style="width: 95px; " name="carInfos[${idx.index}].carsUsingInfo">
                 <core:choose>
                     <core:when test="${personCarsInfo.carsUsingInfo=='营运'}">
@@ -2380,13 +2467,13 @@ $(document).ready(function() {
 </core:forEach>
 
 <tr>
-    <td align="left" colspan="8" style="font-size:18px">
+    <td colspan="8" style="font-size:18px">
         使用金融资产情况
     </td>
 </tr>
 <tr>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">情况</td>
-    <td align="left" colspan="3"><%--${personFinancialAssets.financialInfo}--%>
+    <td >情况</td>
+    <td colspan="3"><%--${personFinancialAssets.financialInfo}--%>
         <core:forEach items="${personFinancialAssets.financialInfo}" var="financialInfo">
             <input type="text" value="${financialInfo}" style="display: none" class="financialInfo"/>
         </core:forEach>
@@ -2412,39 +2499,101 @@ $(document).ready(function() {
             <input type="checkbox" class="其他" value="其他" name="financialInfo"> 其他
         </label>
     </td>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">我社存款</td>
-    <td align="left">
+    <td >我社存款</td>
+    <td>
         <select class="selectpicker" style="width: 95px; " name="financialDepositOurBank">
-            <option value=""></option>
-            <option value="3万元内" ${personFinancialAssets.depositOurBank=='3万元内' ? 'selected' : ''}>3万元内</option>
-            <option value="3-10万元内" ${personFinancialAssets.depositOurBank=='3-10万元内' ? 'selected' : ''}>3-10万元内</option>
-            <option value="10-30万元内" ${personFinancialAssets.depositOurBank=='10-30万元内' ? 'selected' : ''}>10-30万元内</option>
-            <option value="30-100万元内" ${personFinancialAssets.depositOurBank=='30-100万元内' ? 'selected' : ''}>30-100万元内</option>
-            <option value="100万元以上" ${personFinancialAssets.depositOurBank=='100万元以上' ? 'selected' : ''}>100万元以上</option>
+            <core:choose>
+                <core:when test="${personFinancialAssets.depositOurBank=='3万元内'}">
+                    <option value="${personFinancialAssets.depositOurBank}" selected="selected">3万元内</option>
+                    <option value="3-10万元内">3-10万元内</option>
+                    <option value="10-30万元内">10-30万元内</option>
+                    <option value="30-100万元内">30-100万元内</option>
+                    <option value="100万元以上">100万元以上</option>
+                </core:when>
+                <core:when test="${personFinancialAssets.depositOurBank=='3-10万元内'}">
+                    <option value="3万元内">3万元内</option>
+                    <option value="${personFinancialAssets.depositOurBank}" selected="selected">3-10万元内</option>
+                    <option value="10-30万元内">10-30万元内</option>
+                    <option value="30-100万元内">30-100万元内</option>
+                    <option value="100万元以上">100万元以上</option>
+                </core:when>
+                <core:when test="${personFinancialAssets.depositOurBank=='10-30万元内'}">
+                    <option value="3万元内">3万元内</option>
+                    <option value="3-10万元内">3-10万元内</option>
+                    <option value="${personFinancialAssets.depositOurBank}" selected="selected">10-30万元内</option>
+                    <option value="30-100万元内">30-100万元内</option>
+                    <option value="100万元以上">100万元以上</option>
+                </core:when>
+                <core:when test="${personFinancialAssets.depositOurBank=='30-100万元内'}">
+                    <option value="3万元内">3万元内</option>
+                    <option value="3-10万元内">3-10万元内</option>
+                    <option value="10-30万元内">10-30万元内</option>
+                    <option value="${personFinancialAssets.depositOurBank}" selected="selected">30-100万元内</option>
+                    <option value="100万元以上">100万元以上</option>
+                </core:when>
+                <core:otherwise>
+                    <option value="10万以内">10万以内</option>
+                    <option value="10-30万">10-30万</option>
+                    <option value="30-60万">30-60万</option>
+                    <option value="60-100万">60-100万</option>
+                    <option value="${personFinancialAssets.depositOurBank}" selected="selected">100万以上</option>
+                </core:otherwise>
+            </core:choose>
         </select>
     </td>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">他行存款</td>
-    <td align="left">
+    <td >他行存款</td>
+    <td>
         <select class="selectpicker" style="width: 95px; " name="financialDepositOtherBank">
-            <option value=""></option>
-            <option value="3万元内" ${personFinancialAssets.depositOtherBank=='3万元内' ? 'selected' : ''}>3万元内</option>
-            <option value="3-10万元内" ${personFinancialAssets.depositOtherBank=='3-10万元内' ? 'selected' : ''}>3-10万元内</option>
-            <option value="10-30万元内" ${personFinancialAssets.depositOtherBank=='10-30万元内' ? 'selected' : ''}>10-30万元内</option>
-            <option value="30-100万元内" ${personFinancialAssets.depositOtherBank=='30-100万元内' ? 'selected' : ''}>30-100万元内</option>
-            <option value="100万元以上" ${personFinancialAssets.depositOtherBank=='100万元以上' ? 'selected' : ''}>100万元以上</option>
+            <core:choose>
+                <core:when test="${personFinancialAssets.depositOtherBank=='3万元内'}">
+                    <option value="${personFinancialAssets.depositOtherBank}" selected="selected">3万元内</option>
+                    <option value="3-10万元内">3-10万元内</option>
+                    <option value="10-30万元内">10-30万元内</option>
+                    <option value="30-100万元内">30-100万元内</option>
+                    <option value="100万元以上">100万元以上</option>
+                </core:when>
+                <core:when test="${personFinancialAssets.depositOtherBank=='3-10万元内'}">
+                    <option value="3万元内">3万元内</option>
+                    <option value="${personFinancialAssets.depositOtherBank}" selected="selected">3-10万元内</option>
+                    <option value="10-30万元内">10-30万元内</option>
+                    <option value="30-100万元内">30-100万元内</option>
+                    <option value="100万元以上">100万元以上</option>
+                </core:when>
+                <core:when test="${personFinancialAssets.depositOtherBank=='10-30万元内'}">
+                    <option value="3万元内">3万元内</option>
+                    <option value="3-10万元内">3-10万元内</option>
+                    <option value="${personFinancialAssets.depositOtherBank}" selected="selected">10-30万元内</option>
+                    <option value="30-100万元内">30-100万元内</option>
+                    <option value="100万元以上">100万元以上</option>
+                </core:when>
+                <core:when test="${personFinancialAssets.depositOtherBank=='30-100万元内'}">
+                    <option value="3万元内">3万元内</option>
+                    <option value="3-10万元内">3-10万元内</option>
+                    <option value="10-30万元内">10-30万元内</option>
+                    <option value="${personFinancialAssets.depositOtherBank}" selected="selected">30-100万元内</option>
+                    <option value="100万元以上">100万元以上</option>
+                </core:when>
+                <core:otherwise>
+                    <option value="10万以内">10万以内</option>
+                    <option value="10-30万">10-30万</option>
+                    <option value="30-60万">30-60万</option>
+                    <option value="60-100万">60-100万</option>
+                    <option value="${personFinancialAssets.depositOtherBank}" selected="selected">100万以上</option>
+                </core:otherwise>
+            </core:choose>
         </select>
     </td>
 </tr>
 <tr>
-    <td align="center" colspan="8" style="font-size:22px">
+    <td colspan="8" style="font-size:22px">
         家庭负债情况
     </td>
 </tr>
 <tr>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">
+    <td>
         家庭负债总额（万元）
     </td>
-    <td align="left">
+    <td>
         <core:choose>
             <core:when test="${personFamilyIncurDebts.fmIncurDebts != '' and personFamilyIncurDebts.fmIncurDebts != null}">
                 <input class="input-text-c" type="text" name="fmIncurDebts" value="${personFamilyIncurDebts.fmIncurDebts}"
@@ -2455,8 +2604,8 @@ $(document).ready(function() {
             </core:otherwise>
         </core:choose>
     </td>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">本行负债（万元）</td>
-    <td align="left" colspan="2">
+    <td >本行负债（万元）</td>
+    <td colspan="2">
         <core:choose>
             <core:when test="${personFamilyIncurDebts.ourBankDebts != '' and personFamilyIncurDebts.ourBankDebts != null}">
                 <input class="input-text-c" type="text" name="fmIncurOurBankDebts" value="${personFamilyIncurDebts.ourBankDebts}"
@@ -2467,8 +2616,8 @@ $(document).ready(function() {
             </core:otherwise>
         </core:choose>
     </td>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">他行负债（万元）</td>
-    <td align="left" colspan="2">
+    <td >他行负债（万元）</td>
+    <td colspan="2">
         <core:choose>
             <core:when test="${personFamilyIncurDebts.otherBankDebts != '' and personFamilyIncurDebts.otherBankDebts != null}">
                 <input class="input-text-c" type="text" name="fmIncurOtherBankDebts" value="${personFamilyIncurDebts.otherBankDebts}"
@@ -2481,19 +2630,19 @@ $(document).ready(function() {
     </td>
 </tr>
 <tr>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">贷款用途</td>
-    <td align="left" colspan="3">
+    <td >贷款用途</td>
+    <td colspan="3">
         <input class="input-text-c" type="text" name="fmIncurLoanPurpose" value="${personFamilyIncurDebts.loanPurpose}"
                style="width: 270px;height: 30px; ">
     </td>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">贷款形态</td>
-    <td align="left" colspan="3">
+    <td >贷款形态</td>
+    <td colspan="3">
         <input class="input-text-c" type="text" name="fmIncurLoanShap" value="${personFamilyIncurDebts.loanShap}"
                style="width: 270px;height: 30px; ">
     </td>
 </tr>
 <tr>
-    <td align="center" colspan="8" style="font-size:22px">
+    <td colspan="8" style="font-size:22px">
         家庭成员基本情况
     </td>
 </tr>
@@ -2501,23 +2650,23 @@ $(document).ready(function() {
 <core:forEach items="${personFamilyMemberList}" var="personFamilyMember" varStatus="idx">
 <input name="familyMembers[${idx.index}].id" value="${personFamilyMember.id}" type="hidden" />
 <tr>
-    <td align="left" colspan="8" style="font-size:18px">
+    <td colspan="8" style="font-size:18px">
         成员：<core:out value="${idx.index+1}"></core:out>
     </td>
 </tr>
 <tr>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">姓名</td>
-    <td align="left">
+    <td >姓名</td>
+    <td>
         <input class="input-text-c" type="text" name="familyMembers[${idx.index}].familyMemberName" value="${personFamilyMember.familyMemberName}"
                style="width: 95px;height: 30px; ">
     </td>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">年收入（万元）</td>
-    <td align="left">
+    <td >年收入（万元）</td>
+    <td>
         <input class="input-text-c" type="text" name="familyMembers[${idx.index}].yearIncome" value="${personFamilyMember.yearIncome}"
                style="width: 95px;height: 30px; ">
     </td>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">与户主关系</td>
-    <td align="left">
+    <td >与户主关系</td>
+    <td>
         <select class="selectpicker" style="width: 95px; " name="familyMembers[${idx.index}].leaderRelation">
             <core:choose>
                 <core:when test="${personFamilyMember.leaderRelation=='配偶'}">
@@ -2558,8 +2707,8 @@ $(document).ready(function() {
             </core:choose>
         </select>
     </td>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">常住地址</td>
-    <td align="left">
+    <td >常住地址</td>
+    <td>
         <select class="selectpicker" style="width: 95px; " name="familyMembers[${idx.index}].address">
             <core:choose>
                 <core:when test="${personFamilyMember.address=='本市'}">
@@ -2591,8 +2740,8 @@ $(document).ready(function() {
     </td>
 </tr>
 <tr>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">职业</td>
-    <td align="left" colspan="3">
+    <td >职业</td>
+    <td colspan="3">
         <select class="selectpicker" style="width: 270px; " name="familyMembers[${idx.index}].profession">
             <core:choose>
                 <core:when test="${personFamilyMember.profession=='国家机关、党群组织、企业、事业单位负责人'}">
@@ -2698,8 +2847,8 @@ $(document).ready(function() {
             </core:choose>
         </select>
     </td>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">证件号码</td>
-    <td align="left" colspan="3">
+    <td >证件号码</td>
+    <td colspan="3">
         <input class="input-text-c" type="text" name="familyMembers[${idx.index}].familyMemberCerNum" value="${personFamilyMember.familyMemberCerNum}"
                style="width: 270px;height: 30px; ">
     </td>
@@ -2718,10 +2867,10 @@ $(document).ready(function() {
 <tbody>
 <%--<input type="hidden" name="id" value="${financeServicesLists.id}"/>--%>
 <tr>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">
+    <td >
         您目前使用我行（社）的哪些产品
     </td>
-    <td align="left" colspan="3">
+    <td colspan="3">
         <core:forEach items="${usedProducts}" var="usedProduct">
             <input type="text" value="${usedProduct}" style="display: none" class="usedProduct"/>
         </core:forEach>
@@ -2762,10 +2911,10 @@ $(document).ready(function() {
     </td>
 </tr>
 <tr>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">
+    <td >
         您对我行（社）产品满意度
     </td>
-    <td align="left" colspan="3">
+    <td colspan="3">
         <select class="selectpicker" style="width: 270px; " name="finaServiceSatisfaction">
             <core:choose>
                 <core:when test="${financeServicesLists.satisfaction=='较为适用'}">
@@ -2788,10 +2937,10 @@ $(document).ready(function() {
     </td>
 </tr>
 <tr>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">
+    <td >
         您在未来两年内是否有资金需求
     </td>
-    <td align="left" colspan="3">
+    <td colspan="3">
         <select class="selectpicker" style="width: 270px; " name="finaServiceIsMoneyNeed">
             <core:choose>
                 <core:when test="${financeServicesLists.moneyNeed==0}">
@@ -2807,10 +2956,10 @@ $(document).ready(function() {
     </td>
 </tr>
 <tr>
-    <td align="center" rowspan="3" bgcolor="#b4d8ed" style="color:#161823">
+    <td rowspan="3" >
         如果需要贷款的话,您计划用这笔贷款做什么？
     </td>
-    <td align="left" rowspan="3">
+    <td rowspan="3">
         <core:forEach items="${financeServicesLists.moneyTodo}" var="moneyTodo">
             <input type="text" value="${moneyTodo}" style="display: none" class="finaServiceMoneyTodo"/>
         </core:forEach>
@@ -2838,10 +2987,10 @@ $(document).ready(function() {
             <input type="checkbox" class="其他" value="其他" name="finaServiceMoneyTodo"> 其他
         </label>
     </td>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">
+    <td >
         您希望得到的贷款金额是多少？
     </td>
-    <td align="left">
+    <td>
         <core:choose>
             <core:when test="${financeServicesLists.moneyCount != '' and financeServicesLists.moneyCount != null}">
                 <input class="input-text-c" type="text" name="finaServiceMoneyCount" value="${financeServicesLists.moneyCount}"
@@ -2855,10 +3004,10 @@ $(document).ready(function() {
     </td>
 </tr>
 <tr>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">
+    <td >
         您可以提供的担保物有？
     </td>
-    <td align="left">
+    <td>
         <core:forEach items="${financeServicesLists.guarantee}" var="guarantee">
             <input type="text" value="${guarantee}" style="display: none" class="guarantee"/>
         </core:forEach>
@@ -2880,10 +3029,10 @@ $(document).ready(function() {
     </td>
 </tr>
 <tr>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">
+    <td >
         您希望得到的贷款期限是多久？
     </td>
-    <td align="left">
+    <td>
         <core:choose>
             <core:when test="${financeServicesLists.timeLimit!= '' and financeServicesLists.timeLimit != null}">
                 <input class="input-text-c" type="text" name="finaServiceTimeLimit" value="${financeServicesLists.timeLimit}"
@@ -2897,10 +3046,10 @@ $(document).ready(function() {
     </td>
 </tr>
 <tr>
-    <td align="center"  colspan="2" bgcolor="#b4d8ed" style="color:#161823">
+    <td  colspan="2" >
         未来1-2年家庭储蓄的主要目的和用途？
     </td>
-    <td align="left" colspan="2">       <%--ii--%>
+    <td colspan="2">       <%--ii--%>
         <core:forEach items="${financeServicesLists.fmDepositTodo}" var="fmDepositTodo">
             <input type="text" value="${fmDepositTodo}" style="display: none" class="fmDepositTodo"/>
         </core:forEach>
@@ -2928,10 +3077,10 @@ $(document).ready(function() {
     </td>
 </tr>
 <tr>
-    <td align="center"  colspan="2" bgcolor="#b4d8ed" style="color:#161823">
+    <td  colspan="2" >
         您目前希望得到我行（社）的哪些服务？
     </td>
-    <td align="left" colspan="2">
+    <td colspan="2">
         <core:forEach items="${financeServicesLists.needServices}" var="needServices">
             <input type="text" value="${needServices}" style="display: none" class="needServices"/>
         </core:forEach>
@@ -2954,10 +3103,10 @@ $(document).ready(function() {
     </td>
 </tr>
 <tr>
-    <td align="center"  colspan="2" bgcolor="#b4d8ed" style="color:#161823">
+    <td  colspan="2" >
         除了上述业务,您还需要哪些服务？
     </td>
-    <td align="left" colspan="2">
+    <td colspan="2">
         <core:forEach items="${financeServicesLists.needServicesElse}" var="needServicesElse">
             <input type="text" value="${needServicesElse}" style="display: none" class="finaServicesNeedServicesElse"/>
         </core:forEach>
@@ -2993,33 +3142,33 @@ $(document).ready(function() {
     </td>
 </tr>
 <tr>
-    <td align="center"  colspan="2" bgcolor="#b4d8ed" style="color:#161823">
+    <td  colspan="2" >
         您希望我行（社）增加哪些方面的服务？
     </td>
-    <td align="left" colspan="2">
+    <td colspan="2">
         <textarea rows="3" style="width: 355px;height: 85px; " name="finaServicesHolpForServices">
             ${financeServicesLists.holpForServices}
         </textarea>
     </td>
 </tr>
 <tr>
-    <td align="center"  colspan="2" bgcolor="#b4d8ed" style="color:#161823">
+    <td  colspan="2" >
         您对我行（社）服务有何建议？
     </td>
-    <td align="left" colspan="2">
+    <td colspan="2">
         <textarea rows="3" style="width: 355px;height: 85px; " name="finaServicesSuggestion">
             ${financeServicesLists.suggestion}
         </textarea>
     </td>
 </tr>
 <tr>
-    <td align="center" rowspan="7" bgcolor="#b4d8ed" style="color:#161823">
+    <td rowspan="7" >
         金融业务需求
     </td>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">
+    <td >
         金融业务需求
     </td>
-    <td align="left" colspan="2">
+    <td colspan="2">
         <core:forEach items="${financeServicesLists.bankCard}" var="bankCard">
             <input type="text" value="${bankCard}" style="display: none" class="bankCard"/>
         </core:forEach>
@@ -3035,10 +3184,10 @@ $(document).ready(function() {
     </td>
 </tr>
 <tr>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">
+    <td >
         电子银行业务
     </td>
-    <td align="left" colspan="2">
+    <td colspan="2">
         <core:forEach items="${financeServicesLists.electronBank}" var="electronBank">
             <input type="text" value="${electronBank}" style="display: none" class="electronBank"/>
         </core:forEach>
@@ -3057,10 +3206,10 @@ $(document).ready(function() {
     </td>
 </tr>
 <tr>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">
+    <td >
         代缴代扣业务
     </td>
-    <td align="left" colspan="2">
+    <td colspan="2">
         <core:forEach items="${financeServicesLists.agentPay}" var="agentPay">
             <input type="text" value="${agentPay}" style="display: none" class="agentPay"/>
         </core:forEach>
@@ -3085,10 +3234,10 @@ $(document).ready(function() {
     </td>
 </tr>
 <tr>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">
+    <td >
         自助机具业务
     </td>
-    <td align="left" colspan="2">
+    <td colspan="2">
         <core:forEach items="${financeServicesLists.auto}" var="auto">
             <input type="text" value="${auto}" style="display: none" class="auto"/>
         </core:forEach>
@@ -3110,10 +3259,10 @@ $(document).ready(function() {
     </td>
 </tr>
 <tr>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">
+    <td >
         对私贷款业务
     </td>
-    <td align="left" colspan="2">
+    <td colspan="2">
         <core:forEach items="${financeServicesLists.privateLoan}" var="privateLoan">
             <input type="text" value="${privateLoan}" style="display: none" class="privateLoan"/>
         </core:forEach>
@@ -3194,10 +3343,10 @@ $(document).ready(function() {
     </td>
 </tr>
 <tr>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">
+    <td >
         对公贷款业务
     </td>
-    <td align="left" colspan="2">
+    <td colspan="2">
         <core:forEach items="${financeServicesLists.publicLoan}" var="publicLoan">
             <input type="text" value="${publicLoan}" style="display: none" class="finaServicePublicLoan"/>
         </core:forEach>
@@ -3237,10 +3386,10 @@ $(document).ready(function() {
     </td>
 </tr>
 <tr>
-    <td align="center" bgcolor="#b4d8ed" style="color:#161823">
+    <td >
         客户新需求登记
     </td>
-    <td align="left" colspan="2">
+    <td colspan="2">
         <textarea rows="3" style="width: 355px;height: 85px; " name="finaServiceNewRequirement">
             ${financeServicesLists.newRequirement}
         </textarea>
@@ -3252,17 +3401,17 @@ $(document).ready(function() {
 </div>
 </div>
 
-<!-- 3村委会（居委会）评价-->
+<!-- 3??????????-->
 <div class="tab-pane" id="tab3">
 <div class="pad-10">
 <div class="table-list">
 <table width="100%" border="1" cellspacing="0" width="732px" color="#727f8a;">
 <tbody>
 <tr>
-    <td width="27%" align="left" bgcolor="#b4d8ed" style="color:#161823">
+    <td width="27%" >
         一、客户基本资料真实性
     </td>
-    <td width="73%" align="left">
+    <td width="73%">
         <select class="selectpicker" style="width: 270px; " name="villageManagerEva.truth">
             <core:choose>
                 <core:when test="${villageManagerEvaList.truth=='基本准确'}">
@@ -3294,10 +3443,10 @@ $(document).ready(function() {
     </td>
 </tr>
 <tr>
-    <td align="left" bgcolor="#b4d8ed" style="color:#161823">
+    <td >
         二、本地居住时间（农户）
     </td>
-    <td align="left">
+    <td>
         <select class="selectpicker" style="width: 270px; " name="villageManagerEva.localLivingTime">
             <core:choose>
                 <core:when test="${villageManagerEvaList.localLivingTime=='5年(含)以下'}">
@@ -3313,10 +3462,10 @@ $(document).ready(function() {
     </td>
 </tr>
 <tr>
-    <td width="27%" align="left" bgcolor="#b4d8ed" style="color:#161823">
+    <td width="27%" >
         三、经营能力
     </td>
-    <td width="73%" align="left">
+    <td width="73%">
         <select class="selectpicker" style="width: 270px; " name="villageManagerEva.operatingCapacity">
             <core:choose>
                 <core:when test="${villageManagerEvaList.operatingCapacity=='经验丰富,技术水平高,能力强'}">
@@ -3348,10 +3497,10 @@ $(document).ready(function() {
     </td>
 </tr>
 <tr>
-    <td align="left" bgcolor="#b4d8ed" style="color:#161823">
+    <td >
         四、项目潜质
     </td>
-    <td align="left">
+    <td>
         <select class="selectpicker" style="width: 270px; " name="villageManagerEva.projectPotential">
             <core:choose>
                 <core:when test="${villageManagerEvaList.projectPotential=='优秀'}">
@@ -3383,10 +3532,10 @@ $(document).ready(function() {
     </td>
 </tr>
 <tr>
-    <td width="27%" align="left" bgcolor="#b4d8ed" style="color:#161823">
+    <td width="27%" >
         五、市场经营风险
     </td>
-    <td width="73%" align="left">
+    <td width="73%">
         <select class="selectpicker" style="width: 270px; " name="villageManagerEva.operationalRisks">
             <core:choose>
                 <core:when test="${villageManagerEvaList.operationalRisks=='很低'}">
@@ -3418,10 +3567,10 @@ $(document).ready(function() {
     </td>
 </tr>
 <tr>
-    <td align="left" bgcolor="#b4d8ed" style="color:#161823">
+    <td >
         六、市场竞争力和发展前景
     </td>
-    <td align="left">
+    <td>
         <select class="selectpicker" style="width: 270px; " name="villageManagerEva.developmentProspects">
             <core:choose>
                 <core:when test="${villageManagerEvaList.developmentProspects=='很好'}">
@@ -3453,10 +3602,10 @@ $(document).ready(function() {
     </td>
 </tr>
 <tr>
-    <td width="27%" align="left" bgcolor="#b4d8ed" style="color:#161823">
+    <td width="27%" >
         七、生产经营力或工作稳定情况
     </td>
-    <td width="73%" align="left">
+    <td width="73%">
         <select class="selectpicker" style="width: 270px; " name="villageManagerEva.operatingStability">
             <core:choose>
                 <core:when test="${villageManagerEvaList.operatingStability=='强'}">
@@ -3499,10 +3648,10 @@ $(document).ready(function() {
     </td>
 </tr>
 <tr>
-    <td align="left" bgcolor="#b4d8ed" style="color:#161823">
+    <td >
         八、家庭人均纯收入水平（农户）
     </td>
-    <td align="left">
+    <td>
         <select class="selectpicker" style="width: 270px; " name="villageManagerEva.capitaNetIncomeLevel">
             <core:choose>
                 <core:when test="${villageManagerEvaList.capitaNetIncomeLevel=='高收入'}">
@@ -3545,10 +3694,10 @@ $(document).ready(function() {
     </td>
 </tr>
 <tr>
-    <td width="27%" align="left" bgcolor="#b4d8ed" style="color:#161823">
+    <td width="27%" >
         九、家庭人均可支配收入水平（非农户）
     </td>
-    <td width="73%" align="left">
+    <td width="73%">
         <select class="selectpicker" style="width: 270px; " name="villageManagerEva.disposableIncomeLevel">
             <core:choose>
                 <core:when test="${villageManagerEvaList.disposableIncomeLevel=='最高收入'}">
@@ -3619,10 +3768,10 @@ $(document).ready(function() {
     </td>
 </tr>
 <tr>
-    <td align="left" bgcolor="#b4d8ed" style="color:#161823">
+    <td >
         十、家庭财产水平
     </td>
-    <td align="left">
+    <td>
         <select class="selectpicker" style="width: 270px; " name="villageManagerEva.familyPropertyLevel">
             <core:choose>
                 <core:when test="${villageManagerEvaList.familyPropertyLevel=='富足家庭'}">
@@ -3678,10 +3827,10 @@ $(document).ready(function() {
     </td>
 </tr>
 <tr>
-    <td width="27%" align="left" bgcolor="#b4d8ed" style="color:#161823">
+    <td width="27%" >
         十一、税费缴纳情况（含土地、房产款项）
     </td>
-    <td width="73%" align="left">
+    <td width="73%">
         <select class="selectpicker" style="width: 270px; " name="villageManagerEva.payTaxes">
             <core:choose>
                 <core:when test="${villageManagerEvaList.payTaxes=='正常缴纳'}">
@@ -3737,10 +3886,10 @@ $(document).ready(function() {
     </td>
 </tr>
 <tr>
-    <td align="left" bgcolor="#b4d8ed" style="color:#161823">
+    <td >
         十二、敬老情况
     </td>
-    <td align="left">
+    <td>
         <select class="selectpicker" style="width: 270px; " name="villageManagerEva.respectSitu">
             <core:choose>
                 <core:when test="${villageManagerEvaList.respectSitu=='好'}">
@@ -3796,10 +3945,10 @@ $(document).ready(function() {
     </td>
 </tr>
 <tr>
-    <td width="27%" align="left" bgcolor="#b4d8ed" style="color:#161823">
+    <td width="27%" >
         十三、邻里关系
     </td>
-    <td width="73%" align="left">
+    <td width="73%">
         <select class="selectpicker" style="width: 270px; " name="villageManagerEva.neighborhood">
             <core:choose>
                 <core:when test="${villageManagerEvaList.neighborhood=='好'}">
@@ -3855,10 +4004,10 @@ $(document).ready(function() {
     </td>
 </tr>
 <tr>
-    <td align="left" bgcolor="#b4d8ed" style="color:#161823">
+    <td >
         十四、对公益事业关心程度
     </td>
-    <td align="left">
+    <td>
         <select class="selectpicker" style="width: 270px; " name="villageManagerEva.publicWelfareLevel">
             <core:choose>
                 <core:when test="${villageManagerEvaList.publicWelfareLevel=='高'}">
@@ -3901,10 +4050,10 @@ $(document).ready(function() {
     </td>
 </tr>
 <tr>
-    <td width="27%" align="left" bgcolor="#b4d8ed" style="color:#161823">
+    <td width="27%" >
         十五、信誉情况
     </td>
-    <td width="73%" align="left">
+    <td width="73%">
         <select class="selectpicker" style="width: 270px; " name="villageManagerEva.creditworthiness">
             <core:choose>
                 <core:when test="${villageManagerEvaList.creditworthiness=='好'}">
@@ -3936,10 +4085,10 @@ $(document).ready(function() {
     </td>
 </tr>
 <tr>
-    <td align="left" bgcolor="#b4d8ed" style="color:#161823">
+    <td >
         十六、个人品行综合评价
     </td>
-    <td align="left">
+    <td>
         <select class="selectpicker" style="width: 270px; " name="villageManagerEva.conduct">
             <core:choose>
                 <core:when test="${villageManagerEvaList.conduct=='优秀'}">
@@ -3995,10 +4144,10 @@ $(document).ready(function() {
     </td>
 </tr>
 <tr>
-    <td width="27%" align="left" bgcolor="#b4d8ed" style="color:#161823">
+    <td width="27%" >
         十七、受表彰情况
     </td>
-    <td width="73%" align="left">
+    <td width="73%">
         <select class="selectpicker" style="width: 270px; " name="villageManagerEva.praised">
             <core:choose>
                 <core:when test="${villageManagerEvaList.praised=='有'}">
@@ -4021,19 +4170,19 @@ $(document).ready(function() {
     </td>
 </tr>
 <tr>
-    <td align="left" bgcolor="#b4d8ed" style="color:#161823">
+    <td >
         十八、其他补充
     </td>
-    <td align="left">
+    <td>
         <input type="text" name="supplement" value="${villageManagerEvaList.supplement}"
                style="width: 270px; height: 30px;">
     </td>
 </tr>
 <tr>
-    <td width="27%" align="left" bgcolor="#b4d8ed" style="color:#161823">
+    <td width="27%" >
         十九、是否为我行（社）重点服务对象
     </td>
-    <td width="73%" align="left">
+    <td width="73%">
         <core:choose>
             <core:when test="${villageManagerEvaList} != null">
                 <input type="hidden" name="villageManagerEva.id" value="${villageManagerEvaList.id}">
@@ -4069,26 +4218,26 @@ $(document).ready(function() {
 </div>
 </div>
 </div>
-<!-- 4客户经理评价-->
+<!-- 4??????-->
 <div class="tab-pane" id="tab4">
     <div class="pad-10">
         <div class="table-list">
             <table width="100%" border="1" cellspacing="0" width="732px" color="#727f8a;">
                 <tbody>
                 <tr>
-                    <td width="27%" align="center" bgcolor="#b4d8ed" style="color:#161823">
+                    <td width="27%" >
                         客户在他行贷款情况
                     </td>
-                    <td width="73%" align="left">
+                    <td width="73%">
                         <input type="text" name="custManagerLoanSitu" value="${customerManagerEvaList.loanSitu}"
                                style="width: 270px;height: 30px; ">
                     </td>
                 </tr>
                 <tr>
-                    <td align="center" bgcolor="#b4d8ed" style="color:#161823">
+                    <td >
                         个人银行信用记录
                     </td>
-                    <td align="left">            <%--${customerManagerEvaList.creditRecord}  --%>
+                    <td>            <%--${customerManagerEvaList.creditRecord}  --%>
                         <input type="text" value="${customerManagerEvaList.creditRecord}" style="display: none" class="creditRecord"/>
                         <label class="checkbox inline">
                             <input type="checkbox" class="无违约记录" value="报告期内能积极主动按期偿本付息,无违约记录" name="custManagerCreditRecord">
@@ -4147,10 +4296,10 @@ $(document).ready(function() {
                     </td>
                 </tr>
                 <tr>
-                    <td width="27%" align="center" bgcolor="#b4d8ed" style="color:#161823">
+                    <td width="27%" >
                         他行信用记录
                     </td>
-                    <td width="73%" align="left">
+                    <td width="73%">
                         <select class="selectpicker" style="width: 270px; " name="custManagerOtherBankRecord">
                             <core:choose>
                                 <core:when test="${customerManagerEvaList.otherBankRecord=='良好'}">
@@ -4173,10 +4322,10 @@ $(document).ready(function() {
                     </td>
                 </tr>
                 <tr>
-                    <td align="center" bgcolor="#b4d8ed" style="color:#161823">
+                    <td >
                         变现能力
                     </td>
-                    <td align="left">
+                    <td>
                         <select class="selectpicker" style="width: 270px; " name="custManagerHouseToMoney">
                             <core:choose>
                                 <core:when test="${customerManagerEvaList.houseToMoney=='优秀'}">

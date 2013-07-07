@@ -6,10 +6,10 @@
     <insert id="saveVillageManagerEva" parameterType="com.rcuinfomanager.model.VillageManagerEva">
         insert into villagemanagereva(recordId,truth,localLivingTime,operatingCapacity,projectPotential,operationalRisks,
           developmentProspects,operatingStability,capitaNetIncomeLevel,disposableIncomeLevel,familyPropertyLevel,payTaxes,
-          respectSitu,neighborhood,publicWelfareLevel,creditworthiness,conduct,praised,supplement,isImportantObject)
+          respectSitu,neighborhood,publicWelfareLevel,creditworthiness,conduct,praised,supplement,isImportantObject, evaItem)
         values(#{recordId},#{truth},#{localLivingTime},#{operatingCapacity},#{projectPotential},#{operationalRisks},
         #{developmentProspects},#{operatingStability},#{capitaNetIncomeLevel},#{disposableIncomeLevel},#{familyPropertyLevel},#{payTaxes},
-        #{respectSitu},#{neighborhood},#{publicWelfareLevel},#{creditworthiness},#{conduct},#{praised},#{supplement},#{isImportantObject})
+        #{respectSitu},#{neighborhood},#{publicWelfareLevel},#{creditworthiness},#{conduct},#{praised},#{supplement},#{isImportantObject}, #{evaItem})
     </insert>
 
     <update id="updateVillageManagerEva" parameterType="com.rcuinfomanager.model.VillageManagerEva">

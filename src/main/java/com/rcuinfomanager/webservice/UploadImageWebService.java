@@ -23,7 +23,7 @@ import java.util.List;
 @RequestMapping("/api/1")
 public class UploadImageWebService {
 
-    private  /*@Value("${images.store.dir}")*/ String imgStoreDir="d:/tmp";
+    private  /*@Value("${images.store.dir}")*/ String imgStoreDir="d:/rcuinfomanager_data";
 
 
     @RequestMapping(value = "/img/{cerNum}", method = RequestMethod.POST)

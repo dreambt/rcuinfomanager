@@ -16,10 +16,7 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -56,7 +53,7 @@ public class BaseInfoController {
     @Autowired
     private AreasInfoService areasInfoService;
 
-    private  /*@Value("${images.store.dir}")*/ String imgStoreDir = "d:/tmp";
+    private  /*@Value("${images.store.dir}")*/ String imgStoreDir = "d:/rcuinfomanager_data";
 
     //查看
     @RequestMapping(value = "/{id}")
@@ -70,6 +67,7 @@ public class BaseInfoController {
         String logsDate = dateFm.format(new java.util.Date());
         logsInfoService.saveLogsInfo(new LogsInfo(logsDate, sessionUser.getId(), "查看"));
         map.put("displayUserName", sessionUser.getDisplayUserName());
+        map.put("userName", sessionUser.getUserName());
         map.put("personInfoList", baseInfoService.getPersonBasicInfo(id));
 
         //基础概况信息
@@ -200,6 +198,7 @@ public class BaseInfoController {
         String logsDate = dateFm.format(new java.util.Date());
         logsInfoService.saveLogsInfo(new LogsInfo(logsDate, sessionUser.getId(), "编辑"));
         map.put("displayUserName", sessionUser.getDisplayUserName());
+        map.put("userName", sessionUser.getUserName());
         map.put("personInfoList", baseInfoService.getPersonBasicInfo(id));
         //基础概况信息
         CusBaseInfo cusBasicInfo = baseInfoService.getCusBasicInfo(id);
@@ -351,8 +350,7 @@ public class BaseInfoController {
                 e.printStackTrace();
             }
         }
-        map.put("success", true);
-        return "farmer/importBasicData";
+        return "redirect:/index";
     }
 
     //保存导入村委会评价表数据
@@ -375,8 +373,7 @@ public class BaseInfoController {
 
 
         }
-        map.put("success", true);
-        return "farmer/importVillageAssess";
+        return "redirect:/index";
     }
 
 
@@ -513,9 +510,15 @@ public class BaseInfoController {
     }
 
     //增加房产
-    @RequestMapping(value = "/addHouse/{recordId}/{assetsId}", method = RequestMethod.GET)
-    public String addHouse(@PathVariable long recordId,@PathVariable long assetsId,Map map){
-        map.put("assetsId", assetsId);
+    @RequestMapping(value = "/addHouse/{recordId}", method = RequestMethod.GET)
+    public String addHouse(@PathVariable long recordId,@RequestParam(value = "assertsId", required = false) Long assetsId,Map map){
+
+        if (assetsId == null) {
+            map.put("assetsId", 0);
+        } else {
+            map.put("assetsId", assetsId);
+        }
+
         map.put("recordId", recordId);
         map.put("houseInfo", new HouseInfo());
         return "farmer/addHouseProperty";
@@ -523,14 +526,25 @@ public class BaseInfoController {
     //保存房产
     @RequestMapping(value = "/saveHouse", method = RequestMethod.POST)
     public String saveHouse(HttpServletRequest request, HttpServletResponse response,@ModelAttribute("houseInfo")HouseInfo houseInfo,Map map){
-
+        if (houseInfo.getAssetsId() <= 0) {
+            FamilyAssets familyAssets = new FamilyAssets();
+            familyAssets.setRecordId(houseInfo.getRecordId());
+            baseInfoService.saveFamilyAssets(familyAssets);
+            houseInfo.setAssetsId(familyAssets.getAssetsId());
+        }
         baseInfoService.saveHouseInfo(houseInfo);
 
         return "redirect:/family/edit/"+houseInfo.getRecordId();
     }
     //增加土地
-    @RequestMapping(value = "/addLand/{recordId}/{assetsId}", method = RequestMethod.GET)
-    public String addLand(@PathVariable long recordId,@PathVariable long assetsId,Map map){
+    @RequestMapping(value = "/addLand/{recordId}", method = RequestMethod.GET)
+    public String addLand(@PathVariable long recordId,@RequestParam(value = "assertsId", required = false) Long assetsId,Map map){
+        if (assetsId == null) {
+            map.put("assetsId", 0);
+        } else {
+            map.put("assetsId", assetsId);
+        }
+
         map.put("assetsId", assetsId);
         map.put("recordId", recordId);
         map.put("landInfo", new LandInfo());
@@ -540,13 +554,23 @@ public class BaseInfoController {
     //保存土地
     @RequestMapping(value = "/saveLand", method = RequestMethod.POST)
     public String saveLand(HttpServletRequest request, HttpServletResponse response,@ModelAttribute("landInfo")LandInfo landInfo,Map map){
-
+        if (landInfo.getAssetsId() <= 0) {
+            FamilyAssets familyAssets = new FamilyAssets();
+            familyAssets.setRecordId(landInfo.getRecordId());
+            baseInfoService.saveFamilyAssets(familyAssets);
+            landInfo.setAssetsId(familyAssets.getAssetsId());
+        }
         baseInfoService.saveLandInfo(landInfo);
         return "redirect:/family/edit/"+landInfo.getRecordId();
     }
     //增加车辆
-    @RequestMapping(value = "/addCar/{recordId}/{assetsId}", method = RequestMethod.GET)
-     public String addCar(@PathVariable long recordId,@PathVariable long assetsId,Map map){
+    @RequestMapping(value = "/addCar/{recordId}", method = RequestMethod.GET)
+     public String addCar(@PathVariable long recordId,@RequestParam(value = "assertsId", required = false) Long assetsId,Map map){
+        if (assetsId == null) {
+            map.put("assetsId", 0);
+        } else {
+            map.put("assetsId", assetsId);
+        }
         map.put("assetsId", assetsId);
         map.put("recordId", recordId);
         map.put("carsInfo", new CarsInfo());
@@ -555,6 +579,12 @@ public class BaseInfoController {
     //保存车辆
     @RequestMapping(value = "/saveCar", method = RequestMethod.POST)
     public String saveCar(HttpServletRequest request, HttpServletResponse response,@ModelAttribute("carsInfo")CarsInfo carsInfo,Map map){
+        if (carsInfo.getAssetsId() <= 0) {
+            FamilyAssets familyAssets = new FamilyAssets();
+            familyAssets.setRecordId(carsInfo.getRecordId());
+            baseInfoService.saveFamilyAssets(familyAssets);
+            carsInfo.setAssetsId(familyAssets.getAssetsId());
+        }
         baseInfoService.saveCarsinfo(carsInfo);
         return "redirect:/family/edit/"+carsInfo.getRecordId();
     }

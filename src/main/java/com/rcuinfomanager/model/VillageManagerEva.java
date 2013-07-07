@@ -22,6 +22,7 @@ public class VillageManagerEva {
     private String praised;
     private String supplement;
     private String isImportantObject;
+    private String evaItem;
 
     public Long getRecordId() {
         return recordId;
@@ -189,5 +190,13 @@ public class VillageManagerEva {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getEvaItem() {
+        return evaItem;
+    }
+
+    public void setEvaItem(String evaItem) {
+        this.evaItem = evaItem;
     }
 }

@@ -146,4 +146,10 @@ public interface BaseInfoDao {
     void saveIncomeexpenses(AllColumnInfo allColumnInfo);
 
     void saveFamilyincurdebts(AllColumnInfo allColumnInfo);
+
+    BaseInfoStat getBaseInfoStat();
+
+    CommonStat getFamilyAssetsStat();
+
+    CommonStat getVillageManagerEvaStat();
 }

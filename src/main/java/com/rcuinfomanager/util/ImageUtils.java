@@ -32,6 +32,10 @@ public class ImageUtils {
     public static InputStream getImageStream(String certNum, String storeDir, String name) throws IOException {
         File file = new File(storeDir + File.separator + certNum + File.separator + name + ".jpg");
         if (!file.exists()) {
+            file = new File(storeDir + File.separator + certNum + File.separator + name + ".apk");
+        }
+
+        if (!file.exists()) {
             return null;
         }
 
@@ -47,7 +51,7 @@ public class ImageUtils {
         String[] tmpList = file.list(new FilenameFilter() {
             @Override
             public boolean accept(File dir, String name) {
-                if (name.endsWith(".jpg")) {
+                if (name.endsWith(".jpg") || name.endsWith(".apk")) {
                     return true;
                 }
                 return false;

@@ -122,6 +122,7 @@ public class ExportInfo2VillagerCommittee4Estimation {
                     String evaValue = cell.getStringCellValue();
                     if ("较好（建议3（含）-5万）".equals(evaValue)) {
                         villageManagerEva.setRecordId(baseInfo.getRecordId());
+                        villageManagerEva.setEvaItem("较好（建议3（含）-5万）");
                         villageManagerEva.setTruth("基本准确");
                         villageManagerEva.setLocalLivingTime("6年（含）以上");
                         villageManagerEva.setOperatingCapacity("经验丰富、技术水平较高、能力较强");
@@ -142,6 +143,7 @@ public class ExportInfo2VillagerCommittee4Estimation {
                         villageManagerEva.setImportantObject("一般");
                     }  else if ("一般（建议3万以下）".equals(evaValue)) {
                         villageManagerEva.setRecordId(baseInfo.getRecordId());
+                        villageManagerEva.setEvaItem("一般（建议3万以下）");
                         villageManagerEva.setTruth("基本准确");
                         villageManagerEva.setLocalLivingTime("6年（含）以上");
                         villageManagerEva.setOperatingCapacity("经验丰富、技术水平较高、能力较强");
@@ -162,6 +164,7 @@ public class ExportInfo2VillagerCommittee4Estimation {
                         villageManagerEva.setImportantObject("一般");
                     }  else if ("好（建议5（含）-10万）".equals(evaValue)) {
                         villageManagerEva.setRecordId(baseInfo.getRecordId());
+                        villageManagerEva.setEvaItem("好（建议5（含）-10万）");
                         villageManagerEva.setTruth("基本准确");
                         villageManagerEva.setLocalLivingTime("6年（含）以上");
                         villageManagerEva.setOperatingCapacity("经验丰富、技术水平较高、能力较强");
@@ -182,6 +185,7 @@ public class ExportInfo2VillagerCommittee4Estimation {
                         villageManagerEva.setImportantObject("一般");
                     } else if ("很好（建议10万以上）".equals(evaValue)) {
                         villageManagerEva.setRecordId(baseInfo.getRecordId());
+                        villageManagerEva.setEvaItem("很好（建议10万以上）");
                         villageManagerEva.setTruth("基本准确");
                         villageManagerEva.setLocalLivingTime("6年（含）以上");
                         villageManagerEva.setOperatingCapacity("经验丰富、技术水平较高、能力较强");

@@ -67,7 +67,7 @@ public class HomeController {
         SessionUser sessionUser = userSessionContext.getSessionUser();
         map.put("needModifyPassword",sessionUser.isNeedModifyPassword());
         map.put("displayUserName", sessionUser.getDisplayUserName());
-        map.put("userNameByAdmin", sessionUser.getUserName());
+        map.put("userName", sessionUser.getUserName());
         int offset = 20;
         if ("admin".equalsIgnoreCase(sessionUser.getUserName())){
             long totalCount = baseInfoService.getAllFamilyInfoListByCount(organizationName, areaId, areaName, displayUserName, pageNum, offset);
@@ -84,6 +84,9 @@ public class HomeController {
         }
         map.put("userNameList", baseInfoService.getUserNameList());
         map.put("currentPage", pageNum);
+        map.put("baseInfoStat", baseInfoService.getBaseInfoStat());
+        map.put("familyAssetsStat", baseInfoService.getFamilyAssetsStat());
+        map.put("villageEvaStat",baseInfoService.getVillageManagerEvaStat());
         return "farmer/main";
     }
 
@@ -97,6 +100,7 @@ public class HomeController {
         UserSessionContext userSessionContext = UserSessionContextHolder.getUserSessionContext();
         SessionUser sessionUser = userSessionContext.getSessionUser();
         map.put("displayUserName", sessionUser.getDisplayUserName());
+        map.put("userName", sessionUser.getUserName());
 
         long totalCount = clientManagerService.getAllClientManagerCount();
         map.put("pageCount", totalCount % offset == 0 ? totalCount / offset : totalCount / offset + 1);
@@ -115,6 +119,7 @@ public class HomeController {
         UserSessionContext userSessionContext = UserSessionContextHolder.getUserSessionContext();
         SessionUser sessionUser = userSessionContext.getSessionUser();
         map.put("displayUserName", sessionUser.getDisplayUserName());
+        map.put("userName", sessionUser.getUserName());
 
         map.put("orgList", organizationInfoService.getAllOrganizations());
         map.put("organizationInfo", new OrganizationInfo());
@@ -131,6 +136,7 @@ public class HomeController {
         UserSessionContext userSessionContext = UserSessionContextHolder.getUserSessionContext();
         SessionUser sessionUser = userSessionContext.getSessionUser();
         map.put("displayUserName", sessionUser.getDisplayUserName());
+        map.put("userName", sessionUser.getUserName());
         if(sessionUser.getId()==1){
             map.put("roleList",systemRoleService.getSystemRoleByAdminList());
         }else{
@@ -148,12 +154,16 @@ public class HomeController {
                                    @RequestParam(value="userName", required=false) String userName,
                                    ModelMap map)  {
 
-        if (pageNum == null) {
+        if (pageNum == null || pageNum <= 0) {
             pageNum = 1;
+        }
+        if ("按系统帐号".equals(userName)) {
+            userName = "";
         }
         UserSessionContext userSessionContext = UserSessionContextHolder.getUserSessionContext();
         SessionUser sessionUser = userSessionContext.getSessionUser();
         map.put("displayUserName", sessionUser.getDisplayUserName());
+        map.put("userName", sessionUser.getUserName());
         int offset = 20;
         Long totalCount = logsInfoService.getAllLogsInfoListByCount(beginTime, endTime, userName, pageNum, offset);
         map.put("pageCount", totalCount % offset == 0 ? totalCount / offset : totalCount / offset + 1);

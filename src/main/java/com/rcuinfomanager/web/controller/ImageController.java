@@ -16,7 +16,7 @@ import java.io.InputStream;
 @Controller
 public class ImageController {
 
-    private  /*@Value("${images.store.dir}")*/ String imgStoreDir = "d:/tmp";
+    private  /*@Value("${images.store.dir}")*/ String imgStoreDir = "d:/rcuinfomanager_data";
 
     @RequestMapping(value = "/img/{cerNum}/{imgName}")
     public void displayImage(HttpServletRequest request, HttpServletResponse response,@PathVariable String cerNum, @PathVariable String imgName) {

@@ -154,14 +154,6 @@ $(function () {
                 'hideOnContentClick': true,
                 'closeBtn' : false
             });
-
-            /*var url = '/family/batchChecks/' + recordIds;
-            window.art.dialog({
-                id: 'check',
-                title: '验收信息',
-                lock: true,
-                content: '<iframe scrolling="auto" width="450" height="210" frameborder="0" style="border: none;margin: -20px -25px;"marginheight="0" marginwidth="0" src="' + url + '"/>'
-            });*/
             $('#checkOkOperate').click(function () {
                 var state = $('#state').val();
                 if(state && state!=''){
@@ -179,24 +171,39 @@ $(function () {
 
     //导入基础数据
     $('#importBasicOperate').click(function () {
-        var url = '/family/importBasicData';
-        window.top.artDialog({
-            id: 'import',
-            title: '导入数据信息',
-            lock: true,
-            content: '<iframe scrolling="auto" width="400" height="250" frameborder="0" style="border: none;margin: -20px -25px;"marginheight="0" marginwidth="0" src="' + url + '"/>'
+        $("#importBasicOperate").fancybox({
+            'height':200,
+            'autoScale':'false',
+            'transitionIn'		: 'elastic',
+            'transitionOut'		: 'elastic',
+            'hideOnContentClick': 'false',
+            'hideOnOverlayClick': 'false',
+            'closeBtn' : false,
+            'type':'ajax',
+            closeClick  : false, // prevents closing when clicking INSIDE fancybox
+            helpers   : {
+                overlay : {closeClick: false} // prevents closing when clicking OUTSIDE fancybox
+            }
         });
     });
     //导入村委会评价表
     $('#importVillageAssess').click(function () {
-        var url = '/family/importVillageAssess';
-        window.top.artDialog({
-            id: 'import',
-            title: '导入数据信息',
-            lock: true,
-            content: '<iframe scrolling="auto" width="400" height="250" frameborder="0" style="border: none;margin: -20px -25px;"marginheight="0" marginwidth="0" src="' + url + '"/>'
+        $("#importVillageAssess").fancybox({
+            'height':400,
+            'autoScale':'false',
+            'transitionIn'		: 'elastic',
+            'transitionOut'		: 'elastic',
+            'hideOnContentClick': false,
+            'closeBtn' : false,
+            'type':'ajax',
+            closeClick  : false, // prevents closing when clicking INSIDE fancybox
+            helpers   : {
+                overlay : {closeClick: false} // prevents closing when clicking OUTSIDE fancybox
+            }
         });
     });
+
+
 
     $('#exportData').click(function () {
         var me = $(this);
@@ -222,83 +229,6 @@ $(function () {
             }
             var url = '/family/exportData/' + recordIds;
             document.location.href = url;
-            /*window.top.artDialog({
-             id: 'export',
-             title: '导出数据信息',
-             lock: true,
-             content: '<iframe scrolling="auto" width="400" height="250" frameborder="0" style="border: none;margin: -20px -25px;"marginheight="0" marginwidth="0" src="' + url + '"/>'
-             });*/
-        } else {
-            alert("未勾选任何客户信息！");
-        }
-    });
-
-    //导出数据
-    $('#exportBasicData4Household').click(function () {
-        var me = $(this);
-        var checkOperaNodes = $('.checkOpera');
-        var isExist = false;
-        var recordIds = '';
-        var j = 0;
-        $.each(checkOperaNodes, function (i, checkOperaNode) {
-            checkOperaNode = $(checkOperaNode);
-            if (checkOperaNode.attr('checked')) {
-                isExist = true;
-                if (j == 0) {
-                    recordIds = checkOperaNode.attr('recordId');
-                } else {
-                    recordIds = recordIds + ',' + checkOperaNode.attr('recordId');
-                }
-                j++;
-            }
-        });
-        if (isExist) {
-            if ($('#selectAll').is(':checked')) {
-                recordIds = 'All';
-            }
-            var url = '/family/exportBasicData4Household/' + recordIds;
-            document.location.href = url;
-            /*window.top.artDialog({
-                id: 'export',
-                title: '导出数据信息',
-                lock: true,
-                content: '<iframe scrolling="auto" width="400" height="250" frameborder="0" style="border: none;margin: -20px -25px;"marginheight="0" marginwidth="0" src="' + url + '"/>'
-            });*/
-        } else {
-            alert("未勾选任何客户信息！");
-        }
-    });
-
-    $('#exportBasicData4Members').click(function () {
-        var me = $(this);
-        var checkOperaNodes = $('.checkOpera');
-        var isExist = false;
-        var recordIds = '';
-        var j = 0;
-        $.each(checkOperaNodes, function (i, checkOperaNode) {
-            checkOperaNode = $(checkOperaNode);
-            if (checkOperaNode.attr('checked')) {
-                isExist = true;
-                if (j == 0) {
-                    recordIds = checkOperaNode.attr('recordId');
-                } else {
-                    recordIds = recordIds + ',' + checkOperaNode.attr('recordId');
-                }
-                j++;
-            }
-        });
-        if (isExist) {
-            if ($('#selectAll').is(':checked')) {
-                recordIds = 'All';
-            }
-            var url = '/family/exportBasicData4Members/' + recordIds;
-            document.location.href = url;
-            /*window.top.artDialog({
-             id: 'export',
-             title: '导出数据信息',
-             lock: true,
-             content: '<iframe scrolling="auto" width="400" height="250" frameborder="0" style="border: none;margin: -20px -25px;"marginheight="0" marginwidth="0" src="' + url + '"/>'
-             });*/
         } else {
             alert("未勾选任何客户信息！");
         }
@@ -329,12 +259,6 @@ $(function () {
             }
             var url = '/family/exportVillagerEstimation/' + recordIds;
             document.location.href = url;
-           /* window.top.artDialog({
-                id: 'export',
-                title: '导出数据信息',
-                lock: true,
-                content: '<iframe scrolling="auto" width="400" height="250" frameborder="0" style="border: none;margin: -20px -25px;"marginheight="0" marginwidth="0" src="' + url + '"/>'
-            });*/
         } else {
             alert("未勾选任何客户信息！");
         }

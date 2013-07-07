@@ -70,7 +70,7 @@ public class FarmerInfoWebService {
             if (pwdMD5.equals(password)) {
                 try {
                     ObjectMapper mapper = new ObjectMapper();
-                    UploadData uploadData = mapper.readValue(rawData, UploadData.class);
+                    UploadData uploadData = mapper.readValue(EncryptUtils.decryptStr(rawData), UploadData.class);
                     if (uploadData != null) {
                         AllColumnInfo allColumnInfo = uploadData.getAllColumnInfo();
                         allColumnInfo.setUserName(username);

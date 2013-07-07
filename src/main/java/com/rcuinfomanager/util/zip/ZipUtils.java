@@ -58,7 +58,7 @@ public class ZipUtils {
 		for (Enumeration<?> entries = zf.entries(); entries.hasMoreElements();) {
 			ZipEntry entry = ((ZipEntry) entries.nextElement());
 			InputStream in = zf.getInputStream(entry);
-			String str = folderPath + entry.getName();
+			String str = folderPath + File.separator + entry.getName();
 			str = new String(str.getBytes("8859_1"), "GB2312");
 			File desFile = new File(str);
 			if (!desFile.exists()) {

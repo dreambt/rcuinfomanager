@@ -252,8 +252,8 @@ public class BaseInfoService {
                 baseInfoDao.deleteCarsinfoByAssetsId(familyAssets.getAssetsId());
                 baseInfoDao.deleteHouseInfoByAssetsId(familyAssets.getAssetsId());
                 baseInfoDao.deleteLandInfoByAssetsId(familyAssets.getAssetsId());
-                baseInfoDao.deleteFamilyMemberInfoByRecordId(baseInfo.getRecordId());
             }
+            baseInfoDao.deleteFamilyMemberInfoByRecordId(baseInfo.getRecordId());
         } else {
             //save new base info.
             baseInfoDao.saveBaseInfoFromClient(allColumnInfo);

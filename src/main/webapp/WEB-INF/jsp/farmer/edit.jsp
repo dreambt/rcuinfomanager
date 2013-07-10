@@ -1259,7 +1259,7 @@ $(document).ready(function() {
 <tr>
 <td >单位性质</td>
 <td>
-<select class="selectpicker" style="width: 255px; " name="unitProp">
+<select class="selectpicker" style="width: 150px; " name="unitProp">
 <core:choose>
 <core:when test="${personBasicList.unitProp=='党政机关'}">
     <option value="${personBasicList.unitProp}" selected="selected">党政机关</option>
@@ -1861,11 +1861,11 @@ $(document).ready(function() {
         <core:choose>
             <core:when test="${personFamilyAssets.fmAllAssets != '' and personFamilyAssets.fmAllAssets != null}">
                 <input class="input-text-c" type="text" name="fmAllAssets" value="${personFamilyAssets.fmAllAssets}"
-                       style="width: 275px;height: 30px; ">
+                       style="width: 150px;height: 30px; ">
             </core:when>
             <core:otherwise>
                 <input class="input-text-c" type="text" name="fmAllAssets" value="0"
-                       style="width: 275px;height: 30px; ">
+                       style="width: 150px;height: 30px; ">
             </core:otherwise>
         </core:choose>
     </td>

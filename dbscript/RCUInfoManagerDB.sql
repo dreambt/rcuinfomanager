@@ -264,7 +264,7 @@ CREATE TABLE `familymemberinfo` (
   `familyMemberCerNum` varchar(20) DEFAULT NULL,
   `cerNum` varchar(20) DEFAULT NULL,
   `familyMemberName` varchar(20) DEFAULT NULL,
-  `yearIncome` double(8,4) DEFAULT 0.00,
+  `yearIncome` varchar(10) DEFAULT '0',
   `leaderRelation` varchar(10) DEFAULT NULL,
   `profession` varchar(256) DEFAULT NULL,
   `address` varchar(100) DEFAULT NULL,

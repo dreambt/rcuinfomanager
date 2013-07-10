@@ -25,9 +25,7 @@
 </head>
 <body>
 <form id="houseForm" action="/family/saveHouse" method="post">
-    <core:if test="${personFamilyAssets.assetsId != '' and personFamilyAssets.assetsId != null}">
-        <input type="hidden" id="assetsId" name="assetsId" value="${personFamilyAssets.assetsId}"/>
-    </core:if>
+    <input type="hidden" id="assetsId" name="assetsId" value="${assetsId}"/>
     <input type="hidden" name="recordId" value="${recordId}"/>
     <table width="100%" border="0">
         <tbody>

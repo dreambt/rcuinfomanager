@@ -783,16 +783,6 @@
                                                             <td colspan="2">&nbsp;</td>
                                                         </tr>
                                                         <tr>
-                                                            <td bgcolor="#b4d8ed" style="color:#161823">投资经营性质</td>
-                                                            <td>&nbsp;</td>
-                                                            <td bgcolor="#b4d8ed" style="color:#161823">投资资金情况</td>
-                                                            <td>&nbsp;</td>
-                                                            <td bgcolor="#b4d8ed" style="color:#161823">投入金额</td>
-                                                            <td>&nbsp;</td>
-                                                            <td bgcolor="#b4d8ed" style="color:#161823">自有资金情况</td>
-                                                            <td>&nbsp;</td>
-                                                        </tr>
-                                                        <tr>
                                                             <td  bgcolor="#b4d8ed" style="color:#161823">家庭主要支出项目</td>
                                                             <td colspan="3">&nbsp;</td>
                                                             <td bgcolor="#b4d8ed" style="color:#161823">家庭收入能否应付支出</td>
@@ -865,48 +855,6 @@
                                                                 </core:when>
                                                                 <core:otherwise>
                                                                     <td colspan="2">${personIncomeExpensesList.fmOtherMemberIn}</td>
-                                                                </core:otherwise>
-                                                            </core:choose>
-
-                                                        </tr>
-                                                        <tr>
-                                                            <td bgcolor="#b4d8ed" style="color:#161823">投资经营性质</td>
-                                                            <core:choose>
-                                                                <core:when test="${empty personIncomeExpensesList.businessProp}">
-                                                                    <td>&nbsp;</td>
-                                                                </core:when>
-                                                                <core:otherwise>
-                                                                    <td>${personIncomeExpensesList.businessProp}</td>
-                                                                </core:otherwise>
-                                                            </core:choose>
-
-                                                            <td bgcolor="#b4d8ed" style="color:#161823">投资资金情况</td>
-                                                            <core:choose>
-                                                                <core:when test="${empty personIncomeExpensesList.moneySitu}">
-                                                                    <td>&nbsp;</td>
-                                                                </core:when>
-                                                                <core:otherwise>
-                                                                    <td>${personIncomeExpensesList.moneySitu}</td>
-                                                                </core:otherwise>
-                                                            </core:choose>
-
-                                                            <td bgcolor="#b4d8ed" style="color:#161823">投入金额</td>
-                                                            <core:choose>
-                                                                <core:when test="${empty personIncomeExpensesList.inputMoney}">
-                                                                    <td>&nbsp;</td>
-                                                                </core:when>
-                                                                <core:otherwise>
-                                                                    <td>${personIncomeExpensesList.inputMoney}</td>
-                                                                </core:otherwise>
-                                                            </core:choose>
-
-                                                            <td bgcolor="#b4d8ed" style="color:#161823">自有资金情况</td>
-                                                            <core:choose>
-                                                                <core:when test="${empty personIncomeExpensesList.ownMoney}">
-                                                                    <td>&nbsp;</td>
-                                                                </core:when>
-                                                                <core:otherwise>
-                                                                    <td>${personIncomeExpensesList.ownMoney}</td>
                                                                 </core:otherwise>
                                                             </core:choose>
 
